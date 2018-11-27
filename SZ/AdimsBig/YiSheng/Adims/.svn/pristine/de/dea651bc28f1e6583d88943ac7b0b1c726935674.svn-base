@@ -1,0 +1,202 @@
+﻿namespace main.科室事物管理
+{
+    partial class EmployeesList
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dgvEmployees = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.EmployeesID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AnesthesiaDoctor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nurse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Divisions = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgvEmployees);
+            this.panel1.Location = new System.Drawing.Point(2, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(500, 370);
+            this.panel1.TabIndex = 0;
+            // 
+            // dgvEmployees
+            // 
+            this.dgvEmployees.AllowUserToAddRows = false;
+            this.dgvEmployees.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
+            this.dgvEmployees.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvEmployees.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmployees.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.EmployeesID,
+            this.AnesthesiaDoctor,
+            this.Nurse,
+            this.Divisions,
+            this.Time});
+            this.dgvEmployees.Location = new System.Drawing.Point(0, 0);
+            this.dgvEmployees.Name = "dgvEmployees";
+            this.dgvEmployees.ReadOnly = true;
+            this.dgvEmployees.RowTemplate.Height = 23;
+            this.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEmployees.Size = new System.Drawing.Size(500, 367);
+            this.dgvEmployees.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.btnClose);
+            this.panel2.Controls.Add(this.btnUpdate);
+            this.panel2.Controls.Add(this.btnDelete);
+            this.panel2.Controls.Add(this.btnNew);
+            this.panel2.Location = new System.Drawing.Point(2, 379);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(500, 37);
+            this.panel2.TabIndex = 1;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(333, 5);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(80, 24);
+            this.btnUpdate.TabIndex = 2;
+            this.btnUpdate.Text = "修改";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(252, 5);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(80, 24);
+            this.btnDelete.TabIndex = 1;
+            this.btnDelete.Text = "删除";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(171, 5);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(80, 24);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "新增";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(414, 5);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(80, 24);
+            this.btnClose.TabIndex = 3;
+            this.btnClose.Text = "关闭";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // EmployeesID
+            // 
+            this.EmployeesID.DataPropertyName = "EmployeesID";
+            this.EmployeesID.HeaderText = "EmployeesID";
+            this.EmployeesID.Name = "EmployeesID";
+            this.EmployeesID.ReadOnly = true;
+            this.EmployeesID.Visible = false;
+            // 
+            // AnesthesiaDoctor
+            // 
+            this.AnesthesiaDoctor.DataPropertyName = "AnesthesiaDoctor";
+            this.AnesthesiaDoctor.HeaderText = "麻醉医生";
+            this.AnesthesiaDoctor.Name = "AnesthesiaDoctor";
+            this.AnesthesiaDoctor.ReadOnly = true;
+            // 
+            // Nurse
+            // 
+            this.Nurse.DataPropertyName = "Nurse";
+            this.Nurse.HeaderText = "护士";
+            this.Nurse.Name = "Nurse";
+            this.Nurse.ReadOnly = true;
+            // 
+            // Divisions
+            // 
+            this.Divisions.DataPropertyName = "Divisions";
+            this.Divisions.HeaderText = "班次";
+            this.Divisions.Name = "Divisions";
+            this.Divisions.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.DataPropertyName = "Time";
+            this.Time.HeaderText = "时间";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
+            // EmployeesList
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(505, 420);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "EmployeesList";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "排班查询";
+            this.Load += new System.EventHandler(this.EmployeesList_Load);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnNew;
+        public System.Windows.Forms.DataGridView dgvEmployees;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EmployeesID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AnesthesiaDoctor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nurse;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Divisions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+    }
+}

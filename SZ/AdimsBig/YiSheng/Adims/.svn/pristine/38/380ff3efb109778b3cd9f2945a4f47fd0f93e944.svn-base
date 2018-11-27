@@ -1,0 +1,391 @@
+﻿///************************************
+///Updated By        : Senvi
+///************************************
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class paiban : Form
+    {
+        #region <<Members>>
+
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+        string ssj = "全部手术间";
+        DataTable dtSurgeryStaff = new DataTable();
+        DataSet ds = new DataSet();
+        int yslx = 1;
+        int dyi = 0;
+
+        public String printName = String.Empty;
+        public Font prtTextFont = new Font("Verdana", 10);
+        public Font prtTitleFont = new Font("宋体", 10);
+        private String[] titles = new String[0];
+        public String[] Titles
+        {
+            set
+            {
+                titles = value as String[];
+                if (null == titles)
+                {
+                    titles = new String[0];
+                }
+            }
+            get
+            {
+                return titles;
+            }
+        }
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public paiban()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void paiban_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                List<adims_MODEL.oroomstate> rs = new List<adims_MODEL.oroomstate>();
+                dgvOTypesetting.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                ds = bll.GetOTypesetting(ssj, dtDataTime.Value.Date.ToString("yyyy-MM-dd"));
+                dgvOTypesetting.DataSource = ds.Tables[0].DefaultView;
+                dtSurgeryStaff = bll.GetSurgeryStaff(" PostType = 0 ");
+                foreach (DataRow dr in dtSurgeryStaff.Rows)
+                {
+                    int result = Convert.ToInt32(dr["PostType"]);
+                    switch (result)
+                    {
+                        case 0:
+                            dr["PostType"] = "麻醉医师";
+                            break;
+                        case 1:
+                            dr["PostType"] = "洗手护士";
+                            break;
+                        case 2:
+                            dr["PostType"] = "巡回护士";
+                            break;
+                    }
+                }
+                dgvGZRY.DataSource = dtSurgeryStaff.DefaultView;
+                if (dgvOTypesetting.SelectedCells.Count > 0)
+                {
+
+                    lbPatname.Text = dgvOTypesetting.SelectedCells[3].Value.ToString();
+                    lbOroom.Text = dgvOTypesetting.SelectedCells[0].Value.ToString();
+                    lbOS.Text = dgvOTypesetting.SelectedCells[4].Value.ToString();
+                    lbOname.Text = dgvOTypesetting.SelectedCells[5].Value.ToString();
+                }
+                bll.seloroomstate(rs);
+
+                Button b1 = new Button();
+                b1.Location = new Point(50, 333);
+                b1.Text = "全部手术间";
+                b1.Size = new Size(130, 70);
+                b1.Click += new EventHandler(b_Click);
+                splitContainer1.Panel1.Controls.Add(b1);
+                int x = 220, y = 333;
+                foreach (adims_MODEL.oroomstate os in rs)
+                {
+                    Button b = new Button();
+                    b.Location = new Point(x, y);
+                    b.Text = os.Name;
+                    b.Size = new Size(130, 70);
+                    b.Click += new EventHandler(b_Click);
+                    x = x + 170;
+                    if (x > 565)
+                    {
+                        x = 50;
+                        y = y + 100;
+                    }
+                    splitContainer1.Panel1.Controls.Add(b);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void b_Click(object sender, EventArgs e)
+        {
+            ssj = ((Button)sender).Text;
+            DataSet ds = new DataSet();
+            ds = bll.GetOTypesetting(ssj, dtDataTime.Value.Date.ToString("yyyy-MM-dd"));
+            dgvOTypesetting.DataSource = ds.Tables[0].DefaultView;
+        }
+
+        /// <summary>
+        /// 时间改变
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dtDataTime_ValueChanged(object sender, EventArgs e)
+        {
+            ds = bll.GetOTypesetting(ssj, dtDataTime.Value.Date.ToString("yyyy-MM-dd"));
+            dgvOTypesetting.DataSource = ds.Tables[0].DefaultView;
+        }
+
+        private void btnAp1_Click(object sender, EventArgs e)
+        {
+            yslx = 1;
+            btnAp1.Top = 255;
+            dgvGZRY.Top = 279;
+            btnAp2.Top = 617;
+            btnAp3.Top = 640;
+        }
+
+        private void btnAp2_Click(object sender, EventArgs e)
+        {
+            yslx = 2;
+            btnAp1.Top = 255;
+            dgvGZRY.Top = 302;
+            btnAp2.Top = 277;
+            btnAp3.Top = 640;
+        }
+
+        private void btnAp3_Click(object sender, EventArgs e)
+        {
+            yslx = 3;
+            btnAp1.Top = 255;
+            dgvGZRY.Top = 326;
+            btnAp2.Top = 277;
+            btnAp3.Top = 301;
+        }
+
+        /// <summary>
+        /// 点击任意部分触发的事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvOTypesetting_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            lbPatname.Text = dgvOTypesetting.SelectedCells[3].Value.ToString();
+            lbOroom.Text = dgvOTypesetting.SelectedCells[0].Value.ToString();
+            lbOS.Text = dgvOTypesetting.SelectedCells[4].Value.ToString();
+            lbOname.Text = dgvOTypesetting.SelectedCells[5].Value.ToString();
+        }
+
+        /// <summary>
+        /// 双击主麻、副麻、洗手护士、巡回护士
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvOTypesetting_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 12 && e.ColumnIndex <= 18)
+            {
+                selaa selaa = new selaa(dgvOTypesetting, e.RowIndex, e.ColumnIndex);
+                selaa.ShowDialog();
+            }
+        }
+
+        /// <summary>
+        /// 智能排班
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnIntelligent_Click(object sender, EventArgs e)
+        {
+            int[] rn = new int[150];
+            int i = 0;
+            Random rd = new Random();
+            int f = 0;
+            bool k = true;
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                while (k)
+                {
+                    rn[i] = rd.Next(dtSurgeryStaff.Rows.Count);
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (rn[i] == rn[j])
+                            f++;
+                    }
+                    if (f == 0)
+                        k = false;
+                    f = 0;
+                }
+                r[7] = dtSurgeryStaff.Rows[rn[i]][0];
+                bll.UpdateOTypesetting(Convert.ToString(r[2]), "ap1", dtSurgeryStaff.Rows[rn[i]][0].ToString());
+                i++; f = 0;
+                k = true;
+                while (k)
+                {
+                    rn[i] = rd.Next(dtSurgeryStaff.Rows.Count);
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (rn[i] == rn[j])
+                            f++;
+                    }
+                    if (f == 0)
+                        k = false;
+                    f = 0;
+                }
+                r[8] = dtSurgeryStaff.Rows[rn[i]][0];
+                bll.UpdateOTypesetting(Convert.ToString(r[2]), "ap2", dtSurgeryStaff.Rows[rn[i]][0].ToString());
+                i++; f = 0;
+                k = true;
+                while (k)
+                {
+                    rn[i] = rd.Next(dtSurgeryStaff.Rows.Count);
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (rn[i] == rn[j])
+                            f++;
+                    }
+                    if (f == 0)
+                        k = false;
+                    f = 0;
+                }
+                r[9] = dtSurgeryStaff.Rows[rn[i]][0];
+                bll.UpdateOTypesetting(Convert.ToString(r[2]), "ap3", dtSurgeryStaff.Rows[rn[i]][0].ToString());
+                i++; f = 0;
+                k = true;
+            }
+            MessageBox.Show("智能排班成功");
+        }
+
+        private void dgvGZRY_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvOTypesetting.SelectedCells.Count > 0 && dgvGZRY.SelectedCells.Count > 0)
+            {
+                if (yslx == 1)
+                {
+                    dgvOTypesetting.SelectedCells[12].Value = dgvGZRY.SelectedCells[1].Value;
+                    bll.UpdateOTypesetting(Convert.ToString(dgvOTypesetting.SelectedCells[1].Value), "ap1", Convert.ToString(dgvOTypesetting.SelectedCells[12].Value));
+                }
+                else if (yslx == 2)
+                {
+                    dgvOTypesetting.SelectedCells[13].Value = dgvGZRY.SelectedCells[1].Value;
+                    bll.UpdateOTypesetting(Convert.ToString(dgvOTypesetting.SelectedCells[1].Value), "ap2", Convert.ToString(dgvOTypesetting.SelectedCells[13].Value));
+                }
+                else if (yslx == 3)
+                {
+                    dgvOTypesetting.SelectedCells[14].Value = dgvGZRY.SelectedCells[1].Value;
+                    bll.UpdateOTypesetting(Convert.ToString(dgvOTypesetting.SelectedCells[1].Value), "ap3", Convert.ToString(dgvOTypesetting.SelectedCells[14].Value));
+                }
+            }
+            else
+                MessageBox.Show("请先选中病人，");
+        }
+
+        /// <summary>
+        /// 清空
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            bll.clearpaiban(dtDataTime.Value.Date.ToString("yyyy-MM-dd"));
+        }
+
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.Document = pdDocument;
+            if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
+                pdDocument.Print();
+        }
+
+        /// <summary>
+        /// 设置打印机开始打印的事件处理函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="ev"></param>
+        private void pdDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            int x = 20, y = 140;
+            e.Graphics.DrawString("手 术 通 知 单", new Font("宋体", 16, FontStyle.Bold), Brushes.Black, new Point(250, 50));
+            e.Graphics.DrawString("手术日期：" + dtDataTime.Value.ToLongDateString(), this.Font, Brushes.Black, new Point(50, 100));
+            e.Graphics.DrawString("共" + dgvOTypesetting.Rows.Count.ToString() + "台", this.Font, Brushes.Black, new Point(260, 100));
+            e.Graphics.DrawLine(Pens.Black, new Point(20, 120), new Point(880, 120));
+            e.Graphics.DrawLine(Pens.Black, new Point(20, 120), new Point(20, 140));
+            e.Graphics.DrawString("手术间", this.Font, Brushes.Black, new Point(23, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(80, 120), new Point(80, 140));
+            e.Graphics.DrawString("台次", this.Font, Brushes.Black, new Point(81, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(110, 120), new Point(110, 140));
+            e.Graphics.DrawString("科室", this.Font, Brushes.Black, new Point(113, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(150, 120), new Point(150, 140));
+            e.Graphics.DrawString("姓名", this.Font, Brushes.Black, new Point(153, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(210, 120), new Point(210, 140));
+            e.Graphics.DrawString("性别", this.Font, Brushes.Black, new Point(211, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(240, 120), new Point(240, 140));
+            e.Graphics.DrawString("年龄", this.Font, Brushes.Black, new Point(241, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(270, 120), new Point(270, 140));
+            e.Graphics.DrawString("床号", this.Font, Brushes.Black, new Point(271, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(300, 120), new Point(300, 140));
+            e.Graphics.DrawString("        诊断", this.Font, Brushes.Black, new Point(303, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(420, 120), new Point(420, 140));
+            e.Graphics.DrawString("   拟实施手术", this.Font, Brushes.Black, new Point(423, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(540, 120), new Point(540, 140));
+            e.Graphics.DrawString("   手术医师", this.Font, Brushes.Black, new Point(543, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(650, 120), new Point(650, 140));
+            e.Graphics.DrawString(" 麻醉方法", this.Font, Brushes.Black, new Point(653, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(720, 120), new Point(720, 140));
+            e.Graphics.DrawString(" 麻醉医师", this.Font, Brushes.Black, new Point(723, 123));
+            e.Graphics.DrawLine(Pens.Black, new Point(880, 120), new Point(880, 140));
+            e.Graphics.DrawLine(Pens.Black, new Point(20, 140), new Point(880, 140));
+            for (; dyi < dgvOTypesetting.Rows.Count; dyi++)
+            {
+                e.Graphics.DrawLine(Pens.Black, new Point(x, y), new Point(20, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[0, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 3, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 60, y), new Point(x + 60, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[1, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 61, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 90, y), new Point(x + 90, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[3, dyi].Value.ToString(), new Font("宋体", 7), Brushes.Black, new Point(x + 91, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 130, y), new Point(x + 130, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[4, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 133, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 190, y), new Point(x + 190, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[5, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 191, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 220, y), new Point(x + 220, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[6, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 221, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 250, y), new Point(x + 250, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[7, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 251, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 280, y), new Point(x + 280, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[10, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 283, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 400, y), new Point(x + 400, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[9, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 403, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 520, y), new Point(x + 520, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[8, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 523, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 630, y), new Point(x + 630, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[11, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 633, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 700, y), new Point(x + 700, y + 20));
+                e.Graphics.DrawString(dgvOTypesetting[12, dyi].Value.ToString() + "、" + dgvOTypesetting[13, dyi].Value.ToString() + "、" + dgvOTypesetting[14, dyi].Value.ToString(), this.Font, Brushes.Black, new Point(x + 701, y + 3));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 880, y), new Point(x + 880, y + 20));
+                e.Graphics.DrawLine(Pens.Black, new Point(x, y + 20), new Point(x + 880, y + 20));
+                y = y + 20;
+            }
+            dyi = 0;
+        }
+
+        #endregion
+    }
+}

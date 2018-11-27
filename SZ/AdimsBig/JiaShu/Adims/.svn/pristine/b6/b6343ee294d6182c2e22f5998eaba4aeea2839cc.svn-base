@@ -1,0 +1,552 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using main.用户安全;
+using main.科室事物管理;
+using main.药品耗材管理;
+using main.权限管理;
+using adims_MODEL;
+using adims_BLL;
+using adims_DAL;
+
+namespace main
+{
+    public partial class main : Form
+    {
+        #region <<Members>>
+
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public main()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void main_Load(object sender, EventArgs e)
+        {
+            /*   DataSet ds = new DataSet();
+               ds = bll.yhxinxi(Program.zhanghao);
+               Program.yh = ds.Tables[0].Rows[0][0].ToString();
+               List<adims_MODEL.quanxian> qx = new List<adims_MODEL.quanxian>();
+               bll.quanxian(qx, Convert.ToInt32(ds.Tables[0].Rows[0][1]));
+               foreach (adims_MODEL.quanxian t_qx in qx)
+               {
+                   if (t_qx.Ml1 >= 0)
+                       ((ToolStripMenuItem)menuStrip1.Items[t_qx.Ml1]).DropDownItems[t_qx.Ml2].Enabled = false;
+                   else
+                       menuStrip1.Items[t_qx.Ml2].Enabled = false;
+
+               }  */
+            //对不同的用户岗位采用不同的权限
+            /*    for (int i = 0; i < menuStrip1.Items.Count; i++)
+                {
+                    Program.muluz.Add(menuStrip1.Items[i].Text);
+                    for (int j = 0; j < ((ToolStripMenuItem)menuStrip1.Items[i]).DropDownItems.Count; j++)
+                    {
+                        Program.muluz.Add(((ToolStripMenuItem)menuStrip1.Items[i]).DropDownItems[j].Text);
+
+                    }
+                }*/
+            //将菜单添加到目录表中
+            if (!Program.jurisdiction[0]) { ((ToolStripMenuItem)menuStrip1.Items[0]).DropDownItems[0].Enabled = false; ((ToolStripMenuItem)menuStrip1.Items[0]).DropDownItems[0].Visible = false; }
+            if (!Program.jurisdiction[1]) { ((ToolStripMenuItem)menuStrip1.Items[0]).DropDownItems[1].Enabled = false; ((ToolStripMenuItem)menuStrip1.Items[0]).DropDownItems[1].Visible = false; }
+            if (!Program.jurisdiction[0] && !Program.jurisdiction[1])
+            { menuStrip1.Items[0].Enabled = false; menuStrip1.Items[0].Visible = false; }
+            if (!Program.jurisdiction[2]) { ((ToolStripMenuItem)menuStrip1.Items[1]).DropDownItems[0].Enabled = false; ((ToolStripMenuItem)menuStrip1.Items[1]).DropDownItems[0].Visible = false; }
+            if (!Program.jurisdiction[3]) { ((ToolStripMenuItem)menuStrip1.Items[1]).DropDownItems[1].Enabled = false; ((ToolStripMenuItem)menuStrip1.Items[1]).DropDownItems[1].Visible = false; }
+            if (!Program.jurisdiction[4]) { ((ToolStripMenuItem)menuStrip1.Items[1]).DropDownItems[2].Enabled = false; ((ToolStripMenuItem)menuStrip1.Items[1]).DropDownItems[2].Visible = false; }
+            if (!Program.jurisdiction[2] && !Program.jurisdiction[3] && !Program.jurisdiction[4])
+            { menuStrip1.Items[1].Enabled = false; menuStrip1.Items[1].Visible = false; }
+            if (!Program.jurisdiction[5]) { ((ToolStripMenuItem)menuStrip1.Items[2]).DropDownItems[0].Enabled = false; ((ToolStripMenuItem)menuStrip1.Items[2]).DropDownItems[0].Visible = false; }
+            if (!Program.jurisdiction[6]) { ((ToolStripMenuItem)menuStrip1.Items[2]).DropDownItems[1].Enabled = false; ((ToolStripMenuItem)menuStrip1.Items[2]).DropDownItems[1].Visible = false; }
+            if (!Program.jurisdiction[7]) { ((ToolStripMenuItem)menuStrip1.Items[2]).DropDownItems[2].Enabled = false; ((ToolStripMenuItem)menuStrip1.Items[2]).DropDownItems[2].Visible = false; }
+            if (!Program.jurisdiction[5] && !Program.jurisdiction[6] && !Program.jurisdiction[7])
+            { menuStrip1.Items[2].Enabled = false; menuStrip1.Items[2].Visible = false; }
+            if (!Program.jurisdiction[8])
+            { menuStrip1.Items[3].Enabled = false; menuStrip1.Items[3].Visible = false; }
+        }
+
+        private void muMzjld_Click(object sender, EventArgs e)
+        {
+            Smzjld smzjld1 = new Smzjld();
+            smzjld1.Show();
+        }
+
+        private void 排班ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            paiban formpaiban = new paiban();
+            formpaiban.ShowDialog();
+        }
+
+        private void 术前访视ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BeforeVisit formsqfs = new BeforeVisit();
+            formsqfs.ShowDialog();
+        }
+
+        private void 用户权限ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fqxgl f = new Fqxgl();
+            f.ShowDialog();
+        }
+
+        private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /* Fyfjs f = new Fyfjs();
+              f.ShowDialog();*/
+            Add_users users = new Add_users();
+            users.Show();
+        }
+
+        private void 屏幕锁定ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fpmsd f = new Fpmsd();
+            f.ShowDialog();
+
+        }
+
+        private void 基础数据维护ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fzlwf f = new Fzlwf();
+            f.ShowDialog();
+
+        }
+
+        private void 科室药物申领ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fksypsl f = new Fksypsl();
+            f.ShowDialog();
+        }
+
+        private void 药物申领入库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frcd f = new Frcd();
+            f.ShowDialog();
+        }
+
+        private void 手术间药品分发ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fssjypff f = new Fssjypff();
+            f.ShowDialog();
+        }
+
+        private void 医师药品申领ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fysypsl f = new Fysypsl();
+            f.ShowDialog();
+        }
+
+        private void 医师药品核销ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fysyphx f = new Fysyphx();
+            f.ShowDialog();
+        }
+
+        private void 药品退科室库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fmzkyptk f = new Fmzkyptk();
+            f.ShowDialog();
+        }
+
+        private void 科室药品退库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Fksyptk f = new Fksyptk();
+            f.ShowDialog();
+        }
+
+        private void 排班查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmployeesList frmEmployeesList = new EmployeesList();
+            frmEmployeesList.ShowDialog();
+
+        }
+
+        private void 员工排班ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmployeesEdit frmEmployeesEdit = new EmployeesEdit("");
+            frmEmployeesEdit.ShowDialog();
+        }
+
+        private void 请假登记ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LeaveRegistration frmLeaveRegistration = new LeaveRegistration();
+            frmLeaveRegistration.ShowDialog();
+        }
+
+        private void 手术间浏览ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sjll1 f = new sjll1();
+            f.ShowDialog();
+
+        }
+
+        private void 麻醉记录登记ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FMZDJ f = new FMZDJ();
+            f.ShowDialog();
+        }
+
+        private void 中央监护ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FCenterJF f = new FCenterJF();
+            f.ShowDialog();
+        }
+
+        private void 护理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NurseRecord hlform = new NurseRecord();
+            hlform.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            qxqd qxqdform = new qxqd();
+            qxqdform.ShowDialog();
+        }
+
+        private void pACUToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PACU pacuform = new PACU();
+            pacuform.ShowDialog();
+        }
+
+        private void 器械清点ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            qxqd qxqdform = new qxqd();
+            qxqdform.Show();
+        }
+
+        private void 麻醉记录单查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            mzjldList mzxxcxform = new mzjldList();
+            mzxxcxform.Show();
+        }
+
+        private void 术后随访ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AfterVisit shsfform = new AfterVisit();
+            shsfform.ShowDialog();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            shxj shxjform = new shxj();
+            shxjform.ShowDialog();
+        }
+
+        private void 术间浏览ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sjll1 sjllform = new sjll1();
+            sjllform.ShowDialog();
+        }
+
+        /// <summary>
+        /// 手术管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnManager_Click(object sender, EventArgs e)
+        {
+            pictureBox2.Visible = true;
+            pictureBox3.Visible = true;
+            label1.Visible = true;
+            label2.Visible = true;
+        }
+
+        /// <summary>
+        /// 紧急手术
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUrgent_Click(object sender, EventArgs e)
+        {
+            pictureBox2.Visible = false;
+            pictureBox3.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
+        }
+
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            label1.ForeColor = Color.Red;
+        }
+
+        private void pictureBox2_MouseLeave(object sender, EventArgs e)
+        {
+            label1.ForeColor = Color.Black;
+        }
+
+        private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
+        {
+            label2.ForeColor = Color.Red;
+        }
+
+        private void pictureBox3_MouseLeave(object sender, EventArgs e)
+        {
+            label2.ForeColor = Color.Black;
+        }
+
+        private void pictureBox4_MouseLeave(object sender, EventArgs e)
+        {
+            label3.ForeColor = Color.Black;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            for (int i = 0; i < 10; i++)
+            {
+                bll.inss(menuStrip1.Items[i].Text, -1, i);
+                for (int j = 0; j < ((ToolStripMenuItem)menuStrip1.Items[i]).DropDownItems.Count; j++)
+                {
+                    bll.inss(((ToolStripMenuItem)menuStrip1.Items[i]).DropDownItems[j].Text, i, j);
+
+                }
+            }
+
+
+        }
+
+        private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
+        {
+            label3.ForeColor = Color.Red;
+        }
+
+        private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
+        {
+            label4.ForeColor = Color.Red;
+        }
+
+        private void pictureBox5_MouseLeave(object sender, EventArgs e)
+        {
+            label4.ForeColor = Color.Black;
+        }
+
+        private void pictureBox6_MouseMove(object sender, MouseEventArgs e)
+        {
+            label5.ForeColor = Color.Red;
+        }
+
+        private void pictureBox6_MouseLeave(object sender, EventArgs e)
+        {
+            label5.ForeColor = Color.Black;
+        }
+
+        private void pictureBox7_MouseMove(object sender, MouseEventArgs e)
+        {
+            label6.ForeColor = Color.Red;
+        }
+
+        private void pictureBox7_MouseLeave(object sender, EventArgs e)
+        {
+            label6.ForeColor = Color.Black;
+        }
+
+        private void pictureBox8_MouseMove(object sender, MouseEventArgs e)
+        {
+            label7.ForeColor = Color.Red;
+        }
+
+        private void pictureBox8_MouseLeave(object sender, EventArgs e)
+        {
+            label7.ForeColor = Color.Black;
+        }
+
+        private void pictureBox9_MouseMove(object sender, MouseEventArgs e)
+        {
+            label8.ForeColor = Color.Red;
+        }
+
+        private void pictureBox9_MouseLeave(object sender, EventArgs e)
+        {
+            label8.ForeColor = Color.Black;
+        }
+
+        private void pictureBox10_MouseMove(object sender, MouseEventArgs e)
+        {
+            label9.ForeColor = Color.Red;
+        }
+
+        private void pictureBox10_MouseLeave(object sender, EventArgs e)
+        {
+            label9.ForeColor = Color.Black;
+        }
+
+        /// <summary>
+        /// 智能排班
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            paiban f = new paiban();
+            f.ShowDialog();
+        }
+
+        /// <summary>
+        /// 术前访视
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            BeforeVisit frmBeforeVisit = new BeforeVisit();
+            frmBeforeVisit.ShowDialog();
+        }
+
+        /// <summary>
+        /// 麻醉记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            Smzjld f = new Smzjld();
+            f.ShowDialog();
+        }
+
+        /// <summary>
+        /// PACU 苏醒
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            PACU f = new PACU();
+            f.ShowDialog();
+        }
+
+        /// <summary>
+        ///  器械清点
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            qxqd f = new qxqd();
+            f.ShowDialog();
+        }
+
+        /// <summary>
+        /// 麻醉小结
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+            shxj f = new shxj();
+            f.ShowDialog();
+        }
+
+        /// <summary>
+        /// 术后随访
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox9_Click(object sender, EventArgs e)
+        {
+            AfterVisit frmAfterVisit = new AfterVisit();
+            frmAfterVisit.ShowDialog();
+        }
+
+        /// <summary>
+        /// 护理记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox10_Click(object sender, EventArgs e)
+        {
+            NurseRecord frmNurseRecord = new NurseRecord();
+            frmNurseRecord.ShowDialog();
+        }
+
+        /// <summary>
+        /// 退出系统
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("确定退出系统吗", "Confirm Message", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Cancel) return;
+            this.Close();
+        }
+
+        #endregion
+
+        private void 手术室药品管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sugery_Management mySurgery = new Sugery_Management();
+            mySurgery.Show();
+        }
+
+        private void 手术间药品管理ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            OperationRoom_Management myRoom = new OperationRoom_Management();
+            myRoom.Show();
+        }
+
+        private void 添加岗位ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            maintenance mt = new maintenance();
+            mt.Show();
+        }
+
+        private void 岗位权限分配ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            jurisdiction_distribute jd = new jurisdiction_distribute();
+            jd.Show();
+        }
+
+        private void 麻醉科药品入库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Anesthesiology_input input = new Anesthesiology_input();
+            input.Show();
+        }
+
+        private void 手术间药品分发ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Anesthesiology_delivery delivery = new Anesthesiology_delivery();
+            delivery.Show();
+        }
+
+        private void 药品退麻醉科库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Anesthesiology_return giveBack = new Anesthesiology_return();
+            giveBack.Show();
+        }
+
+        private void 医师领用ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Operation_room__output output = new Operation_room__output();
+            output.Show();
+        }
+
+        private void 药品退手术间库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Operation_room_return giveback = new Operation_room_return();
+            giveback.Show();
+        }
+    }
+}

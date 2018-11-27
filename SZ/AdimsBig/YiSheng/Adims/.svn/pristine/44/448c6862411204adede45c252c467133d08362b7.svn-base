@@ -1,0 +1,166 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class addqt : Form
+    {
+        int mzjldid;
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+        List<adims_MODEL.mzqt> mzqt;
+        public addqt(List<adims_MODEL.mzqt> mzqt1,int id)
+        {
+            mzjldid = id;
+            mzqt = mzqt1;
+            InitializeComponent();
+           
+
+           
+          
+           
+        }
+
+        private void addqt_Load(object sender, EventArgs e)
+        {
+            
+            dataGridView1.Columns.Add("0","气体名称");
+            dataGridView1.Columns.Add("1","用量");
+            dataGridView1.Columns.Add("2","单位");
+            dataGridView1.Columns.Add("3","使用时间");
+            dataGridView1.Columns.Add("4","结束时间");
+            dataGridView1.Columns.Add("5","标志");
+            dataGridView1.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns[2].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns[3].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns[4].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns[5].SortMode = DataGridViewColumnSortMode.NotSortable;
+            foreach(adims_MODEL.mzqt mz in mzqt) 
+            {
+                if (mz.Bz == 1)  //如果在使用就没结束时间
+                {
+                    dataGridView1.Rows.Add(mz.Qtname, mz.Yl, mz.Dw, mz.Sysj, "", "正在使用");
+
+                }
+                else if (mz.Bz == 2)
+                {
+                    dataGridView1.Rows.Add(mz.Qtname, mz.Yl, mz.Dw, mz.Sysj,mz.Jssj, "使用结束");
+                
+                }
+
+            }
+         
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (textBox1.Text != "")
+            {
+                int   f = 0;
+
+                foreach (adims_MODEL.mzqt mz in mzqt) 
+                {
+                    if (mz.Bz > 0 && comboBox1.Text == mz.Qtname)
+                        f = 1;
+                }
+
+                if (f == 0)
+                {
+                    adims_MODEL.mzqt mz1 = new adims_MODEL.mzqt();
+                    mz1.Qtname = comboBox1.Text;
+                    mz1.Yl = Convert.ToDouble(textBox1.Text);
+                    mz1.Dw = comboBox2.Text;
+                    mz1.Sysj = DateTime.Now;
+                    mz1.Bz = 1;
+                    mzqt.Add(mz1);
+                    int m = bll.addqt(mzjldid, mz1);
+                    if (m != 1)
+                    { MessageBox.Show("错误"); }
+
+                    dataGridView1.Rows.Add(comboBox1.Text, textBox1.Text, comboBox2.Text, mz1.Sysj, "", 1);
+                }
+                else
+                {
+                    MessageBox.Show("该气体已经使用");
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("用量不能为空");
+            }
+            
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                if (dataGridView1.SelectedRows[0].Cells[5].Value.ToString() == "正在使用")
+                {
+
+                    foreach (adims_MODEL.mzqt mz in mzqt) 
+                    {
+                        if (mz.Qtname == dataGridView1.SelectedRows[0].Cells[0].Value.ToString())
+                        {
+                            mz.Jssj = DateTime.Now;
+                            mz.Bz = 2;
+                            int p= bll.endqt(mzjldid, mz);
+                            if (p != 1)
+                            { MessageBox.Show("错误"); }
+                            dataGridView1.SelectedRows[0].Cells[4].Value = DateTime.Now;
+                            dataGridView1.SelectedRows[0].Cells[5].Value = "使用结束";
+                        }
+                      
+                    }
+
+                }
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+          
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+
+                foreach (adims_MODEL.mzqt mz in mzqt) 
+                {
+                    if (mz.Qtname == dataGridView1.SelectedRows[0].Cells[0].Value.ToString())
+                    {
+                       int q= bll.delqt(mzjldid, mz);
+                       if (q != 1)
+                       { MessageBox.Show("错误"+q.ToString()); }
+                       mzqt.Remove(mz);
+                    }
+                }
+                 
+                dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
+              }
+
+          }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && e.KeyChar != 8 && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+        }
+        }
+
+    }

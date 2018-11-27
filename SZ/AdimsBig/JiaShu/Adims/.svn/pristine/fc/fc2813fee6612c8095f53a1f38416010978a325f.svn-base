@@ -1,0 +1,1768 @@
+﻿namespace main
+{
+    partial class NurseRecord
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NurseRecord));
+            this.dgvNurseRecord = new System.Windows.Forms.DataGridView();
+            this.txtSqzd = new WindowsFormsControlLibrary5.UserControl1();
+            this.label55 = new System.Windows.Forms.Label();
+            this.txtNssss = new WindowsFormsControlLibrary5.UserControl1();
+            this.label54 = new System.Windows.Forms.Label();
+            this.txtBednumber = new WindowsFormsControlLibrary5.UserControl1();
+            this.label53 = new System.Windows.Forms.Label();
+            this.txtDepartment = new WindowsFormsControlLibrary5.UserControl1();
+            this.label52 = new System.Windows.Forms.Label();
+            this.txtPatage = new WindowsFormsControlLibrary5.UserControl1();
+            this.label51 = new System.Windows.Forms.Label();
+            this.txtPatsex = new WindowsFormsControlLibrary5.UserControl1();
+            this.label50 = new System.Windows.Forms.Label();
+            this.txtPatname = new WindowsFormsControlLibrary5.UserControl1();
+            this.label49 = new System.Windows.Forms.Label();
+            this.txtPatid = new WindowsFormsControlLibrary5.UserControl1();
+            this.label48 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtAboutsValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtLeaveTime = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dtEnterTime = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtPosturalValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.chkOther = new System.Windows.Forms.CheckBox();
+            this.chkYou = new System.Windows.Forms.CheckBox();
+            this.chkZuo = new System.Windows.Forms.CheckBox();
+            this.chkJie = new System.Windows.Forms.CheckBox();
+            this.chkYang = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtInfusionSum = new WindowsFormsControlLibrary5.UserControl1();
+            this.label6 = new System.Windows.Forms.Label();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtBloodValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.txtCryoprecipitate = new WindowsFormsControlLibrary5.UserControl1();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtBPlatelet = new WindowsFormsControlLibrary5.UserControl1();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtBPlasma = new WindowsFormsControlLibrary5.UserControl1();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtBWhole = new WindowsFormsControlLibrary5.UserControl1();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.txtAfterValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.chkAfterQT = new System.Windows.Forms.CheckBox();
+            this.chkAfterTS = new System.Windows.Forms.CheckBox();
+            this.chkAfterPK = new System.Windows.Forms.CheckBox();
+            this.chkAfterYC = new System.Windows.Forms.CheckBox();
+            this.chkAfterZC = new System.Windows.Forms.CheckBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.txtBeforeValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.chkQT = new System.Windows.Forms.CheckBox();
+            this.chkTS = new System.Windows.Forms.CheckBox();
+            this.chkPK = new System.Windows.Forms.CheckBox();
+            this.chkYC = new System.Windows.Forms.CheckBox();
+            this.chkZC = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.txtPastePartsValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.label24 = new System.Windows.Forms.Label();
+            this.chkXTY = new System.Windows.Forms.CheckBox();
+            this.chkXTZ = new System.Windows.Forms.CheckBox();
+            this.chkBBY = new System.Windows.Forms.CheckBox();
+            this.chkBBZ = new System.Windows.Forms.CheckBox();
+            this.chkDTY = new System.Windows.Forms.CheckBox();
+            this.chkDTZ = new System.Windows.Forms.CheckBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
+            this.label22 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.txtPositionValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.chkBWOther = new System.Windows.Forms.CheckBox();
+            this.chkXZY = new System.Windows.Forms.CheckBox();
+            this.chkXZZ = new System.Windows.Forms.CheckBox();
+            this.chkSZY = new System.Windows.Forms.CheckBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.chkSZZ = new System.Windows.Forms.CheckBox();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.label25 = new System.Windows.Forms.Label();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.txtHeatingValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.chkJWOther = new System.Windows.Forms.CheckBox();
+            this.chkYT = new System.Windows.Forms.CheckBox();
+            this.chkWT = new System.Windows.Forms.CheckBox();
+            this.chkDRT = new System.Windows.Forms.CheckBox();
+            this.chkWu = new System.Windows.Forms.CheckBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.chkT = new System.Windows.Forms.CheckBox();
+            this.chkD = new System.Windows.Forms.CheckBox();
+            this.chkW = new System.Windows.Forms.CheckBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.txtSliceNum = new WindowsFormsControlLibrary5.UserControl1();
+            this.label34 = new System.Windows.Forms.Label();
+            this.radioButton15 = new System.Windows.Forms.RadioButton();
+            this.radioButton16 = new System.Windows.Forms.RadioButton();
+            this.label33 = new System.Windows.Forms.Label();
+            this.txtSampleNum = new WindowsFormsControlLibrary5.UserControl1();
+            this.label32 = new System.Windows.Forms.Label();
+            this.radioButton13 = new System.Windows.Forms.RadioButton();
+            this.radioButton14 = new System.Windows.Forms.RadioButton();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.txtDrainageValue = new WindowsFormsControlLibrary5.UserControl1();
+            this.radioButton17 = new System.Windows.Forms.RadioButton();
+            this.radioButton18 = new System.Windows.Forms.RadioButton();
+            this.label35 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.btnPrintView = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNurseRecord)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // dgvNurseRecord
+            // 
+            this.dgvNurseRecord.AllowUserToResizeRows = false;
+            this.dgvNurseRecord.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvNurseRecord.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNurseRecord.Location = new System.Drawing.Point(12, 2);
+            this.dgvNurseRecord.Name = "dgvNurseRecord";
+            this.dgvNurseRecord.ReadOnly = true;
+            this.dgvNurseRecord.RowHeadersVisible = false;
+            this.dgvNurseRecord.RowTemplate.Height = 23;
+            this.dgvNurseRecord.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvNurseRecord.Size = new System.Drawing.Size(980, 139);
+            this.dgvNurseRecord.TabIndex = 0;
+            this.dgvNurseRecord.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNurseRecord_CellClick);
+            // 
+            // txtSqzd
+            // 
+            this.txtSqzd.Location = new System.Drawing.Point(342, 43);
+            this.txtSqzd.Name = "txtSqzd";
+            this.txtSqzd.Size = new System.Drawing.Size(492, 23);
+            this.txtSqzd.TabIndex = 37;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(280, 46);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(65, 12);
+            this.label55.TabIndex = 36;
+            this.label55.Text = "术前诊断：";
+            // 
+            // txtNssss
+            // 
+            this.txtNssss.Location = new System.Drawing.Point(80, 43);
+            this.txtNssss.Name = "txtNssss";
+            this.txtNssss.Size = new System.Drawing.Size(178, 23);
+            this.txtNssss.TabIndex = 35;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(3, 44);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(77, 12);
+            this.label54.TabIndex = 34;
+            this.label54.Text = "拟实施手术：";
+            // 
+            // txtBednumber
+            // 
+            this.txtBednumber.Location = new System.Drawing.Point(737, 168);
+            this.txtBednumber.Name = "txtBednumber";
+            this.txtBednumber.Size = new System.Drawing.Size(62, 23);
+            this.txtBednumber.TabIndex = 33;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(698, 170);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(41, 12);
+            this.label53.TabIndex = 32;
+            this.label53.Text = "床号：";
+            // 
+            // txtDepartment
+            // 
+            this.txtDepartment.Location = new System.Drawing.Point(542, 167);
+            this.txtDepartment.Name = "txtDepartment";
+            this.txtDepartment.Size = new System.Drawing.Size(142, 23);
+            this.txtDepartment.TabIndex = 31;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(510, 170);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(41, 12);
+            this.label52.TabIndex = 30;
+            this.label52.Text = "病区：";
+            // 
+            // txtPatage
+            // 
+            this.txtPatage.Location = new System.Drawing.Point(333, 167);
+            this.txtPatage.Name = "txtPatage";
+            this.txtPatage.Size = new System.Drawing.Size(62, 23);
+            this.txtPatage.TabIndex = 29;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(298, 170);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(41, 12);
+            this.label51.TabIndex = 28;
+            this.label51.Text = "年龄：";
+            // 
+            // txtPatsex
+            // 
+            this.txtPatsex.Location = new System.Drawing.Point(446, 167);
+            this.txtPatsex.Name = "txtPatsex";
+            this.txtPatsex.Size = new System.Drawing.Size(58, 23);
+            this.txtPatsex.TabIndex = 27;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(414, 170);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(41, 12);
+            this.label50.TabIndex = 26;
+            this.label50.Text = "性别：";
+            // 
+            // txtPatname
+            // 
+            this.txtPatname.Location = new System.Drawing.Point(197, 167);
+            this.txtPatname.Name = "txtPatname";
+            this.txtPatname.Size = new System.Drawing.Size(90, 23);
+            this.txtPatname.TabIndex = 25;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(162, 170);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(41, 12);
+            this.label49.TabIndex = 24;
+            this.label49.Text = "姓名：";
+            // 
+            // txtPatid
+            // 
+            this.txtPatid.Location = new System.Drawing.Point(61, 168);
+            this.txtPatid.Name = "txtPatid";
+            this.txtPatid.Size = new System.Drawing.Size(84, 23);
+            this.txtPatid.TabIndex = 23;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(15, 170);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(53, 12);
+            this.label48.TabIndex = 22;
+            this.label48.Text = "病人ID：";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label54);
+            this.groupBox1.Controls.Add(this.txtNssss);
+            this.groupBox1.Controls.Add(this.label55);
+            this.groupBox1.Controls.Add(this.txtSqzd);
+            this.groupBox1.Location = new System.Drawing.Point(12, 147);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(981, 72);
+            this.groupBox1.TabIndex = 39;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "基本信息";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtAboutsValue);
+            this.groupBox2.Controls.Add(this.radioButton4);
+            this.groupBox2.Controls.Add(this.radioButton3);
+            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.dtLeaveTime);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.dtEnterTime);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Location = new System.Drawing.Point(12, 225);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(980, 39);
+            this.groupBox2.TabIndex = 40;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "1";
+            // 
+            // txtAboutsValue
+            // 
+            this.txtAboutsValue.Location = new System.Drawing.Point(757, 13);
+            this.txtAboutsValue.Name = "txtAboutsValue";
+            this.txtAboutsValue.Size = new System.Drawing.Size(123, 23);
+            this.txtAboutsValue.TabIndex = 9;
+            this.txtAboutsValue.Tag = "";
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(714, 15);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(47, 16);
+            this.radioButton4.TabIndex = 8;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "其他";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(637, 15);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(71, 16);
+            this.radioButton3.TabIndex = 7;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "回监护室";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(535, 15);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(95, 16);
+            this.radioButton2.TabIndex = 6;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "回麻醉苏醒室";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(446, 15);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(83, 16);
+            this.radioButton1.TabIndex = 5;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "直接回病房";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(385, 17);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "病人去向：";
+            // 
+            // dtLeaveTime
+            // 
+            this.dtLeaveTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtLeaveTime.Location = new System.Drawing.Point(297, 13);
+            this.dtLeaveTime.Name = "dtLeaveTime";
+            this.dtLeaveTime.Size = new System.Drawing.Size(73, 21);
+            this.dtLeaveTime.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(207, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 12);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "离开手术室时间";
+            // 
+            // dtEnterTime
+            // 
+            this.dtEnterTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtEnterTime.Location = new System.Drawing.Point(119, 13);
+            this.dtEnterTime.Name = "dtEnterTime";
+            this.dtEnterTime.Size = new System.Drawing.Size(74, 21);
+            this.dtEnterTime.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "病人入手术室时间";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtPosturalValue);
+            this.groupBox3.Controls.Add(this.chkOther);
+            this.groupBox3.Controls.Add(this.chkYou);
+            this.groupBox3.Controls.Add(this.chkZuo);
+            this.groupBox3.Controls.Add(this.chkJie);
+            this.groupBox3.Controls.Add(this.chkYang);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Location = new System.Drawing.Point(12, 265);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(980, 39);
+            this.groupBox3.TabIndex = 41;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "2";
+            // 
+            // txtPosturalValue
+            // 
+            this.txtPosturalValue.Location = new System.Drawing.Point(413, 14);
+            this.txtPosturalValue.Name = "txtPosturalValue";
+            this.txtPosturalValue.Size = new System.Drawing.Size(91, 23);
+            this.txtPosturalValue.TabIndex = 6;
+            // 
+            // chkOther
+            // 
+            this.chkOther.AutoSize = true;
+            this.chkOther.Location = new System.Drawing.Point(368, 16);
+            this.chkOther.Name = "chkOther";
+            this.chkOther.Size = new System.Drawing.Size(48, 16);
+            this.chkOther.TabIndex = 5;
+            this.chkOther.Text = "其他";
+            this.chkOther.UseVisualStyleBackColor = true;
+            // 
+            // chkYou
+            // 
+            this.chkYou.AutoSize = true;
+            this.chkYou.Location = new System.Drawing.Point(295, 16);
+            this.chkYou.Name = "chkYou";
+            this.chkYou.Size = new System.Drawing.Size(72, 16);
+            this.chkYou.TabIndex = 4;
+            this.chkYou.Text = "右侧卧位";
+            this.chkYou.UseVisualStyleBackColor = true;
+            // 
+            // chkZuo
+            // 
+            this.chkZuo.AutoSize = true;
+            this.chkZuo.Location = new System.Drawing.Point(216, 17);
+            this.chkZuo.Name = "chkZuo";
+            this.chkZuo.Size = new System.Drawing.Size(72, 16);
+            this.chkZuo.TabIndex = 3;
+            this.chkZuo.Text = "左侧卧位";
+            this.chkZuo.UseVisualStyleBackColor = true;
+            // 
+            // chkJie
+            // 
+            this.chkJie.AutoSize = true;
+            this.chkJie.Location = new System.Drawing.Point(149, 17);
+            this.chkJie.Name = "chkJie";
+            this.chkJie.Size = new System.Drawing.Size(60, 16);
+            this.chkJie.TabIndex = 2;
+            this.chkJie.Text = "结石位";
+            this.chkJie.UseVisualStyleBackColor = true;
+            // 
+            // chkYang
+            // 
+            this.chkYang.AutoSize = true;
+            this.chkYang.Location = new System.Drawing.Point(82, 17);
+            this.chkYang.Name = "chkYang";
+            this.chkYang.Size = new System.Drawing.Size(60, 16);
+            this.chkYang.TabIndex = 1;
+            this.chkYang.Text = "仰卧位";
+            this.chkYang.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "手术体位：";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.txtInfusionSum);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.radioButton6);
+            this.groupBox4.Controls.Add(this.radioButton5);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Location = new System.Drawing.Point(12, 304);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(980, 33);
+            this.groupBox4.TabIndex = 42;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "3";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(279, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(23, 12);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "ml)";
+            // 
+            // txtInfusionSum
+            // 
+            this.txtInfusionSum.Location = new System.Drawing.Point(205, 9);
+            this.txtInfusionSum.Name = "txtInfusionSum";
+            this.txtInfusionSum.Size = new System.Drawing.Size(73, 23);
+            this.txtInfusionSum.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(170, 14);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 12);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "(总量";
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(127, 12);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(35, 16);
+            this.radioButton6.TabIndex = 2;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "有";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Location = new System.Drawing.Point(85, 12);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(35, 16);
+            this.radioButton5.TabIndex = 1;
+            this.radioButton5.Text = "无";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 12);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "输液情况：";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.txtBloodValue);
+            this.groupBox5.Controls.Add(this.label17);
+            this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this.txtCryoprecipitate);
+            this.groupBox5.Controls.Add(this.label15);
+            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Controls.Add(this.txtBPlatelet);
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.label12);
+            this.groupBox5.Controls.Add(this.txtBPlasma);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Controls.Add(this.txtBWhole);
+            this.groupBox5.Controls.Add(this.radioButton8);
+            this.groupBox5.Controls.Add(this.radioButton7);
+            this.groupBox5.Controls.Add(this.label9);
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Location = new System.Drawing.Point(12, 338);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(981, 37);
+            this.groupBox5.TabIndex = 43;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "4";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(870, 18);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(23, 12);
+            this.label18.TabIndex = 17;
+            this.label18.Text = "ml)";
+            // 
+            // txtBloodValue
+            // 
+            this.txtBloodValue.Location = new System.Drawing.Point(766, 12);
+            this.txtBloodValue.Name = "txtBloodValue";
+            this.txtBloodValue.Size = new System.Drawing.Size(98, 23);
+            this.txtBloodValue.TabIndex = 16;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(731, 17);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(29, 12);
+            this.label17.TabIndex = 15;
+            this.label17.Text = "其他";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(708, 18);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(17, 12);
+            this.label16.TabIndex = 14;
+            this.label16.Text = "ml";
+            // 
+            // txtCryoprecipitate
+            // 
+            this.txtCryoprecipitate.Location = new System.Drawing.Point(627, 12);
+            this.txtCryoprecipitate.Name = "txtCryoprecipitate";
+            this.txtCryoprecipitate.Size = new System.Drawing.Size(79, 23);
+            this.txtCryoprecipitate.TabIndex = 13;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(586, 18);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(41, 12);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "冷沉淀";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(561, 18);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(17, 12);
+            this.label14.TabIndex = 11;
+            this.label14.Text = "ml";
+            // 
+            // txtBPlatelet
+            // 
+            this.txtBPlatelet.Location = new System.Drawing.Point(474, 13);
+            this.txtBPlatelet.Name = "txtBPlatelet";
+            this.txtBPlatelet.Size = new System.Drawing.Size(82, 23);
+            this.txtBPlatelet.TabIndex = 10;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(434, 18);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(41, 12);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "血小板";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(407, 19);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(17, 12);
+            this.label12.TabIndex = 8;
+            this.label12.Text = "ml";
+            // 
+            // txtBPlasma
+            // 
+            this.txtBPlasma.Location = new System.Drawing.Point(334, 13);
+            this.txtBPlasma.Name = "txtBPlasma";
+            this.txtBPlasma.Size = new System.Drawing.Size(68, 23);
+            this.txtBPlasma.TabIndex = 7;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(307, 17);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(29, 12);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "血浆";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(279, 18);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(17, 12);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "ml";
+            // 
+            // txtBWhole
+            // 
+            this.txtBWhole.Location = new System.Drawing.Point(204, 13);
+            this.txtBWhole.Name = "txtBWhole";
+            this.txtBWhole.Size = new System.Drawing.Size(71, 23);
+            this.txtBWhole.TabIndex = 4;
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.AutoSize = true;
+            this.radioButton8.Location = new System.Drawing.Point(127, 14);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(35, 16);
+            this.radioButton8.TabIndex = 3;
+            this.radioButton8.TabStop = true;
+            this.radioButton8.Text = "有";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.AutoSize = true;
+            this.radioButton7.Location = new System.Drawing.Point(85, 14);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(35, 16);
+            this.radioButton7.TabIndex = 2;
+            this.radioButton7.TabStop = true;
+            this.radioButton7.Text = "无";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(170, 16);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 12);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "(全血";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(14, 17);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "输血情况：";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.txtAfterValue);
+            this.groupBox6.Controls.Add(this.chkAfterQT);
+            this.groupBox6.Controls.Add(this.chkAfterTS);
+            this.groupBox6.Controls.Add(this.chkAfterPK);
+            this.groupBox6.Controls.Add(this.chkAfterYC);
+            this.groupBox6.Controls.Add(this.chkAfterZC);
+            this.groupBox6.Controls.Add(this.label21);
+            this.groupBox6.Controls.Add(this.txtBeforeValue);
+            this.groupBox6.Controls.Add(this.chkQT);
+            this.groupBox6.Controls.Add(this.chkTS);
+            this.groupBox6.Controls.Add(this.chkPK);
+            this.groupBox6.Controls.Add(this.chkYC);
+            this.groupBox6.Controls.Add(this.chkZC);
+            this.groupBox6.Controls.Add(this.label20);
+            this.groupBox6.Controls.Add(this.label19);
+            this.groupBox6.Location = new System.Drawing.Point(12, 377);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(981, 35);
+            this.groupBox6.TabIndex = 44;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "5";
+            // 
+            // txtAfterValue
+            // 
+            this.txtAfterValue.Location = new System.Drawing.Point(841, 10);
+            this.txtAfterValue.Name = "txtAfterValue";
+            this.txtAfterValue.Size = new System.Drawing.Size(88, 23);
+            this.txtAfterValue.TabIndex = 14;
+            // 
+            // chkAfterQT
+            // 
+            this.chkAfterQT.AutoSize = true;
+            this.chkAfterQT.Location = new System.Drawing.Point(797, 14);
+            this.chkAfterQT.Name = "chkAfterQT";
+            this.chkAfterQT.Size = new System.Drawing.Size(48, 16);
+            this.chkAfterQT.TabIndex = 13;
+            this.chkAfterQT.Text = "其他";
+            this.chkAfterQT.UseVisualStyleBackColor = true;
+            // 
+            // chkAfterTS
+            // 
+            this.chkAfterTS.AutoSize = true;
+            this.chkAfterTS.Location = new System.Drawing.Point(743, 15);
+            this.chkAfterTS.Name = "chkAfterTS";
+            this.chkAfterTS.Size = new System.Drawing.Size(48, 16);
+            this.chkAfterTS.TabIndex = 12;
+            this.chkAfterTS.Text = "烫伤";
+            this.chkAfterTS.UseVisualStyleBackColor = true;
+            // 
+            // chkAfterPK
+            // 
+            this.chkAfterPK.AutoSize = true;
+            this.chkAfterPK.Location = new System.Drawing.Point(679, 14);
+            this.chkAfterPK.Name = "chkAfterPK";
+            this.chkAfterPK.Size = new System.Drawing.Size(48, 16);
+            this.chkAfterPK.TabIndex = 11;
+            this.chkAfterPK.Text = "破溃";
+            this.chkAfterPK.UseVisualStyleBackColor = true;
+            // 
+            // chkAfterYC
+            // 
+            this.chkAfterYC.AutoSize = true;
+            this.chkAfterYC.Location = new System.Drawing.Point(620, 15);
+            this.chkAfterYC.Name = "chkAfterYC";
+            this.chkAfterYC.Size = new System.Drawing.Size(48, 16);
+            this.chkAfterYC.TabIndex = 10;
+            this.chkAfterYC.Text = "压疮";
+            this.chkAfterYC.UseVisualStyleBackColor = true;
+            // 
+            // chkAfterZC
+            // 
+            this.chkAfterZC.AutoSize = true;
+            this.chkAfterZC.Location = new System.Drawing.Point(555, 15);
+            this.chkAfterZC.Name = "chkAfterZC";
+            this.chkAfterZC.Size = new System.Drawing.Size(48, 16);
+            this.chkAfterZC.TabIndex = 9;
+            this.chkAfterZC.Text = "正常";
+            this.chkAfterZC.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(513, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(29, 12);
+            this.label21.TabIndex = 8;
+            this.label21.Text = "术后";
+            // 
+            // txtBeforeValue
+            // 
+            this.txtBeforeValue.Location = new System.Drawing.Point(413, 8);
+            this.txtBeforeValue.Name = "txtBeforeValue";
+            this.txtBeforeValue.Size = new System.Drawing.Size(79, 23);
+            this.txtBeforeValue.TabIndex = 7;
+            // 
+            // chkQT
+            // 
+            this.chkQT.AutoSize = true;
+            this.chkQT.Location = new System.Drawing.Point(369, 12);
+            this.chkQT.Name = "chkQT";
+            this.chkQT.Size = new System.Drawing.Size(48, 16);
+            this.chkQT.TabIndex = 6;
+            this.chkQT.Text = "其他";
+            this.chkQT.UseVisualStyleBackColor = true;
+            // 
+            // chkTS
+            // 
+            this.chkTS.AutoSize = true;
+            this.chkTS.Location = new System.Drawing.Point(315, 13);
+            this.chkTS.Name = "chkTS";
+            this.chkTS.Size = new System.Drawing.Size(48, 16);
+            this.chkTS.TabIndex = 5;
+            this.chkTS.Text = "烫伤";
+            this.chkTS.UseVisualStyleBackColor = true;
+            // 
+            // chkPK
+            // 
+            this.chkPK.AutoSize = true;
+            this.chkPK.Location = new System.Drawing.Point(251, 12);
+            this.chkPK.Name = "chkPK";
+            this.chkPK.Size = new System.Drawing.Size(48, 16);
+            this.chkPK.TabIndex = 4;
+            this.chkPK.Text = "破溃";
+            this.chkPK.UseVisualStyleBackColor = true;
+            // 
+            // chkYC
+            // 
+            this.chkYC.AutoSize = true;
+            this.chkYC.Location = new System.Drawing.Point(192, 13);
+            this.chkYC.Name = "chkYC";
+            this.chkYC.Size = new System.Drawing.Size(48, 16);
+            this.chkYC.TabIndex = 3;
+            this.chkYC.Text = "压疮";
+            this.chkYC.UseVisualStyleBackColor = true;
+            // 
+            // chkZC
+            // 
+            this.chkZC.AutoSize = true;
+            this.chkZC.Location = new System.Drawing.Point(127, 13);
+            this.chkZC.Name = "chkZC";
+            this.chkZC.Size = new System.Drawing.Size(48, 16);
+            this.chkZC.TabIndex = 2;
+            this.chkZC.Text = "正常";
+            this.chkZC.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(85, 14);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(29, 12);
+            this.label20.TabIndex = 1;
+            this.label20.Text = "术前";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(14, 14);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(65, 12);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "皮肤情况：";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.txtPastePartsValue);
+            this.groupBox7.Controls.Add(this.label24);
+            this.groupBox7.Controls.Add(this.chkXTY);
+            this.groupBox7.Controls.Add(this.chkXTZ);
+            this.groupBox7.Controls.Add(this.chkBBY);
+            this.groupBox7.Controls.Add(this.chkBBZ);
+            this.groupBox7.Controls.Add(this.chkDTY);
+            this.groupBox7.Controls.Add(this.chkDTZ);
+            this.groupBox7.Controls.Add(this.label23);
+            this.groupBox7.Controls.Add(this.radioButton10);
+            this.groupBox7.Controls.Add(this.radioButton9);
+            this.groupBox7.Controls.Add(this.label22);
+            this.groupBox7.Location = new System.Drawing.Point(12, 412);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(980, 36);
+            this.groupBox7.TabIndex = 45;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "6";
+            // 
+            // txtPastePartsValue
+            // 
+            this.txtPastePartsValue.Location = new System.Drawing.Point(684, 10);
+            this.txtPastePartsValue.Name = "txtPastePartsValue";
+            this.txtPastePartsValue.Size = new System.Drawing.Size(175, 23);
+            this.txtPastePartsValue.TabIndex = 11;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(656, 15);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(29, 12);
+            this.label24.TabIndex = 10;
+            this.label24.Text = "其他";
+            // 
+            // chkXTY
+            // 
+            this.chkXTY.AutoSize = true;
+            this.chkXTY.Location = new System.Drawing.Point(593, 13);
+            this.chkXTY.Name = "chkXTY";
+            this.chkXTY.Size = new System.Drawing.Size(60, 16);
+            this.chkXTY.TabIndex = 9;
+            this.chkXTY.Text = "小腿右";
+            this.chkXTY.UseVisualStyleBackColor = true;
+            // 
+            // chkXTZ
+            // 
+            this.chkXTZ.AutoSize = true;
+            this.chkXTZ.Location = new System.Drawing.Point(530, 13);
+            this.chkXTZ.Name = "chkXTZ";
+            this.chkXTZ.Size = new System.Drawing.Size(60, 16);
+            this.chkXTZ.TabIndex = 8;
+            this.chkXTZ.Text = "小腿左";
+            this.chkXTZ.UseVisualStyleBackColor = true;
+            // 
+            // chkBBY
+            // 
+            this.chkBBY.AutoSize = true;
+            this.chkBBY.Location = new System.Drawing.Point(466, 13);
+            this.chkBBY.Name = "chkBBY";
+            this.chkBBY.Size = new System.Drawing.Size(60, 16);
+            this.chkBBY.TabIndex = 7;
+            this.chkBBY.Text = "臀部右";
+            this.chkBBY.UseVisualStyleBackColor = true;
+            // 
+            // chkBBZ
+            // 
+            this.chkBBZ.AutoSize = true;
+            this.chkBBZ.Location = new System.Drawing.Point(400, 13);
+            this.chkBBZ.Name = "chkBBZ";
+            this.chkBBZ.Size = new System.Drawing.Size(60, 16);
+            this.chkBBZ.TabIndex = 6;
+            this.chkBBZ.Text = "臀部左";
+            this.chkBBZ.UseVisualStyleBackColor = true;
+            // 
+            // chkDTY
+            // 
+            this.chkDTY.AutoSize = true;
+            this.chkDTY.Location = new System.Drawing.Point(334, 13);
+            this.chkDTY.Name = "chkDTY";
+            this.chkDTY.Size = new System.Drawing.Size(60, 16);
+            this.chkDTY.TabIndex = 5;
+            this.chkDTY.Text = "大腿右";
+            this.chkDTY.UseVisualStyleBackColor = true;
+            // 
+            // chkDTZ
+            // 
+            this.chkDTZ.AutoSize = true;
+            this.chkDTZ.Location = new System.Drawing.Point(263, 14);
+            this.chkDTZ.Name = "chkDTZ";
+            this.chkDTZ.Size = new System.Drawing.Size(60, 16);
+            this.chkDTZ.TabIndex = 4;
+            this.chkDTZ.Text = "大腿左";
+            this.chkDTZ.UseVisualStyleBackColor = true;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(178, 15);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(89, 12);
+            this.label23.TabIndex = 3;
+            this.label23.Text = "负极粘贴部位：";
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.AutoSize = true;
+            this.radioButton10.Location = new System.Drawing.Point(127, 13);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(35, 16);
+            this.radioButton10.TabIndex = 2;
+            this.radioButton10.TabStop = true;
+            this.radioButton10.Text = "有";
+            this.radioButton10.UseVisualStyleBackColor = true;
+            // 
+            // radioButton9
+            // 
+            this.radioButton9.AutoSize = true;
+            this.radioButton9.Location = new System.Drawing.Point(82, 14);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(35, 16);
+            this.radioButton9.TabIndex = 1;
+            this.radioButton9.TabStop = true;
+            this.radioButton9.Text = "无";
+            this.radioButton9.UseVisualStyleBackColor = true;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(14, 15);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(65, 12);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "电刀使用：";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.txtPositionValue);
+            this.groupBox8.Controls.Add(this.chkBWOther);
+            this.groupBox8.Controls.Add(this.chkXZY);
+            this.groupBox8.Controls.Add(this.chkXZZ);
+            this.groupBox8.Controls.Add(this.chkSZY);
+            this.groupBox8.Controls.Add(this.label26);
+            this.groupBox8.Controls.Add(this.chkSZZ);
+            this.groupBox8.Controls.Add(this.radioButton12);
+            this.groupBox8.Controls.Add(this.radioButton11);
+            this.groupBox8.Controls.Add(this.label25);
+            this.groupBox8.Location = new System.Drawing.Point(12, 448);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(981, 40);
+            this.groupBox8.TabIndex = 46;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "7";
+            // 
+            // txtPositionValue
+            // 
+            this.txtPositionValue.Location = new System.Drawing.Point(516, 14);
+            this.txtPositionValue.Name = "txtPositionValue";
+            this.txtPositionValue.Size = new System.Drawing.Size(175, 23);
+            this.txtPositionValue.TabIndex = 9;
+            // 
+            // chkBWOther
+            // 
+            this.chkBWOther.AutoSize = true;
+            this.chkBWOther.Location = new System.Drawing.Point(474, 15);
+            this.chkBWOther.Name = "chkBWOther";
+            this.chkBWOther.Size = new System.Drawing.Size(48, 16);
+            this.chkBWOther.TabIndex = 8;
+            this.chkBWOther.Text = "其他";
+            this.chkBWOther.UseVisualStyleBackColor = true;
+            // 
+            // chkXZY
+            // 
+            this.chkXZY.AutoSize = true;
+            this.chkXZY.Location = new System.Drawing.Point(413, 15);
+            this.chkXZY.Name = "chkXZY";
+            this.chkXZY.Size = new System.Drawing.Size(60, 16);
+            this.chkXZY.TabIndex = 7;
+            this.chkXZY.Text = "下肢右";
+            this.chkXZY.UseVisualStyleBackColor = true;
+            // 
+            // chkXZZ
+            // 
+            this.chkXZZ.AutoSize = true;
+            this.chkXZZ.Location = new System.Drawing.Point(351, 15);
+            this.chkXZZ.Name = "chkXZZ";
+            this.chkXZZ.Size = new System.Drawing.Size(60, 16);
+            this.chkXZZ.TabIndex = 6;
+            this.chkXZZ.Text = "下肢左";
+            this.chkXZZ.UseVisualStyleBackColor = true;
+            // 
+            // chkSZY
+            // 
+            this.chkSZY.AutoSize = true;
+            this.chkSZY.Location = new System.Drawing.Point(285, 15);
+            this.chkSZY.Name = "chkSZY";
+            this.chkSZY.Size = new System.Drawing.Size(60, 16);
+            this.chkSZY.TabIndex = 5;
+            this.chkSZY.Text = "上肢右";
+            this.chkSZY.UseVisualStyleBackColor = true;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(178, 17);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(41, 12);
+            this.label26.TabIndex = 4;
+            this.label26.Text = "部位：";
+            // 
+            // chkSZZ
+            // 
+            this.chkSZZ.AutoSize = true;
+            this.chkSZZ.Location = new System.Drawing.Point(225, 16);
+            this.chkSZZ.Name = "chkSZZ";
+            this.chkSZZ.Size = new System.Drawing.Size(60, 16);
+            this.chkSZZ.TabIndex = 3;
+            this.chkSZZ.Text = "上肢左";
+            this.chkSZZ.UseVisualStyleBackColor = true;
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.AutoSize = true;
+            this.radioButton12.Location = new System.Drawing.Point(132, 15);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(35, 16);
+            this.radioButton12.TabIndex = 2;
+            this.radioButton12.TabStop = true;
+            this.radioButton12.Text = "有";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.AutoSize = true;
+            this.radioButton11.Location = new System.Drawing.Point(90, 15);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(35, 16);
+            this.radioButton11.TabIndex = 1;
+            this.radioButton11.TabStop = true;
+            this.radioButton11.Text = "无";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(15, 17);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(77, 12);
+            this.label25.TabIndex = 0;
+            this.label25.Text = "止血带使用：";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.txtHeatingValue);
+            this.groupBox9.Controls.Add(this.chkJWOther);
+            this.groupBox9.Controls.Add(this.chkYT);
+            this.groupBox9.Controls.Add(this.chkWT);
+            this.groupBox9.Controls.Add(this.chkDRT);
+            this.groupBox9.Controls.Add(this.chkWu);
+            this.groupBox9.Controls.Add(this.label27);
+            this.groupBox9.Location = new System.Drawing.Point(13, 488);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(979, 41);
+            this.groupBox9.TabIndex = 47;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "8";
+            // 
+            // txtHeatingValue
+            // 
+            this.txtHeatingValue.Location = new System.Drawing.Point(385, 13);
+            this.txtHeatingValue.Name = "txtHeatingValue";
+            this.txtHeatingValue.Size = new System.Drawing.Size(175, 23);
+            this.txtHeatingValue.TabIndex = 6;
+            // 
+            // chkJWOther
+            // 
+            this.chkJWOther.AutoSize = true;
+            this.chkJWOther.Location = new System.Drawing.Point(341, 16);
+            this.chkJWOther.Name = "chkJWOther";
+            this.chkJWOther.Size = new System.Drawing.Size(48, 16);
+            this.chkJWOther.TabIndex = 5;
+            this.chkJWOther.Text = "其他";
+            this.chkJWOther.UseVisualStyleBackColor = true;
+            // 
+            // chkYT
+            // 
+            this.chkYT.AutoSize = true;
+            this.chkYT.Location = new System.Drawing.Point(251, 16);
+            this.chkYT.Name = "chkYT";
+            this.chkYT.Size = new System.Drawing.Size(84, 16);
+            this.chkYT.TabIndex = 4;
+            this.chkYT.Text = "液体加热器";
+            this.chkYT.UseVisualStyleBackColor = true;
+            // 
+            // chkWT
+            // 
+            this.chkWT.AutoSize = true;
+            this.chkWT.Location = new System.Drawing.Point(197, 16);
+            this.chkWT.Name = "chkWT";
+            this.chkWT.Size = new System.Drawing.Size(48, 16);
+            this.chkWT.TabIndex = 3;
+            this.chkWT.Text = "温毯";
+            this.chkWT.UseVisualStyleBackColor = true;
+            // 
+            // chkDRT
+            // 
+            this.chkDRT.AutoSize = true;
+            this.chkDRT.Location = new System.Drawing.Point(131, 16);
+            this.chkDRT.Name = "chkDRT";
+            this.chkDRT.Size = new System.Drawing.Size(60, 16);
+            this.chkDRT.TabIndex = 2;
+            this.chkDRT.Text = "电热毯";
+            this.chkDRT.UseVisualStyleBackColor = true;
+            // 
+            // chkWu
+            // 
+            this.chkWu.AutoSize = true;
+            this.chkWu.Location = new System.Drawing.Point(86, 16);
+            this.chkWu.Name = "chkWu";
+            this.chkWu.Size = new System.Drawing.Size(36, 16);
+            this.chkWu.TabIndex = 1;
+            this.chkWu.Text = "无";
+            this.chkWu.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(14, 17);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(65, 12);
+            this.label27.TabIndex = 0;
+            this.label27.Text = "加温装置：";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.chkT);
+            this.groupBox10.Controls.Add(this.chkD);
+            this.groupBox10.Controls.Add(this.chkW);
+            this.groupBox10.Controls.Add(this.label28);
+            this.groupBox10.Location = new System.Drawing.Point(13, 529);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(979, 38);
+            this.groupBox10.TabIndex = 48;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "9";
+            // 
+            // chkT
+            // 
+            this.chkT.AutoSize = true;
+            this.chkT.Location = new System.Drawing.Point(194, 16);
+            this.chkT.Name = "chkT";
+            this.chkT.Size = new System.Drawing.Size(48, 16);
+            this.chkT.TabIndex = 7;
+            this.chkT.Text = "温毯";
+            this.chkT.UseVisualStyleBackColor = true;
+            // 
+            // chkD
+            // 
+            this.chkD.AutoSize = true;
+            this.chkD.Location = new System.Drawing.Point(128, 16);
+            this.chkD.Name = "chkD";
+            this.chkD.Size = new System.Drawing.Size(60, 16);
+            this.chkD.TabIndex = 6;
+            this.chkD.Text = "电热毯";
+            this.chkD.UseVisualStyleBackColor = true;
+            // 
+            // chkW
+            // 
+            this.chkW.AutoSize = true;
+            this.chkW.Location = new System.Drawing.Point(83, 16);
+            this.chkW.Name = "chkW";
+            this.chkW.Size = new System.Drawing.Size(36, 16);
+            this.chkW.TabIndex = 5;
+            this.chkW.Text = "无";
+            this.chkW.UseVisualStyleBackColor = true;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(11, 17);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(65, 12);
+            this.label28.TabIndex = 4;
+            this.label28.Text = "留置胃管：";
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.txtSliceNum);
+            this.groupBox12.Controls.Add(this.label34);
+            this.groupBox12.Controls.Add(this.radioButton15);
+            this.groupBox12.Controls.Add(this.radioButton16);
+            this.groupBox12.Controls.Add(this.label33);
+            this.groupBox12.Controls.Add(this.txtSampleNum);
+            this.groupBox12.Controls.Add(this.label32);
+            this.groupBox12.Controls.Add(this.radioButton13);
+            this.groupBox12.Controls.Add(this.radioButton14);
+            this.groupBox12.Controls.Add(this.label31);
+            this.groupBox12.Controls.Add(this.label30);
+            this.groupBox12.Location = new System.Drawing.Point(13, 566);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(979, 39);
+            this.groupBox12.TabIndex = 50;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "10";
+            // 
+            // txtSliceNum
+            // 
+            this.txtSliceNum.Location = new System.Drawing.Point(542, 14);
+            this.txtSliceNum.Name = "txtSliceNum";
+            this.txtSliceNum.Size = new System.Drawing.Size(71, 23);
+            this.txtSliceNum.TabIndex = 11;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(514, 19);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(29, 12);
+            this.label34.TabIndex = 10;
+            this.label34.Text = "数量";
+            // 
+            // radioButton15
+            // 
+            this.radioButton15.AutoSize = true;
+            this.radioButton15.Location = new System.Drawing.Point(469, 17);
+            this.radioButton15.Name = "radioButton15";
+            this.radioButton15.Size = new System.Drawing.Size(35, 16);
+            this.radioButton15.TabIndex = 9;
+            this.radioButton15.TabStop = true;
+            this.radioButton15.Text = "有";
+            this.radioButton15.UseVisualStyleBackColor = true;
+            // 
+            // radioButton16
+            // 
+            this.radioButton16.AutoSize = true;
+            this.radioButton16.Location = new System.Drawing.Point(424, 17);
+            this.radioButton16.Name = "radioButton16";
+            this.radioButton16.Size = new System.Drawing.Size(35, 16);
+            this.radioButton16.TabIndex = 8;
+            this.radioButton16.TabStop = true;
+            this.radioButton16.Text = "无";
+            this.radioButton16.UseVisualStyleBackColor = true;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(361, 19);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(53, 12);
+            this.label33.TabIndex = 7;
+            this.label33.Text = "冰冻切片";
+            // 
+            // txtSampleNum
+            // 
+            this.txtSampleNum.Location = new System.Drawing.Point(273, 13);
+            this.txtSampleNum.Name = "txtSampleNum";
+            this.txtSampleNum.Size = new System.Drawing.Size(64, 23);
+            this.txtSampleNum.TabIndex = 6;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(245, 18);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(29, 12);
+            this.label32.TabIndex = 5;
+            this.label32.Text = "数量";
+            // 
+            // radioButton13
+            // 
+            this.radioButton13.AutoSize = true;
+            this.radioButton13.Location = new System.Drawing.Point(206, 16);
+            this.radioButton13.Name = "radioButton13";
+            this.radioButton13.Size = new System.Drawing.Size(35, 16);
+            this.radioButton13.TabIndex = 4;
+            this.radioButton13.TabStop = true;
+            this.radioButton13.Text = "有";
+            this.radioButton13.UseVisualStyleBackColor = true;
+            // 
+            // radioButton14
+            // 
+            this.radioButton14.AutoSize = true;
+            this.radioButton14.Location = new System.Drawing.Point(164, 16);
+            this.radioButton14.Name = "radioButton14";
+            this.radioButton14.Size = new System.Drawing.Size(35, 16);
+            this.radioButton14.TabIndex = 3;
+            this.radioButton14.TabStop = true;
+            this.radioButton14.Text = "无";
+            this.radioButton14.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(80, 18);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(77, 12);
+            this.label31.TabIndex = 1;
+            this.label31.Text = "常规病理样本";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(11, 17);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(65, 12);
+            this.label30.TabIndex = 0;
+            this.label30.Text = "样本留取：";
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.txtDrainageValue);
+            this.groupBox13.Controls.Add(this.radioButton17);
+            this.groupBox13.Controls.Add(this.radioButton18);
+            this.groupBox13.Controls.Add(this.label35);
+            this.groupBox13.Location = new System.Drawing.Point(13, 605);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(707, 40);
+            this.groupBox13.TabIndex = 51;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "11";
+            // 
+            // txtDrainageValue
+            // 
+            this.txtDrainageValue.Location = new System.Drawing.Point(160, 16);
+            this.txtDrainageValue.Name = "txtDrainageValue";
+            this.txtDrainageValue.Size = new System.Drawing.Size(530, 23);
+            this.txtDrainageValue.TabIndex = 5;
+            // 
+            // radioButton17
+            // 
+            this.radioButton17.AutoSize = true;
+            this.radioButton17.Location = new System.Drawing.Point(126, 18);
+            this.radioButton17.Name = "radioButton17";
+            this.radioButton17.Size = new System.Drawing.Size(35, 16);
+            this.radioButton17.TabIndex = 4;
+            this.radioButton17.TabStop = true;
+            this.radioButton17.Text = "有";
+            this.radioButton17.UseVisualStyleBackColor = true;
+            // 
+            // radioButton18
+            // 
+            this.radioButton18.AutoSize = true;
+            this.radioButton18.Location = new System.Drawing.Point(78, 18);
+            this.radioButton18.Name = "radioButton18";
+            this.radioButton18.Size = new System.Drawing.Size(35, 16);
+            this.radioButton18.TabIndex = 3;
+            this.radioButton18.TabStop = true;
+            this.radioButton18.Text = "无";
+            this.radioButton18.UseVisualStyleBackColor = true;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(13, 19);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(53, 12);
+            this.label35.TabIndex = 0;
+            this.label35.Text = "引流管：";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(746, 619);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(80, 25);
+            this.btnSave.TabIndex = 52;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(914, 618);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(80, 25);
+            this.btnClose.TabIndex = 53;
+            this.btnClose.Text = "取消";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnPrintView
+            // 
+            this.btnPrintView.Location = new System.Drawing.Point(829, 619);
+            this.btnPrintView.Name = "btnPrintView";
+            this.btnPrintView.Size = new System.Drawing.Size(80, 25);
+            this.btnPrintView.TabIndex = 54;
+            this.btnPrintView.Text = "打印预览";
+            this.btnPrintView.UseVisualStyleBackColor = true;
+            this.btnPrintView.Click += new System.EventHandler(this.btnPrintView_Click);
+            // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
+            // 
+            // NurseRecord
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1000, 650);
+            this.Controls.Add(this.btnPrintView);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.groupBox13);
+            this.Controls.Add(this.groupBox12);
+            this.Controls.Add(this.groupBox10);
+            this.Controls.Add(this.groupBox9);
+            this.Controls.Add(this.groupBox8);
+            this.Controls.Add(this.groupBox7);
+            this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBox5);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.txtBednumber);
+            this.Controls.Add(this.label53);
+            this.Controls.Add(this.txtDepartment);
+            this.Controls.Add(this.label52);
+            this.Controls.Add(this.txtPatage);
+            this.Controls.Add(this.label51);
+            this.Controls.Add(this.txtPatsex);
+            this.Controls.Add(this.label50);
+            this.Controls.Add(this.txtPatname);
+            this.Controls.Add(this.label49);
+            this.Controls.Add(this.txtPatid);
+            this.Controls.Add(this.label48);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.dgvNurseRecord);
+            this.Name = "NurseRecord";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "护理记录";
+            this.Load += new System.EventHandler(this.hl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNurseRecord)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.DataGridView dgvNurseRecord;
+        private WindowsFormsControlLibrary5.UserControl1 txtSqzd;
+        private System.Windows.Forms.Label label55;
+        private WindowsFormsControlLibrary5.UserControl1 txtNssss;
+        private System.Windows.Forms.Label label54;
+        private WindowsFormsControlLibrary5.UserControl1 txtBednumber;
+        private System.Windows.Forms.Label label53;
+        private WindowsFormsControlLibrary5.UserControl1 txtDepartment;
+        private System.Windows.Forms.Label label52;
+        private WindowsFormsControlLibrary5.UserControl1 txtPatage;
+        private System.Windows.Forms.Label label51;
+        private WindowsFormsControlLibrary5.UserControl1 txtPatsex;
+        private System.Windows.Forms.Label label50;
+        private WindowsFormsControlLibrary5.UserControl1 txtPatname;
+        private System.Windows.Forms.Label label49;
+        private WindowsFormsControlLibrary5.UserControl1 txtPatid;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DateTimePicker dtEnterTime;
+        private System.Windows.Forms.Label label1;
+        private WindowsFormsControlLibrary5.UserControl1 txtAboutsValue;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtLeaveTime;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private WindowsFormsControlLibrary5.UserControl1 txtPosturalValue;
+        private System.Windows.Forms.CheckBox chkOther;
+        private System.Windows.Forms.CheckBox chkYou;
+        private System.Windows.Forms.CheckBox chkZuo;
+        private System.Windows.Forms.CheckBox chkJie;
+        private System.Windows.Forms.CheckBox chkYang;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label7;
+        private WindowsFormsControlLibrary5.UserControl1 txtInfusionSum;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label18;
+        private WindowsFormsControlLibrary5.UserControl1 txtBloodValue;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private WindowsFormsControlLibrary5.UserControl1 txtCryoprecipitate;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private WindowsFormsControlLibrary5.UserControl1 txtBPlatelet;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private WindowsFormsControlLibrary5.UserControl1 txtBPlasma;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private WindowsFormsControlLibrary5.UserControl1 txtBWhole;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private WindowsFormsControlLibrary5.UserControl1 txtAfterValue;
+        private System.Windows.Forms.CheckBox chkAfterQT;
+        private System.Windows.Forms.CheckBox chkAfterTS;
+        private System.Windows.Forms.CheckBox chkAfterPK;
+        private System.Windows.Forms.CheckBox chkAfterYC;
+        private System.Windows.Forms.CheckBox chkAfterZC;
+        private System.Windows.Forms.Label label21;
+        private WindowsFormsControlLibrary5.UserControl1 txtBeforeValue;
+        private System.Windows.Forms.CheckBox chkQT;
+        private System.Windows.Forms.CheckBox chkTS;
+        private System.Windows.Forms.CheckBox chkPK;
+        private System.Windows.Forms.CheckBox chkYC;
+        private System.Windows.Forms.CheckBox chkZC;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private WindowsFormsControlLibrary5.UserControl1 txtPastePartsValue;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckBox chkXTY;
+        private System.Windows.Forms.CheckBox chkXTZ;
+        private System.Windows.Forms.CheckBox chkBBY;
+        private System.Windows.Forms.CheckBox chkBBZ;
+        private System.Windows.Forms.CheckBox chkDTY;
+        private System.Windows.Forms.CheckBox chkDTZ;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.RadioButton radioButton9;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private WindowsFormsControlLibrary5.UserControl1 txtPositionValue;
+        private System.Windows.Forms.CheckBox chkBWOther;
+        private System.Windows.Forms.CheckBox chkXZY;
+        private System.Windows.Forms.CheckBox chkXZZ;
+        private System.Windows.Forms.CheckBox chkSZY;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.CheckBox chkSZZ;
+        private System.Windows.Forms.RadioButton radioButton12;
+        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private WindowsFormsControlLibrary5.UserControl1 txtHeatingValue;
+        private System.Windows.Forms.CheckBox chkJWOther;
+        private System.Windows.Forms.CheckBox chkYT;
+        private System.Windows.Forms.CheckBox chkWT;
+        private System.Windows.Forms.CheckBox chkDRT;
+        private System.Windows.Forms.CheckBox chkWu;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.CheckBox chkT;
+        private System.Windows.Forms.CheckBox chkD;
+        private System.Windows.Forms.CheckBox chkW;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private WindowsFormsControlLibrary5.UserControl1 txtSliceNum;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.RadioButton radioButton15;
+        private System.Windows.Forms.RadioButton radioButton16;
+        private System.Windows.Forms.Label label33;
+        private WindowsFormsControlLibrary5.UserControl1 txtSampleNum;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.RadioButton radioButton13;
+        private System.Windows.Forms.RadioButton radioButton14;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private WindowsFormsControlLibrary5.UserControl1 txtDrainageValue;
+        private System.Windows.Forms.RadioButton radioButton17;
+        private System.Windows.Forms.RadioButton radioButton18;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnPrintView;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+    }
+}

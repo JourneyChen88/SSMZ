@@ -1,0 +1,708 @@
+﻿///************************************
+///Updated By        : Senvi
+///************************************
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using adims_BLL;
+
+namespace main
+{
+    public partial class NurseRecord : Form
+    {
+        #region <<Members>>
+
+        AdimsController bll = new AdimsController(); //  实例化
+        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        bool b = false;
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public NurseRecord()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void hl_Load(object sender, EventArgs e)
+        {
+            DataTable dt = bll.GetPat(" 1=1 ");
+            dgvNurseRecord.DataSource = dt.DefaultView;
+            dgvNurseRecord_CellClick(null, null);
+        }
+
+        /// <summary>
+        ///  保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveNurseRecord();
+            dictionary.Clear();
+
+        }
+
+        /// <summary>
+        /// 取消
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// 行改变
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvNurseRecord_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ClearEdit();
+            try
+            {
+                string patID = dgvNurseRecord.SelectedCells[0].Value.ToString();
+                if (dgvNurseRecord.RowCount == 0 || string.IsNullOrEmpty(patID)) return;
+                txtPatid.Controls[0].Text = patID;
+                txtPatname.Controls[0].Text = dgvNurseRecord.SelectedCells[1].Value.ToString();
+                txtPatage.Controls[0].Text = dgvNurseRecord.SelectedCells[2].Value.ToString();
+                txtPatsex.Controls[0].Text = dgvNurseRecord.SelectedCells[3].Value.ToString();
+                txtDepartment.Controls[0].Text = dgvNurseRecord.SelectedCells[4].Value.ToString();
+                txtBednumber.Controls[0].Text = dgvNurseRecord.SelectedCells[5].Value.ToString();
+                txtNssss.Controls[0].Text = dgvNurseRecord.SelectedCells[6].Value.ToString();
+                txtSqzd.Controls[0].Text = dgvNurseRecord.SelectedCells[7].Value.ToString();
+                DataTable dt = bll.GetNurseRecord("PatID = '" + txtPatid.Controls[0].Text + "'");
+                if (dt.Rows.Count == 0)
+                    return;
+                SetEditValue(dt);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "出现异常，请检查！");
+            }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Font ptzt = new Font("新宋体", 11);//普通字体
+
+            // 病人去向
+            string patAbouts = string.Empty;
+            if (radioButton1.Checked == true) patAbouts = "直接回病房 ";
+            else if (radioButton2.Checked == true) patAbouts = "回麻醉苏醒室 ";
+            else if (radioButton3.Checked == true) patAbouts = "回监护室 ";
+            else if (radioButton4.Checked == true) patAbouts = "其他：";
+
+            // 手术体位
+            string sPostural = string.Empty;
+            if (chkYang.Checked == true) sPostural += "仰卧位 ";
+            if (chkJie.Checked == true) sPostural += "结石位 ";
+            if (chkZuo.Checked == true) sPostural += "左仰卧位 ";
+            if (chkYou.Checked == true) sPostural += "右仰卧位 ";
+            if (chkOther.Checked == true) sPostural += "其他：";
+
+            // 输液情况
+            string isInfusion = string.Empty;
+            isInfusion = (radioButton5.Checked == false) ? "有" : "无";
+
+            // 输血情况
+            string isBlood = string.Empty;
+            isBlood = (radioButton7.Checked == false) ? "有" : "无";
+
+            // 术前
+            string sBefore = string.Empty;
+            if (chkZC.Checked == true) sBefore += "正常 ";
+            if (chkYC.Checked == true) sBefore += "压疮 ";
+            if (chkPK.Checked == true) sBefore += "破溃 ";
+            if (chkTS.Checked == true) sBefore += "烫伤 ";
+            if (chkQT.Checked == true) sBefore += "其他：";
+
+            // 术后
+            string sAfter = string.Empty;
+            if (chkAfterZC.Checked == true) sAfter += "正常 ";
+            if (chkAfterYC.Checked == true) sAfter += "压疮 ";
+            if (chkAfterPK.Checked == true) sAfter += "破溃 ";
+            if (chkAfterTS.Checked == true) sAfter += "烫伤 ";
+            if (chkAfterQT.Checked == true) sAfter += "其他：";
+
+            // 电刀使用
+            string isElectricKnife = string.Empty;
+            isElectricKnife = (radioButton9.Checked == false) ? "有" : "无";
+
+            // 止血带使用
+            string isTourniquet = string.Empty;
+            isTourniquet = (radioButton11.Checked == false) ? "有" : "无";
+
+            // 负极粘帖部位
+            string pasteParts = string.Empty;
+            if (chkDTZ.Checked == true) pasteParts += "大腿左 ";
+            if (chkDTY.Checked == true) pasteParts += "大腿右 ";
+            if (chkBBZ.Checked == true) pasteParts += "臂部左 ";
+            if (chkBBY.Checked == true) pasteParts += "臂部右 ";
+            if (chkXTZ.Checked == true) pasteParts += "小腿左 ";
+            if (chkXTY.Checked == true) pasteParts += "小腿右 ";
+
+            // 部位
+            string position = string.Empty;
+            if (chkSZZ.Checked == true) position += "上肢左 ";
+            if (chkSZY.Checked == true) position += "上肢右 ";
+            if (chkXZZ.Checked == true) position += "下肢左 ";
+            if (chkXZY.Checked == true) position += "下肢右 ";
+            if (chkBWOther.Checked == true) pasteParts += "其他：";
+
+            // 加温装置
+            string heatingDevice = string.Empty;
+            if (chkWu.Checked == true) heatingDevice += "无 ";
+            if (chkDRT.Checked == true) heatingDevice += "电热毯 ";
+            if (chkWT.Checked == true) heatingDevice += "温毯 ";
+            if (chkYT.Checked == true) heatingDevice += "液体加温器 ";
+            if (chkJWOther.Checked == true) heatingDevice += "其他：";
+
+            // 留置胃管
+            string indwelling = string.Empty;
+            if (chkW.Checked == true) indwelling += "无 ";
+            if (chkD.Checked == true) indwelling += "电热毯 ";
+            if (chkT.Checked == true) indwelling += "加温毯 ";
+
+            // 常规病例样本
+            string isSample = string.Empty;
+            isSample = (radioButton14.Checked == false) ? "无" : "有";
+
+            // 冰冻切片
+            string isSlice = string.Empty;
+            isSlice = (radioButton16.Checked == false) ? "无" : "有";
+
+            // 引流管
+            string isDrainage = string.Empty;
+            isDrainage = (radioButton18.Checked == false) ? "无" : "有";
+
+            e.Graphics.DrawString("护 理 记 录 单", new Font("新宋体", 16, FontStyle.Bold), Brushes.Black, new Point(260, 40));
+            e.Graphics.DrawString("日期：" + Convert.ToString(DateTime.Now), ptzt, Brushes.Black, 530, 80);
+            e.Graphics.DrawString("\n姓名： " + txtPatname.Controls[0].Text.Trim() + "  性别： "
+                + txtPatsex.Controls[0].Text.Trim() + "  年龄： " + txtPatage.Controls[0].Text.Trim() + " 病区： " + txtDepartment.Controls[0].Text.Trim() + "  床号： "
+                + txtBednumber.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 90));
+            e.Graphics.DrawString("\n术前诊断： " + txtSqzd.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 110));
+            e.Graphics.DrawString("\n预行手术： " + txtNssss.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 130));
+            e.Graphics.DrawString("\n病人入室手术时间：" + dtEnterTime.Text.ToString() + "        离开手术室时间：" + dtLeaveTime.Text.ToString(), ptzt, Brushes.Black, new Point(50, 150));
+            e.Graphics.DrawString("\n病人去向：（" + patAbouts + "） " + txtAboutsValue.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 170));
+            e.Graphics.DrawString("\n手术体位：（" + sPostural + "）" + txtPosturalValue.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 190));
+            e.Graphics.DrawString("\n输液情况：（" + isInfusion + "） 总量：" + txtInfusionSum.Controls[0].Text.Trim() + " ml", ptzt, Brushes.Black, new Point(50, 210));
+            e.Graphics.DrawString("\n输血情况：（" + isBlood + "）    全血：" + txtBWhole.Controls[0].Text.Trim() + " ml 血浆：" + txtBPlasma.Controls[0].Text.Trim() + " ml 血小板："
+                + txtBPlatelet.Controls[0].Text.Trim() + " ml 冷沉淀：" + txtCryoprecipitate.Controls[0].Text.Trim() + " ml 其他：" + txtBloodValue.Controls[0].Text.Trim() + " ml", ptzt, Brushes.Black, new Point(50, 230));
+            e.Graphics.DrawString("\n皮肤情况：术前（" + sBefore + "）" + txtBeforeValue.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 250));
+            e.Graphics.DrawString("\n          术后（" + sAfter + "）" + txtAfterValue.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 270));
+            e.Graphics.DrawString("\n电刀使用：（" + isElectricKnife + "）       负极粘帖部位：（" + pasteParts + "）", ptzt, Brushes.Black, new Point(50, 290));
+            e.Graphics.DrawString("\n止血袋使用：（" + isTourniquet + "）     部位：（" + position + "）   ", ptzt, Brushes.Black, new Point(50, 310));
+            e.Graphics.DrawString("\n加温装置：（" + heatingDevice + "）", ptzt, Brushes.Black, new Point(50, 330));
+            e.Graphics.DrawString("\n留置胃管：（" + indwelling + "）", ptzt, Brushes.Black, new Point(50, 350));
+            e.Graphics.DrawString("\n标本留取： 常规病理标本（" + isSample + "）   数量：" + txtSampleNum.Controls[0].Text.Trim() + "   冰冻切片（" + isSlice + "）   数量："
+                + txtSliceNum.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 370));
+            e.Graphics.DrawString("\n引流管：（" + isDrainage + "）" + txtDrainageValue.Controls[0].Text.Trim(), ptzt, Brushes.Black, new Point(50, 390));
+            e.Graphics.DrawString("\n巡回护士签名：        日期：", ptzt, Brushes.Black, new Point(470, 420));
+
+        }
+
+        /// <summary>
+        /// 打印预览
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrintView_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.Document = printDocument1;
+            if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
+                printDocument1.Print();
+        }
+
+        #endregion
+
+        #region <<Methods>>
+
+        /// <summary>
+        /// 清空控件值
+        /// </summary>
+        private void ClearEdit()
+        {
+            txtPatid.Controls[0].Text = string.Empty;
+            txtPatname.Controls[0].Text = string.Empty;
+            txtPatage.Controls[0].Text = string.Empty;
+            txtPatsex.Controls[0].Text = string.Empty;
+            txtDepartment.Controls[0].Text = string.Empty;
+            txtBednumber.Controls[0].Text = string.Empty;
+            txtNssss.Controls[0].Text = string.Empty;
+            txtSqzd.Controls[0].Text = string.Empty;
+            dtEnterTime.Text = string.Empty;
+            dtLeaveTime.Text = string.Empty;
+            txtAboutsValue.Controls[0].Text = string.Empty;
+            txtPosturalValue.Controls[0].Text = string.Empty;
+            txtInfusionSum.Controls[0].Text = string.Empty;
+            txtBWhole.Controls[0].Text = string.Empty;
+            txtBPlasma.Controls[0].Text = string.Empty;
+            txtBPlatelet.Controls[0].Text = string.Empty;
+            txtCryoprecipitate.Controls[0].Text = string.Empty;
+            txtBloodValue.Controls[0].Text = string.Empty;
+            txtBeforeValue.Controls[0].Text = string.Empty;
+            txtAfterValue.Controls[0].Text = string.Empty;
+            txtPastePartsValue.Controls[0].Text = string.Empty;
+            txtPositionValue.Controls[0].Text = string.Empty;
+            txtHeatingValue.Controls[0].Text = string.Empty;
+            txtSampleNum.Controls[0].Text = string.Empty;
+            txtSliceNum.Controls[0].Text = string.Empty;
+            txtDrainageValue.Controls[0].Text = string.Empty;
+
+            chkZuo.Checked = false;
+            chkYang.Checked = false;
+            chkJie.Checked = false;
+            chkYou.Checked = false;
+            chkOther.Checked = false;
+            chkZC.Checked = false;
+            chkYC.Checked = false;
+            chkPK.Checked = false;
+            chkTS.Checked = false;
+            chkQT.Checked = false;
+            chkAfterZC.Checked = false;
+            chkAfterYC.Checked = false;
+            chkAfterPK.Checked = false;
+            chkAfterTS.Checked = false;
+            chkAfterQT.Checked = false;
+            chkDTY.Checked = false;
+            chkBBY.Checked = false;
+            chkXTZ.Checked = false;
+            chkXTY.Checked = false;
+            chkSZZ.Checked = false;
+            chkSZY.Checked = false;
+            chkXZZ.Checked = false;
+            chkXZY.Checked = false;
+            chkBWOther.Checked = false;
+            chkWu.Checked = false;
+            chkDRT.Checked = false;
+            chkWT.Checked = false;
+            chkYT.Checked = false;
+            chkJWOther.Checked = false;
+            chkW.Checked = false;
+            chkD.Checked = false;
+            chkT.Checked = false;
+
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+            radioButton3.Checked = false;
+            radioButton4.Checked = false;
+            radioButton5.Checked = false;
+            radioButton6.Checked = false;
+            radioButton7.Checked = false;
+            radioButton8.Checked = false;
+            radioButton9.Checked = false;
+            radioButton10.Checked = false;
+            radioButton11.Checked = false;
+            radioButton12.Checked = false;
+            radioButton13.Checked = false;
+            radioButton14.Checked = false;
+            radioButton15.Checked = false;
+            radioButton16.Checked = false;
+            radioButton17.Checked = false;
+            radioButton18.Checked = false;
+
+        }
+
+        /// <summary>
+        /// 控件赋值
+        /// </summary>
+        /// <param name="dt"></param>
+        private void SetEditValue(DataTable dt)
+        {
+            dtEnterTime.Text = Convert.ToString(dt.Rows[0]["EnterTime"]);
+            dtLeaveTime.Text = Convert.ToString(dt.Rows[0]["LeaveTime"]);
+            int patAbouts = Convert.ToInt32(dt.Rows[0]["PatAbouts"]);
+
+            // 病人去向
+            if (patAbouts == 0)
+                radioButton1.Checked = true;
+            else if (patAbouts == 1)
+                radioButton2.Checked = true;
+            else if (patAbouts == 2)
+                radioButton3.Checked = true;
+            else if (patAbouts == 3)
+                radioButton4.Checked = true;
+            txtAboutsValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["AboutsValue"]);
+
+            // 手术体位
+            string sPostural = Convert.ToString(dt.Rows[0]["SPostural"]);
+            if (sPostural.Contains("Yang"))
+                chkYang.Checked = true;
+            if (sPostural.Contains("Jie"))
+                chkJie.Checked = true;
+            if (sPostural.Contains("Zuo"))
+                chkZuo.Checked = true;
+            if (sPostural.Contains("You"))
+                chkYou.Checked = true;
+            if (sPostural.Contains("Other"))
+                chkOther.Checked = true;
+            txtPosturalValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["PosturalValue"]);
+            if (Convert.ToInt32(dt.Rows[0]["IsInfusion"]) == 0)
+                radioButton5.Checked = true;
+            else
+                radioButton6.Checked = true;
+            txtInfusionSum.Controls[0].Text = Convert.ToString(dt.Rows[0]["InfusionSum"]);
+
+            if (Convert.ToInt32(dt.Rows[0]["IsBlood"]) == 0)
+                radioButton7.Checked = true;
+            else
+                radioButton8.Checked = true;
+            txtBWhole.Controls[0].Text = Convert.ToString(dt.Rows[0]["BWhole"]);
+            txtBPlasma.Controls[0].Text = Convert.ToString(dt.Rows[0]["BPlasma"]);
+            txtBPlatelet.Controls[0].Text = Convert.ToString(dt.Rows[0]["BPlatelet"]);
+            txtCryoprecipitate.Controls[0].Text = Convert.ToString(dt.Rows[0]["Cryoprecipitate"]);
+            txtBloodValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["BloodValue"]);
+
+            //  术前
+            string sBefore = Convert.ToString(dt.Rows[0]["SBefore"]);
+            if (sBefore.Contains("ZC"))
+                chkZC.Checked = true;
+            if (sBefore.Contains("YC"))
+                chkYC.Checked = true;
+            if (sBefore.Contains("PK"))
+                chkPK.Checked = true;
+            if (sBefore.Contains("TS"))
+                chkTS.Checked = true;
+            if (sBefore.Contains("QT"))
+                chkQT.Checked = true;
+            txtBeforeValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["BeforeValue"]);
+
+            //  术后
+            string sAfter = Convert.ToString(dt.Rows[0]["SAfter"]);
+            if (sAfter.Contains("AfterZC"))
+                chkAfterZC.Checked = true;
+            if (sAfter.Contains("AfterYC"))
+                chkAfterYC.Checked = true;
+            if (sAfter.Contains("AfterPK"))
+                chkAfterPK.Checked = true;
+            if (sAfter.Contains("AfterTS"))
+                chkAfterTS.Checked = true;
+            if (sAfter.Contains("AfterQT"))
+                chkAfterQT.Checked = true;
+            txtAfterValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["AfterValue"]);
+
+            if (Convert.ToInt32(dt.Rows[0]["IsElectricKnife"]) == 0)
+                radioButton9.Checked = true;
+            else
+                radioButton10.Checked = true;
+
+            // 负极粘帖部位
+            string pasteParts = Convert.ToString(dt.Rows[0]["PasteParts"]);
+            if (pasteParts.Contains("DTZ_"))
+                chkDTZ.Checked = true;
+            if (pasteParts.Contains("BBZ_"))
+                chkDTY.Checked = true;
+            if (pasteParts.Contains("BBY_"))
+                chkBBY.Checked = true;
+            if (pasteParts.Contains("XTZ_"))
+                chkXTZ.Checked = true;
+            if (pasteParts.Contains("XTY"))
+                chkXTY.Checked = true;
+            txtPastePartsValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["PastePartsValue"]);
+
+            if (Convert.ToInt32(dt.Rows[0]["IsTourniquet"]) == 0)
+                radioButton11.Checked = true;
+            else
+                radioButton12.Checked = true;
+
+            // 部位
+            string position = Convert.ToString(dt.Rows[0]["Position"]);
+            if (position.Contains("SZZ_"))
+                chkSZZ.Checked = true;
+            if (position.Contains("SZY_"))
+                chkSZY.Checked = true;
+            if (position.Contains("XZZ_"))
+                chkXZZ.Checked = true;
+            if (position.Contains("XZY_"))
+                chkXZY.Checked = true;
+            if (position.Contains("BWOther"))
+                chkBWOther.Checked = true;
+            txtPositionValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["PositionValue"]);
+
+            // 加温装置
+            string heatingDevice = Convert.ToString(dt.Rows[0]["HeatingDevice"]);
+            if (heatingDevice.Contains("Wu_"))
+                chkWu.Checked = true;
+            if (heatingDevice.Contains("DRT_"))
+                chkDRT.Checked = true;
+            if (heatingDevice.Contains("WT_"))
+                chkWT.Checked = true;
+            if (heatingDevice.Contains("YT_"))
+                chkYT.Checked = true;
+            if (heatingDevice.Contains("JWOther"))
+                chkJWOther.Checked = true;
+            txtHeatingValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["HeatingValue"]);
+
+            // 留置胃管
+            string indwelling = Convert.ToString(dt.Rows[0]["Indwelling"]);
+            if (indwelling.Contains("W_"))
+                chkW.Checked = true;
+            if (indwelling.Contains("D_"))
+                chkD.Checked = true;
+            if (indwelling.Contains("T"))
+                chkT.Checked = true;
+
+            if (Convert.ToInt32(dt.Rows[0]["IsSample"]) == 0)
+                radioButton13.Checked = true;
+            else
+                radioButton14.Checked = true;
+            txtSampleNum.Controls[0].Text = Convert.ToString(dt.Rows[0]["SampleNum"]);
+            if (Convert.ToInt32(dt.Rows[0]["IsSlice"]) == 0)
+                radioButton15.Checked = true;
+            else
+                radioButton16.Checked = true;
+            txtSliceNum.Controls[0].Text = Convert.ToString(dt.Rows[0]["SliceNum"]);
+            if (Convert.ToInt32(dt.Rows[0]["IsDrainage"]) == 0)
+                radioButton17.Checked = true;
+            else
+                radioButton18.Checked = true;
+            txtDrainageValue.Controls[0].Text = Convert.ToString(dt.Rows[0]["DrainageValue"]);
+        }
+
+        /// <summary>
+        /// 保存方法
+        /// </summary>
+        /// <returns></returns>
+        private void SaveNurseRecord()
+        {
+            if (!ValiDateNurseRecord()) return;
+            int result = 0;
+            b = bll.GetNurseRecordCount(txtPatid.Controls[0].Text);
+            DictionaryList();
+            try
+            {
+                if (!b) //  新增
+                    result = bll.InsertNurseRecord(dictionary);
+                else
+                    result = bll.UpdateNurseRecord(dictionary);
+                if (result > 0)
+                    MessageBox.Show("保存成功！");
+                else
+                    MessageBox.Show("保存失败！");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "保存出现异常，请检查！");
+            }
+        }
+
+        /// <summary>
+        /// 添加参数
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, string> DictionaryList()
+        {
+            if (!b) // 新增
+            {
+                dictionary.Add("PatID", txtPatid.Controls[0].Text);
+                AddDictionary();
+            }
+            else
+            {
+                AddDictionary();
+                dictionary.Add("PatID", txtPatid.Controls[0].Text);
+            }
+            return dictionary;
+        }
+
+        /// <summary>
+        /// 添加数据到集合中
+        /// </summary>
+        private void AddDictionary()
+        {
+            dictionary.Add("EnterTime", Convert.ToString(dtEnterTime.Value));
+            dictionary.Add("LeaveTime", Convert.ToString(dtLeaveTime.Value));
+
+            // 病人去向
+            if (radioButton1.Checked == true) dictionary.Add("PatAbouts", "0");
+            else if (radioButton2.Checked == true) dictionary.Add("PatAbouts", "1");
+            else if (radioButton3.Checked == true) dictionary.Add("PatAbouts", "2");
+            else if (radioButton4.Checked == true) dictionary.Add("PatAbouts", "3");
+            else dictionary.Add("PatAbouts", "4");
+            dictionary.Add("AboutsValue", txtAboutsValue.Controls[0].Text);
+
+            // 手术体位
+            string sPostural = string.Empty;
+            if (chkYang.Checked == true) sPostural += "Yang_";
+            if (chkJie.Checked == true) sPostural += "Jie_";
+            if (chkZuo.Checked == true) sPostural += "Zuo_";
+            if (chkYou.Checked == true) sPostural += "You_";
+            if (chkOther.Checked == true) sPostural += "Other";
+            dictionary.Add("SPostural", sPostural);
+            dictionary.Add("PosturalValue", txtPosturalValue.Controls[0].Text);
+
+            if (radioButton5.Checked == false) dictionary.Add("IsInfusion", "0");
+            else dictionary.Add("IsInfusion", "1");
+            dictionary.Add("InfusionSum", txtInfusionSum.Controls[0].Text);
+            if (radioButton7.Checked == false) dictionary.Add("IsBlood", "0");
+            else dictionary.Add("IsBlood", "1");
+            dictionary.Add("BWhole", txtBWhole.Controls[0].Text);
+            dictionary.Add("BPlasma", txtBPlasma.Controls[0].Text);
+            dictionary.Add("BPlatelet", txtBPlatelet.Controls[0].Text);
+            dictionary.Add("Cryoprecipitate", txtCryoprecipitate.Controls[0].Text);
+            dictionary.Add("BloodValue", txtBloodValue.Controls[0].Text);
+
+            // 术前
+            string sBefore = string.Empty;
+            if (chkZC.Checked == true) sBefore += "ZC_";
+            if (chkYC.Checked == true) sBefore += "YC_";
+            if (chkPK.Checked == true) sBefore += "PK_";
+            if (chkTS.Checked == true) sBefore += "TS_";
+            if (chkQT.Checked == true) sBefore += "QT";
+            dictionary.Add("SBefore", sBefore);
+            dictionary.Add("BeforeValue", txtBeforeValue.Controls[0].Text);
+
+            // 术后
+            string sAfter = string.Empty;
+            if (chkAfterZC.Checked == true) sAfter += "AfterZC_";
+            if (chkAfterYC.Checked == true) sAfter += "AfterYC_";
+            if (chkAfterPK.Checked == true) sAfter += "AfterPK_";
+            if (chkAfterTS.Checked == true) sAfter += "AfterTS_";
+            if (chkAfterQT.Checked == true) sAfter += "AfterQT";
+            dictionary.Add("SAfter", sAfter);
+            dictionary.Add("AfterValue", txtAfterValue.Controls[0].Text);
+
+            if (radioButton9.Checked == false) dictionary.Add("IsElectricKnife", "0");
+            else dictionary.Add("IsElectricKnife", "1");
+
+            // 负极粘帖部位
+            string pasteParts = string.Empty;
+            if (chkDTZ.Checked == true) pasteParts += "DTZ_";
+            if (chkDTY.Checked == true) pasteParts += "DTY_";
+            if (chkBBZ.Checked == true) pasteParts += "BBZ_";
+            if (chkBBY.Checked == true) pasteParts += "BBY_";
+            if (chkXTZ.Checked == true) pasteParts += "XTZ_";
+            if (chkXTY.Checked == true) pasteParts += "XTY";
+            dictionary.Add("PasteParts", pasteParts);
+            dictionary.Add("PastePartsValue", txtPastePartsValue.Controls[0].Text);
+
+            if (radioButton11.Checked == false) dictionary.Add("IsTourniquet", "0");
+            else dictionary.Add("IsTourniquet", "1");
+
+            // 部位
+            string position = string.Empty;
+            if (chkSZZ.Checked == true) position += "SZZ_";
+            if (chkSZY.Checked == true) position += "SZY_";
+            if (chkXZZ.Checked == true) position += "XZZ_";
+            if (chkXZY.Checked == true) position += "XZY_";
+            if (chkBWOther.Checked == true) pasteParts += "BWOther";
+            dictionary.Add("Position", position);
+            dictionary.Add("PositionValue", txtPositionValue.Controls[0].Text);
+
+            // 加温装置
+            string heatingDevice = string.Empty;
+            if (chkWu.Checked == true) heatingDevice += "Wu_";
+            if (chkDRT.Checked == true) heatingDevice += "DRT_";
+            if (chkWT.Checked == true) heatingDevice += "WT_";
+            if (chkYT.Checked == true) heatingDevice += "YT_";
+            if (chkJWOther.Checked == true) heatingDevice += "JWOther";
+            dictionary.Add("HeatingDevice", heatingDevice);
+            dictionary.Add("HeatingValue", txtHeatingValue.Controls[0].Text);
+
+            // 留置胃管
+            string indwelling = string.Empty;
+            if (chkW.Checked == true) indwelling += "W_";
+            if (chkD.Checked == true) indwelling += "D_";
+            if (chkT.Checked == true) indwelling += "T";
+            dictionary.Add("Indwelling", indwelling);
+
+            if (radioButton14.Checked == false) dictionary.Add("IsSample", "0");
+            else dictionary.Add("IsSample", "1");
+            dictionary.Add("SampleNum", txtSampleNum.Controls[0].Text);
+            if (radioButton16.Checked == false) dictionary.Add("IsSlice", "0");
+            else dictionary.Add("IsSlice", "1");
+            dictionary.Add("SliceNum", txtSampleNum.Controls[0].Text);
+            if (radioButton18.Checked == false) dictionary.Add("IsDrainage", "0");
+            else dictionary.Add("IsDrainage", "1");
+            dictionary.Add("DrainageValue", txtDrainageValue.Controls[0].Text);
+        }
+
+        /// <summary>
+        /// 验证
+        /// </summary>
+        private bool ValiDateNurseRecord()
+        {
+            if (!ValidationRegex.ValidteData(txtInfusionSum.Controls[0].Text)
+                && !ValidationRegex.ValidteDouble(txtInfusionSum.Controls[0].Text))
+            {
+                MessageBox.Show("输液总量填写有误，请检查！");
+                txtInfusionSum.Focus();
+                return false;
+            }
+            if (!ValidationRegex.ValidteData(txtBWhole.Controls[0].Text)
+                && !ValidationRegex.ValidteDouble(txtBWhole.Controls[0].Text))
+            {
+                MessageBox.Show("全血填写有误，请检查！");
+                txtBWhole.Focus();
+                return false;
+            }
+            if (!ValidationRegex.ValidteData(txtBPlasma.Controls[0].Text)
+                && !ValidationRegex.ValidteDouble(txtBPlasma.Controls[0].Text))
+            {
+                MessageBox.Show("血浆填写有误，请检查！");
+                txtBPlasma.Focus();
+                return false;
+            }
+            if (!ValidationRegex.ValidteData(txtBPlatelet.Controls[0].Text)
+                && !ValidationRegex.ValidteDouble(txtBPlatelet.Controls[0].Text))
+            {
+                MessageBox.Show("血小板填写有误，请检查！");
+                txtBPlatelet.Focus();
+                return false;
+            }
+            if (!ValidationRegex.ValidteData(txtCryoprecipitate.Controls[0].Text)
+                && !ValidationRegex.ValidteDouble(txtCryoprecipitate.Controls[0].Text))
+            {
+                MessageBox.Show("冷沉淀填写有误，请检查！");
+                txtCryoprecipitate.Focus();
+                return false;
+            }
+            if (!ValidationRegex.ValidteData(txtBloodValue.Controls[0].Text)
+                && !ValidationRegex.ValidteDouble(txtBloodValue.Controls[0].Text))
+            {
+                MessageBox.Show("其他值填写有误，请检查！");
+                txtBloodValue.Focus();
+                return false;
+            }
+            if (!ValidationRegex.ValidteData(txtSampleNum.Controls[0].Text)
+                && !ValidationRegex.ValidteDouble(txtSampleNum.Controls[0].Text))
+            {
+                MessageBox.Show("常规样本数量填写有误，请检查！");
+                txtSampleNum.Focus();
+                return false;
+            }
+            if (!ValidationRegex.ValidteData(txtSliceNum.Controls[0].Text)
+                && !ValidationRegex.ValidteDouble(txtSliceNum.Controls[0].Text))
+            {
+                MessageBox.Show("冰冻切片数量填写有误，请检查！");
+                txtSliceNum.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+    }
+}

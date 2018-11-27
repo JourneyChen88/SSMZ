@@ -1,0 +1,13 @@
+DROP VIEW  dbo.V_JC_MZ 
+
+
+create VIEW  dbo.V_JC_MZ as
+SELECT     dbo.Adims_OTypesetting.PatID, dbo.Adims_OTypesetting.PatZhuYuanID AS ID, dbo.Adims_Mzjld.Otime AS RQ, dbo.Adims_OTypesetting.Amethod AS MZFL, 
+                      CASE dbo.Adims_Mzjld.ASA WHEN '¢ñ' THEN '1' WHEN '¢ò' THEN '2' WHEN '¢ó' THEN '3' WHEN '¢ô' THEN '4' ELSE '0' END AS ASA, 
+                      dbo.Adims_Mzjld.ASAE AS HZLX, CASE dbo.Adims_Mzjld.brqx WHEN 'PACU' THEN '1' ELSE '0' END AS MZFSS, 
+                      CASE Adims_mzzongjie_SZ.ZhentongB WHEN 'ÒÑ¿ªÍ¨' THEN '1' ELSE '0' END AS SFSHZT, dbo.Adims_OTypesetting.Remarks AS SFFSZL, 
+                      dbo.Adims_OTypesetting.Remarks AS SFFXCD, dbo.Adims_OTypesetting.Remarks AS STEWARD, dbo.Adims_OTypesetting.Remarks AS FYQSJ, 
+                      dbo.Adims_OTypesetting.Remarks AS FYQSJNR, dbo.Adims_OTypesetting.Remarks AS SFFHSW
+FROM         dbo.Adims_OTypesetting INNER JOIN
+                      dbo.Adims_Mzjld ON dbo.Adims_OTypesetting.PatID = dbo.Adims_Mzjld.patid LEFT OUTER JOIN
+                      dbo.Adims_mzzongjie_SZ ON dbo.Adims_Mzjld.id = dbo.Adims_mzzongjie_SZ.mzjldID

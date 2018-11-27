@@ -1,0 +1,834 @@
+﻿namespace main
+{
+    partial class main
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.术前信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.排班ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.术前访视ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.术中信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.muMzjld = new System.Windows.Forms.ToolStripMenuItem();
+            this.手术间浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.器械清点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.术后信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.术后随访ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.护理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pACUToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.药品管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.科室药物申领ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.药物申领入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.手术间药品分发ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.医师药品申领ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.医师药品核销ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.药品退科室库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.科室药品退库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.手术室药品管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.手术间药品管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.病人用药管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.麻醉科药品入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.手术间药品分发ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.药品退麻醉科库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.医师领用ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.药品退手术间库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.员工信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.排班查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.请假登记ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.信息查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.麻醉记录登记ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.麻醉记录单查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.信息维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.屏幕锁定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.基础数据维护ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.术间浏览ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.权限管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.用户权限ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加岗位ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.岗位权限分配ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnManager = new System.Windows.Forms.Button();
+            this.btnUrgent = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.术前信息ToolStripMenuItem,
+            this.术中信息ToolStripMenuItem,
+            this.术后信息ToolStripMenuItem,
+            this.pACUToolStripMenuItem,
+            this.药品管理ToolStripMenuItem,
+            this.员工信息ToolStripMenuItem,
+            this.信息查询ToolStripMenuItem,
+            this.信息维护ToolStripMenuItem,
+            this.权限管理ToolStripMenuItem,
+            this.帮助ToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1051, 25);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // 术前信息ToolStripMenuItem
+            // 
+            this.术前信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.排班ToolStripMenuItem,
+            this.术前访视ToolStripMenuItem});
+            this.术前信息ToolStripMenuItem.Name = "术前信息ToolStripMenuItem";
+            this.术前信息ToolStripMenuItem.Size = new System.Drawing.Size(83, 21);
+            this.术前信息ToolStripMenuItem.Text = "术前信息(&S)";
+            // 
+            // 排班ToolStripMenuItem
+            // 
+            this.排班ToolStripMenuItem.Name = "排班ToolStripMenuItem";
+            this.排班ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.排班ToolStripMenuItem.Text = "排班";
+            this.排班ToolStripMenuItem.Click += new System.EventHandler(this.排班ToolStripMenuItem_Click);
+            // 
+            // 术前访视ToolStripMenuItem
+            // 
+            this.术前访视ToolStripMenuItem.Name = "术前访视ToolStripMenuItem";
+            this.术前访视ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.术前访视ToolStripMenuItem.Text = "术前访视";
+            this.术前访视ToolStripMenuItem.Click += new System.EventHandler(this.术前访视ToolStripMenuItem_Click);
+            // 
+            // 术中信息ToolStripMenuItem
+            // 
+            this.术中信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.muMzjld,
+            this.手术间浏览ToolStripMenuItem,
+            this.器械清点ToolStripMenuItem});
+            this.术中信息ToolStripMenuItem.Name = "术中信息ToolStripMenuItem";
+            this.术中信息ToolStripMenuItem.Size = new System.Drawing.Size(88, 21);
+            this.术中信息ToolStripMenuItem.Text = "术中信息(&M)";
+            // 
+            // muMzjld
+            // 
+            this.muMzjld.Name = "muMzjld";
+            this.muMzjld.Size = new System.Drawing.Size(136, 22);
+            this.muMzjld.Text = "麻醉记录单";
+            this.muMzjld.Click += new System.EventHandler(this.muMzjld_Click);
+            // 
+            // 手术间浏览ToolStripMenuItem
+            // 
+            this.手术间浏览ToolStripMenuItem.Name = "手术间浏览ToolStripMenuItem";
+            this.手术间浏览ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.手术间浏览ToolStripMenuItem.Text = "手术间浏览";
+            this.手术间浏览ToolStripMenuItem.Click += new System.EventHandler(this.手术间浏览ToolStripMenuItem_Click);
+            // 
+            // 器械清点ToolStripMenuItem
+            // 
+            this.器械清点ToolStripMenuItem.Name = "器械清点ToolStripMenuItem";
+            this.器械清点ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.器械清点ToolStripMenuItem.Text = "器械清点";
+            this.器械清点ToolStripMenuItem.Click += new System.EventHandler(this.器械清点ToolStripMenuItem_Click);
+            // 
+            // 术后信息ToolStripMenuItem
+            // 
+            this.术后信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.术后随访ToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.护理ToolStripMenuItem});
+            this.术后信息ToolStripMenuItem.Name = "术后信息ToolStripMenuItem";
+            this.术后信息ToolStripMenuItem.Size = new System.Drawing.Size(83, 21);
+            this.术后信息ToolStripMenuItem.Text = "术后信息(&E)";
+            // 
+            // 术后随访ToolStripMenuItem
+            // 
+            this.术后随访ToolStripMenuItem.Name = "术后随访ToolStripMenuItem";
+            this.术后随访ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.术后随访ToolStripMenuItem.Text = "术后随访";
+            this.术后随访ToolStripMenuItem.Click += new System.EventHandler(this.术后随访ToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.toolStripMenuItem1.Text = "术后小结";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // 护理ToolStripMenuItem
+            // 
+            this.护理ToolStripMenuItem.Name = "护理ToolStripMenuItem";
+            this.护理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.护理ToolStripMenuItem.Text = "护理";
+            this.护理ToolStripMenuItem.Click += new System.EventHandler(this.护理ToolStripMenuItem_Click);
+            // 
+            // pACUToolStripMenuItem
+            // 
+            this.pACUToolStripMenuItem.Name = "pACUToolStripMenuItem";
+            this.pACUToolStripMenuItem.Size = new System.Drawing.Size(67, 21);
+            this.pACUToolStripMenuItem.Text = "PACU(&P)";
+            this.pACUToolStripMenuItem.Click += new System.EventHandler(this.pACUToolStripMenuItem_Click);
+            // 
+            // 药品管理ToolStripMenuItem
+            // 
+            this.药品管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.科室药物申领ToolStripMenuItem,
+            this.药物申领入库ToolStripMenuItem,
+            this.手术间药品分发ToolStripMenuItem,
+            this.医师药品申领ToolStripMenuItem,
+            this.医师药品核销ToolStripMenuItem,
+            this.药品退科室库ToolStripMenuItem,
+            this.科室药品退库ToolStripMenuItem,
+            this.手术室药品管理ToolStripMenuItem,
+            this.手术间药品管理ToolStripMenuItem,
+            this.病人用药管理ToolStripMenuItem,
+            this.麻醉科药品入库ToolStripMenuItem,
+            this.手术间药品分发ToolStripMenuItem1,
+            this.药品退麻醉科库ToolStripMenuItem,
+            this.医师领用ToolStripMenuItem,
+            this.药品退手术间库ToolStripMenuItem});
+            this.药品管理ToolStripMenuItem.Name = "药品管理ToolStripMenuItem";
+            this.药品管理ToolStripMenuItem.Size = new System.Drawing.Size(83, 21);
+            this.药品管理ToolStripMenuItem.Text = "药品管理(&Y)";
+            // 
+            // 科室药物申领ToolStripMenuItem
+            // 
+            this.科室药物申领ToolStripMenuItem.Name = "科室药物申领ToolStripMenuItem";
+            this.科室药物申领ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.科室药物申领ToolStripMenuItem.Text = "科室药物申领";
+            this.科室药物申领ToolStripMenuItem.Click += new System.EventHandler(this.科室药物申领ToolStripMenuItem_Click);
+            // 
+            // 药物申领入库ToolStripMenuItem
+            // 
+            this.药物申领入库ToolStripMenuItem.Name = "药物申领入库ToolStripMenuItem";
+            this.药物申领入库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.药物申领入库ToolStripMenuItem.Text = "药物申领入库";
+            this.药物申领入库ToolStripMenuItem.Click += new System.EventHandler(this.药物申领入库ToolStripMenuItem_Click);
+            // 
+            // 手术间药品分发ToolStripMenuItem
+            // 
+            this.手术间药品分发ToolStripMenuItem.Name = "手术间药品分发ToolStripMenuItem";
+            this.手术间药品分发ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.手术间药品分发ToolStripMenuItem.Text = "手术间药品分发";
+            this.手术间药品分发ToolStripMenuItem.Click += new System.EventHandler(this.手术间药品分发ToolStripMenuItem_Click);
+            // 
+            // 医师药品申领ToolStripMenuItem
+            // 
+            this.医师药品申领ToolStripMenuItem.Name = "医师药品申领ToolStripMenuItem";
+            this.医师药品申领ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.医师药品申领ToolStripMenuItem.Text = "医师药品申领";
+            this.医师药品申领ToolStripMenuItem.Click += new System.EventHandler(this.医师药品申领ToolStripMenuItem_Click);
+            // 
+            // 医师药品核销ToolStripMenuItem
+            // 
+            this.医师药品核销ToolStripMenuItem.Name = "医师药品核销ToolStripMenuItem";
+            this.医师药品核销ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.医师药品核销ToolStripMenuItem.Text = "医师药品核销";
+            this.医师药品核销ToolStripMenuItem.Click += new System.EventHandler(this.医师药品核销ToolStripMenuItem_Click);
+            // 
+            // 药品退科室库ToolStripMenuItem
+            // 
+            this.药品退科室库ToolStripMenuItem.Name = "药品退科室库ToolStripMenuItem";
+            this.药品退科室库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.药品退科室库ToolStripMenuItem.Text = "药品退科室库";
+            this.药品退科室库ToolStripMenuItem.Click += new System.EventHandler(this.药品退科室库ToolStripMenuItem_Click);
+            // 
+            // 科室药品退库ToolStripMenuItem
+            // 
+            this.科室药品退库ToolStripMenuItem.Name = "科室药品退库ToolStripMenuItem";
+            this.科室药品退库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.科室药品退库ToolStripMenuItem.Text = "科室药品退库";
+            this.科室药品退库ToolStripMenuItem.Click += new System.EventHandler(this.科室药品退库ToolStripMenuItem_Click);
+            // 
+            // 手术室药品管理ToolStripMenuItem
+            // 
+            this.手术室药品管理ToolStripMenuItem.Name = "手术室药品管理ToolStripMenuItem";
+            this.手术室药品管理ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.手术室药品管理ToolStripMenuItem.Text = "手术室药品管理";
+            this.手术室药品管理ToolStripMenuItem.Click += new System.EventHandler(this.手术室药品管理ToolStripMenuItem_Click);
+            // 
+            // 手术间药品管理ToolStripMenuItem
+            // 
+            this.手术间药品管理ToolStripMenuItem.Name = "手术间药品管理ToolStripMenuItem";
+            this.手术间药品管理ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.手术间药品管理ToolStripMenuItem.Text = "手术间药品管理";
+            this.手术间药品管理ToolStripMenuItem.Click += new System.EventHandler(this.手术间药品管理ToolStripMenuItem_Click_1);
+            // 
+            // 病人用药管理ToolStripMenuItem
+            // 
+            this.病人用药管理ToolStripMenuItem.Name = "病人用药管理ToolStripMenuItem";
+            this.病人用药管理ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.病人用药管理ToolStripMenuItem.Text = "病人用药管理";
+            // 
+            // 麻醉科药品入库ToolStripMenuItem
+            // 
+            this.麻醉科药品入库ToolStripMenuItem.Name = "麻醉科药品入库ToolStripMenuItem";
+            this.麻醉科药品入库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.麻醉科药品入库ToolStripMenuItem.Text = "麻醉科药品入库";
+            this.麻醉科药品入库ToolStripMenuItem.Click += new System.EventHandler(this.麻醉科药品入库ToolStripMenuItem_Click);
+            // 
+            // 手术间药品分发ToolStripMenuItem1
+            // 
+            this.手术间药品分发ToolStripMenuItem1.Name = "手术间药品分发ToolStripMenuItem1";
+            this.手术间药品分发ToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.手术间药品分发ToolStripMenuItem1.Text = "手术间药品分发";
+            this.手术间药品分发ToolStripMenuItem1.Click += new System.EventHandler(this.手术间药品分发ToolStripMenuItem1_Click);
+            // 
+            // 药品退麻醉科库ToolStripMenuItem
+            // 
+            this.药品退麻醉科库ToolStripMenuItem.Name = "药品退麻醉科库ToolStripMenuItem";
+            this.药品退麻醉科库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.药品退麻醉科库ToolStripMenuItem.Text = "药品退麻醉科库";
+            this.药品退麻醉科库ToolStripMenuItem.Click += new System.EventHandler(this.药品退麻醉科库ToolStripMenuItem_Click);
+            // 
+            // 医师领用ToolStripMenuItem
+            // 
+            this.医师领用ToolStripMenuItem.Name = "医师领用ToolStripMenuItem";
+            this.医师领用ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.医师领用ToolStripMenuItem.Text = "医师领用";
+            this.医师领用ToolStripMenuItem.Click += new System.EventHandler(this.医师领用ToolStripMenuItem_Click);
+            // 
+            // 药品退手术间库ToolStripMenuItem
+            // 
+            this.药品退手术间库ToolStripMenuItem.Name = "药品退手术间库ToolStripMenuItem";
+            this.药品退手术间库ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.药品退手术间库ToolStripMenuItem.Text = "药品退手术间库";
+            this.药品退手术间库ToolStripMenuItem.Click += new System.EventHandler(this.药品退手术间库ToolStripMenuItem_Click);
+            // 
+            // 员工信息ToolStripMenuItem
+            // 
+            this.员工信息ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.排班查询ToolStripMenuItem,
+            this.请假登记ToolStripMenuItem});
+            this.员工信息ToolStripMenuItem.Name = "员工信息ToolStripMenuItem";
+            this.员工信息ToolStripMenuItem.Size = new System.Drawing.Size(85, 21);
+            this.员工信息ToolStripMenuItem.Text = "员工信息(&G)";
+            // 
+            // 排班查询ToolStripMenuItem
+            // 
+            this.排班查询ToolStripMenuItem.Name = "排班查询ToolStripMenuItem";
+            this.排班查询ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.排班查询ToolStripMenuItem.Text = "员工排班";
+            this.排班查询ToolStripMenuItem.Click += new System.EventHandler(this.排班查询ToolStripMenuItem_Click);
+            // 
+            // 请假登记ToolStripMenuItem
+            // 
+            this.请假登记ToolStripMenuItem.Name = "请假登记ToolStripMenuItem";
+            this.请假登记ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.请假登记ToolStripMenuItem.Text = "请假记录";
+            this.请假登记ToolStripMenuItem.Click += new System.EventHandler(this.请假登记ToolStripMenuItem_Click);
+            // 
+            // 信息查询ToolStripMenuItem
+            // 
+            this.信息查询ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.麻醉记录登记ToolStripMenuItem,
+            this.麻醉记录单查询ToolStripMenuItem});
+            this.信息查询ToolStripMenuItem.Name = "信息查询ToolStripMenuItem";
+            this.信息查询ToolStripMenuItem.Size = new System.Drawing.Size(84, 21);
+            this.信息查询ToolStripMenuItem.Text = "信息查询(&X)";
+            // 
+            // 麻醉记录登记ToolStripMenuItem
+            // 
+            this.麻醉记录登记ToolStripMenuItem.Name = "麻醉记录登记ToolStripMenuItem";
+            this.麻醉记录登记ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.麻醉记录登记ToolStripMenuItem.Text = "麻醉记录登记";
+            this.麻醉记录登记ToolStripMenuItem.Click += new System.EventHandler(this.麻醉记录登记ToolStripMenuItem_Click);
+            // 
+            // 麻醉记录单查询ToolStripMenuItem
+            // 
+            this.麻醉记录单查询ToolStripMenuItem.Name = "麻醉记录单查询ToolStripMenuItem";
+            this.麻醉记录单查询ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.麻醉记录单查询ToolStripMenuItem.Text = "麻醉记录单查询";
+            this.麻醉记录单查询ToolStripMenuItem.Click += new System.EventHandler(this.麻醉记录单查询ToolStripMenuItem_Click);
+            // 
+            // 信息维护ToolStripMenuItem
+            // 
+            this.信息维护ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.屏幕锁定ToolStripMenuItem,
+            this.基础数据维护ToolStripMenuItem,
+            this.术间浏览ToolStripMenuItem});
+            this.信息维护ToolStripMenuItem.Name = "信息维护ToolStripMenuItem";
+            this.信息维护ToolStripMenuItem.Size = new System.Drawing.Size(84, 21);
+            this.信息维护ToolStripMenuItem.Text = "信息维护(&R)";
+            // 
+            // 屏幕锁定ToolStripMenuItem
+            // 
+            this.屏幕锁定ToolStripMenuItem.Name = "屏幕锁定ToolStripMenuItem";
+            this.屏幕锁定ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.屏幕锁定ToolStripMenuItem.Text = "屏幕锁定";
+            this.屏幕锁定ToolStripMenuItem.Click += new System.EventHandler(this.屏幕锁定ToolStripMenuItem_Click);
+            // 
+            // 基础数据维护ToolStripMenuItem
+            // 
+            this.基础数据维护ToolStripMenuItem.Name = "基础数据维护ToolStripMenuItem";
+            this.基础数据维护ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.基础数据维护ToolStripMenuItem.Text = "基础数据维护";
+            this.基础数据维护ToolStripMenuItem.Click += new System.EventHandler(this.基础数据维护ToolStripMenuItem_Click);
+            // 
+            // 术间浏览ToolStripMenuItem
+            // 
+            this.术间浏览ToolStripMenuItem.Name = "术间浏览ToolStripMenuItem";
+            this.术间浏览ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.术间浏览ToolStripMenuItem.Text = "术间浏览";
+            this.术间浏览ToolStripMenuItem.Click += new System.EventHandler(this.术间浏览ToolStripMenuItem_Click);
+            // 
+            // 权限管理ToolStripMenuItem
+            // 
+            this.权限管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.用户权限ToolStripMenuItem,
+            this.用户管理ToolStripMenuItem,
+            this.添加岗位ToolStripMenuItem,
+            this.岗位权限分配ToolStripMenuItem});
+            this.权限管理ToolStripMenuItem.Name = "权限管理ToolStripMenuItem";
+            this.权限管理ToolStripMenuItem.Size = new System.Drawing.Size(86, 21);
+            this.权限管理ToolStripMenuItem.Text = "权限管理(&Q)";
+            // 
+            // 用户权限ToolStripMenuItem
+            // 
+            this.用户权限ToolStripMenuItem.Name = "用户权限ToolStripMenuItem";
+            this.用户权限ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.用户权限ToolStripMenuItem.Text = "用户权限";
+            this.用户权限ToolStripMenuItem.Click += new System.EventHandler(this.用户权限ToolStripMenuItem_Click);
+            // 
+            // 用户管理ToolStripMenuItem
+            // 
+            this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
+            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.用户管理ToolStripMenuItem.Text = "用户管理";
+            this.用户管理ToolStripMenuItem.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
+            // 
+            // 添加岗位ToolStripMenuItem
+            // 
+            this.添加岗位ToolStripMenuItem.Name = "添加岗位ToolStripMenuItem";
+            this.添加岗位ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.添加岗位ToolStripMenuItem.Text = "添加岗位";
+            this.添加岗位ToolStripMenuItem.Click += new System.EventHandler(this.添加岗位ToolStripMenuItem_Click);
+            // 
+            // 岗位权限分配ToolStripMenuItem
+            // 
+            this.岗位权限分配ToolStripMenuItem.Name = "岗位权限分配ToolStripMenuItem";
+            this.岗位权限分配ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.岗位权限分配ToolStripMenuItem.Text = "岗位权限分配";
+            this.岗位权限分配ToolStripMenuItem.Click += new System.EventHandler(this.岗位权限分配ToolStripMenuItem_Click);
+            // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
+            this.帮助ToolStripMenuItem.Text = "帮助(&H)";
+            // 
+            // btnManager
+            // 
+            this.btnManager.BackColor = System.Drawing.Color.MistyRose;
+            this.btnManager.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnManager.Font = new System.Drawing.Font("宋体", 12F);
+            this.btnManager.Location = new System.Drawing.Point(76, 242);
+            this.btnManager.Name = "btnManager";
+            this.btnManager.Size = new System.Drawing.Size(139, 39);
+            this.btnManager.TabIndex = 2;
+            this.btnManager.Text = "手术管理";
+            this.btnManager.UseVisualStyleBackColor = false;
+            this.btnManager.Click += new System.EventHandler(this.btnManager_Click);
+            // 
+            // btnUrgent
+            // 
+            this.btnUrgent.BackColor = System.Drawing.Color.MistyRose;
+            this.btnUrgent.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnUrgent.Font = new System.Drawing.Font("宋体", 12F);
+            this.btnUrgent.Location = new System.Drawing.Point(76, 313);
+            this.btnUrgent.Name = "btnUrgent";
+            this.btnUrgent.Size = new System.Drawing.Size(139, 39);
+            this.btnUrgent.TabIndex = 3;
+            this.btnUrgent.Text = "紧急手术";
+            this.btnUrgent.UseVisualStyleBackColor = false;
+            this.btnUrgent.Click += new System.EventHandler(this.btnUrgent_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.MistyRose;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnClose.Font = new System.Drawing.Font("宋体", 12F);
+            this.btnClose.Location = new System.Drawing.Point(76, 383);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(139, 39);
+            this.btnClose.TabIndex = 4;
+            this.btnClose.Text = "退出系统";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 18F);
+            this.label1.Location = new System.Drawing.Point(303, 215);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 24);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "麻醉排班";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 18F);
+            this.label2.Location = new System.Drawing.Point(539, 215);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(106, 24);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "术前访视";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 18F);
+            this.label3.Location = new System.Drawing.Point(773, 215);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(106, 24);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "麻醉方案";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 18F);
+            this.label4.Location = new System.Drawing.Point(302, 413);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 24);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "麻醉记录";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("宋体", 18F);
+            this.label5.Location = new System.Drawing.Point(516, 415);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(178, 24);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "麻醉恢复(PACU)";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("宋体", 18F);
+            this.label6.Location = new System.Drawing.Point(773, 413);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(106, 24);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "器械清点";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("宋体", 18F);
+            this.label7.Location = new System.Drawing.Point(302, 628);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(106, 24);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "麻醉小结";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("宋体", 18F);
+            this.label8.Location = new System.Drawing.Point(539, 628);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(106, 24);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "术后随访";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("宋体", 18F);
+            this.label9.Location = new System.Drawing.Point(773, 628);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(106, 24);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "护理记录";
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox10.Image = global::main.Properties.Resources._9;
+            this.pictureBox10.Location = new System.Drawing.Point(754, 481);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox10.TabIndex = 21;
+            this.pictureBox10.TabStop = false;
+            this.pictureBox10.Click += new System.EventHandler(this.pictureBox10_Click);
+            this.pictureBox10.MouseLeave += new System.EventHandler(this.pictureBox10_MouseLeave);
+            this.pictureBox10.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox10_MouseMove);
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox9.Image = global::main.Properties.Resources._8;
+            this.pictureBox9.Location = new System.Drawing.Point(520, 481);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox9.TabIndex = 19;
+            this.pictureBox9.TabStop = false;
+            this.pictureBox9.Click += new System.EventHandler(this.pictureBox9_Click);
+            this.pictureBox9.MouseLeave += new System.EventHandler(this.pictureBox9_MouseLeave);
+            this.pictureBox9.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox9_MouseMove);
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox8.Image = global::main.Properties.Resources._7;
+            this.pictureBox8.Location = new System.Drawing.Point(283, 481);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox8.TabIndex = 17;
+            this.pictureBox8.TabStop = false;
+            this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
+            this.pictureBox8.MouseLeave += new System.EventHandler(this.pictureBox8_MouseLeave);
+            this.pictureBox8.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox8_MouseMove);
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox7.Image = global::main.Properties.Resources._6;
+            this.pictureBox7.Location = new System.Drawing.Point(754, 266);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox7.TabIndex = 15;
+            this.pictureBox7.TabStop = false;
+            this.pictureBox7.Click += new System.EventHandler(this.pictureBox7_Click);
+            this.pictureBox7.MouseLeave += new System.EventHandler(this.pictureBox7_MouseLeave);
+            this.pictureBox7.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox7_MouseMove);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox6.Image = global::main.Properties.Resources._5;
+            this.pictureBox6.Location = new System.Drawing.Point(520, 266);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox6.TabIndex = 13;
+            this.pictureBox6.TabStop = false;
+            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
+            this.pictureBox6.MouseLeave += new System.EventHandler(this.pictureBox6_MouseLeave);
+            this.pictureBox6.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox6_MouseMove);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox5.Image = global::main.Properties.Resources._4;
+            this.pictureBox5.Location = new System.Drawing.Point(283, 266);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox5.TabIndex = 11;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
+            this.pictureBox5.MouseLeave += new System.EventHandler(this.pictureBox5_MouseLeave);
+            this.pictureBox5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox5_MouseMove);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox4.Image = global::main.Properties.Resources._3;
+            this.pictureBox4.Location = new System.Drawing.Point(754, 68);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox4.TabIndex = 9;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.MouseLeave += new System.EventHandler(this.pictureBox4_MouseLeave);
+            this.pictureBox4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox4_MouseMove);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Image = global::main.Properties.Resources._22;
+            this.pictureBox3.Location = new System.Drawing.Point(520, 68);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox3.TabIndex = 7;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            this.pictureBox3.MouseLeave += new System.EventHandler(this.pictureBox3_MouseLeave);
+            this.pictureBox3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseMove);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = global::main.Properties.Resources._11;
+            this.pictureBox2.Location = new System.Drawing.Point(283, 68);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(154, 144);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.pictureBox2.MouseLeave += new System.EventHandler(this.pictureBox2_MouseLeave);
+            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseMove);
+            // 
+            // main
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1051, 677);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.pictureBox10);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.pictureBox9);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.pictureBox8);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.pictureBox7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.pictureBox5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.pictureBox4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnUrgent);
+            this.Controls.Add(this.btnManager);
+            this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "上海禾宜手术麻醉系统演示版";
+            this.Load += new System.EventHandler(this.main_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 术前信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 术中信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 术后信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pACUToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 药品管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 员工信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 信息查询ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 信息维护ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 权限管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem muMzjld;
+        private System.Windows.Forms.ToolStripMenuItem 排班ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 术前访视ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 用户权限ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 屏幕锁定ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 基础数据维护ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 科室药物申领ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 药物申领入库ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 手术间药品分发ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 医师药品申领ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 医师药品核销ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 药品退科室库ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 科室药品退库ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 排班查询ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 请假登记ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 手术间浏览ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 麻醉记录登记ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 护理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 器械清点ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 麻醉记录单查询ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 术后随访ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 术间浏览ToolStripMenuItem;
+        private System.Windows.Forms.Button btnManager;
+        private System.Windows.Forms.Button btnUrgent;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.ToolStripMenuItem 手术室药品管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 手术间药品管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 病人用药管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 添加岗位ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 岗位权限分配ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 麻醉科药品入库ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 手术间药品分发ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 药品退麻醉科库ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 医师领用ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 药品退手术间库ToolStripMenuItem;
+    }
+}

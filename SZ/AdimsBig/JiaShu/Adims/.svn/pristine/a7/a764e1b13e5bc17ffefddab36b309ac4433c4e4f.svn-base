@@ -1,0 +1,870 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
+
+namespace adims_DAL
+{
+    public class AdimsProvider
+    {
+        private DBConn dBConn = new DBConn();
+
+        #region <<方法>>
+
+        static string strconn = ConfigurationManager.AppSettings["ConnectionString"];
+
+        /// <summary>
+        /// 从table中获取数据
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static DataTable GetData(string table)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("select * from " + table, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            return dt;
+        }
+        public static DataTable GetData1(string table,string name)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("select ID,name "+name+" from " + table, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            return dt;
+        }
+
+        /// <summary>
+        /// 取出排班的类容
+        /// </summary>
+        /// <param name="riqi">日期</param>
+        /// <returns></returns>
+        public static string GetContent(string riqi)
+        {
+            string content = "";
+            DataTable dt = GetData1("select neirong from yuangongpaiban where riqi='" + riqi + "'");
+            if (dt.Rows.Count > 0)
+            { content = dt.Rows[0][0].ToString(); }
+            return content;
+
+
+        }
+
+        public static DataTable GetData1(string sql)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            return dt;
+        }
+
+        /// <summary>
+        /// 向table表里面插入数据
+        /// </summary>
+        /// <param name="name">插入值</param>
+        /// <param name="table">数据表</param>
+        public static void AddData1(string name, string table)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from " + table, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            DataRow newrow = dt.NewRow();
+            newrow["Name"] = name;
+            dt.Rows.Add(newrow);
+            adapter.Update(dt);
+        }
+
+        /// <summary>
+        /// 向请假表里面添加数据
+        /// </summary>
+        /// <param name="ygbh"></param>
+        /// <param name="ygName"></param>
+        /// <param name="qjDate"></param>
+        /// <param name="qjNum"></param>
+        /// <param name="qjWhy"></param>
+        public static void AddData2(string ygbh, string ygName, string qjDate, string qjNum, string qjWhy)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from qingjia", conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            DataRow newrow = dt.NewRow();
+            newrow["ygbh"] = ygbh;
+            newrow["ygName"] = ygName;
+            newrow["qjDate"] = qjDate;
+            newrow["qjNum"] = Convert.ToInt32(qjNum);
+            newrow["qjWhy"] = qjWhy;
+            dt.Rows.Add(newrow);
+            adapter.Update(dt);
+
+        }
+
+        /// <summary>
+        /// 更新table表的中的name字段
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="Name"></param>
+        /// <param name="table"></param>
+        public static void UpdateData1(string ID, string Name, string table)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from " + table, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            DataColumn[] keys = new DataColumn[1];
+            keys[0] = dt.Columns["ID"];
+            dt.PrimaryKey = keys;
+            DataRow findrow = dt.Rows.Find(ID);
+            findrow["Name"] = Name;
+            adapter.Update(dt);
+
+
+        }
+
+        /// <summary>
+        /// 判断table表的name是否存在
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static bool IsHaveName(string name, string table)
+        {
+            string sql = "select * from " + table + " where Name='" + name + "'";
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            int count = ds.Tables[0].Rows.Count;
+            if (count < 1)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        /// <summary>
+        /// 增加
+        /// </summary>
+        /// <param name="neirong">排班内容</param>
+        /// <param name="riqi">日期</param>
+        public static void AddData(string time, string Date, string mzyi, string fs)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from yuangongpaiban1", conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            DataRow newrow = dt.NewRow();
+            newrow["time"] = time;
+            newrow["Date"] = Date;
+            newrow["mzyi"] = mzyi;
+            newrow["fs"] = fs;
+            dt.Rows.Add(newrow);
+            adapter.Update(dt);
+
+        }
+
+        /// <summary>
+        /// 更新内容
+        /// </summary>
+        /// <param name="neirong"></param>
+        /// <param name="riqi"></param>
+        public static void UpdateData(string time, string Date, string mzyi, string fs, string ID)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from yuangongpaiban1", conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            DataColumn[] keys = new DataColumn[1];
+            keys[0] = dt.Columns["ID"];
+            dt.PrimaryKey = keys;
+            DataRow findrow = dt.Rows.Find(ID);
+            findrow["time"] = time;
+            findrow["Date"] = Date;
+            findrow["mzyi"] = mzyi;
+            findrow["fs"] = fs;
+            adapter.Update(dt);
+
+
+        }
+
+        /// <summary>
+        /// 修改请假表
+        /// </summary>
+        /// <param name="ygbh"></param>
+        /// <param name="ygName"></param>
+        /// <param name="qjDate"></param>
+        /// <param name="qjNum"></param>
+        /// <param name="qjWhy"></param>
+        /// <param name="ID"></param>
+        public static void UpdateDate1(string ygbh, string ygName, string qjDate, string qjNum, string qjWhy, string ID)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from qingjia", conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            DataColumn[] keys = new DataColumn[1];
+            keys[0] = dt.Columns["ID"];
+            dt.PrimaryKey = keys;
+            DataRow findrow = dt.Rows.Find(ID);
+            findrow["ygName"] = ygName;
+            findrow["ygbh"] = ygbh;
+            findrow["qjDate"] = qjDate;
+            findrow["qjNum"] = qjNum;
+            findrow["qjWhy"] = qjWhy;
+            adapter.Update(dt);
+
+        }
+
+        /// <summary>
+        /// 是否应该排班
+        /// </summary>
+        /// <param name="riqi"></param>
+        /// <returns></returns>
+        public static bool isPaiBan(string riqi)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            string sql = "select * from yuangongpaiban where riqi='" + riqi + "'";
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            int rowscount = ds.Tables[0].Rows.Count;
+            if (rowscount < 1)
+            { return true; }
+            else
+            { return false; }
+
+        }
+
+        /// <summary>
+        /// 删除table表的ID行
+        /// </summary>
+        /// <param name="ID">ID</param>
+        public static void DeleteData(string ID, string table)
+        {
+            SqlConnection conn = new SqlConnection(strconn);
+            SqlDataAdapter adapter = new SqlDataAdapter("Select * from " + table, conn);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            DataTable dt = ds.Tables[0];
+            DataColumn[] keys = new DataColumn[1];
+            keys[0] = dt.Columns["ID"];
+            dt.PrimaryKey = keys;
+            DataRow findrow = dt.Rows.Find(ID);
+            findrow.Delete();
+            adapter.Update(dt);
+        }
+        #endregion
+
+        #region <<T_SQL>>
+
+        #region <<基础资料>>
+
+        private static readonly string SQL_SURGERYSTAFF_GETLIST = "SELECT MedicalNO,MedicalName,CONVERT(NVARCHAR,PostType) AS PostType FROM Adims_SurgeryStaff WITH (NOLOCK) WHERE {0} ORDER BY PostType";
+
+        #endregion
+
+        #region <<员工排班>>
+
+        private static readonly string SQL_EMPLOYEES_GETLIST = "SELECT EmployeesID,AnesthesiaDoctor,Nurse,Divisions,[Time] FROM Adims_Employees WITH (NOLOCK) WHERE {0} ORDER BY [Time]";
+        private static readonly string SQL_EMPLOYEES_INSERT = "INSERT INTO Adims_Employees (AnesthesiaDoctor,Nurse,Divisions,[Time]) VALUES('{0}','{1}','{2}','{3}')";
+        private static readonly string SQL_EMPLOYEES_UPDATE = "UPDATE Adims_Employees SET AnesthesiaDoctor = '{0}',Nurse = '{1}',Divisions = '{2}',[Time] = '{3}' WHERE EmployeesID = '{0}'";
+        private static readonly string SQL_EMPLOYEES_DELETE = "DELETE Adims_Employees WITH (ROWLOCK) WHERE EmployeesID = '{0}'";
+
+        #endregion
+
+        #region <<请假登记>>
+
+        private static readonly string SQL_LEAVEREGISTRATION_GETLIST = "SELECT LeaveRegistrationID,EmployeesNO,EmployeesName,LeaveDays,LeaveReason,LeaveDate FROM Adims_LeaveRegistration WITH (NOLOCK) WHERE {0}";
+        private static readonly string SQL_LEAVEREGISTRATION_INSERT = "INSERT INTO [Adims_LeaveRegistration]( [EmployeesNO],[EmployeesName],[LeaveDays],[LeaveReason],[LeaveDate],[CreateDate])VALUES ('{0}','{1}','{2}','{3}','{4}',GETDATE())";
+        private static readonly string SQL_LEAVEREGISTRATION_UPDATE = "UPDATE  [Adims_LeaveRegistration] SET [EmployeesNO] = '{0}',[EmployeesName] = '{1}',[LeaveDays] = '{2}',[LeaveReason] = '{3}',[LeaveDate] = '{4}',[UpdateDate] = GETDATE() WHERE LeaveRegistrationID = '{5}'";
+        private static readonly string SQL_LEAVEREGISTRATION_DELETE = "DELETE Adims_LeaveRegistration WHERE LeaveRegistrationID = '{0}'";
+
+        #endregion
+
+        #region <<智能排班>>
+
+        private static readonly string SQL_OTYPESETTING_SELECT = "SELECT oroom 手术间,second 台次, patid 病人ID,patdpm 科室,patname 病人,patsex 性别,patage 年龄,patbedno 床号,os 手术医师,oname 手术名字,pattmd 术前诊断,amethod 麻醉方法,"
+                + "ap1 主麻医师,ap2 副麻医师1,ap3 副麻医师2,on1 洗手护士1,on2 洗手护士2,sn1 巡回护士1,sn2 巡回护士2,SSStartTime 预计手术开始时间,SSEndTime 预计手术结束时间,"
+                + "remarks 备注 from Adims_OTypesetting WITH (NOLOCK) WHERE {0} ORDER BY oroom";
+
+        #endregion
+
+        #region <<术前访视>>
+
+        private static readonly string SQL_BEFOREVISIT_GETLIST = " SELECT BeforeVisitID,PatID,Weight,Blood,HeartRate,Pulse,"
+            + "Breathing,BT,Awareness,SSMode,HistoryDrugs,IsAnesthesiaHistory,AnesthesiaHistoryRemark,IsAllergyHistory,"
+            + "AllergyHistoryRemark,HeadNeck,Dehisce,Tooth,HLAuscultation,ASAClassification,E,MuscleFeeling,FeelingAbnormal,"
+            + "MuscleDrop,Other,PeripheralVenous,SpineCondition,HLClassification,LungFunction,ECG,Chest,LiverFunction,"
+            + "LiverFunctionRemark,KidneyFunction,KidneyFunctionRemark,Hemoglobin,Erythrocyte,Hematocrit,BTB,FG,APTT,ThrombinDate,"
+            + "Potassium,Hyponatremia,SerumChloride,BloodSugar,OtherAbnormal,AProgram,AMethod,ADrug,MProjects,ProblemHandle,ProtectiveMeasures,Physician,AccessDate,"
+            + "CreateDate,UpdateDate  FROM Adims_BeforeVisit WITH (NOLOCK) WHERE {0}";
+        private static readonly string SQL_BEFOREVISIT_COUNT = " SELECT Count(*) FROM Adims_BeforeVisit WITH (NOLOCK) WHERE {0}";
+        private static readonly string SQL_BEFOREVISIT_INSERT = "INSERT INTO Adims_BeforeVisit(Weight,Blood,HeartRate,Pulse,"
+            + "Breathing,BT,Awareness,SSMode,HistoryDrugs,IsAnesthesiaHistory,AnesthesiaHistoryRemark,IsAllergyHistory,"
+            + "AllergyHistoryRemark,HeadNeck,Dehisce,Tooth,HLAuscultation,ASAClassification,E,MuscleFeeling,"
+            + "FeelingAbnormal,MuscleDrop,Other,PeripheralVenous,SpineCondition,HLClassification,LungFunction,ECG,"
+            + "Chest,LiverFunction,LiverFunctionRemark,KidneyFunction,KidneyFunctionRemark,Hemoglobin,Erythrocyte,"
+            + "Hematocrit,BTB,FG,APTT,ThrombinDate,Potassium,Hyponatremia,SerumChloride,BloodSugar,OtherAbnormal,AProgram,AMethod,ADrug,MProjects,ProblemHandle,"
+            + "ProtectiveMeasures,Physician,AccessDate,PatID,CreateDate) VALUES('{0}','{1}','{2}','{3}','{4}','{5}',"
+            + "'{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}',"
+            + "'{21}','{22}','{23}','{24}','{25}','{26}','{27}','{28}','{29}','{30}','{31}','{32}','{33}','{34}',"
+            + "'{35}','{36}','{37}','{38}','{39}','{40}','{41}','{42}','{43}','{44}','{45}','{46}','{47}','{48}',"
+            + "'{49}','{50}','{51}','{52}','{53}',GETDATE())";
+        private static readonly string SQL_BEFOREVISIT_UPDATE = " UPDATE Adims_BeforeVisit WITH (ROWLOCK) SET Weight = '{0}',"
+            + "Blood = '{1}',HeartRate = '{2}',Pulse = '{3}',Breathing = '{4}',BT = '{5}',Awareness = '{6}',"
+            + "SSMode = '{7}',HistoryDrugs = '{8}',IsAnesthesiaHistory = '{9}',AnesthesiaHistoryRemark = '{10}',"
+            + "IsAllergyHistory = '{11}',AllergyHistoryRemark = '{12}',HeadNeck = '{13}',Dehisce = '{14}',"
+            + "Tooth = '{15}',HLAuscultation = '{16}',ASAClassification = '{17}',E = '{18}',MuscleFeeling = '{19}',"
+            + "FeelingAbnormal = '{20}',MuscleDrop = '{21}',Other = '{22}',PeripheralVenous = '{23}',"
+            + "SpineCondition = '{24}',HLClassification = '{25}',LungFunction = '{26}',ECG = '{27}',Chest = '{28}',"
+            + "LiverFunction = '{29}',LiverFunctionRemark = '{30}',KidneyFunction = '{31}',KidneyFunctionRemark = '{32}',"
+            + "Hemoglobin = '{33}',Erythrocyte = '{34}',Hematocrit = '{35}',BTB = '{36}',FG = '{37}',APTT = '{38}',"
+            + "ThrombinDate = '{39}',Potassium = '{40}',Hyponatremia = '{41}',SerumChloride = '{42}',BloodSugar = '{43}',"
+            + "OtherAbnormal = '{44}',AProgram = '{45}',AMethod = '{46}',ADrug = '{47}',MProjects = '{48}',ProblemHandle = '{49}',"
+            + "ProtectiveMeasures = '{50}',Physician = '{51}',AccessDate = '{52}',PatID = '{53}',UpdateDate = GETDATE()";
+
+        #endregion
+
+        #region <<术后随访>>
+
+        private static readonly string SQL_AFTERVISIT_COUNT = "SELECT Count(*) FROM Adims_AfterVisit WITH (NOLOCK) WHERE PatID = '{0}'";
+        private static readonly string SQL_AFTERVISIT_SELECT = "SELECT AfterVisitID,PatID,EnterBP,EnterHeartRate,EnterSpo2,"
+            + "OpenVein,MainDrug,Intubate,AnesthesiaInduction,SZOutAmount,SZInAmount,SBSituation,SBWhereabouts,SZBP,"
+            + "SZBPCauses,SZHeartRate,SZHeartRateCauses,SZSpo2,SZSpo2Causes,Nausea1,NauseaValue1,Vomit1,VomitValue1,"
+            + "Headache1,HeadacheValue1,WaistlegsPain1,WaistlegsPainValue1,URetention1,URetentionValue1,BPReduce1,"
+            + "BPReduceValue1,BPElevated1,BPElevatedValue1,HHyperlipidemia1,HHyperlipidemiaValue1,BSuppression1,"
+            + "BSuppressionValue1,ThroatPain1,ThroatPainValue1,LNumbness1,LNumbnessValue1,Other11,Other1Flag1,"
+            + "Other1Value1,Other21,Other2Flag1,Other2Value1,Other31,Other3Flag1,Other3Value1,AnalgesicScore1,"
+            + "Nausea2,NauseaValue2,Vomit2,VomitValue2,Headache2,HeadacheValue2,WaistlegsPain2,WaistlegsPainValue2,"
+            + "URetention2,URetentionValue2,BPReduce2,BPReduceValue2,BPElevated2,BPElevatedValue2,HHyperlipidemia2,"
+            + "HHyperlipidemiaValue2,BSuppression2,BSuppressionValue2,ThroatPain2,ThroatPainValue2,LNumbness2,"
+            + "LNumbnessValue2,Other12,Other1Flag2,Other1Value2,Other22,Other2Flag2,Other2Value2,Other32,Other3Flag2,"
+            + "Other3Value2,AnalgesicScore2,Nausea3,NauseaValue3,Vomit3,VomitValue3,Headache3,HeadacheValue3,"
+            + "WaistlegsPain3,WaistlegsPainValue3,URetention3,URetentionValue3,BPReduce3,BPReduceValue3,BPElevated3,"
+            + "BPElevatedValue3,HHyperlipidemia3,HHyperlipidemiaValue3,BSuppression3,BSuppressionValue3,ThroatPain3,"
+            + "ThroatPainValue3,LNumbness3,LNumbnessValue3,Other13,Other1Flag3,Other1Value3,Other23,Other2Flag3,"
+            + "Other2Value3,Other33,Other3Flag3,Other3Value3,AnalgesicScore3  FROM Adims_AfterVisit WITH (NOLOCK) WHERE {0}";
+        private static readonly string SQL_AFTERVISIT_INSERT = "INSERT INTO Adims_AfterVisit(EnterBP,EnterHeartRate,"
+            + "EnterSpo2,OpenVein,MainDrug,Intubate,AnesthesiaInduction,SZOutAmount,SZInAmount,SBSituation,SBWhereabouts,"
+            + "SZBP,SZBPCauses,SZHeartRate,SZHeartRateCauses,SZSpo2,SZSpo2Causes,Nausea1,NauseaValue1,Vomit1,VomitValue1,"
+            + "Headache1,HeadacheValue1,WaistlegsPain1,WaistlegsPainValue1,URetention1,URetentionValue1,BPReduce1,"
+            + "BPReduceValue1,BPElevated1,BPElevatedValue1,HHyperlipidemia1,HHyperlipidemiaValue1,BSuppression1,"
+            + "BSuppressionValue1,ThroatPain1,ThroatPainValue1,LNumbness1,LNumbnessValue1,Other11,Other1Flag1,"
+            + "Other1Value1,Other21,Other2Flag1,Other2Value1,Other31,Other3Flag1,Other3Value1,AnalgesicScore1,"
+            + "Nausea2,NauseaValue2,Vomit2,VomitValue2,Headache2,HeadacheValue2,WaistlegsPain2,WaistlegsPainValue2,"
+            + "URetention2,URetentionValue2,BPReduce2,BPReduceValue2,BPElevated2,BPElevatedValue2,HHyperlipidemia2,"
+            + "HHyperlipidemiaValue2,BSuppression2,BSuppressionValue2,ThroatPain2,ThroatPainValue2,LNumbness2,"
+            + "LNumbnessValue2,Other12,Other1Flag2,Other1Value2,Other22,Other2Flag2,Other2Value2,Other32,Other3Flag2,"
+            + "Other3Value2,AnalgesicScore2,Nausea3,NauseaValue3,Vomit3,VomitValue3,Headache3,HeadacheValue3,"
+            + "WaistlegsPain3,WaistlegsPainValue3,URetention3,URetentionValue3,BPReduce3,BPReduceValue3,BPElevated3,"
+            + "BPElevatedValue3,HHyperlipidemia3,HHyperlipidemiaValue3,BSuppression3,BSuppressionValue3,ThroatPain3,"
+            + "ThroatPainValue3,LNumbness3,LNumbnessValue3,Other13,Other1Flag3,Other1Value3,Other23,Other2Flag3,"
+            + "Other2Value3,Other33,Other3Flag3,Other3Value3,AnalgesicScore3,PatID,CreateDate) VALUES ('{0}','{1}','{2}',"
+            + "'{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}',"
+            + "'{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}','{27}','{28}','{29}','{30}','{31}',"
+            + "'{32}','{33}','{34}','{35}','{36}','{37}','{38}','{39}','{40}','{41}','{42}','{43}','{44}','{45}',"
+            + "'{46}','{47}','{48}','{49}','{50}','{51}','{52}','{53}','{54}','{55}','{56}','{57}','{58}','{59}',"
+            + "'{60}','{61}','{62}','{63}','{64}','{65}','{66}','{67}','{68}','{69}','{70}','{71}','{72}','{73}',"
+            + "'{74}','{75}','{76}','{77}','{78}','{79}','{80}','{81}','{82}','{83}','{84}','{85}','{86}','{87}',"
+            + "'{88}','{89}','{90}','{91}','{92}','{93}','{94}','{95}','{96}','{97}','{98}','{99}','{100}','{101}',"
+            + "'{102}','{103}','{104}','{105}','{106}','{107}','{108}','{109}','{110}','{111}','{112}','{113}',GETDATE()) ";
+        private static readonly string SQL_AFTERVISIT_UPDATE = "UPDATE Adims_AfterVisit WITH (ROWLOCK)  SET EnterBP = '{0}',"
+            + "EnterHeartRate = '{1}',EnterSpo2 = '{2}',OpenVein = '{3}',MainDrug = '{4}',Intubate = '{5}',AnesthesiaInduction = '{6}',"
+            + "SZOutAmount = '{7}',SZInAmount = '{8}',SBSituation = '{9}',SBWhereabouts = '{10}',SZBP = '{11}',SZBPCauses = '{12}',"
+            + "SZHeartRate = '{13}',SZHeartRateCauses = '{14}',SZSpo2 = '{15}',SZSpo2Causes = '{16}',Nausea1 = '{17}',"
+            + "NauseaValue1 = '{18}',Vomit1 = '{19}',VomitValue1 ='{20}',Headache1 = '{21}',HeadacheValue1 = '{22}',"
+            + "WaistlegsPain1 ='{23}' ,WaistlegsPainValue1 = '{24}',URetention1 = '{25}',URetentionValue1 = '{26}',"
+            + "BPReduce1 = '{27}',BPReduceValue1 = '{28}',BPElevated1 = '{29}',BPElevatedValue1 ='{30}',HHyperlipidemia1 = '{31}',"
+            + "HHyperlipidemiaValue1 = '{32}',BSuppression1 = '{33}',BSuppressionValue1 = '{34}',ThroatPain1 = '{35}',"
+            + "ThroatPainValue1 = '{36}',LNumbness1 = '{37}',LNumbnessValue1 = '{38}',Other11 = '{39}',Other1Flag1 = '{40}',"
+            + "Other1Value1 = '{41}',Other21 = '{42}',Other2Flag1 = '{43}',Other2Value1 = '{44}',Other31 = '{45}',Other3Flag1 = '{46}',"
+            + "Other3Value1 = '{47}',AnalgesicScore1 = '{48}',Nausea2 = '{49}',NauseaValue2 = '{50}',Vomit2 = '{51}',VomitValue2 ='{52}',"
+            + "Headache2 = '{53}',HeadacheValue2 = '{54}',WaistlegsPain2 = '{55}',WaistlegsPainValue2 = '{56}',URetention2 = '{57}',"
+            + "URetentionValue2 = '{58}',BPReduce2 = '{59}',BPReduceValue2 = '{60}',BPElevated2 = '{61}',BPElevatedValue2 = '{62}',"
+            + "HHyperlipidemia2 = '{63}',HHyperlipidemiaValue2 = '{64}',BSuppression2 = '{65}',BSuppressionValue2 = '{66}',"
+            + "ThroatPain2 = '{67}',ThroatPainValue2 = '{68}',LNumbness2 = '{69}',LNumbnessValue2 = '{70}',Other12 = '{71}',"
+            + "Other1Flag2 = '{72}',Other1Value2 ='{73}',Other22 = '{74}',Other2Flag2 = '{75}',Other2Value2 = '{76}',Other32 = '{77}'"
+            + ",Other3Flag2 = '{78}',Other3Value2 = '{79}',AnalgesicScore2 = '{80}',Nausea3 = '{81}',NauseaValue3 = '{82}',"
+            + "Vomit3 = '{83}',VomitValue3 = '{84}',Headache3 = '{85}',HeadacheValue3 ='{86}',WaistlegsPain3 = '{87}',"
+            + "WaistlegsPainValue3 = '{88}',URetention3 = '{89}',URetentionValue3 = '{90}',BPReduce3 = '{91}',BPReduceValue3 = '{92}',"
+            + "BPElevated3 = '{93}',BPElevatedValue3 = '{94}',HHyperlipidemia3 = '{95}',HHyperlipidemiaValue3 = '{96}',BSuppression3 = '{97}',"
+            + "BSuppressionValue3 = '{98}',ThroatPain3 = '{99}',ThroatPainValue3 = '{100}',LNumbness3 ='{101}',LNumbnessValue3 ='{102}',"
+            + "Other13 ='{105}',Other1Flag3 ='{104}',Other1Value3 = '{105}',Other23 = '{106}',Other2Flag3 = '{107}',Other2Value3 = '{108}',"
+            + "Other33 = '{109}',Other3Flag3 = '{110}',Other3Value3 ='{111}',AnalgesicScore3 = '{112}',UpdateDate = GETDATE() WHERE PatID = '{113}'";
+
+        #endregion
+
+        #region <<护理记录>>
+
+        private static readonly string SQL_NURSERECORD_GETLIST = "SELECT NurseRecordID,PatID,EnterTime,LeaveTime,PatAbouts,"
+            + "AboutsValue,SPostural,PosturalValue,IsInfusion,InfusionSum,IsBlood,BWhole,BPlasma,BPlatelet,Cryoprecipitate,"
+            + "BloodValue,SBefore,BeforeValue,SAfter,AfterValue,IsElectricKnife,PasteParts,PastePartsValue,IsTourniquet,"
+            + "Position,PositionValue,HeatingDevice,HeatingValue,Indwelling,IsSample,SampleNum,IsSlice,SliceNum,IsDrainage,"
+            + "DrainageValue,CreateDate,UpdateDate FROM Adims_NurseRecord WITH (NOLOCK) WHERE {0}";
+        private static readonly string SQL_NURSERECORD_COUNT = "SELECT Count(*) FROM Adims_NurseRecord WHERE PatID = '{0}'";
+        private static readonly string SQL_NURSERECORD_INSERT = "INSERT INTO Adims_NurseRecord(PatID,EnterTime,LeaveTime,"
+            + "PatAbouts,AboutsValue,SPostural,PosturalValue,IsInfusion,InfusionSum,IsBlood,BWhole,"
+            + "BPlasma,BPlatelet,Cryoprecipitate,BloodValue,SBefore,BeforeValue,SAfter,AfterValue,"
+            + "IsElectricKnife,PasteParts,PastePartsValue,IsTourniquet,Position,PositionValue,"
+            + "HeatingDevice,HeatingValue,Indwelling,IsSample,SampleNum,IsSlice,SliceNum,IsDrainage,"
+            + "DrainageValue,CreateDate) VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}',"
+            + "'{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}',"
+            + "'{24}','{25}','{26}','{27}','{28}','{29}','{30}','{31}','{32}','{33}',GETDATE())";
+        private static readonly string SQL_NURSERECORD_UPDATE = "UPDATE Adims_NurseRecord WITH (ROWLOCK)  SET EnterTime = '{0}',"
+            + "LeaveTime = '{1}',PatAbouts = '{2}',AboutsValue = '{3}',SPostural = '{4}',PosturalValue = '{5}',"
+            + "IsInfusion ='{6}',InfusionSum = '{7}',IsBlood = '{8}',BWhole = '{9}',BPlasma ='{10}',BPlatelet = '{11}',"
+            + "Cryoprecipitate = '{12}',BloodValue = '{13}',SBefore = '{14}',BeforeValue = '{15}',SAfter = '{16}',"
+            + "AfterValue = '{17}',IsElectricKnife = '{18}',PasteParts = '{19}',PastePartsValue = '{20}',IsTourniquet = '{21}',"
+            + "Position = '{22}',PositionValue = '{23}',HeatingDevice = '{24}',HeatingValue = '{25}',Indwelling = '{26}',"
+            + "IsSample = '{27}',SampleNum = '{28}',IsSlice = '{29}',SliceNum = '{30}',IsDrainage = '{31}',DrainageValue = '{32}',"
+            + "UpdateDate = GETDATE()  WHERE PatID = '{33}'";
+
+        #endregion
+
+        #region <<麻醉记录单>>
+
+        // 麻醉记录单查询
+        private static readonly string SQL_MZJLD_GETLIST = "SELECT M.id AS MID,OT.patid,PatName,[time],ssmc,mzfa,ap1,patdpm,pattmd,szzd,patsex,"
+            + "patage,os FROM Adims_mzjld AS M WITH (NOLOCK) INNER JOIN Adims_OTypesetting  AS OT WITH (NOLOCK) ON M.patid = OT.patid WHERE {0}";
+        // 根据麻醉医师统计
+        private static readonly string SQL_MZJLD_BYAP = "SELECT ap1,SUM(1) AS ssNum , CONVERT(NUMERIC(12,2),SUM(1)/CONVERT(NUMERIC(12,2),(SELECT COUNT(*) "
+            + "FROM Adims_mzjld AS M WITH (NOLOCK) INNER JOIN Adims_OTypesetting  AS OT WITH (NOLOCK) ON M.patid = OT.patid WHERE {0}))) AS Probability "
+            + "FROM Adims_mzjld AS M WITH (NOLOCK) INNER JOIN Adims_OTypesetting  AS OT WITH (NOLOCK) ON M.patid = OT.patid WHERE {1} GROUP BY ap1";
+        // 根据科室统计
+        private static readonly string SQL_MAZLD_DPM = "SELECT patdpm,SUM(1) AS ssNum FROM Adims_mzjld AS M WITH (NOLOCK) INNER JOIN Adims_OTypesetting  AS OT WITH (NOLOCK) ON M.patid = OT.patid WHERE {0} GROUP BY patdpm";
+
+        #endregion
+
+        #endregion
+
+        #region <<Methods>>
+
+        #region <<基础资料>>
+
+        /// <summary>
+        /// 获取病人信息
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public DataTable GetPat(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format("select patid 病人ID,patname 姓名,patage 年龄,patsex 性别,patdpm 病区,patbedno 床号,"
+                + "oname 拟实施手术,pattmd 主要诊断 FROM Adims_OTypesetting WITH (NOLOCK) where {0}", sqlWhere));
+        }
+
+        /// <summary>
+        /// 查询工作人员
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetSurgeryStaff(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format(SQL_SURGERYSTAFF_GETLIST, sqlWhere));
+        }
+
+        #endregion
+
+        #region <<员工排班>>
+
+        /// <summary>
+        /// 查询员工排班
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public DataTable GetEmployeesList(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format(SQL_EMPLOYEES_GETLIST, sqlWhere));
+        }
+
+        /// <summary>
+        /// 新增员工排班
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public int InsertEmployees(Dictionary<string, string> dictionary)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_EMPLOYEES_INSERT, dictionary.Values.ToArray()));
+        }
+
+        /// <summary>
+        /// 修改员工排班
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public int UpdateEmployees(Dictionary<string, string> dictionary)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_EMPLOYEES_UPDATE, dictionary.Values.ToArray()));
+        }
+
+        /// <summary>
+        /// 删除员工排班
+        /// </summary>
+        /// <param name="employeesID"></param>
+        /// <returns></returns>
+        public int DeleteEmployees(string employeesID)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_EMPLOYEES_DELETE, employeesID));
+        }
+
+        #endregion
+
+        #region <<请假登记>>
+
+        /// <summary>
+        /// 查询请假登记
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public DataTable GetLeaveRegistrationList(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format(SQL_LEAVEREGISTRATION_GETLIST, sqlWhere));
+        }
+
+        /// <summary>
+        /// 新增请假登记
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public int InsertLeaveRegistration(List<string> dictionary)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_LEAVEREGISTRATION_INSERT, dictionary.ToArray()));
+        }
+
+        /// <summary>
+        /// 修改请假登记
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public int UpdateLeaveRegistration(List<string> dictionary)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_LEAVEREGISTRATION_UPDATE, dictionary.ToArray()));
+        }
+
+        /// <summary>
+        /// 删除请假登记
+        /// </summary>
+        /// <param name="employeesID"></param>
+        /// <returns></returns>
+        public int DeleteLeaveRegistration(string employeesID)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_LEAVEREGISTRATION_DELETE, employeesID));
+        }
+
+        #endregion
+
+        #region <<智能排班>>
+
+        /// <summary>
+        /// 查询手术排班
+        /// </summary>
+        /// <param name="oroom"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public DataSet GetOTypesetting(string oroom, string dt)
+        {
+            string sqlWhere = "CONVERT(varchar, Odate , 23 ) = '" + dt + "'";
+            if (oroom != "全部手术间")
+                sqlWhere += " AND oroom = '" + oroom + "'";
+            return dBConn.GetDataSet(string.Format(SQL_OTYPESETTING_SELECT, sqlWhere));
+        }
+
+        /// <summary>
+        /// 保存排版信息
+        /// </summary>
+        /// <param name="pb"></param>
+        /// <returns></returns>
+        public int SaveOTypesetting(adims_MODEL.paiban pb)
+        {
+            return dBConn.ExecuteNonQuery("INSERT INTO Adims_OTypesetting(patid,oname,oroom,second,odepartment,olevel,"
+                + "amethod,gl,jz,ap1,ap2,ap3,aa1,aa2,aa3,os,oa1,oa2,oa3,oa4,tp,on1,on2,sn1,sn2,sn3,remarks,ostate,"
+                + "odate)values('" + pb.Patid + "','" + pb.Oname + "','" + pb.Oroom + "','" + pb.Second + "','"
+                + pb.Odepartment + "','" + pb.Olevel + "','" + pb.Amethod + "','" + pb.Gl + "','" + pb.Jz + "','"
+                + pb.Ap1 + "','" + pb.Ap2 + "','" + pb.Ap3 + "','" + pb.Aa1 + "','" + pb.Aa2 + "','" + pb.Aa3
+                + "','" + pb.Os + "','" + pb.Oa1 + "','" + pb.Oa2 + "','" + pb.Oa3 + "','" + pb.Oa4 + "','"
+                + pb.Tp + "','" + pb.On1 + "','" + pb.On2 + "','" + pb.Sn1 + "','" + pb.Sn2 + "','" + pb.Sn3
+                + "','" + pb.Remarks + "','" + pb.Ostate + "','" + pb.Odate + "')");
+        }
+
+        /// <summary>
+        /// 更新排班信息
+        /// </summary>
+        /// <param name="patID"></param>
+        /// <param name="column"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public int UpdateOTypesetting(string patID, string column, string value)
+        {
+            string sql = "UPDATE Adims_OTypesetting WITH (ROWLOCK) SET " + column + " = '" + value + "' WHERE patid = '" + patID + "'";
+            return dBConn.ExecuteNonQuery(sql);
+        }
+
+        #endregion
+
+        #region <<术前访视>>
+
+        /// <summary>
+        /// 查询术前访视清单
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public DataTable GetBeforeVisitList(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format(SQL_BEFOREVISIT_GETLIST, sqlWhere));
+        }
+
+        /// <summary>
+        /// 判断病人访视信息是否存在
+        /// </summary>
+        /// <param name="patID"></param>
+        /// <returns></returns>
+        public bool GetBeforeVisitCount(string patID)
+        {
+            int result = Convert.ToInt32(dBConn.ExecuteScalar(string.Format(SQL_BEFOREVISIT_COUNT, patID)));
+            if (result == 1) return true; else return false;
+        }
+
+        /// <summary>
+        /// 添加术前访视
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public int InsertBeforeVisit(Dictionary<string, string> dictionary)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_BEFOREVISIT_INSERT, dictionary.Values.ToArray()));
+        }
+
+        /// <summary>
+        /// 更新术前访视
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public int UpdateBeforeVisit(Dictionary<string, string> dictionary)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_BEFOREVISIT_UPDATE, dictionary.Values.ToArray()));
+        }
+
+        #endregion
+
+        #region <<护理记录>>
+
+        /// <summary>
+        /// 查询护理记录
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public DataTable GetNurseRecord(string sqlWhere)
+        {
+            string sql = string.Format(SQL_NURSERECORD_GETLIST, sqlWhere);
+            return dBConn.GetDataTable(sql);
+        }
+
+        /// <summary>
+        /// 验证是否存在病人护理记录
+        /// </summary>
+        /// <param name="patID">病人ID</param>
+        /// <returns></returns>
+        public bool GetNurseRecordCount(string patID)
+        {
+            int result = Convert.ToInt32(dBConn.ExecuteScalar(string.Format(SQL_NURSERECORD_COUNT, patID)));
+            if (result == 1) return true; else return false;
+        }
+
+        /// <summary>
+        /// 添加护理记录
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <returns></returns>
+        public int InsertNurseRecord(Dictionary<string, string> dictionary)
+        {
+            string sql = string.Format(SQL_NURSERECORD_INSERT, dictionary.Values.ToArray());
+            return dBConn.ExecuteNonQuery(sql);
+        }
+
+        /// <summary>
+        /// 更新护理记录
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public int UpdateNurseRecord(Dictionary<string, string> dictionary)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_NURSERECORD_UPDATE, dictionary.Values.ToArray()));
+        }
+
+        #endregion
+
+        #region <<术后随访>>
+
+        /// <summary>
+        /// 验证病人信息是否存在
+        /// </summary>
+        /// <param name="patID">病人ID</param>
+        /// <returns></returns>
+        public bool GetAfterVisitCount(string patID)
+        {
+            int result = Convert.ToInt32(dBConn.ExecuteScalar(string.Format(SQL_AFTERVISIT_COUNT, patID)));
+            if (result == 1) return true; else return false;
+        }
+
+        /// <summary>
+        /// 查询术后随访
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public DataTable GetAfterVisit(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format(SQL_AFTERVISIT_SELECT, sqlWhere));
+        }
+
+        /// <summary>
+        /// 添加术后随访
+        /// </summary>
+        /// <param name="afterVisitList"></param>
+        /// <returns></returns>
+        public int InsertAfterVisit(Dictionary<string, string> afterVisitList)
+        {
+            string sql = string.Format(SQL_AFTERVISIT_INSERT, afterVisitList.Values.ToArray());
+            return dBConn.ExecuteNonQuery(sql);
+        }
+
+        /// <summary>
+        /// 更新术后随访
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public int UpdateAfterVisit(Dictionary<string, string> afterVisitList)
+        {
+            return dBConn.ExecuteNonQuery(string.Format(SQL_AFTERVISIT_UPDATE, afterVisitList.Values.ToArray()));
+        }
+
+        #endregion
+
+        #region <<麻醉记录单>>
+
+        /// <summary>
+        /// 查询麻醉记录单
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
+        public DataTable GetMzjldList(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format(SQL_MZJLD_GETLIST, sqlWhere));
+        }
+
+        /// <summary>
+        /// 根据麻醉医师统计
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public DataTable GetByApList(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format(SQL_MZJLD_BYAP, sqlWhere, sqlWhere));
+        }
+
+        /// <summary>
+        /// 根据科室统计
+        /// </summary>
+        /// <param name="sqlWhere"></param>
+        /// <returns></returns>
+        public DataTable GetByDpmList(string sqlWhere)
+        {
+            return dBConn.GetDataTable(string.Format(SQL_MAZLD_DPM, sqlWhere));
+        }
+
+        /// <summary>
+        /// 查找气体
+        /// </summary>
+        /// <param name="mzjldid"></param>
+        /// <returns></returns>
+        public DataTable GetQT(int mzjldid)
+        {
+
+            return dBConn.GetDataTable("select qtname,yl,dw,sytime,jstime,flags from Adims_Qtuse where mzjldid='" + mzjldid + "'");
+        }
+
+        /// <summary>
+        /// 查找液体
+        /// </summary>
+        /// <param name="mzjldid"></param>
+        /// <returns></returns>
+        public DataTable GetYT(int mzjldid)
+        {
+            return dBConn.GetDataTable("select ytname,yl,dw,yyfs,cxyy,sytime,jstime,flags from Adims_Ytuse where mzjldid='" + mzjldid + "'");
+
+        }
+
+        /// <summary>
+        /// 查找晶体
+        /// </summary>
+        /// <param name="mzjldid"></param>
+        /// <returns></returns>
+        public DataTable GetJT(int mzjldid)
+        {
+            return dBConn.GetDataTable("select type,name,jl,dw,zrfs,kssj,jssj,flags from m_jtjtsx where mzjldid='" + mzjldid + "'");
+        }
+
+        /// <summary>
+        /// 查找胶体
+        /// </summary>
+        /// <param name="mzjldid"></param>
+        /// <returns></returns>
+        public DataTable GetPoint(int mzjldid)
+        {
+
+            return dBConn.GetDataTable("select lx,value,time from Adims_Point where mzjldid='" + mzjldid + "'");
+        }
+
+        /// <summary>
+        /// 查找监护项目
+        /// </summary>
+        /// <param name="mzjldid"></param>
+        /// <returns></returns>
+        public DataTable GetJHXM(int mzjldid)
+        {
+            return dBConn.GetDataTable("select lx,value,time from Adims_Point where mzjldid='" + mzjldid + "'");
+        }
+
+        /// <summary>
+        /// 查找指定日期的病人姓名
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
+        public DataTable GetPat(DateTime d)
+        {
+            return dBConn.GetDataTable("select DISTINCT Adims_OTypesetting.patid,Adims_OTypesetting.patname from Adims_OTypesetting,Adims_Mzjld where Adims_Mzjld.patid = Adims_OTypesetting.patid ");//and Adims_Mzjld.time='"+d.Date+"'");
+        }
+
+        #endregion
+
+        #endregion
+    }
+}

@@ -1,0 +1,34 @@
+SCC = This is a Source Code Control file.
+
+[MediII.Adapter.sln]
+SCC_Aux_Path = 122.224.75.132:8899:MediFrameWork
+SCC_Project_Name = $/5.MediII/3.代码/3.Adapter/MediII.Adapter
+
+[MediII.Adapter.Winform.Tool.MQ.csproj]
+SCC_Aux_Path = 122.224.75.132:8899:MediFrameWork
+SCC_Project_Name = $/5.MediII/3.代码/3.Adapter/MediII.Adapter
+
+[MediII.Common.Reference.csproj]
+SCC_Aux_Path = 122.224.75.132:8899:MediFrameWork
+SCC_Project_Name = $/5.MediII/3.代码/3.Adapter/MediII.Adapter/Common/MediII.Common.Reference
+
+[MediII.Adapter.BaseBiz.csproj]
+SCC_Aux_Path = 122.224.75.132:8899:MediFrameWork
+SCC_Project_Name = $/5.MediII/3.代码/3.Adapter/MediII.Adapter/IL.BizComponent/MediII.Adapter.BaseBiz
+
+[MediII.Adapter.BizComponent.ADT.csproj]
+SCC_Aux_Path = 122.224.75.132:8899:MediFrameWork
+SCC_Project_Name = $/5.MediII/3.代码/3.Adapter/MediII.Adapter/IL.BizComponent/MediII.Adapter.BizComponent.ADT
+
+[MediII.Adapter.BizComponent.MFN.csproj]
+SCC_Aux_Path = 122.224.75.132:8899:MediFrameWork
+SCC_Project_Name = $/5.MediII/3.代码/3.Adapter/MediII.Adapter/IL.BizComponent/MediII.Adapter.BizComponent.MFN
+
+[MediII.Adapter.BizComponent.OMD.csproj]
+SCC_Aux_Path = 122.224.75.132:8899:MediFrameWork
+SCC_Project_Name = $/5.MediII/3.代码/3.Adapter/MediII.Adapter/IL.BizComponent/MediII.Adapter.BizComponent.OMD
+
+[MediII.Adapter.BizComponent.OML.csproj]
+SCC_Aux_Path = 122.224.75.132:8899:MediFrameWork
+SCC_Project_Name = $/5.MediII/3.代码/3.Adapter/MediII.Adapter
+

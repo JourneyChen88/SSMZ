@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{79A7629A-3BC7-43DD-80A5-E1A92B403C09}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>main</RootNamespace>
+    <AssemblyName>main</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v10.1, Version=10.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.1, Version=10.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.1, Version=10.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.1, Version=10.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.1, Version=10.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="sjll, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\sjll.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsFormsControlLibrary5">
+      <HintPath>D:\Documents\Visual Studio 2010\Projects\WindowsFormsControlLibrary5\WindowsFormsControlLibrary5\bin\Debug\WindowsFormsControlLibrary5.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="addcl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addcl.Designer.cs">
+      <DependentUpon>addcl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addjhxm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addjhxm.Designer.cs">
+      <DependentUpon>addjhxm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addmzydy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addmzydy.Designer.cs">
+      <DependentUpon>addmzydy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addqt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addqt.Designer.cs">
+      <DependentUpon>addqt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addszsj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addszsj.Designer.cs">
+      <DependentUpon>addszsj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addszyy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addszyy.Designer.cs">
+      <DependentUpon>addszyy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addtsyy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addtsyy.Designer.cs">
+      <DependentUpon>addtsyy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addyt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addyt.Designer.cs">
+      <DependentUpon>addyt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommMaster.Designer.cs">
+      <DependentUpon>CommMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Drage.cs" />
+    <Compile Include="hbz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hbz.Designer.cs">
+      <DependentUpon>hbz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NurseRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NurseRecord.Designer.cs">
+      <DependentUpon>NurseRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="jybl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="jybl.Designer.cs">
+      <DependentUpon>jybl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="main.Designer.cs">
+      <DependentUpon>main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mzff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mzff.Designer.cs">
+      <DependentUpon>mzff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mzjldEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mzjldEdit.Designer.cs">
+      <DependentUpon>mzjldEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mzjldList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mzjldList.Designer.cs">
+      <DependentUpon>mzjldList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="权限管理\modify_password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="权限管理\modify_password.Designer.cs">
+      <DependentUpon>modify_password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\data_add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\data_add.Designer.cs">
+      <DependentUpon>data_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\data_maintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\data_maintenance.Designer.cs">
+      <DependentUpon>data_maintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Operation_room_return.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Operation_room_return.Designer.cs">
+      <DependentUpon>Operation_room_return.cs</DependentUpon>
+    </Compile>
+    <Compile Include="osel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="osel.Designer.cs">
+      <DependentUpon>osel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PACU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PACU.designer.cs">
+      <DependentUpon>PACU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="paiban.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="paiban.Designer.cs">
+      <DependentUpon>paiban.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="qxqd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="qxqd.Designer.cs">
+      <DependentUpon>qxqd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="selaa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="selaa.Designer.cs">
+      <DependentUpon>selaa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AfterVisit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AfterVisit.Designer.cs">
+      <DependentUpon>AfterVisit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeforeVisit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeforeVisit.Designer.cs">
+      <DependentUpon>BeforeVisit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="shxj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="shxj.Designer.cs">
+      <DependentUpon>shxj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sjll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sjll.Designer.cs">
+      <DependentUpon>sjll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Smzjld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Smzjld.Designer.cs">
+      <DependentUpon>Smzjld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sqyy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sqyy.Designer.cs">
+      <DependentUpon>sqyy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sqzd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sqzd.Designer.cs">
+      <DependentUpon>sqzd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sssj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sssj.Designer.cs">
+      <DependentUpon>sssj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ssysform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ssysform.Designer.cs">
+      <DependentUpon>ssysform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="test.Designer.cs">
+      <DependentUpon>test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="twform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="twform.Designer.cs">
+      <DependentUpon>twform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xgcl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="xgcl.Designer.cs">
+      <DependentUpon>xgcl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xgjhsj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="xgjhsj.Designer.cs">
+      <DependentUpon>xgjhsj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="yxbl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="yxbl.Designer.cs">
+      <DependentUpon>yxbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="zhiwudingyi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="zhiwudingyi.Designer.cs">
+      <DependentUpon>zhiwudingyi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="权限管理\Add_users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="权限管理\Add_users.Designer.cs">
+      <DependentUpon>Add_users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="权限管理\jurisdiction_distribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="权限管理\jurisdiction_distribute.Designer.cs">
+      <DependentUpon>jurisdiction_distribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="权限管理\maintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="权限管理\maintenance.Designer.cs">
+      <DependentUpon>maintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="用户安全\Fgwwf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="用户安全\Fgwwf.Designer.cs">
+      <DependentUpon>Fgwwf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="用户安全\Fpmsd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="用户安全\Fpmsd.Designer.cs">
+      <DependentUpon>Fpmsd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="用户安全\Fqxgl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="用户安全\Fqxgl.Designer.cs">
+      <DependentUpon>Fqxgl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="用户安全\Fxgmm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="用户安全\Fxgmm.Designer.cs">
+      <DependentUpon>Fxgmm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="用户安全\Fyfjs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="用户安全\Fyfjs.Designer.cs">
+      <DependentUpon>Fyfjs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\FCenterJF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\FCenterJF.Designer.cs">
+      <DependentUpon>FCenterJF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\Fkstj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\Fkstj.Designer.cs">
+      <DependentUpon>Fkstj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\FMZDJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\FMZDJ.Designer.cs">
+      <DependentUpon>FMZDJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\Fmzystj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\Fmzystj.Designer.cs">
+      <DependentUpon>Fmzystj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\Fpb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\Fpb.Designer.cs">
+      <DependentUpon>Fpb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\EmployeesEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\EmployeesEdit.Designer.cs">
+      <DependentUpon>EmployeesEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\EmployeesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\EmployeesList.Designer.cs">
+      <DependentUpon>EmployeesList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\Fprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\Fprint.Designer.cs">
+      <DependentUpon>Fprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\Fsjwfct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\Fsjwfct.Designer.cs">
+      <DependentUpon>Fsjwfct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\Fview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\Fview.Designer.cs">
+      <DependentUpon>Fview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\Fygpb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\Fygpb.Designer.cs">
+      <DependentUpon>Fygpb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\LeaveRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\LeaveRegistration.Designer.cs">
+      <DependentUpon>LeaveRegistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="科室事物管理\Fzlwf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="科室事物管理\Fzlwf.Designer.cs">
+      <DependentUpon>Fzlwf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Anesthesiology_delivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Anesthesiology_delivery.Designer.cs">
+      <DependentUpon>Anesthesiology_delivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Anesthesiology_input.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Anesthesiology_input.Designer.cs">
+      <DependentUpon>Anesthesiology_input.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Anesthesiology_return.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Anesthesiology_return.Designer.cs">
+      <DependentUpon>Anesthesiology_return.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Fksypsl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Fksypsl.Designer.cs">
+      <DependentUpon>Fksypsl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Fksyptk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Fksyptk.Designer.cs">
+      <DependentUpon>Fksyptk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Fmzkyptk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Fmzkyptk.Designer.cs">
+      <DependentUpon>Fmzkyptk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Frcd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Frcd.Designer.cs">
+      <DependentUpon>Frcd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Fssjypff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Fssjypff.Designer.cs">
+      <DependentUpon>Fssjypff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Fysyphx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Fysyphx.Designer.cs">
+      <DependentUpon>Fysyphx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Fysypsl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Fysypsl.Designer.cs">
+      <DependentUpon>Fysypsl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\OperationRoom_Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\OperationRoom_Management.Designer.cs">
+      <DependentUpon>OperationRoom_Management.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Operation_room__output.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Operation_room__output.Designer.cs">
+      <DependentUpon>Operation_room__output.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\PatientComsumption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\PatientComsumption.Designer.cs">
+      <DependentUpon>PatientComsumption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="药品耗材管理\Sugery_Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="药品耗材管理\Sugery_Management.Designer.cs">
+      <DependentUpon>Sugery_Management.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="addcl.resx">
+      <DependentUpon>addcl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addjhxm.resx">
+      <DependentUpon>addjhxm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addmzydy.resx">
+      <DependentUpon>addmzydy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addqt.resx">
+      <DependentUpon>addqt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addszsj.resx">
+      <DependentUpon>addszsj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addszyy.resx">
+      <DependentUpon>addszyy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addtsyy.resx">
+      <DependentUpon>addtsyy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addyt.resx">
+      <DependentUpon>addyt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommMaster.resx">
+      <DependentUpon>CommMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hbz.resx">
+      <DependentUpon>hbz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NurseRecord.resx">
+      <DependentUpon>NurseRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="jybl.resx">
+      <DependentUpon>jybl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="main.resx">
+      <DependentUpon>main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mzff.resx">
+      <DependentUpon>mzff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mzjldEdit.resx">
+      <DependentUpon>mzjldEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mzjldList.resx">
+      <DependentUpon>mzjldList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="osel.resx">
+      <DependentUpon>osel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PACU.resx">
+      <DependentUpon>PACU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paiban.resx">
+      <DependentUpon>paiban.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="qxqd.resx">
+      <DependentUpon>qxqd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="selaa.resx">
+      <DependentUpon>selaa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AfterVisit.resx">
+      <DependentUpon>AfterVisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BeforeVisit.resx">
+      <DependentUpon>BeforeVisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="shxj.resx">
+      <DependentUpon>shxj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sjll.resx">
+      <DependentUpon>sjll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Smzjld.resx">
+      <DependentUpon>Smzjld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sqyy.resx">
+      <DependentUpon>sqyy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sqzd.resx">
+      <DependentUpon>sqzd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sssj.resx">
+      <DependentUpon>sssj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ssysform.resx">
+      <DependentUpon>ssysform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="test.resx">
+      <DependentUpon>test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="twform.resx">
+      <DependentUpon>twform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xgcl.resx">
+      <DependentUpon>xgcl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xgjhsj.resx">
+      <DependentUpon>xgjhsj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="yxbl.resx">
+      <DependentUpon>yxbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="zhiwudingyi.resx">
+      <DependentUpon>zhiwudingyi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="权限管理\Add_users.resx">
+      <DependentUpon>Add_users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="权限管理\jurisdiction_distribute.resx">
+      <DependentUpon>jurisdiction_distribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="权限管理\maintenance.resx">
+      <DependentUpon>maintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="权限管理\modify_password.resx">
+      <DependentUpon>modify_password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="用户安全\Fgwwf.resx">
+      <DependentUpon>Fgwwf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="用户安全\Fpmsd.resx">
+      <DependentUpon>Fpmsd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="用户安全\Fqxgl.resx">
+      <DependentUpon>Fqxgl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="用户安全\Fxgmm.resx">
+      <DependentUpon>Fxgmm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="用户安全\Fyfjs.resx">
+      <DependentUpon>Fyfjs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\data_add.resx">
+      <DependentUpon>data_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\data_maintenance.resx">
+      <DependentUpon>data_maintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\FCenterJF.resx">
+      <DependentUpon>FCenterJF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\Fkstj.resx">
+      <DependentUpon>Fkstj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\FMZDJ.resx">
+      <DependentUpon>FMZDJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\Fmzystj.resx">
+      <DependentUpon>Fmzystj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\Fpb.resx">
+      <DependentUpon>Fpb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\EmployeesEdit.resx">
+      <DependentUpon>EmployeesEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\EmployeesList.resx">
+      <DependentUpon>EmployeesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\Fprint.resx">
+      <DependentUpon>Fprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\Fsjwfct.resx">
+      <DependentUpon>Fsjwfct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\Fview.resx">
+      <DependentUpon>Fview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\Fygpb.resx">
+      <DependentUpon>Fygpb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\LeaveRegistration.resx">
+      <DependentUpon>LeaveRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="科室事物管理\Fzlwf.resx">
+      <DependentUpon>Fzlwf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Anesthesiology_delivery.resx">
+      <DependentUpon>Anesthesiology_delivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Anesthesiology_input.resx">
+      <DependentUpon>Anesthesiology_input.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Anesthesiology_return.resx">
+      <DependentUpon>Anesthesiology_return.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Fksypsl.resx">
+      <DependentUpon>Fksypsl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Fksyptk.resx">
+      <DependentUpon>Fksyptk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Fmzkyptk.resx">
+      <DependentUpon>Fmzkyptk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Frcd.resx">
+      <DependentUpon>Frcd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Fssjypff.resx">
+      <DependentUpon>Fssjypff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Fysyphx.resx">
+      <DependentUpon>Fysyphx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Fysypsl.resx">
+      <DependentUpon>Fysypsl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\OperationRoom_Management.resx">
+      <DependentUpon>OperationRoom_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Operation_room_return.resx">
+      <DependentUpon>Operation_room_return.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Operation_room__output.resx">
+      <DependentUpon>Operation_room__output.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\PatientComsumption.resx">
+      <DependentUpon>PatientComsumption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="药品耗材管理\Sugery_Management.resx">
+      <DependentUpon>Sugery_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\adims_BLL\adims_BLL.csproj">
+      <Project>{DBAAC667-E7C1-4820-BFD5-4BEB5C1BAB59}</Project>
+      <Name>adims_BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\adims_DAL\adims_DAL.csproj">
+      <Project>{17D7D14C-7640-45C5-AFEA-94DA84893449}</Project>
+      <Name>adims_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\adims_MODEL\adims_MODEL.csproj">
+      <Project>{F2BF0CFD-289B-403F-BF4D-006B750317BE}</Project>
+      <Name>adims_MODEL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="qxqddy.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

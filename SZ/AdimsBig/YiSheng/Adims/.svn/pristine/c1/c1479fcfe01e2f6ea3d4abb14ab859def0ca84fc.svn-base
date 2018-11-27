@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using adims_MODEL;
+using adims_DAL;
+using adims_BLL;
+
+namespace main.科室事物管理
+{
+    public partial class data_add : Form
+    {
+        private string nodeText; 
+        private string tableName;
+        string id = "";
+        bool flag = false;
+        DataTable mytable = new DataTable();
+
+        public data_add(string text,string name)
+        {   
+            InitializeComponent();
+            nodeText = text;
+            tableName = name;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string name = name_txt.Text.ToString();
+            AdimsProvider.AddData1(name,tableName);
+            mytable = AdimsProvider.GetData(tableName);
+            dataGridView1.DataSource = mytable;
+        }
+
+        private void data_add_Load(object sender, EventArgs e)
+        {
+            label1.Text = nodeText;
+            mytable=AdimsProvider.GetData1(tableName,nodeText);
+            dataGridView1.DataSource = mytable;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(flag)
+            {
+                string name = name_txt.Text.ToString();
+                AdimsProvider.UpdateData1(id, name, tableName);
+                flag = false;
+                mytable = AdimsProvider.GetData1(tableName, nodeText);
+                dataGridView1.DataSource = mytable;
+            }
+        }
+        
+        
+        private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            name_txt.Text = dataGridView1.Rows[(e.RowIndex)].Cells[1].Value.ToString();
+            id = dataGridView1.Rows[(e.RowIndex)].Cells[0].Value.ToString();
+            flag = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (flag)
+            {
+                AdimsProvider.DeleteData(id, tableName);
+                mytable = AdimsProvider.GetData1(tableName, nodeText);
+                dataGridView1.DataSource = mytable;
+                flag = false;
+            }
+        }
+
+
+    }
+}

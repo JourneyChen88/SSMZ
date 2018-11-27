@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class addszsj : Form
+    {
+        #region <<Members>>
+
+        List<adims_MODEL.szsj> szsj;
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="l"></param>
+        public addszsj(List<adims_MODEL.szsj> l)
+        {
+            szsj = l;
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        private void listBox1_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+                textBox1.Text = listBox1.SelectedItem.ToString();
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != "")
+            {
+                adims_MODEL.szsj s = new adims_MODEL.szsj();
+                s.D = DateTime.Now;
+                s.Name = textBox1.Text;
+                szsj.Add(s);
+                this.Close();
+            }
+
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
+    }
+}

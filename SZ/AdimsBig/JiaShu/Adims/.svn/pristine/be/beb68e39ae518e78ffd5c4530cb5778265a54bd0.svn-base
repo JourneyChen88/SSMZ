@@ -1,0 +1,208 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main.科室事物管理
+{
+    public partial class Fygpb : Form
+    {
+        string content = "";//员工排班单元格的类容
+        string riqi = "";
+        public Fygpb()
+        {
+            InitializeComponent();
+
+        }
+
+
+
+        public void Fygpb_Load(object sender, EventArgs e)
+        {
+            panel2.BackColor = Color.White;
+            panel4.BackColor = Color.White;
+            panel4.Width = panel1.Width;
+
+            for (int i = 0; i < 7; i++)
+            {
+                Label l = new Label();
+                panel2.Width = panel1.Width;
+
+                Panel p = new Panel();
+                switch (i)
+                {
+                    case 0:
+                        l.Text = "星期日";
+
+                        break;
+                    case 1:
+                        l.Text = "星期一";
+                        break;
+                    case 2:
+                        l.Text = "星期二";
+                        break;
+                    case 3:
+                        l.Text = "星期三";
+                        break;
+                    case 4:
+                        l.Text = "星期四";
+                        break;
+                    case 5:
+                        l.Text = "星期五";
+                        break;
+                    default:
+                        l.Text = "星期六";
+                        break;
+
+                }
+                l.TextAlign = ContentAlignment.MiddleCenter;
+                p.Width = panel2.Width / 7;
+                p.Height = panel2.Height;
+
+
+                p.Left = p.Width * i;
+                //p.BackColor = Color.Red;
+                p.Controls.Add(l);
+                panel2.Controls.Add(p);
+
+            }
+
+
+            
+            DateTime datetime = this.dateTimePicker1.Value;
+            int year = datetime.Year;
+            int month = datetime.Month;
+            DateTime FirstDateInMonth = Convert.ToDateTime(year.ToString() + "-" + month.ToString() + "-01");
+            int weekday = Convert.ToInt32(FirstDateInMonth.DayOfWeek);//这个月的第一天是星期几
+            bool isDiYiCI = true;//是不是这个月的第一天的tag赋值 
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Panel p1 = new Panel();
+                    p1.BackColor = Color.White;
+                    Label label = new Label();
+                    if (i % 2 ==0)
+                    {
+                        label.BackColor = Color.Red;
+                    }
+                    label.Dock = DockStyle.Fill;
+                    if (j == weekday && isDiYiCI)
+                    {
+
+                        label.Tag = FirstDateInMonth;
+                        content = adims_BLL.AdimsController.getcontent(FirstDateInMonth.Date.ToShortDateString());
+                        label.Text = FirstDateInMonth.Date.ToShortDateString() + " " + content;
+                        Menu(label);//给label加右键菜单
+                        isDiYiCI = false;
+                        FirstDateInMonth = FirstDateInMonth.AddDays(1);
+                        p1.Controls.Add(label);
+
+                    }
+                    else if (!isDiYiCI)
+                    {
+                        label.Tag = FirstDateInMonth;
+                        content = adims_BLL.AdimsController.getcontent(FirstDateInMonth.Date.ToShortDateString());
+                       label.Text = FirstDateInMonth.Date.ToShortDateString() + " " + content;
+
+                        Menu(label);
+                        FirstDateInMonth = FirstDateInMonth.AddDays(1);
+                        p1.Controls.Add(label);
+
+                    }
+
+                    p1.BorderStyle = BorderStyle.Fixed3D;
+                    p1.Width = this.Width / 7;
+                    p1.Height = 100;
+                    p1.Left = j * p1.Width;
+                    p1.Top = i * 100;
+                    panel3.Width = this.Width;
+                    panel3.Controls.Add(p1);
+                }
+
+            }
+
+        }
+
+
+        /// <summary>
+        /// 给单元格label加右键菜单
+        /// </summary>
+        /// <param name="l">需要加右键菜单的label</param>
+        public void Menu(Label l)
+        {
+
+            content = "";
+            ContextMenuStrip cms = new System.Windows.Forms.ContextMenuStrip();
+            ToolStripMenuItem tsmi = new ToolStripMenuItem();
+            riqi = ((DateTime)(l.Tag)).Date.ToShortDateString();
+            l.ContextMenuStrip = cms;
+      
+
+
+
+
+            //bool iscontent = false;
+            //string text = l.Text;
+            //for (int i = 0; i < text.Length; i++)//获得排班的内容，不包括日期
+            //{
+            //    if (iscontent)
+            //    {
+            //        content = content + text[i].ToString();
+            //    }
+            //    if (text[i] == ' ')
+            //    {
+            //        iscontent = true;
+            //    }
+
+            //}
+
+          bool b=adims_BLL.AdimsController.isPaiBan(riqi);
+          if (b)
+          { tsmi.Text = "排班"; }
+          else
+          { tsmi.Text = "修改"; }
+            //if (content == "")
+            //{ tsmi.Text = "排班"; }
+            //else if (content != "")
+            //{
+            //    tsmi.Text = "修改";
+            //}
+          tsmi.Click += new EventHandler(tsmi_Click);
+          cms.Items.Add(tsmi);
+        }
+
+
+        void tsmi_Click(object sender, EventArgs e)
+        {
+            ContextMenuStrip cms = (ContextMenuStrip)(((ToolStripMenuItem)sender).GetCurrentParent());
+            Label l = (Label)(cms.SourceControl);
+            Fpb fpb = new Fpb(l);
+            fpb.ShowDialog();
+
+        }
+
+        /// <summary>
+        /// 获取月份第一天的日期
+        /// </summary>
+        /// <param name="datetime">月份第一天的时间</param>
+        /// <returns></returns>
+        public DateTime FirstDayOfMonth(DateTime datetime)
+        {
+            return datetime.AddDays(1 - datetime.Day);
+        }
+
+
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            this.panel3.Controls.Clear();
+            this.Fygpb_Load(null, null);
+
+        }
+    }
+}

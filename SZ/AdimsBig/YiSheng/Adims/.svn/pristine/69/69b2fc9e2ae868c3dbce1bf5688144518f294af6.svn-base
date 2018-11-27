@@ -1,0 +1,102 @@
+﻿///************************************
+///Updated By        : Senvi
+///************************************
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using adims_BLL;
+
+namespace main
+{
+    public partial class login : Form
+    {
+        #region <<Members>>
+
+        AdimsController bll = new AdimsController();
+
+        #endregion
+
+        #region <<Constructors>>
+
+        public login()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(txtLoginName.Text.Trim())))
+            {
+                MessageBox.Show("请输入用户名！");
+                txtLoginName.Focus();
+                return;
+            }
+            if (string.IsNullOrEmpty(Convert.ToString(txtPassWord.Text.Trim())))
+            {
+                MessageBox.Show("请输入密　码！");
+                txtPassWord.Focus();
+                return;
+            }
+            try
+            {
+                // result = bll.GetUsers(Convert.ToString(txtLoginName.Text.Trim()), Convert.ToString(txtPassWord.Text.Trim()));
+                Program.customer.uid = txtLoginName.Text.Trim();
+                Program.customer.password = txtPassWord.Text.Trim();
+                Program.customer = bll.Get_user_info(Program.customer);
+                if (Program.customer != null)
+                {
+                    //    Program.zhanghao = txtLoginName.Text;
+                    string jurisdiction = bll.Get_user_jurisdiction(Program.customer);
+                    int jurisdiction_Length = jurisdiction.Length;
+                    Program.jurisdiction = new bool[jurisdiction_Length];
+                    Char[] temp = new char[jurisdiction_Length];
+                    temp = jurisdiction.ToCharArray();
+                    for (int j = 0; j < jurisdiction.Length; j++)
+                        Program.jurisdiction[j] = (temp[j] == '1') ? true : false;
+                    DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("账号或密码错误,请检查。");
+                    txtPassWord.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "登录出现异常！");
+            }
+        }
+
+        /// <summary>
+        /// 退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
+
+        private void login_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

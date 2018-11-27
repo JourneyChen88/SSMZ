@@ -1,0 +1,130 @@
+﻿///************************************
+///Updated By        : Senvi
+///************************************
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using adims_BLL;
+
+namespace main.科室事物管理
+{
+    public partial class Fmzystj : Form
+    {
+        AdimsController adimsController = new AdimsController();
+
+        public Fmzystj()
+        {
+            InitializeComponent();
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Fprint fprint = new Fprint();
+            fprint.ShowDialog();
+        }
+
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Fmzystj_Load(object sender, EventArgs e)
+        {
+            button1_Click(null, null);
+        }
+
+        /// <summary>
+        /// 统计
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string sqlWhere = " 1=1 ";
+            System.Data.DataTable dt = adimsController.GetByApList(sqlWhere);
+            dataGridView1.DataSource = dt.DefaultView;
+            int sum = 0;
+            foreach (DataGridViewRow dr in dataGridView1.Rows)
+            {
+                sum += Convert.ToInt32(dr.Cells["colssNum"].Value);
+            }
+            label4.Text = sum.ToString();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataGridviewShowToExcel(dataGridView1);
+        }
+
+        /// <summary>
+        /// 导出execl
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="isShowExcle"></param>
+        /// <returns></returns>
+        public void DataGridviewShowToExcel(DataGridView dgv)
+        {
+            if (dgv.Rows.Count == 0) return;
+            try
+            {
+                //建立Excel对象   
+                Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+                excel.Visible = false;
+                //excel.Application.Workbooks.Add(true);
+                if (excel == null)
+                {
+                    MessageBox.Show("Excel 无法启动");
+                    return;
+                }
+                Microsoft.Office.Interop.Excel.Workbook xlBook = excel.Workbooks.Add(true);
+                Microsoft.Office.Interop.Excel.Worksheet xlSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlBook.Worksheets[1];
+                int cols = dgv.Rows[0].Cells.Count;
+                int rows = dgv.Rows.Count;
+                Microsoft.Office.Interop.Excel.Range range = null;
+                // 列头
+                for (int k = 0; k < cols; k++)
+                {
+                    excel.Cells[1, k + 1] = dgv.Columns[k].HeaderText;
+                    range = excel.Cells[1, k + 1];
+                    range.Font.Bold = true;
+                    range.Interior.ColorIndex = 15;
+                    range.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    range.EntireColumn.AutoFit();
+                }
+                //填充数据  
+                for (int i = 1; i < dgv.RowCount; i++)
+                {
+                    for (int j = 1; j < dgv.ColumnCount; j++)
+                    {
+                        if (dgv[j, i].ValueType == typeof(string))
+                            excel.Cells[i + 1, j] = "'" + dgv[j, i].Value.ToString();
+                        else
+                            excel.Cells[i + 1, j] = dgv[j, i].Value.ToString();
+                    }
+                }
+                excel.Visible = true;
+            }
+            catch
+            {
+                MessageBox.Show("导出Execl出现异常,请检查!");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+    }
+}

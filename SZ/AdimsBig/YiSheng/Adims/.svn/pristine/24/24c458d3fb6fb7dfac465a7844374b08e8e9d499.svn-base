@@ -1,0 +1,212 @@
+﻿///************************************
+///Updated By        : Senvi
+///************************************
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class mzjldList : Form
+    {
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+        adims_MODEL.mzjldcxtj mzjlcx = new adims_MODEL.mzjldcxtj();
+
+        public mzjldList()
+        {
+            InitializeComponent();
+        }
+
+        private void mzjldList_Load(object sender, EventArgs e)
+        {
+            btnSearch_Click(null, null);
+        }
+
+        private void mzjldList_SizeChanged(object sender, EventArgs e)
+        {
+            dgvmzjld.Width = this.Width;
+        }
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string sqlWhere = " 1=1 ";
+            if (!string.IsNullOrEmpty(txtBah.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(txtBrid.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(txtBfz.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(txtXm.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbAsa.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(txtHbz.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(txtAge1.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(txtAge2.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cbXb.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(txtSsys.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbSsmc.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbKsmc.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbMzys.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbTw.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbSqyy.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbMzff.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbJcxm.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbSzyy.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbSqzd.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbSzzd.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbSzsj.Text))
+                sqlWhere += "";
+            if (!string.IsNullOrEmpty(cmbSzyt.Text))
+                sqlWhere += "";
+            DataTable dt = bll.GetMzjldList(sqlWhere);
+            dgvmzjld.DataSource = dt.DefaultView;
+        }
+
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void dgvmzjld_DoubleClick(object sender, EventArgs e)
+        {
+            string mzjldID = Convert.ToString(this.dgvmzjld.SelectedRows[0].Cells["colMID"].Value);
+            int patID = Convert.ToInt32(this.dgvmzjld.SelectedRows[0].Cells["colpatid"].Value);
+            mzjldEdit mzjldxs = new mzjldEdit(mzjldID, patID);
+            mzjldxs.Show();
+        }
+
+        /// <summary>
+        /// 清空
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtBah.Text = string.Empty;
+            txtBrid.Text = string.Empty;
+            txtBfz.Text = string.Empty;
+            txtXm.Text = string.Empty;
+            cmbAsa.Text = string.Empty;
+            txtHbz.Text = string.Empty;
+            txtAge1.Text = string.Empty;
+            txtAge2.Text = string.Empty;
+            cbXb.Text = string.Empty;
+            txtSsys.Text = string.Empty;
+            cmbSsmc.Text = string.Empty;
+            cmbKsmc.Text = string.Empty;
+            cmbMzys.Text = string.Empty;
+            cmbTw.Text = string.Empty;
+            cmbSqyy.Text = string.Empty;
+            cmbMzff.Text = string.Empty;
+            cmbJcxm.Text = string.Empty;
+            cmbSzyy.Text = string.Empty;
+            cmbSqzd.Text = string.Empty;
+            cmbSzzd.Text = string.Empty;
+            cmbSzsj.Text = string.Empty;
+            cmbSzyt.Text = string.Empty;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DataGridviewShowToExcel(dgvmzjld);
+        }
+
+        /// <summary>
+        /// 导出execl
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="isShowExcle"></param>
+        /// <returns></returns>
+        public void DataGridviewShowToExcel(DataGridView dgv)
+        {
+            if (dgv.Rows.Count == 0) return;
+            try
+            {
+                //建立Excel对象   
+                Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+                excel.Visible = false;
+                //excel.Application.Workbooks.Add(true);
+                if (excel == null)
+                {
+                    MessageBox.Show("Excel 无法启动");
+                    return;
+                }
+                Microsoft.Office.Interop.Excel.Workbook xlBook = excel.Workbooks.Add(true);
+                Microsoft.Office.Interop.Excel.Worksheet xlSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlBook.Worksheets[1];
+                int cols = dgv.Rows[0].Cells.Count;
+                int rows = dgv.Rows.Count;
+                Microsoft.Office.Interop.Excel.Range range = null;
+                // 列头
+                for (int k = 0; k < cols; k++)
+                {
+                    excel.Cells[1, k + 1] = dgv.Columns[k].HeaderText;
+                    range = excel.Cells[1, k + 1];
+                    range.Font.Bold = true;
+                    range.Interior.ColorIndex = 15;
+                    range.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    range.EntireColumn.AutoFit();
+                }
+                //填充数据  
+                for (int i = 1; i < dgv.RowCount; i++)
+                {
+                    for (int j = 1; j < dgv.ColumnCount; j++)
+                    {
+                        if (dgv[j, i].ValueType == typeof(string))
+                            excel.Cells[i + 1, j] = "'" + dgv[j, i].Value.ToString();
+                        else
+                            excel.Cells[i + 1, j] = dgv[j, i].Value.ToString();
+                    }
+                }
+                excel.Visible = true;
+            }
+            catch
+            {
+                MessageBox.Show("导出Execl出现异常,请检查!");
+            }
+        }
+
+        /// <summary>
+        /// 全部记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string sqlWhere = " 1=1 ";
+            DataTable dt = bll.GetMzjldList(sqlWhere);
+            dgvmzjld.DataSource = dt.DefaultView;
+        }
+    }
+}

@@ -1,0 +1,182 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class addszyy : Form
+    {
+        #region <<Members>>
+
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+        List<adims_MODEL.jtytsx> szyy1;
+        int type, mzjldid;
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="jys"></param>
+        /// <param name="t"></param>
+        /// <param name="m"></param>
+        public addszyy(List<adims_MODEL.jtytsx> jys, int t, int m)
+        {
+            mzjldid = m;
+            type = t;
+            szyy1 = jys;
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addszyy_Load(object sender, EventArgs e)
+        {
+            if (type == 1)
+            {
+                comboBox3.Text = "晶体";
+            }
+            else if (type == 2)
+            {
+                comboBox3.Text = "胶体";
+            }
+            else if (type == 3)
+            {
+                comboBox3.Text = "输血";
+            }
+
+            dataGridView1.Columns.Add("1", "药品名称");
+            dataGridView1.Columns.Add("2", "剂量");
+            dataGridView1.Columns.Add("3", "单位");
+            dataGridView1.Columns.Add("4", "注入方式");
+            dataGridView1.Columns.Add("5", "液体种类");
+            dataGridView1.Columns.Add("6", "开始时间");
+            dataGridView1.Columns.Add("7", "结束时间");
+            foreach (adims_MODEL.jtytsx szyy in szyy1)
+                if (szyy.Bz == 1)
+                    dataGridView1.Rows.Add(szyy.Name, szyy.Jl, szyy.Dw, szyy.Zrfs, szyy.Ytlx, szyy.Kssj, "");
+                else if (szyy.Bz == 2)
+                    dataGridView1.Rows.Add(szyy.Name, szyy.Jl, szyy.Dw, szyy.Zrfs, szyy.Ytlx, szyy.Kssj, szyy.Jssj);
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                foreach (adims_MODEL.jtytsx szyy in szyy1)
+                {
+                    if (szyy.Bz == 1 && szyy.Name == dataGridView1.SelectedRows[0].Cells[0].Value.ToString())
+                    {
+                        szyy.Jssj = DateTime.Now;
+
+                        szyy.Bz = 2;
+                        int q = bll.endjt(mzjldid, szyy);
+                        if (q != 1)
+                        { MessageBox.Show("错误" + q.ToString()); }
+                    }
+
+                }
+                dataGridView1.SelectedRows[0].Cells[6].Value = DateTime.Now;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                foreach (adims_MODEL.jtytsx szyy in szyy1)
+                {
+                    if (szyy.Name == dataGridView1.SelectedRows[0].Cells[0].Value.ToString())
+                    {
+                        szyy1.Remove(szyy);
+                        int q = bll.deljt(mzjldid, szyy);
+                        if (q != 1)
+                        {
+                            MessageBox.Show("错误" + q.ToString());
+                        }
+                    }
+                }
+                dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text != "")
+            {
+                int f = 0;
+                foreach (adims_MODEL.jtytsx szyy in szyy1)
+                {
+                    if (szyy.Bz > 0 && szyy.Name == textBox1.Text)
+                        f = 1;
+
+
+                }
+                if (f == 0)
+                {
+                    adims_MODEL.jtytsx jtytsx = new adims_MODEL.jtytsx();
+
+                    jtytsx.Bz = 1;
+                    jtytsx.Name = textBox1.Text;
+                    jtytsx.Jl = Convert.ToInt32(textBox2.Text);
+                    jtytsx.Dw = comboBox2.Text;
+                    jtytsx.Zrfs = comboBox1.Text;
+                    jtytsx.Ytlx = type;
+                    jtytsx.Kssj = DateTime.Now;
+                    int q = bll.addjt(mzjldid, jtytsx);
+                    if (q != 1)
+                    { MessageBox.Show("错误" + q.ToString()); }
+                    szyy1.Add(jtytsx);
+                    dataGridView1.Rows.Add(jtytsx.Name, jtytsx.Jl, jtytsx.Dw, jtytsx.Zrfs, comboBox3.Text, jtytsx.Kssj, "");
+
+                }
+                else
+                {
+                    MessageBox.Show("已使用该要药");
+                }
+            }
+            else
+            {
+                MessageBox.Show("剂量不能为空");
+            }
+        }
+
+        private void listBox1_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                textBox1.Text = listBox1.SelectedItem.ToString();
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && e.KeyChar != 8 && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+        }
+
+        #endregion
+    }
+}

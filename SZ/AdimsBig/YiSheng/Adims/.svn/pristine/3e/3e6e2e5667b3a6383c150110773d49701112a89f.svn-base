@@ -1,0 +1,487 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Drawing.Printing;
+using System.Data.SqlClient;
+
+namespace main.用户安全
+{
+    public partial class PACU : Form
+    {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public PACU()
+        {
+            InitializeComponent();
+        }
+
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+        adims_MODEL.PACU_record record = new adims_MODEL.PACU_record();
+        //  DataSet myset = new DataSet();
+        //  SqlDataAdapter adp = new SqlDataAdapter();
+        int pick_count = 0;
+        int max_pickCount = 0;
+        static string con_str = "server=192.168.0.112;database=BLT_database;uid=sa;password=sa";
+        SqlConnection con = new SqlConnection(con_str);
+        private void PACU_Load(object sender, EventArgs e)
+        {
+            // TODO: 这行代码将数据加载到表“bLT_DatabaseDataSet.xueya_Data”中。您可以根据需要移动或删除它。
+            // this.xueya_DataTableAdapter.Fill(this.bLT_DatabaseDataSet.xueya_Data);
+            //bool b = this.Tag is int;
+            //int i=
+            //if (b == true)
+            //{ 
+            //((int)(this.Tag))
+            //}
+            comboBox1.Text = comboBox1.Items[0].ToString();
+            DataSet ds = new DataSet();
+            ds = bll.PACU_table1();
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+            if (0 == dataGridView1.RowCount || dataGridView1.SelectedCells.Count==0) return;
+            int i = dataGridView1.SelectedCells[0].RowIndex;
+            ID_txt.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
+            patname_txt.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
+            patsex_txt.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
+            patbedno_txt.Text = dataGridView1.Rows[i].Cells[11].Value.ToString();
+            Oname_txt.Text = dataGridView1.Rows[i].Cells[5].Value.ToString();
+            szzd_txt.Text = dataGridView1.Rows[i].Cells[7].Value.ToString();
+            mzfa_txt.Text = dataGridView1.Rows[i].Cells[9].Value.ToString();
+            record.patID = int.Parse(ID_txt.Text);
+            dateTimePicker1.Value = DateTime.Now;
+            int row_count = dataGridView1.RowCount;
+            int x = panel1.Location.X + 10;
+            int y = panel1.Location.Y + 10;
+            int x_var = x;
+            int y_var = y;
+            for (int j = 0; j < row_count - 1; j++)
+            {
+                Label l = new Label();
+                l.Text = dataGridView1.Rows[j].Cells[2].Value.ToString();
+                l.Name = j.ToString();
+                l.Width = 50;
+                l.Font = new Font(new FontFamily("黑体"), 10);
+                l.ForeColor = Color.Red;
+                //  l.BackColor = Color.Green;
+                l.Location = new Point(x_var, y_var);
+                MouseEventHandler myhandle = new MouseEventHandler(mylabel);
+                l.MouseClick += myhandle;
+                l.Visible = true;
+                panel1.Controls.Add(l);
+                x_var += 50;
+                if (x_var - x > 150) { y_var += 30; x_var = x; }
+
+            }
+        }
+        Label mylabel1;
+        object lastbel;
+        bool label_click = false;
+
+        private void mylabel(object sender, MouseEventArgs e)
+        {
+            if (label_click) ((Label)lastbel).ForeColor = Color.Red;
+            mylabel1 = (Label)sender;
+            int row_count = dataGridView1.RowCount;
+            for (int i = 0; i < row_count - 1; i++)
+                dataGridView1.Rows[i].Selected = false;
+
+            int n = int.Parse(mylabel1.Name);
+            dataGridView1.Rows[n].Selected = true;
+
+
+            ID_txt.Text = dataGridView1.Rows[n].Cells[1].Value.ToString();
+            patname_txt.Text = dataGridView1.Rows[n].Cells[2].Value.ToString();
+            patsex_txt.Text = dataGridView1.Rows[n].Cells[3].Value.ToString();
+            patbedno_txt.Text = dataGridView1.Rows[n].Cells[11].Value.ToString();
+            Oname_txt.Text = dataGridView1.Rows[n].Cells[5].Value.ToString();
+            szzd_txt.Text = dataGridView1.Rows[n].Cells[7].Value.ToString();
+            mzfa_txt.Text = dataGridView1.Rows[n].Cells[9].Value.ToString();
+            record.patID = int.Parse(ID_txt.Text);
+            mylabel1.ForeColor = Color.Green;
+            lastbel = sender;
+            label_click = true;
+            if (n != lastrow) clear();
+            lastrow = n;
+
+
+
+        }
+
+
+
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                record.visitDate = dateTimePicker1.Value;
+                record.cautions = cautions_txt.Text;
+                record.observeTime = (float)Convert.ToDouble(observeTime_txt.Text);
+                record.concious = concious_txt.Text;
+                record.liquid = (float)Convert.ToDouble(liquid_txt.Text);
+                record.urin = (float)Convert.ToDouble(urin_txt.Text);
+                record.cough = cough_Yes.Checked;
+                record.stimulate = stimulate_Yes.Checked;
+                record.breathe = breathe_txt.Text;
+                record.duralPlane = duralPlane_Yes.Checked;
+                record.limb = limb_Yes.Checked;
+                record.recorder = recorder_txt.Text;
+                bll.SavaPACU_record(record);
+                MessageBox.Show("保存成功");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("请检查输入数据的格式是否正确！");
+                return;
+            }
+        }
+
+
+        /// <summary>
+        /// 双击麻醉医生得到对应的病人的信息的方法
+        /// </summary>
+        /// <param name="name"></param>
+        public void Click(string name)
+        {
+            foreach (Label item in this.panel1.Controls)
+            {
+                if (item.Name == name)
+                {
+                    item.BackColor = Color.Green;
+                    string YiSheng = item.Text.Trim();
+                    string Date = this.dateTimePicker1.Value.Date.ToShortDateString();
+                    DataTable dt;
+                    dt = GetShouShu(YiSheng, Date);
+                    if (dt != null)
+                    {
+                        this.dataGridView1.DataSource = dt;
+                    }
+                }
+                else
+                {
+                    item.BackColor = Color.White;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 得到麻醉医生所对应的手术信息
+        /// </summary>
+        /// <param name="YiSheng">麻醉医生</param>
+        /// <param name="date">日期</param>
+        /// <returns></returns>
+        public DataTable GetShouShu(string YiSheng, string date)
+        {
+            DataTable dt;
+            dt = adims_BLL.AdimsController.getPacu1(YiSheng, date);
+            //adims_BLL.AdimsController.getPacu1();
+            return dt;
+
+        }
+
+        int lastrow = 0;
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (0 == dataGridView1.RowCount) return;
+            int i = dataGridView1.SelectedCells[0].RowIndex;
+            ID_txt.Text = dataGridView1.Rows[i].Cells[1].Value.ToString();
+            patname_txt.Text = dataGridView1.Rows[i].Cells[2].Value.ToString();
+            patsex_txt.Text = dataGridView1.Rows[i].Cells[3].Value.ToString();
+            patbedno_txt.Text = dataGridView1.Rows[i].Cells[11].Value.ToString();
+            Oname_txt.Text = dataGridView1.Rows[i].Cells[5].Value.ToString();
+            szzd_txt.Text = dataGridView1.Rows[i].Cells[7].Value.ToString();
+            mzfa_txt.Text = dataGridView1.Rows[i].Cells[9].Value.ToString();
+            record.patID = int.Parse(ID_txt.Text);
+            if (i != lastrow) clear();
+            lastrow = i;
+
+        }
+
+        private void cough_Yes_Click(object sender, EventArgs e)
+        {
+            cough_Yes.Checked = true;
+            cough_No.Checked = false;
+        }
+
+        private void cough_No_Click(object sender, EventArgs e)
+        {
+            cough_Yes.Checked = false;
+            cough_No.Checked = true;
+        }
+
+        private void stimulate_Yes_Click(object sender, EventArgs e)
+        {
+            stimulate_Yes.Checked = true;
+            stimulate_No.Checked = false;
+        }
+
+        private void stimulate_No_Click(object sender, EventArgs e)
+        {
+            stimulate_Yes.Checked = false;
+            stimulate_No.Checked = true;
+        }
+
+        private void duralPlane_Yes_Click(object sender, EventArgs e)
+        {
+            duralPlane_Yes.Checked = true;
+            duralPlane_No.Checked = false;
+        }
+
+        private void duralPlane_No_Click(object sender, EventArgs e)
+        {
+            duralPlane_Yes.Checked = false;
+            duralPlane_No.Checked = true;
+        }
+
+        private void limb_Yes_Click(object sender, EventArgs e)
+        {
+            limb_Yes.Checked = true;
+            limb_No.Checked = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            // printDocument1 为 打印控件
+            //设置打印用的纸张 当设置为Custom的时候，可以自定义纸张的大小，还可以选择A4,A5等常用纸型
+            //条码纸尺寸：40mmX25mm
+            /*   PrintDocument printDocument1 = new PrintDocument();
+               printDocument1.DefaultPageSettings.PaperSize = new PaperSize("Custum", 40, 25);
+               printDocument1.PrintPage += new PrintPageEventHandler();
+               //将写好的格式给打印预览控件以便预览
+               PrintPreviewDialog printPreviewDialog1 = new PrintPreviewDialog();
+               printPreviewDialog1.Document = printDocument1;
+               //显示打印预览
+               //PrintPreviewDialog ww = new PrintPreviewDialog();
+               DialogResult result = printPreviewDialog1.ShowDialog();
+               //if (result == DialogResult.OK)
+               //    this.MyPrintDocument.Print();*/
+
+            //打印文檔 
+            PrintDocument pdDocument = new PrintDocument();
+
+            //打印格式設置頁面 
+            PageSetupDialog dlgPageSetup = new PageSetupDialog();
+
+            //打印頁面 
+            PrintDialog dlgPrint = new PrintDialog();
+
+            //實例化打印預覽 
+            PrintPreviewDialog dlgPrintPreview = new PrintPreviewDialog();
+
+            pdDocument.PrintPage += new PrintPageEventHandler(myPrint);
+
+            //頁面設置的打印文檔設置為需要打印的文檔 
+            dlgPageSetup.Document = pdDocument;
+
+            //打印界面的打印文檔設置為被打印文檔 
+            dlgPrint.Document = pdDocument;
+
+            //打印預覽的打印文檔設置為被打印文檔 
+            dlgPrintPreview.Document = pdDocument;
+
+            if (dlgPrintPreview.ShowDialog() == DialogResult.OK)
+                pdDocument.Print();
+        }
+        public void myPrint(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+
+            //int rowcount = dataGridView2.RowCount;
+            //dataGridView2.Rows[0].Cells[0].Value.ToString();
+            if (dataGridView2.DataSource == null) { MessageBox.Show("没有检测数据！"); return; }
+            int x = e.MarginBounds.X;
+            int y = e.MarginBounds.Y;
+            int width = e.MarginBounds.Width;
+            int height = e.MarginBounds.Height;
+            int w = dataGridView2.Width;   //非显示的宽度,实际为最大显示宽度，超过此宽度则会出现滚动条
+            int h = dataGridView2.Height;  //非显示的高度，实际为最大显示高度，超过此高度则会出现分页
+            double rate1 = (w * 1.00) / (width * 1.00);
+            double rate2 = (h * 1.00) / (height * 1.00);
+            double rate = (rate1 > rate2) ? rate1 : rate2;
+            // w = (int)(w * 1.00 / rate);
+            // h = (int)(h * 1.00 / rate);
+            int col_count = dataGridView2.ColumnCount;
+            int row_count = dataGridView2.RowCount;
+            w = 0;
+            for (int i = 0; i < col_count; i++) w += (int)(dataGridView2.Columns[i].Width * 1.00 / rate);
+            int row_height = (int)(dataGridView2.Rows[0].Height * 1.00 / rate);
+            h = row_count * row_height;
+            Font myfont = dataGridView2.Font;
+            int startX = x + (width - w) / 2;
+            int startY = y;
+            int lineX1 = startX;
+            int lineY1 = startY;
+            int lineX2 = startX + w;
+            int lineY2 = startY;
+            e.Graphics.DrawLine(Pens.Red, lineX1, lineY1, lineX2, lineY2);
+            for (int i = 0; i < row_count; i++)
+            {
+
+                lineY1 += row_height;
+                lineY2 += row_height;
+                e.Graphics.DrawLine(Pens.Red, lineX1, lineY1, lineX2, lineY2);
+            }
+            lineX1 = startX;
+            lineY1 = startY;
+            lineX2 = startX;
+            lineY2 = startY + h;
+            e.Graphics.DrawLine(Pens.Green, lineX1, lineY1, lineX2, lineY2);
+            for (int i = 0; i < col_count; i++)
+            {
+
+                lineX1 += (int)(dataGridView2.Columns[i].Width * 1.00 / rate);
+                lineX2 += (int)(dataGridView2.Columns[i].Width * 1.00 / rate);
+                e.Graphics.DrawLine(Pens.Green, lineX1, lineY1, lineX2, lineY2);
+            }
+            startX += 3;
+            startY += 3;
+            int startX_var = startX;
+            int startY_var = startY;
+            for (int i = 0; i < col_count; i++)
+            {
+                e.Graphics.DrawString(dataGridView2.Columns[i].HeaderText, new Font(new FontFamily("黑体"), 7), System.Drawing.Brushes.Black, startX_var, startY_var);
+                startX_var += (int)((dataGridView2.Columns[i].Width * 1.0) / rate);
+            }
+            startX_var = startX;
+            startY_var = startY;
+            for (int i = 0; i < row_count - 1; i++)
+            {
+                startX_var = startX;
+                startY_var += row_height;
+                for (int j = 0; j < col_count; j++)
+                {
+                    e.Graphics.DrawString(dataGridView2.Rows[i].Cells[j].Value.ToString(), new Font(new FontFamily("黑体"), 7), System.Drawing.Brushes.Black, startX_var, startY_var);
+                    startX_var += (int)((dataGridView2.Columns[j].Width * 1.0) / rate);
+                }
+
+            }
+            //dataGridView2.Columns[i].HeaderCell
+            //e.Graphics.DrawString("入库单编号", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, x, y);
+            /*       // dataGridView2.Columns[0].Width
+                   e.Graphics.DrawString(dataGridView2.Rows[0].Cells[0].Value.ToString(), new Font(new FontFamily("黑体"), 11), System.Drawing.Brushes.Black, 170, 10);
+               e.Graphics.DrawString("供货商:河南科技学院", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Blue, 10, 12);
+               //信息的名称
+               e.Graphics.DrawLine(Pens.Black, 8, 30, 480, 30);
+               e.Graphics.DrawString("入库单编号" , new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 9, 35);
+               e.Graphics.DrawString("商品名称", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 160, 35);
+               e.Graphics.DrawString("数量", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 260, 35);
+               e.Graphics.DrawString("单价", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 330, 35);
+               e.Graphics.DrawString("总金额", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 400, 35);
+               e.Graphics.DrawLine (Pens.Black ,8,50,480,50);
+               //产品信息
+               e.Graphics.DrawString("R2011-01-2016:06:35", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 9, 55);
+               e.Graphics.DrawString("联想A460", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 160, 55);
+               e.Graphics.DrawString("100", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 260, 55);
+               e.Graphics.DrawString("200.00", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 330, 55);
+               e.Graphics.DrawString("20000.00", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 400, 55);
+
+
+               e.Graphics.DrawLine(Pens.Black, 8, 200, 480, 200);
+               e.Graphics.DrawString("地址：新乡市河南科技学院信息工程学院", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 9, 210);
+               e.Graphics.DrawString("经办人:任忌", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 220, 210);
+               e.Graphics.DrawString("服务热线:15083128577", new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 320, 210);
+               e.Graphics.DrawString("入库时间:"+DateTime.Now .ToString (), new Font(new FontFamily("黑体"), 8), System.Drawing.Brushes.Black, 9, 230);
+               */
+        }
+
+        bool pause = false;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataSet myset = new DataSet();
+            SqlDataAdapter adp = new SqlDataAdapter();
+            SqlCommand com = new SqlCommand();
+            com.Connection = con;
+            com.CommandText = "delete from xueya_data";
+            if (con.State == ConnectionState.Open) con.Close();
+            con.Open();
+            if (!pause) com.ExecuteNonQuery();
+            com.CommandText = "select patid 病人编号,time 采集时刻,SYS 收缩压,DIA 舒张压,MAP 平均血压,PR 脉率 from xueya_Data where patid='" + record.patID + "'order by time DESC";
+            adp.SelectCommand = com;
+            adp.Fill(myset);
+            dataGridView2.DataSource = myset.Tables[0];
+            timer1.Enabled = true;
+            pick_count = 0;
+            max_pickCount = int.Parse(comboBox1.Text.Trim());
+            pause = true;
+
+
+        }
+        int sys = 0;
+        int dia = 10;
+        int map = 20;
+        int pr = 30;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                /* DataRow myrow = myset.Tables[0].NewRow();
+                 myrow["病人编号"] = record.patID;
+                 myrow["采集时刻"] = DateTime.Now;
+                 myrow["收缩压"] = ++sys;
+                 myrow["舒张压"] = ++dia;
+                 myrow["平均血压"] = ++map;
+                 myrow["脉率"] = ++pr;
+                myset.Tables[0].Rows.Add(myrow);*/
+                DataSet myset1 = new DataSet();
+                SqlDataAdapter adp = new SqlDataAdapter();
+                pick_count++;
+                if (max_pickCount <= pick_count) timer1.Enabled = false;
+                SqlCommand mycom = new SqlCommand();
+                mycom.Connection = con;
+                // adp.InsertCommand = mycom;                
+                mycom.CommandText = "insert into xueya_data(patid,time,sys,dia,map,pr)values('"
+                    + record.patID + "','" + DateTime.Now + "','" + (++sys) + " ','" + (++dia) + " ','"
+                    + (++map) + " ','" + (++pr) + "')";
+                //   adp.Update(myset.Tables[0]);
+                if (con.State == ConnectionState.Open) con.Close();
+                con.Open();
+                mycom.ExecuteNonQuery();
+                mycom.CommandText = "select patid 病人编号,time 采集时刻,SYS 收缩压,DIA 舒张压,MAP 平均血压,PR 脉率 from xueya_Data where patid='" + record.patID + "'order by time DESC";
+                adp.SelectCommand = mycom;
+
+                adp.Fill(myset1);
+                dataGridView2.DataSource = myset1.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+        }
+
+
+        private void limb_No_Click(object sender, EventArgs e)
+        {
+            limb_Yes.Checked = false;
+            limb_No.Checked = true;
+        }
+        public void clear()
+        {
+            dateTimePicker1.Value = DateTime.Now;
+            cautions_txt.Text = "";
+            observeTime_txt.Text = "";
+            concious_txt.Text = "";
+            liquid_txt.Text = "";
+            urin_txt.Text = "";
+            cough_Yes.Checked = false;
+            cough_No.Checked = false;
+            stimulate_Yes.Checked = false;
+            stimulate_No.Checked = false;
+            breathe_txt.Text = "";
+            duralPlane_Yes.Checked = false;
+            duralPlane_No.Checked = false;
+            limb_Yes.Checked = false;
+            limb_No.Checked = false;
+            recorder_txt.Text = "";
+        }
+
+    }
+}

@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using adims_MODEL;
+using adims_BLL;
+
+namespace main.药品耗材管理
+{
+    public partial class Operation_room__output : Form
+    {
+        public Operation_room__output()
+        {
+            InitializeComponent();
+        }
+        AdimsController bll = new AdimsController();
+        DataSet output_set = new DataSet();
+        DataSet room_stock_set = new DataSet();
+
+        private void Operation_room__output_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 10; i++)
+            roomId_com.Items.Add(i.ToString());
+            roomId_com.SelectedIndex = 0;
+            room_stock_set = bll.select_room_stock(int.Parse(roomId_com.Text));
+            dataGridView1.DataSource = room_stock_set.Tables[0];
+            output_set = bll.select_room_output();
+            dataGridView2.DataSource = output_set.Tables[0];
+            for (int i = 0; i < room_stock_set.Tables[0].Rows.Count; i++)
+                medNub_com.Items.Add(room_stock_set.Tables[0].Rows[i][0].ToString());
+             medNub_com.SelectedIndex = 0;
+             for (int i = 0; i < 20; i++)
+                 patid_com.Items.Add(i.ToString());
+             patid_com.SelectedIndex = 0;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            room_output output = new room_output();
+            output.room_id = int.Parse(roomId_com.Text.Trim());
+            output.medicine_number = medNub_com.Text;
+            output.output_count = int.Parse(count_txt.Text.Trim());
+            output.patid = int.Parse(patid_com.Text.Trim());
+            output.output_time = DateTime.Now;
+            output.confirm_person = confirmPerson_txt.Text;
+            int test = bll.TestSub_room_stock(output);
+            if (0 == test) { MessageBox.Show("手术间里没有这种药品", "警告"); return; }
+            if (1 == test) { MessageBox.Show("手术间里这种药品不足", "警告"); return; }
+            bll.UpdateSub_room_stock(output);
+          //  int flag=bll.Add_room_output(output);
+          //  if (flag == 0) MessageBox.Show("添加领用记录失败");
+            int flag = 0;
+            int count = 0;
+            while (flag == 0)
+            {
+                flag = bll.Add_room_output(output);
+                count++;
+                if (count == 3) break;
+            }
+            if (flag == 0) MessageBox.Show("添加分发记录失败");
+            output_set = bll.select_room_output();
+            dataGridView2.DataSource = output_set.Tables[0];
+            room_stock_set = bll.select_room_stock(int.Parse(roomId_com.Text));
+            dataGridView1.DataSource = room_stock_set.Tables[0];
+        }
+
+        private void roomId_com_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            room_stock_set = bll.select_room_stock(int.Parse(roomId_com.Text));
+            dataGridView1.DataSource = room_stock_set.Tables[0];
+        }
+    }
+}

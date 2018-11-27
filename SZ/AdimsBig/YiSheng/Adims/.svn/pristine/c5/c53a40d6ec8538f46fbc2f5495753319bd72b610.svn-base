@@ -1,0 +1,351 @@
+﻿namespace main.权限管理
+{
+    partial class jurisdiction_distribute
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("排班");
+            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("术前访视");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("术前信息", new System.Windows.Forms.TreeNode[] {
+            treeNode37,
+            treeNode38});
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("麻醉记录单");
+            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("手术间浏览");
+            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("器械清点");
+            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("术中信息", new System.Windows.Forms.TreeNode[] {
+            treeNode40,
+            treeNode41,
+            treeNode42});
+            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("术后随访");
+            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("术后小结");
+            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("护理");
+            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode("术后信息", new System.Windows.Forms.TreeNode[] {
+            treeNode44,
+            treeNode45,
+            treeNode46});
+            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("PACU");
+            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("麻醉科申领");
+            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("申领入库");
+            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("手术间分发");
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("医师申领");
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("医师核销");
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("退麻醉科药");
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("药品退库");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("药品管理", new System.Windows.Forms.TreeNode[] {
+            treeNode49,
+            treeNode50,
+            treeNode51,
+            treeNode52,
+            treeNode53,
+            treeNode54,
+            treeNode55});
+            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("员工排班");
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("请假记录");
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("员工信息", new System.Windows.Forms.TreeNode[] {
+            treeNode57,
+            treeNode58});
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("麻醉记录登记");
+            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("中央监护");
+            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("麻醉记录单查询");
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("信息查询", new System.Windows.Forms.TreeNode[] {
+            treeNode60,
+            treeNode61,
+            treeNode62});
+            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode("屏幕锁定");
+            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("基础数据维护");
+            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("术间浏览");
+            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("信息维护", new System.Windows.Forms.TreeNode[] {
+            treeNode64,
+            treeNode65,
+            treeNode66});
+            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("用户管理");
+            System.Windows.Forms.TreeNode treeNode69 = new System.Windows.Forms.TreeNode("添加岗位");
+            System.Windows.Forms.TreeNode treeNode70 = new System.Windows.Forms.TreeNode("岗位权限分配");
+            System.Windows.Forms.TreeNode treeNode71 = new System.Windows.Forms.TreeNode("权限管理", new System.Windows.Forms.TreeNode[] {
+            treeNode68,
+            treeNode69,
+            treeNode70});
+            System.Windows.Forms.TreeNode treeNode72 = new System.Windows.Forms.TreeNode("帮助");
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.module_tree = new System.Windows.Forms.TreeView();
+            this.module_label = new System.Windows.Forms.Label();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.position_checklist = new System.Windows.Forms.CheckedListBox();
+            this.position_list_txt = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(13, 13);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.module_tree);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.module_label);
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Size = new System.Drawing.Size(656, 432);
+            this.splitContainer1.SplitterDistance = 383;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // module_tree
+            // 
+            this.module_tree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.module_tree.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.module_tree.Location = new System.Drawing.Point(0, 0);
+            this.module_tree.Name = "module_tree";
+            treeNode37.Name = "0";
+            treeNode37.Text = "排班";
+            treeNode38.Name = "1";
+            treeNode38.Text = "术前访视";
+            treeNode39.Name = "0.2";
+            treeNode39.Text = "术前信息";
+            treeNode40.Name = "2";
+            treeNode40.Text = "麻醉记录单";
+            treeNode41.Name = "3";
+            treeNode41.Text = "手术间浏览";
+            treeNode42.Name = "4";
+            treeNode42.Text = "器械清点";
+            treeNode43.Name = "2.3";
+            treeNode43.Text = "术中信息";
+            treeNode44.Name = "5";
+            treeNode44.Text = "术后随访";
+            treeNode45.Name = "6";
+            treeNode45.Text = "术后小结";
+            treeNode46.Name = "7";
+            treeNode46.Text = "护理";
+            treeNode47.Name = "5.3";
+            treeNode47.Text = "术后信息";
+            treeNode48.Name = "8";
+            treeNode48.Text = "PACU";
+            treeNode49.Name = "9";
+            treeNode49.Text = "麻醉科申领";
+            treeNode50.Name = "10";
+            treeNode50.Text = "申领入库";
+            treeNode51.Name = "11";
+            treeNode51.Text = "手术间分发";
+            treeNode52.Name = "12";
+            treeNode52.Text = "医师申领";
+            treeNode53.Name = "13";
+            treeNode53.Text = "医师核销";
+            treeNode54.Name = "14";
+            treeNode54.Text = "退麻醉科药";
+            treeNode55.Name = "15";
+            treeNode55.Text = "药品退库";
+            treeNode56.Name = "9.7";
+            treeNode56.Text = "药品管理";
+            treeNode57.Name = "16";
+            treeNode57.Text = "员工排班";
+            treeNode58.Name = "17";
+            treeNode58.Text = "请假记录";
+            treeNode59.Name = "16.2";
+            treeNode59.Text = "员工信息";
+            treeNode60.Name = "18";
+            treeNode60.Text = "麻醉记录登记";
+            treeNode61.Name = "19";
+            treeNode61.Text = "中央监护";
+            treeNode62.Name = "20";
+            treeNode62.Text = "麻醉记录单查询";
+            treeNode63.Name = "18.3";
+            treeNode63.Text = "信息查询";
+            treeNode64.Name = "21";
+            treeNode64.Text = "屏幕锁定";
+            treeNode65.Name = "22";
+            treeNode65.Text = "基础数据维护";
+            treeNode66.Name = "23";
+            treeNode66.Text = "术间浏览";
+            treeNode67.Name = "21.3";
+            treeNode67.Text = "信息维护";
+            treeNode68.Name = "24";
+            treeNode68.Text = "用户管理";
+            treeNode69.Name = "25";
+            treeNode69.Text = "添加岗位";
+            treeNode70.Name = "26";
+            treeNode70.Text = "岗位权限分配";
+            treeNode71.Name = "24.3";
+            treeNode71.Text = "权限管理";
+            treeNode72.Name = "27";
+            treeNode72.Text = "帮助";
+            this.module_tree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode39,
+            treeNode43,
+            treeNode47,
+            treeNode48,
+            treeNode56,
+            treeNode59,
+            treeNode63,
+            treeNode67,
+            treeNode71,
+            treeNode72});
+            this.module_tree.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.module_tree.Size = new System.Drawing.Size(383, 432);
+            this.module_tree.TabIndex = 0;
+            this.module_tree.DoubleClick += new System.EventHandler(this.module_tree_DoubleClick);
+            // 
+            // module_label
+            // 
+            this.module_label.AutoSize = true;
+            this.module_label.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.module_label.ForeColor = System.Drawing.Color.Red;
+            this.module_label.Location = new System.Drawing.Point(99, 35);
+            this.module_label.Name = "module_label";
+            this.module_label.Size = new System.Drawing.Size(0, 16);
+            this.module_label.TabIndex = 2;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Location = new System.Drawing.Point(3, 69);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.position_checklist);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.splitContainer2.Panel2.Controls.Add(this.position_list_txt);
+            this.splitContainer2.Size = new System.Drawing.Size(266, 360);
+            this.splitContainer2.SplitterDistance = 296;
+            this.splitContainer2.TabIndex = 1;
+            // 
+            // position_checklist
+            // 
+            this.position_checklist.FormattingEnabled = true;
+            this.position_checklist.Location = new System.Drawing.Point(0, 0);
+            this.position_checklist.Name = "position_checklist";
+            this.position_checklist.Size = new System.Drawing.Size(263, 292);
+            this.position_checklist.TabIndex = 0;
+            // 
+            // position_list_txt
+            // 
+            this.position_list_txt.BackColor = System.Drawing.Color.Lime;
+            this.position_list_txt.Location = new System.Drawing.Point(4, 4);
+            this.position_list_txt.Multiline = true;
+            this.position_list_txt.Name = "position_list_txt";
+            this.position_list_txt.Size = new System.Drawing.Size(259, 56);
+            this.position_list_txt.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(120, 473);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "全选";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(240, 473);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "全清";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(360, 473);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "保存";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(480, 473);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "退出";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // jurisdiction_distribute
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(670, 518);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.splitContainer1);
+            this.Name = "jurisdiction_distribute";
+            this.Text = "权限分配";
+            this.Load += new System.EventHandler(this.jurisdiction_distribute_Load);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.CheckedListBox position_checklist;
+     //   private HeYiAMISDataSet heYiAMISDataSet;
+     //   private HeYiAMISDataSetTableAdapters.Adims_position_jurisdictionTableAdapter adims_position_jurisdictionTableAdapter;
+        private System.Windows.Forms.TreeView module_tree;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label module_label;
+        private System.Windows.Forms.TextBox position_list_txt;
+    }
+}

@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class addtsyy : Form
+    {
+        #region <<Members>>
+
+        List<adims_MODEL.tsyy> tsyy;
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="t"></param>
+        public addtsyy(List<adims_MODEL.tsyy> t)
+        {
+            tsyy = t;
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+                textBox1.Text = listBox1.SelectedItem.ToString();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (textBox1.Text != "" && textBox2.Text != "")
+            {
+                adims_MODEL.tsyy ts = new adims_MODEL.tsyy();
+                ts.D = DateTime.Now;
+                ts.Name = textBox1.Text;
+                ts.Yl = Convert.ToInt32(textBox2.Text);
+                ts.Dw = comboBox1.Text;
+                ts.Yyfs = comboBox2.Text;
+                tsyy.Add(ts);
+                this.Close();
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && e.KeyChar != 8 && e.KeyChar != 13)
+            {
+                e.Handled = true;
+            }
+        }
+
+        #endregion
+    }
+}

@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class Smzjld : Form
+    {
+        #region <<Members>>
+
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public Smzjld()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Smzjld_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                lbMzs.Text = Program.customer.user_name;
+                dataGridView1.DataSource = bll.xssbr(Program.customer.user_name).DefaultView;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "出现异常，请检查！");
+            }
+        }
+
+        /// <summary>
+        /// 确定
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                mzjldEdit mzjld1 = new mzjldEdit(Convert.ToInt32(dataGridView1.SelectedCells[0].Value));
+                DialogResult = DialogResult.OK;
+                mzjld1.ShowDialog();
+                this.Close();
+            }
+        }
+
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        #endregion
+    }
+}

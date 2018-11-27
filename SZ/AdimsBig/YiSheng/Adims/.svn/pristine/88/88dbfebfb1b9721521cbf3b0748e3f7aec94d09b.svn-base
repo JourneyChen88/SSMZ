@@ -1,0 +1,268 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+using System.Drawing.Printing;
+
+namespace main
+{
+    public partial class shxj : Form
+    {
+        #region <<Members>>
+
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+        StringReader myReader;
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public shxj()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void shxj_Load(object sender, EventArgs e)
+        {
+            cbId.Items.Clear();
+            cbName.Items.Clear();
+            DataTable dt = bll.GetPat(dateTimePicker1.Value);
+            foreach (DataRow r in dt.Rows)
+            {
+                cbId.Items.Add(r[0]);
+                cbName.Items.Add(r[1]);
+            }
+        }
+
+        /// <summary>
+        /// 姓名选项
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            adims_MODEL.paiban p = new adims_MODEL.paiban();
+            if (cbId.SelectedIndex != cbName.SelectedIndex)
+                cbId.SelectedIndex = cbName.SelectedIndex;
+            rtbBook.Clear();
+            bll.GetPatInfo(Convert.ToInt32(cbId.Text), p);
+            string s = "患者姓名:";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 12, FontStyle.Bold);
+            s = p.Patname + "; ";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+
+            s = "性别:";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 12, FontStyle.Bold);
+            rtbBook.Font = this.Font;
+            s = p.Patsex + "; ";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+
+            s = "年龄:";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 12, FontStyle.Bold);
+            rtbBook.Font = this.Font;
+            s = p.Patage + "岁\n";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+
+            s = "所在科室:";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 12, FontStyle.Bold);
+            rtbBook.Font = this.Font;
+            s = p.Department + "; ";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+
+            s = "所患疾病:";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 12, FontStyle.Bold);
+            rtbBook.Font = this.Font;
+            s = p.TMD1 + "; \n";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+
+            s = "手术信息\n";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+
+            s = "手术间:";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 12, FontStyle.Bold);
+            rtbBook.Font = this.Font;
+            s = p.Oroom + "\n";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+
+            adims_MODEL.shxjmzxx mzjld = new adims_MODEL.shxjmzxx();
+            bll.selmzjld(mzjld, Convert.ToInt32(p.Patid));
+            List<adims_MODEL.mzks> mzks = new List<adims_MODEL.mzks>();
+
+            s = "手术名称:";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 12, FontStyle.Bold);
+            rtbBook.Font = this.Font;
+            s = mzjld.Ssmc + ",";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+
+            s = ":";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 12, FontStyle.Bold);
+            rtbBook.Font = this.Font;
+            s = mzjld.Ssmc + ",";
+            rtbBook.AppendText(s);
+            rtbBook.SelectionStart = rtbBook.Text.Length - s.Length;
+            rtbBook.SelectionLength = s.Length;
+            rtbBook.SelectionFont = new System.Drawing.Font("宋体", 10);
+        }
+
+        /// <summary>
+        /// ID选项
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbId.SelectedIndex != cbName.SelectedIndex)
+                cbName.SelectedIndex = cbId.SelectedIndex;
+        }
+
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        ///  保存
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            cbId.Items.Clear();
+            cbName.Items.Clear();
+            DataTable dtPat = bll.GetPat(dateTimePicker1.Value);
+            foreach (DataRow r in dtPat.Rows)
+            {
+                cbId.Items.Add(r[0]);
+                cbName.Items.Add(r[1]);
+            }
+
+        }
+
+        private void btnPrintView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strText = rtbBook.Text;
+                myReader = new StringReader(strText);
+                PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog();
+                printPreviewDialog.Document = document;
+                printPreviewDialog.FormBorderStyle = FormBorderStyle.Fixed3D;
+                if (printPreviewDialog.ShowDialog() != DialogResult.OK) return;
+                document.Print();
+            }
+            catch (Exception excep)
+            {
+                MessageBox.Show(excep.Message, "打印出错", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void document_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            float linesPerPage = 0;
+            float yPosition = 0;
+            int count = 0;
+            float leftMargin = e.MarginBounds.Left;
+            float topMargin = e.MarginBounds.Top;
+            string line = null;
+            Font printFont = rtbBook.Font;
+            SolidBrush myBrush = new SolidBrush(Color.Black);
+            //计算每一页打印多少行 
+            linesPerPage = e.MarginBounds.Height / printFont.GetHeight(e.Graphics);
+            e.Graphics.DrawString("麻 醉 小 结 单", new Font("新宋体", 16, FontStyle.Bold), Brushes.Black, new Point(260, 40));
+            //重复使用StringReader对象 ,打印出richTextBox1中的所有内容
+            while (count < linesPerPage && ((line = myReader.ReadLine()) != null))
+            {
+                // 计算出要打印的下一行所基于页面的位置
+                yPosition = topMargin + (count * printFont.GetHeight(e.Graphics));
+                // 打印出richTextBox1中的下一行内容
+                e.Graphics.DrawString(line, printFont, myBrush, leftMargin, yPosition, new StringFormat());
+                count++;
+            }
+            // 判断如果还要下一页，则继续打印
+            if (line != null)
+                e.HasMorePages = true;
+            else
+                e.HasMorePages = false;
+            myBrush.Dispose();
+        }
+
+        #endregion
+    }
+}

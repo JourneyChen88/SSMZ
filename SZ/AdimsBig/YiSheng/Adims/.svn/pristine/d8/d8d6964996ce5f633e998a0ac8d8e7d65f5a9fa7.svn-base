@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace main.科室事物管理
+{
+    public partial class Fzlwf : Form
+    {
+        public Fzlwf()
+        {
+            InitializeComponent();
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            this.panel2.Controls.Clear();//每次点击节点都要刷新主窗体里面装载子窗体的容器
+            TreeNode node = e.Node;
+            if (node.Nodes.Count == 0)//如果是最后一级的节点才需要将子窗体添加到主窗体里面
+            {
+                string TreenodeText = e.Node.Text;
+                Fsjwfct f = new Fsjwfct(TreenodeText);//TreenodeText表示是哪一个树节点被单击了
+                AddForm(f);//将数据维护窗体添加的主窗体里面
+            }
+        }
+
+        /// <summary>
+        /// 将数据维护窗体添加的主窗体里面
+        /// </summary>
+        /// <param name="f">数据维护窗体</param>
+        public void AddForm(Fsjwfct f)
+        {
+            f.TopLevel = false;
+            this.panel2.Width = f.Width;
+            this.panel2.Height = f.Height;
+            this.panel2.Controls.Add(f);
+            f.Show();
+        }
+
+
+
+    }
+}

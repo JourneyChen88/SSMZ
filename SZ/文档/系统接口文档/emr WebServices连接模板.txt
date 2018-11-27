@@ -1,0 +1,54 @@
+http://10.6.1.191:8090/ssmz/services/SsmzService?wsdl
+
+
+
+  <?xml version="1.0" encoding="UTF-8" ?> 
+- <wsdl:definitions targetNamespace="http://service.emr.simlink.com" xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:tns="http://service.emr.simlink.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+- <wsdl:types>
+- <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.emr.simlink.com">
+- <xsd:element name="getPatientInfo">
+- <xsd:complexType>
+- <xsd:sequence>
+  <xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string" /> 
+  </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+- <xsd:element name="getPatientInfoResponse">
+- <xsd:complexType>
+- <xsd:sequence>
+  <xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string" /> 
+  </xsd:sequence>
+  </xsd:complexType>
+  </xsd:element>
+  </xsd:schema>
+  </wsdl:types>
+- <wsdl:message name="getPatientInfoRequest">
+  <wsdl:part name="parameters" element="tns:getPatientInfo" /> 
+  </wsdl:message>
+- <wsdl:message name="getPatientInfoResponse">
+  <wsdl:part name="parameters" element="tns:getPatientInfoResponse" /> 
+  </wsdl:message>
+- <wsdl:portType name="ISsmzServicePortType">
+- <wsdl:operation name="getPatientInfo">
+  <wsdl:input name="getPatientInfoRequest" message="tns:getPatientInfoRequest" /> 
+  <wsdl:output name="getPatientInfoResponse" message="tns:getPatientInfoResponse" /> 
+  </wsdl:operation>
+  </wsdl:portType>
+- <wsdl:binding name="ISsmzServiceHttpBinding" type="tns:ISsmzServicePortType">
+  <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" /> 
+- <wsdl:operation name="getPatientInfo">
+  <wsdlsoap:operation soapAction="" /> 
+- <wsdl:input name="getPatientInfoRequest">
+  <wsdlsoap:body use="literal" /> 
+  </wsdl:input>
+- <wsdl:output name="getPatientInfoResponse">
+  <wsdlsoap:body use="literal" /> 
+  </wsdl:output>
+  </wsdl:operation>
+  </wsdl:binding>
+- <wsdl:service name="ISsmzService">
+- <wsdl:port name="ISsmzServiceHttpPort" binding="tns:ISsmzServiceHttpBinding">
+  <wsdlsoap:address location="http://10.6.1.191:8090/ssmz/services/SsmzService" /> 
+  </wsdl:port>
+  </wsdl:service>
+  </wsdl:definitions>

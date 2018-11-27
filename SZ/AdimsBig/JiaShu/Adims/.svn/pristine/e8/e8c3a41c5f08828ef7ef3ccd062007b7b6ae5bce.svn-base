@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class test : Form
+    {  List<adims_MODEL.point> p=new List<adims_MODEL.point>();
+
+      Drage drage;
+        public test()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            byte[] s = new byte[6];
+            s[0] = 0xA5;
+            s[1] = 0x02;
+            s[2] = 0x00;
+            s[3] = 0x57;
+            s[4] = 0xFE;
+            s[5] = 0X00;
+            drage.p.Write(s, 0, 6); 
+        }
+
+        private void test_Load(object sender, EventArgs e)
+        {
+            drage = new Drage(p);
+            drage.p.Open();
+
+        }
+    }
+}

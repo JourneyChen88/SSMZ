@@ -1,0 +1,352 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class qxqd : Form
+    {
+        public qxqd()
+        {
+            InitializeComponent();
+        }
+
+        private void domainUpDown1_MouseClick(object sender, MouseEventArgs e)
+        {
+           
+        }
+
+        private void numericUpDown193_ValueChanged(object sender, EventArgs e)
+        {
+
+    
+            int sq = 0, sz = 0, gqq = 0, gqh = 0;
+            foreach (Control c in this.Controls)
+            {
+
+                if (c is NumericUpDown)
+                {
+                    NumericUpDown n = (NumericUpDown)c;
+                    if (c.Tag != null)
+                    {
+                        if (Convert.ToInt32(c.Tag) == 1)
+                            sq = sq + Convert.ToInt32(n.Value);
+                        if (Convert.ToInt32(c.Tag) == 2)
+                            sz = sz + Convert.ToInt32(n.Value);
+                        if(Convert.ToInt32(c.Tag)==3)
+                            gqq=gqq+Convert.ToInt32(n.Value);
+                        if(Convert.ToInt32(c.Tag)==4)
+                            gqh=gqh+Convert.ToInt32(n.Value);
+                    }
+
+                }
+
+
+            }
+            textBox1.Text = sq.ToString();
+            textBox2.Text = sz.ToString();
+            textBox3.Text = gqq.ToString();
+            textBox4.Text = gqh.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int f = 0;
+            if ((numericUpDown1.Value + numericUpDown2.Value) != numericUpDown3.Value)
+            { f++;MessageBox.Show("卵圆钳数量不对");}
+            else if ((numericUpDown1.Value + numericUpDown2.Value) != numericUpDown4.Value)
+            { f++; MessageBox.Show("卵圆钳数量不对"); }
+
+
+            if ((numericUpDown5.Value + numericUpDown6.Value) != numericUpDown7.Value)
+            { f++; MessageBox.Show("咬骨钳数量不对"); }
+            else if ((numericUpDown5.Value + numericUpDown6.Value) != numericUpDown8.Value)
+            { f++; MessageBox.Show("咬骨钳数量不对"); }
+ 
+
+            if ((numericUpDown16.Value + numericUpDown15.Value) != numericUpDown14.Value)
+            { f++; MessageBox.Show("巾钳数量不对"); }
+            else if ((numericUpDown16.Value + numericUpDown15.Value) != numericUpDown13.Value)
+            { f++; MessageBox.Show("巾钳数量不对"); }
+
+            if ((numericUpDown12.Value + numericUpDown11.Value) != numericUpDown10.Value)
+            { f++; MessageBox.Show("骨刀凿数量不对"); }
+            else if ((numericUpDown12.Value + numericUpDown11.Value) != numericUpDown9.Value)
+            { f++; MessageBox.Show("骨刀凿数量不对"); }
+
+            if ((numericUpDown24.Value + numericUpDown23.Value) != numericUpDown22.Value)
+            { f++; MessageBox.Show("持针钳数量不对"); }
+            else if ((numericUpDown24.Value + numericUpDown23.Value) != numericUpDown21.Value)
+            { f++; MessageBox.Show("持针钳数量不对"); }
+
+            if ((numericUpDown20.Value + numericUpDown19.Value) != numericUpDown18.Value)
+            { f++; MessageBox.Show("拉钩数量不对"); }
+            else if ((numericUpDown20.Value + numericUpDown19.Value) != numericUpDown17.Value)
+            { f++; MessageBox.Show("拉钩数量不对"); }
+
+            if ((numericUpDown48.Value + numericUpDown47.Value) != numericUpDown46.Value)
+            { f++; MessageBox.Show("组织钳数量不对"); }
+            else if ((numericUpDown48.Value + numericUpDown47.Value) != numericUpDown45.Value)
+            { f++; MessageBox.Show("组织钳数量不对"); }
+
+            if ((numericUpDown44.Value + numericUpDown43.Value) != numericUpDown42.Value)
+            { f++; MessageBox.Show("刮匙数量不对"); }
+            else if ((numericUpDown44.Value + numericUpDown43.Value) != numericUpDown41.Value)
+            { f++; MessageBox.Show("刮匙数量不对"); }
+         
+            if ((numericUpDown40.Value + numericUpDown39.Value) != numericUpDown38.Value)
+            { f++; MessageBox.Show("大弯血管钳数量不对"); }
+            else if ((numericUpDown40.Value + numericUpDown39.Value) != numericUpDown37.Value)
+            { f++; MessageBox.Show("大弯血管钳数量不对"); }
+          
+            
+            if ((numericUpDown36.Value + numericUpDown35.Value) != numericUpDown34.Value)
+            { f++; MessageBox.Show("脊柱牵开器钳数量不对"); }
+            else if ((numericUpDown36.Value + numericUpDown35.Value) != numericUpDown33.Value)
+            { f++; MessageBox.Show("脊柱牵开器钳数量不对"); }
+
+            if ((numericUpDown32.Value + numericUpDown31.Value) != numericUpDown30.Value)
+            { f++; MessageBox.Show("弯血管钳数量不对"); }
+            else if ((numericUpDown32.Value + numericUpDown31.Value) != numericUpDown29.Value)
+            { f++; MessageBox.Show("弯血管钳数量不对"); }
+
+            if ((numericUpDown28.Value + numericUpDown27.Value) != numericUpDown26.Value)
+            { f++; MessageBox.Show("腹腔牵开器数量不对"); }
+            else if ((numericUpDown28.Value + numericUpDown27.Value) != numericUpDown25.Value)
+            { f++; MessageBox.Show("腹腔牵开器数量不对"); }
+
+            if ((numericUpDown96.Value + numericUpDown95.Value) != numericUpDown94.Value)
+            { f++; MessageBox.Show("直血管钳数量不对"); }
+            else if ((numericUpDown96.Value + numericUpDown95.Value) != numericUpDown93.Value)
+            { f++; MessageBox.Show("直血管钳数量不对"); }
+
+            if ((numericUpDown92.Value + numericUpDown91.Value) != numericUpDown90.Value)
+            { f++; MessageBox.Show("胸腔牵开器数量不对"); }
+            else if ((numericUpDown92.Value + numericUpDown91.Value) != numericUpDown89.Value)
+            { f++; MessageBox.Show("胸腔牵开器数量不对"); }
+
+           if ((numericUpDown88.Value + numericUpDown87.Value) != numericUpDown86.Value)
+           { f++; MessageBox.Show("蚊式钳数量不对"); }
+            else if ((numericUpDown88.Value + numericUpDown87.Value) != numericUpDown85.Value)
+           { f++; MessageBox.Show("蚊式钳数量不对"); }
+
+           if ((numericUpDown84.Value + numericUpDown83.Value) != numericUpDown82.Value)
+           { f++; MessageBox.Show("有齿镊数量不对"); }
+            else if ((numericUpDown84.Value + numericUpDown83.Value) != numericUpDown81.Value)
+           { f++; MessageBox.Show("有齿镊数量不对"); }
+
+           if ((numericUpDown80.Value + numericUpDown79.Value) != numericUpDown78.Value)
+           { f++; MessageBox.Show("直角钳数量不对"); }
+            else if ((numericUpDown80.Value + numericUpDown79.Value) != numericUpDown77.Value)
+           { f++; MessageBox.Show("直角钳数量不对"); }
+
+           if ((numericUpDown76.Value + numericUpDown75.Value) != numericUpDown74.Value)
+           { f++; MessageBox.Show("无齿镊数量不对"); }
+            else if ((numericUpDown76.Value + numericUpDown75.Value) != numericUpDown73.Value)
+           { f++; MessageBox.Show("无齿镊数量不对"); }
+
+           if ((numericUpDown72.Value + numericUpDown71.Value) != numericUpDown70.Value)
+           { f++; MessageBox.Show("扁桃腺钳数量不对"); }
+            else if ((numericUpDown72.Value + numericUpDown71.Value) != numericUpDown69.Value)
+           { f++; MessageBox.Show("扁桃腺钳数量不对"); }
+
+           if ((numericUpDown68.Value + numericUpDown67.Value) != numericUpDown66.Value)
+           { f++; MessageBox.Show("刀柄数量不对"); }
+            else if ((numericUpDown68.Value + numericUpDown67.Value) != numericUpDown65.Value)
+           { f++; MessageBox.Show("刀柄数量不对"); }
+
+           if ((numericUpDown64.Value + numericUpDown63.Value) != numericUpDown62.Value)
+           { f++; MessageBox.Show("柯克钳数量不对"); }
+            else if ((numericUpDown64.Value + numericUpDown63.Value) != numericUpDown61.Value)
+           { f++; MessageBox.Show("柯克钳数量不对"); }
+
+           if ((numericUpDown60.Value + numericUpDown59.Value) != numericUpDown58.Value)
+           { f++; MessageBox.Show("手术剪数量不对"); }
+            else if ((numericUpDown60.Value + numericUpDown59.Value) != numericUpDown57.Value)
+           { f++; MessageBox.Show("手术剪数量不对"); }
+
+           if ((numericUpDown56.Value + numericUpDown55.Value) != numericUpDown54.Value)
+           { f++; MessageBox.Show("胃钳数量不对"); }
+            else if ((numericUpDown56.Value + numericUpDown55.Value) != numericUpDown53.Value)
+           { f++; MessageBox.Show("胃钳数量不对"); }
+
+           if ((numericUpDown52.Value + numericUpDown51.Value) != numericUpDown50.Value)
+           { f++; MessageBox.Show("吸引头数量不对"); }
+            else if ((numericUpDown52.Value + numericUpDown51.Value) != numericUpDown49.Value)
+           { f++; MessageBox.Show("吸引头数量不对"); }
+
+           if ((numericUpDown192.Value + numericUpDown191.Value) != numericUpDown190.Value)
+           { f++; MessageBox.Show("肠钳数量不对"); }
+            else if ((numericUpDown192.Value + numericUpDown191.Value) != numericUpDown189.Value)
+           { f++; MessageBox.Show("肠钳数量不对"); }
+
+           if ((numericUpDown188.Value + numericUpDown187.Value) != numericUpDown186.Value)
+           { f++; MessageBox.Show("电烧(头)数量不对"); }
+            else if ((numericUpDown188.Value + numericUpDown187.Value) != numericUpDown185.Value)
+           { f++; MessageBox.Show("电烧(头)数量不对"); }
+
+           if ((numericUpDown184.Value + numericUpDown183.Value) != numericUpDown182.Value)
+           { f++; MessageBox.Show("取石钳数量不对"); }
+            else if ((numericUpDown184.Value + numericUpDown183.Value) != numericUpDown181.Value)
+           { f++; MessageBox.Show("取石钳数量不对"); }
+
+           if ((numericUpDown176.Value + numericUpDown175.Value) != numericUpDown174.Value)
+           { f++; MessageBox.Show("胆石刮数量不对"); }
+            else if ((numericUpDown176.Value + numericUpDown175.Value) != numericUpDown173.Value)
+           { f++; MessageBox.Show("胆石刮数量不对"); }
+
+           if ((numericUpDown168.Value + numericUpDown167.Value) != numericUpDown166.Value)
+           { f++; MessageBox.Show("胆道探子数量不对"); }
+            else if ((numericUpDown168.Value + numericUpDown167.Value) != numericUpDown165.Value)
+           { f++; MessageBox.Show("胆道探子数量不对"); }
+
+           if ((numericUpDown164.Value + numericUpDown163.Value) != numericUpDown162.Value)
+           { f++; MessageBox.Show("大纱垫数量不对"); }
+            else if ((numericUpDown164.Value + numericUpDown163.Value) != numericUpDown161.Value)
+           { f++; MessageBox.Show("大纱垫数量不对"); }
+
+
+           if ((numericUpDown160.Value + numericUpDown159.Value) != numericUpDown158.Value)
+           { f++; MessageBox.Show("肾蒂钳数量不对"); }
+            else if ((numericUpDown160.Value + numericUpDown159.Value) != numericUpDown157.Value)
+           { f++; MessageBox.Show("肾蒂钳数量不对"); }
+
+           if ((numericUpDown156.Value + numericUpDown155.Value) != numericUpDown154.Value)
+           { f++; MessageBox.Show("小纱垫数量不对"); }
+            else if ((numericUpDown156.Value + numericUpDown155.Value) != numericUpDown153.Value)
+           { f++; MessageBox.Show("小纱垫数量不对"); }
+
+           if ((numericUpDown152.Value + numericUpDown151.Value) != numericUpDown150.Value)
+           { f++; MessageBox.Show("输尿管钳数量不对"); }
+            else if ((numericUpDown152.Value + numericUpDown151.Value) != numericUpDown149.Value)
+           { f++; MessageBox.Show("输尿管钳数量不对"); }
+
+           if ((numericUpDown148.Value + numericUpDown147.Value) != numericUpDown146.Value)
+           { f++; MessageBox.Show("纱布数量不对"); }
+            else if ((numericUpDown148.Value + numericUpDown147.Value) != numericUpDown145.Value)
+           { f++; MessageBox.Show("纱布数量不对"); }
+
+           if ((numericUpDown144.Value + numericUpDown143.Value) != numericUpDown142.Value)
+           { f++; MessageBox.Show("沙式钳数量不对"); }
+            else if ((numericUpDown144.Value + numericUpDown143.Value) != numericUpDown141.Value)
+           { f++; MessageBox.Show("沙式钳数量不对"); }
+
+           if ((numericUpDown140.Value + numericUpDown139.Value) != numericUpDown138.Value)
+           { f++; MessageBox.Show("纱条数量不对"); }
+            else if ((numericUpDown140.Value + numericUpDown139.Value) != numericUpDown137.Value)
+           { f++; MessageBox.Show("纱条数量不对"); }
+
+           if ((numericUpDown136.Value + numericUpDown135.Value) != numericUpDown134.Value)
+           { f++; MessageBox.Show("持瓣钳数量不对"); }
+            else if ((numericUpDown136.Value + numericUpDown135.Value) != numericUpDown133.Value)
+           { f++; MessageBox.Show("持瓣钳数量不对"); }
+
+           if ((numericUpDown132.Value + numericUpDown131.Value) != numericUpDown130.Value)
+           { f++; MessageBox.Show("棉片数量不对"); }
+            else if ((numericUpDown132.Value + numericUpDown131.Value) != numericUpDown129.Value)
+           { f++; MessageBox.Show("棉片数量不对"); }
+
+           if ((numericUpDown128.Value + numericUpDown127.Value) != numericUpDown126.Value)
+           { f++; MessageBox.Show("阻断钳数量不对"); }
+            else if ((numericUpDown128.Value + numericUpDown127.Value) != numericUpDown125.Value)
+           { f++; MessageBox.Show("阻断钳数量不对"); }
+
+           if ((numericUpDown124.Value + numericUpDown123.Value) != numericUpDown122.Value)
+           { f++; MessageBox.Show("棉签数量不对"); }
+            else if ((numericUpDown124.Value + numericUpDown123.Value) != numericUpDown121.Value)
+           { f++; MessageBox.Show("棉签数量不对"); }
+
+           if ((numericUpDown120.Value + numericUpDown119.Value) != numericUpDown118.Value)
+           { f++; MessageBox.Show("肺叶钳数量不对"); }
+            else if ((numericUpDown120.Value + numericUpDown119.Value) != numericUpDown117.Value)
+           { f++; MessageBox.Show("肺叶钳数量不对"); }
+
+           if ((numericUpDown116.Value + numericUpDown115.Value) != numericUpDown114.Value)
+           { f++; MessageBox.Show("阻断带数量不对"); }
+            else if ((numericUpDown116.Value + numericUpDown115.Value) != numericUpDown113.Value)
+           { f++; MessageBox.Show("阻断带数量不对"); }
+
+           if ((numericUpDown112.Value + numericUpDown111.Value) != numericUpDown110.Value)
+           { f++; MessageBox.Show("心房钳数量不对"); }
+            else if ((numericUpDown112.Value + numericUpDown111.Value) != numericUpDown109.Value)
+           { f++; MessageBox.Show("心房钳数量不对"); }
+
+           if ((numericUpDown108.Value + numericUpDown107.Value) != numericUpDown106.Value)
+           { f++; MessageBox.Show("花生米数量不对"); }
+            else if ((numericUpDown108.Value + numericUpDown107.Value) != numericUpDown105.Value)
+           { f++; MessageBox.Show("花生米数量不对"); }
+
+           if ((numericUpDown104.Value + numericUpDown103.Value) != numericUpDown102.Value)
+           { f++; MessageBox.Show("心耳钳数量不对"); }
+            else if ((numericUpDown104.Value + numericUpDown103.Value) != numericUpDown101.Value)
+           { f++; MessageBox.Show("心耳钳数量不对"); }
+
+           if ((numericUpDown100.Value + numericUpDown99.Value) != numericUpDown98.Value)
+           { f++; MessageBox.Show("缝针数量不对"); }
+            else if ((numericUpDown100.Value + numericUpDown99.Value) != numericUpDown97.Value)
+           { f++; MessageBox.Show("缝针数量不对"); }
+
+          if ((numericUpDown224.Value + numericUpDown223.Value) != numericUpDown222.Value)
+          { f++; MessageBox.Show("哈巴狗数量不对"); }
+            else if ((numericUpDown224.Value + numericUpDown223.Value) != numericUpDown221.Value)
+          { f++; MessageBox.Show("哈巴狗数量不对"); }
+
+          if ((numericUpDown220.Value + numericUpDown219.Value) != numericUpDown218.Value)
+          { f++; MessageBox.Show("注射器数量不对"); }
+            else if ((numericUpDown220.Value + numericUpDown219.Value) != numericUpDown217.Value)
+          { f++; MessageBox.Show("注射器数量不对"); }
+
+          if ((numericUpDown216.Value + numericUpDown215.Value) != numericUpDown214.Value)
+          { f++; MessageBox.Show("气管钳数量不对"); }
+            else if ((numericUpDown216.Value + numericUpDown215.Value) != numericUpDown213.Value)
+          { f++; MessageBox.Show("气管钳数量不对"); }
+
+          if ((numericUpDown212.Value + numericUpDown211.Value) != numericUpDown210.Value)
+          { f++; MessageBox.Show("针头数量不对"); }
+            else if ((numericUpDown212.Value + numericUpDown211.Value) != numericUpDown209.Value)
+          { f++; MessageBox.Show("针头数量不对"); }
+
+          if ((numericUpDown208.Value + numericUpDown207.Value) != numericUpDown206.Value)
+          { f++; MessageBox.Show("剥离子数量不对"); }
+            else if ((numericUpDown208.Value + numericUpDown207.Value) != numericUpDown205.Value)
+          { f++; MessageBox.Show("剥离子数量不对"); }
+
+          if ((numericUpDown204.Value + numericUpDown203.Value) != numericUpDown202.Value)
+          { f++; MessageBox.Show("棉球数量不对"); }
+            else if ((numericUpDown204.Value + numericUpDown203.Value) != numericUpDown201.Value)
+          { f++; MessageBox.Show("棉球数量不对"); }
+
+          if ((numericUpDown200.Value + numericUpDown199.Value) != numericUpDown198.Value)
+          { f++; MessageBox.Show("髓核钳数量不对"); }
+            else if ((numericUpDown200.Value + numericUpDown199.Value) != numericUpDown197.Value)
+          { f++; MessageBox.Show("髓核钳数量不对"); }
+          if (f == 0)
+              MessageBox.Show("清点成功");
+
+
+               
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.Document = printDocument1;
+            if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
+                printDocument1.Print();
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            
+            e.Graphics.DrawImage(pictureBox2.Image, 50, 50);
+        }
+
+
+
+
+    }
+}

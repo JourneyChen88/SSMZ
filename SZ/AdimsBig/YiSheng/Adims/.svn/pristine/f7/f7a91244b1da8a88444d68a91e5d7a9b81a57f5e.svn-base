@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class sjll1: Form
+    {   
+        int x = 1, y = 1,z;
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+        List<adims_MODEL.oroomstate> oroom = new List<adims_MODEL.oroomstate>();
+        public sjll1()
+        {
+            InitializeComponent();
+        }
+
+        private void sjll_Load(object sender, EventArgs e)
+        {
+            z = this.Width / 3;
+            bll.seloroomstate(oroom);
+            foreach (adims_MODEL.oroomstate o in oroom)
+            {
+                sjll.sjll s = new sjll.sjll();
+                s.Width = z-2;
+                s.Location = new Point(x,y);
+                s.Ssj = o.Name;
+                s.F = o.Ostate;
+                s.DoubleClick += new EventHandler(s_DoubleClick);
+                if (s.F != 0)
+                { 
+                    adims_MODEL.ssqk ssqk = new adims_MODEL.ssqk();
+                    ssqk.Mzjldid=o.Mzjldid;
+                    bll.oroombaseinfo(ssqk);
+                    s.Hzxm = ssqk.Hzname;
+                    s.Ssmc = ssqk.Oname;
+                    s.Kssj = ssqk.Kssj;
+                    s.Mzys = ssqk.Mzys;
+                    s.Blh = ssqk.Mzjldid;
+                }
+                this.Controls.Add(s);
+               x = x + z;
+                if (x >=(this.Width-10))
+                {
+                    x = 1;
+                    y = y + 136;
+                }
+
+                
+            
+            }
+
+        }
+
+        void s_DoubleClick(object sender, EventArgs e)
+        {
+            if (((sjll.sjll)sender).F != 0)
+            {
+                mzjldEdit mzjldform = new mzjldEdit(((sjll.sjll)sender).Blh,0);
+                mzjldform.ShowDialog();
+            }
+        }
+    }
+}

@@ -1,0 +1,1407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{79A7629A-3BC7-43DD-80A5-E1A92B403C09}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>main</RootNamespace>
+    <AssemblyName>main</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\Admin\Desktop\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>DC428A0D863002315DCCB49270E311F7A51D87ED</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>main_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ChnCharInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="MediII.Adapter.BaseBiz, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MediII.Adapter.BaseBiz.dll</HintPath>
+    </Reference>
+    <Reference Include="MediII.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MediII.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MediII.Common.Processer, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MediII.Common.Processer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=10.0.4504.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="NHapi.Base, Version=2.3.0.0, Culture=neutral, PublicKeyToken=d0d8ea960a3440eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NHapi.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="NHapi.Model.V24, Version=2.3.0.0, Culture=neutral, PublicKeyToken=d0d8ea960a3440eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\NHapi.Model.V24.dll</HintPath>
+    </Reference>
+    <Reference Include="SenderRoutingLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\SenderRoutingLib.dll</HintPath>
+    </Reference>
+    <Reference Include="sjll, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\sjll.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsFormsControlLibrary5">
+      <HintPath>D:\Documents\Visual Studio 2010\Projects\WindowsFormsControlLibrary5\WindowsFormsControlLibrary5\bin\Debug\WindowsFormsControlLibrary5.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HelpClass\PrintDataGridView.cs" />
+    <Compile Include="MedicalConsumableManage\ConsumableManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\ConsumableManageForm.Designer.cs">
+      <DependentUpon>ConsumableManageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addcl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addcl.Designer.cs">
+      <DependentUpon>addcl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addjhxm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addjhxm.Designer.cs">
+      <DependentUpon>addjhxm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addMZPM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addMZPM.Designer.cs">
+      <DependentUpon>addMZPM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\AddQt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\AddQt.Designer.cs">
+      <DependentUpon>AddQt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addshuxue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addshuxue.Designer.cs">
+      <DependentUpon>addshuxue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addshuye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addshuye.Designer.cs">
+      <DependentUpon>addshuye.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addszsj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addszsj.Designer.cs">
+      <DependentUpon>addszsj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addJuMaYao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addJuMaYao.Designer.cs">
+      <DependentUpon>addJuMaYao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addtsyy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addtsyy.Designer.cs">
+      <DependentUpon>addtsyy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addYDyao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addYDyao.Designer.cs">
+      <DependentUpon>addYDyao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addZhenTong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addZhenTong.Designer.cs">
+      <DependentUpon>addZhenTong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\AfterVisit_Select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\AfterVisit_Select.Designer.cs">
+      <DependentUpon>AfterVisit_Select.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\AfterVisit_SZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\AfterVisit_SZ.Designer.cs">
+      <DependentUpon>AfterVisit_SZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\BeforeVisit_HS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\BeforeVisit_HS.Designer.cs">
+      <DependentUpon>BeforeVisit_HS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\BeforeVisit_Select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\BeforeVisit_Select.Designer.cs">
+      <DependentUpon>BeforeVisit_Select.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\BeforeVisit_YS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\BeforeVisit_YS.designer.cs">
+      <DependentUpon>BeforeVisit_YS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelpClass\GE1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HelpClass\GE2.cs" />
+    <Compile Include="HelpClass\ClassFTP.cs" />
+    <Compile Include="HelpClass\Drage.cs" />
+    <Compile Include="OperDoctorUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OperDoctorUpdate.Designer.cs">
+      <DependentUpon>OperDoctorUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysInterface\EMRform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\EMRform.Designer.cs">
+      <DependentUpon>EMRform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JizhenOper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JizhenOper.designer.cs">
+      <DependentUpon>JizhenOper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysInterface\LisTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\LisTest.Designer.cs">
+      <DependentUpon>LisTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LockSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LockSet.Designer.cs">
+      <DependentUpon>LockSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\MZH_ZhengTong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\MZH_ZhengTong.Designer.cs">
+      <DependentUpon>MZH_ZhengTong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\MZJHS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\MZJHS.designer.cs">
+      <DependentUpon>MZJHS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\Mzjhs_select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\Mzjhs_select.designer.cs">
+      <DependentUpon>Mzjhs_select.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\mzjldQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistics\mzjldQuery.Designer.cs">
+      <DependentUpon>mzjldQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\ConsumablesUseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\ConsumablesUseForm.Designer.cs">
+      <DependentUpon>ConsumablesUseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\Mztys.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\Mztys.Designer.cs">
+      <DependentUpon>Mztys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\MZZJ_SZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\MZZJ_SZ.Designer.cs">
+      <DependentUpon>MZZJ_SZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\MZZJ_ZXYJH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\MZZJ_ZXYJH.designer.cs">
+      <DependentUpon>MZZJ_ZXYJH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\MZZJ_select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\MZZJ_select.designer.cs">
+      <DependentUpon>MZZJ_select.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\MZ_zhentong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\MZ_zhentong.Designer.cs">
+      <DependentUpon>MZ_zhentong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\NurseRecord_Select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\NurseRecord_Select.Designer.cs">
+      <DependentUpon>NurseRecord_Select.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\NurseRecord_SZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\NurseRecord_SZ.Designer.cs">
+      <DependentUpon>NurseRecord_SZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\NurseRecord_SZ_Eye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\NurseRecord_SZ_Eye.designer.cs">
+      <DependentUpon>NurseRecord_SZ_Eye.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_Addcl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_Addcl.Designer.cs">
+      <DependentUpon>PACU_Addcl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACUaddQt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACUaddQt.Designer.cs">
+      <DependentUpon>PACUaddQt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_AddSJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_AddSJ.Designer.cs">
+      <DependentUpon>PACU_AddSJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_AddSY.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_AddSY.Designer.cs">
+      <DependentUpon>PACU_AddSY.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_AddYyao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_AddYyao.Designer.cs">
+      <DependentUpon>PACU_AddYyao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_Add_SX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PACU_LEVEL\PACU_Add_SX.Designer.cs">
+      <DependentUpon>PACU_Add_SX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\PACU_Select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\PACU_Select.Designer.cs">
+      <DependentUpon>PACU_Select.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\PACU_SZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\PACU_SZ.Designer.cs">
+      <DependentUpon>PACU_SZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelpClass\PrintDataGridViewLandscape.cs" />
+    <Compile Include="Flows\QiXieQD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\QiXieQD.Designer.cs">
+      <DependentUpon>QiXieQD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="qxList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="qxList.Designer.cs">
+      <DependentUpon>qxList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\qxqdForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\qxqdForm.Designer.cs">
+      <DependentUpon>qxqdForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\PointMange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\PointMange.Designer.cs">
+      <DependentUpon>PointMange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPatient\SelectYSorHS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPatient\SelectYSorHS.Designer.cs">
+      <DependentUpon>SelectYSorHS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XiugaiYuanYin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XiugaiYuanYin.Designer.cs">
+      <DependentUpon>XiugaiYuanYin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\ssjListManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\ssjListManage.Designer.cs">
+      <DependentUpon>ssjListManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\SSTSTJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistics\SSTSTJ.Designer.cs">
+      <DependentUpon>SSTSTJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPatient\SelectHbz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPatient\SelectHbz.Designer.cs">
+      <DependentUpon>SelectHbz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysInterface\jybl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\jybl.Designer.cs">
+      <DependentUpon>jybl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogIn.Designer.cs">
+      <DependentUpon>LogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPatient\SelectMzff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPatient\SelectMzff.Designer.cs">
+      <DependentUpon>SelectMzff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\mzjldEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\mzjldEdit.Designer.cs">
+      <DependentUpon>mzjldEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysInterface\sssj_temp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\sssj_temp.Designer.cs">
+      <DependentUpon>sssj_temp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\ConsumablesUseQueryByOrg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistics\ConsumablesUseQueryByOrg.Designer.cs">
+      <DependentUpon>ConsumablesUseQueryByOrg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statistics\ConsumablesUseQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statistics\ConsumablesUseQuery.Designer.cs">
+      <DependentUpon>ConsumablesUseQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateOdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateOdate.Designer.cs">
+      <DependentUpon>UpdateOdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateOroom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateOroom.designer.cs">
+      <DependentUpon>UpdateOroom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UcComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Web References\EmrWebReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HisWebReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="PrivigeManage\modify_password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrivigeManage\modify_password.Designer.cs">
+      <DependentUpon>modify_password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrivigeManage\szsjGuanli.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrivigeManage\szsjGuanli.Designer.cs">
+      <DependentUpon>szsjGuanli.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Add_KS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Add_KS.Designer.cs">
+      <DependentUpon>Add_KS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\data_add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\data_add.Designer.cs">
+      <DependentUpon>data_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\data_maintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\data_maintenance.Designer.cs">
+      <DependentUpon>data_maintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fmzhstj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fmzhstj.Designer.cs">
+      <DependentUpon>Fmzhstj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\FSSJTJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\FSSJTJ.Designer.cs">
+      <DependentUpon>FSSJTJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\JBJL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\JBJL.Designer.cs">
+      <DependentUpon>JBJL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\mzyb_Tongji.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\mzyb_Tongji.Designer.cs">
+      <DependentUpon>mzyb_Tongji.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\QJJBTJ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\QJJBTJ.Designer.cs">
+      <DependentUpon>QJJBTJ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Operation_room_return.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Operation_room_return.Designer.cs">
+      <DependentUpon>Operation_room_return.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\AddOperName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\AddOperName.Designer.cs">
+      <DependentUpon>AddOperName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\PaiBanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\PaiBanForm.Designer.cs">
+      <DependentUpon>PaiBanForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Flows\qxqd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\qxqd.Designer.cs">
+      <DependentUpon>qxqd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPatient\SelectDoctor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPatient\SelectDoctor.Designer.cs">
+      <DependentUpon>SelectDoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\ShuJianLiulan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\ShuJianLiulan.Designer.cs">
+      <DependentUpon>ShuJianLiulan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flows\MzjldSelet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flows\MzjldSelet.Designer.cs">
+      <DependentUpon>MzjldSelet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MZJLDs\addSqyy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MZJLDs\addSqyy.Designer.cs">
+      <DependentUpon>addSqyy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPatient\SelectSqzd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPatient\SelectSqzd.Designer.cs">
+      <DependentUpon>SelectSqzd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysInterface\sssj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\sssj.Designer.cs">
+      <DependentUpon>sssj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPatient\SelectSSYS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPatient\SelectSSYS.Designer.cs">
+      <DependentUpon>SelectSSYS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JKTimeSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JKTimeSet.Designer.cs">
+      <DependentUpon>JKTimeSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectPatient\SelectTiwei.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPatient\SelectTiwei.Designer.cs">
+      <DependentUpon>SelectTiwei.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XiugaiChuLiang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XiugaiChuLiang.Designer.cs">
+      <DependentUpon>XiugaiChuLiang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xgjhsj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="xgjhsj.Designer.cs">
+      <DependentUpon>xgjhsj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysInterface\PacsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\PacsForm.Designer.cs">
+      <DependentUpon>PacsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="zhiwudingyi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="zhiwudingyi.Designer.cs">
+      <DependentUpon>zhiwudingyi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrivigeManage\Add_users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrivigeManage\Add_users.Designer.cs">
+      <DependentUpon>Add_users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrivigeManage\jurisdiction_distribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrivigeManage\jurisdiction_distribute.Designer.cs">
+      <DependentUpon>jurisdiction_distribute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrivigeManage\maintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrivigeManage\maintenance.Designer.cs">
+      <DependentUpon>maintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserSecurity\Fgwwf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserSecurity\Fgwwf.Designer.cs">
+      <DependentUpon>Fgwwf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserSecurity\Fpmsd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserSecurity\Fpmsd.Designer.cs">
+      <DependentUpon>Fpmsd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserSecurity\Fxgmm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserSecurity\Fxgmm.Designer.cs">
+      <DependentUpon>Fxgmm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserSecurity\Fyfjs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserSecurity\Fyfjs.Designer.cs">
+      <DependentUpon>Fyfjs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\FCenterJF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\FCenterJF.Designer.cs">
+      <DependentUpon>FCenterJF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fkstj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fkstj.Designer.cs">
+      <DependentUpon>Fkstj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fmzystj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fmzystj.Designer.cs">
+      <DependentUpon>Fmzystj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fpb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fpb.Designer.cs">
+      <DependentUpon>Fpb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\EmployeesEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\EmployeesEdit.Designer.cs">
+      <DependentUpon>EmployeesEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\EmployeesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\EmployeesList.Designer.cs">
+      <DependentUpon>EmployeesList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fprint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fprint.Designer.cs">
+      <DependentUpon>Fprint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fsjwfct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fsjwfct.Designer.cs">
+      <DependentUpon>Fsjwfct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\Fview.Designer.cs">
+      <DependentUpon>Fview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrgBusinessManage\LeaveRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrgBusinessManage\LeaveRegistration.Designer.cs">
+      <DependentUpon>LeaveRegistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Anesthesiology_delivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Anesthesiology_delivery.Designer.cs">
+      <DependentUpon>Anesthesiology_delivery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Anesthesiology_input.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Anesthesiology_input.Designer.cs">
+      <DependentUpon>Anesthesiology_input.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Anesthesiology_return.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Anesthesiology_return.Designer.cs">
+      <DependentUpon>Anesthesiology_return.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fksypsl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fksypsl.Designer.cs">
+      <DependentUpon>Fksypsl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fksyptk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fksyptk.Designer.cs">
+      <DependentUpon>Fksyptk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fmzkyptk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fmzkyptk.Designer.cs">
+      <DependentUpon>Fmzkyptk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Frcd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Frcd.Designer.cs">
+      <DependentUpon>Frcd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fssjypff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fssjypff.Designer.cs">
+      <DependentUpon>Fssjypff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fysyphx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fysyphx.Designer.cs">
+      <DependentUpon>Fysyphx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fysypsl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Fysypsl.Designer.cs">
+      <DependentUpon>Fysypsl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\OperationRoom_Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\OperationRoom_Management.Designer.cs">
+      <DependentUpon>OperationRoom_Management.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Operation_room__output.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Operation_room__output.Designer.cs">
+      <DependentUpon>Operation_room__output.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\SsYytj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\SsYytj.Designer.cs">
+      <DependentUpon>SsYytj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Sugery_Management.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\Sugery_Management.Designer.cs">
+      <DependentUpon>Sugery_Management.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\YPguanli.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicalConsumableManage\YPguanli.Designer.cs">
+      <DependentUpon>YPguanli.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MedicalConsumableManage\ConsumableManageForm.resx">
+      <DependentUpon>ConsumableManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addcl.resx">
+      <DependentUpon>addcl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addjhxm.resx">
+      <DependentUpon>addjhxm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addMZPM.resx">
+      <DependentUpon>addMZPM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\AddQt.resx">
+      <DependentUpon>AddQt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addshuxue.resx">
+      <DependentUpon>addshuxue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addshuye.resx">
+      <DependentUpon>addshuye.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addszsj.resx">
+      <DependentUpon>addszsj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addJuMaYao.resx">
+      <DependentUpon>addJuMaYao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addtsyy.resx">
+      <DependentUpon>addtsyy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addYDyao.resx">
+      <DependentUpon>addYDyao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addZhenTong.resx">
+      <DependentUpon>addZhenTong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\AfterVisit_Select.resx">
+      <DependentUpon>AfterVisit_Select.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\AfterVisit_SZ.resx">
+      <DependentUpon>AfterVisit_SZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\BeforeVisit_HS.resx">
+      <DependentUpon>BeforeVisit_HS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\BeforeVisit_Select.resx">
+      <DependentUpon>BeforeVisit_Select.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\BeforeVisit_YS.resx">
+      <DependentUpon>BeforeVisit_YS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OperDoctorUpdate.resx">
+      <DependentUpon>OperDoctorUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\EMRform.resx">
+      <DependentUpon>EMRform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JizhenOper.resx">
+      <DependentUpon>JizhenOper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\LisTest.resx">
+      <DependentUpon>LisTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LockSet.resx">
+      <DependentUpon>LockSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\MZH_ZhengTong.resx">
+      <DependentUpon>MZH_ZhengTong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\MZJHS.resx">
+      <DependentUpon>MZJHS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\Mzjhs_select.resx">
+      <DependentUpon>Mzjhs_select.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistics\mzjldQuery.resx">
+      <DependentUpon>mzjldQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\ConsumablesUseForm.resx">
+      <DependentUpon>ConsumablesUseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\Mztys.resx">
+      <DependentUpon>Mztys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\MZZJ_SZ.resx">
+      <DependentUpon>MZZJ_SZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\MZZJ_ZXYJH.resx">
+      <DependentUpon>MZZJ_ZXYJH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\MZZJ_select.resx">
+      <DependentUpon>MZZJ_select.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\MZ_zhentong.resx">
+      <DependentUpon>MZ_zhentong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\NurseRecord_Select.resx">
+      <DependentUpon>NurseRecord_Select.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\NurseRecord_SZ.resx">
+      <DependentUpon>NurseRecord_SZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\NurseRecord_SZ_Eye.resx">
+      <DependentUpon>NurseRecord_SZ_Eye.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PACU_LEVEL\PACU_Addcl.resx">
+      <DependentUpon>PACU_Addcl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PACU_LEVEL\PACUaddQt.resx">
+      <DependentUpon>PACUaddQt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PACU_LEVEL\PACU_AddSJ.resx">
+      <DependentUpon>PACU_AddSJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PACU_LEVEL\PACU_AddSY.resx">
+      <DependentUpon>PACU_AddSY.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PACU_LEVEL\PACU_AddYyao.resx">
+      <DependentUpon>PACU_AddYyao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PACU_LEVEL\PACU_Add_SX.resx">
+      <DependentUpon>PACU_Add_SX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\PACU_Select.resx">
+      <DependentUpon>PACU_Select.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\PACU_SZ.resx">
+      <DependentUpon>PACU_SZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\QiXieQD.resx">
+      <DependentUpon>QiXieQD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="qxList.resx">
+      <DependentUpon>qxList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\qxqdForm.resx">
+      <DependentUpon>qxqdForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\PointMange.resx">
+      <DependentUpon>PointMange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPatient\SelectYSorHS.resx">
+      <DependentUpon>SelectYSorHS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XiugaiYuanYin.resx">
+      <DependentUpon>XiugaiYuanYin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\ssjListManage.resx">
+      <DependentUpon>ssjListManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistics\SSTSTJ.resx">
+      <DependentUpon>SSTSTJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPatient\SelectHbz.resx">
+      <DependentUpon>SelectHbz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\jybl.resx">
+      <DependentUpon>jybl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogIn.resx">
+      <DependentUpon>LogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPatient\SelectMzff.resx">
+      <DependentUpon>SelectMzff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\mzjldEdit.resx">
+      <DependentUpon>mzjldEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\AddOperName.resx">
+      <DependentUpon>AddOperName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\PaiBanForm.resx">
+      <DependentUpon>PaiBanForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Flows\qxqd.resx">
+      <DependentUpon>qxqd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPatient\SelectDoctor.resx">
+      <DependentUpon>SelectDoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\ShuJianLiulan.resx">
+      <DependentUpon>ShuJianLiulan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flows\MzjldSelet.resx">
+      <DependentUpon>MzjldSelet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MZJLDs\addSqyy.resx">
+      <DependentUpon>addSqyy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPatient\SelectSqzd.resx">
+      <DependentUpon>SelectSqzd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\sssj.resx">
+      <DependentUpon>sssj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\sssj_temp.resx">
+      <DependentUpon>sssj_temp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPatient\SelectSSYS.resx">
+      <DependentUpon>SelectSSYS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JKTimeSet.resx">
+      <DependentUpon>JKTimeSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistics\ConsumablesUseQueryByOrg.resx">
+      <DependentUpon>ConsumablesUseQueryByOrg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statistics\ConsumablesUseQuery.resx">
+      <DependentUpon>ConsumablesUseQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPatient\SelectTiwei.resx">
+      <DependentUpon>SelectTiwei.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateOdate.resx">
+      <DependentUpon>UpdateOdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateOroom.resx">
+      <DependentUpon>UpdateOroom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XiugaiChuLiang.resx">
+      <DependentUpon>XiugaiChuLiang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xgjhsj.resx">
+      <DependentUpon>xgjhsj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\PacsForm.resx">
+      <DependentUpon>PacsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="zhiwudingyi.resx">
+      <DependentUpon>zhiwudingyi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrivigeManage\Add_users.resx">
+      <DependentUpon>Add_users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrivigeManage\jurisdiction_distribute.resx">
+      <DependentUpon>jurisdiction_distribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrivigeManage\maintenance.resx">
+      <DependentUpon>maintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrivigeManage\modify_password.resx">
+      <DependentUpon>modify_password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrivigeManage\szsjGuanli.resx">
+      <DependentUpon>szsjGuanli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserSecurity\Fgwwf.resx">
+      <DependentUpon>Fgwwf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserSecurity\Fpmsd.resx">
+      <DependentUpon>Fpmsd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserSecurity\Fxgmm.resx">
+      <DependentUpon>Fxgmm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserSecurity\Fyfjs.resx">
+      <DependentUpon>Fyfjs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\Add_KS.resx">
+      <DependentUpon>Add_KS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\data_add.resx">
+      <DependentUpon>data_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\data_maintenance.resx">
+      <DependentUpon>data_maintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\FCenterJF.resx">
+      <DependentUpon>FCenterJF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\Fkstj.resx">
+      <DependentUpon>Fkstj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\Fmzhstj.resx">
+      <DependentUpon>Fmzhstj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\Fmzystj.resx">
+      <DependentUpon>Fmzystj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\FSSJTJ.resx">
+      <DependentUpon>FSSJTJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\Fpb.resx">
+      <DependentUpon>Fpb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\EmployeesEdit.resx">
+      <DependentUpon>EmployeesEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\EmployeesList.resx">
+      <DependentUpon>EmployeesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\Fprint.resx">
+      <DependentUpon>Fprint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\Fsjwfct.resx">
+      <DependentUpon>Fsjwfct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\Fview.resx">
+      <DependentUpon>Fview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\JBJL.resx">
+      <DependentUpon>JBJL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\LeaveRegistration.resx">
+      <DependentUpon>LeaveRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\mzyb_Tongji.resx">
+      <DependentUpon>mzyb_Tongji.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrgBusinessManage\QJJBTJ.resx">
+      <DependentUpon>QJJBTJ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Anesthesiology_delivery.resx">
+      <DependentUpon>Anesthesiology_delivery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Anesthesiology_input.resx">
+      <DependentUpon>Anesthesiology_input.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Anesthesiology_return.resx">
+      <DependentUpon>Anesthesiology_return.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Fksypsl.resx">
+      <DependentUpon>Fksypsl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Fksyptk.resx">
+      <DependentUpon>Fksyptk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Fmzkyptk.resx">
+      <DependentUpon>Fmzkyptk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Frcd.resx">
+      <DependentUpon>Frcd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Fssjypff.resx">
+      <DependentUpon>Fssjypff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Fysyphx.resx">
+      <DependentUpon>Fysyphx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Fysypsl.resx">
+      <DependentUpon>Fysypsl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\OperationRoom_Management.resx">
+      <DependentUpon>OperationRoom_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Operation_room_return.resx">
+      <DependentUpon>Operation_room_return.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Operation_room__output.resx">
+      <DependentUpon>Operation_room__output.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\SsYytj.resx">
+      <DependentUpon>SsYytj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\Sugery_Management.resx">
+      <DependentUpon>Sugery_Management.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicalConsumableManage\YPguanli.resx">
+      <DependentUpon>YPguanli.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Web References\EmrWebReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\EmrWebReference\SsmzService.wsdl" />
+    <None Include="Web References\HisWebReference\OperAisthService.wsdl" />
+    <None Include="Web References\HisWebReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\adims_BLL\adims_BLL.csproj">
+      <Project>{DBAAC667-E7C1-4820-BFD5-4BEB5C1BAB59}</Project>
+      <Name>adims_BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\adims_DAL\adims_DAL.csproj">
+      <Project>{17D7D14C-7640-45C5-AFEA-94DA84893449}</Project>
+      <Name>adims_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\adims_MODEL\adims_MODEL.csproj">
+      <Project>{F2BF0CFD-289B-403F-BF4D-006B750317BE}</Project>
+      <Name>adims_MODEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adims_Utility\Adims_Utility.csproj">
+      <Project>{442d8aff-11d7-4de8-b8cc-5d485d528074}</Project>
+      <Name>Adims_Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="qxqddy.bmp" />
+    <Content Include="Resources\desk1.jpg" />
+    <Content Include="Resources\Excel.png" />
+    <Content Include="Resources\Excel1.png" />
+    <None Include="Web References\HisWebReference\OperAisthService.disco" />
+    <None Include="Resources\t01cd8d49f708f796f2.jpg" />
+    <None Include="Resources\sspb.png" />
+    <None Include="Resources\sqfs.png" />
+    <None Include="Resources\hljl.png" />
+    <None Include="Resources\mzjl.png" />
+    <None Include="Resources\mzzj.png" />
+    <None Include="Resources\mzzt.png" />
+    <None Include="Resources\pacu.png" />
+    <None Include="Resources\qxqd.png" />
+    <None Include="Resources\main.png" />
+    <None Include="Resources\main1.jpg" />
+    <Content Include="Resources\shsf.png" />
+    <Content Include="Resources\shzt.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\Query.png" />
+    <None Include="Resources\Print.png" />
+    <None Include="Resources\Lock.png" />
+    <None Include="Resources\List.png" />
+    <None Include="Resources\Key.png" />
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\Config.png" />
+    <None Include="Resources\Category.png" />
+    <None Include="Resources\Cancel.png" />
+    <None Include="Resources\Barcode.png" />
+    <None Include="Resources\Add3.png" />
+    <None Include="Resources\Add.png" />
+    <None Include="Resources\Account.png" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\Repair.png" />
+    <None Include="Resources\Remove3.png" />
+    <None Include="Resources\Reject.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://10.0.100.114:8080/SZYYOperService/OperAisthService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HisWebReference\</RelPath>
+      <UpdateFromURL>http://10.0.100.114:8080/SZYYOperService/OperAisthService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>main_HisWebReference_OperAisthService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://10.0.100.55:8080/ssmz/services/SsmzService%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\EmrWebReference\</RelPath>
+      <UpdateFromURL>http://10.0.100.55:8080/ssmz/services/SsmzService%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>main_EmrWebReference_ISsmzService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

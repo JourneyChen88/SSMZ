@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+  </configSections>
+  <connectionStrings>
+    <add name="main.Properties.Settings.HeYiAMISConnectionString"
+      connectionString="Data Source=.;Initial Catalog=HeYiAMIS;User ID=sa;Password=sa"
+      providerName="System.Data.SqlClient" />
+    <add name="main.Properties.Settings.HeYiAMISConnectionString1"
+      connectionString="Data Source=20120627-1252;Initial Catalog=HeYiAMIS;User ID=sa;Password=sa"
+      providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <appSettings>
+    <add key="ConnectionString" value="Server=192.168.0.112;DataBase=HeYiAMIS;Uid=sa;PassWord=sa"></add>
+  </appSettings>
+</configuration>

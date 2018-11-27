@@ -1,0 +1,13 @@
+LIS视图
+IP： 10.0.100.31
+数据库： lis
+用户名： sa
+密码： plangain
+视图名：LABVWSTAT1
+
+HIS视图
+IP： 10.0.100.11
+数据库： hrip-sz
+用户名： ssmz
+密码： ssmz
+视图名：hrip.vw-op-aisth

@@ -1,0 +1,93 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main.用户安全
+{
+    public partial class Fqxgl : Form
+    {
+
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+        public Fqxgl()
+        {
+            InitializeComponent();
+        }
+
+        private void Fqxgl_Load(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            ds = bll.allzhiwu();
+            foreach (DataRow r in ds.Tables[0].Rows)
+            {
+                comboBox1.Items.Add(r[0].ToString());
+            
+            }
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
+            DataSet ds = bll.fquanxian(comboBox1.Text);
+
+            foreach (string s in Program.muluz)
+            {
+                listBox2.Items.Add(s);
+             
+            }
+      /*     foreach(DataRow r in ds.Tables[0].Rows)
+           {
+               listBox2.Items.Remove(r[0].ToString());
+               listBox1.Items.Add(r[0].ToString());
+           } */
+
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                listBox2.Items.Add(listBox1.SelectedItem);
+                int n = bll.delfquanxian(listBox1.SelectedItem.ToString(), comboBox1.Text);
+                listBox1.Items.RemoveAt(listBox1.SelectedIndex);
+                               if (n != 1)
+                    MessageBox.Show("error"+n.ToString());
+            
+            
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listBox2.SelectedIndex != -1)
+            {
+                listBox1.Items.Add(listBox2.SelectedItem);
+                int n = bll.insertfquanxian(listBox2.SelectedItem.ToString(), comboBox1.Text);
+                listBox2.Items.RemoveAt(listBox2.SelectedIndex);
+                if (n != 1)
+                    MessageBox.Show("error"+n.ToString());
+            
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            zhiwudingyi zhiwuform = new zhiwudingyi();
+            zhiwuform.ShowDialog();
+        }
+
+ 
+    }
+}

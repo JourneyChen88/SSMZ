@@ -1,0 +1,216 @@
+﻿///************************************
+///Updated By        : Senvi
+///************************************
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
+using adims_BLL;
+
+namespace main.科室事物管理
+{
+    public partial class FMZDJ : Form
+    {
+        AdimsController adimsController = new AdimsController();
+
+        public FMZDJ()
+        {
+            InitializeComponent();
+        }
+
+        private void FMZDJ_Load(object sender, EventArgs e)
+        {
+            IsEnable();
+            string sqlWhere = " 1=1 ";
+            System.Data.DataTable dt = adimsController.GetMzjldList(sqlWhere);
+            dgvmzjld.DataSource = dt.DefaultView;
+            label3.Text = dgvmzjld.RowCount + "台手术";
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            IsEnable();
+        }
+
+        /// <summary>
+        /// 控制dateTimePicker是否可用
+        /// </summary>
+        public void IsEnable()
+        {
+
+            if (this.checkBox1.Checked)
+            {
+                dateTimePicker1.Enabled = true;
+                dateTimePicker2.Enabled = true;
+            }
+            else if (!this.checkBox1.Checked)
+            {
+                dateTimePicker1.Enabled = false;
+                dateTimePicker2.Enabled = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //System.Data.DataTable dSouce = adims_BLL.AdimsController.getdata(dateTimePicker1.Value.Date.ToShortDateString(), dateTimePicker2.Value.Date.ToShortDateString());
+            //dgvmzjld.DataSource = dSouce;
+            //label3.Text = dSouce.Rows.Count.ToString() + "台手术";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DataGridviewShowToExcel(dgvmzjld);
+        }
+
+        /// <summary>
+        /// 导出execl
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="isShowExcle"></param>
+        /// <returns></returns>
+        public void DataGridviewShowToExcel(DataGridView dgv)
+        {
+            if (dgv.Rows.Count == 0) return;
+            try
+            {
+                //建立Excel对象   
+                Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+                excel.Visible = false;
+                //excel.Application.Workbooks.Add(true);
+                if (excel == null)
+                {
+                    MessageBox.Show("Excel 无法启动");
+                    return;
+                }
+                Microsoft.Office.Interop.Excel.Workbook xlBook = excel.Workbooks.Add(true);
+                Microsoft.Office.Interop.Excel.Worksheet xlSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlBook.Worksheets[1];
+                int cols = dgv.Rows[0].Cells.Count;
+                int rows = dgv.Rows.Count;
+                Microsoft.Office.Interop.Excel.Range range = null;
+                // 列头
+                for (int k = 0; k < cols; k++)
+                {
+                    excel.Cells[1, k + 1] = dgv.Columns[k].HeaderText;
+                    range = excel.Cells[1, k + 1];
+                    range.Font.Bold = true;
+                    range.Interior.ColorIndex = 15;
+                    range.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+                    range.EntireColumn.AutoFit();
+                }
+                //填充数据  
+                for (int i = 1; i < dgv.RowCount; i++)
+                {
+                    for (int j = 1; j < dgv.ColumnCount; j++)
+                    {
+                        if (dgv[j, i].ValueType == typeof(string))
+                            excel.Cells[i + 1, j] = "'" + dgv[j, i].Value.ToString();
+                        else
+                            excel.Cells[i + 1, j] = dgv[j, i].Value.ToString();
+                    }
+                }
+                excel.Visible = true;
+            }
+            catch
+            {
+                MessageBox.Show("导出Execl出现异常,请检查!");
+            }
+        }
+
+
+        /// <summary>   
+        /// 直接导出Excel   
+        /// </summary>   
+        /// <param name="ds">数据源DataSet</param>   
+        /// <param name="fileName">保存文件名(例如：E:\a.xls)</param>   
+        /// <returns></returns>   
+        /// <summary>   
+        /// 直接导出Excel   
+        /// </summary>   
+        /// <param name="ds">数据源DataSet</param>   
+        /// <param name="columns">列名数组,允许为空(columns=null),为空则表使用默认数据库列名 </param>   
+        /// <param name="fileName">保存文件名(例如：E:\a.xls)</param>   
+        /// <returns></returns>   
+        public bool DoExport(System.Data.DataTable dt, string fileName, params  string[] columns)
+        {
+
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            int rowindex = 1;
+            int colindex = 0;
+            Microsoft.Office.Interop.Excel.Workbook work = excel.Workbooks.Add(true);
+            //Worksheet sheet1 = (Worksheet)work.Worksheets[0];   
+            System.Data.DataTable table = dt;
+            if (columns != null)
+            {
+                for (int i = 0; i < columns.Length; i++)
+                {
+                    colindex++;
+                    if (columns[i] != null && columns[i] != "")
+                    {
+                        excel.Cells[1, colindex] = columns[i];
+                    }
+                    else
+                    {
+                        excel.Cells[1, colindex] = table.Columns[i].ColumnName;
+                    }
+                }
+            }
+            else
+            {
+                foreach (DataColumn col in table.Columns)
+                {
+                    colindex++;
+                    excel.Cells[1, colindex] = col.ColumnName;
+                }
+            }
+            foreach (DataRow row in table.Rows)
+            {
+                rowindex++;
+                colindex = 0;
+                foreach (DataColumn col in table.Columns)
+                {
+                    colindex++;
+                    excel.Cells[rowindex, colindex] = row[col.ColumnName].ToString();
+                }
+            }
+            excel.Visible = false;
+            excel.ActiveWorkbook.SaveAs(fileName, XlFileFormat.xlExcel9795, null, null, false, false, XlSaveAsAccessMode.xlNoChange, null, null, null, null, null);
+            excel.Quit();
+            excel = null;
+            GC.Collect();
+            return true;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Fmzystj f = new Fmzystj();
+            f.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Fkstj f = new Fkstj();
+            f.ShowDialog();
+        }
+    }
+}

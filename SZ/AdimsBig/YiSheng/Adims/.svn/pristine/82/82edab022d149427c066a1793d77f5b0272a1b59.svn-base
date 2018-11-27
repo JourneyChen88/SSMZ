@@ -1,0 +1,134 @@
+﻿///************************************
+///Updated By        : Senvi
+///************************************
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace main
+{
+    public partial class mzjldList : Form
+    {
+        #region <<Members>>
+
+        adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
+
+        #endregion
+
+        #region <<Constructors>>
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public mzjldList()
+        {
+            InitializeComponent();
+        }
+
+        #endregion
+
+        #region <<Events>>
+
+        /// <summary>
+        /// 窗体加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mzjldList_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                btnSearch_Click(null, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "出现异常，请检查！");
+            }
+        }
+
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string sqlWhere = " 1=1 ";
+                DataTable dt = bll.GetMzjldList(sqlWhere);
+                grdMzjld.DataSource = dt.DefaultView;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "出现异常，请检查！");
+            }
+        }
+
+        /// <summary>
+        /// 重置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// grdvMzjld 双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void grdvMzjld_DoubleClick(object sender, EventArgs e)
+        {
+            string mzjldID = Convert.ToString(grdvMzjld.GetFocusedRowCellValue("MID"));
+            if (string.IsNullOrEmpty(mzjldID)) return;
+            int patID = Convert.ToInt32(grdvMzjld.GetFocusedRowCellValue("patid"));
+            mzjldEdit mzjldxs = new mzjldEdit(mzjldID, patID);
+            mzjldxs.Show();
+        }
+
+        /// <summary>
+        /// 显示行号
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void grdvMzjld_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+        {
+            e.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            if (e.Info.IsRowIndicator)
+            {
+                if (e.RowHandle >= 0)
+                {
+                    e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                }
+                else if (e.RowHandle < 0 && e.RowHandle > -1000)
+                {
+                    e.Info.Appearance.BackColor = System.Drawing.Color.AntiqueWhite;
+                    e.Info.DisplayText = "G" + e.RowHandle.ToString();
+                }
+            }
+        }
+
+        #endregion
+
+        #region <<Methods>>
+
+        /// <summary>
+        /// 绑定数据源
+        /// </summary>
+        private void BindLookUpEdit()
+        {
+
+        }
+
+        #endregion
+    }
+}
