@@ -57,6 +57,10 @@
       <Project>{F2BF0CFD-289B-403F-BF4D-006B750317BE}</Project>
       <Name>adims_MODEL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Adims_Utility\Adims_Utility.csproj">
+      <Project>{442D8AFF-11D7-4DE8-B8CC-5D485D528074}</Project>
+      <Name>Adims_Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

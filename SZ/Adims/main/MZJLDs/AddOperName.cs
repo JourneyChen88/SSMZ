@@ -99,7 +99,7 @@ namespace main
             if (dgvSelected.SelectedRows.Count > 0)
             {
                 PatOperation po = new PatOperation();
-                int id = TypeExtension.ConvertToInt32(dgvSelected.CurrentRow.Cells["id"].Value);
+                int id = dgvSelected.CurrentRow.Cells["id"].Value.ToInt32();
 
                 int res = _PatOperationDal.DelPatOperation(id);
                 if (res > 0)

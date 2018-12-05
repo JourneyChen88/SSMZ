@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 
 namespace main
 {
-    public partial class sjll1: Form
+    public partial class sjll1 : Form
     {
-        int x = 1, y = 1, HEGHT, WEIGHT,palcount=1;
+        int x = 1, y = 1, HEGHT, WEIGHT, palcount = 1;
         string OROOM = "手术间";
         adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
         List<adims_MODEL.oroomstate> oroom = new List<adims_MODEL.oroomstate>();
@@ -25,9 +25,9 @@ namespace main
         {
             WEIGHT = this.Width / 3;
             HEGHT = this.Height / 4;
-            bll.seloroomstate(oroom);
+            oroom = bll.GetOroomState();
             for (int i = 0; i < oroom.Count; i++)
-            {            
+            {
                 GroupBox newPAL = new GroupBox();
                 palcount++;
                 newPAL.Width = WEIGHT - 5;
@@ -35,38 +35,38 @@ namespace main
                 newPAL.Height = HEGHT - 5;
                 newPAL.DoubleClick += new EventHandler(newPAL_DoubleClick);
                 newPAL.Location = new Point(x, y);
-                newPAL.Font=new Font("楷体", 13);
+                newPAL.Font = new Font("楷体", 13);
                 newPAL.BackColor = Color.LightYellow;
                 this.Controls.Add(newPAL);
                 newPAL.Text = oroom[i].Oname;
-                if (oroom[i].Ostate!=0)
-	            {
-                     Label lb = new Label();
-                     lb.AutoSize = true;
-                     lb.Text = "麻醉编号：" + oroom[i].Mzjldid;
-                     lb.Font = new Font("楷体", 10);
-                     lb.ForeColor = Color.Blue; 
-                     newPAL.Controls.Add(lb);                    
-                     lb.Location = new Point(10, 30);
-                     newPAL.Controls.Add(lb);
-                     lb.BringToFront();
+                if (oroom[i].Ostate != 0)
+                {
+                    Label lb = new Label();
+                    lb.AutoSize = true;
+                    lb.Text = "麻醉编号：" + oroom[i].Mzjldid;
+                    lb.Font = new Font("楷体", 10);
+                    lb.ForeColor = Color.Blue;
+                    newPAL.Controls.Add(lb);
+                    lb.Location = new Point(10, 30);
+                    newPAL.Controls.Add(lb);
+                    lb.BringToFront();
 
-                     Label lb2 = new Label();
-                     lb2.AutoSize = true; 
-                     lb2.Text = "病人编号：" + oroom[i].Patid;
-                     lb2.Font = new Font("楷体", 10);
-                     lb2.ForeColor = Color.Blue;
-                     newPAL.Controls.Add(lb2);
-                     lb2.Location = new Point(10, 60);
-                     lb2.Visible=true;                     
+                    Label lb2 = new Label();
+                    lb2.AutoSize = true;
+                    lb2.Text = "病人编号：" + oroom[i].Patid;
+                    lb2.Font = new Font("楷体", 10);
+                    lb2.ForeColor = Color.Blue;
+                    newPAL.Controls.Add(lb2);
+                    lb2.Location = new Point(10, 60);
+                    lb2.Visible = true;
 
-                     //Label lb3 = new Label();
-                     //newPAL.Controls.Add(lb3);
-                     //lb3.Font = new Font("楷体", 10);
-                     //lb3.ForeColor = Color.Blue;
-                     //lb3.Location = new Point(10,75);
-                     //lb3.Text = "开始时间：" + DateTime.Now.ToLongTimeString();
-	            }
+                    //Label lb3 = new Label();
+                    //newPAL.Controls.Add(lb3);
+                    //lb3.Font = new Font("楷体", 10);
+                    //lb3.ForeColor = Color.Blue;
+                    //lb3.Location = new Point(10,75);
+                    //lb3.Text = "开始时间：" + DateTime.Now.ToLongTimeString();
+                }
                 else
                 {
                     Label lb = new Label();
@@ -74,8 +74,8 @@ namespace main
                     newPAL.Controls.Add(lb);
                     lb.Text = "当前无手术";
                     lb.Font = new Font("楷体", 13);
-                    lb.ForeColor = Color.Red;                   
-                    lb.Location = new Point( 10,  50);                    
+                    lb.ForeColor = Color.Red;
+                    lb.Location = new Point(10, 50);
                 }
                 x = x + WEIGHT;
                 if (x >= (this.Width - 10))
@@ -96,12 +96,12 @@ namespace main
             {
                 if (con.Handle == h)
                 {
-                    string OROOM = con.Name;                   
+                    string OROOM = con.Name;
                     DataTable dt = bll.slectOroomINFO(OROOM);
                     if (Convert.ToInt32(dt.Rows[0][0]) != 0)
                     {
                         //this.Close();
-                        mzjldEdit mzjldform = new mzjldEdit(dt.Rows[0][2].ToString(),OROOM,Convert.ToDateTime(DateTime.Now.ToShortDateString()),Convert.ToInt32(dt.Rows[0][1]),true);
+                        mzjldEdit mzjldform = new mzjldEdit(dt.Rows[0][2].ToString(), OROOM, Convert.ToDateTime(DateTime.Now.ToShortDateString()), Convert.ToInt32(dt.Rows[0][1]), true);
                         mzjldform.ShowDialog();
                     }
                 }
@@ -110,7 +110,7 @@ namespace main
 
         //private void sjll1_MouseDoubleClick(object sender, MouseEventArgs e)
         //{
-           
+
         //    if (e.X > 1 && e.X < this.Width / 3 - 5 && e.Y < this.Height / 4 - 5)
         //    {
         //        OROOM = "手术间1";
@@ -145,9 +145,9 @@ namespace main
         //    }
 
         // }
-         
-            
+
+
     }
-       
+
 }
 

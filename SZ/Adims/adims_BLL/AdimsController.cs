@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 using adims_MODEL;
 using adims_DAL;
-
+using Adims_Utility;
 
 namespace adims_BLL
 {
@@ -1526,36 +1526,36 @@ namespace adims_BLL
             dt = dBConn.GetDataTable("select patid,PatZhuYuanID,PatHeight,PatBloodType,PatWeight,patname,patage,patsex,patdpm,patbedno,oname,pattmd,os,oa1,oa2,oa3,oa4,"
                 + "amethod,ap1,ap2,ap3,on1,on2,sn1,sn2,asa,asae,Odate,xueya,maibo,huxi,tiwen from Adims_OTypesetting where patid='" + patID + "'");
             if (dt.Rows.Count == 0) return;
-            pat.Patid = Convert.ToString(dt.Rows[0]["patid"]);
-            pat.Patname = Convert.ToString(dt.Rows[0]["patname"]);
+            pat.Patid = dt.Rows[0]["patid"].ToStringForce();
+            pat.Patname = dt.Rows[0]["patname"].ToStringForce();
             pat.Patage = Convert.ToInt32(dt.Rows[0]["patage"]);
-            pat.Patsex = Convert.ToString(dt.Rows[0]["patsex"]);
-            pat.Height = Convert.ToString(dt.Rows[0]["PatHeight"]);
-            pat.Weight = Convert.ToString(dt.Rows[0]["PatWeight"]);
+            pat.Patsex = dt.Rows[0]["patsex"].ToStringForce();
+            pat.Height = dt.Rows[0]["PatHeight"].ToStringForce();
+            pat.Weight = dt.Rows[0]["PatWeight"].ToStringForce();
             //pat.Xueya = Convert.ToInt32(dt.Rows[0]["xueya"]);
             //pat.Maibo = Convert.ToInt32(dt.Rows[0]["maibo"]);
             //pat.Huxi = Convert.ToInt32(dt.Rows[0]["huxi"]);
             //pat.Tiwen = Convert.ToDouble(dt.Rows[0]["tiwen"]);
-            pat.Bloodtype = Convert.ToString(dt.Rows[0]["PatBloodType"]);
-            pat.ZhuyuanNo = Convert.ToString(dt.Rows[0]["PatZhuYuanID"]);
-            pat.Department = Convert.ToString(dt.Rows[0]["patdpm"]);
-            pat.Bednumber = Convert.ToString(dt.Rows[0]["patbedno"]);
-            pat.Oname = Convert.ToString(dt.Rows[0]["oname"]);
-            pat.TMD1 = Convert.ToString(dt.Rows[0]["pattmd"]);
-            pat.Os = Convert.ToString(dt.Rows[0]["os"]);
-            pat.On1 = Convert.ToString(dt.Rows[0]["On1"]);
-            pat.On2 = Convert.ToString(dt.Rows[0]["On2"]);
-            pat.Sn1 = Convert.ToString(dt.Rows[0]["Sn1"]);
-            pat.Sn2 = Convert.ToString(dt.Rows[0]["Sn2"]);
-            pat.Oa1 = Convert.ToString(dt.Rows[0]["oa1"]);
-            pat.Oa2 = Convert.ToString(dt.Rows[0]["oa2"]);
-            pat.Oa3 = Convert.ToString(dt.Rows[0]["oa3"]);
-            pat.Oa4 = Convert.ToString(dt.Rows[0]["oa4"]);
-            pat.Amethod = Convert.ToString(dt.Rows[0]["amethod"]);
-            pat.Ap1 = Convert.ToString(dt.Rows[0]["ap1"]);
-            pat.Ap2 = Convert.ToString(dt.Rows[0]["ap2"]);
-            pat.Ap3 = Convert.ToString(dt.Rows[0]["ap3"]);
-            pat.Asa = Convert.ToString(dt.Rows[0]["asa"]);
+            pat.Bloodtype = dt.Rows[0]["PatBloodType"].ToStringForce();
+            pat.ZhuyuanNo = dt.Rows[0]["PatZhuYuanID"].ToStringForce();
+            pat.Department = dt.Rows[0]["patdpm"].ToStringForce();
+            pat.Bednumber = dt.Rows[0]["patbedno"].ToStringForce();
+            pat.Oname = dt.Rows[0]["oname"].ToStringForce();
+            pat.TMD1 = dt.Rows[0]["pattmd"].ToStringForce();
+            pat.Os = dt.Rows[0]["os"].ToStringForce();
+            pat.On1 = dt.Rows[0]["On1"].ToStringForce();
+            pat.On2 = dt.Rows[0]["On2"].ToStringForce();
+            pat.Sn1 = dt.Rows[0]["Sn1"].ToStringForce();
+            pat.Sn2 = dt.Rows[0]["Sn2"].ToStringForce();
+            pat.Oa1 = dt.Rows[0]["oa1"].ToStringForce();
+            pat.Oa2 = dt.Rows[0]["oa2"].ToStringForce();
+            pat.Oa3 = dt.Rows[0]["oa3"].ToStringForce();
+            pat.Oa4 = dt.Rows[0]["oa4"].ToStringForce();
+            pat.Amethod = dt.Rows[0]["amethod"].ToStringForce();
+            pat.Ap1 = dt.Rows[0]["ap1"].ToStringForce();
+            pat.Ap2 = dt.Rows[0]["ap2"].ToStringForce();
+            pat.Ap3 = dt.Rows[0]["ap3"].ToStringForce();
+            pat.Asa = dt.Rows[0]["asa"].ToStringForce();
             pat.Asae = Convert.ToInt32(dt.Rows[0]["asae"]);
             pat.Odate = Convert.ToDateTime(dt.Rows[0]["Odate"]);
         }
@@ -2267,18 +2267,19 @@ namespace adims_BLL
             if (dt.Rows.Count > 0)
             {
                 m.Mzjldid = Convert.ToInt32(dt.Rows[0]["id"]);
-                m.Ssmc = Convert.ToString(dt.Rows[0]["ssmc"]);
-                m.Szzd = Convert.ToString(dt.Rows[0]["szzd"]);
-                m.Mzfa = Convert.ToString(dt.Rows[0]["mzfa"]);
-                m.Yssss = Convert.ToString(dt.Rows[0]["yssss"]);
-                m.Jhxm = Convert.ToString(dt.Rows[0]["jhxm"]);
-                m.Tw = Convert.ToString(dt.Rows[0]["tw"]);
-                m.Mzxg = Convert.ToString(dt.Rows[0]["mzxg"]);
+                m.Ssmc = dt.Rows[0]["ssmc"].ToStringForce();
+                m.Szzd = dt.Rows[0]["szzd"].ToStringForce();
+                m.Mzfa = dt.Rows[0]["mzfa"].ToStringForce();
+                m.Yssss = dt.Rows[0]["yssss"].ToStringForce();
+                m.Jhxm = dt.Rows[0]["jhxm"].ToStringForce();
+                m.Tw = dt.Rows[0]["tw"].ToStringForce();
+                m.Mzxg = dt.Rows[0]["mzxg"].ToStringForce();
             }
         }
 
-        public void seloroomstate(List<adims_MODEL.oroomstate> oroom) //手术室个数
+        public List<adims_MODEL.oroomstate> GetOroomState() //手术室个数
         {
+            List<adims_MODEL.oroomstate> oroom = new List<oroomstate>();
             DataSet ds = new DataSet();
             ds = dBConn.GetDataSet("select oname,state,mzjldid,patid from ssjstate where oname like '%新·%'");
             foreach (DataRow r in ds.Tables[0].Rows)
@@ -2286,19 +2287,12 @@ namespace adims_BLL
                 adims_MODEL.oroomstate o = new adims_MODEL.oroomstate();
 
                 o.Mzjldid = r["mzjldid"].ToString();
-                o.Ostate = Convert.ToInt32(r["state"].ToString());
-                o.Oname = r["oname"].ToString();
-                o.Patid = r["patid"].ToString();
-                //DataTable DT1 = new DataTable();
-                //string sql="select Adims_mzjld.PATID,Patname,Oname,AP1,AP2,AP3,MZkssj from Adims_OTypesetting INNER JOIN Adims_mzjld ON Adims_OTypesetting.PATID=Adims_mzjld.PATID WHERE Adims_mzjld.id='" + o.Mzjldid + "'";
-                //DT1 = dBConn.GetDataTable(sql);
-                //o.Mzys = DT1.Rows[0]["AP1"].ToString() + "," + DT1.Rows[0]["AP2"].ToString() + "," + DT1.Rows[0]["AP3"].ToString();
-                //o.Kssj = Convert.ToDateTime(DT1.Rows[0]["MZkssj"]);
-                //o.Oname = DT1.Rows[0]["Oname"].ToString();
-                //o.Patid = DT1.Rows[0]["PATID"].ToString();
+                o.Ostate = Convert.ToInt32(r["state"].ToStringForce());
+                o.Oname = r["oname"].ToStringForce();
+                o.Patid = r["patid"].ToStringForce();
                 oroom.Add(o);
             }
-
+            return oroom;
         }
         public DataTable slectOroomINFO(string oroom) //手术室信息
         {
