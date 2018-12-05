@@ -1,0 +1,17 @@
+Adims_AfterVisit                  - 术后随访
+Adims_BeforeVisit               - 术前访视
+Adims_Employees               - 员工排班
+Adims_jhxm                         - 监护项目
+Adims_jtjtsx                          - 术中晶体/输血
+Adims_LeaveRegistration    - 麻醉医生
+Adims_Mzjld                        - 麻醉记录
+Adims_NurseRecord            - 护理记录
+Adims_OTypesetting           - 麻醉排班
+Adims_Point                         - 记录坐标
+Adims_Qtuse                        - 术中气体
+Adims_SurgeryStaff              - 工作人员
+Adims_Szsj                            - 术中事件
+Adims_Tsyy                           - 特殊用药
+Adims_User                           - 用户管理
+Adims_Ytuse                         - 术中液体
+Adims_cl                                - 术中出量

@@ -1,0 +1,83 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace adims_MODEL
+{
+   public class oroomstate  //手术间状态
+   {
+       private string name;
+
+       public string Name
+       {
+           get { return name; }
+           set { name = value; }
+       }
+
+       private int ostate;
+
+       public int Ostate
+       {
+           get { return ostate; }
+           set { ostate = value; }
+       }
+
+       private string mzjldid;
+
+       public string Mzjldid
+       {
+           get { return mzjldid; }
+           set { mzjldid = value; }
+       }
+  
+
+       private string patid;
+
+       public string Patid
+       {
+           get { return patid; }
+           set { patid = value; }
+       }
+
+       private string hzname;//患者姓名
+
+       public string Hzname
+       {
+           get { return hzname; }
+           set { hzname = value; }
+       }
+
+       private string oname;//手术名称
+
+       public string Oname
+       {
+           get { return oname; }
+           set { oname = value; }
+       }
+       private DateTime kssj;//开始时间
+
+       public DateTime Kssj
+       {
+           get { return kssj; }
+           set { kssj = value; }
+       }
+
+       private string mzys;//麻醉医师
+
+       public string Mzys
+       {
+           get { return mzys; }
+           set { mzys = value; }
+       }
+
+       private string blh;//病历号
+
+       public string Blh
+       {
+           get { return blh; }
+           set { blh = value; }
+       }
+    
+   }
+}

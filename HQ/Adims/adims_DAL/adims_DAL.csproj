@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{17D7D14C-7640-45C5-AFEA-94DA84893449}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>adims_DAL</RootNamespace>
+    <AssemblyName>adims_DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\main\bin\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=2.0.38.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\main\bin\Debug\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dics\DataDicDal.cs" />
+    <Compile Include="Dics\QxqdModelDal.cs" />
+    <Compile Include="Dics\SzsjListDal.cs" />
+    <Compile Include="Dics\YaopinDal.cs" />
+    <Compile Include="Dics\UserDal.cs" />
+    <Compile Include="Flows\TransfusionEvaluationDal.cs" />
+    <Compile Include="Flows\OperImplantDal.cs" />
+    <Compile Include="Flows\NurseRecordDal.cs" />
+    <Compile Include="Flows\AfterVisitDal.cs" />
+    <Compile Include="Flows\BeforeVisitDal.cs" />
+    <Compile Include="Flows\AnesthesiaSummaryDal.cs" />
+    <Compile Include="Flows\MzzqtysDal.cs" />
+    <Compile Include="Flows\OperScheduleDal.cs" />
+    <Compile Include="Flows\MzjldDal.cs" />
+    <Compile Include="Flows\LsyzDal.cs" />
+    <Compile Include="Flows\AfterAnalgesia.cs" />
+    <Compile Include="Flows\ZtzltysDal.cs" />
+    <Compile Include="Interfaces\DB2help.cs" />
+    <Compile Include="DBConn.cs" />
+    <Compile Include="AdimsProvider.cs" />
+    <Compile Include="Interfaces\HisDB_Help.cs" />
+    <Compile Include="Interfaces\LIS_DB_Help.cs" />
+    <Compile Include="Interfaces\PACS_DB_Help.cs" />
+    <Compile Include="Flows\PacuDal.cs" />
+    <Compile Include="MzjldPointDal.cs" />
+    <Compile Include="YongyaoListDal.cs" />
+    <Compile Include="MigrationDal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\LIS_SQL_help.cs" />
+    <Compile Include="Reports\OperStatisticsDal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\adims_MODEL\adims_MODEL.csproj">
+      <Project>{F2BF0CFD-289B-403F-BF4D-006B750317BE}</Project>
+      <Name>adims_MODEL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
