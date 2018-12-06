@@ -3972,50 +3972,52 @@ namespace main
                 e.Graphics.DrawLine(pb2, x + 200, y, x + 205, y + 10);
                 e.Graphics.DrawLine(pb2, x + 205, y + 10, x + 210, y);
             }
-            e.Graphics.DrawString("每  " +this.txtmFZ.Text+"    分钟", textfront, Brushes.Black, x + 255, y);
-            e.Graphics.DrawRectangle(Pens.Black, x + 350, y, 10, 10);
-            e.Graphics.DrawString("有创压", textfront, Brushes.Black, x + 365, y);
+            e.Graphics.DrawString("每 " +this.txtmFZ.Text+" 分钟", textfront, Brushes.Black, x + 255, y);
+            int xLeft = x + 325;
+            //e.Graphics.DrawRectangle(Pens.Black, x + 350, y, 10, 10);
+            e.Graphics.DrawString("□ 有创压", textfront, Brushes.Black, xLeft, y);
             if (cbJCJL4.Checked)
             {
-                e.Graphics.DrawLine(pb2, x + 350, y, x + 355, y + 10);
-                e.Graphics.DrawLine(pb2, x + 355, y + 10, x + 360, y);
+                e.Graphics.DrawLine(pb2, xLeft, y, xLeft+5, y + 10);
+                e.Graphics.DrawLine(pb2, xLeft + 5, y + 10, xLeft + 10, y);
             }
-            e.Graphics.DrawRectangle(Pens.Black, x + 405, y, 10, 10);
-            e.Graphics.DrawString("CVP", textfront, Brushes.Black, x + 420, y);
+            xLeft +=60;            
+            e.Graphics.DrawString("□ CVP", textfront, Brushes.Black, xLeft, y);
             if (cbJCJL5.Checked)
             {
-                e.Graphics.DrawLine(pb2, x + 405, y, x + 410, y + 10);
-                e.Graphics.DrawLine(pb2, x + 410, y + 10, x + 415, y);
+                e.Graphics.DrawLine(pb2, xLeft, y, xLeft + 5, y + 10);
+                e.Graphics.DrawLine(pb2, xLeft + 5, y + 10, xLeft + 10, y);
             }
-            e.Graphics.DrawRectangle(Pens.Black, x + 450, y, 10, 10);
-            e.Graphics.DrawString("脉搏", textfront, Brushes.Black, x + 465, y);
+            xLeft += 50;
+            e.Graphics.DrawString("□ 脉搏", textfront, Brushes.Black, xLeft, y);
             if (cbJCJL6.Checked)
             {
-                e.Graphics.DrawLine(pb2, x + 450, y, x + 455, y + 10);
-                e.Graphics.DrawLine(pb2, x + 455, y + 10, x + 460, y);
+                e.Graphics.DrawLine(pb2, xLeft, y, xLeft + 5, y + 10);
+                e.Graphics.DrawLine(pb2, xLeft + 5, y + 10, xLeft + 10, y);
             }
 
-            e.Graphics.DrawRectangle(Pens.Black, x + 535, y, 10, 10);
-            e.Graphics.DrawString("SPO2", textfront, Brushes.Black, x + 550, y);
+            xLeft += 50;
+            e.Graphics.DrawString("□ SPO2", textfront, Brushes.Black, xLeft, y);
             if (cbSP02.Checked)
             {
-                e.Graphics.DrawLine(pb2, x + 535, y, x + 540, y + 10);
-                e.Graphics.DrawLine(pb2, x + 540, y + 10, x + 545, y);
+                e.Graphics.DrawLine(pb2, xLeft, y, xLeft + 5, y + 10);
+                e.Graphics.DrawLine(pb2, xLeft + 5, y + 10, xLeft + 10, y);
             }
 
-            e.Graphics.DrawRectangle(Pens.Black, x + 590, y, 10, 10);
-            e.Graphics.DrawString("心电图", textfront, Brushes.Black, x + 605, y);
+            xLeft += 50;
+            e.Graphics.DrawString("□ 心电图", textfront, Brushes.Black, xLeft, y);
             if (cbXinDT.Checked)
             {
-                e.Graphics.DrawLine(pb2, x + 590, y, x + 595, y + 10);
-                e.Graphics.DrawLine(pb2, x + 595, y + 10, x + 600, y);
+                e.Graphics.DrawLine(pb2, xLeft, y, xLeft + 5, y + 10);
+                e.Graphics.DrawLine(pb2, xLeft + 5, y + 10, xLeft + 10, y);
             }
-            e.Graphics.DrawRectangle(Pens.Black, x + 650, y, 10, 10);
-            e.Graphics.DrawString("其他", textfront, Brushes.Black, x + 665, y);
+
+            xLeft += 60;
+            e.Graphics.DrawString("□ 其他", textfront, Brushes.Black, xLeft, y);
             if (cbOTHER.Checked)
             {
-                e.Graphics.DrawLine(pb2, x + 650, y, x + 655, y + 10);
-                e.Graphics.DrawLine(pb2, x + 655, y + 10, x + 660, y);
+                e.Graphics.DrawLine(pb2, xLeft, y, xLeft + 5, y + 10);
+                e.Graphics.DrawLine(pb2, xLeft + 5, y + 10, xLeft + 10, y);
             }
 
 
