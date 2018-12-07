@@ -134,6 +134,7 @@ namespace main
             }
             catch (Exception ex)
             {
+               Logger.WriteErrorLog(ex);
                 throw ex;
             }
         }

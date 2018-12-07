@@ -844,7 +844,7 @@ namespace main
             ssy.Clear(); szy.Clear(); xl.Clear(); tw.Clear(); hxl.Clear();
             mbo.Clear(); spo2List.Clear();
             etco2List.Clear();
-            //CreateTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP
+            //RecordTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP
             DataTable datadt = dal.GetAdims_PACU_Point(mzjldID);
             for (int i = 0; i < datadt.Rows.Count; i++)
             {

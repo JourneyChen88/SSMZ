@@ -21,7 +21,7 @@ namespace adims_Utility
             public string Owner;
             public string Group;
             public bool IsDirectory;
-            public DateTime CreateTime;
+            public DateTime MyCreateTime;
             public string Name;
         }
         public enum FileListStyle
@@ -366,7 +366,7 @@ namespace adims_Utility
             {
                 processstr = processstr.Replace(yearOrTime, DateTime.Now.Year.ToString());
             }
-            f.CreateTime = DateTime.Parse(_cutSubstringFromStringWithTrim(ref processstr, ' ', 8));
+            f.MyCreateTime = DateTime.Parse(_cutSubstringFromStringWithTrim(ref processstr, ' ', 8));
             f.Name = processstr;   //最后就是名称  
             return f;
         }
@@ -385,7 +385,7 @@ namespace adims_Utility
             processstr = (processstr.Substring(7, processstr.Length - 7)).Trim();
             DateTimeFormatInfo myDTFI = new CultureInfo("en-US", false).DateTimeFormat;
             myDTFI.ShortTimePattern = "t";
-            f.CreateTime = DateTime.Parse(dateStr + " " + timeStr, myDTFI);
+            f.MyCreateTime = DateTime.Parse(dateStr + " " + timeStr, myDTFI);
             if (processstr.Substring(0, 5) == "<DIR>")
             {
                 f.IsDirectory = true;

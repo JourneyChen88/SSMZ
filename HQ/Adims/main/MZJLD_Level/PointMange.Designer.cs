@@ -61,7 +61,7 @@
             this.tbetco2 = new System.Windows.Forms.TextBox();
             this.CoDelete = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Co0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecordTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nibps = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nibpd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pulse = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -88,7 +88,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CoDelete,
             this.Co0,
-            this.CreateTime,
+            this.RecordTime,
             this.nibps,
             this.nibpd,
             this.pulse,
@@ -500,11 +500,11 @@
             // 
             // RecordTime
             // 
-            this.CreateTime.DataPropertyName = "CreateTime";
-            this.CreateTime.HeaderText = "检测时间";
-            this.CreateTime.Name = "RecordTime";
-            this.CreateTime.ReadOnly = true;
-            this.CreateTime.Width = 130;
+            this.RecordTime.DataPropertyName = "RecordTime";
+            this.RecordTime.HeaderText = "检测时间";
+            this.RecordTime.Name = "RecordTime";
+            this.RecordTime.ReadOnly = true;
+            this.RecordTime.Width = 130;
             // 
             // nibps
             // 
@@ -671,7 +671,7 @@
         private System.Windows.Forms.TextBox tbetco2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn CoDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn Co0;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CreateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecordTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn nibps;
         private System.Windows.Forms.DataGridViewTextBoxColumn nibpd;
         private System.Windows.Forms.DataGridViewTextBoxColumn pulse;

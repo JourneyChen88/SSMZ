@@ -1699,15 +1699,15 @@ namespace adims_DAL
 
         public int CopyDataPacu(int mzjldid, DateTime dtime)
         {
-            string query = "select mzjldid,CreateTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_MonitorRecord_PACU "
-                + " where mzjldid='" + mzjldid + "' and Adims_MonitorRecord_PACU.CreateTime='" + dtime + "'";
+            string query = "select mzjldid,RecordTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_MonitorRecord_PACU "
+                + " where mzjldid='" + mzjldid + "' and Adims_MonitorRecord_PACU.RecordTime='" + dtime + "'";
             DataTable dt = dBConn.GetDataTable(query);
             int i = 0;
             if (dt.Rows.Count > 0)
             {
                 string copy = "insert into Adims_Pacu_Point(mzjldid,RecordTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP) "
-                    + "select mzjldid,CreateTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_MonitorRecord_PACU "
-                    + " where mzjldid='" + mzjldid + "' and Adims_MonitorRecord_PACU.CreateTime='" + dtime + "'";
+                    + "select mzjldid,RecordTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_MonitorRecord_PACU "
+                    + " where mzjldid='" + mzjldid + "' and Adims_MonitorRecord_PACU.RecordTime='" + dtime + "'";
                 i = dBConn.ExecuteNonQuery(copy);
             }
             return i;
@@ -1937,16 +1937,16 @@ namespace adims_DAL
 
         public int insertJianCeDataPACU(int mzjldid, int nibps, int nibpd, int nibpm, int rrc, int hr, int pulse, int spo2, int etco2, double temp, DateTime now)
         {
-            string insert = "insert into Adims_MonitorRecord_PACU(mzjldid,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,CreateTime) values(" + mzjldid + "," + nibps + "," + nibpd + "," + nibpm + "," + rrc + "," + hr + "," + pulse + "," + spo2 + "," + etco2 + "," + temp + ",'" + now + "')";
+            string insert = "insert into Adims_MonitorRecord_PACU(mzjldid,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,RecordTime) values(" + mzjldid + "," + nibps + "," + nibpd + "," + nibpm + "," + rrc + "," + hr + "," + pulse + "," + spo2 + "," + etco2 + "," + temp + ",'" + now + "')";
             return dBConn.ExecuteNonQuery(insert);
         }
         public DataTable selectJianCeData(DateTime dt, int mzjldid, int TYPE)
         {
             string sel = "";
             if (TYPE == 0)
-                sel = "select * from Adims_MonitorRecord where CreateTime='" + dt + "'and mzjldid='" + mzjldid + "'";
+                sel = "select * from Adims_MonitorRecord where RecordTime='" + dt + "'and mzjldid='" + mzjldid + "'";
             if (TYPE == 1)
-                sel = "select * from Adims_MonitorRecord_PACU where CreateTime='" + dt + "'and mzjldid='" + mzjldid + "'";
+                sel = "select * from Adims_MonitorRecord_PACU where RecordTime='" + dt + "'and mzjldid='" + mzjldid + "'";
             return dBConn.GetDataTable(sel);
         }
 

@@ -37,6 +37,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
+                DalLogger.WriteErrorLog(ex);
                 throw ex;
             }
         }
@@ -74,6 +75,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
+                DalLogger.WriteErrorLog(ex);
                 throw ex;
             }
         }
@@ -98,6 +100,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
+                DalLogger.WriteErrorLog(ex);
                 throw ex;
             }
         }
@@ -123,6 +126,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
+                DalLogger.WriteErrorLog(ex);
                 throw ex;
             }
         }
@@ -133,7 +137,7 @@ namespace adims_DAL
         {//convert(nvarchar(5),otime,24)as starttime,
             string sql = "select op_record_ID as patID ,ZhuYuanNo,patName,CardID,patAge,patSex,patNation,PatHeight,PatWeight,PatBloodType,BedNo,Patdpm,Pattmd,Oname,Odate,OS1,OS2,OS3,OS4,OS5,Amethod,BX, Tiwei, GR, BX,Ocode,SSLB,SSDJ,Remarks,StartTime,SQSJ"
             + " from V_Operation_Interface where Convert(varchar,Odate,23)='" + dtime + "'";
-            return  this.GetDataTable(sql);
+            return this.GetDataTable(sql);
         }
         public DataTable GetHisInfoByPatID(string PATID)
         {//convert(nvarchar(5),otime,24)as starttime,
@@ -144,12 +148,12 @@ namespace adims_DAL
         public DataTable GetHisZhenduan(string sxname)
         {
             string sql = "SELECT FName,FSpell FROM V_EMR_Operation_Interface_Diag_list where FSpell like'" + sxname + "%'";
-            return  this.GetDataTable(sql);
+            return this.GetDataTable(sql);
         }
-         public DataTable GetHisShoushu(string sxname)
+        public DataTable GetHisShoushu(string sxname)
         {
             string sql = "SELECT FName as 手术名称,flevel as 手术等级 FROM V_EMR_Operation_Interface_operation_list where FSpell like'" + sxname + "%'";
-            return  this.GetDataTable(sql);
-        }        
+            return this.GetDataTable(sql);
+        }
     }
 }

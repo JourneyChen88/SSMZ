@@ -13,12 +13,12 @@ namespace adims_DAL
 
         public DataTable GetMzjldPoint(DateTime dt, int mzjldid)
         {
-            string sel = "select * from Adims_MonitorRecord where CreateTime='" + dt + "'and mzjldid='" + mzjldid + "'";
+            string sel = "select * from Adims_MonitorRecord where RecordTime='" + dt + "'and mzjldid='" + mzjldid + "'";
             return dBConn.GetDataTable(sel);
         }
         public int insertJianCeDataMZJLD(int mzjldid, int nibps, int nibpd, int nibpm, int rrc, int hr, int pulse, int spo2, int etco2, double temp, DateTime now)
         {
-            string insert = "insert into Adims_MonitorRecord(mzjldid,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,CreateTime) values(" + mzjldid + "," + nibps + "," + nibpd + "," + nibpm + "," + rrc + "," + hr + "," + pulse + "," + spo2 + "," + etco2 + "," + temp + ",'" + now + "')";
+            string insert = "insert into Adims_MonitorRecord(mzjldid,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,RecordTime) values(" + mzjldid + "," + nibps + "," + nibpd + "," + nibpm + "," + rrc + "," + hr + "," + pulse + "," + spo2 + "," + etco2 + "," + temp + ",'" + now + "')";
             return dBConn.ExecuteNonQuery(insert);
         }
         /// <summary>
@@ -28,18 +28,18 @@ namespace adims_DAL
         /// <returns></returns>
         public int insertJianCeData(int mzjldid, int hr, int spo2, int pulse, int nibps, int nibpd, int nibpm, int arts, int artd, int artm, double etco2, int ico2, int rrc)
         {
-            string insert = "insert into Adims_MonitorRecord(mzjldid,HR,SpO2,Pulse,NIBPS,NIBPD,NIBPM,ARTS,ARTD,ARTM,ETCO2,ICO2,RRC,CreateTime) values(" + mzjldid + "," + hr + "," + spo2 + "," + pulse + "," + nibps + "," + nibpd + "," + nibpm + "," + arts + "," + artd + "," + artm + "," + etco2 + "," + ico2 + "," + rrc + ",'" + DateTime.Now + "')";
+            string insert = "insert into Adims_MonitorRecord(mzjldid,HR,SpO2,Pulse,NIBPS,NIBPD,NIBPM,ARTS,ARTD,ARTM,ETCO2,ICO2,RRC,RecordTime) values(" + mzjldid + "," + hr + "," + spo2 + "," + pulse + "," + nibps + "," + nibpd + "," + nibpm + "," + arts + "," + artd + "," + artm + "," + etco2 + "," + ico2 + "," + rrc + ",'" + DateTime.Now + "')";
 
             return dBConn.ExecuteNonQuery(insert);
         }
         public int insertJianCeDataMZJLD(int mzjldid, int nibps, int nibpd, int nibpm, int rrc, int hr, int pulse, int spo2, int etco2, double temp, string now)
         {
-            string insert = "insert into Adims_MonitorRecord(mzjldid,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,CreateTime) values(" + mzjldid + "," + nibps + "," + nibpd + "," + nibpm + "," + rrc + "," + hr + "," + pulse + "," + spo2 + "," + etco2 + "," + temp + ",'" + now + "')";
+            string insert = "insert into Adims_MonitorRecord(mzjldid,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,RecordTime) values(" + mzjldid + "," + nibps + "," + nibpd + "," + nibpm + "," + rrc + "," + hr + "," + pulse + "," + spo2 + "," + etco2 + "," + temp + ",'" + now + "')";
             return dBConn.ExecuteNonQuery(insert);
         }
         public int insertJianCeDataPACU(int mzjldid, int nibps, int nibpd, int nibpm, int rrc, int hr, int pulse, int spo2, int etco2, double temp, string now)
         {
-            string insert = "insert into Adims_MonitorRecord_PACU(mzjldid,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,CreateTime) values(" + mzjldid + "," + nibps + "," + nibpd + "," + nibpm + "," + rrc + "," + hr + "," + pulse + "," + spo2 + "," + etco2 + "," + temp + ",'" + now + "')";
+            string insert = "insert into Adims_MonitorRecord_PACU(mzjldid,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,RecordTime) values(" + mzjldid + "," + nibps + "," + nibpd + "," + nibpm + "," + rrc + "," + hr + "," + pulse + "," + spo2 + "," + etco2 + "," + temp + ",'" + now + "')";
             return dBConn.ExecuteNonQuery(insert);
         }
 
@@ -50,9 +50,9 @@ namespace adims_DAL
         {
             string sel = "";
             if (TYPE == 0)
-                sel = "select * from Adims_MonitorRecord where CreateTime='" + dt + "'and mzjldid='" + mzjldid + "'";
+                sel = "select * from Adims_MonitorRecord where RecordTime='" + dt + "'and mzjldid='" + mzjldid + "'";
             if (TYPE == 1)
-                sel = "select * from Adims_MonitorRecord_PACU where CreateTime='" + dt + "'and mzjldid='" + mzjldid + "'";
+                sel = "select * from Adims_MonitorRecord_PACU where RecordTime='" + dt + "'and mzjldid='" + mzjldid + "'";
             return dBConn.GetDataTable(sel);
         }
 
@@ -65,17 +65,17 @@ namespace adims_DAL
         /// <returns></returns>
         public int CopyDataPacu(int mzjldid, DateTime dtime)
         {
-            string query = "select mzjldid,CreateTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_MonitorRecord_PACU "
-                + " where mzjldid='" + mzjldid + "' and CreateTime='" + dtime.ToString("yyyy-MM-dd HH:mm") + "'";
+            string query = "select mzjldid,RecordTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_MonitorRecord_PACU "
+                + " where mzjldid='" + mzjldid + "' and RecordTime='" + dtime.ToString("yyyy-MM-dd HH:mm") + "'";
             DataTable dt = dBConn.GetDataTable(query);
-            string queryServer = "select mzjldid,CreateTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_PACU_Point "
-               + " where mzjldid='" + mzjldid + "' and CreateTime='" + dtime + "'";
+            string queryServer = "select mzjldid,RecordTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_PACU_Point "
+               + " where mzjldid='" + mzjldid + "' and RecordTime='" + dtime + "'";
             DataTable dtServer = dBConn.GetDataTable(queryServer);
             int i = 0;
             if (dt.Rows.Count > 0 && dtServer.Rows.Count == 0)
             {
-                string copy = "insert into Adims_Pacu_Point(mzjldid,CreateTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP) "
-                    + "values('" + dt.Rows[0]["mzjldid"] + "','" + Convert.ToDateTime(dt.Rows[0]["CreateTime"]) + "','" + dt.Rows[0]["NIBPS"] + "','" + dt.Rows[0]["NIBPD"] + "',"
+                string copy = "insert into Adims_Pacu_Point(mzjldid,RecordTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP) "
+                    + "values('" + dt.Rows[0]["mzjldid"] + "','" + Convert.ToDateTime(dt.Rows[0]["RecordTime"]) + "','" + dt.Rows[0]["NIBPS"] + "','" + dt.Rows[0]["NIBPD"] + "',"
                     + "'" + dt.Rows[0]["NIBPM"] + "','" + dt.Rows[0]["RRC"] + "','" + dt.Rows[0]["HR"] + "','" + dt.Rows[0]["Pulse"] + "', '" + dt.Rows[0]["SpO2"] + "',"
                     + "'" + dt.Rows[0]["ETCO2"] + "', '" + dt.Rows[0]["TEMP"] + "')";
                 i = dBConn.ExecuteNonQuery(copy);
@@ -97,20 +97,20 @@ namespace adims_DAL
             {
                 if (jh.Sy == "SpO2")
                     sqlU = "update Adims_MonitorRecord set spo2='" + jh.V + "' where mzjldid='"
-                            + mzjldid + "' and CreateTime='" + jh.D + "'";
+                            + mzjldid + "' and RecordTime='" + jh.D + "'";
                 else if (jh.Sy == "ETCO2")
                     sqlU = "update Adims_MonitorRecord set spo2='" + jh.V + "' where mzjldid='"
-                            + mzjldid + "' and CreateTime='" + jh.D + "'";
+                            + mzjldid + "' and RecordTime='" + jh.D + "'";
 
             }
             if (type == 1)
             {
                 if (jh.Sy == "SpO2")
                     sqlU = "update Adims_pacu_Point set spo2='" + jh.V + "' where mzjldid='"
-                        + mzjldid + "' and CreateTime='" + jh.D + "'";
+                        + mzjldid + "' and RecordTime='" + jh.D + "'";
                 else if (jh.Sy == "ETCO2")
                     sqlU = "update Adims_pacu_Point set spo2='" + jh.V + "' where mzjldid='"
-                        + mzjldid + "' and CreateTime='" + jh.D + "'";
+                        + mzjldid + "' and RecordTime='" + jh.D + "'";
             }
             return dBConn.ExecuteNonQuery(sqlU);
         }
@@ -121,7 +121,7 @@ namespace adims_DAL
         /// <returns></returns>
         public DataTable GetMaxPoint(int mzjldid)//查询监测点
         {
-            string insert = "select max(CreateTime) from Adims_MonitorRecord where mzjldid='" + mzjldid + "'";
+            string insert = "select max(RecordTime) from Adims_MonitorRecord where mzjldid='" + mzjldid + "'";
             return dBConn.GetDataTable(insert);
         }
         /// <summary>
@@ -132,7 +132,7 @@ namespace adims_DAL
         /// <returns></returns>
         public DataTable GetSingle(int mzjldid, DateTime dt)//查询监测点
         {
-            string insert = "select * from Adims_MonitorRecord where mzjldid='" + mzjldid + "' and CreateTime='" + dt + "'";
+            string insert = "select * from Adims_MonitorRecord where mzjldid='" + mzjldid + "' and RecordTime='" + dt + "'";
             return dBConn.GetDataTable(insert);
         }
         /// <summary>
@@ -142,8 +142,8 @@ namespace adims_DAL
         /// <returns></returns>
         public DataTable GetPoint(int mzjldid)//
         {
-            string insert = "select mzjldid,CreateTime,NIBPS,NIBPD,RRC,Pulse,SpO2,ETCO2,CVP,qdy,sdz,jsz,temp " +
-                " from Adims_MonitorRecord where mzjldid='" + mzjldid + "' ORDER BY CreateTime ASC";
+            string insert = "select mzjldid,RecordTime,NIBPS,NIBPD,RRC,Pulse,SpO2,ETCO2,CVP,qdy,sdz,jsz,temp " +
+                " from Adims_MonitorRecord where mzjldid='" + mzjldid + "' ORDER BY RecordTime ASC";
             return dBConn.GetDataTable(insert);
         }
         /// <summary>
@@ -164,12 +164,12 @@ namespace adims_DAL
         {
             string insert = "UPDATE  Adims_MonitorRecord set NIBPS = '" + nibps + "',NIBPD= '" + nibpd + "',RRC= '" + rrc + "',Pulse= '" + pulse + "',"
             + "SpO2= '" + spo2 + "',ETCO2= '" + etco2 + "',temp= '" + temp + "',cvp= '" + cvp + "'"
-            + " where mzjldid='" + mzjldid + "' and CreateTime='" + dt + "'";
+            + " where mzjldid='" + mzjldid + "' and RecordTime='" + dt + "'";
             return dBConn.ExecuteNonQuery(insert);
         }
         public DataTable GetByMzjldID(int mzjldid)//查询显示监测点1
         {
-            string sql = $"Select  CreateTime ,NIBPS,NIBPD,Pulse,RRC,TEMP,SpO2,ETCO2,CVP,NIBPM,HR from Adims_MonitorRecord  Where mzjldid ='{mzjldid}' order by CreateTime ASC";
+            string sql = $"Select  RecordTime ,NIBPS,NIBPD,Pulse,RRC,TEMP,SpO2,ETCO2,CVP,NIBPM,HR from Adims_MonitorRecord  Where mzjldid ='{mzjldid}' order by RecordTime ASC";
             return dBConn.GetDataTable(sql);
         }
         /// <summary>
@@ -182,9 +182,9 @@ namespace adims_DAL
         /// <returns></returns>
         public DataTable GetByTimeSpan(int mzjldid, DateTime Start, DateTime End, int Intervel)//查询显示监测点1
         {
-            string sql = "Select  CreateTime ,NIBPS,NIBPD,Pulse,RRC,TEMP,SpO2,ETCO2,CVP,NIBPM,HR from Adims_MonitorRecord  ";
-            sql += " Where mzjldid ='" + mzjldid + "'  AND CreateTime between '" + Start + "' AND '" + End + "'";
-            sql += " And DateDiff(mi,'" + Start + "',CreateTime) % '" + Intervel + "'=0 order by CreateTime ASC";
+            string sql = "Select  RecordTime ,NIBPS,NIBPD,Pulse,RRC,TEMP,SpO2,ETCO2,CVP,NIBPM,HR from Adims_MonitorRecord  ";
+            sql += " Where mzjldid ='" + mzjldid + "'  AND RecordTime between '" + Start + "' AND '" + End + "'";
+            sql += " And DateDiff(mi,'" + Start + "',RecordTime) % '" + Intervel + "'=0 order by RecordTime ASC";
             return dBConn.GetDataTable(sql);
         }
         /// <summary>
@@ -195,7 +195,7 @@ namespace adims_DAL
         /// <returns></returns>
         public int Delete(int mzjldid, DateTime dt)//
         {
-            string insert = "delete from  Adims_MonitorRecord where mzjldid='" + mzjldid + "' and CreateTime='" + dt + "'";
+            string insert = "delete from  Adims_MonitorRecord where mzjldid='" + mzjldid + "' and RecordTime='" + dt + "'";
             return dBConn.ExecuteNonQuery(insert);
         }
         /// <summary>
@@ -214,7 +214,7 @@ namespace adims_DAL
         /// <returns></returns>
         public int Add(int mzjldid, DateTime dt, string nibps, string nibpd, string rrc, string pulse, string spo2, string etco2, string cvp, string temp)//增加监测点
         {
-            string insert = "insert into Adims_MonitorRecord(mzjldid,CreateTime,NIBPS,NIBPD,RRC,Pulse,SpO2,ETCO2,cvp,Temp) values ('" + mzjldid + "','" + dt + "','" + nibps + "',"
+            string insert = "insert into Adims_MonitorRecord(mzjldid,RecordTime,NIBPS,NIBPD,RRC,Pulse,SpO2,ETCO2,cvp,Temp) values ('" + mzjldid + "','" + dt + "','" + nibps + "',"
             + "'" + nibpd + "','" + rrc + "','" + pulse + "','" + spo2 + "','" + etco2 + "','" + cvp + "','" + temp + "')";
             return dBConn.ExecuteNonQuery(insert);
         }
@@ -228,7 +228,7 @@ namespace adims_DAL
         /// <returns></returns>
         public int UpdateMzjldPointJKHX(int mzid, DateTime dt1, DateTime dt2, string value)
         {
-            string MZJLD_UPDATE1 = "UPDATE Adims_MonitorRecord SET RRC='" + value + "' where mzjldid='" + mzid + "' and CreateTime>'" + dt1 + "' and CreateTime<'" + dt2 + "'";
+            string MZJLD_UPDATE1 = "UPDATE Adims_MonitorRecord SET RRC='" + value + "' where mzjldid='" + mzid + "' and RecordTime>'" + dt1 + "' and RecordTime<'" + dt2 + "'";
             return dBConn.ExecuteNonQuery(MZJLD_UPDATE1);
         }
 
@@ -243,30 +243,30 @@ namespace adims_DAL
             string SQL = "";
             if (p.Lx == 5)
                 SQL = "update Adims_MonitorRecord set TEMP='" + p.V + "' where mzjldid='"
-                    + mzjldid + "' and CreateTime='" + p.D + "'";
+                    + mzjldid + "' and RecordTime='" + p.D + "'";
             return dBConn.ExecuteNonQuery(SQL);
         }
         public int UpdateMzjldPoint(int mzjldid, adims_MODEL.point p)//修改点
         {
             string SQL = "";
             if (p.Lx == 1)
-                SQL = "update Adims_MonitorRecord set NIBPS='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+                SQL = "update Adims_MonitorRecord set NIBPS='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
             else if (p.Lx == 2)
-                SQL = "update Adims_MonitorRecord set NIBPD='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+                SQL = "update Adims_MonitorRecord set NIBPD='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
             else if (p.Lx == 3)
-                SQL = "update Adims_MonitorRecord set pulse='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+                SQL = "update Adims_MonitorRecord set pulse='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
             else if (p.Lx == 4)
-                SQL = "update Adims_MonitorRecord set RRC='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+                SQL = "update Adims_MonitorRecord set RRC='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
             else if (p.Lx == 5)
-                SQL = "update Adims_MonitorRecord set TEMP='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+                SQL = "update Adims_MonitorRecord set TEMP='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
             else if (p.Lx == 6)
-                SQL = "update Adims_MonitorRecord set ETCO2='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+                SQL = "update Adims_MonitorRecord set ETCO2='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
             //else if (p.Lx == 7)
-            //    SQL = "update Adims_MonitorRecord set SpO2='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+            //    SQL = "update Adims_MonitorRecord set SpO2='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
             //else if (p.Lx == 8)
-            //    SQL = "update Adims_MonitorRecord set CVP='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+            //    SQL = "update Adims_MonitorRecord set CVP='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
             //else if (p.Lx == 9)
-            //    SQL = "update Adims_MonitorRecord set TOF='" + p.V + "' where mzjldid='" + mzjldid + "' and CreateTime='" + p.D + "'";
+            //    SQL = "update Adims_MonitorRecord set TOF='" + p.V + "' where mzjldid='" + mzjldid + "' and RecordTime='" + p.D + "'";
 
             return dBConn.ExecuteNonQuery(SQL);
         }

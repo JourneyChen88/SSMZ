@@ -192,7 +192,7 @@ namespace adims_Utility
                 /* MonitorRecord.MonitorCode = "test75";
                  webser.SendRawData(MonitorRecord);
                  */
-        /*        cmd.CommandText = "insert into MonitorRecord(HR,SpO2,Pulse,NIBPS,NIBPD,NIBPM,ARTS,ARTD,ARTM,ETCO2,ICO2,RRC,CreateTime) values(" + hr + "," + spo2 + "," + pulse + "," + nibps + "," + nibpd + "," + nibpm + "," + arts + "," + artd + "," + artm + "," + etco2 + "," + ico2 + "," + rrc + ",'" + DateTime.Now + "')";
+        /*        cmd.CommandText = "insert into MonitorRecord(HR,SpO2,Pulse,NIBPS,NIBPD,NIBPM,ARTS,ARTD,ARTM,ETCO2,ICO2,RRC,RecordTime) values(" + hr + "," + spo2 + "," + pulse + "," + nibps + "," + nibpd + "," + nibpm + "," + arts + "," + artd + "," + artm + "," + etco2 + "," + ico2 + "," + rrc + ",'" + DateTime.Now + "')";
                 int fa = cmd.ExecuteNonQuery();
                 if (fa != 1)
                 { MessageBox.Show("错误"); }

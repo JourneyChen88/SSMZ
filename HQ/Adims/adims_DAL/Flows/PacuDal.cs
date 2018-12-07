@@ -70,7 +70,7 @@ where P.Odate between '" + date1 + "'and'" + date2 + "' and P.rssj>'1990-01-01' 
         {
             int result = 0;
             string query = "select NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP from Adims_MonitorRecord "
-            + " where mzjldid='" + mzid + "' order by CreateTime desc ";
+            + " where mzjldid='" + mzid + "' order by RecordTime desc ";
             DataTable dtMZJLD = dBConn.GetDataTable(query);
             foreach (DataRow dr in dtMZJLD.Rows)
             {

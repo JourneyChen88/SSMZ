@@ -57,6 +57,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
+                DalLogger.WriteErrorLog(ex);
                 throw ex;
             }
         }
@@ -94,6 +95,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
+                DalLogger.WriteErrorLog(ex);
                 throw ex;
             }
         }
@@ -118,6 +120,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
+                DalLogger.WriteErrorLog(ex);
                 throw ex;
             }
         }
@@ -143,6 +146,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
+                DalLogger.WriteErrorLog(ex);
                 throw ex;
             }
         }

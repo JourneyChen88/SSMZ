@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DalLogger.cs" />
     <Compile Include="Dics\DataDicDal.cs" />
     <Compile Include="Dics\QxqdModelDal.cs" />
     <Compile Include="Dics\SzsjListDal.cs" />

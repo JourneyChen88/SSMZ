@@ -229,8 +229,8 @@ namespace main
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //dtRecordTime.Value = Convert.ToDateTime(dataGridView1.CurrentRow.Cells["CreateTime"].Value);
-            dtRecordTime.Value = Convert.ToDateTime(dataGridView1.CurrentRow.Cells["CreateTime"].Value);
+            //dtRecordTime.Value = Convert.ToDateTime(dataGridView1.CurrentRow.Cells["RecordTime"].Value);
+            dtRecordTime.Value = Convert.ToDateTime(dataGridView1.CurrentRow.Cells["RecordTime"].Value);
             tbNIBPS.Text = Convert.ToString(dataGridView1.CurrentRow.Cells["nibps"].Value);
             tbNIBPD.Text = Convert.ToString(dataGridView1.CurrentRow.Cells["nibpd"].Value);
             tbPulse.Text = Convert.ToString(dataGridView1.CurrentRow.Cells["Pulse"].Value);
@@ -266,8 +266,8 @@ namespace main
                 {
                     if ((bool)dataGridView1.Rows[i].Cells["CoDelete"].EditedFormattedValue == true)
                     {
-                        //DateTime dt = Convert.ToDateTime(dataGridView1.Rows[i].Cells["CreateTime"].Value);
-                        DateTime dt = Convert.ToDateTime(dataGridView1.Rows[i].Cells["CreateTime"].Value);
+                        //DateTime dt = Convert.ToDateTime(dataGridView1.Rows[i].Cells["RecordTime"].Value);
+                        DateTime dt = Convert.ToDateTime(dataGridView1.Rows[i].Cells["RecordTime"].Value);
                         flag2 = mpdal.Delete(_MzjldId, dt);
                         if (flag2 > 0)
                             flag++;
@@ -284,7 +284,7 @@ namespace main
                 {
                     if ((bool)dataGridView1.Rows[i].Cells["CoDelete"].EditedFormattedValue == true)
                     {
-                        DateTime dt = Convert.ToDateTime(dataGridView1.Rows[i].Cells["CreateTime"].Value);
+                        DateTime dt = Convert.ToDateTime(dataGridView1.Rows[i].Cells["RecordTime"].Value);
                         flag2 = bll.DeletePointPACU(_MzjldId, dt);
                         if (flag2 > 0)
                             flag++;

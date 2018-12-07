@@ -2870,7 +2870,7 @@ namespace main
             ssyList.Clear(); szyList.Clear(); xlList.Clear(); twList.Clear(); hxlList.Clear();
             mboList.Clear(); spo2List.Clear(); etco2List.Clear(); jhxmValue.Clear();
 
-            //CreateTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP
+            //RecordTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP
             DataTable datadt = new DataTable();
 
             var dtmz = _MzjldDal.GetMzjldByMzjldId(_MzjldId);
