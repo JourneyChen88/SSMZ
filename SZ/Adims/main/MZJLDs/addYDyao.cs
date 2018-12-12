@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using adims_BLL;
 using System.Collections;
+using Adims_Utility;
 
 namespace main
 {
@@ -100,36 +101,44 @@ namespace main
         {
             if (sss.Count < 11 || (sss.Count == 11 && sss.Contains(tbName.Text.Trim())))
             {
-                if (tbYL.Text.Trim() != "" && tbName.Text.Trim() != "")
+                if (tbYL.Text.Trim().ToDouble() <= 0)
                 {
-                    int m = 0;
-                    adims_MODEL.mzyt yt1 = new adims_MODEL.mzyt();
-                    yt1.Ytname = tbName.Text.Trim();
-                    yt1.Yl = Convert.ToDouble(tbYL.Text.Trim());
-                    yt1.Dw = comboBox2.Text.Trim();
-                    yt1.Yyfs = cmbYYFS.Text.Trim();
-                    yt1.Cxyy = cbCXYY.Checked;
-                    yt1.Sysj = DateTime.Now;
-                    if (cbCXYY.Checked)
-                    {
-                        yt1.Bz = 1;
-                        yt1.Dw = yt1.Dw;
-                        m = bll.addyt1(mzjldID, yt1);
-                    }
-                    else
-                    {
-                        yt1.Bz = 2;
-                        yt1.Jssj = yt1.Sysj;
-                        m = bll.addyt2(mzjldID, yt1);
-                    }
-                    if (m > 0)
-                    {
-                        BindYdyList();
+                    MessageBox.Show("用量必须大于0");
+                    return;
+                }
+                if (tbName.Text.Trim() == "")
+                {
+                    MessageBox.Show("用量或诱导药名称不能为空");
+                    return;
 
-                    }
                 }
 
-                else MessageBox.Show("用量或诱导药名称不能为空");
+                int m = 0;
+                adims_MODEL.mzyt yt1 = new adims_MODEL.mzyt();
+                yt1.Ytname = tbName.Text.Trim();
+                yt1.Yl = tbYL.Text.Trim().ToDouble();
+                yt1.Dw = comboBox2.Text.Trim();
+                yt1.Yyfs = cmbYYFS.Text.Trim();
+                yt1.Cxyy = cbCXYY.Checked;
+                yt1.Sysj = DateTime.Now;
+                if (cbCXYY.Checked)
+                {
+                    yt1.Bz = 1;
+                    yt1.Dw = yt1.Dw;
+                    m = bll.addyt1(mzjldID, yt1);
+                }
+                else
+                {
+                    yt1.Bz = 2;
+                    yt1.Jssj = yt1.Sysj;
+                    m = bll.addyt2(mzjldID, yt1);
+                }
+                if (m > 0)
+                {
+                    BindYdyList();
+
+                }
+
             }
             else MessageBox.Show("诱导药标记数超标，请添加到特殊用药");
         }
@@ -181,7 +190,7 @@ namespace main
                     int m = 0;
                     adims_MODEL.mzyt yt1 = new adims_MODEL.mzyt();
                     yt1.Ytname = dt.Rows[i]["ypname"].ToString();
-                    yt1.Yl = Convert.ToDouble(dt.Rows[i]["yl"]);
+                    yt1.Yl =dt.Rows[i]["yl"].ToDouble();
                     yt1.Dw = Convert.ToString(dt.Rows[i]["dw"]);
                     yt1.Yyfs = Convert.ToString(dt.Rows[i]["zrff"]);
                     int cxyy = Convert.ToInt32(dt.Rows[i]["cxyy"]);

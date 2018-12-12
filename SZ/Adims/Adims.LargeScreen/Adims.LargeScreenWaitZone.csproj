@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>bin\Debug\WaitZone.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -98,9 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\waitbacked.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="bin\Debug\WaitZone.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

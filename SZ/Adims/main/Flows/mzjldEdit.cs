@@ -28,6 +28,7 @@ using MediII.Common;
 using adims_BLL;
 using System.Configuration;
 using main.MZJLDs;
+using Adims_Utility;
 
 namespace main
 {
@@ -276,7 +277,7 @@ namespace main
             jhxma.Add("RESP");
             jhxma.Add("BIS");
             jhxma.Add("TOF");
-            jcsjjg = Convert.ToInt32(cmbSJJG.Text.Trim());
+            jcsjjg = cmbSJJG.Text.Trim().ToInt32();
             lbtimew1.Text = lbTime1.Text = otime.ToString("HH:mm");
             lbtimew2.Text = lbTime2.Text = otime.AddMinutes(6 * jcsjjg).ToString("HH:mm");
             //+ ":" + (otime.AddMinutes(6 * jcsjjs).Minute == 0 ? "00" : "30");
@@ -298,12 +299,12 @@ namespace main
             otime = (Convert.ToDateTime(dtMzjld.Rows[0]["otime"]));
             ucOperDate.Controls[0].Text = otime.ToShortDateString();
             cmbSJJG.Text = Convert.ToString(dtMzjld.Rows[0]["jcsjjg"]);
-            if (Convert.ToInt32(dtMzjld.Rows[0]["isTiwenView"]) == 1)
+            if (dtMzjld.Rows[0]["isTiwenView"].ToInt32()== 1)
             {
                 isTiwenView = true;
                 cbIsTiwen.Checked = true;
             }
-            else if (Convert.ToInt32(dtMzjld.Rows[0]["isTiwenView"]) == 0)
+            else if (dtMzjld.Rows[0]["isTiwenView"].ToInt32() == 0)
             {
                 isTiwenView = false;
                 cbIsTiwen.Checked = false;
@@ -582,7 +583,7 @@ namespace main
             ucXHHS.Controls[0].Text = XHHS;
             if (dt.Rows[0]["ASAE"].ToString() != "")
             {
-                if (Convert.ToInt32(dt.Rows[0]["ASAE"]) == 1)
+                if (dt.Rows[0]["ASAE"].ToInt32() == 1)
                     cbE.Checked = true;
                 else
                     cbE.Checked = false;
@@ -664,7 +665,7 @@ namespace main
                         return;
                     }
                     DataTable dt = bll.selectSinglemzjld(patID, otime);
-                    mzjldID = Convert.ToInt32(dt.Rows[0][0]);
+                    mzjldID = dt.Rows[0][0].ToInt32();
 
                     ucOperDate.Controls[0].Text = odate.ToShortDateString();
                     ucMzjldId.Controls[0].Text = Convert.ToString(mzjldID);
@@ -870,12 +871,12 @@ namespace main
                 {
                     adims_MODEL.mzqt mzqt = new adims_MODEL.mzqt();
                     mzqtList.Add(mzqt);
-                    mzqtList[i].Id = Convert.ToInt32(dr["id"]);
+                    mzqtList[i].Id = dr["id"].ToInt32();
                     mzqtList[i].Qtname = Convert.ToString(dr["qtname"]);
-                    mzqtList[i].Yl = Convert.ToDouble(dr["yl"]);
+                    mzqtList[i].Yl = dr["yl"].ToDouble();
                     mzqtList[i].Dw = Convert.ToString(dr["dw"]);
                     mzqtList[i].Sysj = Convert.ToDateTime(dr["sytime"]);
-                    mzqtList[i].Bz = Convert.ToInt32(dr["flags"]);
+                    mzqtList[i].Bz = dr["flags"].ToInt32();
                     if (mzqtList[i].Bz == 2)
                     {
                         mzqtList[i].Jssj = Convert.ToDateTime(dr["jstime"]);
@@ -897,14 +898,14 @@ namespace main
                 {
                     adims_MODEL.shuye yt1 = new adims_MODEL.shuye();
                     shuyeList.Add(yt1);
-                    shuyeList[i].Id = Convert.ToInt32(dr["id"]);
+                    shuyeList[i].Id = dr["id"].ToInt32();
                     shuyeList[i].Name = Convert.ToString(dr["shuyename"]);
-                    shuyeList[i].Jl = Convert.ToDouble(dr["Jl"]);
+                    shuyeList[i].Jl = dr["Jl"].ToDouble();
                     syZongl = syZongl + shuyeList[i].Jl;
                     shuyeList[i].Dw = Convert.ToString(dr["dw"]);
                     shuyeList[i].Zrfs = Convert.ToString(dr["Zrfs"]);
                     shuyeList[i].Kssj = Convert.ToDateTime(dr["kssj"]);
-                    shuyeList[i].Bz = Convert.ToInt32(dr["flags"]);
+                    shuyeList[i].Bz = dr["flags"].ToInt32();
                     if (shuyeList[i].Bz == 2)
                     {
                         shuyeList[i].Jssj = Convert.ToDateTime(dr["jssj"]);
@@ -927,14 +928,14 @@ namespace main
                     adims_MODEL.shuxue yt1 = new adims_MODEL.shuxue();
                     shuxueList.Add(yt1);
                     //shuxueList[i].Id = Convert.ToString(dr["id"]);
-                    shuxueList[i].Id = Convert.ToInt32(dr["id"]);
+                    shuxueList[i].Id = dr["id"].ToInt32();
                     shuxueList[i].Name = Convert.ToString(dr["shuxuename"]);
-                    shuxueList[i].Jl = Convert.ToDouble(dr["Jl"]);
+                    shuxueList[i].Jl = dr["Jl"].ToDouble();
                     sxZongl = sxZongl + shuxueList[i].Jl;
                     shuxueList[i].Dw = Convert.ToString(dr["dw"]);
                     shuxueList[i].Zrfs = Convert.ToString(dr["Zrfs"]);
                     shuxueList[i].Kssj = Convert.ToDateTime(dr["kssj"]);
-                    shuxueList[i].Bz = Convert.ToInt32(dr["flags"]);
+                    shuxueList[i].Bz = dr["flags"].ToInt32();
                     if (shuxueList[i].Bz == 2)
                     {
                         shuxueList[i].Jssj = Convert.ToDateTime(dr["jssj"]);
@@ -957,7 +958,7 @@ namespace main
                     mzpmList.Add(yt1);
                     mzpmList[i].mzpmName = Convert.ToString(dr["mzpmName"]);
                     mzpmList[i].D = Convert.ToDateTime(dr["time"]);
-                    mzpmList[i].Id = Convert.ToInt32(dr["id"]);
+                    mzpmList[i].Id = dr["id"].ToInt32();
                     i++;
                 }
             }
@@ -974,17 +975,17 @@ namespace main
                 {
                     adims_MODEL.jtytsx yt1 = new adims_MODEL.jtytsx();
                     jmyList.Add(yt1);
-                    jmyList[i].Id = Convert.ToInt32(dr["Id"]);
+                    jmyList[i].Id = dr["Id"].ToInt32();
                     jmyList[i].Name = Convert.ToString(dr["name"]);
-                    jmyList[i].Jl = Convert.ToDouble(dr["Jl"]);
-                    if (Convert.ToInt32(dr["Cxyy"]) == 1)
+                    jmyList[i].Jl = dr["Jl"].ToDouble();
+                    if (dr["Cxyy"].ToInt32() == 1)
                         jmyList[i].Cxyy = true;
                     else
                         jmyList[i].Cxyy = false;
                     jmyList[i].Dw = Convert.ToString(dr["dw"]);
                     jmyList[i].Zrfs = Convert.ToString(dr["Zrfs"]);
                     jmyList[i].Kssj = Convert.ToDateTime(dr["kssj"]);
-                    jmyList[i].Bz = Convert.ToInt32(dr["flags"]);
+                    jmyList[i].Bz = dr["flags"].ToInt32();
                     if (jmyList[i].Bz == 2)
                     {
                         jmyList[i].Jssj = Convert.ToDateTime(dr["jssj"]);
@@ -1005,17 +1006,17 @@ namespace main
                 {
                     adims_MODEL.mzyt yt1 = new adims_MODEL.mzyt();
                     ydyList.Add(yt1);
-                    ydyList[i].Id = Convert.ToInt32(dr["id"]);
+                    ydyList[i].Id = dr["id"].ToInt32();
                     ydyList[i].Ytname = Convert.ToString(dr["ydyname"]);
-                    ydyList[i].Yl = Convert.ToDouble(dr["yl"]);
+                    ydyList[i].Yl = dr["yl"].ToDouble();
                     ydyList[i].Dw = Convert.ToString(dr["dw"]);
                     ydyList[i].Yyfs = Convert.ToString(dr["Yyfs"]);
-                    if (Convert.ToInt32(dr["Cxyy"]) == 1)
+                    if (dr["Cxyy"].ToInt32() == 1)
                         ydyList[i].Cxyy = true;
                     else
                         ydyList[i].Cxyy = false;
                     ydyList[i].Sysj = Convert.ToDateTime(dr["sytime"]);
-                    ydyList[i].Bz = Convert.ToInt32(dr["flags"]);
+                    ydyList[i].Bz = dr["flags"].ToInt32();
                     if (ydyList[i].Bz == 2)
                     {
                         ydyList[i].Jssj = Convert.ToDateTime(dr["jstime"]);
@@ -1076,7 +1077,7 @@ namespace main
                 {
                     adims_MODEL.szsj yt1 = new adims_MODEL.szsj();
                     szsj.Add(yt1);
-                    szsj[i].Id = Convert.ToInt32(dr["id"]);
+                    szsj[i].Id = dr["id"].ToInt32();
                     szsj[i].Name = Convert.ToString(dr["Name"]);
                     szsj[i].D = Convert.ToDateTime(dr["time"]);
                     //szsj[i].Id = Convert.ToDateTime(dr["id"]);
@@ -1108,7 +1109,7 @@ namespace main
                 {
                     adims_MODEL.tsyy yt1 = new adims_MODEL.tsyy();
                     tsyy.Add(yt1);
-                    tsyy[i].Id = Convert.ToInt32(dr["ID"]);
+                    tsyy[i].Id = dr["ID"].ToInt32();
                     tsyy[i].Name = Convert.ToString(dr["name"]);
                     tsyy[i].Yl = float.Parse(dr["yl"].ToString());
                     tsyy[i].Dw = Convert.ToString(dr["dw"]);
@@ -2026,7 +2027,7 @@ namespace main
         {
             string temp1 = "10.3.13.195";
             string temp2 = "4602";
-            int port = Convert.ToInt32(temp2);
+            int port = temp2.ToInt32();
             IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(temp1.Trim()), port);
             ServerSocket = new Socket(ipep.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             try
@@ -2161,7 +2162,7 @@ namespace main
                         int position = BasicCommand.LastIndexOf('^');
                         string tmp = BasicCommand.Substring(position + 1, BasicCommand.Length - position - 1);
                         if (IsNumberic(tmp))
-                            BedId = Convert.ToInt32(tmp);
+                            BedId = tmp.ToInt32();
 
                     }
                     if (IsOBR)  //"OBR|1|15419^MINDRAY_EGATEWAY^00A0370027000143^EUI-64|15419^MINDRAY_EGATEWAY^00A0370027000143^EUI-64|69952^MDC_DEV_MON_PT_PHYSIO_MULTI_PARAM^MDC|||20140606112039+0800"
@@ -2488,7 +2489,7 @@ namespace main
             //{
             //    adims_MODEL.point p = new adims_MODEL.point();//收缩压记录点
             //    p.D = Convert.ToDateTime(ssydt.Rows[i][4]);
-            //    p.V = Convert.ToInt32(ssydt.Rows[i][3]);
+            //    p.V = ssydt.Rows[i][3]);
             //    p.Lx = 1;
             //    ssy.Add(p);
             //}
@@ -2499,7 +2500,7 @@ namespace main
             //{
             //    adims_MODEL.point p1 = new adims_MODEL.point();//舒张压记录点
             //    p1.D = Convert.ToDateTime(szydt.Rows[i][4]);
-            //    p1.V = Convert.ToInt32(szydt.Rows[i][3]);
+            //    p1.V = szydt.Rows[i][3]);
             //    p1.Lx = 2;
             //    szy.Add(p1);
 
@@ -2510,7 +2511,7 @@ namespace main
             //{
             //    adims_MODEL.point p2 = new adims_MODEL.point();//心率记录点
             //    p2.D = Convert.ToDateTime(xldt.Rows[i][4]);
-            //    p2.V = Convert.ToInt32(xldt.Rows[i][3]);
+            //    p2.V = xldt.Rows[i][3]);
             //    p2.Lx = 3;
             //    xl.Add(p2);
 
@@ -2521,7 +2522,7 @@ namespace main
             //{
             //    adims_MODEL.point p4 = new adims_MODEL.point();//体温记录点
             //    p4.D = Convert.ToDateTime(twdt.Rows[i][4]);
-            //    p4.V = Convert.ToInt32(twdt.Rows[i][3]);
+            //    p4.V = twdt.Rows[i][3]);
             //    p4.Lx = 4;
             //    tw.Add(p4);
 
@@ -2533,7 +2534,7 @@ namespace main
             //    adims_MODEL.point p3 = new adims_MODEL.point();//呼吸率记录点
 
             //    p3.D = Convert.ToDateTime(hxdt.Rows[i][4]);
-            //    p3.V = Convert.ToInt32(hxdt.Rows[i][3]);
+            //    p3.V = hxdt.Rows[i][3]);
             //    p3.Lx = 5;
             //    hxl.Add(p3);
             //}
@@ -2553,11 +2554,11 @@ namespace main
                 {
                     adims_MODEL.clcxqt CLCXQT = new adims_MODEL.clcxqt();
                     clcxqt.Add(CLCXQT);
-                    clcxqt[i].Id = Convert.ToInt32(dtCL.Rows[i][0]);
+                    clcxqt[i].Id = dtCL.Rows[i][0].ToInt32();
                     clcxqt[i].D = Convert.ToDateTime(dtCL.Rows[i][4]);
-                    clcxqt[i].V = Convert.ToInt32(dtCL.Rows[i][3]);
+                    clcxqt[i].V = dtCL.Rows[i][3].ToInt32();
                     cnl = cnl + clcxqt[i].V;
-                    clcxqt[i].Lx = Convert.ToInt32(dtCL.Rows[i][2]);
+                    clcxqt[i].Lx = dtCL.Rows[i][2].ToInt32();
                     i++;
                 }
                 if (cnl > 0)
@@ -2787,8 +2788,8 @@ namespace main
                     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 100);
                     int y1 = YY + qti * 12 + 4;
                     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 10 / jcsjjg + 100);
-                    //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
-                    //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
+                    //double qtzongliang = (mzqt.Yl) * (x2 - x1) / 2.5);
+                    //e.Graphics.DrawString(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
                     if (x1 > 100 + x && x1 < 700 + x)
                     {
                         e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ht6, Brushes.Blue, new Point(x1 + x + (x2 - x1) / 2, y + y1 - 8)); //new Point(x1 -3 + x, y + y1 - 6));
@@ -3711,7 +3712,7 @@ namespace main
                                 {
                                     for (int i = 0; i < count; i++)
                                     {
-                                        objResult = send.Send(message, HL7IPaddress, Convert.ToInt32(HL7port));
+                                        objResult = send.Send(message, HL7IPaddress, HL7port.ToInt32());
                                         string ack = objResult == null ? string.Empty : objResult.ToString();
                                         if (ack.Contains("AA"))
                                         {
@@ -4197,7 +4198,7 @@ namespace main
                 DateTime DTIME = otime.AddMinutes((xEnd - 165) / 15 * jcsjjg);
                 lab1.Text = DTIME.ToString("HH:mm");
                 timer3.Enabled = true;
-                //int ssshijian = Convert.ToInt32((lbMzjs1.Location.X - lbMzks1.Location.X) / 3);//计算麻醉总时间
+                //int ssshijian = (lbMzjs1.Location.X - lbMzks1.Location.X) / 3);//计算麻醉总时间
                 //txtMZJS.Controls[0].Text =DTIME.ToString("HH:mm");
 
             }
@@ -4375,7 +4376,7 @@ namespace main
                 lab1.Location = new Point(lb_bguan.Location.X, lb_bguan.Location.Y - 10);
                 DateTime DTIME = otime.AddMinutes((xEnd - 165) / 15 * jcsjjg);
                 lab1.Text = DTIME.ToString("HH:mm");
-                //int ssshijian = Convert.ToInt32((lb_bguan.Location.X - lb_bguan.Location.X) / 3);//计算拔管时间
+                //int ssshijian = (lb_bguan.Location.X - lb_bguan.Location.X) / 3);//计算拔管时间
                 timer3.Enabled = true;
                 //txtCGJS.Controls[0].Text = DTIME.ToString("HH:mm");
             }
@@ -4563,7 +4564,7 @@ namespace main
                 DateTime DTIME = otime.AddMinutes((xEnd - 165) / 15 * jcsjjg);
                 lab1.Text = DTIME.ToString("HH:mm");
                 timer3.Enabled = true;
-                //int ssshijian=Convert.ToInt32((ssjs1.Location.X - ssks1.Location.X) / 3.27);
+                //int ssshijian=(ssjs1.Location.X - ssks1.Location.X) / 3.27);
                 //txtSssj.Controls[0].Text = (ssshijian / 60).ToString() + "小时"+(ssshijian % 60).ToString()+"分";
                 //txtSSJS.Controls[0].Text = DTIME.ToString("HH:mm");
             }
@@ -6537,8 +6538,8 @@ namespace main
                     int KAISHI = mz.Sysj.Hour * 60 + mz.Sysj.Minute;
                     int JIESHU = mz.Jssj.Hour * 60 + mz.Jssj.Minute;
                     int y1 = 15 * (dy + 1) + 18;
-                    double qtzongliang = (mz.Yl) * Convert.ToDouble((JIESHU - KAISHI) * 3.27);
-                    e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(5, y1 - 2));
+                    double qtzongliang = (mz.Yl) * (JIESHU - KAISHI) * 3.27;
+                    e.Graphics.DrawString(qtzongliang.ToString() + "L", this.Font, Brushes.Blue, new Point(5, y1 - 2));
                     //MessageBox.Show(mz.Dw.Split('/').ToString());
                 }
                 dy++;
