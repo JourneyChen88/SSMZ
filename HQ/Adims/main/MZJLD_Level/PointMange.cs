@@ -94,7 +94,8 @@ namespace main
                 var dtmz = _MzjldDal.GetMzjldByMzjldId(_MzjldId);
                 if (dtmz.Rows.Count > 0 && dtmz.Rows[0]["IsZoom"].ToString() == "0")
                 {
-                    dt = mpdal.GetByMzjldID(_MzjldId);
+                    var zr = ZoomRegionList.FirstOrDefault();
+                    dt = mpdal.GetByMzjldID(_MzjldId, zr.AStartTime, zr.EndTime, zr.Interval);
                 }
                 else
                 {

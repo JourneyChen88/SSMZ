@@ -167,10 +167,15 @@ namespace adims_DAL
             + " where mzjldid='" + mzjldid + "' and RecordTime='" + dt + "'";
             return dBConn.ExecuteNonQuery(insert);
         }
-        public DataTable GetByMzjldID(int mzjldid)//查询显示监测点1
+        public DataTable GetByMzjldID(int mzjldid,DateTime Start, DateTime End, int Intervel)//查询显示监测点1
         {
-            string sql = $"Select  RecordTime ,NIBPS,NIBPD,Pulse,RRC,TEMP,SpO2,ETCO2,CVP,NIBPM,HR from Adims_MonitorRecord  Where mzjldid ='{mzjldid}' order by RecordTime ASC";
+            string sql = "Select  RecordTime ,NIBPS,NIBPD,Pulse,RRC,TEMP,SpO2,ETCO2,CVP,NIBPM,HR from Adims_MonitorRecord  ";
+            sql += " Where mzjldid ='" + mzjldid + "'  AND RecordTime between '" + Start + "' AND '" + End + "'";
+            sql += " And DateDiff(mi,'" + Start + "',RecordTime) % '" + Intervel + "'=0 order by RecordTime ASC";
             return dBConn.GetDataTable(sql);
+            //string sql = $@"Select  RecordTime ,NIBPS,NIBPD,Pulse,RRC,TEMP,SpO2,ETCO2,CVP,NIBPM,HR
+            //        from Adims_mzjld_Point  Where mzjldid ='{mzjldid}' order by RecordTime ASC";
+            //return dBConn.GetDataTable(sql);
         }
         /// <summary>
         /// 获取监测点--通过时间间隔

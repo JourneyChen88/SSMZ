@@ -53,6 +53,13 @@
     <Compile Include="MigrationForm.Designer.cs">
       <DependentUpon>MigrationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MovePoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MovePoint.Designer.cs">
+      <DependentUpon>MovePoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Orm.cs" />
     <Compile Include="ProcessForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +70,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MigrationForm.resx">
       <DependentUpon>MigrationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MovePoint.resx">
+      <DependentUpon>MovePoint.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProcessForm.resx">
       <DependentUpon>ProcessForm.cs</DependentUpon>
@@ -102,6 +112,10 @@
     <ProjectReference Include="..\adims_MODEL\adims_MODEL.csproj">
       <Project>{F2BF0CFD-289B-403F-BF4D-006B750317BE}</Project>
       <Name>adims_MODEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SI.Infrastructure.Service\SI.Infrastructure.Service.csproj">
+      <Project>{29F3E4CE-84A7-442D-8C45-73EAD1C63476}</Project>
+      <Name>SI.Infrastructure.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utility\adims_Utility.csproj">
       <Project>{0A683DAD-C296-4D5D-80B2-928A239FBB8A}</Project>

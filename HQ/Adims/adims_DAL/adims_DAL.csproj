@@ -74,6 +74,7 @@
     <Compile Include="Interfaces\LIS_DB_Help.cs" />
     <Compile Include="Interfaces\PACS_DB_Help.cs" />
     <Compile Include="Flows\PacuDal.cs" />
+    <Compile Include="MovePointDal.cs" />
     <Compile Include="MzjldPointDal.cs" />
     <Compile Include="YongyaoListDal.cs" />
     <Compile Include="MigrationDal.cs" />
