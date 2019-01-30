@@ -406,7 +406,7 @@ namespace main
                     result = _BeforeVisitDal.InsertBeforeVisit_HS(SHFS);
                 if (result > 0)
                 {
-                    BCcount++; MessageBox.Show("保存成功！");
+                    BCcount++; //MessageBox.Show("保存成功！");
                 }
                 else MessageBox.Show("保存失败！");
             }

@@ -430,7 +430,7 @@ namespace main
                 result = _BeforeVistDal.UpdateBeforeVist_YS(SQFS);
                 if (result > 0)
                 {
-                    BCcount++; MessageBox.Show("保存成功！");
+                    BCcount++; //MessageBox.Show("保存成功！");
                 }
                 else MessageBox.Show("保存失败！");
             }

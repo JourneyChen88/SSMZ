@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayHelper.cs" />
+    <Compile Include="TypeExtension.cs" />
     <Compile Include="ListHelper.cs" />
     <Compile Include="ClassFTP.cs" />
     <Compile Include="Drage.cs" />

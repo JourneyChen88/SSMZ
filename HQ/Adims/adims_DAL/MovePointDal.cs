@@ -48,11 +48,25 @@ VALUES(
 '{mr.Temp}','{mr.CVP}'  )";
             return dBConn.ExecuteNonQuery(sql);
         }
-         public int UpdateTable(string sql)
+         public int UpdateAdims_OperSchedule( )
         {
+            string sql = @"UPDATE Adims_OperSchedule SET Ostate=2 WHERE Ostate=1 AND Odate<'2019-01-01'";
             return dBConn.ExecuteNonQuery(sql);
         }
 
-
+        public int InsertAdims_mzjld_Point(MonitorRecord mr)
+        {
+            string sql = $@"    INSERT INTO dbo.Adims_mzjld_Point(mzjldid, RecordTime, NIBPS, 
+NIBPD, NIBPM, RRC, HR, Pulse, SpO2,
+ETCO2, TEMP,  CVP)
+VALUES(
+'{mr.Mzjldid}','{mr.RecordTime}',
+'{mr.NIBPS}','{mr.NIBPD}',
+'{mr.NIBPM}','{mr.RRC}','{mr.HR}',
+'{mr.Pulse}','{mr.SpO2}','{mr.ETCO2}',
+'{mr.TEMP}','{mr.CVP}'  )";
+            return dBConn.ExecuteNonQuery(sql);
+        }
+  
     }
 }

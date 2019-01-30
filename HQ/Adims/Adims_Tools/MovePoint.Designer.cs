@@ -36,12 +36,17 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tbCount = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 73);
+            this.label1.Location = new System.Drawing.Point(45, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 20);
             this.label1.TabIndex = 0;
@@ -49,14 +54,14 @@
             // 
             // tbPoint
             // 
-            this.tbPoint.Location = new System.Drawing.Point(172, 70);
+            this.tbPoint.Location = new System.Drawing.Point(49, 32);
             this.tbPoint.Name = "tbPoint";
             this.tbPoint.Size = new System.Drawing.Size(100, 26);
             this.tbPoint.TabIndex = 1;
             // 
             // tbRecord
             // 
-            this.tbRecord.Location = new System.Drawing.Point(172, 143);
+            this.tbRecord.Location = new System.Drawing.Point(49, 111);
             this.tbRecord.Name = "tbRecord";
             this.tbRecord.Size = new System.Drawing.Size(100, 26);
             this.tbRecord.TabIndex = 3;
@@ -64,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(45, 146);
+            this.label2.Location = new System.Drawing.Point(45, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 20);
             this.label2.TabIndex = 2;
@@ -72,12 +77,13 @@
             // 
             // btnPaiban
             // 
-            this.btnPaiban.Location = new System.Drawing.Point(324, 99);
+            this.btnPaiban.Location = new System.Drawing.Point(169, 12);
             this.btnPaiban.Name = "btnPaiban";
-            this.btnPaiban.Size = new System.Drawing.Size(118, 50);
+            this.btnPaiban.Size = new System.Drawing.Size(68, 50);
             this.btnPaiban.TabIndex = 4;
             this.btnPaiban.Text = "开始转移";
             this.btnPaiban.UseVisualStyleBackColor = true;
+            this.btnPaiban.Visible = false;
             this.btnPaiban.Click += new System.EventHandler(this.btnPaiban_Click);
             // 
             // backgroundWorker1
@@ -89,25 +95,72 @@
             // 
             // tbCount
             // 
-            this.tbCount.Location = new System.Drawing.Point(324, 193);
+            this.tbCount.Location = new System.Drawing.Point(382, 175);
             this.tbCount.Name = "tbCount";
-            this.tbCount.Size = new System.Drawing.Size(118, 26);
+            this.tbCount.Size = new System.Drawing.Size(98, 26);
             this.tbCount.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(253, 199);
+            this.label3.Location = new System.Drawing.Point(372, 138);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "转移数量";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(45, 181);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(59, 20);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "带0数量";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(128, 178);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(75, 26);
+            this.textBox1.TabIndex = 7;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(260, 168);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 38);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "转移到Point";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // backgroundWorker2
+            // 
+            this.backgroundWorker2.WorkerReportsProgress = true;
+            this.backgroundWorker2.WorkerSupportsCancellation = true;
+            this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
+            this.backgroundWorker2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker2_RunWorkerCompleted);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(260, 43);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(123, 41);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "修改排班状态";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MovePoint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 279);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbCount);
             this.Controls.Add(this.btnPaiban);
@@ -136,5 +189,10 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.TextBox tbCount;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.Button button2;
     }
 }

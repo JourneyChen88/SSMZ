@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Monitors\Adims_Mzjld.cs" />
     <Compile Include="Monitors\MonitorRecord.cs" />
     <Compile Include="Monitors\Mzjld_Point.cs" />
     <Compile Include="Flows\MZJLD\ZoomRegion.cs" />

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Adims_Tools
 {
-    public  static class Orm
+    public static class Orm
     {
 
 
@@ -37,6 +37,19 @@ inner join Adims_mzjld_Point b on a.id=b.mzjldid
 where a.IsZoom=1";
                 var list = context.Sql(sql)
                      .QueryMany<Mzjld_Point>();
+
+                return list;
+            }
+        }
+
+        public static Adims_Mzjld GetAdims_mzjld(int mzjldid)
+        {
+            using (var context = AppDbContext.HeYiAdimsContext())
+            {
+                string sql = @"select *  from adims_mzjld
+where id=@0";
+                var list = context.Sql(sql).Parameters(mzjldid)
+                     .QuerySingle<Adims_Mzjld>();
 
                 return list;
             }

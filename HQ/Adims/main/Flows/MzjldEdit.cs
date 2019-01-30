@@ -2877,7 +2877,8 @@ namespace main
             if (dtmz.Rows.Count > 0 && dtmz.Rows[0]["IsZoom"].ToString() == "0")
             {
                 var zr = ZoomRegionList.FirstOrDefault();
-                datadt = mpdal.GetByMzjldID(_MzjldId, zr.AStartTime, zr.EndTime, zr.Interval);
+                datadt = mpdal.GetByMzjldID(_MzjldId);
+                //datadt = mpdal.GetByMzjldID(_MzjldId, zr.AStartTime, zr.EndTime, zr.Interval);
             }
             else
             {
