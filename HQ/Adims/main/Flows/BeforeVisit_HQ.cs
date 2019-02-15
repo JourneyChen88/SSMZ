@@ -80,7 +80,7 @@ namespace main
             txtWeith.Text = dr1["PatWeight"].ToString();
             dtVisitDate.Text = Odate;
         }
-        int BCcount = 0;
+        int SaveCount = 0;
         /// <summary>
         /// 赋值
         /// </summary>
@@ -430,7 +430,7 @@ namespace main
                 result = _BeforeVistDal.UpdateBeforeVist_YS(SQFS);
                 if (result > 0)
                 {
-                    BCcount++; //MessageBox.Show("保存成功！");
+                    SaveCount++; //MessageBox.Show("保存成功！");
                 }
                 else MessageBox.Show("保存失败！");
             }
@@ -442,6 +442,10 @@ namespace main
 
         private void btnDY_Click(object sender, EventArgs e)
         {
+            if (SaveCount == 0)
+            {
+                Save();
+            }
             this.printPreviewDialog1.Document = printDocument1;
             if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
                 printDocument1.Print();
@@ -1649,7 +1653,7 @@ namespace main
                 this.FormClosing -= new System.Windows.Forms.FormClosingEventHandler(this.BeforeVisit_HQ_FormClosing);
                 this.Close();
             }
-            else if (BCcount > 0)
+            else if (SaveCount > 0)
             {
                 this.FormClosing -= new System.Windows.Forms.FormClosingEventHandler(this.BeforeVisit_HQ_FormClosing);
                 this.Close();
@@ -1681,7 +1685,7 @@ namespace main
                 this.FormClosing -= new System.Windows.Forms.FormClosingEventHandler(this.BeforeVisit_HQ_FormClosing);
                 this.Close();
             }
-            else if (BCcount > 0)
+            else if (SaveCount > 0)
             {
                 this.FormClosing -= new System.Windows.Forms.FormClosingEventHandler(this.BeforeVisit_HQ_FormClosing);
                 this.Close();
