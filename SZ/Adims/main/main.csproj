@@ -72,49 +72,48 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\ChnCharInfo.dll</HintPath>
+    <Reference Include="ChnCharInfo">
+      <HintPath>..\Reference\ChnCharInfo.dll</HintPath>
     </Reference>
-    <Reference Include="MediII.Adapter.BaseBiz, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\MediII.Adapter.BaseBiz.dll</HintPath>
+    <Reference Include="MediII.Adapter.BaseBiz">
+      <HintPath>..\Reference\MediII.Adapter.BaseBiz.dll</HintPath>
     </Reference>
-    <Reference Include="MediII.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\MediII.Common.dll</HintPath>
+    <Reference Include="MediII.Common">
+      <HintPath>..\Reference\MediII.Common.dll</HintPath>
     </Reference>
-    <Reference Include="MediII.Common.Processer, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\MediII.Common.Processer.dll</HintPath>
+    <Reference Include="MediII.Common.Processer">
+      <HintPath>..\Reference\MediII.Common.Processer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=10.0.4504.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Office.Interop.Excel">
+      <HintPath>..\Reference\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>bin\Debug\Microsoft.Office.Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="NHapi.Base, Version=2.3.0.0, Culture=neutral, PublicKeyToken=d0d8ea960a3440eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\NHapi.Base.dll</HintPath>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs">
+      <HintPath>..\Reference\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
     </Reference>
-    <Reference Include="NHapi.Model.V24, Version=2.3.0.0, Culture=neutral, PublicKeyToken=d0d8ea960a3440eb, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\NHapi.Model.V24.dll</HintPath>
+    <Reference Include="NHapi.Base">
+      <HintPath>..\Reference\NHapi.Base.dll</HintPath>
     </Reference>
-    <Reference Include="SenderRoutingLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\SenderRoutingLib.dll</HintPath>
+    <Reference Include="NHapi.Model.V24">
+      <HintPath>..\Reference\NHapi.Model.V24.dll</HintPath>
     </Reference>
-    <Reference Include="sjll, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\sjll.dll</HintPath>
+    <Reference Include="SenderRoutingLib">
+      <HintPath>..\Reference\SenderRoutingLib.dll</HintPath>
+    </Reference>
+    <Reference Include="sjll">
+      <HintPath>..\Reference\sjll.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\Reference\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>..\Reference\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
@@ -133,7 +132,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsFormsControlLibrary5">
-      <HintPath>D:\Documents\Visual Studio 2010\Projects\WindowsFormsControlLibrary5\WindowsFormsControlLibrary5\bin\Debug\WindowsFormsControlLibrary5.dll</HintPath>
+      <HintPath>..\Reference\WindowsFormsControlLibrary5.dll</HintPath>
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>

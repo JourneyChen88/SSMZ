@@ -222,7 +222,12 @@ namespace main
         }
         private void GetConfigure()//获取常用登录医院
         {
-            FileStream fs = new FileStream(Application.StartupPath + "\\LogInNormal.txt", FileMode.Open);
+            string filepath = Application.StartupPath + "\\LogInNormal.txt";
+            if (!File.Exists(filepath))
+            {
+                File.Create(filepath);
+            }
+            FileStream fs = new FileStream(filepath, FileMode.Open);
             StreamReader sw = new StreamReader(fs, Encoding.Default);
             cmbYiyuan.Text = sw.ReadLine();
             sw.Close();

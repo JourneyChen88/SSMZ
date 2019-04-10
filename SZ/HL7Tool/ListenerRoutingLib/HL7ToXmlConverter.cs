@@ -128,6 +128,7 @@ namespace ListenerRoutingLib
                     else
                     {
                         pb.IsZhuYuan = "0";
+                        pb.ASAE = "1";
                     }
                     string[] bedList = sList[3].Split('^');
                     pb.BedNo = bedList[4];
