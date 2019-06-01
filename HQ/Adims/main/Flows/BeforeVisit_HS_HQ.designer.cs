@@ -1473,7 +1473,7 @@
             this.btnCD.Name = "btnCD";
             this.btnCD.Size = new System.Drawing.Size(75, 40);
             this.btnCD.TabIndex = 642;
-            this.btnCD.Text = "存档";
+            this.btnCD.Text = "锁定";
             this.btnCD.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCD.UseVisualStyleBackColor = true;
             this.btnCD.Click += new System.EventHandler(this.btnCD_Click);

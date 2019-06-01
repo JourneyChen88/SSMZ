@@ -406,7 +406,7 @@ namespace main
                     result = _BeforeVisitDal.InsertBeforeVisit_HS(SHFS);
                 if (result > 0)
                 {
-                    BCcount++; //MessageBox.Show("保存成功！");
+                    BCcount++; MessageBox.Show("保存成功！");
                 }
                 else MessageBox.Show("保存失败！");
             }
@@ -1005,7 +1005,7 @@ namespace main
             DataTable dt = _BeforeVisitDal.GetBeforeVisit_HS(PatId);
             if (dt.Rows[0]["isRead"].ToString() == "1")
             {
-                result = _BeforeVisitDal.UpdateBeforeVisit_HS(PatId, 1);
+                result = _BeforeVisitDal.UpdateBeforeVisit_HS(PatId, 0);
                 if (result > 0)
                 {
                     MessageBox.Show("解锁成功！");
