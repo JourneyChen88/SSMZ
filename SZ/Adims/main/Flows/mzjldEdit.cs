@@ -299,7 +299,7 @@ namespace main
             otime = (Convert.ToDateTime(dtMzjld.Rows[0]["otime"]));
             ucOperDate.Controls[0].Text = otime.ToShortDateString();
             cmbSJJG.Text = Convert.ToString(dtMzjld.Rows[0]["jcsjjg"]);
-            if (dtMzjld.Rows[0]["isTiwenView"].ToInt32()== 1)
+            if (dtMzjld.Rows[0]["isTiwenView"].ToInt32() == 1)
             {
                 isTiwenView = true;
                 cbIsTiwen.Checked = true;
@@ -4690,7 +4690,7 @@ namespace main
             string height = ucHeight.Controls[0].Text.Trim();
             string weight = ucWeight.Controls[0].Text.Trim();
             string sqlWhere = $" PatHeight = '{height}',PatWeight= '{weight}' ";
-          
+
             result = dal.UpdatePaibanWhere(patID, sqlWhere);
             return result;
         }
@@ -6901,6 +6901,25 @@ namespace main
         {
             ConsumablesUseForm cuf = new ConsumablesUseForm(mzjldID, patID);
             cuf.ShowDialog();
+        }
+
+        private void btnEHR_Click(object sender, EventArgs e)
+        {
+
+            EHRForm form = new EHRForm(patID);
+            form.Show();
+        }
+
+        private void btnElectrocardiogram_Click(object sender, EventArgs e)
+        {
+            ElectrocardiogramForm form = new ElectrocardiogramForm(patID);
+            form.Show();
+        }
+
+        private void btnPathological_Click(object sender, EventArgs e)
+        {
+            PathologicalForm form = new PathologicalForm(patID);
+            form.Show();
         }
 
         private void txtSSYS_DoubleClick(object sender, EventArgs e)

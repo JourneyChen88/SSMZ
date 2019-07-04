@@ -253,6 +253,18 @@
     <Compile Include="OperDoctorUpdate.Designer.cs">
       <DependentUpon>OperDoctorUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="SysInterface\PathologicalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\PathologicalForm.Designer.cs">
+      <DependentUpon>PathologicalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysInterface\ElectrocardiogramForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\ElectrocardiogramForm.Designer.cs">
+      <DependentUpon>ElectrocardiogramForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SysInterface\EMRform.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -433,6 +445,12 @@
     </Compile>
     <Compile Include="SelectPatient\SelectYSorHS.Designer.cs">
       <DependentUpon>SelectYSorHS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SysInterface\EHRForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SysInterface\EHRForm.Designer.cs">
+      <DependentUpon>EHRForm.cs</DependentUpon>
     </Compile>
     <Compile Include="XiugaiYuanYin.cs">
       <SubType>Form</SubType>
@@ -941,6 +959,12 @@
     <EmbeddedResource Include="OperDoctorUpdate.resx">
       <DependentUpon>OperDoctorUpdate.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\PathologicalForm.resx">
+      <DependentUpon>PathologicalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\ElectrocardiogramForm.resx">
+      <DependentUpon>ElectrocardiogramForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SysInterface\EMRform.resx">
       <DependentUpon>EMRform.cs</DependentUpon>
     </EmbeddedResource>
@@ -1030,6 +1054,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SelectPatient\SelectYSorHS.resx">
       <DependentUpon>SelectYSorHS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SysInterface\EHRForm.resx">
+      <DependentUpon>EHRForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="XiugaiYuanYin.resx">
       <DependentUpon>XiugaiYuanYin.cs</DependentUpon>

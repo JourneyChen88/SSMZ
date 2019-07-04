@@ -11,22 +11,22 @@ using Adims_Utility;
 
 namespace main
 {
-    public partial class PacsForm : Form
+    public partial class EHRForm : Form
     {
-        string carid = "";
-        public PacsForm(string cardno)
+        string Patid = "";
+        public EHRForm(string patid)
         {
-            carid = cardno;
+            Patid = patid;
             InitializeComponent();
         }
-        private void yxbl_Load(object sender, EventArgs e)
+        private void EHRForm_Load(object sender, EventArgs e)
         {
             this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
             this.Top = 0;
             XmlHelper help = new XmlHelper();
             string filename = Application.StartupPath + @"\SysSetting.xml";
-            var remotepath = help.GetXmlNodeInnerText(filename, "PACS");
-            string http = remotepath + carid;
+            var remotepath = help.GetXmlNodeInnerText(filename, "EHR");
+            string http = remotepath;
             webBrowser1.Navigate(http);
         }
     }
