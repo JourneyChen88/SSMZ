@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -23,9 +24,11 @@ namespace main
         {
             this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
             this.Top = 0;
-            XmlHelper help = new XmlHelper();
-            string filename = Application.StartupPath + @"\SysSetting.xml";
-            var remotepath = help.GetXmlNodeInnerText(filename, "PACS");
+            //XmlHelper help = new XmlHelper();
+            //string filename = Application.StartupPath + @"\SysSetting.xml";
+
+            var remotepath = ConfigurationManager.AppSettings["PACS"];
+            //help.GetXmlNodeInnerText(filename, "PACS");
             string http = remotepath + carid;
             webBrowser1.Navigate(http);
         }

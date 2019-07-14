@@ -22,9 +22,9 @@ namespace main
 
         private void EMRform_Load(object sender, EventArgs e)
         {
-            XmlHelper help = new XmlHelper();
-            string filename = Application.StartupPath + @"\SysSetting.xml";
-            var remotepath = help.GetXmlNodeInnerText(filename, "EMR");
+            //XmlHelper help = new XmlHelper();
+            //string filename = Application.StartupPath + @"\SysSetting.xml";
+            var remotepath = ConfigurationManager.AppSettings["EMR"];
             string http = remotepath + userNo;
             webBrowser1.Navigate(http);
         }
