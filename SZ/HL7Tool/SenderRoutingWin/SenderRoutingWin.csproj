@@ -38,6 +38,9 @@
     <Reference Include="ChnCharInfo">
       <HintPath>..\Common\ChnCharInfo.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="MediII.Common">
       <HintPath>..\Common\MediII.Common.dll</HintPath>
     </Reference>
@@ -51,8 +54,10 @@
       <HintPath>..\Common\NHapi.Model.V24.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Printing" />
     <Reference Include="System.ServiceModel" />
@@ -109,6 +114,7 @@
       <DependentUpon>SenderWCFWin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

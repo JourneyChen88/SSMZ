@@ -56,6 +56,8 @@ namespace ListenerRoutingLib
 
         public String applyID { get; set; }
 
+        public String PatientNo { get; set; }
+
         public String cardNO { get; set; }
 
     }

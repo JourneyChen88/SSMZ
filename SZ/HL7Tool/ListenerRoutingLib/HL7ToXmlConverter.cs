@@ -86,7 +86,7 @@ namespace ListenerRoutingLib
                 {
 
                     string[] sList = sHL7Lines[i].Split('|');
-
+                    pb.PatientNo = sList[2];
                     string[] idList = sList[3].Split('~');
                     pb.applyID = idList[0];
                     pb.zhuyuanNO = idList[1];

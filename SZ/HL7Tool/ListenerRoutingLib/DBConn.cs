@@ -160,17 +160,16 @@ namespace ListenerRoutingLib
 
         public int InsertPaiban(paibanModel pb, string tableName)
         {
-            string SQL_PAIBAN = "insert into " + tableName + " (applyid,Cardno, PatZhuYuanID,IsZhuYuan, Patname,Patage,Patsex,patWeight,patHeight,patdpm,Pattmd,Oname,Odate,ApplyDate,os,OsNo,OA1,OA2,OA3,OA1No,OA2No,OA3No,Amethod,Patbedno,patid,asae,operaddress,ostate,oroom,ap1,ap2,ap3,sn1,sn2,on1,on2)"
-                + "values('" + pb.applyID + "','" + pb.cardNO + "','" + pb.zhuyuanNO + "','" + pb.IsZhuYuan + "','" + pb.patName + "','" + pb.patage + "','" + pb.patsex + "','" + pb.Weight + "','" + pb.Height + "','" + pb.patdpm + "','" + pb.SQZD + "','" + pb.Oname + "','" + pb.Odate + "','" + pb.ApplyDate + "',"
+            string SQL_PAIBAN = "insert into " + tableName + " (PatientNo,applyid,Cardno, PatZhuYuanID,IsZhuYuan, Patname,Patage,Patsex,patWeight,patHeight,patdpm,Pattmd,Oname,Odate,ApplyDate,os,OsNo,OA1,OA2,OA3,OA1No,OA2No,OA3No,Amethod,Patbedno,patid,asae,operaddress,ostate,oroom,ap1,ap2,ap3,sn1,sn2,on1,on2)"
+                + "values('" + pb.PatientNo + "','" + pb.applyID + "','" + pb.cardNO + "','" + pb.zhuyuanNO + "','" + pb.IsZhuYuan + "','" + pb.patName + "','" + pb.patage + "','" + pb.patsex + "','" + pb.Weight + "','" + pb.Height + "','" + pb.patdpm + "','" + pb.SQZD + "','" + pb.Oname + "','" + pb.Odate + "','" + pb.ApplyDate + "',"
             + "'" + pb.OS + "','" + pb.OsNo + "','" + pb.OA1 + "','" + pb.OA2 + "','" + pb.OA3 + "','" + pb.OA1No + "','" + pb.OA2No + "','" + pb.OA3No + "','" + pb.MZFA + "','" + pb.BedNo + "','" + pb.PATID + "','" + pb.ASAE + "','" + pb.operAddress + "','0','','','','','','','','')";
             string INSERT = string.Format(SQL_PAIBAN);
             SaveLog(INSERT);
             return ExecuteNonQuery(INSERT);
-
         }
         public int UpdatePaibanAll(paibanModel pb, string tableName)
         {
-            string SQL_PAIBAN = "Update " + tableName + " set applyid='" + pb.applyID + "',Cardno='" + pb.cardNO + "', PatZhuYuanID='" + pb.zhuyuanNO + "',"
+            string SQL_PAIBAN = "Update " + tableName + " set   PatientNo='" + pb.PatientNo + "',applyid='" + pb.applyID + "',Cardno='" + pb.cardNO + "', PatZhuYuanID='" + pb.zhuyuanNO + "',"
             + "IsZhuYuan='" + pb.IsZhuYuan + "', Patname='" + pb.patName + "',Patage='" + pb.patage + "',Patsex='" + pb.patsex + "',patWeight='" + pb.Weight + "',"
             + "patHeight='" + pb.Height + "',patdpm='" + pb.patdpm + "',Pattmd='" + pb.SQZD + "',Oname='" + pb.Oname + "',os='" + pb.OS + "',Odate='" + pb.Odate + "',ApplyDate='" + pb.ApplyDate + "',"
             + "OsNo='" + pb.OsNo + "',OA1='" + pb.OA1 + "',OA2='" + pb.OA2 + "',OA3='" + pb.OA3 + "',OA1No='" + pb.OA1No + "',OA2No='" + pb.OA2No + "',OA3No='" + pb.OA3No + "',"
