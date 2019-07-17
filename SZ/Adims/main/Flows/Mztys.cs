@@ -26,7 +26,7 @@ namespace main
 
         private void Mzzqtys_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.customer.yiyuanType;
+            yiyuanID = Program.Customer.yiyuanType;
             DataBind();
             cmbMZYS.Items.Clear();
             DataTable dt1 = bll.selectUserName(1);

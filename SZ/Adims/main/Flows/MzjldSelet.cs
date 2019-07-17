@@ -47,18 +47,18 @@ namespace main
         /// <param name="e"></param>
         private void Smzjld_Load(object sender, EventArgs e)
         {
-            operAddress = Program.customer.yiyuanType;
+            operAddress = Program.Customer.yiyuanType;
             BindNewPatInfo();
         }
         public void BindNewPatInfo()
         {
-            lbMzs.Text = Program.customer.user_name;
+            lbMzs.Text = Program.Customer.user_name;
             dataGridView1.DataSource = bll.xssbr1(dtDATE.Value.ToString("yyyy-MM-dd"), operAddress).DefaultView;
             dataGridView1_CellClick(null, null);
         }
         public void BindOldPatInfo()
         {
-            lbMzs.Text = Program.customer.user_name;
+            lbMzs.Text = Program.Customer.user_name;
             dataGridView1.DataSource = bll.xssbr2(dtDATE.Value.ToString("yyyy-MM-dd"), operAddress).DefaultView;
             dataGridView1_CellClick(null, null);
         }
@@ -155,7 +155,7 @@ namespace main
         {
             try
             {
-                lbMzs.Text = Program.customer.user_name;
+                lbMzs.Text = Program.Customer.user_name;
                 DataTable dt;
                 if (rdNew.Checked)
                 {

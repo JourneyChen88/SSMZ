@@ -78,14 +78,14 @@ namespace main
                 if (dtUser.Rows.Count != 0)
                 {
                     SaveConfigure();
-                    Program.customer.user_name = dtUser.Rows[0][2].ToString();
-                    Program.customer.position = dtUser.Rows[0][3].ToString();
-                    Program.customer.userno = dtUser.Rows[0][4].ToString();
+                    Program.Customer.user_name = dtUser.Rows[0][2].ToString();
+                    Program.Customer.position = dtUser.Rows[0][3].ToString();
+                    Program.Customer.userno = dtUser.Rows[0][4].ToString();
                     if (cmbYiyuan.Text.Trim() == "江苏盛泽医院")
-                        Program.customer.yiyuanType = "010601";
+                        Program.Customer.yiyuanType = "010601";
                     else if (cmbYiyuan.Text.Trim() == "妇幼保健中心")
-                        Program.customer.yiyuanType = "010604";
-                    string jurisdiction = bll.Get_user_jurisdiction(Program.customer);
+                        Program.Customer.yiyuanType = "010604";
+                    string jurisdiction = bll.Get_user_jurisdiction(Program.Customer);
                     int jurisdiction_Length = jurisdiction.Length;
                     Program.jurisdiction = new bool[jurisdiction_Length];
                     Char[] temp = new char[jurisdiction_Length];

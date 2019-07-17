@@ -95,7 +95,7 @@ namespace main
         /// <param name="e"></param>
         private void paiban_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.customer.yiyuanType;
+            yiyuanID = Program.Customer.yiyuanType;
             this.numericUpDown1.Value = 1;
             this.WindowState = FormWindowState.Maximized;
             this.dtDataTime.Value = DateTime.Now;
@@ -1005,7 +1005,7 @@ namespace main
                     int a = dal.UpdatePaibanCancel(patid);
                     if (a > 0)
                     {
-                        string msg = Program.customer.user_name + " 取消了 " + patid + "--" + patname +
+                        string msg = Program.Customer.user_name + " 取消了 " + patid + "--" + patname +
                             " 的手术，取消时间为：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm");
                         SaveLog(msg);
                         string sqlWhere = "";
@@ -1484,8 +1484,8 @@ namespace main
             String SCH = "SCH||||||";
             SCH += "^取消手术安排^^^ " + "|||||";
             SCH += "^^^" + DateTime.Now.ToString("yyyyMMddHHmmss") + "|||||";
-            SCH += Program.customer.userno + "^^" + Program.customer.user_name + "||||";
-            SCH += Program.customer.userno + "^^" + Program.customer.user_name + "|||||";
+            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "||||";
+            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "|||||";
             SCH += patid + "\n";
             #endregion
 
@@ -1539,8 +1539,8 @@ namespace main
             #region ARQ|
             String ARQ = "ARQ|" + dr["patid"].ToString() + "||||||||||";
             ARQ += DateTime.Now.ToString("yyyyMMddHHmmss") + "||||";
-            ARQ += Program.customer.userno + "||||";
-            ARQ += Program.customer.userno + "\n";
+            ARQ += Program.Customer.userno + "||||";
+            ARQ += Program.Customer.userno + "\n";
             #endregion
 
 
@@ -1599,9 +1599,9 @@ namespace main
             #region SCH|
             String SCH = "SCH||||||^" + SCH_1 + "^^^原因" + "|||||";
             SCH += "^^^" + Convert.ToDateTime(dr["odate"]).ToString("yyyyMMddHHmmss") + "|||||";
-            SCH += Program.customer.userno + "^^" + Program.customer.user_name + "|||";
+            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "|||";
             SCH += "^^^^^^^^" + dr["patdpm"].ToString() + "|";
-            SCH += Program.customer.userno + "^^" + Program.customer.user_name + "|||||";
+            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "|||||";
             SCH += dr["patid"].ToString() + "\n";
             #endregion
 

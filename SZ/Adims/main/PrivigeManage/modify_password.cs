@@ -18,13 +18,13 @@ namespace main.PrivigeManage
             InitializeComponent();
         }
         AdimsController bll = new AdimsController();
-        user_info customer = new user_info();
+        user_info Customer = new user_info();
         private void button1_Click(object sender, EventArgs e)
         {
             string old_password = old_txt.Text.ToString().Trim();
             string new_password1 = new1_txt.Text.ToString().Trim();
             string new_password2 = new2_txt.Text.ToString().Trim();
-            if (old_password != Program.customer.password)
+            if (old_password != Program.Customer.password)
             {
                 MessageBox.Show("旧密码输入错误，你没有修改权限","警告");
                 old_txt.Text = "";
@@ -37,8 +37,8 @@ namespace main.PrivigeManage
                 new2_txt.Text = "";
                 return;
             }
-            Program.customer.password = new_password1;
-            bll.Update_user(Program.customer);
+            Program.Customer.password = new_password1;
+            bll.Update_user(Program.Customer);
             MessageBox.Show("恭喜，密码修改成功", "信息");
         }
 

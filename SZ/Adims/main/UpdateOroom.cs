@@ -54,7 +54,7 @@ namespace main
         /// <param name="e"></param>
         private void selaa_Load(object sender, EventArgs e)
         {
-            operAddress = Program.customer.yiyuanType;
+            operAddress = Program.Customer.yiyuanType;
             cmbOroom.Items.Clear();
             DataTable dt1 = dal.GetOROOM(operAddress);
             for (int i = 0; i < dt1.Rows.Count; i++)

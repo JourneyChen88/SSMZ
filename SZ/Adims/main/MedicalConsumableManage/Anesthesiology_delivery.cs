@@ -39,7 +39,7 @@ namespace main.MedicalConsumableManage
         DataSet medicine_set = new DataSet();
         private void Anesthesiology_delivery_Load(object sender, EventArgs e)
         {
-            confirmPerson_txt.Text = Program.customer.user_name;
+            confirmPerson_txt.Text = Program.Customer.user_name;
             stock_set = bll.select_surgery_stock();
             output_set = bll.select_surgery_output();
             medicine_set = bll.select_medicine_info();

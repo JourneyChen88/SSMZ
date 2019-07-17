@@ -47,7 +47,7 @@ namespace main
 
         private void Mzzongjie_Load(object sender, EventArgs e)
         {
-            operAddress= Program.customer.yiyuanType;
+            operAddress= Program.Customer.yiyuanType;
             DataBind();
         }
 

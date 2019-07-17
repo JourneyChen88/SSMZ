@@ -23,7 +23,7 @@ namespace main.MedicalConsumableManage
         DataSet medicine_info_set = new DataSet();
         private void Anesthesiology_dpt_management_Load(object sender, EventArgs e)
         {
-            confirmPerson_IN_txt.Text = Program.customer.user_name;
+            confirmPerson_IN_txt.Text = Program.Customer.user_name;
             stock_set = bll.select_surgery_stock();
             input_set = bll.select_surgery_input();
             medicine_info_set = bll.select_medicine_info();

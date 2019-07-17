@@ -174,8 +174,8 @@ namespace main
                     }
                 }*/
             //将菜单添加到目录表中
-            this.Text += "(当前用户为: " + Program.customer.user_name + ")";
-            string jurisdiction = bll.Get_user_jurisdiction(Program.customer);
+            this.Text += "(当前用户为: " + Program.Customer.user_name + ")";
+            string jurisdiction = bll.Get_user_jurisdiction(Program.Customer);
             sqxxToolStripMenuItem.Visible = false;
             szxxToolStripMenuItem.Visible = false;
             shxxToolStripMenuItem.Visible = false;

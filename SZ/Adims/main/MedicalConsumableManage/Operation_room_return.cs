@@ -43,7 +43,7 @@ namespace main
 
         private void Operation_room_return_Load(object sender, EventArgs e)
         {
-            confirmPerson_txt.Text = Program.customer.user_name;
+            confirmPerson_txt.Text = Program.Customer.user_name;
             for (int i = 0; i < 10; i++)
                 roomId_com.Items.Add(i.ToString());
             roomId_com.SelectedIndex = 0;

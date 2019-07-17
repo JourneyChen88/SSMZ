@@ -51,7 +51,7 @@ namespace main
 
         private void JizhenOper_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.customer.yiyuanType;
+            yiyuanID = Program.Customer.yiyuanType;
             cmbOroom.Items.Clear();
             DataTable dt1 = dal.GetOROOM(yiyuanID);
             for (int i = 0; i < dt1.Rows.Count; i++)

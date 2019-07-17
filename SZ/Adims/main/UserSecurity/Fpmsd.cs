@@ -17,11 +17,11 @@ namespace main.UserSecurity
             InitializeComponent();
         }
         Keys presskey;
-        user_info customer = new user_info();
+        user_info Customer = new user_info();
         private void Fpmsd_Load(object sender, EventArgs e)
         {
-            button1.Text = "屏幕已被" + Program.customer.user_name + "锁定";
-            customer.uid = Program.customer.uid;
+            button1.Text = "屏幕已被" + Program.Customer.user_name + "锁定";
+            Customer.uid = Program.Customer.uid;
 
         }
         bool flag = false;
@@ -31,7 +31,7 @@ namespace main.UserSecurity
             newlogin.ShowDialog();
             if (newlogin.DialogResult == DialogResult.OK)
             {
-                if (Program.customer.uid == customer.uid) { flag = true; this.Close(); }
+                if (Program.Customer.uid == Customer.uid) { flag = true; this.Close(); }
                 else
                 {
                     MessageBox.Show("登录用户与锁定用户不一致", "警告");

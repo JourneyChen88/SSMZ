@@ -3788,8 +3788,8 @@ namespace main
             SCH += "SSMZ" + "^^^" + mzff_No + "^" + mzff + "|||||";
             SCH += "^^^" + Convert.ToDateTime(dr["sskssj"]).ToString("yyyyMMddHHmmss") + "^" + Convert.ToDateTime(dr["ssjssj"]).ToString("yyyyMMddHHmmss");
             SCH += "^^^" + Convert.ToDateTime(dr["otime"]).ToString("yyyyMMddHHmmss") + "^" + DateTime.Now.ToString("yyyyMMddHHmmss") + "|||||";
-            SCH += Program.customer.userno + "^^" + Program.customer.user_name + "||||";
-            SCH += Program.customer.userno + "^^" + Program.customer.user_name + "|||||";
+            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "||||";
+            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "|||||";
             SCH += dr["patid"].ToString() + "\n";
             #endregion
             #region PV1|
@@ -4597,8 +4597,12 @@ namespace main
         private void button8_Click(object sender, EventArgs e)
         {
             string cardno = at.GetCardno(patID).ToString();
-            PacsForm yxblform = new PacsForm(cardno);
-            yxblform.Show();
+            //PacsForm yxblform = new PacsForm(cardno);
+            //yxblform.Show();
+
+            var remotepath = ConfigurationManager.AppSettings["PACS"];
+            string http = remotepath + cardno;
+            BrowserHelper.OpenDefaultBrowserUrl(http);
         }
 
         /// <summary>
@@ -6906,20 +6910,32 @@ namespace main
         private void btnEHR_Click(object sender, EventArgs e)
         {
 
-            EHRForm form = new EHRForm(patID);
-            form.Show();
+            //  EHRForm form = new EHRForm(patID);
+            //form.Show();
+            var remotepath = ConfigurationManager.AppSettings["EHR"];
+            string http = remotepath;
+            BrowserHelper.OpenDefaultBrowserUrl(http);
         }
 
         private void btnElectrocardiogram_Click(object sender, EventArgs e)
         {
-            ElectrocardiogramForm form = new ElectrocardiogramForm(patID);
-            form.Show();
+            //ElectrocardiogramForm form = new ElectrocardiogramForm(patID);
+            //form.Show();
+            var res = dal.GetPaiban(patID);
+            string PatientNo = res.Rows[0]["PatientNo"].ToString();
+            var remotepath = ConfigurationManager.AppSettings["Electrocardiogram"];
+            string http = remotepath + PatientNo;
+            BrowserHelper.OpenDefaultBrowserUrl(http);
         }
 
         private void btnPathological_Click(object sender, EventArgs e)
         {
-            PathologicalForm form = new PathologicalForm(patID);
-            form.Show();
+            //PathologicalForm form = new PathologicalForm(patID);
+            //form.Show();
+            var remotepath = ConfigurationManager.AppSettings["Pathological"];
+            //help.GetXmlNodeInnerText(filename, "Pathological");
+            string http = remotepath;
+            BrowserHelper.OpenDefaultBrowserUrl(http);
         }
 
         private void txtSSYS_DoubleClick(object sender, EventArgs e)
@@ -7075,9 +7091,10 @@ namespace main
 
         private void btnEmr_Click(object sender, EventArgs e)//链接电子病历
         {
-            string userNO = Program.customer.userno;
-            EMRform yxblform = new EMRform(userNO);
-            yxblform.Show();
+            string userNO = Program.Customer.userno;            
+            var remotepath = ConfigurationManager.AppSettings["EMR"];
+            string http = remotepath + userNO;
+            BrowserHelper.OpenDefaultBrowserUrl(http);
         }
 
         private void isEyeOper_CheckedChanged(object sender, EventArgs e)

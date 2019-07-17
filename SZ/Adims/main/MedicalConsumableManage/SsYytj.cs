@@ -141,7 +141,7 @@ namespace main.MedicalConsumableManage
             //    dtKStime.Text = year + "/1/1";
             //    //初始化月份第一天
             //    dtKStime.Text = year + "/" + month + "/1";
-            yiyuanType = Program.customer.yiyuanType;
+            yiyuanType = Program.Customer.yiyuanType;
             BindPat();
 
         }

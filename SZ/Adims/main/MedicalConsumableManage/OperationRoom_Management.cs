@@ -28,9 +28,9 @@ namespace main.MedicalConsumableManage
         admin_T_SQL at = new admin_T_SQL();
         private void OperationRoom_Management_Load(object sender, EventArgs e)
         {
-            this.confirmPerson_IN_txt.Text = "" + Program.customer.user_name;//谁登陆谁就是用药确认人
-            this.confirmPerson_OUT_txt.Text = "" + Program.customer.user_name;//谁登陆谁就是用药确认人
-            this.confirm_CHECK_txt.Text = "" + Program.customer.user_name;//谁登陆谁就是用药确认人
+            this.confirmPerson_IN_txt.Text = "" + Program.Customer.user_name;//谁登陆谁就是用药确认人
+            this.confirmPerson_OUT_txt.Text = "" + Program.Customer.user_name;//谁登陆谁就是用药确认人
+            this.confirm_CHECK_txt.Text = "" + Program.Customer.user_name;//谁登陆谁就是用药确认人
 
             BindcmbOrrom();
             Bindmedicine_number();

@@ -107,7 +107,7 @@ namespace main.OrgBusinessManage
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     string ysName = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                    DataTable dt2 = apro.GetYSMZLbyTime(SumAll, date1, date2, ysName,Program.customer.yiyuanType);
+                    DataTable dt2 = apro.GetYSMZLbyTime(SumAll, date1, date2, ysName,Program.Customer.yiyuanType);
                     if (dt2.Rows[0][0] == null)
                     {
                         dataGridView1.Rows[i].Cells[1].Value = 0;

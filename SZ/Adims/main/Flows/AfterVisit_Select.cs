@@ -20,7 +20,7 @@ namespace main
         AdimsProvider apro = new AdimsProvider();
         private void AfterVisit_Select_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.customer.yiyuanType;
+            yiyuanID = Program.Customer.yiyuanType;
             DataBind();
         }
         private void DataBind()

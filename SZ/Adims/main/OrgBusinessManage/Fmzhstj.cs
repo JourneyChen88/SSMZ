@@ -52,7 +52,7 @@ namespace main.OrgBusinessManage
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
                 {
                     string HSName = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                    DataTable dt2 = apro.GetHSMZLbyTime(SumAll, date1, date2, HSName, Program.customer.yiyuanType);
+                    DataTable dt2 = apro.GetHSMZLbyTime(SumAll, date1, date2, HSName, Program.Customer.yiyuanType);
                     if (dt2.Rows[0][0] == null)
                     {
                         dataGridView1.Rows[i].Cells[1].Value = 0;

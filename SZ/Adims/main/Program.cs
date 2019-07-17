@@ -14,7 +14,7 @@ namespace main
     {
         public static string yh;
         public static string zhanghao;
-        public static user_info customer = new user_info();
+        public static user_info Customer = new user_info();
         public static bool[] jurisdiction;
         public static List<string> muluz = new List<string>();
         public static GlobalsModel Globals = new GlobalsModel();

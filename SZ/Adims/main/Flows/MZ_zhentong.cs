@@ -21,7 +21,7 @@ namespace main
 
         private void MZ_zhentong_Load(object sender, EventArgs e)
         {
-            operAddress = Program.customer.yiyuanType;
+            operAddress = Program.Customer.yiyuanType;
             DataBind();
         }
         private void DataBind()
