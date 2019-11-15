@@ -12,7 +12,7 @@ namespace main
 {
     public partial class NurseRecord_Select : Form
     {
-        string operAddress = "";
+      
         AdimsProvider apro = new AdimsProvider();
         public NurseRecord_Select()
         {
@@ -21,12 +21,12 @@ namespace main
 
         private void NurseRecord_Select_Load(object sender, EventArgs e)
         {
-            operAddress = Program.Customer.yiyuanType;
+          
             DataBind();
         }
         private void DataBind()
         {
-            DataTable dt1 = apro.GetmazuizongjieList(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"),operAddress);
+            DataTable dt1 = apro.GetmazuizongjieList(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
             dataGridView1.DataSource = dt1.DefaultView;
         }
 

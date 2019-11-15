@@ -330,7 +330,7 @@ namespace main.MedicalConsumableManage
         adims_DAL.AdimsProvider dal = new adims_DAL.AdimsProvider();
         private void BindPat()
         {
-            DataTable dt1 = dal.GetmazuizongjieList(dtKStime.Value.Date.ToString("yyyy-MM-dd"), yiyuanType);
+            DataTable dt1 = dal.GetmazuizongjieList(dtKStime.Value.Date.ToString("yyyy-MM-dd"));
             dgvPat.DataSource = dt1.DefaultView;
         }
 

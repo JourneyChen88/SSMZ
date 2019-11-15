@@ -12,7 +12,7 @@ namespace main
 {
     public partial class MZ_zhentong : Form
     { 
-        string operAddress ="";
+      
         public MZ_zhentong()
         {
             InitializeComponent();
@@ -21,12 +21,12 @@ namespace main
 
         private void MZ_zhentong_Load(object sender, EventArgs e)
         {
-            operAddress = Program.Customer.yiyuanType;
+           
             DataBind();
         }
         private void DataBind()
         {
-            DataTable dt1 = apro.GetmazuizongjieList(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"), operAddress);
+            DataTable dt1 = apro.GetmazuizongjieList(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
             dataGridView1.DataSource = dt1.DefaultView;
         }
 

@@ -201,7 +201,7 @@ AS OT on M.patid = OT.PatId left join Adims_BeforeVisit_HS as H on h.PatId=OT.Pa
         /// <returns></returns>
         public DataTable GetFromStartToEndTime(DateTime date1, DateTime date2)
         {
-            string select1 = @"SELECT row_number() over(order by m.otime) as row_id, M.id AS mzid,OT.PatZhuYuanID,Convert(nvarchar,otime,23) as otime,
+            string select1 = $@"SELECT row_number() over(order by m.otime) as row_id, M.id AS mzid,OT.PatZhuYuanID,Convert(nvarchar,otime,23) as otime,
 Oroom,PatName,patsex,patage,Patdpm,(select case ot.isjizhen when 0 then '择期' else '急诊' end )as jizhen
 ,(left(Convert(varchar,otime,108),(len(Convert(varchar,otime,108))-3)))as rssj,(left(Convert(varchar,sskssj,108),
 (len(Convert(varchar,sskssj,108))-3)))as kssj,(left(Convert(varchar,(select max(RecordTime)
@@ -210,11 +210,11 @@ Oroom,PatName,patsex,patage,Patdpm,(select case ot.isjizhen when 0 then '择期'
  from Adims_MonitorRecord where mzjldid=m.id),108))-3)))as jssj
 ,Szzd,ot.oname,ot.Amethod,MazuiFS,M.asa,Ssys,mzys,qxhs,Xhhs,h.Ssjb,h.Fxpg,h.shengfen,ot.Remarks
  FROM Adims_mzjld AS M  left join Adims_OperSchedule  
-AS OT on M.patid = OT.patid left join Adims_BeforeVisit_HS as H on h.patid=OT.patid"
-+ " where otime between '" + date1 + "'and'" + date2 + "' "
-+ " and mzkssj>'1990-01-01' and ssjssj>'1990-01-01'  and ot.odate>=1 ";
+AS OT on M.patid = OT.patid left join Adims_BeforeVisit_HS as H on h.patid=OT.patid
+ where otime between '{date1}' and '{date2}' 
+and mzkssj>'1990-01-01' and ssjssj>'1990-01-01'  and ot.odate>=1 ";
 
-            return dBConn.GetDataTable(string.Format(select1));
+            return dBConn.GetDataTable(select1);
         }
     }
 }

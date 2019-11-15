@@ -11,7 +11,7 @@ namespace main
 {
     public partial class JizhenOper : Form
     {
-        string yiyuanID;//新医院或者旧医院
+       
         public JizhenOper()
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace main
                 cmbOroom.Focus();
                 return;
             }
-            int i = dal.InsertPAIBAN(patid, patname, oroom, odate,yiyuanID);//插入急诊排班
+            int i = dal.InsertPAIBAN(patid, patname, oroom, odate);//插入急诊排班
             if (i>0)
             {
                 mzjldEdit mzjld1 = new mzjldEdit(patid, oroom, odate, 0);
@@ -51,9 +51,9 @@ namespace main
 
         private void JizhenOper_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.Customer.yiyuanType;
+           
             cmbOroom.Items.Clear();
-            DataTable dt1 = dal.GetOROOM(yiyuanID);
+            DataTable dt1 = dal.GetOROOM();
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
                 this.cmbOroom.Items.Add(dt1.Rows[i][0]);

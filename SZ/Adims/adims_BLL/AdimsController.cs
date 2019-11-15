@@ -1362,18 +1362,18 @@ namespace adims_BLL
                 + "ap3 副麻医师2,on1 洗手护士1,on2 洗手护士2,sn1 巡回护士1,sn2 巡回护士2,remarks 备注 from Adims_OTypesetting "
                 + "WITH (NOLOCK) where CONVERT(varchar, Odate , 23 )  ='" + dtime + "'");
         }
-        public DataTable Sqfs1(string dtime, string operaddress)
+        public DataTable GetPaibanByOdate(string dtime)
         {
             string sqls = "select patzhuyuanid 住院号,patbedno 床号,patname 姓名,patdpm 病区,patage 年龄,patsex 性别,"
                 + " oname 拟实施手术,pattmd 主要诊断,os 手术医师,oname 手术名字,amethod 麻醉方法,ap1 主麻医师,on1 器械护士,sn1 巡回护士,"
                 + " patid 病人编号 from Adims_OTypesetting WITH (NOLOCK) where CONVERT(varchar, Odate , 23 )  ='" + dtime + "' "
-                + " and IsValid='1' and operaddress ='" + operaddress + "'";
+                + " and IsValid='1' ";
 
             return dBConn.GetDataTable(sqls);
         }
-        public DataTable GetPaibanInfo(string dtime, string operaddress)
+        public DataTable GetPaibanInfo(string dtime)
         {
-            string sqls = "select patid,patname,patbedno , patdpm  from Adims_OTypesetting WITH (NOLOCK) where CONVERT(varchar, Odate , 23 )  ='" + dtime + "' and operaddress ='" + operaddress + "'";
+            string sqls = "select patid,patname,patbedno , patdpm  from Adims_OTypesetting WITH (NOLOCK) where CONVERT(varchar, Odate , 23 )  ='" + dtime + "'";
             return dBConn.GetDataTable(sqls);
         }
         public DataTable GetAllPaibanInfo(string patid)
@@ -1429,15 +1429,7 @@ namespace adims_BLL
         }
 
 
-        /// <summary>
-        /// 查询手术信息
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        public DataTable GetOperationName(string str)
-        {
-            return dBConn.GetDataTable("select onname 手术名称,OperCode 编码,olevel 手术等级,ospell 检索拼音 from OperationName where ospell like'%" + str + "%' ");
-        }
+
 
 
    
@@ -1468,18 +1460,23 @@ namespace adims_BLL
         /// </summary>
         /// <param name="ap"></param>
         /// <returns></returns>
-        public DataTable xssbr1(string dt, string operAddress)
+        public DataTable GetPaibaned(string dt)
         {
             string sql = "SELECT Oroom 手术间名称,patdpm 科室,patzhuyuanid 住院号,patbedno 床位号, Patname 病人姓名,patsex 性别, patage 年龄,pattmd 主要诊断,"
                 + "oname 手术名称,patid 病人编号,id 编号  from Adims_OTypesetting WITH (NOLOCK) where "
-            + "CONVERT(varchar, Odate , 23 ) = '" + dt + "' and operAddress='" + operAddress + "' and ostate='1' and IsValid='1'  order by oroom ";
+            + "CONVERT(varchar, Odate , 23 ) = '" + dt + "' and ostate='1' and IsValid='1'  order by oroom ";
             return dBConn.GetDataTable(sql);
         }
-        public DataTable xssbr2(string dt, string operAddress)
+        /// <summary>
+        /// 获取已手术列表
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public DataTable GetOpered(string dt)
         {
             string sql = "SELECT Oroom 手术间名称,patdpm 科室,patzhuyuanid 住院号,patbedno 床位号,Patname 病人姓名,patsex 性别, patage 年龄,pattmd 主要诊断,"
                 + "oname 手术名称,A.patid 病人编号, B.id 麻醉编号 from Adims_OTypesetting AS A Inner join adims_mzjld as B  ON A.patid=B.patid "
-                + " where CONVERT(varchar, Otime , 23 ) = '" + dt + "' and operAddress='" + operAddress + "' and IsValid='1' order by A.oroom ";
+                + " where CONVERT(varchar, Otime , 23 ) = '" + dt + "' and IsValid='1' order by A.oroom ";
 
             return dBConn.GetDataTable(sql);
         }

@@ -11,7 +11,7 @@ namespace main
 {
     public partial class Mzzqtys : Form
     {
-        string yiyuanID = "";
+      
         public string patID = "";
         adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
         public Mzzqtys()
@@ -20,13 +20,13 @@ namespace main
         }
         private void DataBind()
         {
-            DataTable dt1 = bll.GetPaibanInfo(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"), yiyuanID);
+            DataTable dt1 = bll.GetPaibanInfo(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
             dataGridView1.DataSource = dt1.DefaultView;
         }
 
         private void Mzzqtys_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.Customer.yiyuanType;
+         
             DataBind();
             cmbMZYS.Items.Clear();
             DataTable dt1 = bll.selectUserName(1);

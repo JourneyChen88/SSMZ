@@ -35,7 +35,6 @@ namespace main
         private void osel_Load(object sender, EventArgs e)
         {
             BindDgvSelected();
-            // bll.GetOperationName("");
             OperNameTable = HisHelp.GetHisOperName("");
 
              dgvOperList.DataSource = OperNameTable.DefaultView;

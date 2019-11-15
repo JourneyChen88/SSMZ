@@ -11,7 +11,7 @@ namespace main
 {
     public partial class Mzjhs_select : Form
     {
-        string yiyuanID =""; 
+       
         adims_DAL.AdimsProvider apro = new adims_DAL.AdimsProvider();
         adims_BLL.AdimsController acon = new adims_BLL.AdimsController();
         public Mzjhs_select()
@@ -36,13 +36,13 @@ namespace main
         }
         private void DataBind()
         {
-            DataTable dt1 = acon.Sqfs1(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"), yiyuanID);
+            DataTable dt1 = acon.GetPaibanByOdate(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
             dataGridView1.DataSource = dt1.DefaultView;
         }
 
         private void BeforeVisit_Select_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.Customer.yiyuanType;
+           
             DataBind();
         }
 

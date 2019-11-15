@@ -31,7 +31,7 @@ namespace main
     {
         #region <<Members>>
         adims_MODEL.PaibanModel pbModel = new adims_MODEL.PaibanModel();
-        string yiyuanID;
+        
         string whereOstate1 = " and ostate>='1' ";
         string whereOstate0 = " and ostate='0' ";
         string whereEyeOper = " and patdpm like '%眼科%' ";
@@ -95,7 +95,7 @@ namespace main
         /// <param name="e"></param>
         private void paiban_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.Customer.yiyuanType;
+          
             this.numericUpDown1.Value = 1;
             this.WindowState = FormWindowState.Maximized;
             this.dtDataTime.Value = DateTime.Now;
@@ -104,7 +104,7 @@ namespace main
                 List<adims_MODEL.oroomstate> rs = new List<adims_MODEL.oroomstate>();
                 dgvOTypesetting.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 BindPaibanInfo(whereNotEyeOper);//绑定列表
-                dtRoom = dal.GetOROOM(yiyuanID);
+                dtRoom = dal.GetOROOM();
                 BindOroom(dtRoom);
                 BindOroomList(dtRoom);//绑定左侧手术间列表
                 DataTable dtMZYS = dal.GetAllMZYS();
@@ -149,7 +149,7 @@ namespace main
         private void BindPaibanInfo(string sqlwhere)//绑定我们系统数据表排班情况
         {
 
-            ds = dal.GetPAIBAN(dtDataTime.Value.Date.ToString("yyyy-MM-dd"), yiyuanID, sqlwhere);
+            ds = dal.GetPAIBAN(dtDataTime.Value.Date.ToString("yyyy-MM-dd"), sqlwhere);
             dgvOTypesetting.DataSource = ds.DefaultView;
         }
 
@@ -181,17 +181,11 @@ namespace main
                         HISinfo.Add("2");
                     else
                         HISinfo.Add(dr["ASAE"].ToString().Substring(1, 1));//急诊
-                    if (dr["operaddress"].ToString() == "")
-                        HISinfo.Add("010601");
-                    else
-                        HISinfo.Add(dr["operaddress"].ToString().Substring(0, 6));//手术地址
+                 
                     HISinfo.Add("0");//未排班的
-                    if (HISinfo[15].ToString() == yiyuanID)
-                    {
-                        DataTable dt = dal.GetPaiban(dr["applyid"].ToString());
-                        if (dt.Rows.Count == 0)
-                            result = dal.InsertPaiban(HISinfo);
-                    }
+                    DataTable dt = dal.GetPaiban(dr["applyid"].ToString());
+                    if (dt.Rows.Count == 0)
+                        result = dal.InsertPaiban(HISinfo);
 
                 }
                 if (cbEye.Checked)
@@ -215,7 +209,7 @@ namespace main
         {
             listboxRoom.Items.Clear();
             listboxRoom.Items.Add("全部手术间");
-            dt1 = dal.GetOROOM(yiyuanID);
+            dt1 = dal.GetOROOM();
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
                 this.listboxRoom.Items.Add(dt1.Rows[i][0]);
@@ -550,7 +544,7 @@ namespace main
                 where = "";
             else
                 where = "and oroom='" + ssj + "'";
-            ds = dal.GetPAIBAN(dtDataTime.Value.Date.ToString("yyyy-MM-dd"), yiyuanID, where);
+            ds = dal.GetPAIBAN(dtDataTime.Value.Date.ToString("yyyy-MM-dd"), where);
             dgvOTypesetting.DataSource = ds.DefaultView;
         }
         /// <summary>
@@ -623,7 +617,7 @@ namespace main
         private void btnE_Click(object sender, EventArgs e)
         {
             string where = " and asae = '1'";
-            ds = dal.GetPAIBAN(dtDataTime.Value.Date.ToString("yyyy-MM-dd"), yiyuanID, where);
+            ds = dal.GetPAIBAN(dtDataTime.Value.Date.ToString("yyyy-MM-dd"), where);
             dgvOTypesetting.DataSource = ds.DefaultView;
         }
 
@@ -918,19 +912,7 @@ namespace main
         }
 
         #endregion
-        public void PaiXu()
-        {
-            //if (cbOroom.Checked)
-            //{
-            //    BindPaibanInfo(yiyuanID);//绑定列表
-
-            //}
-            //if (cbKeshi.Checked)
-            //{
-            //    BindPaibanInfo(yiyuanID);//绑定列表
-            //}
-
-        }
+   
         private void TextBoxDec_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar != 8 && !Char.IsDigit(e.KeyChar))
@@ -1116,13 +1098,9 @@ namespace main
                         MessageBox.Show("手术间和台次不能都为空");
                         return;
                     }
-                    int ostateNum = Convert.ToInt32(dal.GetOstate(patid));
-                    if (ostateNum == 0)
-                    {
-                        int Jieguo = dal.UpdatePaibanInfo(1, patid);//修改成 已排班
 
-                    }
                     string message = AppendHL7stringConfig(patid);
+
                     UserFunction.SaveLogHL7(message);
                     string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];
                     //if (message.Length > 0 && UserFunction.PingHost(HL7IPaddress))
@@ -1260,8 +1238,8 @@ namespace main
             orm.MSH.MessageType.TriggerEvent.Value = "S01";
             orm.MSH.MessageType.MessageStructure.Value = "SRM_S01";
             orm.MSH.FieldSeparator.Value = MessageConstant.FieldSeparator;
-            orm.MSH.SendingApplication.NamespaceID.Value = "SSMZ";
-            orm.MSH.SendingFacility.NamespaceID.Value = "SSMZ";
+            orm.MSH.SendingApplication.NamespaceID.Value = "SSMZ1";
+            orm.MSH.SendingFacility.NamespaceID.Value = "SSMZ1";
             orm.MSH.ReceivingApplication.NamespaceID.Value = "MediII";
             orm.MSH.ReceivingFacility.NamespaceID.Value = "MediII";
             orm.MSH.EncodingCharacters.Value = MessageConstant.EncodingCharacters;
@@ -1452,7 +1430,7 @@ namespace main
         }
 
         /// <summary>
-        /// 取消排班
+        /// 取消手术
         /// </summary>
         /// <param name="patid"></param>
         /// <returns></returns>
@@ -1464,10 +1442,10 @@ namespace main
             orm.MSH.MessageType.TriggerEvent.Value = "S20";
             orm.MSH.MessageType.MessageStructure.Value = "SIU_S20";
             orm.MSH.FieldSeparator.Value = MessageConstant.FieldSeparator;
-            orm.MSH.SendingApplication.NamespaceID.Value = "SSMZ";
-            orm.MSH.SendingFacility.NamespaceID.Value = "SSMZ";
-            orm.MSH.ReceivingApplication.NamespaceID.Value = "HIS";
-            orm.MSH.ReceivingFacility.NamespaceID.Value = "HIS";
+            orm.MSH.SendingApplication.NamespaceID.Value = "SSMZ1";
+            orm.MSH.SendingFacility.NamespaceID.Value = "SSMZ1";
+            orm.MSH.ReceivingApplication.NamespaceID.Value = "MediII";
+            orm.MSH.ReceivingFacility.NamespaceID.Value = "MediII";
             orm.MSH.EncodingCharacters.Value = MessageConstant.EncodingCharacters;
             orm.MSH.VersionID.VersionID.Value = MessageConstant.VersionID;
             orm.MSH.DateTimeOfMessage.TimeOfAnEvent.SetLongDateWithSecond(DateTime.Now);
@@ -1481,12 +1459,11 @@ namespace main
 
 
             #region SCH|
-            String SCH = "SCH||||||";
-            SCH += "^取消手术安排^^^ " + "|||||";
+            String SCH = "SCH||" + patid;
+            SCH += "|||^取消手术安排^^^ " + "|||||";
             SCH += "^^^" + DateTime.Now.ToString("yyyyMMddHHmmss") + "|||||";
-            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "||||";
             SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "|||||";
-            SCH += patid + "\n";
+            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name;
             #endregion
 
 
@@ -1511,8 +1488,8 @@ namespace main
             orm.MSH.MessageType.TriggerEvent.Value = "S04";
             orm.MSH.MessageType.MessageStructure.Value = "SRM_S04";
             orm.MSH.FieldSeparator.Value = MessageConstant.FieldSeparator;
-            orm.MSH.SendingApplication.NamespaceID.Value = "SSMZ";
-            orm.MSH.SendingFacility.NamespaceID.Value = "SSMZ";
+            orm.MSH.SendingApplication.NamespaceID.Value = "SSMZ1";
+            orm.MSH.SendingFacility.NamespaceID.Value = "SSMZ1";
             orm.MSH.ReceivingApplication.NamespaceID.Value = "HIS";
             orm.MSH.ReceivingFacility.NamespaceID.Value = "HIS";
             orm.MSH.EncodingCharacters.Value = MessageConstant.EncodingCharacters;
@@ -1563,29 +1540,30 @@ namespace main
             DataTable dtResult = dal.GetPaiban(patid);
             DataRow dr = dtResult.Rows[0];
             int ostateNum = UserFunction.ToInt32(dr["Ostate"].ToString());
+            UserFunction.SaveLogHL7("状态" + dr["Ostate"].ToString());
             string SCH_1 = "";
             #region 组装消息头
             if (ostateNum == 0)
             {
                 SCH_1 = "确定手术安排";
                 orm.MSH.MessageType.TriggerEvent.Value = "S18";
-                orm.MSH.MessageType.MessageStructure.Value = "SIU_S18";
+                orm.MSH.MessageType.MessageStructure.Value = "SIU_S12";
             }
             else
             {
                 SCH_1 = "修改手术安排";
                 orm.MSH.MessageType.TriggerEvent.Value = "S19";
-                orm.MSH.MessageType.MessageStructure.Value = "SIU_S19";
+                orm.MSH.MessageType.MessageStructure.Value = "SIU_S12";
             }
 
 
             orm.MSH.MessageType.MessageType.Value = "SIU";
 
             orm.MSH.FieldSeparator.Value = MessageConstant.FieldSeparator;
-            orm.MSH.SendingApplication.NamespaceID.Value = "SSMZ";
-            orm.MSH.SendingFacility.NamespaceID.Value = "SSMZ";
-            orm.MSH.ReceivingApplication.NamespaceID.Value = "HIS";
-            orm.MSH.ReceivingFacility.NamespaceID.Value = "HIS";
+            orm.MSH.SendingApplication.NamespaceID.Value = "SSMZ1";
+            orm.MSH.SendingFacility.NamespaceID.Value = "SSMZ1";
+            orm.MSH.ReceivingApplication.NamespaceID.Value = "MediII";
+            orm.MSH.ReceivingFacility.NamespaceID.Value = "MediII";
             orm.MSH.EncodingCharacters.Value = MessageConstant.EncodingCharacters;
             orm.MSH.VersionID.VersionID.Value = MessageConstant.VersionID;
             orm.MSH.DateTimeOfMessage.TimeOfAnEvent.SetLongDateWithSecond(DateTime.Now);
@@ -1601,66 +1579,70 @@ namespace main
             SCH += "^^^" + Convert.ToDateTime(dr["odate"]).ToString("yyyyMMddHHmmss") + "|||||";
             SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "|||";
             SCH += "^^^^^^^^" + dr["patdpm"].ToString() + "|";
-            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "|||||";
+            SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "||||||";
             SCH += dr["patid"].ToString() + "\n";
             #endregion
 
+            String PID = dr["PidInfo"].ToString();
+
+            String PV1 = dr["Pv1Info"].ToString();
             #region RGS|
             String RGS = "RGS|1" + "\n";
             #endregion
 
             #region AIS|
             String AIS = "AIS|1||";
-            AIS += "^" + dr["Oroom"].ToString() + "^^^" + dr["Second"].ToString() + "\n";
+            AIS += dr["OperNo"].ToString() + "^" + dr["Oname"].ToString()+"|||||||";
+            AIS += dr["Oroom"].ToString() + "^^^" + dr["Second"].ToString() + "|" + "\n";
             #endregion
 
-            #region PV1|
-            String PV1 = "PV1||";
-            if (dr["IsZhuYuan"].ToString() == "1")
-            {
-                PV1 += "I|||||||||||||||||";
-            }
-            else
-            {
-                PV1 += "O|||||||||||||||||";
-            }
-            PV1 += dr["ApplyID"].ToString() + "||||" + "\n";
-            #endregion
+         
 
             #region 手术医生
-            String AIP = "AIP|0||";
+            String AIP = "AIP|1||";
             AIP += dr["OsNo"].ToString() + "^" + dr["OS"].ToString() + "|主刀医生" + "\n";
-            AIP += "AIP|1||";
-            AIP += dr["OA1No"].ToString() + "^" + dr["OA1"].ToString() + "|一助" + "\n";
-            AIP += "AIP|2||";
-            AIP += dr["OA2No"].ToString() + "^" + dr["OA2"].ToString() + "|二助" + "\n";
-            AIP += "AIP|3||";
-            AIP += dr["OA3No"].ToString() + "^" + dr["OA3"].ToString() + "|三助" + "\n";
             #endregion
 
             #region 护士
             DataTable dt = dal.GetUserNoByName(dr["SN1"].ToString());
             string UserNO = " ";
             if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
-            AIP += "AIP|4||";
-            AIP += UserNO + "^" + dr["SN1"].ToString() + "|器械护士" + "\n";
+            AIP += "AIP|2||";
+            AIP += UserNO + "^" + dr["SN1"].ToString() + "|4^洗手护士" + "\n";
+
             dt = dal.GetUserNoByName(dr["SN2"].ToString());
             UserNO = " ";
             if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
-            AIP += "AIP|5||";
-            AIP += UserNO + "^" + dr["SN2"].ToString() + "|器械护士" + "\n";
+            AIP += "AIP|3||";
+            AIP += UserNO + "^" + dr["SN2"].ToString() + "|4^洗手护士" + "\n";
+
             dt = dal.GetUserNoByName(dr["ON1"].ToString());
             UserNO = " ";
             if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
-            AIP += "AIP|6||";
-            AIP += UserNO + "^" + dr["ON1"].ToString() + "|巡回护士" + "\n";
+            AIP += "AIP|4||";
+            AIP += UserNO + "^" + dr["ON1"].ToString() + "|5^巡回护士" + "\n";
+
             dt = dal.GetUserNoByName(dr["ON2"].ToString());
             UserNO = " ";
             if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
-            AIP += "AIP|7||";
-            AIP += UserNO + "^" + dr["ON2"].ToString() + "|巡回护士" + "\n";
+            AIP += "AIP|5||";
+            AIP += UserNO + "^" + dr["ON2"].ToString() + "|5^巡回护士" + "\n";
+
+            dt = dal.GetUserNoByName(dr["ON3"].ToString());
+            UserNO = " ";
+            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
+            AIP += "AIP|6||";
+            AIP += UserNO + "^" + dr["ON3"].ToString() + "|5^巡回护士" + "\n";
             #endregion
 
+            #region 手术助手
+            AIP += "AIP|7||";
+            AIP += dr["OA1No"].ToString() + "^" + dr["OA1"].ToString() + "|2^助理医生" + "\n";
+            AIP += "AIP|8||";
+            AIP += dr["OA2No"].ToString() + "^" + dr["OA2"].ToString() + "|2^助理医生" + "\n";
+            AIP += "AIP|9||";
+            AIP += dr["OA3No"].ToString() + "^" + dr["OA3"].ToString() + "|2^助理医生" + "\n";
+            #endregion
             #region 麻醉医生
             dt = dal.GetUserNoByName(dr["AP1"].ToString());
             UserNO = " ";
@@ -1682,7 +1664,7 @@ namespace main
 
 
             #region 转换消息对象为字符串
-            String hl7Message = SCH + RGS + AIS + PV1 + AIP;
+            String hl7Message = SCH + PID + PV1 + RGS + AIS + AIP;
             NHapi.Base.Parser.PipeParser parser = new NHapi.Base.Parser.PipeParser();
             string message = parser.Encode(orm) + hl7Message;
             return message;
@@ -1999,7 +1981,7 @@ namespace main
         private void btnPrintSort_Click(object sender, EventArgs e)
         {
             string sqlwhere = " order by oroom,Convert(int,second) asc";
-            ds = dal.GetPAIBAN(dtDataTime.Value.Date.ToString("yyyy-MM-dd"), yiyuanID, sqlwhere);
+            ds = dal.GetPAIBAN(dtDataTime.Value.Date.ToString("yyyy-MM-dd"), sqlwhere);
             dgvOTypesetting.DataSource = ds.DefaultView;
         }
 

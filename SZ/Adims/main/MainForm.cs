@@ -897,30 +897,7 @@ namespace main
             f1.ShowDialog();
         }
 
-        private void ExcelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                DataTable excelTable = new DataTable();
-                openFileDialog1.Multiselect = false;
-                string filePath = openFileDialog1.FileName;
-                string fileType = System.IO.Path.GetExtension(filePath);
-                string SheetName1 = "手术名字编号";
-                if (string.IsNullOrEmpty(fileType)) return;
-                excelTable = UserFunction.GetDataFromExcel(fileType, filePath, SheetName1);
-                excelTable = UserFunction.removeEmptyRow(excelTable);
-                string OperNo = ""; string OperName = ""; string NameSuoxie = "";
-                foreach (DataRow drE in excelTable.Rows)
-                {
-                    OperNo = drE[0].ToString();
-                    OperName = drE[1].ToString();
-                    NameSuoxie = drE[2].ToString();
-                    dal.InsertOperName(OperNo, OperName, NameSuoxie);
-                }
-                MessageBox.Show("导入完成");
-
-            }
-        }
+    
 
         private void inputOSToolStripMenuItem_Click(object sender, EventArgs e)
         {

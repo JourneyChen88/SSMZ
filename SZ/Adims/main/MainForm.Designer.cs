@@ -72,9 +72,9 @@
             this.ssjlbToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.科室信息管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.锁屏间隔设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inputOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hcglToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.手术医生校对ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qxglToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.添加岗位ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,7 +115,6 @@
             this.nudSPJG = new System.Windows.Forms.NumericUpDown();
             this.btnSetLockTime = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.手术医生校对ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
@@ -453,7 +452,6 @@
             this.ssjlbToolStripMenuItem,
             this.科室信息管理ToolStripMenuItem,
             this.锁屏间隔设置ToolStripMenuItem,
-            this.ExcelToolStripMenuItem,
             this.inputOSToolStripMenuItem,
             this.hcglToolStripMenuItem,
             this.手术医生校对ToolStripMenuItem});
@@ -511,13 +509,6 @@
             this.锁屏间隔设置ToolStripMenuItem.Text = "锁屏间隔设置";
             this.锁屏间隔设置ToolStripMenuItem.Click += new System.EventHandler(this.锁屏间隔设置ToolStripMenuItem_Click);
             // 
-            // ExcelToolStripMenuItem
-            // 
-            this.ExcelToolStripMenuItem.Name = "ExcelToolStripMenuItem";
-            this.ExcelToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.ExcelToolStripMenuItem.Text = "导入手术名字";
-            this.ExcelToolStripMenuItem.Click += new System.EventHandler(this.ExcelToolStripMenuItem_Click);
-            // 
             // inputOSToolStripMenuItem
             // 
             this.inputOSToolStripMenuItem.Name = "inputOSToolStripMenuItem";
@@ -533,6 +524,13 @@
             this.hcglToolStripMenuItem.Text = "耗材管理";
             this.hcglToolStripMenuItem.Click += new System.EventHandler(this.hcglToolStripMenuItem_Click);
             // 
+            // 手术医生校对ToolStripMenuItem
+            // 
+            this.手术医生校对ToolStripMenuItem.Name = "手术医生校对ToolStripMenuItem";
+            this.手术医生校对ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
+            this.手术医生校对ToolStripMenuItem.Text = "手术医生校对";
+            this.手术医生校对ToolStripMenuItem.Click += new System.EventHandler(this.手术医生校对ToolStripMenuItem_Click);
+            // 
             // qxglToolStripMenuItem
             // 
             this.qxglToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -546,21 +544,21 @@
             // 用户管理ToolStripMenuItem
             // 
             this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
-            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.用户管理ToolStripMenuItem.Text = "用户管理";
             this.用户管理ToolStripMenuItem.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
             // 
             // 添加岗位ToolStripMenuItem
             // 
             this.添加岗位ToolStripMenuItem.Name = "添加岗位ToolStripMenuItem";
-            this.添加岗位ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.添加岗位ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.添加岗位ToolStripMenuItem.Text = "添加岗位";
             this.添加岗位ToolStripMenuItem.Click += new System.EventHandler(this.添加岗位ToolStripMenuItem_Click);
             // 
             // 岗位权限分配ToolStripMenuItem
             // 
             this.岗位权限分配ToolStripMenuItem.Name = "岗位权限分配ToolStripMenuItem";
-            this.岗位权限分配ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.岗位权限分配ToolStripMenuItem.Size = new System.Drawing.Size(180, 24);
             this.岗位权限分配ToolStripMenuItem.Text = "岗位权限分配";
             this.岗位权限分配ToolStripMenuItem.Click += new System.EventHandler(this.岗位权限分配ToolStripMenuItem_Click);
             // 
@@ -1007,13 +1005,6 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Excel(*.xlsx)|*.xlsx|Excel(*.xls)|*.xls";
             // 
-            // 手术医生校对ToolStripMenuItem
-            // 
-            this.手术医生校对ToolStripMenuItem.Name = "手术医生校对ToolStripMenuItem";
-            this.手术医生校对ToolStripMenuItem.Size = new System.Drawing.Size(183, 24);
-            this.手术医生校对ToolStripMenuItem.Text = "手术医生校对";
-            this.手术医生校对ToolStripMenuItem.Click += new System.EventHandler(this.手术医生校对ToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1160,7 +1151,6 @@
         private System.Windows.Forms.Button btnSetLockTime;
         private System.Windows.Forms.ToolStripMenuItem mzjhsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zqtysToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ExcelToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem inputOSToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hcglToolStripMenuItem;

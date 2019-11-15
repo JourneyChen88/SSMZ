@@ -1929,8 +1929,8 @@
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button2.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.Image = global::main.Properties.Resources.Print;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.Location = new System.Drawing.Point(29, 777);
@@ -1944,8 +1944,8 @@
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button3.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
             this.button3.Image = global::main.Properties.Resources.Exit;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.Location = new System.Drawing.Point(29, 837);
@@ -1959,8 +1959,8 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.Font = new System.Drawing.Font("宋体", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Image = global::main.Properties.Resources.Save;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.Location = new System.Drawing.Point(31, 722);

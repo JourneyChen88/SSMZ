@@ -675,11 +675,7 @@ namespace adims_DAL
             return dBConn.ExecuteNonQuery(string.Format(update));
         }
 
-        public int InsertOperName(string OperNo, string OperName, string NameSuoxie)
-        {
-            string update = "Insert into OperationName(OperNo,ONname,OSpell) Values('" + OperNo + "','" + OperName + "','" + NameSuoxie + "')";
-            return dBConn.ExecuteNonQuery(string.Format(update));
-        }
+     
         public int InsertShoushuYisheng(string nameNo, string name, string NameSuoxie)
         {
             string update = "Insert into ShoushuYisheng(nameNo,name,NameSuoxie) Values('" + nameNo + "','" + name + "','" + NameSuoxie + "')";
@@ -746,10 +742,10 @@ namespace adims_DAL
         /// 根据医生查询手术总量
         /// </summary>
         /// <returns></returns>
-        public DataTable GetYSMZLbyTime(int sunall, DateTime dt1, DateTime dt2, string name, string address)
+        public DataTable GetYSMZLbyTime(int sunall, DateTime dt1, DateTime dt2, string name)
         {
             string selectysbyTime = "SELECT sum(DATEDIFF ( hh , mzkssj , mzjssj )),count(*),SUBSTRING(cast(count(*)*100.0/" + sunall + "  as nvarchar),1,4) +' %' from Adims_Mzjld ,Adims_OTypesetting"
-                                + " WHERE   Otime between '" + dt1 + "'and'" + dt2 + "' and mzys like '%" + name + "%' and Adims_OTypesetting.operaddress='" + address + "' and  Adims_OTypesetting.patid=Adims_Mzjld.patid";
+                                + " WHERE   Otime between '" + dt1 + "'and'" + dt2 + "' and mzys like '%" + name + "%' and  Adims_OTypesetting.patid=Adims_Mzjld.patid";
             return dBConn.GetDataTable(string.Format(selectysbyTime));
         }
         /// <summary>
@@ -763,7 +759,7 @@ namespace adims_DAL
         public DataTable GetHSMZLbyTime(int sunall, DateTime dt1, DateTime dt2, string name, string address)
         {
             string selectysbyTime = "SELECT sum(DATEDIFF ( hh , mzkssj , mzjssj )),count(*),SUBSTRING(cast(count(*)*100.0/" + sunall + "  as nvarchar),1,4) +' %' from Adims_Mzjld,Adims_OTypesetting"
-                                + " WHERE   Otime between '" + dt1 + "'and'" + dt2 + "' and (qxhs like '%" + name + "%' or xhhs like '%" + name + "%')  and Adims_OTypesetting.operaddress='" + address + "' and  Adims_OTypesetting.patid=Adims_Mzjld.patid";
+                                + " WHERE   Otime between '" + dt1 + "'and'" + dt2 + "' and (qxhs like '%" + name + "%' or xhhs like '%" + name + "%')   and  Adims_OTypesetting.patid=Adims_Mzjld.patid";
             return dBConn.GetDataTable(string.Format(selectysbyTime));
         }
 
@@ -790,10 +786,10 @@ namespace adims_DAL
                                 + " WHERE   Otime between '" + dt1 + "'and'" + dt2 + "' and O.Patdpm like '%" + name + "%' ";
             return dBConn.GetDataTable(string.Format(selectysbyTime));
         }
-        public DataTable GetYSMZLbyOKeshi1(DateTime dt1, DateTime dt2, string address)
+        public DataTable GetYSMZLbyOKeshi1(DateTime dt1, DateTime dt2)
         {
             string selectysbyTime = "select ao.patdpm, sum(DATEDIFF ( hh , mzkssj , mzjssj )),count(*) from Adims_OTypesetting as ao join Adims_Mzjld as am on ao.patid=am.patid "
-                                    + " WHERE  Convert(nvarchar, otime,23) between '" + dt1.ToString("yyyy-MM-dd") + "'and'" + dt2.ToString("yyyy-MM-dd") + "' and ao.operaddress='" + address + "' group by ao.Patdpm ";
+                                    + " WHERE  Convert(nvarchar, otime,23) between '" + dt1.ToString("yyyy-MM-dd") + "'and'" + dt2.ToString("yyyy-MM-dd") + "'  group by ao.Patdpm ";
             return dBConn.GetDataTable(string.Format(selectysbyTime));
         }
 
@@ -1384,10 +1380,10 @@ namespace adims_DAL
         /// </summary>
         /// <param name="sqlWhere"></param>
         /// <returns></returns>
-        public DataTable GetmazuizongjieList(string dt, string operAddress)
+        public DataTable GetmazuizongjieList(string dt)
         {
             string sql = "select  A.id ,B.patid,B.patname,B.patzhuyuanid,B.Patbedno,B.patsex,B.patage from Adims_Mzjld as A LEFT join "
-                    + "Adims_OTypesetting AS B ON A.PATID=B.PATID where CONVERT(varchar, A.Otime , 23 ) = '" + dt + "' and B.operAddress='" + operAddress + "' and B.Ostate>='0'";
+                    + "Adims_OTypesetting AS B ON A.PATID=B.PATID where CONVERT(varchar, A.Otime , 23 ) = '" + dt + "'  and B.Ostate>='0'";
             return dBConn.GetDataTable(sql);
         }
 
@@ -1962,11 +1958,11 @@ namespace adims_DAL
         /// </summary>
         /// <param name="m"></param>
         /// <returns></returns>
-        public DataTable GetMzjldList2(string date1, string date2, string address)
+        public DataTable GetMzjldList2(string date1, string date2)
         {
             string select = "SELECT M.id AS MID,OT.patid,PatName,[Otime],ssss,mzfa,ap1,patdpm,pattmd,szzd,patsex,Oroom,"
             + "patage,os FROM Adims_mzjld AS M WITH (NOLOCK) right JOIN Adims_OTypesetting  AS OT WITH (NOLOCK) ON M.patid = OT.patid "
-            + "WHERE Otime between '" + date1 + "'and'" + date2 + "' and ot.operaddress='" + address + "'";
+            + "WHERE Otime between '" + date1 + "'and'" + date2 + "' ";
             return dBConn.GetDataTable(string.Format(select));
         }
 
@@ -2440,12 +2436,10 @@ namespace adims_DAL
         /// </summary>
         /// <param name="sqlWhere"></param>
         /// <returns></returns>
-        public DataTable GetSSJname(string operaddress)
+        public DataTable GetSSJname()
         {
-            if (operaddress == "010601")
-                return dBConn.GetDataTable(string.Format("select oname from ssjstate where oname like '新·%' "));
-            else
-                return dBConn.GetDataTable(string.Format("select oname from ssjstate where oname like '老·%' "));
+            return dBConn.GetDataTable(string.Format("select oname from ssjstate  "));
+         
 
         }
         /// <summary>
@@ -2468,14 +2462,10 @@ namespace adims_DAL
             return dBConn.GetDataTable(string.Format("select AMname from AMethod "));
 
         }
-        public DataTable GetOROOM(string yiyuanID)
+        public DataTable GetOROOM()
         {
-            string sql = "";
+            string sql = "select ONAME from SSJSTATE";
 
-            if (yiyuanID == "010604")
-                sql = "select ONAME from SSJSTATE where oname like '%老·%'";
-            else
-                sql = "select ONAME from SSJSTATE where oname like '%新·%'";
             return dBConn.GetDataTable(sql);
         }
         public DataTable GetOROOM1()
@@ -2602,11 +2592,11 @@ namespace adims_DAL
             string INSERT = string.Format(SQL_PAIBAN_INSERT, dictionary.Values.ToArray());
             return dBConn.ExecuteNonQuery(INSERT);
         }
-        public int InsertPAIBAN(string patid, string patname, string oroom, DateTime odate, string operAddress)
+        public int InsertPAIBAN(string patid, string patname, string oroom, DateTime odate)
         {
             string INSERT = "insert into Adims_OTypesetting"
-                + " (patid,patname,oroom,odate,operAddress,ASAE,ostate,patage,patsex,IsValid,patdpm)"
-                + " values('" + patid + "','" + patname + "','" + oroom + "','" + odate + "','" + operAddress + "','1','2','','','1','')";
+                + " (patid,patname,oroom,odate,ASAE,ostate,patage,patsex,IsValid,patdpm)"
+                + " values('" + patid + "','" + patname + "','" + oroom + "','" + odate + "','1','2','','','1','')";
             return dBConn.ExecuteNonQuery(INSERT);
         }
         /// <summary>
@@ -2616,8 +2606,8 @@ namespace adims_DAL
         /// <returns></returns>
         public int InsertPaiban(List<string> list1)
         {
-            string SQL_PAIBAN = "insert into Adims_OTypesetting (applyid,Cardno, PatZhuYuanID, Patname,Patage,Patsex,patdpm,Pattmd,Oname,Odate,os,Amethod,Patbedno,patid,asae,operaddress,ostate,oroom,ap1,ap2,ap3,sn1,sn2,on1,on2)"
-                + "values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}', '{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','','','','','','','','')";
+            string SQL_PAIBAN = "insert into Adims_OTypesetting (applyid,Cardno, PatZhuYuanID, Patname,Patage,Patsex,patdpm,Pattmd,Oname,Odate,os,Amethod,Patbedno,patid,asae,ostate,oroom,ap1,ap2,ap3,sn1,sn2,on1,on2)"
+                + "values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}', '{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','','','','','','','','')";
             string INSERT = string.Format(SQL_PAIBAN, list1.ToArray());
             return dBConn.ExecuteNonQuery(INSERT);
         }
@@ -2634,13 +2624,13 @@ namespace adims_DAL
         //    return dBConn.GetDataTable(sql);
         //}
 
-        public DataTable GetPAIBAN(string dtime, string operAddress, string sqlWhere)
+        public DataTable GetPAIBAN(string dtime , string sqlWhere)
         {
             string sql =
                 string.Format(@"SELECT id ,oroom,second ,patdpm,patbedno,patname,
                 patage,patsex,oname,pattmd,os,amethod,on1,on2 ,sn1,sn2,Remarks,ap1 ,ap2 ,ap3
                 ,applyID,patZhuYuanID,patid,ASAE from Adims_OTypesetting  
-                where CONVERT(varchar,Odate,23) ='{0}'and operAddress='{1}' and IsValid='1'", dtime, operAddress)
+                where CONVERT(varchar,Odate,23) ='{0}' and IsValid='1'", dtime)
                 + sqlWhere;
 
             return dBConn.GetDataTable(sql);
@@ -2671,15 +2661,15 @@ namespace adims_DAL
             string sql = "SELECT Mzff_No  FROM [mazuifangan] where [name]='" + MZFF + "'";
             return dBConn.GetDataTable(sql);
         }
-        public DataTable GetOperNo(string SSMZ)
+        public DataTable GetOperNo(string OperName)
         {
-            string sql = "SELECT OperNo  FROM OperationName where ONname='" + SSMZ + "'";
+            string sql = "SELECT *  FROM OperDic where OperName='" + OperName + "'";
             return dBConn.GetDataTable(sql);
         }
         public DataTable GetPaibanAndMZJLD(string patid)
         {
-            string sql = "  SELECT O.PatID,O.ApplyID,O.Amethod,M.sskssj,M.ssjssj,M.Otime,M.ssss,O.Oroom,O.Second,O.Oname,O.IsZhuYuan,"
-            + " Olevel,Amethod,GL,JZ,AP1,AP2,AP3,OA1,OA2,OA3,OA1No,OA2No,OA3No,OS,OsNo,TP,ON1,ON2,SN1,SN2,Remarks,M.asa,M.asae,Ostate,Odate "
+            string sql = "  SELECT O.PatID,O.ApplyID,O.Amethod,M.sskssj,M.ssjssj,M.Otime,M.ssss,O.Oroom,O.Second,O.OperNo,O.Oname,O.IsZhuYuan,O.PidInfo,O.Pv1Info,"
+            + " Olevel,Amethod,GL,JZ,AP1,AP2,AP3,OA1,OA2,OA3,OA1No,OA2No,OA3No,OS,OsNo,TP,ON1,ON2,ON3,SN1,SN2,Remarks,M.asa,M.asae,Ostate,Odate "
             + " FROM HeYiAMIS.dbo.Adims_OTypesetting  as O LEFT JOIN Adims_Mzjld as M ON O.PatID =M.patid"
             + " WHERE O.patid='" + patid + "'";
             return dBConn.GetDataTable(sql);

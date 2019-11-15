@@ -12,7 +12,7 @@ namespace main
 {
     public partial class MZZJ_select : Form
     {
-        string operAddress="";
+     
         AdimsProvider apro=new AdimsProvider();
         public MZZJ_select()
         {
@@ -21,7 +21,7 @@ namespace main
 
         private void DataBind()
         {
-            DataTable dt1 = apro.GetmazuizongjieList(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"),operAddress);
+            DataTable dt1 = apro.GetmazuizongjieList(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
             dataGridView1.DataSource = dt1.DefaultView;
         }
         private void button1_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace main
 
         private void Mzzongjie_Load(object sender, EventArgs e)
         {
-            operAddress= Program.Customer.yiyuanType;
+           
             DataBind();
         }
 

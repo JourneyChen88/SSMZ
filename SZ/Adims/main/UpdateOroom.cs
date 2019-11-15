@@ -18,7 +18,7 @@ namespace main
     {
         #region <<Members>>
 
-        string operAddress = "";
+     
         admin_T_SQL at = new admin_T_SQL();
         adims_DAL.AdimsProvider dal = new AdimsProvider();
         adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
@@ -54,9 +54,9 @@ namespace main
         /// <param name="e"></param>
         private void selaa_Load(object sender, EventArgs e)
         {
-            operAddress = Program.Customer.yiyuanType;
+         
             cmbOroom.Items.Clear();
-            DataTable dt1 = dal.GetOROOM(operAddress);
+            DataTable dt1 = dal.GetOROOM();
             for (int i = 0; i < dt1.Rows.Count; i++)
             {
                 this.cmbOroom.Items.Add(dt1.Rows[i][0]);

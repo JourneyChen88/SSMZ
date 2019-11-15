@@ -51,7 +51,7 @@ namespace main
            
 
             DataTable dt2 = new DataTable();
-            dt2 = opr.GetSSJname(Program.Customer.yiyuanType);
+            dt2 = opr.GetSSJname();
             if (dt2.Rows.Count > 0)
             {
                 for (int i = 0; i < dt2.Rows.Count; i++)
@@ -99,7 +99,7 @@ namespace main
         {
             string d1 = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string d2 = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-            System.Data.DataTable dt = opr.GetMzjldList2(d1, d2, Program.Customer.yiyuanType);
+            System.Data.DataTable dt = opr.GetMzjldList2(d1, d2);
             dataGridView1.DataSource = dt.DefaultView;
             this.toolStripStatusLabel1.Text = "当前手术总量：" + (dataGridView1.Rows.Count - 1).ToString();
         }

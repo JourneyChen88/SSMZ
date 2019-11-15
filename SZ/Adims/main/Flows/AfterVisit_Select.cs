@@ -12,7 +12,7 @@ namespace main
 {
     public partial class AfterVisit_Select : Form
     {
-        string yiyuanID = "";
+      
         public AfterVisit_Select()
         {
             InitializeComponent();
@@ -20,12 +20,12 @@ namespace main
         AdimsProvider apro = new AdimsProvider();
         private void AfterVisit_Select_Load(object sender, EventArgs e)
         {
-            yiyuanID = Program.Customer.yiyuanType;
+         
             DataBind();
         }
         private void DataBind()
         {
-            DataTable dt1 = apro.GetmazuizongjieList(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"), yiyuanID);
+            DataTable dt1 = apro.GetmazuizongjieList(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
             dataGridView1.DataSource = dt1.DefaultView;
         }
 

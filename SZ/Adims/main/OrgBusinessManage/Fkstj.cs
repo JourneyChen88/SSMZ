@@ -45,7 +45,7 @@ namespace main.OrgBusinessManage
             DateTime date1 = dateTimePicker1.Value;
             DateTime date2 = dateTimePicker2.Value;
             dataGridView1.Rows.Clear();
-            DataTable dt = apro.GetYSMZLbyOKeshi1(date1, date2, Program.Customer.yiyuanType);
+            DataTable dt = apro.GetYSMZLbyOKeshi1(date1, date2);
             if (dt.Rows.Count <= 0)
             {
                 MessageBox.Show("当前时间段没有数据！！");

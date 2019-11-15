@@ -43,36 +43,36 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 29);
+            this.label1.Location = new System.Drawing.Point(19, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(56, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "用户名";
             // 
             // txtLoginName
             // 
             this.txtLoginName.BackColor = System.Drawing.Color.Snow;
-            this.txtLoginName.Location = new System.Drawing.Point(79, 20);
+            this.txtLoginName.Location = new System.Drawing.Point(81, 35);
             this.txtLoginName.Name = "txtLoginName";
-            this.txtLoginName.Size = new System.Drawing.Size(129, 21);
+            this.txtLoginName.Size = new System.Drawing.Size(129, 26);
             this.txtLoginName.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 69);
+            this.label2.Location = new System.Drawing.Point(19, 87);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.Size = new System.Drawing.Size(56, 16);
             this.label2.TabIndex = 2;
             this.label2.Text = "密　码";
             // 
             // txtPassWord
             // 
             this.txtPassWord.BackColor = System.Drawing.Color.Snow;
-            this.txtPassWord.Location = new System.Drawing.Point(79, 60);
+            this.txtPassWord.Location = new System.Drawing.Point(81, 84);
             this.txtPassWord.Name = "txtPassWord";
             this.txtPassWord.PasswordChar = '*';
-            this.txtPassWord.Size = new System.Drawing.Size(129, 21);
+            this.txtPassWord.Size = new System.Drawing.Size(129, 26);
             this.txtPassWord.TabIndex = 3;
             // 
             // btnLogin
@@ -80,7 +80,7 @@
             this.btnLogin.BackColor = System.Drawing.Color.Transparent;
             this.btnLogin.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLogin.BackgroundImage")));
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnLogin.Location = new System.Drawing.Point(72, 171);
+            this.btnLogin.Location = new System.Drawing.Point(73, 189);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(80, 28);
             this.btnLogin.TabIndex = 4;
@@ -93,7 +93,7 @@
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
             this.btnClose.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnClose.BackgroundImage")));
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnClose.Location = new System.Drawing.Point(167, 171);
+            this.btnClose.Location = new System.Drawing.Point(179, 189);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(80, 28);
             this.btnClose.TabIndex = 5;
@@ -120,9 +120,10 @@
             this.groupBox1.Controls.Add(this.txtPassWord);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(51, 56);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(239, 98);
+            this.groupBox1.Size = new System.Drawing.Size(228, 125);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "登录信息";
@@ -133,7 +134,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(340, 213);
+            this.ClientSize = new System.Drawing.Size(353, 244);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnClose);
@@ -144,7 +145,7 @@
             this.Name = "login";
             this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "登录窗口V2.0";
+            this.Text = "登录窗口V11.0";
             this.Load += new System.EventHandler(this.login_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

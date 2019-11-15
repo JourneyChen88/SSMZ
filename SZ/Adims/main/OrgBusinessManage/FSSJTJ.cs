@@ -127,7 +127,7 @@ namespace main.OrgBusinessManage
             DateTime date1 = dateTimePicker1.Value;
             DateTime date2 = dateTimePicker2.Value;
             dataGridView1.Rows.Clear();
-            DataTable dt = apro.GetSSJname(Program.Customer.yiyuanType);
+            DataTable dt = apro.GetSSJname();
             DataTable dt1 = apro.GetAllMZLbyTime(date1, date2);
             if (dt1.Rows.Count <= 0)
             {

@@ -223,7 +223,9 @@ namespace main
             GetConfigure();
             PatientIPAddress1.Text = IPAddressInput1;
             //BedNumber1.Text = BedIDInput1;
-            phillip_server = new IPEndPoint(IPAddress.Parse(PatientIPAddress1.Text.Trim()), 24105);
+            //BedNumber1.Text = BedIDInput1;
+            string ip = PatientIPAddress1.Text.Trim().IsNullOrEmpty() ? "192.168.1.5" : PatientIPAddress1.Text.Trim();
+            phillip_server = new IPEndPoint(IPAddress.Parse(ip), 24105);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             Remote = new IPEndPoint(IPAddress.Any, 8001);
             phillip = (EndPoint)Remote;
@@ -238,7 +240,8 @@ namespace main
             GetConfigure();
             PatientIPAddress1.Text = IPAddressInput1;
             //BedNumber1.Text = BedIDInput1;
-            phillip_server = new IPEndPoint(IPAddress.Parse(PatientIPAddress1.Text.Trim()), 24105);
+            string ip = PatientIPAddress1.Text.Trim().IsNullOrEmpty() ? "192.168.1.5" : PatientIPAddress1.Text.Trim();
+            phillip_server = new IPEndPoint(IPAddress.Parse(ip), 24105);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             Remote = new IPEndPoint(IPAddress.Any, 8001);
             phillip = (EndPoint)Remote;
@@ -251,7 +254,8 @@ namespace main
             GetConfigure();
             PatientIPAddress1.Text = IPAddressInput1;
             //BedNumber1.Text = BedIDInput1;
-            phillip_server = new IPEndPoint(IPAddress.Parse(PatientIPAddress1.Text.Trim()), 24105);
+            string ip = PatientIPAddress1.Text.Trim().IsNullOrEmpty() ? "192.168.1.5" : PatientIPAddress1.Text.Trim();
+            phillip_server = new IPEndPoint(IPAddress.Parse(ip), 24105);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             Remote = new IPEndPoint(IPAddress.Any, 8001);
             phillip = (EndPoint)Remote;
@@ -264,7 +268,8 @@ namespace main
             GetConfigure();
             PatientIPAddress1.Text = IPAddressInput1;
             //BedNumber1.Text = BedIDInput1;
-            phillip_server = new IPEndPoint(IPAddress.Parse(PatientIPAddress1.Text.Trim()), 24105);
+            string ip = PatientIPAddress1.Text.Trim().IsNullOrEmpty() ? "192.168.1.5" : PatientIPAddress1.Text.Trim();
+            phillip_server = new IPEndPoint(IPAddress.Parse(ip), 24105);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             Remote = new IPEndPoint(IPAddress.Any, 8001);
             phillip = (EndPoint)Remote;
@@ -1982,7 +1987,7 @@ namespace main
                 CheckTimer.Start();
                 TimerStarted = true;
             }
-            SaveConfigure();
+            //SaveConfigure();
             GetConfigure();
             if (!ThreadExist)
             {
@@ -2511,23 +2516,27 @@ namespace main
             value = (float)(m * System.Math.Pow(10, exp));
             return value;
         }
-        private void SaveConfigure()
-        {
-            IPConfigureInfo IpConf;
-            IpConf.PatientIPAddress = IPAddressInput1; IpConf.BedID = BedIDInput1;
-            FileStream fs = new FileStream(Application.StartupPath + "\\Config.txt", FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-            sw.WriteLine(IpConf.PatientIPAddress);
-            sw.WriteLine(IpConf.BedID);
-            sw.Close();
-            fs.Close();
-        }
+        //private void SaveConfigure()
+        //{
+        //    IPConfigureInfo IpConf;
+        //    IpConf.PatientIPAddress = IPAddressInput1; IpConf.BedID = BedIDInput1;
+        //    FileStream fs = new FileStream(Application.StartupPath + "\\Config.txt", FileMode.Create);
+        //    StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+        //    sw.WriteLine(IpConf.PatientIPAddress);
+        //    sw.WriteLine(IpConf.BedID);
+        //    sw.Close();
+        //    fs.Close();
+        //}
         private void GetConfigure()
         {
             IPConfigureInfo IpConf;
-            FileStream fs = new FileStream(Application.StartupPath + "\\Config.txt", FileMode.Open);
+            FileStream fs = new FileStream(Application.StartupPath + "\\Config.txt", FileMode.OpenOrCreate);
             StreamReader sw = new StreamReader(fs, Encoding.Default);
             IpConf.PatientIPAddress = sw.ReadLine();
+            if (IpConf.PatientIPAddress.IsNullOrEmpty())
+            {
+                IpConf.PatientIPAddress = "193.168.1.200";
+            }
             IpConf.BedID = sw.ReadLine();
             sw.Close();
             fs.Close();
@@ -2573,7 +2582,7 @@ namespace main
                 CheckTimer.Start();
                 TimerStarted = true;
             }
-            SaveConfigure();
+            //SaveConfigure();
             GetConfigure();
             if (!ThreadExist_JKW)
             {
@@ -3293,1377 +3302,1242 @@ namespace main
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            int xLeft = 70, yTop = 0;//整体位置控制
-            int xStart = xLeft + 130;
-            int xEnd = xStart + 420;
-            int xRight = xEnd + 110;
-            string title = "        天 津 红 桥 医 院 麻 醉 记 录 单";//标题       
-            Pen ptp = Pens.Gray;//普通画笔
-            Pen ptp1 = Pens.Black;//普通画笔
-            //Pen ptp = new Pen(Brushes.Black, 0.1f);
-            Pen pblack2 = new Pen(Brushes.Black, 2);
-            Pen pxuxian = new Pen(Brushes.Gray);
-            pxuxian.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            Font ptzt14 = new System.Drawing.Font("宋体", 14);//标题
-            Font ptzt13 = new System.Drawing.Font("宋体", 13);//标题                      
-            Font ptzt12 = new Font("宋体", 12);//填入栏目字体
-            Font ptzt11 = new Font("宋体", 11);//填入栏目字体
-            Font ptzt10 = new Font("宋体", 10);//填入栏目字体
-            Font ptzt9 = new Font("宋体", 9);//填入栏目字体          
-            Font ptzt8 = new Font("宋体", 8);//填入栏目字体
-            Font ptzt88 = new Font("宋体", 8);//填入栏目字体
-            Font ht7 = new Font("黑体", 7);//填入栏目字体
-            Font ptzt7 = new Font("宋体", 7);//填入栏目字体 
-            Font ptzt7_U = new Font("宋体", 7, FontStyle.Underline, GraphicsUnit.Point);//下划线字体
-            Font ptzt6 = new Font("宋体", 6);//填入栏目字体
-            Font ptzt5 = new Font("宋体", 5);//填入栏目字体
-            Font ptzt4 = new Font("宋体", 4);//填入栏目字体
-            Pen pred2 = new Pen(Brushes.Red, 2);
-            Pen pblue2 = new Pen(Brushes.Blue, 1);
-            e.Graphics.DrawString(title, ptzt13, Brushes.Black, new Point(80 + xLeft, 20 + yTop));
-            int Y_unLine = yTop + 63;
-            int YY = yTop + 50;
-            int SZYY = 0;
-            int FYYY = YY;//控制分页y
-
-            #region 页头
-            e.Graphics.DrawString("科别：", ptzt8, Brushes.Black, new Point(80 + xLeft, YY));
-            e.Graphics.DrawString(txtBingQu.Text == "" ? "/" : txtBingQu.Text, ptzt8, Brushes.Black, new Point(115 + xLeft, YY));
-
-            e.Graphics.DrawLine(ptp, new Point(110 + xLeft, Y_unLine), new Point(210 + xLeft, Y_unLine));
-            e.Graphics.DrawString("床号：", ptzt8, Brushes.Black, new Point(220 + xLeft, YY));
-            e.Graphics.DrawString(txtBednumber.Text == "" ? "/" : txtBednumber.Text, ptzt8, Brushes.Black, new Point(255 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(250 + xLeft, Y_unLine), new Point(300 + xLeft, Y_unLine));
-            e.Graphics.DrawString("病历号：", ptzt8, Brushes.Black, new Point(340 + xLeft, YY));
-            e.Graphics.DrawString(txtZhuYuanHao.Text == "" ? "/" : txtZhuYuanHao.Text, ptzt8, Brushes.Black, new Point(385 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(380 + xLeft, Y_unLine), new Point(470 + xLeft, Y_unLine));
-
-            #endregion
-            //↑画标题一块的东西
-            Y_unLine = YY + 15; YY = YY + 20;
-
-
-            #region 打印病人基本信息
-            YY = YY + 5; Y_unLine = YY + 13;
-            e.Graphics.DrawString("姓名 ", ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
-            e.Graphics.DrawString(txtName.Text == "" ? "/" : txtName.Text, ptzt8, Brushes.Black, new Point(35 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(30 + xLeft, Y_unLine), new Point(100 + xLeft, Y_unLine));
-            e.Graphics.DrawString("年龄 ", ptzt8, Brushes.Black, new Point(110 + xLeft, YY));
-            e.Graphics.DrawString(txtAge.Text == "" ? "/" : txtAge.Text, ptzt8, Brushes.Black, new Point(140 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(135 + xLeft, Y_unLine), new Point(165 + xLeft, Y_unLine));
-            e.Graphics.DrawString("岁  性别 ", ptzt8, Brushes.Black, new Point(170 + xLeft, YY));
-            e.Graphics.DrawString(txtSex.Text == "" ? "/" : txtSex.Text, ptzt8, Brushes.Black, new Point(225 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(220 + xLeft, Y_unLine), new Point(240 + xLeft, Y_unLine));
-            e.Graphics.DrawString("身高 ", ptzt8, Brushes.Black, new Point(250 + xLeft, YY));
-            e.Graphics.DrawString(txtHeight.Text == "" ? "/" : txtHeight.Text, ptzt8, Brushes.Black, new Point(285 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(280 + xLeft, Y_unLine), new Point(310 + xLeft, Y_unLine));
-            e.Graphics.DrawString("cm  体重 ", ptzt8, Brushes.Black, new Point(315 + xLeft, YY));
-            e.Graphics.DrawString(txtWeight.Text == "" ? "/" : txtWeight.Text, ptzt8, Brushes.Black, new Point(365 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(360 + xLeft, Y_unLine), new Point(390 + xLeft, Y_unLine));
-            e.Graphics.DrawString("kg  ASA分级 ", ptzt8, Brushes.Black, new Point(395 + xLeft, YY));
-            e.Graphics.DrawString(cmbASA.Text == "" ? "/" : cmbASA.Text, ptzt8, Brushes.Black, new Point(465 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(460 + xLeft, Y_unLine), new Point(500 + xLeft, Y_unLine));
-
-            e.Graphics.DrawString("□ 急诊", ptzt8, Brushes.Black, new Point(520 + xLeft, YY));
-            e.Graphics.DrawString("□ 择期", ptzt8, Brushes.Black, new Point(570 + xLeft, YY));
-
-            if (cbJizhen.Checked)
-                e.Graphics.DrawLines(pblue2, new Point[] { new Point(520 + xLeft, YY), new Point(525 + xLeft, YY + 10), new Point(535 + xLeft, YY) });
-            if (cbZeqi.Checked)
-                e.Graphics.DrawLines(pblue2, new Point[] { new Point(570 + xLeft, YY), new Point(575 + xLeft, YY + 8), new Point(585 + xLeft, YY) });
-
-            YY = YY + 20; Y_unLine = YY + 13;
-            e.Graphics.DrawString("入手术室血压 ", ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
-            e.Graphics.DrawString(txtXueya.Text == "" ? "/" : txtXueya.Text, ptzt8, Brushes.Black, new Point(80 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(75 + xLeft, Y_unLine), new Point(150 + xLeft, Y_unLine));
-            e.Graphics.DrawString("mmHg  脉搏 ", ptzt8, Brushes.Black, new Point(155 + xLeft, YY));
-            e.Graphics.DrawString(txtMaibo.Text == "" ? "/" : txtMaibo.Text, ptzt8, Brushes.Black, new Point(225 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(220 + xLeft, Y_unLine), new Point(250 + xLeft, Y_unLine));
-            e.Graphics.DrawString("次/分  呼吸 ", ptzt8, Brushes.Black, new Point(255 + xLeft, YY));
-            e.Graphics.DrawString(txtHuxi.Text == "" ? "/" : txtHuxi.Text, ptzt8, Brushes.Black, new Point(325 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(320 + xLeft, Y_unLine), new Point(350 + xLeft, Y_unLine));
-            e.Graphics.DrawString("次/分  血型 ", ptzt8, Brushes.Black, new Point(355 + xLeft, YY));
-            e.Graphics.DrawString(cmbXueXing.Text == "" ? "/" : cmbXueXing.Text, ptzt8, Brushes.Black, new Point(425 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(420 + xLeft, Y_unLine), new Point(470 + xLeft, Y_unLine));
-            e.Graphics.DrawString("手术日期 " + dtOdate.Text, ptzt8, Brushes.Black, new Point(490 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(540 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-
-            YY = YY + 20; Y_unLine = YY + 13;
-            e.Graphics.DrawString("手术前诊断  ", ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
-            if (txtSqzd.Text.Trim() != "")
+            try
             {
-                if (txtSqzd.Text.Trim().Length <= 130)
+
+
+                int xLeft = 70, yTop = 0;//整体位置控制
+                int xStart = xLeft + 130;
+                int xEnd = xStart + 420;
+                int xRight = xEnd + 110;
+                string title = "        天 津 红 桥 医 院 麻 醉 记 录 单";//标题       
+                Pen ptp = Pens.Gray;//普通画笔
+                Pen ptp1 = Pens.Black;//普通画笔
+                                      //Pen ptp = new Pen(Brushes.Black, 0.1f);
+                Pen pblack2 = new Pen(Brushes.Black, 2);
+                Pen pxuxian = new Pen(Brushes.Gray);
+                pxuxian.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+                Font ptzt14 = new System.Drawing.Font("宋体", 14);//标题
+                Font ptzt13 = new System.Drawing.Font("宋体", 13);//标题                      
+                Font ptzt12 = new Font("宋体", 12);//填入栏目字体
+                Font ptzt11 = new Font("宋体", 11);//填入栏目字体
+                Font ptzt10 = new Font("宋体", 10);//填入栏目字体
+                Font ptzt9 = new Font("宋体", 9);//填入栏目字体          
+                Font ptzt8 = new Font("宋体", 8);//填入栏目字体
+                Font ptzt88 = new Font("宋体", 8);//填入栏目字体
+                Font ht7 = new Font("黑体", 7);//填入栏目字体
+                Font ptzt7 = new Font("宋体", 7);//填入栏目字体 
+                Font ptzt7_U = new Font("宋体", 7, FontStyle.Underline, GraphicsUnit.Point);//下划线字体
+                Font ptzt6 = new Font("宋体", 6);//填入栏目字体
+                Font ptzt5 = new Font("宋体", 5);//填入栏目字体
+                Font ptzt4 = new Font("宋体", 4);//填入栏目字体
+                Pen pred2 = new Pen(Brushes.Red, 2);
+                Pen pblue2 = new Pen(Brushes.Blue, 1);
+                e.Graphics.DrawString(title, ptzt13, Brushes.Black, new Point(80 + xLeft, 15 + yTop));
+
+                int YY = yTop + 45;
+                int Y_unLine = YY + 13;
+                int SZYY = 0;
+                int FYYY = YY;//控制分页y
+
+                #region 页头
+                e.Graphics.DrawString("科别：", ptzt8, Brushes.Black, new Point(80 + xLeft, YY));
+                e.Graphics.DrawString(txtBingQu.Text == "" ? "/" : txtBingQu.Text, ptzt8, Brushes.Black, new Point(115 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(110 + xLeft, Y_unLine), new Point(210 + xLeft, Y_unLine));
+                e.Graphics.DrawString("床号：", ptzt8, Brushes.Black, new Point(220 + xLeft, YY));
+                e.Graphics.DrawString(txtBednumber.Text == "" ? "/" : txtBednumber.Text, ptzt8, Brushes.Black, new Point(255 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(250 + xLeft, Y_unLine), new Point(300 + xLeft, Y_unLine));
+                e.Graphics.DrawString("病历号：", ptzt8, Brushes.Black, new Point(340 + xLeft, YY));
+                e.Graphics.DrawString(txtZhuYuanHao.Text == "" ? "/" : txtZhuYuanHao.Text, ptzt8, Brushes.Black, new Point(385 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(380 + xLeft, Y_unLine), new Point(470 + xLeft, Y_unLine));
+
+                #endregion
+                //↑画标题一块的东西
+                Y_unLine = YY + 15; YY = YY + 20;
+
+
+                #region 打印病人基本信息
+                YY = YY + 5; Y_unLine = YY + 13;
+                e.Graphics.DrawString("姓名 ", ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
+                e.Graphics.DrawString(txtName.Text == "" ? "/" : txtName.Text, ptzt8, Brushes.Black, new Point(35 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(30 + xLeft, Y_unLine), new Point(100 + xLeft, Y_unLine));
+                e.Graphics.DrawString("年龄 ", ptzt8, Brushes.Black, new Point(110 + xLeft, YY));
+                e.Graphics.DrawString(txtAge.Text == "" ? "/" : txtAge.Text, ptzt8, Brushes.Black, new Point(140 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(135 + xLeft, Y_unLine), new Point(165 + xLeft, Y_unLine));
+                e.Graphics.DrawString("岁  性别 ", ptzt8, Brushes.Black, new Point(170 + xLeft, YY));
+                e.Graphics.DrawString(txtSex.Text == "" ? "/" : txtSex.Text, ptzt8, Brushes.Black, new Point(225 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(220 + xLeft, Y_unLine), new Point(240 + xLeft, Y_unLine));
+                e.Graphics.DrawString("身高 ", ptzt8, Brushes.Black, new Point(250 + xLeft, YY));
+                e.Graphics.DrawString(txtHeight.Text == "" ? "/" : txtHeight.Text, ptzt8, Brushes.Black, new Point(285 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(280 + xLeft, Y_unLine), new Point(310 + xLeft, Y_unLine));
+                e.Graphics.DrawString("cm  体重 ", ptzt8, Brushes.Black, new Point(315 + xLeft, YY));
+                e.Graphics.DrawString(txtWeight.Text == "" ? "/" : txtWeight.Text, ptzt8, Brushes.Black, new Point(365 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(360 + xLeft, Y_unLine), new Point(390 + xLeft, Y_unLine));
+                e.Graphics.DrawString("kg  ASA分级 ", ptzt8, Brushes.Black, new Point(395 + xLeft, YY));
+                e.Graphics.DrawString(cmbASA.Text == "" ? "/" : cmbASA.Text, ptzt8, Brushes.Black, new Point(465 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(460 + xLeft, Y_unLine), new Point(500 + xLeft, Y_unLine));
+
+                e.Graphics.DrawString("□ 急诊", ptzt8, Brushes.Black, new Point(520 + xLeft, YY));
+                e.Graphics.DrawString("□ 择期", ptzt8, Brushes.Black, new Point(570 + xLeft, YY));
+
+                if (cbJizhen.Checked)
+                    e.Graphics.DrawLines(pblue2, new Point[] { new Point(520 + xLeft, YY), new Point(525 + xLeft, YY + 10), new Point(535 + xLeft, YY) });
+                if (cbZeqi.Checked)
+                    e.Graphics.DrawLines(pblue2, new Point[] { new Point(570 + xLeft, YY), new Point(575 + xLeft, YY + 8), new Point(585 + xLeft, YY) });
+
+                YY = YY + 20; Y_unLine = YY + 13;
+                e.Graphics.DrawString("入手术室血压 ", ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
+                e.Graphics.DrawString(txtXueya.Text == "" ? "/" : txtXueya.Text, ptzt8, Brushes.Black, new Point(80 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(75 + xLeft, Y_unLine), new Point(150 + xLeft, Y_unLine));
+                e.Graphics.DrawString("mmHg  脉搏 ", ptzt8, Brushes.Black, new Point(155 + xLeft, YY));
+                e.Graphics.DrawString(txtMaibo.Text == "" ? "/" : txtMaibo.Text, ptzt8, Brushes.Black, new Point(225 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(220 + xLeft, Y_unLine), new Point(250 + xLeft, Y_unLine));
+                e.Graphics.DrawString("次/分  呼吸 ", ptzt8, Brushes.Black, new Point(255 + xLeft, YY));
+                e.Graphics.DrawString(txtHuxi.Text == "" ? "/" : txtHuxi.Text, ptzt8, Brushes.Black, new Point(325 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(320 + xLeft, Y_unLine), new Point(350 + xLeft, Y_unLine));
+                e.Graphics.DrawString("次/分  血型 ", ptzt8, Brushes.Black, new Point(355 + xLeft, YY));
+                e.Graphics.DrawString(cmbXueXing.Text == "" ? "/" : cmbXueXing.Text, ptzt8, Brushes.Black, new Point(425 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(420 + xLeft, Y_unLine), new Point(470 + xLeft, Y_unLine));
+                e.Graphics.DrawString("手术日期 " + dtOdate.Text, ptzt8, Brushes.Black, new Point(490 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(540 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
+
+                YY = YY + 20; Y_unLine = YY + 13;
+                e.Graphics.DrawString("术前诊断 ", ptzt8, Brushes.Black, xLeft + 5, YY);
+                string sqzd = txtSqzd.Text.Trim().IsNullOrEmpty() ? "  / " : txtSqzd.Text.Trim();
+                string str1_sqzd = "";
+                int row_sqzd = sqzd.Length / 62;
+                for (int i = 0; i <= row_sqzd; i++)
                 {
+                    if (i < row_sqzd)
+                        str1_sqzd = sqzd.Substring(i * 62, 62);
+                    else
+                        str1_sqzd = sqzd.Substring(i * 62);
+                    e.Graphics.DrawString(str1_sqzd, ptzt7, Brushes.Black, xLeft + 55, YY);
+                    e.Graphics.DrawLine(ptp, new Point(xLeft + 50, Y_unLine), new Point(xRight - 5, Y_unLine));
+                    YY += 20; Y_unLine += 20;
+                }
 
-                    string str1_zd = "";
-                    int StrLength_zd = txtSqzd.Text.Trim().Length;
-                    int row_zd = StrLength_zd / 65;
+                e.Graphics.DrawString("拟施手术  ", ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
+                e.Graphics.DrawString(txtNssss.Text == "" ? "/" : txtNssss.Text, ptzt8, Brushes.Black, new Point(55 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
 
-                    for (int i = 0; i <= row_zd;)//49个字符就换行
+                YY = YY + 20; Y_unLine = YY + 13;
+                if (string.IsNullOrEmpty(txtSqyy.Text.Trim()))
+                    txtSqyy.Text = " 无";
+                e.Graphics.DrawString("术前用药  " + txtSqyy.Text, ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(350 + xLeft, Y_unLine));
+
+                //e.Graphics.DrawString("手术体位 " + this.cmbTiwei.Text, ptzt8, Brushes.Black, new Point(310 + xLeft, YY));
+                //e.Graphics.DrawLine(ptp, new Point(360 + xLeft, Y_unLine), new Point(500 + xLeft, Y_unLine));
+                if (string.IsNullOrEmpty(txtTSBQing.Text.Trim()))
+                    txtTSBQing.Text = " 无";
+                e.Graphics.DrawString("特殊情况  " + txtTSBQing.Text.Trim(), ptzt8, Brushes.Black, new Point(360 + xLeft, YY));
+                e.Graphics.DrawLine(ptp, new Point(410 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
+
+
+                YY = YY + 22; Y_unLine = YY + 13;
+                e.Graphics.DrawLine(ptp, new Point(xLeft, YY), new Point(xRight, YY));
+                //↑画边框
+                #endregion
+
+                #region 打印时间和分页   
+                DateTime PrintEndTime = new DateTime();//打印截止时间判断        
+                DateTime PageStartTime = new DateTime();//当前页开始时间
+                PageStartTime = ptime; //当前打印页时间开始时间 
+                PrintEndTime = MaxPointTime;
+                //DataTable dtMax = mpdal.GetMaxPoint(_MzjldId);
+
+                //if (dtMax.Rows[0][0].ToString() == "")
+                //    PrintEndTime = DateTime.Now;
+                //else
+                //    PrintEndTime =MaxPointTime
+
+                int addMin = TextValueLimit.XtoMinutePrint(2 * 210, ZoomRegionListPrint);//210分钟*每分钟2像素
+                DateTime PageEndTime = PageStartTime.AddMinutes(addMin);
+
+                e.Graphics.DrawString("时间(分钟)", ptzt8, Brushes.Black, new Point(10 + xLeft, YY + 2));
+                for (int i = 0; i < 8; i++) //打印检测时间
+                {
+                    ptime = PageStartTime;
+                    int add = TextValueLimit.XtoMinutePrint(i * 60, ZoomRegionListPrint);
+                    ptime = ptime.AddMinutes(add);
+                    e.Graphics.DrawString(ptime.ToString("HH:mm"), ptzt7, Brushes.Black, new Point(xStart - 10 + 60 * i, YY + 2));
+
+                }
+
+                #endregion
+
+                #region  打印用药区域
+                YY = YY + 16; SZYY = YY;
+                for (int i = 0; i < 22; i++)//画横实线
+                {
+                    if (i == 0)
+                        e.Graphics.DrawLine(ptp1, new Point(xLeft, YY + 12 * i + yTop), new Point(xRight, YY + 12 * i + yTop));
+                    else if (i == 12 || i == 21)
+                        e.Graphics.DrawLine(ptp1, new Point(xLeft, YY + 12 * i + yTop), new Point(xEnd, YY + 12 * i + yTop));
+
+                    else
+                        e.Graphics.DrawLine(ptp, new Point(15 + xLeft, YY + 12 * i + yTop), new Point(xEnd, YY + 12 * i + yTop));
+                }
+                e.Graphics.DrawLine(ptp, new Point(15 + xLeft, YY + yTop), new Point(15 + xLeft, YY + 28 * 12 + yTop));
+
+
+                for (int i = 0; i <= 42; i++)
+                {
+                    if (i % 3 == 0)//画竖实线
                     {
-
-                        if (i < row_zd)
-                            str1_zd = txtSqzd.Text.ToString().Substring(i * 65, 65); //从i*65个开始，截取65个字符串
-                        else
-                            str1_zd = txtSqzd.Text.ToString().Substring(i * 65);
-                        e.Graphics.DrawString(str1_zd, ptzt7, Brushes.Black, xLeft + 75, YY);
-                        e.Graphics.DrawLine(ptp, new Point(70 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-                        i++;
-                        if (i > row_zd)
-                        {
-
-                        }
-                        else
-                        {
-                            if (i == 2)
-                            {
-                                break;
-                            }
-                            YY = YY + 20; Y_unLine = YY + 13;
-                        }
-
+                        e.Graphics.DrawLine(ptp, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 28 * 12 + yTop));
+                    }
+                    else//画竖虚线
+                    {
+                        e.Graphics.DrawLine(pxuxian, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 28 * 12 + yTop));
                     }
                 }
-                else
+                //e.Graphics.DrawString("气\n吸\n药", ptzt7, Brushes.Black, new Point(22 + xLeft, YY ));
+                e.Graphics.DrawString("\n\n\n全\n麻\n局\n麻\n药", ptzt7, Brushes.Black, new Point(2 + xLeft, YY + 12 * 1));
+                e.Graphics.DrawString("输\n液\n输\n血", ptzt7, Brushes.Black, new Point(2 + xLeft, YY + 12 * 15));
+                //e.Graphics.DrawString("输\n血", ptzt7, Brushes.Black, new Point(22 + xLeft, YY + 12 * 24 + 10));
+                #endregion
+
+                #region 打印气体
+                ArrayList sssQT = new ArrayList();
+                int qti = 0;   //起步位置
+                foreach (adims_MODEL.Yongyao mzqt in mzqtList)
                 {
-                    string str1_zd = "";
-                    int StrLength_zd = txtSqzd.Text.Trim().Length;
-                    int row_zd = StrLength_zd / 90;
+                    if (sssQT.Contains(mzqt.Name))
+                        qti = qti - 1;
+                    if (!sssQT.Contains(mzqt.Name))
+                        e.Graphics.DrawString(mzqt.Name, mzqt.Name.Length < 7 ? ptzt7 : ptzt7,
+                            Brushes.Black, new PointF(20 + xLeft, YY + qti * 12 + yTop + 3));
 
-                    for (int i = 0; i <= row_zd;)//85个字符就换行
-                    {
-
-                        if (i < row_zd)
-                            str1_zd = txtSqzd.Text.ToString().Substring(i * 90, 90); //从i*49个开始，截取49个字符串
-                        else
-                            str1_zd = txtSqzd.Text.ToString().Substring(i * 90);
-                        e.Graphics.DrawString(str1_zd, ptzt5, Brushes.Black, xLeft + 75, YY);
-                        e.Graphics.DrawLine(ptp, new Point(70 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-                        i++;
-                        if (i > row_zd)
-                        {
-
-                        }
-                        else
-                        {
-                            if (i == 2)
-                            {
-                                break;
-                            }
-                            YY = YY + 20; Y_unLine = YY + 13;
-                        }
-
-                    }
-                }
-            }
-            else
-            {
-
-                e.Graphics.DrawString("/", ptzt8, Brushes.Black, new Point(75 + xLeft, YY));
-                e.Graphics.DrawLine(ptp, new Point(70 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-            }
-
-            YY = YY + 20; Y_unLine = YY + 13;
-            e.Graphics.DrawString("拟施手术  ", ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
-            e.Graphics.DrawString(txtNssss.Text == "" ? "/" : txtNssss.Text, ptzt8, Brushes.Black, new Point(55 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-
-            YY = YY + 20; Y_unLine = YY + 13;
-            if (string.IsNullOrEmpty(txtSqyy.Text.Trim()))
-                txtSqyy.Text = " 无";
-            e.Graphics.DrawString("术前用药  " + txtSqyy.Text, ptzt8, Brushes.Black, new Point(5 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(350 + xLeft, Y_unLine));
-
-            //e.Graphics.DrawString("手术体位 " + this.cmbTiwei.Text, ptzt8, Brushes.Black, new Point(310 + xLeft, YY));
-            //e.Graphics.DrawLine(ptp, new Point(360 + xLeft, Y_unLine), new Point(500 + xLeft, Y_unLine));
-            if (string.IsNullOrEmpty(txtTSBQing.Text.Trim()))
-                txtTSBQing.Text = " 无";
-            e.Graphics.DrawString("特殊情况  " + txtTSBQing.Text.Trim(), ptzt8, Brushes.Black, new Point(360 + xLeft, YY));
-            e.Graphics.DrawLine(ptp, new Point(410 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-
-
-            YY = YY + 25; Y_unLine = YY + 13;
-            e.Graphics.DrawLine(ptp, new Point(xLeft, YY), new Point(xRight, YY));
-            //↑画边框
-            #endregion
-
-            #region 打印时间和分页   
-            DateTime PrintEndTime = new DateTime();//打印截止时间判断        
-            DateTime PageStartTime = new DateTime();//当前页开始时间
-            PageStartTime = ptime; //当前打印页时间开始时间 
-            PrintEndTime = MaxPointTime;
-            //DataTable dtMax = mpdal.GetMaxPoint(_MzjldId);
-
-            //if (dtMax.Rows[0][0].ToString() == "")
-            //    PrintEndTime = DateTime.Now;
-            //else
-            //    PrintEndTime =MaxPointTime
-
-            int addMin = TextValueLimit.XtoMinutePrint(2 * 210, ZoomRegionListPrint);//210分钟*每分钟2像素
-            DateTime PageEndTime = PageStartTime.AddMinutes(addMin);
-
-            e.Graphics.DrawString("时间(分钟)", ptzt8, Brushes.Black, new Point(10 + xLeft, YY + 2));
-            for (int i = 0; i < 8; i++) //打印检测时间
-            {
-                ptime = PageStartTime;
-                int add = TextValueLimit.XtoMinutePrint(i * 60, ZoomRegionListPrint);
-                ptime = ptime.AddMinutes(add);
-                e.Graphics.DrawString(ptime.ToString("HH:mm"), ptzt7, Brushes.Black, new Point(xStart - 10 + 60 * i, YY + 2));
-
-            }
-
-            #endregion
-
-            #region  打印用药区域
-            YY = YY + 18; SZYY = YY;
-            for (int i = 0; i < 22; i++)//画横实线
-            {
-                if (i == 0)
-                    e.Graphics.DrawLine(ptp1, new Point(xLeft, YY + 12 * i + yTop), new Point(xRight, YY + 12 * i + yTop));
-                else if (i == 12 || i == 21)
-                    e.Graphics.DrawLine(ptp1, new Point(xLeft, YY + 12 * i + yTop), new Point(xEnd, YY + 12 * i + yTop));
-
-                else
-                    e.Graphics.DrawLine(ptp, new Point(15 + xLeft, YY + 12 * i + yTop), new Point(xEnd, YY + 12 * i + yTop));
-            }
-            e.Graphics.DrawLine(ptp, new Point(15 + xLeft, YY + yTop), new Point(15 + xLeft, YY + 28 * 12 + yTop));
-
-
-            for (int i = 0; i <= 42; i++)
-            {
-                if (i % 3 == 0)//画竖实线
-                {
-                    e.Graphics.DrawLine(ptp, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 28 * 12 + yTop));
-                }
-                else//画竖虚线
-                {
-                    e.Graphics.DrawLine(pxuxian, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 28 * 12 + yTop));
-                }
-            }
-            //e.Graphics.DrawString("气\n吸\n药", ptzt7, Brushes.Black, new Point(22 + xLeft, YY ));
-            e.Graphics.DrawString("\n\n\n全\n麻\n局\n麻\n药", ptzt7, Brushes.Black, new Point(2 + xLeft, YY + 12 * 1));
-            e.Graphics.DrawString("输\n液\n输\n血", ptzt7, Brushes.Black, new Point(2 + xLeft, YY + 12 * 15));
-            //e.Graphics.DrawString("输\n血", ptzt7, Brushes.Black, new Point(22 + xLeft, YY + 12 * 24 + 10));
-            #endregion
-
-            #region 打印气体
-            ArrayList sssQT = new ArrayList();
-            int qti = 0;   //起步位置
-            foreach (adims_MODEL.Yongyao mzqt in mzqtList)
-            {
-                if (sssQT.Contains(mzqt.Name))
-                    qti = qti - 1;
-                if (!sssQT.Contains(mzqt.Name))
-                    e.Graphics.DrawString(mzqt.Name, mzqt.Name.Length < 7 ? ptzt7 : ptzt7,
-                        Brushes.Black, new PointF(20 + xLeft, YY + qti * 12 + yTop + 3));
-
-                int x1 = (TextValueLimit.TimeToXprint(mzqt.KsTime, ZoomRegionListPrint) + xStart);
-                int y1 = YY + qti * 12 + 4;
-                DateTime dtend = DateTime.Now;
-                if (mzqt.Bz == 1)
-                {
-                    dtend = MaxPointTime;
-                }
-                else
-                {
-                    dtend = mzqt.JsTime;
-                }
-                if (mzqt.JsTime > MaxPointTime)
-                {
-                    dtend = MaxPointTime;
-                }
-                int x2 = (TextValueLimit.TimeToXprint(dtend, ZoomRegionListPrint) + xStart);
-                if (x1 >= xStart && x1 < xEnd)
-                {
-                    e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
-                    e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
-                }
-
-                if (x2 > xStart && x2 <= xEnd)
-                {
+                    int x1 = (TextValueLimit.TimeToXprint(mzqt.KsTime, ZoomRegionListPrint) + xStart);
+                    int y1 = YY + qti * 12 + 4;
+                    DateTime dtend = DateTime.Now;
                     if (mzqt.Bz == 1)
                     {
-                        e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1));
-                        e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1 + 6));
-                    }
-                    if (mzqt.Bz == 2)
-                    {
-                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + yTop), new Point(x2 - 3, y1 + 6 + yTop), new Point(x2 + 3, y1 + 6 + yTop) });
-                    }
-
-                }
-                if (x1 >= xStart && x1 < xEnd && x2 > xStart && x2 < xEnd)
-                {
-                    e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
-                }
-                if (x1 >= xStart && x1 < xEnd && x2 > xEnd)
-                {
-                    e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
-                }
-                if (x1 < xStart && x2 > xStart && x2 <= xEnd)
-                {
-                    e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
-                }
-                if (x1 < xStart && x2 > xEnd)
-                {
-                    e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
-                }
-
-                qti++;
-                sssQT.Add(mzqt.Name);
-            }
-
-            #endregion
-
-            #region 打印全麻药
-            ArrayList sssYDY = new ArrayList();
-            int ydyi = qti;
-            foreach (adims_MODEL.Yongyao mzyt in ydyList)
-            {
-                if (sssYDY.Contains(mzyt.Name))
-                    ydyi = ydyi - 1;
-                if (!sssYDY.Contains(mzyt.Name))
-                    e.Graphics.DrawString(mzyt.Name + " " + mzyt.Dw, mzyt.Name.Length < 7 ? ptzt7 : ptzt7,
-                        Brushes.Black, new PointF(20 + xLeft, YY + ydyi * 12 + yTop + 3));
-
-                if (mzyt.Cxyy == false)
-                {
-                    TimeSpan t = new TimeSpan();
-                    t = mzyt.KsTime - PageStartTime;
-                    int x1 = (TextValueLimit.TimeToXprint(mzyt.KsTime, ZoomRegionListPrint) + xStart);
-                    int y1 = YY + ydyi * 12 + 4;
-                    if (x1 >= xStart && x1 < xEnd)
-                    {
-                        e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
-                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
-                    }
-                }
-                if (mzyt.Cxyy == true)
-                {
-
-                    int x1 = (TextValueLimit.TimeToXprint(mzyt.KsTime, ZoomRegionListPrint) + xStart);
-                    int y1 = YY + ydyi * 12 + 4;
-                    DateTime dtend = DateTime.Now;
-                    if (mzyt.Bz == 1)
-                    {
                         dtend = MaxPointTime;
                     }
                     else
                     {
-                        dtend = mzyt.JsTime;
+                        dtend = mzqt.JsTime;
                     }
-                    if (mzyt.JsTime > MaxPointTime)
+                    if (mzqt.JsTime > MaxPointTime)
                     {
                         dtend = MaxPointTime;
                     }
                     int x2 = (TextValueLimit.TimeToXprint(dtend, ZoomRegionListPrint) + xStart);
                     if (x1 >= xStart && x1 < xEnd)
                     {
-                        e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
+                        e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
                         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
                     }
+
                     if (x2 > xStart && x2 <= xEnd)
                     {
+                        if (mzqt.Bz == 1)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1));
+                            e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1 + 6));
+                        }
+                        if (mzqt.Bz == 2)
+                        {
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + yTop), new Point(x2 - 3, y1 + 6 + yTop), new Point(x2 + 3, y1 + 6 + yTop) });
+                        }
+
+                    }
+                    if (x1 >= xStart && x1 < xEnd && x2 > xStart && x2 < xEnd)
+                    {
+                        e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
+                    }
+                    if (x1 >= xStart && x1 < xEnd && x2 > xEnd)
+                    {
+                        e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
+                    }
+                    if (x1 < xStart && x2 > xStart && x2 <= xEnd)
+                    {
+                        e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
+                    }
+                    if (x1 < xStart && x2 > xEnd)
+                    {
+                        e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
+                    }
+
+                    qti++;
+                    sssQT.Add(mzqt.Name);
+                }
+
+                #endregion
+
+                #region 打印全麻药
+                ArrayList sssYDY = new ArrayList();
+                int ydyi = qti;
+                foreach (adims_MODEL.Yongyao mzyt in ydyList)
+                {
+                    if (sssYDY.Contains(mzyt.Name))
+                        ydyi = ydyi - 1;
+                    if (!sssYDY.Contains(mzyt.Name))
+                        e.Graphics.DrawString(mzyt.Name + " " + mzyt.Dw, mzyt.Name.Length < 7 ? ptzt7 : ptzt7,
+                            Brushes.Black, new PointF(20 + xLeft, YY + ydyi * 12 + yTop + 3));
+
+                    if (mzyt.Cxyy == false)
+                    {
+                        TimeSpan t = new TimeSpan();
+                        t = mzyt.KsTime - PageStartTime;
+                        int x1 = (TextValueLimit.TimeToXprint(mzyt.KsTime, ZoomRegionListPrint) + xStart);
+                        int y1 = YY + ydyi * 12 + 4;
+                        if (x1 >= xStart && x1 < xEnd)
+                        {
+                            e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
+                        }
+                    }
+                    if (mzyt.Cxyy == true)
+                    {
+
+                        int x1 = (TextValueLimit.TimeToXprint(mzyt.KsTime, ZoomRegionListPrint) + xStart);
+                        int y1 = YY + ydyi * 12 + 4;
+                        DateTime dtend = DateTime.Now;
                         if (mzyt.Bz == 1)
                         {
-                            e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1));
-                            e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1 + 6));
+                            dtend = MaxPointTime;
                         }
-                        if (mzyt.Bz == 2)
+                        else
                         {
-                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + yTop), new Point(x2 - 3, y1 + 6 + yTop), new Point(x2 + 3, y1 + 6 + yTop) });
+                            dtend = mzyt.JsTime;
                         }
-                    }
-                    if (x1 >= xStart && x1 < xEnd && x2 > xStart && x2 <= xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
-                    }
-                    if (x1 >= xStart && x1 < xEnd && x2 > xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
-                    }
-                    if (x1 < xStart && x2 > xStart && x2 <= xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
-                    }
-                    if (x1 < xStart && x2 > xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
-                    }
-                }
-                ydyi++;
-                sssYDY.Add(mzyt.Name);
-            }
-            #endregion
-
-            #region 打印局麻药
-            //int jti = 20;  //打印局麻药
-            //ArrayList sssJMY = new ArrayList();
-            //foreach (adims_MODEL.Yongyao jt in jmyList)
-            //{
-            //    if (sssJMY.Contains(jt.Name))
-            //        jti = jti - 1;
-            //    if (!sssJMY.Contains(jt.Name))
-            //        e.Graphics.DrawString(jt.Name + " " + jt.Dw, jt.Name.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + xLeft, YY + jti * 12 + yTop + 2));
-
-            //    TimeSpan t = new TimeSpan();
-            //    t = jt.KsTime - pagetime;
-            //    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 9 / _MonitorInterval + 120);
-            //    int y1 = YY + jti * 12 + 4;
-            //    if (x1 > 120 + xLeft && x1 < 780 + xLeft)
-            //    {
-            //        e.Graphics.DrawString(jt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + xLeft, yTop + y1 - 6));
-            //        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + xLeft, y1 + yTop), new Point(x1 - 3 + xLeft, y1 + 6 + yTop), new Point(x1 + 3 + xLeft, y1 + 6 + yTop) });
-            //    }
-            //    jti++;
-            //    sssJMY.Add(jt.Name);
-            //}
-            #endregion
-
-            #region 打印输液
-            int syi = 12;
-            ArrayList sssSY = new ArrayList();
-            foreach (adims_MODEL.Yongyao sx in shuyeList)
-            {
-                if (sssSY.Contains(sx.Name))
-                    syi = syi - 1;
-                if (!sssSY.Contains(sx.Name))
-                    e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 7 ? ptzt7 : ptzt7,
-                        Brushes.Black, new PointF(20 + xLeft, YY + syi * 12 + yTop + 3));
-
-                if (sx.Cxyy == false)
-                {
-                    TimeSpan t = new TimeSpan();
-                    t = sx.KsTime - PageStartTime;
-                    int x1 = (TextValueLimit.TimeToXprint(sx.KsTime, ZoomRegionListPrint) + xStart);
-                    int y1 = YY + syi * 12 + 4;
-                    if (x1 >= xStart && x1 < xEnd)
-                    {
-                        e.Graphics.DrawString(sx.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
-                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
-                    }
-                }
-                if (sx.Cxyy == true)
-                {
-
-                    int x1 = (TextValueLimit.TimeToXprint(sx.KsTime, ZoomRegionListPrint) + xStart);
-                    int y1 = YY + syi * 12 + 4;
-
-                    DateTime dtend = DateTime.Now;
-                    if (sx.Bz == 1)
-                    {
-                        dtend = MaxPointTime;
-                    }
-                    else
-                    {
-                        dtend = sx.JsTime;
-                    }
-
-                    if (sx.JsTime > MaxPointTime)
-                    {
-                        dtend = MaxPointTime;
-                    }
-                    int x2 = (TextValueLimit.TimeToXprint(dtend, ZoomRegionListPrint) + xStart);
-                    if (x1 >= xStart && x1 < xEnd)
-                    {
-                        e.Graphics.DrawString(sx.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
-                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
-                    }
-                    if (x2 > xStart && x2 <= xEnd)
-                    {
-                        if (sx.Bz == 1)
+                        if (mzyt.JsTime > MaxPointTime)
                         {
-                            e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1));
-                            e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1 + 6));
+                            dtend = MaxPointTime;
                         }
-                        if (sx.Bz == 2)
+                        int x2 = (TextValueLimit.TimeToXprint(dtend, ZoomRegionListPrint) + xStart);
+                        if (x1 >= xStart && x1 < xEnd)
                         {
-                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + yTop), new Point(x2 - 3, y1 + 6 + yTop), new Point(x2 + 3, y1 + 6 + yTop) });
+                            e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
                         }
-                    }
-                    if (x1 >= xStart && x1 < xEnd && x2 > xStart && x2 <= xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
-                    }
-                    if (x1 >= xStart && x1 < xEnd && x2 > xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
-                    }
-                    if (x1 < xStart && x2 > xStart && x2 <= xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
-                    }
-                    if (x1 < xStart && x2 > xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
-                    }
-                }
-                syi++;
-                sssSY.Add(sx.Name);
-
-            }
-
-            #endregion
-
-            #region 打印输血
-            //打印输血
-            int sxi = syi;
-            ArrayList sssSX = new ArrayList();
-            foreach (adims_MODEL.Yongyao sx in shuxueList)
-            {
-                if (sssSX.Contains(sx.Name))
-                    sxi = sxi - 1;
-                if (!sssSX.Contains(sx.Name))
-                    e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 7 ? ptzt7 : ptzt7,
-                        Brushes.Black, new PointF(20 + xLeft, YY + sxi * 12 + yTop + 3));
-
-                if (sx.Cxyy == false)
-                {
-                    TimeSpan t = new TimeSpan();
-                    t = sx.KsTime - PageStartTime;
-                    int x1 = (TextValueLimit.TimeToXprint(sx.KsTime, ZoomRegionListPrint) + xStart);
-                    int y1 = YY + sxi * 12 + 4;
-                    if (x1 > 100 + xLeft && x1 < xEnd)
-                    {
-                        e.Graphics.DrawString(sx.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
-                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
-                    }
-                }
-                if (sx.Cxyy == true)
-                {
-
-                    int x1 = (TextValueLimit.TimeToXprint(sx.KsTime, ZoomRegionListPrint) + xStart);
-                    int y1 = YY + sxi * 12 + 4;
-                    DateTime dtend = DateTime.Now;
-                    if (sx.Bz == 1)
-                    {
-                        dtend = MaxPointTime;
-                    }
-                    else
-                    {
-                        dtend = sx.JsTime;
-                    }
-                    if (sx.JsTime > MaxPointTime)
-                    {
-                        dtend = MaxPointTime;
-                    }
-                    int x2 = (TextValueLimit.TimeToXprint(dtend, ZoomRegionListPrint) + xStart);
-                    if (x1 >= xStart && x1 < xEnd)
-                    {
-                        e.Graphics.DrawString(sx.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
-                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
-                    }
-                    if (x2 > xStart && x2 <= xEnd)
-                    {
-                        if (sx.Bz == 1)
+                        if (x2 > xStart && x2 <= xEnd)
                         {
-                            e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1));
-                            e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1 + 6));
-                        }
-                        if (sx.Bz == 2)
-                        {
-                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + yTop), new Point(x2 - 3, y1 + 6 + yTop), new Point(x2 + 3, y1 + 6 + yTop) });
-                        }
-                    }
-                    if (x1 >= xStart && x1 < xEnd && x2 > xStart && x2 <= xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
-                    }
-                    if (x1 >= xStart && x1 < xEnd && x2 > xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
-                    }
-                    if (x1 < xStart && x2 > xStart && x2 <= xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
-                    }
-                    if (x1 < xStart && x2 > xEnd)
-                    {
-                        e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
-                    }
-                }
-                sxi++;
-                sssSX.Add(sx.Name);
-
-            }
-            #endregion
-
-
-            #region 打印检测区域格子，血压体温等区域↓
-            YY = YY + 12 * 21;
-            e.Graphics.DrawLine(ptp, new Point(15 + xLeft, YY), new Point(15 + xLeft, YY + 8 * 26));
-            e.Graphics.DrawString("术\n\n中\n\n监\n\n测", ptzt8, Brushes.Black, new Point(2 + xLeft, YY + 60));
-            for (int i = 1; i < 14; i++)//画横实线   
-            {
-                e.Graphics.DrawLine(ptp, new Point(xStart, YY + 16 * i), new Point(xEnd, YY + 16 * i + yTop));
-            }
-            for (int i = 0; i < 13; i++)//画横虚线
-                e.Graphics.DrawLine(pxuxian, xStart, YY + 16 * i + 8, xEnd, YY + 16 * i + yTop + 8);
-
-
-
-            for (int i = 0; i <= 42; i++)
-            {
-                if (i % 3 == 0)//画竖实线
-                {
-                    e.Graphics.DrawLine(ptp, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 8 * 26 + yTop));
-                }
-                else//画竖虚线
-                {
-                    e.Graphics.DrawLine(pxuxian, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 8 * 26 + yTop));
-                }
-
-            }
-            for (int i = 1; i < 13; i++)
-            {
-                e.Graphics.DrawString((41 - i * 1).ToString(), ptzt7, Brushes.Black, new PointF(85 + xLeft, YY + (float)16 * i + yTop - 5));
-                e.Graphics.DrawString((260 - i * 20).ToString(), ptzt7, Brushes.Black, new PointF(100 + xLeft, YY + (float)16 * i + yTop - 5));
-            }
-
-
-
-            e.Graphics.DrawString("∨收缩压", ptzt7, Brushes.Red, new Point(20 + xLeft, YY + 10));
-            e.Graphics.DrawString("∧舒张压", ptzt7, Brushes.Red, new Point(20 + xLeft, YY + 25));
-            e.Graphics.DrawString("●脉  搏", ptzt7, Brushes.Blue, new Point(20 + xLeft, YY + 40));
-            e.Graphics.DrawString("○呼  吸", ptzt7, Brushes.DarkCyan, new Point(20 + xLeft, YY + 55));
-            e.Graphics.DrawString("C机械呼吸", ptzt7, Brushes.DarkCyan, new Point(20 + xLeft, YY + 70));
-            e.Graphics.DrawString("Ⅹ麻醉开始", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 85));
-            e.Graphics.DrawString("   插  管", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 100));
-            Image cgImage = Properties.Resources.CG;
-            e.Graphics.DrawImage(cgImage, new Rectangle(20 + xLeft, YY + 100, 9, 9));
-            e.Graphics.DrawString("  拔  管", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 115));
-            Image BgImage = Properties.Resources.BG;
-            e.Graphics.DrawImage(BgImage, new Rectangle(20 + xLeft, YY + 115, 9, 9));
-            e.Graphics.DrawString("⊙手术开始", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 130));
-            e.Graphics.DrawString("   手术结束", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 145));
-            Image ssjsImage = Properties.Resources.SSJS;
-            e.Graphics.DrawImage(ssjsImage, new Rectangle(20 + xLeft, YY + 145, 9, 9));
-            e.Graphics.DrawString("   体  温", ptzt7, Brushes.DarkRed, new Point(20 + xLeft, YY + 160));
-            e.Graphics.DrawString("   ETCO2", ptzt7, Brushes.DarkOrange, new Point(20 + xLeft, YY + 175));
-            #endregion
-
-            #region  //打印收缩压
-            float px = 0, py = 0;
-            Pen p_red2 = new Pen(Brushes.Red, 2);
-            foreach (adims_MODEL.point p in ssyList)
-            {
-                if (p.D >= PageStartTime && p.D <= PageEndTime)
-                {
-                    TimeSpan t = new TimeSpan();
-                    t = p.D - PageStartTime;
-                    float pointx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart);
-                    float pointy = 0;
-                    if (p.V > 250)
-                    {
-                        pointy = (float)((20) * 0.2 + YY);
-                        e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, new PointF(pointx, pointy));
-                    }
-                    else
-                        pointy = (float)((260 - p.V) * 0.8 + YY);
-                    e.Graphics.DrawLines(p_red2, new PointF[3] { new PointF(pointx - 3, pointy - 5), new PointF(pointx, pointy), new PointF(pointx + 3, pointy - 5) });
-                    if (px != 0)
-                        e.Graphics.DrawLine(Pens.Red, new PointF(px, py), new PointF(pointx, pointy));
-
-                    px = pointx;
-                    py = pointy;
-                }
-
-            }
-            #endregion
-
-            #region  //打印舒张压
-            px = 0; py = 0;
-            foreach (adims_MODEL.point p in szyList)
-            {
-
-                if (p.D >= PageStartTime && p.D <= PageEndTime)
-                {
-                    float pointx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart);
-                    //float pointy = (float)((220 - p.V) * 1 + 460);
-                    float pointy = 0;
-                    if (p.V > 250)
-                    {
-                        pointy = (float)((20) * 0.2 + YY);
-                        e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, new PointF(pointx, pointy));
-                    }
-                    else
-                        pointy = (float)((260 - p.V) * 0.8 + YY);
-                    e.Graphics.DrawLines(p_red2, new PointF[3] { new PointF(pointx - 3, pointy + 5), new PointF(pointx, pointy), new PointF(pointx + 3, pointy + 5) });
-                    if (px != 0)
-                        e.Graphics.DrawLine(Pens.Red, new PointF(px, py), new PointF(pointx, pointy));
-
-                    px = pointx;
-                    py = pointy;
-                }
-            }
-
-            #endregion
-
-            #region  //打印脉搏
-            px = 0; py = 0;
-            foreach (adims_MODEL.point p in mboList)
-            {
-                if (p.D >= PageStartTime && p.D <= PageEndTime)
-                {
-
-                    float pointx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart);
-                    float pointy = 0;
-                    if (p.V > 250)
-                    {
-                        pointy = (float)((20) * 0.2 + YY);
-                        e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, new PointF(pointx, pointy));
-                    }
-                    else
-                        pointy = (float)((260 - p.V) * 0.8 + YY);
-                    e.Graphics.FillEllipse(Brushes.Blue, pointx - 2, pointy - 2, 3, 3);
-                    if (px != 0)
-                        e.Graphics.DrawLine(Pens.Blue, new PointF(px, py), new PointF(pointx, pointy));
-                    px = pointx;
-                    py = pointy;
-                }
-            }
-
-            #endregion
-
-
-
-            #region  //打印体温
-            //px = 0; py = 0;
-            //foreach (adims_MODEL.tw_point p in twList)
-            //{
-            //    if (p.V > 0)
-            //    {
-            //        if (p.D >= PageStartTime && p.D <= PageEndTime)
-            //        {
-            //            TimeSpan t = new TimeSpan();
-            //            t = p.D - PageStartTime;
-            //             float pointx = (float)(TextValueLimit.TimeToX(p.D, ZoomRegionListPrint)  + x);
-            //            //float pointy = (float)((220 - p.V) * 1 + 460);
-            //            float pointy = 0;
-            //            if (p.V > 41)
-            //            {
-            //                pointy = (float)((20) *0.2+ YY);
-            //                e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, pointx + x, pointy + y);
-
-            //            }
-            //            else
-            //                pointy = (float)((41 - p.V) * 16+ YY);
-            //            e.Graphics.DrawPolygon(Pens.Maroon, new PointF[3] { new PointF(pointx - 3 + x, pointy + 5 + y), new PointF(pointx + x, pointy + y), new PointF(pointx + 3 + x, pointy + 5 + y) });
-            //            //e.Graphics.FillEllipse(Pens.Maroon, pointx + x - 2, pointy + y - 2, 5, 5);
-            //            if (px != 0)
-            //                e.Graphics.DrawLine(Pens.Maroon, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
-
-            //            px = pointx;
-            //            py = pointy;
-            //        }
-            //    }
-            //}
-            #endregion
-
-            #region  //打印呼吸
-            px = 0; py = 0;
-            foreach (adims_MODEL.point p in hxlList)
-            {
-                if (p.D >= PageStartTime && p.D <= PageEndTime)
-                {
-
-                    float pointx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart);
-                    float pointy = 0;
-                    if (p.V > 250)
-                    {
-                        pointy = ((20) * 1 + YY) + yTop;
-                        e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, pointx, pointy);
-                    }
-                    else
-                        pointy = (float)((260 - p.V) * 0.8 + YY) + yTop;
-                    if (jkksTime < p.D && p.D < jkjsTime)
-                    {
-                        e.Graphics.DrawString("C", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
-                    }
-                    else if (fzksTime < p.D && p.D < fzjsTime)
-                    {
-                        e.Graphics.DrawString("A", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
-                    }
-                    else
-                    {
-
-                        e.Graphics.DrawEllipse(Pens.DarkCyan, pointx - 2, pointy - 2, 5, 5);
-                    }
-                    if (px != 0)
-                        e.Graphics.DrawLine(Pens.DarkCyan, new PointF(px, py), new PointF(pointx, pointy));
-                    px = pointx;
-                    py = pointy;
-                }
-            }
-            #endregion
-
-            #region 打印标记
-            //↓标记区域
-            YY = YY + 8 * 26;
-            int y_Bz = YY + 20;
-            e.Graphics.DrawLine(ptp, new Point(xLeft, YY), new Point(xEnd, YY));
-            e.Graphics.DrawString("标注", ptzt8, Brushes.Black, new Point(5 + xLeft, YY + 10));
-            int y_tsyy = YY;
-            // 打印其他用药标记
-            int tsyyIndex = 1;
-            foreach (adims_MODEL.Yongyao ts in tsyyList)
-            {
-                float xxx = (float)(TextValueLimit.TimeToXprint(ts.KsTime, ZoomRegionListPrint) + xStart - 3);
-                if (ts.KsTime >= PageStartTime && ts.KsTime <= PageEndTime)
-                {
-                    if (tsyyIndex % 2 == 1)
-                    {
-                        e.Graphics.DrawString(tsyyIndex.ToString(), ptzt7, Brushes.Black, new PointF(xxx, y_tsyy));
-                    }
-                    else
-                    {
-                        e.Graphics.DrawString(tsyyIndex.ToString(), ptzt7, Brushes.Black, new PointF(xxx, y_tsyy + 10));
-                    }
-                }
-                tsyyIndex++;
-            }
-
-            //打印手术开始标记
-            if (ssksTime >= PageStartTime && ssksTime <= PageEndTime)
-            {
-                int xxx = (TextValueLimit.TimeToXprint(ssksTime, ZoomRegionListPrint) + xStart - 5);
-                e.Graphics.DrawString("⊙", ptzt8, Brushes.Black, xxx, y_Bz);
-            }
-            //打印手术结束标记
-            if (ssjsTime >= PageStartTime && ssjsTime <= PageEndTime)
-            {
-                int xxx = 0;
-                if (ssjsTime >= MaxPointTime)
-                {
-                    xxx = (TextValueLimit.TimeToXprint(MaxPointTime, ZoomRegionListPrint) + xStart - 5);
-                }
-                else
-                {
-                    xxx = (TextValueLimit.TimeToXprint(ssjsTime, ZoomRegionListPrint) + xStart - 5);
-                }
-
-                Image newImage = Properties.Resources.SSJS;
-                e.Graphics.DrawImage(newImage, new Rectangle(xxx, y_Bz, 10, 10));
-            }
-            //打印麻醉开始标记
-            if (mzksTime >= PageStartTime && mzksTime <= PageEndTime)
-            {
-                int xxx = (TextValueLimit.TimeToXprint(mzksTime, ZoomRegionListPrint) + xStart - 5);
-                e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, y_Bz);
-            }
-            //打印麻醉结束标记
-            //if (mzjsTime >= pagetime && mzjsTime <= pagetime.AddHours(_MonitorInterval))
-            //{
-            //     int xxx = (TextValueLimit.TimeToXprint(mzjsTime, ZoomRegionListPrint) + xStart  - 5);
-            //     e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
-            //}
-            //打印插管标记
-            if (_CgTime >= PageStartTime && _CgTime <= PageEndTime)
-            {
-                int xxx = (TextValueLimit.TimeToXprint(_CgTime, ZoomRegionListPrint) + xStart - 5);
-                Image newImage = Properties.Resources.CG;
-                e.Graphics.DrawImage(newImage, new Rectangle(xxx, y_Bz, 10, 10));
-            }
-            //打印拔管标记
-            if (_BgTime >= PageStartTime && _BgTime <= PageEndTime)
-            {
-                int xxx = (TextValueLimit.TimeToXprint(_BgTime, ZoomRegionListPrint) + xStart - 5);
-                Image newImage = Properties.Resources.BG;
-                if ((_BgTime - ksjcTime).TotalMinutes <= 2)
-                {
-                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, y_Bz - 10, 10, 10));
-                }
-                else
-                {
-                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, y_Bz, 10, 10));
-                }
-
-            }
-            //打印术中事件标记
-
-            foreach (adims_MODEL.szsj sz in szsjList)
-            {
-                if (sz.D >= PageStartTime && sz.D <= PageEndTime)
-                {
-                    float x_szsj = (float)(TextValueLimit.TimeToXprint(sz.D, ZoomRegionListPrint) + xStart - 3);
-                    //e.Graphics.FillRectangle(Brushes.Pink, x_szsj - 1, y_Bz, 8, 8);
-                    string szsjSort = ArrayHelper.ReplaceNumToLetter(PrintSzsjIndex);
-                    e.Graphics.DrawString(szsjSort, ptzt7, Brushes.Black, new PointF(x_szsj, y_Bz + 10));
-
-                    PrintSzsjIndex++;
-                }
-            }
-
-            #endregion
-
-
-
-            #region 打印出血出尿
-            //Pen dakred2 = new Pen(Brushes.DarkRed, 2);
-            //if (tbChuNiao.Text.Trim() == "")
-            //    tbChuNiao.Text = " 0";
-            //int yyyy = YY + 32 * 12 + 1;
-            //e.Graphics.DrawString("出尿：" + tbChuNiao.Text, ht7, Brushes.DarkRed, new Point(700 + xLeft, yyyy));
-            //e.Graphics.DrawLine(dakred2, new Point(725 + xLeft, yyyy + 11), new Point(766 + xLeft, yyyy + 11));
-            //e.Graphics.DrawString("ml", ht7, Brushes.Black, new Point(765 + xLeft, yyyy));
-            //yyyy = yyyy + 12;
-            //if (tbChuxue.Text.Trim() == "")
-            //    tbChuxue.Text = " 0";
-            //e.Graphics.DrawString("出血：" + tbChuxue.Text, ht7, Brushes.DarkRed, new Point(700 + xLeft, yyyy));
-            //e.Graphics.DrawLine(dakred2, new Point(725 + xLeft, yyyy + 11), new Point(766 + xLeft, yyyy + 11));
-            //e.Graphics.DrawString("ml", ht7, Brushes.Black, new Point(765 + xLeft, yyyy));
-
-            #endregion
-
-            #region  打印监护项目区域
-            YY = YY + 40;
-            //e.Graphics.DrawString("\n检\n测\n项\n目", ptzt8, Brushes.Black, new Point(20 + xLeft, YY + 5));
-            for (int i = 0; i <= 6; i++)//画横实线 
-            {
-                if (i == 6)
-                {
-                    e.Graphics.DrawLine(ptp, new Point(xLeft, YY + 12 * i), new Point(xRight, YY + 12 * i + yTop));
-                }
-                else
-                {
-                    e.Graphics.DrawLine(ptp, new Point(xLeft, YY + 12 * i), new Point(xEnd, YY + 12 * i + yTop));
-
-                }
-
-            }
-
-            for (int i = 0; i <= 42; i++)
-            {
-                if (i % 9 == 0)//画竖实线
-                {
-                    e.Graphics.DrawLine(ptp, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 6 * 12 + yTop));
-                }
-                else//画竖虚线
-                {
-                    e.Graphics.DrawLine(pxuxian, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 6 * 12 + yTop));
-                }
-
-            }
-
-
-
-
-
-
-            #endregion
-
-            e.Graphics.DrawLine(ptp, new Point(xEnd, SZYY + yTop), new Point(xEnd, YY + 6 * 12 + yTop));
-            #region 打印监护项目
-
-            #region  //打印ETCO2
-            //px = 0; py = 0;
-            //foreach (adims_MODEL.point p in etco2List)
-            //{
-            //    if (p.D >= pagetime && p.D <= pagetime.AddMinutes(60 * _MonitorInterval))
-            //    {
-            //        TimeSpan t = new TimeSpan();
-            //        t = p.D - pagetime;
-            //        float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / _MonitorInterval + 120);
-            //        float pointy = 0;
-            //        if (p.V > 230)
-            //        {
-            //            pointy = (float)((20) * 1 + YY);
-            //            e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + xLeft, pointy + yTop);
-            //        }
-            //        else
-            //            pointy = (float)((240 - p.V) * 1 + YY);
-
-            //        e.Graphics.DrawPolygon(Pens.DarkOrange, new PointF[3] { new PointF(pointx+ xLeft, pointy+ yTop), 
-            //                           new PointF(pointx - 3+ xLeft, pointy - 5+ yTop), new PointF(pointx + 3+ xLeft, pointy - 5+ yTop) });
-            //        // e.Graphics.FillPolygon(Brushes.Green, new PointF[3] { new PointF(pointx+ xLeft, pointy+ yTop), 
-            //        //         new PointF(pointx + 3+ xLeft, pointy + 6+ yTop), new PointF(pointx - 3+ xLeft, pointy + 6+ yTop) });
-
-            //        if (px != 0)
-            //            e.Graphics.DrawLine(Pens.DarkOrange, new PointF(px + xLeft, py + yTop), new PointF(pointx + xLeft, pointy + yTop));
-
-            //        px = pointx;
-            //        py = pointy;
-            //    }
-            //}
-
-            #endregion
-
-            #region 打印监护项目
-            int jhi = 0;
-            foreach (string jc in jhxmIn)
-            {
-                e.Graphics.DrawString(jc, ptzt7, Brushes.Black, new PointF(20 + xLeft, YY + jhi * 12 + yTop));
-                int count1 = 0;
-                foreach (adims_MODEL.jhxm j in jhxmValue)
-                {
-                    if (jc == j.Sy && j.V != 0)
-                    {
-                        if (j.D >= PageStartTime && j.D <= PageEndTime)
-                        {
-                            TimeSpan t = new TimeSpan();
-                            t = j.D - PageStartTime;
-                            float jhx = (float)(TextValueLimit.TimeToXprint(j.D, ZoomRegionListPrint) + xStart - 5);
-                            float jhy = YY + jhi * 12;
-                            if (count1 % 2 == 0)
+                            if (mzyt.Bz == 1)
                             {
-                                e.Graphics.FillRectangle(Brushes.Pink, jhx - 3, jhy, 12, 9);
-                                e.Graphics.DrawString(j.V.ToString(), j.V > 99 ? ptzt5 : ptzt6, Brushes.Black, new PointF(jhx - 4, jhy));
-                                //}
+                                e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1));
+                                e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1 + 6));
                             }
-                            count1++;
+                            if (mzyt.Bz == 2)
+                            {
+                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + yTop), new Point(x2 - 3, y1 + 6 + yTop), new Point(x2 + 3, y1 + 6 + yTop) });
+                            }
+                        }
+                        if (x1 >= xStart && x1 < xEnd && x2 > xStart && x2 <= xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
+                        }
+                        if (x1 >= xStart && x1 < xEnd && x2 > xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
+                        }
+                        if (x1 < xStart && x2 > xStart && x2 <= xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
+                        }
+                        if (x1 < xStart && x2 > xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
                         }
                     }
+                    ydyi++;
+                    sssYDY.Add(mzyt.Name);
                 }
-                jhi++;
+                #endregion
 
-            }
-            ///打印显示体温
-            //jhi++;
-            int tw_count = 0;
-            e.Graphics.DrawString("体温", ptzt7, Brushes.Black, new PointF(20 + xLeft, YY + jhi * 12 + yTop));
-            foreach (adims_MODEL.tw_point p in twList)
-            {
-                if (p.V > 0)
+                #region 打印局麻药
+                //int jti = 20;  //打印局麻药
+                //ArrayList sssJMY = new ArrayList();
+                //foreach (adims_MODEL.Yongyao jt in jmyList)
+                //{
+                //    if (sssJMY.Contains(jt.Name))
+                //        jti = jti - 1;
+                //    if (!sssJMY.Contains(jt.Name))
+                //        e.Graphics.DrawString(jt.Name + " " + jt.Dw, jt.Name.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + xLeft, YY + jti * 12 + yTop + 2));
+
+                //    TimeSpan t = new TimeSpan();
+                //    t = jt.KsTime - pagetime;
+                //    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 9 / _MonitorInterval + 120);
+                //    int y1 = YY + jti * 12 + 4;
+                //    if (x1 > 120 + xLeft && x1 < 780 + xLeft)
+                //    {
+                //        e.Graphics.DrawString(jt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + xLeft, yTop + y1 - 6));
+                //        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + xLeft, y1 + yTop), new Point(x1 - 3 + xLeft, y1 + 6 + yTop), new Point(x1 + 3 + xLeft, y1 + 6 + yTop) });
+                //    }
+                //    jti++;
+                //    sssJMY.Add(jt.Name);
+                //}
+                #endregion
+
+                #region 打印输液
+                int syi = 12;
+                ArrayList sssSY = new ArrayList();
+                foreach (adims_MODEL.Yongyao sx in shuyeList)
+                {
+                    if (sssSY.Contains(sx.Name))
+                        syi = syi - 1;
+                    if (!sssSY.Contains(sx.Name))
+                        e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 7 ? ptzt7 : ptzt7,
+                            Brushes.Black, new PointF(20 + xLeft, YY + syi * 12 + yTop + 3));
+
+                    if (sx.Cxyy == false)
+                    {
+                        TimeSpan t = new TimeSpan();
+                        t = sx.KsTime - PageStartTime;
+                        int x1 = (TextValueLimit.TimeToXprint(sx.KsTime, ZoomRegionListPrint) + xStart);
+                        int y1 = YY + syi * 12 + 4;
+                        if (x1 >= xStart && x1 < xEnd)
+                        {
+                            e.Graphics.DrawString(sx.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
+                        }
+                    }
+                    if (sx.Cxyy == true)
+                    {
+
+                        int x1 = (TextValueLimit.TimeToXprint(sx.KsTime, ZoomRegionListPrint) + xStart);
+                        int y1 = YY + syi * 12 + 4;
+
+                        DateTime dtend = DateTime.Now;
+                        if (sx.Bz == 1)
+                        {
+                            dtend = MaxPointTime;
+                        }
+                        else
+                        {
+                            dtend = sx.JsTime;
+                        }
+
+                        if (sx.JsTime > MaxPointTime)
+                        {
+                            dtend = MaxPointTime;
+                        }
+                        int x2 = (TextValueLimit.TimeToXprint(dtend, ZoomRegionListPrint) + xStart);
+                        if (x1 >= xStart && x1 < xEnd)
+                        {
+                            e.Graphics.DrawString(sx.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
+                        }
+                        if (x2 > xStart && x2 <= xEnd)
+                        {
+                            if (sx.Bz == 1)
+                            {
+                                e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1));
+                                e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1 + 6));
+                            }
+                            if (sx.Bz == 2)
+                            {
+                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + yTop), new Point(x2 - 3, y1 + 6 + yTop), new Point(x2 + 3, y1 + 6 + yTop) });
+                            }
+                        }
+                        if (x1 >= xStart && x1 < xEnd && x2 > xStart && x2 <= xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
+                        }
+                        if (x1 >= xStart && x1 < xEnd && x2 > xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
+                        }
+                        if (x1 < xStart && x2 > xStart && x2 <= xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
+                        }
+                        if (x1 < xStart && x2 > xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
+                        }
+                    }
+                    syi++;
+                    sssSY.Add(sx.Name);
+
+                }
+
+                #endregion
+
+                #region 打印输血
+                //打印输血
+                int sxi = syi;
+                ArrayList sssSX = new ArrayList();
+                foreach (adims_MODEL.Yongyao sx in shuxueList)
+                {
+                    if (sssSX.Contains(sx.Name))
+                        sxi = sxi - 1;
+                    if (!sssSX.Contains(sx.Name))
+                        e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 7 ? ptzt7 : ptzt7,
+                            Brushes.Black, new PointF(20 + xLeft, YY + sxi * 12 + yTop + 3));
+
+                    if (sx.Cxyy == false)
+                    {
+                        TimeSpan t = new TimeSpan();
+                        t = sx.KsTime - PageStartTime;
+                        int x1 = (TextValueLimit.TimeToXprint(sx.KsTime, ZoomRegionListPrint) + xStart);
+                        int y1 = YY + sxi * 12 + 4;
+                        if (x1 > 100 + xLeft && x1 < xEnd)
+                        {
+                            e.Graphics.DrawString(sx.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
+                        }
+                    }
+                    if (sx.Cxyy == true)
+                    {
+
+                        int x1 = (TextValueLimit.TimeToXprint(sx.KsTime, ZoomRegionListPrint) + xStart);
+                        int y1 = YY + sxi * 12 + 4;
+                        DateTime dtend = DateTime.Now;
+                        if (sx.Bz == 1)
+                        {
+                            dtend = MaxPointTime;
+                        }
+                        else
+                        {
+                            dtend = sx.JsTime;
+                        }
+                        if (sx.JsTime > MaxPointTime)
+                        {
+                            dtend = MaxPointTime;
+                        }
+                        int x2 = (TextValueLimit.TimeToXprint(dtend, ZoomRegionListPrint) + xStart);
+                        if (x1 >= xStart && x1 < xEnd)
+                        {
+                            e.Graphics.DrawString(sx.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3, yTop + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + yTop), new Point(x1 - 3, y1 + 6 + yTop), new Point(x1 + 3, y1 + 6 + yTop) });
+                        }
+                        if (x2 > xStart && x2 <= xEnd)
+                        {
+                            if (sx.Bz == 1)
+                            {
+                                e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1));
+                                e.Graphics.DrawLine(pred2, new Point(x2, y1 + 3), new Point(x2 - 5, y1 + 6));
+                            }
+                            if (sx.Bz == 2)
+                            {
+                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + yTop), new Point(x2 - 3, y1 + 6 + yTop), new Point(x2 + 3, y1 + 6 + yTop) });
+                            }
+                        }
+                        if (x1 >= xStart && x1 < xEnd && x2 > xStart && x2 <= xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
+                        }
+                        if (x1 >= xStart && x1 < xEnd && x2 > xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
+                        }
+                        if (x1 < xStart && x2 > xStart && x2 <= xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(x2, y1 + yTop + 3));
+                        }
+                        if (x1 < xStart && x2 > xEnd)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(xStart, y1 + yTop + 3), new Point(xEnd, y1 + yTop + 3));
+                        }
+                    }
+                    sxi++;
+                    sssSX.Add(sx.Name);
+
+                }
+                #endregion
+
+
+                #region 打印检测区域格子，血压体温等区域↓
+                YY = YY + 12 * 21;
+                e.Graphics.DrawLine(ptp, new Point(15 + xLeft, YY), new Point(15 + xLeft, YY + 8 * 26));
+                e.Graphics.DrawString("术\n\n中\n\n监\n\n测", ptzt8, Brushes.Black, new Point(2 + xLeft, YY + 60));
+                for (int i = 1; i < 14; i++)//画横实线   
+                {
+                    e.Graphics.DrawLine(ptp, new Point(xStart, YY + 16 * i), new Point(xEnd, YY + 16 * i + yTop));
+                }
+                for (int i = 0; i < 13; i++)//画横虚线
+                    e.Graphics.DrawLine(pxuxian, xStart, YY + 16 * i + 8, xEnd, YY + 16 * i + yTop + 8);
+
+
+
+                for (int i = 0; i <= 42; i++)
+                {
+                    if (i % 3 == 0)//画竖实线
+                    {
+                        e.Graphics.DrawLine(ptp, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 8 * 26 + yTop));
+                    }
+                    else//画竖虚线
+                    {
+                        e.Graphics.DrawLine(pxuxian, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 8 * 26 + yTop));
+                    }
+
+                }
+                for (int i = 1; i < 13; i++)
+                {
+                    e.Graphics.DrawString((41 - i * 1).ToString(), ptzt7, Brushes.Black, new PointF(85 + xLeft, YY + (float)16 * i + yTop - 5));
+                    e.Graphics.DrawString((260 - i * 20).ToString(), ptzt7, Brushes.Black, new PointF(100 + xLeft, YY + (float)16 * i + yTop - 5));
+                }
+
+
+
+                e.Graphics.DrawString("∨收缩压", ptzt7, Brushes.Red, new Point(20 + xLeft, YY + 10));
+                e.Graphics.DrawString("∧舒张压", ptzt7, Brushes.Red, new Point(20 + xLeft, YY + 25));
+                e.Graphics.DrawString("●脉  搏", ptzt7, Brushes.Blue, new Point(20 + xLeft, YY + 40));
+                e.Graphics.DrawString("○呼  吸", ptzt7, Brushes.DarkCyan, new Point(20 + xLeft, YY + 55));
+                e.Graphics.DrawString("C机械呼吸", ptzt7, Brushes.DarkCyan, new Point(20 + xLeft, YY + 70));
+                e.Graphics.DrawString("Ⅹ麻醉开始", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 85));
+                e.Graphics.DrawString("   插  管", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 100));
+                Image cgImage = Properties.Resources.CG;
+                e.Graphics.DrawImage(cgImage, new Rectangle(20 + xLeft, YY + 100, 9, 9));
+                e.Graphics.DrawString("  拔  管", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 115));
+                Image BgImage = Properties.Resources.BG;
+                e.Graphics.DrawImage(BgImage, new Rectangle(20 + xLeft, YY + 115, 9, 9));
+                e.Graphics.DrawString("⊙手术开始", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 130));
+                e.Graphics.DrawString("   手术结束", ptzt7, Brushes.Black, new Point(20 + xLeft, YY + 145));
+                Image ssjsImage = Properties.Resources.SSJS;
+                e.Graphics.DrawImage(ssjsImage, new Rectangle(20 + xLeft, YY + 145, 9, 9));
+                e.Graphics.DrawString("   体  温", ptzt7, Brushes.DarkRed, new Point(20 + xLeft, YY + 160));
+                e.Graphics.DrawString("   ETCO2", ptzt7, Brushes.DarkOrange, new Point(20 + xLeft, YY + 175));
+                #endregion
+
+                #region  //打印收缩压
+                float px = 0, py = 0;
+                Pen p_red2 = new Pen(Brushes.Red, 2);
+                foreach (adims_MODEL.point p in ssyList)
                 {
                     if (p.D >= PageStartTime && p.D <= PageEndTime)
                     {
                         TimeSpan t = new TimeSpan();
                         t = p.D - PageStartTime;
-                        float jhx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart - 5);
-                        float jhy = YY + jhi * 12;
-                        if (tw_count % 5 == 0)
+                        float pointx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart);
+                        float pointy = 0;
+                        if (p.V > 250)
                         {
-                            if (p.V.ToString().Length > 3)
-                            {
-                                e.Graphics.FillRectangle(Brushes.Pink, jhx - 3, jhy, 16, 9);
-                            }
-                            else
-                            {
-                                e.Graphics.FillRectangle(Brushes.Pink, jhx - 3, jhy, 12, 9);
-                            }
-                            e.Graphics.DrawString(p.V.ToString(), p.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx - 4, jhy));
-
+                            pointy = (float)((20) * 0.2 + YY);
+                            e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, new PointF(pointx, pointy));
                         }
-                        tw_count++;
+                        else
+                            pointy = (float)((260 - p.V) * 0.8 + YY);
+                        e.Graphics.DrawLines(p_red2, new PointF[3] { new PointF(pointx - 3, pointy - 5), new PointF(pointx, pointy), new PointF(pointx + 3, pointy - 5) });
+                        if (px != 0)
+                            e.Graphics.DrawLine(Pens.Red, new PointF(px, py), new PointF(pointx, pointy));
+
+                        px = pointx;
+                        py = pointy;
+                    }
+
+                }
+                #endregion
+
+                #region  //打印舒张压
+                px = 0; py = 0;
+                foreach (adims_MODEL.point p in szyList)
+                {
+
+                    if (p.D >= PageStartTime && p.D <= PageEndTime)
+                    {
+                        float pointx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart);
+                        //float pointy = (float)((220 - p.V) * 1 + 460);
+                        float pointy = 0;
+                        if (p.V > 250)
+                        {
+                            pointy = (float)((20) * 0.2 + YY);
+                            e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, new PointF(pointx, pointy));
+                        }
+                        else
+                            pointy = (float)((260 - p.V) * 0.8 + YY);
+                        e.Graphics.DrawLines(p_red2, new PointF[3] { new PointF(pointx - 3, pointy + 5), new PointF(pointx, pointy), new PointF(pointx + 3, pointy + 5) });
+                        if (px != 0)
+                            e.Graphics.DrawLine(Pens.Red, new PointF(px, py), new PointF(pointx, pointy));
+
+                        px = pointx;
+                        py = pointy;
                     }
                 }
 
-            }
+                #endregion
 
-
-            #endregion
-            #endregion
-            #region 打印右部分的内容
-            #region 打印术中事件内容
-            e.Graphics.DrawString("术中事件", ptzt9, Brushes.Black, new Point(xEnd + 10, SZYY + 5));
-            e.Graphics.DrawLine(ptp, new Point(xEnd, SZYY + 24), new Point(xEnd, SZYY + 24));
-            SZYY = SZYY + 24;
-            int szi = 0;
-            string szss1 = "";
-            int szszWidth = 105;
-            SizeF size = new SizeF(szszWidth, 300);
-            //打印的起点
-            PointF pSZSJ = new PointF(xEnd + 5, SZYY + 5);
-            foreach (adims_MODEL.szsj sz in szsjList)
-            {
-                string szsjSort = ArrayHelper.ReplaceNumToLetter(szi);
-                szss1 += szsjSort + "." + sz.Name + " " + sz.D.ToString("HH:mm") + "\n";
-                szi++;
-            }
-            int charNum, lineNum;
-            //测量需要画几行
-            e.Graphics.MeasureString(szss1, ptzt7, size, StringFormat.GenericTypographic, out charNum, out lineNum);
-            //获取字体的高度
-            float fontHeight = ptzt7.GetHeight(e.Graphics);
-            size = new SizeF(szszWidth, lineNum * fontHeight + 12);
-            e.Graphics.DrawString(szss1, ptzt7, Brushes.Black, new RectangleF(pSZSJ, size), StringFormat.GenericTypographic);
-
-            SZYY = SZYY + (int)size.Height;
-            e.Graphics.DrawLine(ptp, new Point(xEnd, SZYY), new Point(xEnd, SZYY));
-            #endregion
-            #region 打印其他用药内容
-            e.Graphics.DrawString("其他用药", ptzt9, Brushes.Black, new Point(xEnd + 10, SZYY + 10));
-            e.Graphics.DrawLine(ptp, new Point(xEnd, SZYY + 24), new Point(xEnd, SZYY + 24));
-            SZYY = SZYY + 30;
-            int tsi = 1;
-            string tss1 = "";
-            foreach (adims_MODEL.Yongyao ts in tsyyList)
-            {
-                string zsfs = "";//注射方式
-
-                if (ts.Yyfs == "口服")
+                #region  //打印脉搏
+                px = 0; py = 0;
+                foreach (adims_MODEL.point p in mboList)
                 {
-                    zsfs = "po";
-                }
-                if (ts.Yyfs == "静脉滴注")
-                {
-                    zsfs = "ivdrip";
-                }
-                if (ts.Yyfs == "皮下注射")
-                {
-                    zsfs = "ih";
-                }
-                if (ts.Yyfs == "肌肉注射")
-                {
-                    zsfs = "im";
-                }
-                if (ts.Yyfs == "静脉注射")
-                {
-                    zsfs = "iv";
-                }
-                if (ts.Yyfs == "皮下注射")
-                {
-                    zsfs = "id";
-                }
-                tss1 = tsi.ToString() + "." + ts.Name + "" + ts.Yl + "" + ts.Dw + " " + zsfs + "\n";
-                e.Graphics.DrawString(tss1, ptzt7, Brushes.Black, new PointF(xEnd + 3, SZYY));
-                SZYY = SZYY + 15;
-                if (SZYY > 775)
-                {
-                    break;
-                }
-                tsi++;
-            }
-            //e.Graphics.DrawLine(ptp, new Point(xLeft + 480, SZYY + 204), new Point(xLeft + 660, SZYY + 204));
-            #endregion
-
-            #endregion
-
-            #region 打印尾部区域↓
-            int y_weibu = YY + 6 * 12; //尾部开始位置Y坐标
-            //Y_unLine = y_weibu + 6;
-            //e.Graphics.DrawLine(ptp, new Point(20 + xLeft, y_weibu), new Point(660 + xLeft, y_weibu));
-            y_weibu = y_weibu + 5; Y_unLine = y_weibu + 13;
-            if (txtSZZD.Text.Trim() != "")
-            {
-                if (txtSZZD.Text.Trim().Length <= 130)
-                {
-
-                    string str1_zd = "";
-                    int StrLength_zd = txtSZZD.Text.Trim().Length;
-                    int row_zd = StrLength_zd / 65;
-                    e.Graphics.DrawString("术中诊断 ", ptzt8, Brushes.Black, xLeft + 5, y_weibu);
-                    for (int i = 0; i <= row_zd;)//49个字符就换行
+                    if (p.D >= PageStartTime && p.D <= PageEndTime)
                     {
 
-                        if (i < row_zd)
-                            str1_zd = txtSZZD.Text.ToString().Substring(i * 65, 65); //从i*65个开始，截取65个字符串
+                        float pointx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart);
+                        float pointy = 0;
+                        if (p.V > 250)
+                        {
+                            pointy = (float)((20) * 0.2 + YY);
+                            e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, new PointF(pointx, pointy));
+                        }
                         else
-                            str1_zd = txtSZZD.Text.ToString().Substring(i * 65);
-                        e.Graphics.DrawString(str1_zd, ptzt7, Brushes.Black, xLeft + 80, y_weibu);
-                        e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-                        i++;
-                        if (i > row_zd)
+                            pointy = (float)((260 - p.V) * 0.8 + YY);
+                        e.Graphics.FillEllipse(Brushes.Blue, pointx - 2, pointy - 2, 3, 3);
+                        if (px != 0)
+                            e.Graphics.DrawLine(Pens.Blue, new PointF(px, py), new PointF(pointx, pointy));
+                        px = pointx;
+                        py = pointy;
+                    }
+                }
+
+                #endregion
+
+
+
+                #region  //打印体温
+                //px = 0; py = 0;
+                //foreach (adims_MODEL.tw_point p in twList)
+                //{
+                //    if (p.V > 0)
+                //    {
+                //        if (p.D >= PageStartTime && p.D <= PageEndTime)
+                //        {
+                //            TimeSpan t = new TimeSpan();
+                //            t = p.D - PageStartTime;
+                //             float pointx = (float)(TextValueLimit.TimeToX(p.D, ZoomRegionListPrint)  + x);
+                //            //float pointy = (float)((220 - p.V) * 1 + 460);
+                //            float pointy = 0;
+                //            if (p.V > 41)
+                //            {
+                //                pointy = (float)((20) *0.2+ YY);
+                //                e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, pointx + x, pointy + y);
+
+                //            }
+                //            else
+                //                pointy = (float)((41 - p.V) * 16+ YY);
+                //            e.Graphics.DrawPolygon(Pens.Maroon, new PointF[3] { new PointF(pointx - 3 + x, pointy + 5 + y), new PointF(pointx + x, pointy + y), new PointF(pointx + 3 + x, pointy + 5 + y) });
+                //            //e.Graphics.FillEllipse(Pens.Maroon, pointx + x - 2, pointy + y - 2, 5, 5);
+                //            if (px != 0)
+                //                e.Graphics.DrawLine(Pens.Maroon, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
+
+                //            px = pointx;
+                //            py = pointy;
+                //        }
+                //    }
+                //}
+                #endregion
+
+                #region  //打印呼吸
+                px = 0; py = 0;
+                foreach (adims_MODEL.point p in hxlList)
+                {
+                    if (p.D >= PageStartTime && p.D <= PageEndTime)
+                    {
+
+                        float pointx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart);
+                        float pointy = 0;
+                        if (p.V > 250)
+                        {
+                            pointy = ((20) * 1 + YY) + yTop;
+                            e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, pointx, pointy);
+                        }
+                        else
+                            pointy = (float)((260 - p.V) * 0.8 + YY) + yTop;
+                        if (jkksTime < p.D && p.D < jkjsTime)
+                        {
+                            e.Graphics.DrawString("C", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
+                        }
+                        else if (fzksTime < p.D && p.D < fzjsTime)
+                        {
+                            e.Graphics.DrawString("A", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
+                        }
+                        else
                         {
 
+                            e.Graphics.DrawEllipse(Pens.DarkCyan, pointx - 2, pointy - 2, 5, 5);
+                        }
+                        if (px != 0)
+                            e.Graphics.DrawLine(Pens.DarkCyan, new PointF(px, py), new PointF(pointx, pointy));
+                        px = pointx;
+                        py = pointy;
+                    }
+                }
+                #endregion
+
+                #region 打印标记
+                //↓标记区域
+                YY = YY + 8 * 26;
+                int y_Bz = YY + 20;
+                e.Graphics.DrawLine(ptp, new Point(xLeft, YY), new Point(xEnd, YY));
+                e.Graphics.DrawString("标注", ptzt8, Brushes.Black, new Point(5 + xLeft, YY + 10));
+                int y_tsyy = YY;
+                // 打印其他用药标记
+                int tsyyIndex = 1;
+                foreach (adims_MODEL.Yongyao ts in tsyyList)
+                {
+                    float xxx = (float)(TextValueLimit.TimeToXprint(ts.KsTime, ZoomRegionListPrint) + xStart - 3);
+                    if (ts.KsTime >= PageStartTime && ts.KsTime <= PageEndTime)
+                    {
+                        if (tsyyIndex % 2 == 1)
+                        {
+                            e.Graphics.DrawString(tsyyIndex.ToString(), ptzt7, Brushes.Black, new PointF(xxx, y_tsyy));
                         }
                         else
                         {
-                            if (i == 2)
-                            {
-                                break;
-                            }
-                            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
+                            e.Graphics.DrawString(tsyyIndex.ToString(), ptzt7, Brushes.Black, new PointF(xxx, y_tsyy + 10));
                         }
+                    }
+                    tsyyIndex++;
+                }
+
+                //打印手术开始标记
+                if (ssksTime >= PageStartTime && ssksTime <= PageEndTime)
+                {
+                    int xxx = (TextValueLimit.TimeToXprint(ssksTime, ZoomRegionListPrint) + xStart - 5);
+                    e.Graphics.DrawString("⊙", ptzt8, Brushes.Black, xxx, y_Bz);
+                }
+                //打印手术结束标记
+                if (ssjsTime >= PageStartTime && ssjsTime <= PageEndTime)
+                {
+                    int xxx = 0;
+                    if (ssjsTime >= MaxPointTime)
+                    {
+                        xxx = (TextValueLimit.TimeToXprint(MaxPointTime, ZoomRegionListPrint) + xStart - 5);
+                    }
+                    else
+                    {
+                        xxx = (TextValueLimit.TimeToXprint(ssjsTime, ZoomRegionListPrint) + xStart - 5);
+                    }
+
+                    Image newImage = Properties.Resources.SSJS;
+                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, y_Bz, 10, 10));
+                }
+                //打印麻醉开始标记
+                if (mzksTime >= PageStartTime && mzksTime <= PageEndTime)
+                {
+                    int xxx = (TextValueLimit.TimeToXprint(mzksTime, ZoomRegionListPrint) + xStart - 5);
+                    e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, y_Bz);
+                }
+                //打印麻醉结束标记
+                //if (mzjsTime >= pagetime && mzjsTime <= pagetime.AddHours(_MonitorInterval))
+                //{
+                //     int xxx = (TextValueLimit.TimeToXprint(mzjsTime, ZoomRegionListPrint) + xStart  - 5);
+                //     e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
+                //}
+                //打印插管标记
+                if (_CgTime >= PageStartTime && _CgTime <= PageEndTime)
+                {
+                    int xxx = (TextValueLimit.TimeToXprint(_CgTime, ZoomRegionListPrint) + xStart - 5);
+                    Image newImage = Properties.Resources.CG;
+                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, y_Bz, 10, 10));
+                }
+                //打印拔管标记
+                if (_BgTime >= PageStartTime && _BgTime <= PageEndTime)
+                {
+                    int xxx = (TextValueLimit.TimeToXprint(_BgTime, ZoomRegionListPrint) + xStart - 5);
+                    Image newImage = Properties.Resources.BG;
+                    if ((_BgTime - ksjcTime).TotalMinutes <= 2)
+                    {
+                        e.Graphics.DrawImage(newImage, new Rectangle(xxx, y_Bz - 10, 10, 10));
+                    }
+                    else
+                    {
+                        e.Graphics.DrawImage(newImage, new Rectangle(xxx, y_Bz, 10, 10));
+                    }
+
+                }
+                //打印术中事件标记
+
+                foreach (adims_MODEL.szsj sz in szsjList)
+                {
+                    if (sz.D >= PageStartTime && sz.D <= PageEndTime)
+                    {
+                        float x_szsj = (float)(TextValueLimit.TimeToXprint(sz.D, ZoomRegionListPrint) + xStart - 3);
+                        //e.Graphics.FillRectangle(Brushes.Pink, x_szsj - 1, y_Bz, 8, 8);
+                        string szsjSort = ArrayHelper.ReplaceNumToLetter(PrintSzsjIndex);
+                        e.Graphics.DrawString(szsjSort, ptzt7, Brushes.Black, new PointF(x_szsj, y_Bz + 10));
+
+                        PrintSzsjIndex++;
+                    }
+                }
+
+                #endregion
+
+
+
+                #region 打印出血出尿
+                //Pen dakred2 = new Pen(Brushes.DarkRed, 2);
+                //if (tbChuNiao.Text.Trim() == "")
+                //    tbChuNiao.Text = " 0";
+                //int yyyy = YY + 32 * 12 + 1;
+                //e.Graphics.DrawString("出尿：" + tbChuNiao.Text, ht7, Brushes.DarkRed, new Point(700 + xLeft, yyyy));
+                //e.Graphics.DrawLine(dakred2, new Point(725 + xLeft, yyyy + 11), new Point(766 + xLeft, yyyy + 11));
+                //e.Graphics.DrawString("ml", ht7, Brushes.Black, new Point(765 + xLeft, yyyy));
+                //yyyy = yyyy + 12;
+                //if (tbChuxue.Text.Trim() == "")
+                //    tbChuxue.Text = " 0";
+                //e.Graphics.DrawString("出血：" + tbChuxue.Text, ht7, Brushes.DarkRed, new Point(700 + xLeft, yyyy));
+                //e.Graphics.DrawLine(dakred2, new Point(725 + xLeft, yyyy + 11), new Point(766 + xLeft, yyyy + 11));
+                //e.Graphics.DrawString("ml", ht7, Brushes.Black, new Point(765 + xLeft, yyyy));
+
+                #endregion
+
+                #region  打印监护项目区域
+                YY = YY + 40;
+                //e.Graphics.DrawString("\n检\n测\n项\n目", ptzt8, Brushes.Black, new Point(20 + xLeft, YY + 5));
+                for (int i = 0; i <= 6; i++)//画横实线 
+                {
+                    if (i == 6)
+                    {
+                        e.Graphics.DrawLine(ptp, new Point(xLeft, YY + 12 * i), new Point(xRight, YY + 12 * i + yTop));
+                    }
+                    else
+                    {
+                        e.Graphics.DrawLine(ptp, new Point(xLeft, YY + 12 * i), new Point(xEnd, YY + 12 * i + yTop));
 
                     }
+
+                }
+
+                for (int i = 0; i <= 42; i++)
+                {
+                    if (i % 9 == 0)//画竖实线
+                    {
+                        e.Graphics.DrawLine(ptp, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 6 * 12 + yTop));
+                    }
+                    else//画竖虚线
+                    {
+                        e.Graphics.DrawLine(pxuxian, new Point(xStart + 10 * i, YY + yTop), new Point(xStart + 10 * i, YY + 6 * 12 + yTop));
+                    }
+
+                }
+
+
+
+
+
+
+                #endregion
+
+                e.Graphics.DrawLine(ptp, new Point(xEnd, SZYY + yTop), new Point(xEnd, YY + 6 * 12 + yTop));
+                #region 打印监护项目
+
+                #region  //打印ETCO2
+                //px = 0; py = 0;
+                //foreach (adims_MODEL.point p in etco2List)
+                //{
+                //    if (p.D >= pagetime && p.D <= pagetime.AddMinutes(60 * _MonitorInterval))
+                //    {
+                //        TimeSpan t = new TimeSpan();
+                //        t = p.D - pagetime;
+                //        float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / _MonitorInterval + 120);
+                //        float pointy = 0;
+                //        if (p.V > 230)
+                //        {
+                //            pointy = (float)((20) * 1 + YY);
+                //            e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + xLeft, pointy + yTop);
+                //        }
+                //        else
+                //            pointy = (float)((240 - p.V) * 1 + YY);
+
+                //        e.Graphics.DrawPolygon(Pens.DarkOrange, new PointF[3] { new PointF(pointx+ xLeft, pointy+ yTop), 
+                //                           new PointF(pointx - 3+ xLeft, pointy - 5+ yTop), new PointF(pointx + 3+ xLeft, pointy - 5+ yTop) });
+                //        // e.Graphics.FillPolygon(Brushes.Green, new PointF[3] { new PointF(pointx+ xLeft, pointy+ yTop), 
+                //        //         new PointF(pointx + 3+ xLeft, pointy + 6+ yTop), new PointF(pointx - 3+ xLeft, pointy + 6+ yTop) });
+
+                //        if (px != 0)
+                //            e.Graphics.DrawLine(Pens.DarkOrange, new PointF(px + xLeft, py + yTop), new PointF(pointx + xLeft, pointy + yTop));
+
+                //        px = pointx;
+                //        py = pointy;
+                //    }
+                //}
+
+                #endregion
+
+                #region 打印监护项目
+                int jhi = 0;
+                foreach (string jc in jhxmIn)
+                {
+                    e.Graphics.DrawString(jc, ptzt7, Brushes.Black, new PointF(20 + xLeft, YY + jhi * 12 + yTop));
+                    int count1 = 0;
+                    foreach (adims_MODEL.jhxm j in jhxmValue)
+                    {
+                        if (jc == j.Sy && j.V != 0)
+                        {
+                            if (j.D >= PageStartTime && j.D <= PageEndTime)
+                            {
+                                TimeSpan t = new TimeSpan();
+                                t = j.D - PageStartTime;
+                                float jhx = (float)(TextValueLimit.TimeToXprint(j.D, ZoomRegionListPrint) + xStart - 5);
+                                float jhy = YY + jhi * 12;
+                                if (count1 % 2 == 0)
+                                {
+                                    e.Graphics.FillRectangle(Brushes.Pink, jhx - 3, jhy, 12, 9);
+                                    e.Graphics.DrawString(j.V.ToString(), j.V > 99 ? ptzt5 : ptzt6, Brushes.Black, new PointF(jhx - 4, jhy));
+                                    //}
+                                }
+                                count1++;
+                            }
+                        }
+                    }
+                    jhi++;
+
+                }
+                ///打印显示体温
+                //jhi++;
+                int tw_count = 0;
+                e.Graphics.DrawString("体温", ptzt7, Brushes.Black, new PointF(20 + xLeft, YY + jhi * 12 + yTop));
+                foreach (adims_MODEL.tw_point p in twList)
+                {
+                    if (p.V > 0)
+                    {
+                        if (p.D >= PageStartTime && p.D <= PageEndTime)
+                        {
+                            TimeSpan t = new TimeSpan();
+                            t = p.D - PageStartTime;
+                            float jhx = (float)(TextValueLimit.TimeToXprint(p.D, ZoomRegionListPrint) + xStart - 5);
+                            float jhy = YY + jhi * 12;
+                            if (tw_count % 5 == 0)
+                            {
+                                if (p.V.ToString().Length > 3)
+                                {
+                                    e.Graphics.FillRectangle(Brushes.Pink, jhx - 3, jhy, 16, 9);
+                                }
+                                else
+                                {
+                                    e.Graphics.FillRectangle(Brushes.Pink, jhx - 3, jhy, 12, 9);
+                                }
+                                e.Graphics.DrawString(p.V.ToString(), p.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx - 4, jhy));
+
+                            }
+                            tw_count++;
+                        }
+                    }
+
+                }
+
+
+                #endregion
+                #endregion
+                #region 打印右部分的内容
+                #region 打印术中事件内容
+                e.Graphics.DrawString("术中事件", ptzt9, Brushes.Black, new Point(xEnd + 10, SZYY + 5));
+                e.Graphics.DrawLine(ptp, new Point(xEnd, SZYY + 24), new Point(xEnd, SZYY + 24));
+                SZYY = SZYY + 24;
+                int szi = 0;
+                string szss1 = "";
+                int szszWidth = 105;
+                SizeF size = new SizeF(szszWidth, 300);
+                //打印的起点
+                PointF pSZSJ = new PointF(xEnd + 5, SZYY + 5);
+                foreach (adims_MODEL.szsj sz in szsjList)
+                {
+                    string szsjSort = ArrayHelper.ReplaceNumToLetter(szi);
+                    szss1 += szsjSort + "." + sz.Name + " " + sz.D.ToString("HH:mm") + "\n";
+                    szi++;
+                }
+                int charNum, lineNum;
+                //测量需要画几行
+                e.Graphics.MeasureString(szss1, ptzt7, size, StringFormat.GenericTypographic, out charNum, out lineNum);
+                //获取字体的高度
+                float fontHeight = ptzt7.GetHeight(e.Graphics);
+                size = new SizeF(szszWidth, lineNum * fontHeight + 12);
+                e.Graphics.DrawString(szss1, ptzt7, Brushes.Black, new RectangleF(pSZSJ, size), StringFormat.GenericTypographic);
+
+                SZYY = SZYY + (int)size.Height;
+                e.Graphics.DrawLine(ptp, new Point(xEnd, SZYY), new Point(xEnd, SZYY));
+                #endregion
+                #region 打印其他用药内容
+                e.Graphics.DrawString("其他用药", ptzt9, Brushes.Black, new Point(xEnd + 10, SZYY + 10));
+                e.Graphics.DrawLine(ptp, new Point(xEnd, SZYY + 24), new Point(xEnd, SZYY + 24));
+                SZYY = SZYY + 30;
+                int tsi = 1;
+                string qtyy = "";
+                foreach (adims_MODEL.Yongyao ts in tsyyList)
+                {
+                    qtyy += tsi.ToString() + "." + ts.Name + "" + ts.Yl + "" + ts.Dw + " " + ts.Yyfs + "\n";                 
+                    tsi++;
+                }
+                //打印的起点
+                PointF pointQtyy = new PointF(xEnd + 5, SZYY);
+                int charCount, lineCount;
+                SizeF sizeQtyy = new SizeF(105, 500);
+                //测量需要画几行
+                e.Graphics.MeasureString(qtyy, ptzt7, sizeQtyy, StringFormat.GenericTypographic, out charCount, out lineCount);
+                //获取字体的高度
+                float fontHeight1 = ptzt7.GetHeight(e.Graphics);
+                sizeQtyy = new SizeF(105, lineCount * fontHeight + 12);
+                e.Graphics.DrawString(qtyy, ptzt7, Brushes.Black, new RectangleF(pointQtyy, sizeQtyy), StringFormat.GenericTypographic);
+
+                //e.Graphics.DrawLine(ptp, new Point(xLeft + 480, SZYY + 204), new Point(xLeft + 660, SZYY + 204));
+                #endregion
+
+                #endregion
+
+                #region 打印尾部区域↓
+                int y_weibu = YY + 6 * 12; //尾部开始位置Y坐标
+                y_weibu = y_weibu + 3; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("术中诊断 ", ptzt8, Brushes.Black, xLeft + 5, y_weibu);
+                string szzd = txtSZZD.Text.Trim().IsNullOrEmpty() ? "  / " : txtSZZD.Text.Trim();
+                string str1_zd = "";
+                int row_zd = szzd.Length / 62;
+                for (int i = 0; i <= row_zd; i++)
+                {
+                    if (i < row_zd)
+                        str1_zd = szzd.Substring(i * 62, 62); //从i*65个开始，截取65个字符串
+                    else
+                        str1_zd = szzd.Substring(i * 62);
+                    e.Graphics.DrawString(str1_zd, ptzt7, Brushes.Black, xLeft + 55, y_weibu);
+                    e.Graphics.DrawLine(ptp, new Point(xLeft + 50, Y_unLine), new Point(xRight - 5, Y_unLine));
+                    y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                }
+
+                e.Graphics.DrawString("实施手术 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtSSSS.Text == "" ? "/" : txtSSSS.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xLeft + 485,Y_unLine));
+
+                int xShixue = xLeft + 490;
+                e.Graphics.DrawString("失血量", ptzt8, Brushes.Black, xShixue + 0, y_weibu);
+                e.Graphics.DrawString(txtShixue.Text == "" ? "/" : txtShixue.Text, txtShixue.Text.Length < 3 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 35, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(xShixue + 30, Y_unLine), new Point(xShixue + 60, Y_unLine));
+                e.Graphics.DrawString("ml, 红细胞 ", ptzt8, Brushes.Black, xShixue + 60, y_weibu);
+                e.Graphics.DrawString(txtHongxibao.Text == "" ? "/" : txtHongxibao.Text, txtHongxibao.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 120, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(xShixue + 120, Y_unLine), new Point(xShixue + 150, Y_unLine));
+                e.Graphics.DrawString("u ", ptzt8, Brushes.Black, xShixue + 150, y_weibu);
+
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("药物 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtMZyaowu.Text == "" ? "  /" : txtMZyaowu.Text, ptzt7, Brushes.Black, 35 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(30 + xLeft, Y_unLine), new Point(xLeft + 485, Y_unLine));
+                e.Graphics.DrawString("尿量 ", ptzt8, Brushes.Black, xShixue + 0, y_weibu);
+                e.Graphics.DrawString(txtChuniao.Text == "" ? "/" : txtChuniao.Text, txtChuniao.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 35, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(xShixue + 30, Y_unLine), new Point(xShixue + 60, Y_unLine));
+                e.Graphics.DrawString("ml, 全血 ", ptzt8, Brushes.Black, xShixue + 60, y_weibu);
+                e.Graphics.DrawString(txtQuanxue.Text == "" ? "/" : txtQuanxue.Text, txtQuanxue.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 120, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(xShixue + 120, Y_unLine), new Point(xShixue + 150, Y_unLine));
+                e.Graphics.DrawString("ml ", ptzt8, Brushes.Black, xShixue + 150, y_weibu);
+
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("麻醉方法 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtMZFF.Text == "" ? "/" : txtMZFF.Text, ptzt8, Brushes.Black, 55 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(320 + xLeft, Y_unLine));
+                e.Graphics.DrawString("手术医师 ", ptzt8, Brushes.Black, 320 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtSSYS.Text == "" ? "/" : txtSSYS.Text, txtSSYS.Text.Length > 10 ? ptzt7 : ptzt8, Brushes.Black, 370 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(365 + xLeft, Y_unLine), new Point(480 + xLeft, Y_unLine));
+                e.Graphics.DrawString("胸水 ", ptzt8, Brushes.Black, xShixue + 0, y_weibu);
+                e.Graphics.DrawString(txtXiongshui.Text == "" ? "/" : txtXiongshui.Text, txtXiongshui.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 35, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(xShixue + 30, Y_unLine), new Point(xShixue + 60, Y_unLine));
+                e.Graphics.DrawString("ml, 血浆", ptzt8, Brushes.Black, xShixue + 60, y_weibu);
+                e.Graphics.DrawString(txtXuejiang.Text == "" ? "/" : txtXuejiang.Text, txtXuejiang.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 120, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(xShixue + 120, Y_unLine), new Point(xShixue + 150, Y_unLine));
+                e.Graphics.DrawString("ml ", ptzt8, Brushes.Black, xShixue + 150, y_weibu);
+
+
+
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("区域阻滞 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtQYZZ.Text == "" ? "/" : txtQYZZ.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(320 + xLeft, Y_unLine));
+
+
+                e.Graphics.DrawString("麻醉医师 ", ptzt8, Brushes.Black, 320 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtMZYS.Text == "" ? "/" : txtMZYS.Text, txtMZYS.Text.Length > 10 ? ptzt7 : ptzt8, Brushes.Black, 370 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(365 + xLeft, Y_unLine), new Point(480 + xLeft, Y_unLine));
+
+                e.Graphics.DrawString("腹水 ", ptzt8, Brushes.Black, xShixue + 0, y_weibu);
+                e.Graphics.DrawString(txtFushui.Text == "" ? "/" : txtFushui.Text, txtFushui.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 35, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(xShixue + 30, Y_unLine), new Point(xShixue + 60, Y_unLine));
+                e.Graphics.DrawString("ml, 输液 ", ptzt8, Brushes.Black, xShixue + 60, y_weibu);
+                e.Graphics.DrawString(txtShuye.Text == "" ? "/" : txtShuye.Text, txtShuye.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 120, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(xShixue + 120, Y_unLine), new Point(xShixue + 150, Y_unLine));
+                e.Graphics.DrawString("ml ", ptzt8, Brushes.Black, xShixue + 150, y_weibu);
+
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+
+                e.Graphics.DrawString("麻醉平面 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(cmbMZPM.Text == "" ? "/" : cmbMZPM.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(320 + xLeft, Y_unLine));
+
+
+                e.Graphics.DrawString("器械护士 ", ptzt8, Brushes.Black, 320 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtQXHS.Text == "" ? "/" : txtQXHS.Text, txtQXHS.Text.Length > 10 ? ptzt7 : ptzt8, Brushes.Black, 370 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(365 + xLeft, Y_unLine), new Point(480 + xLeft, Y_unLine));
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("术后镇痛 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(userSHZT.Text == "" ? "/" : userSHZT.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(150 + xLeft, Y_unLine));
+                e.Graphics.DrawString("手术体位 ", ptzt8, Brushes.Black, 150 + xLeft, y_weibu);
+                e.Graphics.DrawString(cmbTiwei.Text == "" ? "/" : cmbTiwei.Text, ptzt8, Brushes.Black, 200 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(195 + xLeft, Y_unLine), new Point(320 + xLeft, Y_unLine));
+                e.Graphics.DrawString("巡回护士 ", ptzt8, Brushes.Black, 320 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtXHHS.Text == "" ? "/" : txtXHHS.Text, txtXHHS.Text.Length > 10 ? ptzt7 : ptzt8, Brushes.Black, 370 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(365 + xLeft, Y_unLine), new Point(480 + xLeft, Y_unLine));
+
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("全麻维持 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(cmbQMWC.Text == "" ? "/" : cmbQMWC.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("全麻诱导 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(cmbQMYD.Text == "" ? "/" : cmbQMYD.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("气道与通气 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(txtQDTQ.Text == "" ? "/" : txtQDTQ.Text, ptzt8, Brushes.Black, 65 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(60 + xLeft, Y_unLine), new Point(250 + xLeft, Y_unLine));
+                e.Graphics.DrawString("插管 ", ptzt8, Brushes.Black, 260 + xLeft, y_weibu);
+                e.Graphics.DrawString(UserCG.Text == "" ? "/" : UserCG.Text, ptzt8, Brushes.Black, 290 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(285 + xLeft, Y_unLine), new Point(450 + xLeft, Y_unLine));
+                e.Graphics.DrawString("插管号 ", ptzt8, Brushes.Black, 460 + xLeft, y_weibu);
+                e.Graphics.DrawString(usercgh.Text == "" ? "/" : usercgh.Text, ptzt8, Brushes.Black, 500 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(495 + xLeft, Y_unLine), new Point(530 + xLeft, Y_unLine));
+                e.Graphics.DrawString("手术时间 ", ptzt8, Brushes.Black, 530 + xLeft, y_weibu);
+                e.Graphics.DrawString(userSSSJ.Text == "" ? "/" : userSSSJ.Text, ptzt8, Brushes.Black, 580 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(580 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
+                y_weibu = y_weibu + 18; Y_unLine = y_weibu + 13;
+                e.Graphics.DrawString("麻醉时间 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
+                e.Graphics.DrawString(userMZSJ.Text == "" ? "/" : userMZSJ.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(145 + xLeft, Y_unLine));
+                e.Graphics.DrawString("麻醉效果 ", ptzt8, Brushes.Black, 150 + xLeft, y_weibu);
+                e.Graphics.DrawString(cmbMZXG.Text == "" ? "/" : cmbMZXG.Text, ptzt8, Brushes.Black, 200 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(195 + xLeft, Y_unLine), new Point(230 + xLeft, Y_unLine));
+                e.Graphics.DrawString("麻醉穿刺间隙 ", ptzt8, Brushes.Black, 240 + xLeft, y_weibu);
+                e.Graphics.DrawString(userMZXG.Text == "" ? "/" : userMZXG.Text, ptzt8, Brushes.Black, 315 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(310 + xLeft, Y_unLine), new Point(370 + xLeft, Y_unLine));
+                e.Graphics.DrawString("出室情况 ", ptzt8, Brushes.Black, 380 + xLeft, y_weibu);
+                e.Graphics.DrawString(userCSQK.Text == "" ? "/" : userCSQK.Text, ptzt8, Brushes.Black, 430 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(425 + xLeft, Y_unLine), new Point(550 + xLeft, Y_unLine));
+                e.Graphics.DrawString("病人去向 ", ptzt8, Brushes.Black, 550 + xLeft, y_weibu);
+                e.Graphics.DrawString(cmbBRQX.Text == "" ? "/" : cmbBRQX.Text, ptzt8, Brushes.Black, 600 + xLeft, y_weibu);
+                e.Graphics.DrawLine(ptp, new Point(595 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
+            
+
+
+
+
+
+
+                #endregion
+                y_weibu = y_weibu + 18;
+                e.Graphics.DrawLine(pblack2, new Point(xLeft, 65 + yTop), new Point(xRight, 65 + yTop));
+                e.Graphics.DrawLine(pblack2, new Point(xLeft, 65 + yTop), new Point(xLeft, y_weibu));
+                e.Graphics.DrawLine(pblack2, new Point(xRight, 65 + yTop), new Point(xRight, y_weibu));
+                e.Graphics.DrawLine(pblack2, new Point(xLeft, y_weibu), new Point(xRight, y_weibu));
+                y_weibu = y_weibu + 18;
+                if (PageEndTime < PrintEndTime)
+                {
+
+                    e.HasMorePages = true;
+                    ptime = PageEndTime;
+                    FirstOpen = PageEndTime;
+                    BindZoomRegionListPrint(ptime);
+                    e.Graphics.DrawString("第 " + iYema.ToString() + " 页", ptzt8, Brushes.Black, new Point(480 + xLeft, y_weibu));
+                    iYema++;
                 }
                 else
                 {
-                    string str1_zd = "";
-                    int StrLength_zd = txtSZZD.Text.Trim().Length;
-                    int row_zd = StrLength_zd / 90;
-                    e.Graphics.DrawString("术中诊断 ", ptzt8, Brushes.Black, xLeft + 5, y_weibu);
-                    for (int i = 0; i <= row_zd;)//85个字符就换行
+                    e.HasMorePages = false;
+                    BindZoomRegionListPrint(InRoomTime);
+                    FirstOpen = ZoomRegionListPrint[0].AStartTime;
+                    ptime = FirstOpen;
+
+
+                    if (iYema > 1)
                     {
-
-                        if (i < row_zd)
-                            str1_zd = txtSZZD.Text.ToString().Substring(i * 90, 90); //从i*49个开始，截取49个字符串
-                        else
-                            str1_zd = txtSZZD.Text.ToString().Substring(i * 90);
-                        e.Graphics.DrawString(str1_zd, ptzt8, Brushes.Black, xLeft + 60, y_weibu);
-                        e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-                        i++;
-                        if (i > row_zd)
-                        {
-
-                        }
-                        else
-                        {
-                            if (i == 2)
-                            {
-                                break;
-                            }
-                            YY = YY + 20; Y_unLine = YY + 13;
-                        }
-
+                        e.Graphics.DrawString("第 " + iYema.ToString() + " 页", ptzt8, Brushes.Black, new Point(480 + xLeft, y_weibu));
                     }
                 }
             }
-            else
+            catch (Exception ee)
             {
-                e.Graphics.DrawString("术中诊断 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-                e.Graphics.DrawString(txtSZZD.Text == "" ? "/" : txtSZZD.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
-                e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-            }
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("实施手术 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtSSSS.Text == "" ? "/" : txtSSSS.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("药物 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtMZyaowu.Text == "" ? "  /" : txtMZyaowu.Text, ptzt7, Brushes.Black, 35 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(30 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("麻醉方法 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtMZFF.Text == "" ? "/" : txtMZFF.Text, ptzt8, Brushes.Black, 55 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(320 + xLeft, Y_unLine));
-            e.Graphics.DrawString("手术医师 ", ptzt8, Brushes.Black, 320 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtSSYS.Text == "" ? "/" : txtSSYS.Text, txtSSYS.Text.Length > 10 ? ptzt7 : ptzt8, Brushes.Black, 370 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(365 + xLeft, Y_unLine), new Point(480 + xLeft, Y_unLine));
-
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("区域阻滞 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtQYZZ.Text == "" ? "/" : txtQYZZ.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(320 + xLeft, Y_unLine));
-
-
-            e.Graphics.DrawString("麻醉医师 ", ptzt8, Brushes.Black, 320 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtMZYS.Text == "" ? "/" : txtMZYS.Text, txtMZYS.Text.Length > 10 ? ptzt7 : ptzt8, Brushes.Black, 370 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(365 + xLeft, Y_unLine), new Point(480 + xLeft, Y_unLine));
-
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-
-            e.Graphics.DrawString("麻醉平面 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(cmbMZPM.Text == "" ? "/" : cmbMZPM.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(320 + xLeft, Y_unLine));
-
-
-            e.Graphics.DrawString("器械护士 ", ptzt8, Brushes.Black, 320 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtQXHS.Text == "" ? "/" : txtQXHS.Text, txtQXHS.Text.Length > 10 ? ptzt7 : ptzt8, Brushes.Black, 370 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(365 + xLeft, Y_unLine), new Point(480 + xLeft, Y_unLine));
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("术后镇痛 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(userSHZT.Text == "" ? "/" : userSHZT.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(150 + xLeft, Y_unLine));
-            e.Graphics.DrawString("手术体位 ", ptzt8, Brushes.Black, 150 + xLeft, y_weibu);
-            e.Graphics.DrawString(cmbTiwei.Text == "" ? "/" : cmbTiwei.Text, ptzt8, Brushes.Black, 200 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(195 + xLeft, Y_unLine), new Point(320 + xLeft, Y_unLine));
-            e.Graphics.DrawString("巡回护士 ", ptzt8, Brushes.Black, 320 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtXHHS.Text == "" ? "/" : txtXHHS.Text, txtXHHS.Text.Length > 10 ? ptzt7 : ptzt8, Brushes.Black, 370 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(365 + xLeft, Y_unLine), new Point(480 + xLeft, Y_unLine));
-
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("全麻维持 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(cmbQMWC.Text == "" ? "/" : cmbQMWC.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("全麻诱导 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(cmbQMYD.Text == "" ? "/" : cmbQMYD.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("气道与通气 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(txtQDTQ.Text == "" ? "/" : txtQDTQ.Text, ptzt8, Brushes.Black, 65 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(60 + xLeft, Y_unLine), new Point(250 + xLeft, Y_unLine));
-            e.Graphics.DrawString("插管 ", ptzt8, Brushes.Black, 260 + xLeft, y_weibu);
-            e.Graphics.DrawString(UserCG.Text == "" ? "/" : UserCG.Text, ptzt8, Brushes.Black, 290 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(285 + xLeft, Y_unLine), new Point(450 + xLeft, Y_unLine));
-            e.Graphics.DrawString("插管号 ", ptzt8, Brushes.Black, 460 + xLeft, y_weibu);
-            e.Graphics.DrawString(usercgh.Text == "" ? "/" : usercgh.Text, ptzt8, Brushes.Black, 500 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(495 + xLeft, Y_unLine), new Point(530 + xLeft, Y_unLine));
-            e.Graphics.DrawString("手术时间 ", ptzt8, Brushes.Black, 530 + xLeft, y_weibu);
-            e.Graphics.DrawString(userSSSJ.Text == "" ? "/" : userSSSJ.Text, ptzt8, Brushes.Black, 580 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(580 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-            y_weibu = y_weibu + 20; Y_unLine = y_weibu + 13;
-            e.Graphics.DrawString("麻醉时间 ", ptzt8, Brushes.Black, 5 + xLeft, y_weibu);
-            e.Graphics.DrawString(userMZSJ.Text == "" ? "/" : userMZSJ.Text, ptzt8, Brushes.Black, 60 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(50 + xLeft, Y_unLine), new Point(145 + xLeft, Y_unLine));
-            e.Graphics.DrawString("麻醉效果 ", ptzt8, Brushes.Black, 150 + xLeft, y_weibu);
-            e.Graphics.DrawString(cmbMZXG.Text == "" ? "/" : cmbMZXG.Text, ptzt8, Brushes.Black, 200 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(195 + xLeft, Y_unLine), new Point(230 + xLeft, Y_unLine));
-            e.Graphics.DrawString("麻醉穿刺间隙 ", ptzt8, Brushes.Black, 240 + xLeft, y_weibu);
-            e.Graphics.DrawString(userMZXG.Text == "" ? "/" : userMZXG.Text, ptzt8, Brushes.Black, 315 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(310 + xLeft, Y_unLine), new Point(370 + xLeft, Y_unLine));
-            e.Graphics.DrawString("出室情况 ", ptzt8, Brushes.Black, 380 + xLeft, y_weibu);
-            e.Graphics.DrawString(userCSQK.Text == "" ? "/" : userCSQK.Text, ptzt8, Brushes.Black, 430 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(425 + xLeft, Y_unLine), new Point(550 + xLeft, Y_unLine));
-            e.Graphics.DrawString("病人去向 ", ptzt8, Brushes.Black, 550 + xLeft, y_weibu);
-            e.Graphics.DrawString(cmbBRQX.Text == "" ? "/" : cmbBRQX.Text, ptzt8, Brushes.Black, 600 + xLeft, y_weibu);
-            e.Graphics.DrawLine(ptp, new Point(595 + xLeft, Y_unLine), new Point(xRight - 5, Y_unLine));
-            int y_weibu1 = YY + 6 * 12 + 5; //尾部开始位置Y坐标
-            //Y_unLine = y_weibu1 + 6;
-            //e.Graphics.DrawString("出量 ", ptzt8, Brushes.Black, 500 + xLeft, y_weibu1);
-            //e.Graphics.DrawString("入量 ", ptzt8, Brushes.Black, 580 + xLeft, y_weibu1);
-            y_weibu1 = y_weibu1 + 20; Y_unLine = y_weibu1 + 13;
-            y_weibu1 = y_weibu1 + 20; Y_unLine = y_weibu1 + 13;
-            y_weibu1 = y_weibu1 + 20; Y_unLine = y_weibu1 + 13;
-            int xShixue = xLeft + 490;
-            e.Graphics.DrawString("失血量", ptzt8, Brushes.Black, xShixue + 0, y_weibu1);
-            e.Graphics.DrawString(txtShixue.Text == "" ? "/" : txtShixue.Text, txtShixue.Text.Length < 3 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 35, y_weibu1);
-            e.Graphics.DrawLine(ptp, new Point(xShixue + 30, Y_unLine), new Point(xShixue + 60, Y_unLine));
-            e.Graphics.DrawString("ml, 红细胞 ", ptzt8, Brushes.Black, xShixue + 60, y_weibu1);
-            e.Graphics.DrawString(txtHongxibao.Text == "" ? "/" : txtHongxibao.Text, txtHongxibao.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 120, y_weibu1);
-            e.Graphics.DrawLine(ptp, new Point(xShixue + 120, Y_unLine), new Point(xShixue + 150, Y_unLine));
-            e.Graphics.DrawString("u ", ptzt8, Brushes.Black, xShixue + 150, y_weibu1);
-
-            y_weibu1 = y_weibu1 + 20; Y_unLine = y_weibu1 + 13;
-            e.Graphics.DrawString("尿量 ", ptzt8, Brushes.Black, xShixue + 0, y_weibu1);
-            e.Graphics.DrawString(txtChuniao.Text == "" ? "/" : txtChuniao.Text, txtChuniao.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 35, y_weibu1);
-            e.Graphics.DrawLine(ptp, new Point(xShixue + 30, Y_unLine), new Point(xShixue + 60, Y_unLine));
-            e.Graphics.DrawString("ml, 全血 ", ptzt8, Brushes.Black, xShixue + 60, y_weibu1);
-            e.Graphics.DrawString(txtQuanxue.Text == "" ? "/" : txtQuanxue.Text, txtQuanxue.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 120, y_weibu1);
-            e.Graphics.DrawLine(ptp, new Point(xShixue + 120, Y_unLine), new Point(xShixue + 150, Y_unLine));
-            e.Graphics.DrawString("ml ", ptzt8, Brushes.Black, xShixue + 150, y_weibu1);
-
-            y_weibu1 = y_weibu1 + 20; Y_unLine = y_weibu1 + 13;
-            e.Graphics.DrawString("胸水 ", ptzt8, Brushes.Black, xShixue + 0, y_weibu1);
-            e.Graphics.DrawString(txtXiongshui.Text == "" ? "/" : txtXiongshui.Text, txtXiongshui.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 35, y_weibu1);
-            e.Graphics.DrawLine(ptp, new Point(xShixue + 30, Y_unLine), new Point(xShixue + 60, Y_unLine));
-            e.Graphics.DrawString("ml, 血浆", ptzt8, Brushes.Black, xShixue + 60, y_weibu1);
-            e.Graphics.DrawString(txtXuejiang.Text == "" ? "/" : txtXuejiang.Text, txtXuejiang.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 120, y_weibu1);
-            e.Graphics.DrawLine(ptp, new Point(xShixue + 120, Y_unLine), new Point(xShixue + 150, Y_unLine));
-            e.Graphics.DrawString("ml ", ptzt8, Brushes.Black, xShixue + 150, y_weibu1);
-
-            y_weibu1 = y_weibu1 + 20; Y_unLine = y_weibu1 + 13;
-            e.Graphics.DrawString("腹水 ", ptzt8, Brushes.Black, xShixue + 0, y_weibu1);
-            e.Graphics.DrawString(txtFushui.Text == "" ? "/" : txtFushui.Text, txtFushui.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 35, y_weibu1);
-            e.Graphics.DrawLine(ptp, new Point(xShixue + 30, Y_unLine), new Point(xShixue + 60, Y_unLine));
-            e.Graphics.DrawString("ml, 输液 ", ptzt8, Brushes.Black, xShixue + 60, y_weibu1);
-            e.Graphics.DrawString(txtShuye.Text == "" ? "/" : txtShuye.Text, txtShuye.Text.Length < 4 ? ptzt7 : ptzt6, Brushes.Black, xShixue + 120, y_weibu1);
-            e.Graphics.DrawLine(ptp, new Point(xShixue + 120, Y_unLine), new Point(xShixue + 150, Y_unLine));
-            e.Graphics.DrawString("ml ", ptzt8, Brushes.Black, xShixue + 150, y_weibu1);
-        
-            #endregion
-            y_weibu = y_weibu + 20;
-            e.Graphics.DrawLine(pblack2, new Point(xLeft, 70 + yTop), new Point(xRight, 70 + yTop));
-            e.Graphics.DrawLine(pblack2, new Point(xLeft, 70 + yTop), new Point(xLeft, y_weibu));
-            e.Graphics.DrawLine(pblack2, new Point(xRight, 70 + yTop), new Point(xRight, y_weibu));
-            e.Graphics.DrawLine(pblack2, new Point(xLeft, y_weibu), new Point(xRight, y_weibu));
-            y_weibu = y_weibu + 20;
-            if (PageEndTime < PrintEndTime)
-            {
-
-                e.HasMorePages = true;
-                ptime = PageEndTime;
-                FirstOpen = PageEndTime;
-                BindZoomRegionListPrint(ptime);
-                e.Graphics.DrawString("第 " + iYema.ToString() + " 页", ptzt8, Brushes.Black, new Point(480 + xLeft, y_weibu));
-                iYema++;
-            }
-            else
-            {
-                e.HasMorePages = false;
-                BindZoomRegionListPrint(InRoomTime);
-                FirstOpen = ZoomRegionListPrint[0].AStartTime;
-                ptime = FirstOpen;
-
-
-                if (iYema > 1)
-                {
-                    e.Graphics.DrawString("第 " + iYema.ToString() + " 页", ptzt8, Brushes.Black, new Point(480 + xLeft, y_weibu));
-                }
+                MessageBox.Show(ee.Message);
             }
         }
 

@@ -23,7 +23,6 @@ namespace main
         public int mzjldid = 0;
 
         #endregion
-        string operAddress = "";
         admin_T_SQL at = new admin_T_SQL();//
         #region <<Constructors>>
 
@@ -47,19 +46,19 @@ namespace main
         /// <param name="e"></param>
         private void Smzjld_Load(object sender, EventArgs e)
         {
-            operAddress = Program.Customer.yiyuanType;
+          
             BindNewPatInfo();
         }
         public void BindNewPatInfo()
         {
             lbMzs.Text = Program.Customer.user_name;
-            dataGridView1.DataSource = bll.xssbr1(dtDATE.Value.ToString("yyyy-MM-dd"), operAddress).DefaultView;
+            dataGridView1.DataSource = bll.GetOpered(dtDATE.Value.ToString("yyyy-MM-dd")).DefaultView;
             dataGridView1_CellClick(null, null);
         }
         public void BindOldPatInfo()
         {
             lbMzs.Text = Program.Customer.user_name;
-            dataGridView1.DataSource = bll.xssbr2(dtDATE.Value.ToString("yyyy-MM-dd"), operAddress).DefaultView;
+            dataGridView1.DataSource = bll.GetOpered(dtDATE.Value.ToString("yyyy-MM-dd")).DefaultView;
             dataGridView1_CellClick(null, null);
         }
         public bool PingHost(string Address, int TimeOut = 1000)
@@ -159,7 +158,7 @@ namespace main
                 DataTable dt;
                 if (rdNew.Checked)
                 {
-                    dt = bll.xssbr1(dtDATE.Value.ToString("yyyy-MM-dd"), operAddress);
+                    dt = bll.GetPaibaned(dtDATE.Value.ToString("yyyy-MM-dd"));
                     dataGridView1.DataSource = dt.DefaultView;
                     if (dt.Rows.Count != 0)
                     {
@@ -168,7 +167,7 @@ namespace main
                 }
                 else if (rdOld.Checked)
                 {
-                    dt = bll.xssbr2(dtDATE.Value.ToString("yyyy-MM-dd"), operAddress);
+                    dt = bll.GetOpered(dtDATE.Value.ToString("yyyy-MM-dd"));
                     dataGridView1.DataSource = dt.DefaultView;
                     if (dt.Rows.Count != 0)
                     {
