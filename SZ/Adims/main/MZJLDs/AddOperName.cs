@@ -29,13 +29,13 @@ namespace main
             u = o;
             InitializeComponent();
         }
-        DB2help HisHelp = new DB2help();
+       // DB2help HisHelp = new DB2help();
         DataTable OperNameTable = new DataTable();
         adims_DAL.AdimsProvider dal = new AdimsProvider();
         private void osel_Load(object sender, EventArgs e)
         {
             BindDgvSelected();
-            OperNameTable = HisHelp.GetHisOperName("");
+            OperNameTable = dal.GetOperAll();
 
              dgvOperList.DataSource = OperNameTable.DefaultView;
             dgvOperList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -46,10 +46,10 @@ namespace main
             if (dgvOperList.SelectedRows.Count > 0)
             {
                 PatOperation po = new PatOperation();
-                po.OperCode = dgvOperList.CurrentRow.Cells[0].Value.ToString();
-                po.OperName = dgvOperList.CurrentRow.Cells[1].Value.ToString();
-                po.OperLevel = dgvOperList.CurrentRow.Cells[2].Value.ToString();
-                po.CutType = dgvOperList.CurrentRow.Cells[3].Value.ToString();
+                po.OperCode = dgvOperList.CurrentRow.Cells["OperCode"].Value.ToString();
+                po.OperName = dgvOperList.CurrentRow.Cells["OperName"].Value.ToString();
+                po.OperLevel = dgvOperList.CurrentRow.Cells["OperLevel"].Value.ToString();
+                po.CutType = dgvOperList.CurrentRow.Cells["CutType"].Value.ToString();
 
 
                 DataTable dt = _PatOperationDal.GetPatOperationByCode(MzjldId, po.OperCode);
@@ -76,7 +76,7 @@ namespace main
         {
             if (textBox1.Text.Trim() != "")
             {
-                string select = string.Format("INPUTSTR like '%{0} %' or 手术名称 like '%{0}%'", textBox1.Text);
+                string select = string.Format("INPUTSTR like '%{0} %' or OperName like '%{0}%'", textBox1.Text);
                 DataRow[] drs = OperNameTable.Select(select);
                 dgvOperList.DataSource = Adims_Utility.TypeExtension.ToDataTable(drs);
             }

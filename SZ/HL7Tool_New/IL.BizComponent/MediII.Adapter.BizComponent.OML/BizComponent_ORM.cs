@@ -8,6 +8,7 @@ using NHapi.Model.V24.Segment;
 using NHapi.Base.Model;
 using System.Data.Common;
 using System.Transactions;
+using MediII.Common;
 
 namespace MediII.Adapter.BizComponent.ORM
 {
@@ -42,7 +43,7 @@ namespace MediII.Adapter.BizComponent.ORM
                     sb.Append("申请单ID:[").Append(shenQingDId).Append("]").Append(Environment.NewLine);
                     sb.Append("操作员:[").Append(caoZuoYuan).Append("]").Append(Environment.NewLine);
                     sb.Append("附：接收到消息后，可参考组装消息进行解析，在此不再罗列，只以[申请单ID]作为测试");
-                    MediII.Net.Common.LogTxt.WriteError("接收消息内容：" + Environment.NewLine, sb.ToString(), System.Diagnostics.EventLogEntryType.Information);
+                    LogHelp.WriteLog("接收消息内容：" + Environment.NewLine, sb.ToString());
                     scope.Complete();
                     return SetACK(ormO01, "ACK", "", "");
                 }

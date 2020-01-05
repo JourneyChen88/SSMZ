@@ -39,32 +39,7 @@ namespace main.OrgBusinessManage
 
         private void data_maintenance_Load(object sender, EventArgs e)
         {
-            //获取数据表名与维护数据之间的关联文本文件
-           /*    string file =  @".\datatable.txt";
-               string content = "已经维护的基本数据表的都只包含两个字段：id（int ,not null primarykey）name(varchar(50),null)";
-               content += "\r\n";
-               content += "维护的数据   表名";
-               content += "\r\n";
-               foreach (TreeNode mynode in treeView1.Nodes)
-               {    foreach(TreeNode node in mynode.Nodes)
-                   {
-                       if (node.Name != "")
-                           content += node.Text + "    " +node.Name+ "\r\n";
-                   }
-               }
-               if (File.Exists(file) == true)
-                    {
-                    MessageBox.Show("存在此文件!");
-                     }
-               else            
-              {                
-                   FileStream myFs = new FileStream(file, FileMode.Create);                
-                   StreamWriter mySw = new StreamWriter(myFs);                
-                   mySw.Write(content);               
-                   mySw.Close();                
-                   myFs.Close();               
-                   MessageBox.Show("写入成功");}
-            */ 
+           
         }
        }
 }

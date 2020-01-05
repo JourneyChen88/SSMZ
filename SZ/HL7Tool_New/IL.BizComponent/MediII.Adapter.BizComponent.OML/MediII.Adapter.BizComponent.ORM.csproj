@@ -67,8 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BizComponent_ORM.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="LogTxt.cs" />
+    <Compile Include="LogHelp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

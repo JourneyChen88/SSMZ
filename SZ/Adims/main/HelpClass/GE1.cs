@@ -11,7 +11,7 @@ using System.Data;
 using adims_DAL;
 using adims_MODEL;
 using System.Windows.Forms;
-
+using Adims_Utility;
 
 namespace main
 {
@@ -639,7 +639,7 @@ namespace main
             mr.TIME = now;
             if (sh.selectJianCeData(now, mzjldid, type).Rows.Count == 0)//判断本地数据库中这个时间段这条数据有没
             {
-                adims_BLL.UserFunction.SaveMonitorLog(DateTime.Now.ToString() +
+                LogHelp.SaveMonitorLog(DateTime.Now.ToString() +
                string.Format(" -- HR {0:d}/min NIBP {1:d}/{2:d}({3:d})mmHg SpO2 {4:d}% ETCO2 {5:d}mmHg T1 {6}°C T2 {7}°C T3 {8}°C T4 {8}°C",
                s1, s2, s3, s4, s5, s6, s15, s16, tp15, tp16),
                Application.StartupPath + "\\MonitorLog.txt");
@@ -756,27 +756,7 @@ namespace main
             }
             return str;
         }
-        public void ExportToCSVFile(string _FileName)
-        {
-            try
-            {   // Open file for reading. 
-                StreamWriter wrStream = new StreamWriter(_FileName, true, Encoding.UTF8);
-
-                wrStream.WriteLine(m_strBuilder);
-                m_strBuilder.Clear();
-
-                // close file stream. 
-                wrStream.Close();
-
-            }
-
-            catch (Exception _Exception)
-            {
-                // Error.
-                Console.WriteLine("Exception caught in process: {0}", _Exception.ToString());
-            }
-
-        }
+       
 
         public bool OSIsUnix()
         {

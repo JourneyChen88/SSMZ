@@ -1,1 +1,0 @@
-select CreateTime,NIBPS,NIBPD,Pulse,RRC,TEMP,SpO2,ETCO2,CVP,NIBPM,HR from Adims_MonitorRecord where mzjldid=123

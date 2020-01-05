@@ -15,8 +15,7 @@ using System.Configuration;
 using System.Xml;
 using System.Diagnostics;
 using System.IO;
-using System.Net.NetworkInformation;
-using adims_BLL;
+using Adims_Utility;
 
 namespace main
 {
@@ -77,7 +76,7 @@ namespace main
                 DataTable dtUser = bll.Get_user_info(uid, password);
                 if (dtUser.Rows.Count != 0)
                 {
-                    SaveConfigure();
+                    LogHelp.SaveLoginConfigure(cmbYiyuan.Text);
                     Program.Customer.user_name = dtUser.Rows[0][2].ToString();
                     Program.Customer.position = dtUser.Rows[0][3].ToString();
                     Program.Customer.userno = dtUser.Rows[0][4].ToString();
@@ -107,21 +106,14 @@ namespace main
             catch (Exception ex)
             {
                 string errorStr = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "服务器中断，登陆失败!!";
-                SaveLog(errorStr);
+                LogHelp.WriteErrorLog(errorStr);
                 MessageBox.Show("登录失败！", ex.ToString());
                 this.txtPassWord.Text = string.Empty;
             }
         }
 
 
-        private void SaveLog(string str)
-        {
-            FileStream fs = new FileStream(Application.StartupPath + "\\ErrorLinkInternet.txt", FileMode.Append);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-            sw.WriteLine(str);
-            sw.Close();
-            fs.Close();
-        }
+    
         /// <summary>
         /// 退出
         /// </summary>
@@ -212,14 +204,7 @@ namespace main
 
 
         }
-        private void SaveConfigure()
-        {
-            FileStream fs = new FileStream(Application.StartupPath + "\\LogInNormal.txt", FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-            sw.WriteLine(cmbYiyuan.Text);
-            sw.Close();
-            fs.Close();
-        }
+     
         private void GetConfigure()//获取常用登录医院
         {
             string filepath = Application.StartupPath + "\\LogInNormal.txt";

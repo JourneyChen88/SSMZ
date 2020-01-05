@@ -135,7 +135,11 @@ namespace ListenerRoutingLib
                     DateTime dtApplyDate = DateTime.ParseExact(dateList[1].Replace("^", ""), "yyyyMMddHHmmss", System.Globalization.CultureInfo.CurrentCulture);
                     pb.ApplyDate = dtApplyDate;
                     string[] nameList = sList[5].Split('^');
-                    pb.MZFA = nameList[1];
+                    if (nameList.Length>1)
+                    {
+                        pb.MZFA = nameList[1];
+                    }
+                   
 
                 }
                 if (sHL7Lines[i].Contains("PID|"))
@@ -200,7 +204,7 @@ namespace ListenerRoutingLib
                     }
 
                     string[] bedList = sList[3].Split('^');
-                    pb.BedNo = bedList[5];
+                    pb.BedNo = bedList[4];
                     string[] dpmList = bedList[3].Split('&');
 
                     pb.patdpm = dpmList[1];
@@ -234,8 +238,17 @@ namespace ListenerRoutingLib
                 {
                     string[] sList = sHL7Lines[i].Split('|');
                     string[] osList = sList[3].Split('^');
-                    pb.OsNo = osList[0];
-                    pb.OS = osList[1];
+                    try
+                    {
+                        pb.OsNo = osList[0];
+                        pb.OS = osList[2];
+                    }
+                    catch (Exception)
+                    {
+                        pb.OsNo = string.Empty;
+                        pb.OS = string.Empty;
+                    }
+                   
                 }
                 if (sHL7Lines[i].Contains("AIP|7|"))
                 {
@@ -244,7 +257,7 @@ namespace ListenerRoutingLib
                     try
                     {
                         pb.OA1No = osList[0];
-                        pb.OA1 = osList[1];
+                        pb.OA1 = osList[2];
                     }
                     catch (Exception)
                     {
@@ -261,7 +274,7 @@ namespace ListenerRoutingLib
                     try
                     {
                         pb.OA2No = osList[0];
-                        pb.OA2 = osList[1];
+                        pb.OA2 = osList[2];
                     }
                     catch (Exception)
                     {
@@ -277,7 +290,7 @@ namespace ListenerRoutingLib
                     try
                     {
                         pb.OA3No = osList[0];
-                        pb.OA3 = osList[1];
+                        pb.OA3 = osList[2];
                     }
                     catch (Exception)
                     {

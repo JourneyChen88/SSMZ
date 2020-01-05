@@ -65,6 +65,11 @@ namespace ListenerRoutingWin
         private void ListenerRoutingWin_Load(object sender, EventArgs e)
         {
             btnEnd.Enabled = false;
+            Program._AcceptTitleOperDic = ConfigurationManager.AppSettings["AcceptTitleOperDic"];
+            Program._CancelOperApply = ConfigurationManager.AppSettings["CancelOperApply"];
+            Program._NewOperApply = ConfigurationManager.AppSettings["NewOperApply"];
+            Program._PaibanTable = ConfigurationManager.AppSettings["PaibanTableName"];
+            Program._UpdateOperApply = ConfigurationManager.AppSettings["UpdateOperApply"];
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -76,7 +81,7 @@ namespace ListenerRoutingWin
           
 
             //手术字典
-            if (message.Contains(ConfigurationManager.AppSettings["AcceptTitleOperDic"]))
+            if (message.Contains(Program._AcceptTitleOperDic))
             {
                 OperDicModel dic = HL7ToXmlConverter.ToOperDic(message);
                int res= dbcon.InsertOperDic(dic);
@@ -86,26 +91,24 @@ namespace ListenerRoutingWin
                 }
             }
 
-            if (message.Contains(ConfigurationManager.AppSettings["AcceptTitleConfig"]))
+            if (message.Contains(Program._UpdateOperApply))
             {
                 paibanModel paiban = HL7ToXmlConverter.toDataBae(message);
-                string tableName = System.Configuration.ConfigurationManager.AppSettings["PaibanTableName"];
-                if (dbcon.GetPaiban(paiban, tableName).Rows.Count == 1)
+                if (dbcon.GetPaiban(paiban, Program._PaibanTable).Rows.Count == 1)
                 {
-                    int i = dbcon.UpdatePaibanAll(paiban, tableName);
+                    int i = dbcon.UpdatePaibanAll(paiban, Program._PaibanTable);
                     if (i > 0)
                     {
                         MessageBox.Show("修改手术成功");
                     }
                 }
             }
-            if (message.Contains(ConfigurationManager.AppSettings["AcceptTitle"]))
+            if (message.Contains(Program._NewOperApply))
             {
                 paibanModel paiban = HL7ToXmlConverter.toDataBae(message);
-                string tableName = ConfigurationManager.AppSettings["PaibanTableName"];
-                if (dbcon.GetPaiban(paiban, tableName).Rows.Count == 0)
+                if (dbcon.GetPaiban(paiban, Program._PaibanTable).Rows.Count == 0)
                 {
-                    int i = dbcon.InsertPaiban(paiban, tableName);
+                    int i = dbcon.InsertPaiban(paiban, Program._PaibanTable);
                     if (i > 0)
                     {
                         MessageBox.Show("新加手术成功");
@@ -114,7 +117,7 @@ namespace ListenerRoutingWin
                 else
                     MessageBox.Show("病人已经存在!");
             }
-            if (message.Contains(ConfigurationManager.AppSettings["AcceptTitleCancel"]))
+            if (message.Contains(Program._CancelOperApply))
             {
                 string PatID = "";
                 message = message.Replace("ARQ", "\nARQ");
@@ -126,8 +129,7 @@ namespace ListenerRoutingWin
                         PatID = str.Split('|')[1].Replace("^", "");
                     }
                 }
-                string tableName = System.Configuration.ConfigurationManager.AppSettings["PaibanTableName"];
-                int i = dbcon.UpdatePaibanOstate(tableName, PatID);
+                int i = dbcon.UpdatePaibanOstate(Program._PaibanTable, PatID);
                 if (i > 0)
                 {
                     MessageBox.Show("取消手术成功");

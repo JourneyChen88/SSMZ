@@ -1329,7 +1329,7 @@ namespace main
         {
             IPConfigureInfo IpConf;
             IpConf.PatientIPAddress = IPAddressInput1; IpConf.BedID = BedIDInput1;
-            FileStream fs = new FileStream("c:\\Config.txt", FileMode.Create);
+            FileStream fs = new FileStream("c:\\Config.txt", FileMode.OpenOrCreate);
             StreamWriter sw = new StreamWriter(fs, Encoding.Default);
             sw.WriteLine(IpConf.PatientIPAddress);
             sw.WriteLine(IpConf.BedID);
@@ -1339,7 +1339,7 @@ namespace main
         private void GetConfigure()
         {
             IPConfigureInfo IpConf;
-            FileStream fs = new FileStream("c:\\Config.txt", FileMode.Open);
+            FileStream fs = new FileStream("c:\\Config.txt", FileMode.OpenOrCreate);
             StreamReader sw = new StreamReader(fs, Encoding.Default);
             IpConf.PatientIPAddress = sw.ReadLine();
             IpConf.BedID = sw.ReadLine();

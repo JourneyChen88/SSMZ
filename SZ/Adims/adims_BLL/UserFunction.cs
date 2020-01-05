@@ -163,34 +163,8 @@ namespace adims_BLL
             }
             return result;
         }
-        public static void SaveLogHL7(string msg)
-        {
-            try
-            {
-                using (StreamWriter sw = File.AppendText(Application.StartupPath + @"\SendHL7message.txt"))
-                {
-                    string str = DateTime.Now.ToString() + Environment.NewLine + msg;
-                    sw.WriteLine(str);
-                    sw.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public static void SaveMonitorLog(string str, string path)
-        {
-            if (!File.Exists(path))
-            {
-                File.Create(path);
-            }
-            FileStream fs = new FileStream(path, FileMode.Append);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-            sw.WriteLine(str);
-            sw.Close();
-            fs.Close();
-        }
+    
+        
         public static int ToInt32(object obj)
         {
             int i = 0;

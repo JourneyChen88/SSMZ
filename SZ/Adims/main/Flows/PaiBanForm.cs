@@ -24,6 +24,7 @@ using NHapi.Model.V24.Message;
 using MediII.Common;
 using Microsoft.International.Converters.PinYinConverter;
 using System.Configuration;
+using Adims_Utility;
 
 namespace main
 {
@@ -989,13 +990,13 @@ namespace main
                     {
                         string msg = Program.Customer.user_name + " 取消了 " + patid + "--" + patname +
                             " 的手术，取消时间为：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-                        SaveLog(msg);
+                       LogHelp.SaveCancelOperLog(msg);
                         string sqlWhere = "";
                         BindPaibanInfo(sqlWhere);//绑定列表
 
                         #region 发送HL7
                         string message = AppendHL7stringCancelPaiban(patid);
-                        UserFunction.SaveLogHL7(message);
+                        LogHelp.SaveLogHL7(message);
                         string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];
                         //if (UserFunction.PingHost(HL7IPaddress))
                         if (true)
@@ -1018,14 +1019,14 @@ namespace main
                                             if (ack.Contains("AA"))
                                             {
                                                 iResult++;
-                                                UserFunction.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                                LogHelp.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
 
                                                 SetText(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                             }
                                             else
                                             {
                                                 iResult++;
-                                                UserFunction.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                                LogHelp.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                                 SetText(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                             }
                                         }
@@ -1046,21 +1047,7 @@ namespace main
                 }
             }
         }
-        public void SaveLog(string msg)
-        {
-            try
-            {
-                using (StreamWriter sw = File.AppendText(Application.StartupPath + @"\CancelOper.txt"))
-                {
-                    sw.WriteLine(msg);
-                    sw.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+     
 
 
         private void BackToHisExitOper(string patid)
@@ -1101,7 +1088,7 @@ namespace main
 
                     string message = AppendHL7stringConfig(patid);
 
-                    UserFunction.SaveLogHL7(message);
+                    LogHelp.SaveLogHL7(message);
                     string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];
                     //if (message.Length > 0 && UserFunction.PingHost(HL7IPaddress))
                     if (true)
@@ -1123,13 +1110,13 @@ namespace main
                                     if (ack.Contains("AA"))
                                     {
                                         iResult++;
-                                        UserFunction.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                        LogHelp.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                         SetText(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                     }
                                     else
                                     {
                                         iResult++;
-                                        UserFunction.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                        LogHelp.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                         SetText(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                     }
                                 }
@@ -1172,46 +1159,7 @@ namespace main
             {
                 MessageBox.Show(ex.ToString());
             }
-            #region
-            //if (dgvOTypesetting.SelectedCells.Count == 1)
-            //{
-            //    DataGridViewRow dgvRow = dgvOTypesetting.CurrentRow;
-            //    string patid = dgvRow.Cells["patid"].Value.ToString();
-            //    string room = dgvRow.Cells["Oroom"].Value.ToString();
-            //    string send = dgvRow.Cells["second"].Value.ToString();
-            //    if (room != "" || send != "")
-            //    {
-            //        int ostateNum = Convert.ToInt32(dal.GetOstate(patid));
-            //        if (ostateNum == 0)
-            //        {
-            //            int Jieguo = dal.UpdatePaibanInfo(1, patid);//修改成 已排班
-            //            if (Jieguo < 1)
-            //            {
-            //                MessageBox.Show("排班确认失败！");
-            //                return;
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("排班确认成功！");
-            //                string HISresult = BackToHisPaibanInfo(dgvRow);
-            //                if (HISresult != "1")
-            //                {
-            //                    MessageBox.Show("反馈失败！");
-            //                }
-            //            }
-            //        }
-            //        else if (ostateNum > 0)
-            //        {
-            //            MessageBox.Show("已排班确认！");
-            //            return;
-            //        }                  
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("手术间和台次不能为空！");
-            //    }
-            //}
-            #endregion
+          
 
         }
 
@@ -1540,7 +1488,7 @@ namespace main
             DataTable dtResult = dal.GetPaiban(patid);
             DataRow dr = dtResult.Rows[0];
             int ostateNum = UserFunction.ToInt32(dr["Ostate"].ToString());
-            UserFunction.SaveLogHL7("状态" + dr["Ostate"].ToString());
+            LogHelp.SaveLogHL7("状态" + dr["Ostate"].ToString());
             string SCH_1 = "";
             #region 组装消息头
             if (ostateNum == 0)
@@ -1576,7 +1524,7 @@ namespace main
 
             #region SCH|
             String SCH = "SCH||||||^" + SCH_1 + "^^^原因" + "|||||";
-            SCH += "^^^" + Convert.ToDateTime(dr["odate"]).ToString("yyyyMMddHHmmss") + "|||||";
+            SCH += "^^^" +DateTime.Now.ToString("yyyyMMddHHmmss") + "|||||";
             SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "|||";
             SCH += "^^^^^^^^" + dr["patdpm"].ToString() + "|";
             SCH += Program.Customer.userno + "^^" + Program.Customer.user_name + "||||||";
@@ -1794,7 +1742,7 @@ namespace main
 
                     }
                     string message = AppendHL7stringConfig(patid);
-                    UserFunction.SaveLogHL7(message);
+                    LogHelp.SaveLogHL7(message);
                     string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];
                     if (true)
                     {
@@ -1814,13 +1762,13 @@ namespace main
                                     if (ack.Contains("AA"))
                                     {
                                         iResult++;
-                                        UserFunction.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                        LogHelp.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                         SetText(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                     }
                                     else
                                     {
                                         iResult--;
-                                        UserFunction.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                        LogHelp.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                         SetText(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                     }
                                 }
@@ -1839,13 +1787,13 @@ namespace main
                                         if (ack.Contains("AA"))
                                         {
                                             iResult++;
-                                            UserFunction.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                            LogHelp.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                             SetText(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                         }
                                         else
                                         {
                                             iResult--;
-                                            UserFunction.SaveLogHL7(string.Format("\r\n发送失败，错误信息：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                            LogHelp.SaveLogHL7(string.Format("\r\n发送失败，错误信息：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                             SetText(string.Format("\r\n发送失败，错误信息：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                         }
                                     }

@@ -54,7 +54,6 @@
     <Compile Include="DataView.Designer.cs">
       <DependentUpon>DataView.cs</DependentUpon>
     </Compile>
-    <Compile Include="LogHelp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DataView.resx">
@@ -91,6 +90,10 @@
     <ProjectReference Include="..\adims_MODEL\adims_MODEL.csproj">
       <Project>{f2bf0cfd-289b-403f-bf4d-006b750317be}</Project>
       <Name>adims_MODEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adims_Utility\Adims_Utility.csproj">
+      <Project>{442D8AFF-11D7-4DE8-B8CC-5D485D528074}</Project>
+      <Name>Adims_Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

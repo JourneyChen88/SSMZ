@@ -428,19 +428,7 @@ namespace adims_DAL
             //SaveMonitorLog(DateTime.Now.ToString() + "  插入本地行数：" + res.ToString());
             return res;
         }
-        //public static void SaveMonitorLog(string str)
-        //{
-        //    string path = "D:\\MonitorLog.txt";
-        //    if (!File.Exists(path))
-        //    {
-        //        File.Create(path);
-        //    }
-        //    FileStream fs = new FileStream(path, FileMode.Append);
-        //    StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-        //    sw.WriteLine(str);
-        //    sw.Close();
-        //    fs.Close();
-        //}
+  
         public int insertMonitorRecord_PACU(MonitorRecord mr)
         {
             string insert = "insert into Adims_MonitorRecord_PACU(mzjldid,CreateTime,NIBPS,NIBPD,NIBPM,RRC,HR,Pulse,SpO2,ETCO2,TEMP,BIS)";

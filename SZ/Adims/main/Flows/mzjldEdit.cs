@@ -1997,7 +1997,7 @@ namespace main
         {
             IPConfigureInfo IpConf;
             IpConf.PatientIPAddress = IPAddressInput1; IpConf.BedID = BedIDInput1;
-            FileStream fs = new FileStream(Application.StartupPath + "\\Config.txt", FileMode.Create);
+            FileStream fs = new FileStream(Application.StartupPath + "\\Config.txt", FileMode.OpenOrCreate);
             StreamWriter sw = new StreamWriter(fs, Encoding.Default);
             sw.WriteLine(IpConf.PatientIPAddress);
             sw.WriteLine(IpConf.BedID);
@@ -2007,7 +2007,7 @@ namespace main
         private void GetConfigure()
         {
             IPConfigureInfo IpConf;
-            FileStream fs = new FileStream(Application.StartupPath + "\\Config.txt", FileMode.Open);
+            FileStream fs = new FileStream(Application.StartupPath + "\\Config.txt", FileMode.OpenOrCreate);
             StreamReader sw = new StreamReader(fs, Encoding.Default);
             IpConf.PatientIPAddress = sw.ReadLine();
             IpConf.BedID = sw.ReadLine();
@@ -3690,12 +3690,11 @@ namespace main
                     this.FormClosing -= new FormClosingEventHandler(this.mzjldEdit_FormClosing);
                     dal.UpdateShoushujianinfo(0, 0, "0", Oroom);//修改手术间状态,关联家属大屏幕
                     dal.UpdatePaibanInfo(3, patID);//修改排班状态，关联医生大屏幕
-                                                   //BackToHisYSandHS();//反馈信息给HIS系统
                     #region 发送HL7
                     string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];
 
                     string message = AppendHL7stringOperConfig();
-                    UserFunction.SaveLogHL7(message);
+                    LogHelp.SaveLogHL7(message);
                     // if (UserFunction.PingHost(HL7IPaddress))
                     if (true)
                     {
@@ -3717,12 +3716,12 @@ namespace main
                                         if (ack.Contains("AA"))
                                         {
                                             iResult++;
-                                            UserFunction.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                            LogHelp.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                         }
                                         else
                                         {
                                             iResult++;
-                                            UserFunction.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                            LogHelp.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
                                         }
                                     }
                                 }).Start();
@@ -3731,7 +3730,7 @@ namespace main
                         }
                         else
                         {
-                            UserFunction.SaveLogHL7(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " IP地址或端口错误");
+                            LogHelp.SaveLogHL7(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " IP地址或端口错误");
                         }
 
                     }

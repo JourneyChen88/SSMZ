@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ListenerRoutingLib;
 //using MediII.Adapter.BaseBiz;
 using NHapi.Base.Parser;
-using NHapi.Model.V24.Message;
-using NHapi.Base.Model;
-using MediII.Adapter.BaseBiz;
-using NHapi.Model.V24.Segment;
-using System.Diagnostics;
-using MediII.Net.Common;
-using System.Data;
-using ListenerRoutingLib;
+using System;
 using System.Configuration;
-using static MediII.Net.Common.Logger;
 
 namespace MediII.Adapter.ListenerRouting
 {
@@ -21,6 +10,10 @@ namespace MediII.Adapter.ListenerRouting
     {
         private SqlServerLink sqlHelp = new SqlServerLink();
         public string tableName = ConfigurationManager.AppSettings["PaibanTableName"];
+        public string _AcceptTitleOperDic = ConfigurationManager.AppSettings["AcceptTitleOperDic"];
+        public string _CancelOperApply = ConfigurationManager.AppSettings["CancelOperApply"];
+        public string _NewOperApply = ConfigurationManager.AppSettings["NewOperApply"];
+        public string _UpdateOperApply = ConfigurationManager.AppSettings["UpdateOperApply"];
         /// <summary>
         /// 开始处理
         /// </summary>
@@ -35,7 +28,7 @@ namespace MediII.Adapter.ListenerRouting
             }
             catch (Exception ex)
             {
-                LogTxt.WriteError("异常:", ex.ToString(), EventLogEntryType.Error);
+                LogHelp.WriteErrorLog("异常:", ex.ToString());
             }
         }
 
@@ -58,20 +51,19 @@ namespace MediII.Adapter.ListenerRouting
                 //解析出消息类型，创建对应的Biz进行处理
                 string message = System.Text.Encoding.UTF8.GetString(e.Contents);
                 message = MediII.Common.MLLPHelper.TrimMLLP(message, true, false);
-                Logger.WriteLog("接收信息:" + message, LogType.Message);
+                LogHelp.WriteLog(message);
 
                 //手术字典
-                if (message.Contains(ConfigurationManager.AppSettings["AcceptTitleOperDic"]))
+                if (message.Contains(_AcceptTitleOperDic))
                 {
                     OperDicModel dic = HL7ToXmlConverter.ToOperDic(message);
                     dbcon.InsertOperDic(dic);
                 }
 
 
-                if (message.Contains(ConfigurationManager.AppSettings["AcceptTitle"]))
+                if (message.Contains(_NewOperApply))
                 {
                     paibanModel paiban = HL7ToXmlConverter.toDataBae(message);
-                    string tableName = System.Configuration.ConfigurationManager.AppSettings["PaibanTableName"];
                     if (dbcon.GetPaiban(paiban, tableName).Rows.Count == 0)
                     {
                         dbcon.InsertPaiban(paiban, tableName);
@@ -79,17 +71,17 @@ namespace MediII.Adapter.ListenerRouting
 
                 }
 
-                if (message.Contains(ConfigurationManager.AppSettings["AcceptTitleConfig"]))
+                //修改
+                if (message.Contains(_UpdateOperApply))
                 {
                     paibanModel paiban = HL7ToXmlConverter.toDataBae(message);
-                    string tableName = System.Configuration.ConfigurationManager.AppSettings["PaibanTableName"];
                     if (dbcon.GetPaiban(paiban, tableName).Rows.Count == 1)
                     {
                         dbcon.UpdatePaibanAll(paiban, tableName);
                     }
                 }
 
-                if (message.Contains(ConfigurationManager.AppSettings["AcceptTitleCancel"]))
+                if (message.Contains(_CancelOperApply))
                 {
                     string PatID = "";
                     message = message.Replace("ARQ", "\nARQ");
@@ -101,14 +93,13 @@ namespace MediII.Adapter.ListenerRouting
                             PatID = str.Split('|')[1].Replace("^", "");
                         }
                     }
-                    string tableName = System.Configuration.ConfigurationManager.AppSettings["PaibanTableName"];
                     dbcon.UpdatePaibanOstate(tableName, PatID);
                 }
 
                 //string mesStruct = parser.GetMessageStructure(message).Substring(0, 3);
                 string ackMsg = MediII.Common.MessageHelper.SetACK("ACK", "", "", recvApp, recvApp, sendingApp, sendingApp,
                                                    Guid.NewGuid().ToString("N"));
-                Logger.WriteLog(ackMsg);
+                LogHelp.WriteLog(ackMsg);
                 SocketHelper.SendAck(MediII.Common.MLLPHelper.AddMLLP(ackMsg), e.SocketHandler);
             }
             catch (Exception ex)
@@ -116,7 +107,7 @@ namespace MediII.Adapter.ListenerRouting
                 //出现异常需要返回，避免队列堵塞
                 string ackMsg = MediII.Common.MessageHelper.SetACK("ACK", "", "", recvApp, recvApp, sendingApp, sendingApp,
                                                             Guid.NewGuid().ToString("N"), ex.Message);
-                Logger.WriteLog(ackMsg);
+                LogHelp.WriteErrorLog(ackMsg);
                 SocketHelper.SendAck(MediII.Common.MLLPHelper.AddMLLP(ackMsg), e.SocketHandler);
                 MediII.Common.LogHelper.LogError(ex, Common.LogCatagories.AdapterBiz);
             }

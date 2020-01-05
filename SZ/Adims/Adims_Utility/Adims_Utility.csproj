@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="BrowserHelper.cs" />
     <Compile Include="ListHelper.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="LogHelp.cs" />
     <Compile Include="TypeExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlHelper.cs" />

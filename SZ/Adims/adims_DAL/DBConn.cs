@@ -62,7 +62,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
-                Logger.WriteErrorLog(ex);
+                LogHelp.WriteLog(ex.ToString());
                 return null;
             }
         }
@@ -101,7 +101,7 @@ namespace adims_DAL
             catch (Exception ex)
             {
                 string s = ex.ToString();
-                Logger.WriteErrorLog(ex);
+                LogHelp.WriteErrorLog(ex.ToString());
                 return null;
             }
         }
@@ -126,7 +126,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
-                Logger.WriteErrorLog(ex);
+                LogHelp.WriteErrorLog(ex.ToString());
                 return 0;
             }
         }
@@ -152,7 +152,7 @@ namespace adims_DAL
             }
             catch (Exception ex)
             {
-                Logger.WriteErrorLog(ex);
+                LogHelp.WriteErrorLog(ex.ToString());
                 return null;
             }
         }

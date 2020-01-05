@@ -2611,18 +2611,7 @@ namespace adims_DAL
             string INSERT = string.Format(SQL_PAIBAN, list1.ToArray());
             return dBConn.ExecuteNonQuery(INSERT);
         }
-        /// <summary>
-        /// 查询排班
-        /// </summary>
-        /// <param name="sqlWhere"></param>
-        /// <returns></returns>
-        //public DataTable GetPAIBAN(string dtime)
-        //{
-        //    string sql = "SELECT patid,oroom ,second ,patdpm ,patname ,patsex ,patage ,patbedno ,os ,oname ,pattmd ,amethod ,"
-        //       + "ap1 ,ap2 ,ap3 ,on1,on2 ,sn1,sn2"
-        //       + ",applyID ,id   from Adims_OTypesetting where CONVERT(varchar, Odate , 23 ) ='" + dtime + "' and oroom like '%新·%'";
-        //    return dBConn.GetDataTable(sql);
-        //}
+   
 
         public DataTable GetPAIBAN(string dtime , string sqlWhere)
         {
@@ -2664,6 +2653,12 @@ namespace adims_DAL
         public DataTable GetOperNo(string OperName)
         {
             string sql = "SELECT *  FROM OperDic where OperName='" + OperName + "'";
+            return dBConn.GetDataTable(sql);
+        }
+
+        public DataTable GetOperAll( )
+        {
+            string sql = "SELECT OperName,OperCode, Operlevel,CutType,QuickInput FROM OperDic  ";
             return dBConn.GetDataTable(sql);
         }
         public DataTable GetPaibanAndMZJLD(string patid)

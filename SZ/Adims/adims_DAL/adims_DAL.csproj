@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin_T_SQL.cs" />
+    <Compile Include="MzjldDal.cs" />
     <Compile Include="OperDicDal.cs" />
     <Compile Include="PaibanDal.cs" />
     <Compile Include="PatOperationDal.cs" />
