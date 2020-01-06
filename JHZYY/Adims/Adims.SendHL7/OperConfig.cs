@@ -107,10 +107,10 @@ namespace Adims.SendHL7
                 this.Invoke(new UpDateInfo(UpDateText), new object[] { text });
                 Thread.Sleep(5);
             }
-           
+
         }
-      
-        adims_DAL.SendHl7Dal dal = new adims_DAL.SendHl7Dal();
+
+        adims_DAL.SqlSugarDal dal = new adims_DAL.SqlSugarDal();
         /// <summary>
         /// 手术消息反馈
         /// </summary>
@@ -135,24 +135,20 @@ namespace Adims.SendHL7
 
             #endregion
 
-            DataTable dtResult = dal.GetPaibanAndMZJLD(patID);
-            DataRow dr = dtResult.Rows[0];
+            var mzjldDto = dal.GetPaibanAndMzjld(patID);
 
             #region SCH|
             String SCH = "SCH||1||||";
-            string mzff = dr["Amethod"].ToString();
-            DataTable dtMzff = dal.GetMzffID(mzff);
+            string mzff = mzjldDto.Amethod;
+            //DataTable dtMzff = dal.GetMzffID(mzff);
             string mzff_No = "00";
-            if (dtMzff.Rows.Count > 0)
-            {
-                mzff_No = dtMzff.Rows[0][0].ToString();
-            }
+
             SCH += "SSMZ" + "^^^" + mzff_No + "^" + mzff + "|||||";
-            SCH += "^^^" + Convert.ToDateTime(dr["sskssj"]).ToString("yyyyMMddHHmmss") + "^" + Convert.ToDateTime(dr["ssjssj"]).ToString("yyyyMMddHHmmss");
-            SCH += "~^^^" + Convert.ToDateTime(dr["otime"]).ToString("yyyyMMddHHmmss") + "^" + DateTime.Now.ToString("yyyyMMddHHmmss") + "|||||";
+            SCH += "^^^" + mzjldDto.sskssj.Value.ToString("yyyyMMddHHmmss") + "^" + mzjldDto.ssjssj.Value.ToString("yyyyMMddHHmmss");
+            SCH += "~^^^" + mzjldDto.Otime.Value.ToString("yyyyMMddHHmmss") + "^" + DateTime.Now.ToString("yyyyMMddHHmmss") + "|||||";
             SCH += userNo + "^^" + userName + "||||";
             SCH += userNo + "^^" + userName + "||||||";
-            SCH += dr["patid"].ToString() + "\n";
+            SCH += mzjldDto.Patid + "\n";
             #endregion
 
             #region NTE|
@@ -160,112 +156,88 @@ namespace Adims.SendHL7
             #endregion
 
 
-            string PID = dr["PidInfo"].ToString();
-            string PV1 = dr["Pv1Info"].ToString();
+            string PID = mzjldDto.PidInfo;
+            string PV1 = mzjldDto.Pv1Info;
 
 
             string RGS = "RGS|1" + "\n";
 
             #region AIS|
             String AIS = "AIS|1||";
-            string OperName = dr["Oname"].ToString();
-            DataTable dtSSSS = dal.GetOperNo(OperName);
-            string OperCode = "00";
-            if (dtSSSS.Rows.Count > 0)
-            {
-                OperCode = dtSSSS.Rows[0]["OperCode"].ToString();
-            }
-            AIS += OperCode + "^" + OperName + "||||||";
-            AIS += dr["GL"].ToString() + "|";
-            AIS += dr["Oroom"].ToString() + "^" + dr["Second"].ToString() + "\n";
+            string OperName = mzjldDto.Oname;
+        
+            AIS += mzjldDto.OperNo + "^" + mzjldDto.Oname + "|||||||";
+            AIS += mzjldDto.Oroom + "^" + mzjldDto.Second+ "\n";
             #endregion
 
             #region 手术医生
 
             String AIP = "AIP|1||";
-            DataTable dtOsNo = dal.GetShoushuYishengNo(dr["OS"].ToString());
-            string OsNO = "";
-            if (dtOsNo.Rows.Count > 0)
-            {
-                OsNO = dtOsNo.Rows[0]["nameNo"].ToString();
-            }
-            AIP += OsNO + "^" + dr["OS"].ToString() + "|主刀医生" + "\n";
+            var listUser = dal.GetUser();
+            AIP += mzjldDto.OsNo + "^" + mzjldDto.OS + " |主刀医生" + "\n";
 
             AIP += "AIP|7||";
-            dtOsNo = dal.GetShoushuYishengNo(dr["OA1"].ToString());
-            OsNO = "";
-            if (dtOsNo.Rows.Count > 0)
-            {
-                OsNO = dtOsNo.Rows[0]["nameNo"].ToString();
-            }
-            AIP += OsNO + "^" + dr["OA1"].ToString() + "|2^助理医生" + "\n";
+            string OsNO = string.Empty;
+            AIP += OsNO + "^" + mzjldDto.OS1 + "|2^助理医生" + "\n";
 
             AIP += "AIP|8||";
-            dtOsNo = dal.GetShoushuYishengNo(dr["OA2"].ToString());
-            OsNO = "";
-            if (dtOsNo.Rows.Count > 0)
-            {
-                OsNO = dtOsNo.Rows[0]["nameNo"].ToString();
-            }
-            AIP += OsNO + "^" + dr["OA2"].ToString() + "|2^助理医生" + "\n";
+            AIP += OsNO + "^" + mzjldDto.OS2 + "|2^助理医生" + "\n";
 
-            AIP += "AIP|9||";
-            dtOsNo = dal.GetShoushuYishengNo(dr["OA3"].ToString());
-            OsNO = "";
-            if (dtOsNo.Rows.Count > 0)
-            {
-                OsNO = dtOsNo.Rows[0]["nameNo"].ToString();
-            }
-            AIP += OsNO + "^" + dr["OA3"].ToString() + "|2^助理医生" + "\n";
+            AIP += "AIP|9||";            
+            AIP += OsNO + "^" + mzjldDto.OS3 + "|2^助理医生" + "\n";
             #endregion
 
             #region 护士
-            DataTable dt = dal.GetUserNoByName(dr["SN1"].ToString());
-            string UserNO = string.Empty;
-            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
-            AIP += "AIP|2||";
-            AIP += UserNO + "^" + dr["SN1"].ToString() + "|4^洗手护士" + "\n";
-            dt = dal.GetUserNoByName(dr["SN2"].ToString());
-            UserNO = string.Empty;
-            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
-            AIP += "AIP|3||";
-            AIP += UserNO + "^" + dr["SN2"].ToString() + "|4^洗手护士" + "\n";
-            dt = dal.GetUserNoByName(dr["ON1"].ToString());
-            UserNO = string.Empty;
-            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
-            AIP += "AIP|4||";
-            AIP += UserNO + "^" + dr["ON1"].ToString() + "|5^巡回护士" + "\n";
-            dt = dal.GetUserNoByName(dr["ON2"].ToString());
-            UserNO = string.Empty;
-            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
-            AIP += "AIP|5||";
-            AIP += UserNO + "^" + dr["ON2"].ToString() + "|5^巡回护士" + "\n";
 
-            dt = dal.GetUserNoByName(dr["ON3"].ToString());
+            string UserNO = string.Empty;
+            var user = listUser.FirstOrDefault(a=>a.User_name==mzjldDto.SN1);
+            if (user!=null) UserNO = user.Uid;
+            AIP += "AIP|2||";
+            AIP += UserNO + "^" + mzjldDto.SN1 + "|4^洗手护士" + "\n";
+         
             UserNO = string.Empty;
-            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
+            user = listUser.FirstOrDefault(a => a.User_name == mzjldDto.SN2);
+            if (user != null) UserNO = user.Uid;
+            AIP += "AIP|3||";
+            AIP += UserNO + "^" + mzjldDto.SN2+ "|4^洗手护士" + "\n";
+
+            UserNO = string.Empty;
+            user = listUser.FirstOrDefault(a => a.User_name == mzjldDto.ON1);
+            if (user != null) UserNO = user.Uid;
+            AIP += "AIP|4||";
+            AIP += UserNO + "^" + mzjldDto.ON1 + "|5^巡回护士" + "\n";
+            UserNO = string.Empty;
+            user = listUser.FirstOrDefault(a => a.User_name == mzjldDto.ON2);
+            if (user != null) UserNO = user.Uid;
+            AIP += "AIP|5||";
+            AIP += UserNO + "^" + mzjldDto.ON2 + "|5^巡回护士" + "\n";
+
+           
             AIP += "AIP|6||";
-            AIP += UserNO + "^" + dr["ON3"].ToString() + "|5^巡回护士" + "\n";
+            AIP += UserNO + "^" + ""+ "|5^巡回护士" + "\n";
             #endregion
 
             AIP += "AIP|10|||6^体外循环师" + "\n";
 
             #region 麻醉医生
-            dt = dal.GetUserNoByName(dr["AP1"].ToString());
+
             UserNO = string.Empty;
-            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
+            user = listUser.FirstOrDefault(a => a.User_name == mzjldDto.AP1);
+            if (user != null) UserNO = user.Uid;
             AIP += "AIP|11||";
-            AIP += UserNO + "^" + dr["AP1"].ToString() + "|3^麻醉师" + "\n";
-            dt = dal.GetUserNoByName(dr["AP2"].ToString());
+            AIP += UserNO + "^" + mzjldDto.AP1 + "|3^麻醉师" + "\n";
+
             UserNO = string.Empty;
-            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
+            user = listUser.FirstOrDefault(a => a.User_name == mzjldDto.AP2);
+            if (user != null) UserNO = user.Uid;
             AIP += "AIP|12||";
-            AIP += UserNO + "^" + dr["AP2"].ToString() + "|7^助理麻醉师" + "\n";
-            dt = dal.GetUserNoByName(dr["AP3"].ToString());
+            AIP += UserNO + "^" + mzjldDto.AP2 + "|7^助理麻醉师" + "\n";
+
             UserNO = string.Empty;
-            if (dt.Rows.Count > 0) UserNO = dt.Rows[0][0].ToString();
+            user = listUser.FirstOrDefault(a => a.User_name == mzjldDto.AP3);
+            if (user != null) UserNO = user.Uid;
             AIP += "AIP|13||";
-            AIP += UserNO + "^" + dr["AP3"].ToString() + "|7^助理麻醉师" + "\n";
+            AIP += UserNO + "^" + mzjldDto.AP3 + "|7^助理麻醉师" + "\n";
             #endregion
 
 
@@ -278,14 +250,14 @@ namespace Adims.SendHL7
             #endregion
 
         }
-      
+
 
         private void btnAll_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow item in dgvOper.Rows)
             {
 
-           
+
                 #region 发送HL7
                 string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];
 
@@ -335,7 +307,7 @@ namespace Adims.SendHL7
                 #endregion
 
             }
-          
+
 
         }
 
@@ -351,7 +323,7 @@ namespace Adims.SendHL7
             dgvOper.DataSource = res;
             if (res != null)
             {
-                tbCount.Text = res.Rows.Count.ToString();
+                tbCount.Text = res.Count.ToString();
             }
             else
             {
@@ -366,7 +338,7 @@ namespace Adims.SendHL7
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-          
+
         }
     }
 }

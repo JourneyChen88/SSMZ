@@ -33,7 +33,7 @@ WHERE Convert(VARCHAR(10),b.Odate,23)= '{date}' ";
             string sql = "SELECT Mzff_No  FROM [mazuifangan] where [name]='" + MZFF + "'";
             return dBConn.GetDataTable(sql);
         }
-        public DataTable GetUserNoByName(string userName)
+        public DataTable GetUser(string userName)
         {
             string sql = "select uid as UserNo from Adims_User where user_name='" + userName + "'";
             return dBConn.GetDataTable(sql);
@@ -79,7 +79,7 @@ WHERE Convert(VARCHAR(10),b.Odate,23)= '{date}' ";
             string sql =
                 string.Format(@"SELECT id ,oroom,second ,patdpm,patbedno,patname,
                 patage,patsex,oname,pattmd,os,amethod,on1,on2 ,sn1,sn2,Remarks,ap1 ,ap2 ,ap3
-                ,applyID,patZhuYuanID,patid,ASAE from Adims_OTypesetting  
+                ,patZhuYuanID,patid,ASAE from Adims_OTypesetting  
                 where CONVERT(varchar,Odate,23) ='{0}' ", dtime)
                 + sqlWhere;
 

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SqlSugar, Version=5.0.0.12, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlSugar.5.0.0.12\lib\SqlSugar.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite">
@@ -48,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\MzjldDto.cs" />
+    <Compile Include="Dtos\PaibanDto.cs" />
+    <Compile Include="Dtos\QueryMzjldDto.cs" />
+    <Compile Include="Entitys\Adims_Mzjld.cs" />
+    <Compile Include="Entitys\Adims_OTypesetting.cs" />
+    <Compile Include="Entitys\Adims_User.cs" />
     <Compile Include="Admins_Mbbtj.cs" />
     <Compile Include="JHdataModel.cs" />
     <Compile Include="clcxqt.cs" />
@@ -86,6 +95,10 @@
     <Compile Include="user_info.cs" />
     <Compile Include="ydyjmy.cs" />
     <Compile Include="ZhenTongYao.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

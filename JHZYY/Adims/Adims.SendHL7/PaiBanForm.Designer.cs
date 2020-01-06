@@ -59,7 +59,6 @@
             this.PatZhuYuanID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asae = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbEye = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOTypesetting)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,8 +123,8 @@
             // 
             this.dgvOTypesetting.AllowUserToAddRows = false;
             this.dgvOTypesetting.AllowUserToDeleteRows = false;
-            this.dgvOTypesetting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dgvOTypesetting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOTypesetting.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvOTypesetting.BackgroundColor = System.Drawing.SystemColors.Control;
@@ -358,23 +357,11 @@
             this.asae.Visible = false;
             this.asae.Width = 54;
             // 
-            // cbEye
-            // 
-            this.cbEye.AutoSize = true;
-            this.cbEye.Location = new System.Drawing.Point(567, 35);
-            this.cbEye.Name = "cbEye";
-            this.cbEye.Size = new System.Drawing.Size(88, 24);
-            this.cbEye.TabIndex = 657;
-            this.cbEye.Text = "眼科手术";
-            this.cbEye.UseVisualStyleBackColor = true;
-            this.cbEye.CheckedChanged += new System.EventHandler(this.cbEye_CheckedChanged);
-            // 
             // PaiBanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 496);
-            this.Controls.Add(this.cbEye);
             this.Controls.Add(this.dgvOTypesetting);
             this.Controls.Add(this.dtOdate);
             this.Controls.Add(this.label1);
@@ -426,7 +413,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PatZhuYuanID;
         private System.Windows.Forms.DataGridViewTextBoxColumn patid;
         private System.Windows.Forms.DataGridViewTextBoxColumn asae;
-        private System.Windows.Forms.CheckBox cbEye;
     }
 }
 
