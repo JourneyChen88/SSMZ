@@ -411,7 +411,7 @@ namespace main
             {
                 MessageBox.Show("是否镇痛为空不能保存");
             }
-            if (pgys.Text == "")
+            if (pgys.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("评估医生为空不能保存");
                 return;
@@ -2695,7 +2695,7 @@ namespace main
                 for (int i = 0; i < shenghua.Rows.Count; i++)
                 {
                   //  sh = shenghua.Rows[i]["anti_codeen"].ToString() + "  " + shenghua.Rows[i]["result"].ToString() + " " + shenghua.Rows[i]["units"].ToString();
-                    if (sh == "")
+                    if (sh.IsNullOrEmpty())
                         sh = shenghua.Rows[i]["报告项目打印代码"].ToString() + "  " + shenghua.Rows[i]["检验结果"].ToString() + " " + shenghua.Rows[i]["结果单位"].ToString();
                     else
                         sh = sh + "、" + shenghua.Rows[i]["报告项目打印代码"].ToString() + "  " + shenghua.Rows[i]["检验结果"].ToString() + " " + shenghua.Rows[i]["结果单位"].ToString();
@@ -2726,7 +2726,7 @@ namespace main
                     for (int i = 0; i < shenghua.Rows.Count; i++)
                     {
                         //  sh = shenghua.Rows[i]["anti_codeen"].ToString() + "  " + shenghua.Rows[i]["result"].ToString() + " " + shenghua.Rows[i]["units"].ToString();
-                        if (sh == "")
+                        if (sh.IsNullOrEmpty())
                             sh = shenghua.Rows[i]["报告项目打印代码"].ToString() + "  " + shenghua.Rows[i]["检验结果"].ToString() + " " + shenghua.Rows[i]["结果单位"].ToString();
                         else
                             sh = sh + "、" + shenghua.Rows[i]["报告项目打印代码"].ToString() + "  " + shenghua.Rows[i]["检验结果"].ToString() + " " + shenghua.Rows[i]["结果单位"].ToString();
@@ -2757,7 +2757,7 @@ namespace main
                     for (int i = 0; i < mianyi.Rows.Count; i++)
                     {
                         //  sh = shenghua.Rows[i]["anti_codeen"].ToString() + "  " + shenghua.Rows[i]["result"].ToString() + " " + shenghua.Rows[i]["units"].ToString();
-                        if (sh == "")
+                        if (sh.IsNullOrEmpty())
                             sh = mianyi.Rows[i]["报告项目打印代码"].ToString() + "  " + mianyi.Rows[i]["检验结果"].ToString() + " " + mianyi.Rows[i]["结果单位"].ToString();
                         else
                             sh = sh + "、" + mianyi.Rows[i]["检验结果"].ToString() + "  " + mianyi.Rows[i]["检验结果"].ToString() + " " + mianyi.Rows[i]["结果单位"].ToString();
@@ -2788,7 +2788,7 @@ namespace main
                     for (int i = 0; i < mianyi.Rows.Count; i++)
                     {
                         //  sh = shenghua.Rows[i]["anti_codeen"].ToString() + "  " + shenghua.Rows[i]["result"].ToString() + " " + shenghua.Rows[i]["units"].ToString();
-                        if (sh == "")
+                        if (sh.IsNullOrEmpty())
                             sh = mianyi.Rows[i]["报告项目打印代码"].ToString() + "  " + mianyi.Rows[i]["检验结果"].ToString() + " " + mianyi.Rows[i]["结果单位"].ToString();
                         else
                             sh = sh + "、" + mianyi.Rows[i]["报告项目打印代码"].ToString() + "  " + mianyi.Rows[i]["检验结果"].ToString() + " " + mianyi.Rows[i]["结果单位"].ToString();
@@ -2819,7 +2819,7 @@ namespace main
                     for (int i = 0; i < ningxue.Rows.Count; i++)
                     {
                         //  sh = shenghua.Rows[i]["anti_codeen"].ToString() + "  " + shenghua.Rows[i]["result"].ToString() + " " + shenghua.Rows[i]["units"].ToString();
-                        if (sh == "")
+                        if (sh.IsNullOrEmpty())
                             sh = ningxue.Rows[i]["报告项目打印代码"].ToString() + "  " + ningxue.Rows[i]["检验结果"].ToString() + " " + ningxue.Rows[i]["结果单位"].ToString();
                         else
                             sh = sh + "、" + ningxue.Rows[i]["报告项目打印代码"].ToString() + "  " + ningxue.Rows[i]["检验结果"].ToString() + " " + ningxue.Rows[i]["结果单位"].ToString();
@@ -2850,7 +2850,7 @@ namespace main
                     for (int i = 0; i < ningxue.Rows.Count; i++)
                     {
                         //  sh = shenghua.Rows[i]["anti_codeen"].ToString() + "  " + shenghua.Rows[i]["result"].ToString() + " " + shenghua.Rows[i]["units"].ToString();
-                        if (sh == "")
+                        if (sh.IsNullOrEmpty())
                             sh = ningxue.Rows[i]["报告项目打印代码"].ToString() + "  " + ningxue.Rows[i]["检验结果"].ToString() + " " + ningxue.Rows[i]["结果单位"].ToString();
                         else
                             sh = sh + "、" + ningxue.Rows[i]["报告项目打印代码"].ToString() + "  " + ningxue.Rows[i]["检验结果"].ToString() + " " + ningxue.Rows[i]["结果单位"].ToString();
@@ -2881,7 +2881,7 @@ namespace main
                     for (int i = 0; i < xuecg.Rows.Count; i++)
                     {
                         //  sh = shenghua.Rows[i]["anti_codeen"].ToString() + "  " + shenghua.Rows[i]["result"].ToString() + " " + shenghua.Rows[i]["units"].ToString();
-                        if (sh == "")
+                        if (sh.IsNullOrEmpty())
                             sh = xuecg.Rows[i]["报告项目打印代码"].ToString() + "  " + xuecg.Rows[i]["检验结果"].ToString() + " " + xuecg.Rows[i]["结果单位"].ToString();
                         else
                             sh = sh + "、" + xuecg.Rows[i]["报告项目打印代码"].ToString() + "  " + xuecg.Rows[i]["检验结果"].ToString() + " " + xuecg.Rows[i]["结果单位"].ToString();
@@ -2914,7 +2914,7 @@ namespace main
                     for (int i = 0; i < xuecg.Rows.Count; i++)
                     {
                         //  sh = shenghua.Rows[i]["anti_codeen"].ToString() + "  " + shenghua.Rows[i]["result"].ToString() + " " + shenghua.Rows[i]["units"].ToString();
-                        if (sh == "")
+                        if (sh.IsNullOrEmpty())
                             sh = xuecg.Rows[i]["报告项目打印代码"].ToString() + "  " + xuecg.Rows[i]["检验结果"].ToString() + " " + xuecg.Rows[i]["结果单位"].ToString();
                         else
                             sh = sh + "、" + xuecg.Rows[i]["报告项目打印代码"].ToString() + "  " + xuecg.Rows[i]["检验结果"].ToString() + " " + xuecg.Rows[i]["结果单位"].ToString();

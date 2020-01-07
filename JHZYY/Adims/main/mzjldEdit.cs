@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 using adims_MODEL;
 using System.Drawing.Printing;
 using main.CGG;
-
+using Adims_Utility;
 
 namespace main
 {
@@ -1236,7 +1236,7 @@ namespace main
             #region //分类型采集
             if (btnMonitor.Text.Equals("开始监测"))
             {
-                if (cmbJianhuyi.Text == "")
+                if (cmbJianhuyi.Text.IsNullOrEmpty())
                 {
                     MessageBox.Show("请选择监护仪机型！");
                     return;
@@ -2973,7 +2973,7 @@ namespace main
                     //RR =Convert.ToInt32(rrc);
 
                 }//机械值
-                else if (rrc == "")//根据氧和赋值
+                else if (rrc.IsNullOrEmpty())//根据氧和赋值
                 {
                     RR = SPO2 / 4;
                 }
@@ -3205,7 +3205,7 @@ namespace main
                             while ((BasicCommand[position] != '|') && (BasicCommand[position] != '^'))
                                 position++;
                             TestValueStr = BasicCommand.Substring(startposition, position - startposition);
-                            if (TestValueStr == "")
+                            if (TestValueStr.IsNullOrEmpty())
                             {
                                 TestValue = 0;
                             }
@@ -3326,7 +3326,7 @@ namespace main
                             //RR =Convert.ToInt32(rrc);
 
                         }//机械值
-                        else if (rrc == "")//根据氧和赋值
+                        else if (rrc.IsNullOrEmpty())//根据氧和赋值
                         {
                             RR = SPO2 / 4;
                         }
@@ -3747,7 +3747,7 @@ namespace main
                 try
                 {
                     p5.D = Convert.ToDateTime(datadt.Rows[i][0]);//体温记录点
-                    if (datadt.Rows[i]["TEMP"].ToString() == "")
+                    if (datadt.Rows[i]["TEMP"].ToString().IsNullOrEmpty())
                     {
                         p5.V = 0;
                     }
@@ -3842,7 +3842,7 @@ namespace main
             {
                 adims_MODEL.jhxm jhxmt = new adims_MODEL.jhxm();
                 jhxmt.D = Convert.ToDateTime(datadt.Rows[i][0]);
-                if (datadt.Rows[i]["CVP"].ToString() == "")
+                if (datadt.Rows[i]["CVP"].ToString().IsNullOrEmpty())
                 {
                     jhxmt.V = 0;
                 }
@@ -4720,7 +4720,7 @@ namespace main
                 DateTime dtnow = new DateTime();//打印截止时间判断        
                 DateTime pagetime = new DateTime();
                 DataTable dtMax = bll.GetMaxPoint(mzjldID);
-                if (dtMax.Rows[0][0].ToString() == "")
+                if (dtMax.Rows[0][0].ToString().IsNullOrEmpty())
                     dtnow = DateTime.Now;
                 else
                     dtnow = Convert.ToDateTime(dtMax.Rows[0][0]);
@@ -5244,56 +5244,56 @@ namespace main
                 //txtxuet.Text = Convert.ToString(dtMzjld.Rows[0]["XUETANG"]);
                 #region 打印血气
                 //Pen dakred2 = new Pen(Brushes.DarkRed, 2);
-                //if (tXTPH.Text.Trim() == "")
+                //if (tXTPH.Text.Trim().IsNullOrEmpty())
                 //    tXTPH.Text = " / ";
                 //int yyyy = YY + 27 * 12 + 1;
                 //e.Graphics.DrawString("PH： " + tXTPH.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtpco2.Text.Trim() == "")
+                //if (txtpco2.Text.Trim().IsNullOrEmpty())
                 //    txtpco2.Text = " /";
                 //e.Graphics.DrawString("PCO2:" + txtpco2.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtpo2.Text.Trim() == "")
+                //if (txtpo2.Text.Trim().IsNullOrEmpty())
                 //    txtpo2.Text = "/";
                 //e.Graphics.DrawString("PO2：" + txtpo2.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtbe.Text.Trim() == "")
+                //if (txtbe.Text.Trim().IsNullOrEmpty())
                 //    txtbe.Text = "/";
                 //e.Graphics.DrawString("BE： " + txtbe.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthco3.Text.Trim() == "")
+                //if (txthco3.Text.Trim().IsNullOrEmpty())
                 //    txthco3.Text = "/";
                 //e.Graphics.DrawString("HCO3:" + txthco3.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthb.Text.Trim() == "")
+                //if (txthb.Text.Trim().IsNullOrEmpty())
                 //    txthb.Text = "/";
                 //e.Graphics.DrawString("HB： " + txthb.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("g/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtk.Text.Trim() == "")
+                //if (txtk.Text.Trim().IsNullOrEmpty())
                 //    txtk.Text = "/";
                 //e.Graphics.DrawString("K：  " + txtk.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmol/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthct.Text.Trim() == "")
+                //if (txthct.Text.Trim().IsNullOrEmpty())
                 //    txthct.Text = "/";
                 //e.Graphics.DrawString("HCT：" + txthct.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("%", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtxuet.Text.Trim() == "")
+                //if (txtxuet.Text.Trim().IsNullOrEmpty())
                 //    txtxuet.Text = "/";
                 //e.Graphics.DrawString("血糖:" + txtxuet.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
@@ -6357,7 +6357,7 @@ namespace main
                 if (DialogResult.OK == MessageBox.Show("确定退出麻醉记录单？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
                 {
                     string result = string.Empty;
-                    if (cmbASA.Text == "")
+                    if (cmbASA.Text.IsNullOrEmpty())
                     {
                         MessageBox.Show("ASA分级不能为空！");
                         e.Cancel = true;
@@ -9145,7 +9145,7 @@ namespace main
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (cmbASA.Text == "")
+            if (cmbASA.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("ASA分级不能为空！");
                 return ;
@@ -10865,7 +10865,7 @@ namespace main
                 DateTime dtnow = new DateTime();//打印截止时间判断        
                 DateTime pagetime = new DateTime();
                 DataTable dtMax = bll.GetMaxPoint(mzjldID);
-                if (dtMax.Rows[0][0].ToString() == "")
+                if (dtMax.Rows[0][0].ToString().IsNullOrEmpty())
                     dtnow = DateTime.Now;
                 else
                     dtnow = Convert.ToDateTime(dtMax.Rows[0][0]);
@@ -11389,56 +11389,56 @@ namespace main
                 //txtxuet.Text = Convert.ToString(dtMzjld.Rows[0]["XUETANG"]);
                 #region 打印血气
                 //Pen dakred2 = new Pen(Brushes.DarkRed, 2);
-                //if (tXTPH.Text.Trim() == "")
+                //if (tXTPH.Text.Trim().IsNullOrEmpty())
                 //    tXTPH.Text = " / ";
                 //int yyyy = YY + 27 * 12 + 1;
                 //e.Graphics.DrawString("PH： " + tXTPH.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtpco2.Text.Trim() == "")
+                //if (txtpco2.Text.Trim().IsNullOrEmpty())
                 //    txtpco2.Text = " /";
                 //e.Graphics.DrawString("PCO2:" + txtpco2.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtpo2.Text.Trim() == "")
+                //if (txtpo2.Text.Trim().IsNullOrEmpty())
                 //    txtpo2.Text = "/";
                 //e.Graphics.DrawString("PO2：" + txtpo2.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtbe.Text.Trim() == "")
+                //if (txtbe.Text.Trim().IsNullOrEmpty())
                 //    txtbe.Text = "/";
                 //e.Graphics.DrawString("BE： " + txtbe.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthco3.Text.Trim() == "")
+                //if (txthco3.Text.Trim().IsNullOrEmpty())
                 //    txthco3.Text = "/";
                 //e.Graphics.DrawString("HCO3:" + txthco3.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthb.Text.Trim() == "")
+                //if (txthb.Text.Trim().IsNullOrEmpty())
                 //    txthb.Text = "/";
                 //e.Graphics.DrawString("HB： " + txthb.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("g/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtk.Text.Trim() == "")
+                //if (txtk.Text.Trim().IsNullOrEmpty())
                 //    txtk.Text = "/";
                 //e.Graphics.DrawString("K：  " + txtk.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmol/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthct.Text.Trim() == "")
+                //if (txthct.Text.Trim().IsNullOrEmpty())
                 //    txthct.Text = "/";
                 //e.Graphics.DrawString("HCT：" + txthct.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("%", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtxuet.Text.Trim() == "")
+                //if (txtxuet.Text.Trim().IsNullOrEmpty())
                 //    txtxuet.Text = "/";
                 //e.Graphics.DrawString("血糖:" + txtxuet.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));

@@ -45,50 +45,50 @@ namespace main
         //保存
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (tbPatname.Text == "")
+            if (tbPatname.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("姓名不能为空!");
                 tbPatname.Focus();
                 return;
             }
-            if (tbSex.Text == "")
+            if (tbSex.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("性别不能为空！");
                 tbSex.Focus();
                 return;
             }
-            if (tbAge.Text == "")
+            if (tbAge.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("年龄不能为空！");
                 tbAge.Focus();
                 return;
             }
-            if (tbBedNO.Text == "")
+            if (tbBedNO.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("床号不能为空！");
                 tbBedNO.Focus();
                 return;
 
             }
-            if (tbZhuyuanID.Text == "")
+            if (tbZhuyuanID.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("住院号不能为空！");
                 tbZhuyuanID.Focus();
                 return;
             }
-            if (comboBoxmzys.Text == "")
+            if (comboBoxmzys.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("麻醉医生不能为空！");
                 comboBoxmzys.Focus();
                 return;
             }
-            if (comboBoxfsys.Text == "")
+            if (comboBoxfsys.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("复苏医生不能为空！");
                 comboBoxfsys.Focus();
                 return;
             }
-            if (comboBoxhsq.Text == "")
+            if (comboBoxhsq.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("复苏护士不能为空！");
                 comboBoxhsq.Focus();
@@ -233,7 +233,7 @@ namespace main
         //    //        v_content += v_line;
         //    //    }
         //    //}
-        //    //if (v_content == "")
+        //    //if (v_content.IsNullOrEmpty())
         //    //{
         //    //    return v_content;
         //    //}
@@ -589,38 +589,38 @@ namespace main
         //打印
         private void printStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (tbPatname.Text == "")
+            if (tbPatname.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("姓名为空禁止打印!");
                 tbPatname.Focus();
                 return;
             }
-            if (tbSex.Text == "")
+            if (tbSex.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("性别为空禁止打印！");
                 tbSex.Focus();
                 return;
             }
-            if (tbAge.Text == "")
+            if (tbAge.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("年龄为空禁止打印！");
                 tbAge.Focus();
                 return;
             }
-            if (tbBedNO.Text == "")
+            if (tbBedNO.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("床号为空禁止打印！");
                 tbBedNO.Focus();
                 return;
 
             }
-            if (tbZhuyuanID.Text == "")
+            if (tbZhuyuanID.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("住院号为空禁止打印！");
                 tbZhuyuanID.Focus();
                 return;
             }
-            if (comboBoxmzys.Text == "")
+            if (comboBoxmzys.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("麻醉科医生为空禁止打印！");
                 comboBoxmzys.Focus();
@@ -756,7 +756,7 @@ namespace main
 
             y = y + 605;
             string z, c, v, b, n, m, q, w;
-            if (textBoxzrl.Text == "")
+            if (textBoxzrl.Text.IsNullOrEmpty())
             {
                 z = "/";
             }
@@ -764,7 +764,7 @@ namespace main
             {
                 z = textBoxzrl.Text;
             }
-            if (textBoxjt.Text == "")
+            if (textBoxjt.Text.IsNullOrEmpty())
             {
                 c = "/";
             }
@@ -772,7 +772,7 @@ namespace main
             {
                 c = textBoxjt.Text;
             }
-            if (textBoxjti.Text == "")
+            if (textBoxjti.Text.IsNullOrEmpty())
             {
                 v = "/";
             }
@@ -780,7 +780,7 @@ namespace main
             {
                 v = textBoxjti.Text;
             }
-            if (textBoxxxj.Text == "")
+            if (textBoxxxj.Text.IsNullOrEmpty())
             {
                 b = "/";
             }
@@ -788,7 +788,7 @@ namespace main
             {
                 b = textBoxxxj.Text;
             }
-            if (textBoxzcl.Text == "")
+            if (textBoxzcl.Text.IsNullOrEmpty())
             {
                 n = "/";
             }
@@ -796,7 +796,7 @@ namespace main
             {
                 n = textBoxzcl.Text;
             }
-            if (textBoxnl.Text == "")
+            if (textBoxnl.Text.IsNullOrEmpty())
             {
                 m = "/";
             }
@@ -804,7 +804,7 @@ namespace main
             {
                 m = textBoxnl.Text;
             }
-            if (textBoxqt.Text == "")
+            if (textBoxqt.Text.IsNullOrEmpty())
             {
                 q = "/";
             }
@@ -812,7 +812,7 @@ namespace main
             {
                 q = textBoxqt.Text;
             }
-            if (textBoxyll.Text == "")
+            if (textBoxyll.Text.IsNullOrEmpty())
             {
                 w = "/";
             }
@@ -1003,7 +1003,7 @@ namespace main
                 
             //        if (e.ColumnIndex == 2)
             //        {
-            //            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "")
+            //            if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().IsNullOrEmpty())
             //            {
             //                string valueType = dataGridView1.Columns[e.ColumnIndex].Name.ToString();
             //                DateTime dt = DateTime.Now;

@@ -34,10 +34,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(107, 87);
+            this.button1.Location = new System.Drawing.Point(60, 60);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 37);
+            this.button1.Size = new System.Drawing.Size(104, 64);
             this.button1.TabIndex = 21;
             this.button1.Text = "排班";
             this.button1.UseVisualStyleBackColor = true;
@@ -45,10 +45,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(284, 87);
+            this.button2.Location = new System.Drawing.Point(218, 60);
             this.button2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(104, 37);
+            this.button2.Size = new System.Drawing.Size(104, 64);
             this.button2.TabIndex = 22;
             this.button2.Text = "手术登记";
             this.button2.UseVisualStyleBackColor = true;
@@ -58,10 +58,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(557, 237);
+            this.ClientSize = new System.Drawing.Size(380, 199);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "SelectForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SelectForm";
             this.ResumeLayout(false);
 

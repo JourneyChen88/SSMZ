@@ -348,7 +348,7 @@ namespace main
                    string qkzj= da["qkfxzj"].ToString();
                   mzzjsyz.Text = da["mzzjsyz"].ToString();
                   mzzjz.Text = da["mzzjz"].ToString();
-                  if (qkzj == "" || qkzj == null)
+                  if (qkzj.IsNullOrEmpty() || qkzj == null)
                   {
                       FXZJ();
                   }

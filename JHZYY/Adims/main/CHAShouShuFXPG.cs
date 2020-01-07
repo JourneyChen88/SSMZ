@@ -117,7 +117,7 @@ namespace main.CGG
         {
             try
             {
-                if (comboxssdj.Text == "")
+                if (comboxssdj.Text.IsNullOrEmpty())
                 {
                     MessageBox.Show("手术等级不能为空");
                     return;
@@ -659,15 +659,15 @@ namespace main.CGG
         
         private void txtbssqjcd_TextChanged(object sender, EventArgs e)
         {
-            if (txtbssqjcd.Text == "")
+            if (txtbssqjcd.Text.IsNullOrEmpty())
             {
                 txtbssqjcd.Text = "0";
             }
-            if (txetasa.Text == "")
+            if (txetasa.Text.IsNullOrEmpty())
             {
                 txetasa.Text = "0";
             }
-            if (textsscxsj.Text == "")
+            if (textsscxsj.Text.IsNullOrEmpty())
             {
                 textsscxsj.Text = "0";
             }
@@ -676,15 +676,15 @@ namespace main.CGG
 
         private void txetasa_TextChanged(object sender, EventArgs e)
         {
-            if (txtbssqjcd.Text == "")
+            if (txtbssqjcd.Text.IsNullOrEmpty())
             {
                 txtbssqjcd.Text = "0";
             }
-            if (txetasa.Text == "")
+            if (txetasa.Text.IsNullOrEmpty())
             {
                 txetasa.Text = "0";
             }
-            if (textsscxsj.Text == "")
+            if (textsscxsj.Text.IsNullOrEmpty())
             {
                 textsscxsj.Text = "0";
             }
@@ -693,15 +693,15 @@ namespace main.CGG
 
         private void textsscxsj_TextChanged(object sender, EventArgs e)
         {
-            if (txtbssqjcd.Text == "")
+            if (txtbssqjcd.Text.IsNullOrEmpty())
             {
                 txtbssqjcd.Text = "0";
             }
-            if (txetasa.Text == "")
+            if (txetasa.Text.IsNullOrEmpty())
             {
                 txetasa.Text = "0";
             }
-            if (textsscxsj.Text == "")
+            if (textsscxsj.Text.IsNullOrEmpty())
             {
                 textsscxsj.Text = "0";
             }

@@ -155,35 +155,35 @@ namespace main
         //    e.Graphics.DrawString("病区：" + tbBingqu.Text, ptzt, Brushes.Black, new Point(x + 20, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 53, y1, x + 176, y1);
         //    //为空画斜杠
-        //    if (tbBingqu.Text == "")
+        //    if (tbBingqu.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(60 + x, y + 13), new Point(80 + x, y + 2));
         //    }
         //    e.Graphics.DrawString("床号：" + tbBedNO.Text, ptzt, Brushes.Black, new Point(x + 180, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 208, y1, x + 270, y1);
         //    //为空画斜杠
-        //    if (tbBedNO.Text == "")
+        //    if (tbBedNO.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(218 + x, y + 13), new Point(238 + x, y + 2));
         //    }
         //    e.Graphics.DrawString("住院号：" + tbZhuyuanID.Text, ptzt, Brushes.Black, new Point(x + 275, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 317, y1, x + 400, y1);
         //    //为空画斜杠
-        //    if (tbZhuyuanID.Text == "")
+        //    if (tbZhuyuanID.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(327 + x, y + 13), new Point(447 + x, y + 2));
         //    }
         //    e.Graphics.DrawString("患者姓名：" + tbPatname.Text, ptzt, Brushes.Black, new Point(x + 405, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 458, y1, x + 530, y1);
         //    //为空画斜杠
-        //    if (tbBingqu.Text == "")
+        //    if (tbBingqu.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(478 + x, y + 13), new Point(498 + x, y + 2));
         //    }
         //    e.Graphics.DrawString("年龄：" + tbAge.Text, ptzt, Brushes.Black, new Point(x + 530, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 562, y1, x + 635, y1);
         //    //为空画斜杠
-        //    if (tbAge.Text == "")
+        //    if (tbAge.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(572 + x, y + 13), new Point(591 + x, y + 2));
         //    }
@@ -192,14 +192,14 @@ namespace main
         //    e.Graphics.DrawString("诊断：" + tbSqzd.Text, ptzt, Brushes.Black, new Point(x + 20, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 50, y1, x + 310, y1);
         //    //为空画斜杠
-        //    if (tbSqzd.Text == "")
+        //    if (tbSqzd.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(73 + x, y + 13), new Point(330 + x, y + 2));
         //    }
         //    e.Graphics.DrawString("拟定手术：" + tbNDSS.Text, ptzt, Brushes.Black, new Point(x + 320, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 383, y1, x + 638, y1);
         //    //为空画斜杠
-        //    if (tbNDSS.Text == "")
+        //    if (tbNDSS.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(403 + x, y + 13), new Point(658 + x, y + 2));
         //    }
@@ -208,7 +208,7 @@ namespace main
         //    e.Graphics.DrawString("简要病史：" + rtbJybs.Text, ptzt, Brushes.Black, new Point(x + 20, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 637, y1);
         //    //为空画斜杠
-        //    if (rtbJybs.Text == "")
+        //    if (rtbJybs.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(110 + x, y + 13), new Point(130 + x, y + 2));
         //    }
@@ -216,7 +216,7 @@ namespace main
         //    e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 637, y1);
 
         //    //为空画斜杠
-        //    if (rtbJybs.Text == "")
+        //    if (rtbJybs.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(110 + x, y + 13), new Point(130 + x, y + 2));
         //    }
@@ -224,7 +224,7 @@ namespace main
         //    e.Graphics.DrawString("既往史：" + tbJiwangshi.Text, ptzt, Brushes.Black, new Point(x + 20, y));
         //    e.Graphics.DrawLine(Pens.Black, x + 70, y1, x + 638, y1);
         //    //为空画斜杠
-        //    if (tbJiwangshi.Text == "")
+        //    if (tbJiwangshi.Text.IsNullOrEmpty())
         //    {
         //        e.Graphics.DrawLine(ptp, new Point(110 + x, y + 13), new Point(130 + x, y + 2));
 
@@ -233,7 +233,7 @@ namespace main
         //        e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 637, y1);
 
         //        //为空画斜杠
-        //        if (tbXinliZQ.Text == "")
+        //        if (tbXinliZQ.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(110 + x, y + 13), new Point(130 + x, y + 2));
         //        }
@@ -242,7 +242,7 @@ namespace main
         //        e.Graphics.DrawLine(Pens.Black, x + 240, y1, x + 640, y1);
 
         //        //为空画斜杠
-        //        if (tbXinliZQ.Text == "")
+        //        if (tbXinliZQ.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(260 + x, y + 13), new Point(280 + x, y + 2));
         //        }
@@ -250,14 +250,14 @@ namespace main
         //        e.Graphics.DrawString("麻醉方式：" + cmbMZFF.Text, ptzt, Brushes.Black, new Point(x + 20, y));
         //        e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 200, y1);
         //        //为空画斜杠
-        //        if (cmbMZFF.Text == "")
+        //        if (cmbMZFF.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(105 + x, y + 13), new Point(125 + x, y + 2));
         //        }
         //        e.Graphics.DrawString("其他：" + tbMZFFother.Text, ptzt, Brushes.Black, new Point(x + 240, y));
         //        e.Graphics.DrawLine(Pens.Black, x + 275, y1, x + 640, y1);
         //        //为空画斜杠
-        //        if (tbMZFFother.Text == "")
+        //        if (tbMZFFother.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(295 + x, y + 13), new Point(315 + x, y + 2));
         //        }
@@ -266,14 +266,14 @@ namespace main
         //        e.Graphics.DrawString("月经来潮：" + cmbYuejingLC.Text, ptzt, Brushes.Black, new Point(x + 20, y));
         //        e.Graphics.DrawLine(Pens.Black, x + 80, y1, x + 150, y1);
         //        //为空画斜杠
-        //        if (cmbYuejingLC.Text == "")
+        //        if (cmbYuejingLC.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(105 + x, y + 13), new Point(125 + x, y + 2));
         //        }
         //        e.Graphics.DrawString("是否知道术前禁食、禁饮时间：" + cmbJingzhiYS.Text, ptzt, Brushes.Black, new Point(x + 180, y));
         //        e.Graphics.DrawLine(Pens.Black, x + 370, y1, x + 450, y1);
         //        //为空画斜杠
-        //        if (cmbJingzhiYS.Text == "")
+        //        if (cmbJingzhiYS.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(390 + x, y + 13), new Point(410 + x, y + 2));
         //        }
@@ -281,7 +281,7 @@ namespace main
         //        e.Graphics.DrawLine(Pens.Black, x + 570, y1, x + 640, y1);
 
         //        //为空画斜杠
-        //        if (cmbJingzhiYS.Text == "")
+        //        if (cmbJingzhiYS.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(590 + x, y + 13), new Point(610 + x, y + 2));
         //        }
@@ -289,21 +289,21 @@ namespace main
         //        e.Graphics.DrawString("病区责任护士签名：" + cmbZerenHushi.Text, ptzt, Brushes.Black, new Point(x + 20, y));
         //        e.Graphics.DrawLine(Pens.Black, x + 140, y1, x + 220, y1);
         //        //为空画斜杠
-        //        if (cmbZerenHushi.Text == "")
+        //        if (cmbZerenHushi.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(160 + x, y + 13), new Point(180 + x, y + 2));
         //        }
         //        e.Graphics.DrawString("术前访视者签名：" + cmbJingzhiYS.Text, ptzt, Brushes.Black, new Point(x + 260, y));
         //        e.Graphics.DrawLine(Pens.Black, x + 360, y1, x + 440, y1);
         //        //为空画斜杠
-        //        if (cmbJingzhiYS.Text == "")
+        //        if (cmbJingzhiYS.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(390 + x, y + 13), new Point(410 + x, y + 2));
         //        }
         //        e.Graphics.DrawString("访视日期：" + dtVisitDate.Text, ptzt, Brushes.Black, new Point(x + 470, y));
         //        e.Graphics.DrawLine(Pens.Black, x + 535, y1, x + 640, y1);
         //        //为空画斜杠
-        //        if (dtVisitDate.Text == "")
+        //        if (dtVisitDate.Text.IsNullOrEmpty())
         //        {
         //            e.Graphics.DrawLine(ptp, new Point(555 + x, y + 13), new Point(575 + x, y + 2));
         //        }
@@ -406,35 +406,35 @@ namespace main
             e.Graphics.DrawString("病区：" + tbBingqu.Text, ptzt, Brushes.Black, new Point(x + 20, y));
             e.Graphics.DrawLine(Pens.Black, x + 53, y1, x + 176, y1);
             //为空画斜杠
-            if (tbBingqu.Text == "")
+            if (tbBingqu.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(60 + x, y + 13), new Point(80 + x, y + 2));
             }
             e.Graphics.DrawString("床号：" + tbBedNO.Text, ptzt, Brushes.Black, new Point(x + 180, y));
             e.Graphics.DrawLine(Pens.Black, x + 208, y1, x + 270, y1);
             //为空画斜杠
-            if (tbBedNO.Text == "")
+            if (tbBedNO.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(218 + x, y + 13), new Point(238 + x, y + 2));
             }
             e.Graphics.DrawString("住院号：" + tbZhuyuanID.Text, ptzt, Brushes.Black, new Point(x + 275, y));
             e.Graphics.DrawLine(Pens.Black, x + 317, y1, x + 400, y1);
             //为空画斜杠
-            if (tbZhuyuanID.Text == "")
+            if (tbZhuyuanID.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(327 + x, y + 13), new Point(447 + x, y + 2));
             }
             e.Graphics.DrawString("患者姓名：" + tbPatname.Text, ptzt, Brushes.Black, new Point(x + 405, y));
             e.Graphics.DrawLine(Pens.Black, x + 458, y1, x + 530, y1);
             //为空画斜杠
-            if (tbBingqu.Text == "")
+            if (tbBingqu.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(478 + x, y + 13), new Point(498 + x, y + 2));
             }
             e.Graphics.DrawString("年龄：" + tbAge.Text, ptzt, Brushes.Black, new Point(x + 530, y));
             e.Graphics.DrawLine(Pens.Black, x + 562, y1, x + 635, y1);
             //为空画斜杠
-            if (tbAge.Text == "")
+            if (tbAge.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(572 + x, y + 13), new Point(591 + x, y + 2));
             }
@@ -443,14 +443,14 @@ namespace main
             e.Graphics.DrawString("诊断：" + tbSqzd.Text, ptzt, Brushes.Black, new Point(x + 20, y));
             e.Graphics.DrawLine(Pens.Black, x + 50, y1, x + 310, y1);
             //为空画斜杠
-            if (tbSqzd.Text == "")
+            if (tbSqzd.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(73 + x, y + 13), new Point(330 + x, y + 2));
             }
             e.Graphics.DrawString("拟定手术：" + tbNDSS.Text, ptzt, Brushes.Black, new Point(x + 320, y));
             e.Graphics.DrawLine(Pens.Black, x + 383, y1, x + 638, y1);
             //为空画斜杠
-            if (tbNDSS.Text == "")
+            if (tbNDSS.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(403 + x, y + 13), new Point(658 + x, y + 2));
             }
@@ -459,7 +459,7 @@ namespace main
             e.Graphics.DrawString("简要病史：" + rtbJybs.Text, ptzt, Brushes.Black, new Point(x + 20, y));
             e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 637, y1);
             //为空画斜杠
-            if (rtbJybs.Text == "")
+            if (rtbJybs.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(110 + x, y + 13), new Point(130 + x, y + 2));
             }
@@ -467,7 +467,7 @@ namespace main
             e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 637, y1);
 
             //为空画斜杠
-            if (rtbJybs.Text == "")
+            if (rtbJybs.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(110 + x, y + 13), new Point(130 + x, y + 2));
             }
@@ -475,7 +475,7 @@ namespace main
             e.Graphics.DrawString("既往史：" + tbJiwangshi.Text, ptzt, Brushes.Black, new Point(x + 20, y));
             e.Graphics.DrawLine(Pens.Black, x + 70, y1, x + 638, y1);
             //为空画斜杠
-            if (tbJiwangshi.Text == "")
+            if (tbJiwangshi.Text.IsNullOrEmpty())
             {
                 e.Graphics.DrawLine(ptp, new Point(110 + x, y + 13), new Point(130 + x, y + 2));
 
@@ -484,7 +484,7 @@ namespace main
                 e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 637, y1);
 
                 //为空画斜杠
-                if (tbXinliZQ.Text == "")
+                if (tbXinliZQ.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(110 + x, y + 13), new Point(130 + x, y + 2));
                 }
@@ -493,7 +493,7 @@ namespace main
                 e.Graphics.DrawLine(Pens.Black, x + 240, y1, x + 640, y1);
 
                 //为空画斜杠
-                if (tbXinliZQ.Text == "")
+                if (tbXinliZQ.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(260 + x, y + 13), new Point(280 + x, y + 2));
                 }
@@ -501,14 +501,14 @@ namespace main
                 e.Graphics.DrawString("麻醉方式：" + cmbMZFF.Text, ptzt, Brushes.Black, new Point(x + 20, y));
                 e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 200, y1);
                 //为空画斜杠
-                if (cmbMZFF.Text == "")
+                if (cmbMZFF.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(105 + x, y + 13), new Point(125 + x, y + 2));
                 }
                 e.Graphics.DrawString("其他：" + tbMZFFother.Text, ptzt, Brushes.Black, new Point(x + 240, y));
                 e.Graphics.DrawLine(Pens.Black, x + 275, y1, x + 640, y1);
                 //为空画斜杠
-                if (tbMZFFother.Text == "")
+                if (tbMZFFother.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(295 + x, y + 13), new Point(315 + x, y + 2));
                 }
@@ -517,14 +517,14 @@ namespace main
                 e.Graphics.DrawString("月经来潮：" + cmbYuejingLC.Text, ptzt, Brushes.Black, new Point(x + 20, y));
                 e.Graphics.DrawLine(Pens.Black, x + 80, y1, x + 150, y1);
                 //为空画斜杠
-                if (cmbYuejingLC.Text == "")
+                if (cmbYuejingLC.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(105 + x, y + 13), new Point(125 + x, y + 2));
                 }
                 e.Graphics.DrawString("是否知道术前禁食、禁饮时间：" + cmbJingzhiYS.Text, ptzt, Brushes.Black, new Point(x + 180, y));
                 e.Graphics.DrawLine(Pens.Black, x + 370, y1, x + 450, y1);
                 //为空画斜杠
-                if (cmbJingzhiYS.Text == "")
+                if (cmbJingzhiYS.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(390 + x, y + 13), new Point(410 + x, y + 2));
                 }
@@ -532,7 +532,7 @@ namespace main
                 e.Graphics.DrawLine(Pens.Black, x + 570, y1, x + 640, y1);
 
                 //为空画斜杠
-                if (cmbJingzhiYS.Text == "")
+                if (cmbJingzhiYS.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(590 + x, y + 13), new Point(610 + x, y + 2));
                 }
@@ -540,21 +540,21 @@ namespace main
                 e.Graphics.DrawString("病区责任护士签名：" + cmbZerenHushi.Text, ptzt, Brushes.Black, new Point(x + 20, y));
                 e.Graphics.DrawLine(Pens.Black, x + 140, y1, x + 220, y1);
                 //为空画斜杠
-                if (cmbZerenHushi.Text == "")
+                if (cmbZerenHushi.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(160 + x, y + 13), new Point(180 + x, y + 2));
                 }
                 e.Graphics.DrawString("术前访视者签名：" + cmbJingzhiYS.Text, ptzt, Brushes.Black, new Point(x + 260, y));
                 e.Graphics.DrawLine(Pens.Black, x + 360, y1, x + 440, y1);
                 //为空画斜杠
-                if (cmbJingzhiYS.Text == "")
+                if (cmbJingzhiYS.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(390 + x, y + 13), new Point(410 + x, y + 2));
                 }
                 e.Graphics.DrawString("访视日期：" + dtVisitDate.Text, ptzt, Brushes.Black, new Point(x + 470, y));
                 e.Graphics.DrawLine(Pens.Black, x + 535, y1, x + 640, y1);
                 //为空画斜杠
-                if (dtVisitDate.Text == "")
+                if (dtVisitDate.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, new Point(555 + x, y + 13), new Point(575 + x, y + 2));
                 }

@@ -549,44 +549,44 @@ namespace main.CGG
         private void button2_Click(object sender, EventArgs e)
         {
          
-            if (textBoxintroduce.Text == "")
+            if (textBoxintroduce.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("患者病因没有填写!");
                 textBoxintroduce.Focus();
                 return;
             }
-            if(textBoxzhenduan.Text == "")
+            if(textBoxzhenduan.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("患者初步诊断没有填写!");
                 textBoxzhenduan.Focus();
                 return;
             }
-            if (textBoxmazui.Text == "")
+            if (textBoxmazui.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("麻醉方式没有填写!");
                 textBoxmazui.Focus();
                 return;
             }
-                 if (comboBoxgaowei.Text == "")
+                 if (comboBoxgaowei.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("高危因素没有填写，没有请选择“无”!");
                 comboBoxgaowei.Focus();
                 return;
             }
-                 if (textBoxmazuifangfa.Text == "")
+                 if (textBoxmazuifangfa.Text.IsNullOrEmpty())
                  {
                      MessageBox.Show("替代方案没有填写，没有请选择“无”!");
                      textBoxmazuifangfa.Focus();
                      return;
                  }
-                 if (comboBoxpingjia.Text == "")
+                 if (comboBoxpingjia.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("代替方案的评价，没有请选择“无”!");
                 comboBoxpingjia.Focus();
                 return;
             }
 
-                 if (comboBox1.Text == "")
+                 if (comboBox1.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("麻醉医师不能为空!");
                 comboBox1.Focus();

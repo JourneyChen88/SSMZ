@@ -1413,22 +1413,22 @@ namespace main
             //e.Graphics.DrawString(title1, ptzt3, Brushes.Black, new Point(x + 240, y)); 
 
             //y = y + 40; y1 = y + 15;
-            //if (tbPatname.Text == "") tbPatname.Text = "   无 ";
+            //if (tbPatname.Text.IsNullOrEmpty()) tbPatname.Text = "   无 ";
             //e.Graphics.DrawString("病人姓名：" + tbPatname.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 50, y1, x + 150, y1);
-            //if (cmbSex.Text == "") cmbSex.Text = "   无 ";
+            //if (cmbSex.Text.IsNullOrEmpty()) cmbSex.Text = "   无 ";
             //e.Graphics.DrawString("性别：" + cmbSex.Text.Trim(), ptzt, Brushes.Black, new Point(x + 160, y));
             //e.Graphics.DrawLine(Pens.Black, x + 190, y1, x + 230, y1);
-            //if (tbAge.Text == "") tbAge.Text = "   无 ";
+            //if (tbAge.Text.IsNullOrEmpty()) tbAge.Text = "   无 ";
             //e.Graphics.DrawString("年龄：" + this.tbAge.Text.Trim()+" 岁", ptzt, Brushes.Black, new Point(x + 240, y));
             //e.Graphics.DrawLine(Pens.Black, x + 270, y1, x + 330, y1);
-            //if (tbBingqu.Text == "") tbBingqu.Text = "   无 ";
+            //if (tbBingqu.Text.IsNullOrEmpty()) tbBingqu.Text = "   无 ";
             //e.Graphics.DrawString("科室：" + tbBingqu.Text.Trim(), ptzt, Brushes.Black, new Point(x + 340, y));
             //e.Graphics.DrawLine(Pens.Black, x + 370, y1, x + 470, y1);
-            //if (tbBedNO.Text == "") tbBedNO.Text = "   无 ";
+            //if (tbBedNO.Text.IsNullOrEmpty()) tbBedNO.Text = "   无 ";
             //e.Graphics.DrawString("床号：" + this.tbBedNO.Text.Trim(), ptzt, Brushes.Black, new Point(x + 480, y));
             //e.Graphics.DrawLine(Pens.Black, x + 510, y1, x + 580, y1);            
-            //if (tbZhuyuanID.Text == "") tbZhuyuanID.Text = "   无 ";
+            //if (tbZhuyuanID.Text.IsNullOrEmpty()) tbZhuyuanID.Text = "   无 ";
             //e.Graphics.DrawString("住院号：" + tbZhuyuanID.Text.Trim(), ptzt, Brushes.Black, new Point(x + 590, y));
             //e.Graphics.DrawLine(Pens.Black, x + 630, y1, x + 740, y1);
 
@@ -1484,15 +1484,15 @@ namespace main
             //y = y + 35; y1 = y + 15;
             //e.Graphics.DrawString("ASA 分级："+cmbASA.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 55, y1, x + 120, y1);
-            //if (cmbFeiPang.Text == "") cmbFeiPang.Text = "   无 ";
+            //if (cmbFeiPang.Text.IsNullOrEmpty()) cmbFeiPang.Text = "   无 ";
             //e.Graphics.DrawString("肥胖：" + this.cmbFeiPang.Text, ptzt, Brushes.Black, new Point(x + 140, y));
             //e.Graphics.DrawLine(Pens.Black, x + 170, y1, x + 270, y1);
-            //if (cmbBaowei.Text == "") cmbBaowei.Text = "   无 ";
+            //if (cmbBaowei.Text.IsNullOrEmpty()) cmbBaowei.Text = "   无 ";
             //e.Graphics.DrawString("饱胃：" + this.cmbBaowei.Text, ptzt, Brushes.Black, new Point(x + 290, y));
             //e.Graphics.DrawLine(Pens.Black, x + 320, y1, x + 400, y1);
 
             //y = y + 30; y1 = y + 15;
-            //if (cmbYNYWS.Text == "") cmbYNYWS.Text = "   无 ";
+            //if (cmbYNYWS.Text.IsNullOrEmpty()) cmbYNYWS.Text = "   无 ";
             //e.Graphics.DrawString("依耐性药物用药史：" + this.cmbYNYWS.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 200, y1);
             //e.Graphics.DrawString("体重：" + this.tbWeight.Text.Trim() + " Kg", ptzt, Brushes.Black, new Point(x + 220, y));
@@ -1502,22 +1502,22 @@ namespace main
             //e.Graphics.DrawString("体格检查：", ptzt2, Brushes.Black, new Point(x, y));
 
             //y = y + 35; y1 = y + 15;
-            //if (cmbJixing.Text == "") cmbJixing.Text = "   无 ";
+            //if (cmbJixing.Text.IsNullOrEmpty()) cmbJixing.Text = "   无 ";
             //e.Graphics.DrawString("身体有无畸形：" + this.cmbJixing.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 85, y1, x + 185, y1);
             //e.Graphics.DrawString("颈椎活动情况：" + this.cmbJingzhui.Text, ptzt, Brushes.Black, new Point(x + 200, y));
             //e.Graphics.DrawLine(Pens.Black, x + 280, y1, x + 380, y1);
-            //if (cmbZKKN.Text == "") cmbZKKN.Text = "   无 ";
+            //if (cmbZKKN.Text.IsNullOrEmpty()) cmbZKKN.Text = "   无 ";
             //e.Graphics.DrawString("张口困难：" + this.cmbZKKN.Text, ptzt, Brushes.Black, new Point(x + 400, y));
             //e.Graphics.DrawLine(Pens.Black, x + 455, y1, x + 555, y1);
             //e.Graphics.DrawString("张口度：" + this.cmbZKdu.Text, ptzt, Brushes.Black, new Point(x + 580, y));
             //e.Graphics.DrawLine(Pens.Black, x + 620, y1, x + 720, y1);
 
             //y = y + 30; y1 = y + 15;
-            //if (cmbJiaya.Text == "") cmbJiaya.Text = "   无 ";
+            //if (cmbJiaya.Text.IsNullOrEmpty()) cmbJiaya.Text = "   无 ";
             //e.Graphics.DrawString("假牙：" + this.cmbJiaya.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 30, y1, x + 130, y1);
-            //if (cmbHuxiKN.Text == "") cmbHuxiKN.Text = "   无 ";
+            //if (cmbHuxiKN.Text.IsNullOrEmpty()) cmbHuxiKN.Text = "   无 ";
             //e.Graphics.DrawString("呼吸困难：" + this.cmbHuxiKN.Text, ptzt, Brushes.Black, new Point(x + 150, y));
             //e.Graphics.DrawLine(Pens.Black, x + 205, y1, x + 300, y1);           
             //e.Graphics.DrawString("气道情况： Mallampati分级：" + this.cmbMallam.Text, ptzt, Brushes.Black, new Point(x + 320, y));
@@ -1529,18 +1529,18 @@ namespace main
             //y = y + 35; y1 = y + 15;
             //e.Graphics.DrawString("心脏功能：" + this.cmbXinzang.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 55, y1, x + 150, y1);
-            //if (cmbGaoxueya.Text == "") cmbGaoxueya.Text = "   无 ";
+            //if (cmbGaoxueya.Text.IsNullOrEmpty()) cmbGaoxueya.Text = "   无 ";
             //e.Graphics.DrawString("高血压病：" + this.cmbGaoxueya.Text, ptzt, Brushes.Black, new Point(x + 170, y));
             //e.Graphics.DrawLine(Pens.Black, x + 225, y1, x + 320, y1);
-            //if (cmbGuanxinB.Text == "") cmbGuanxinB.Text = "   无 ";
+            //if (cmbGuanxinB.Text.IsNullOrEmpty()) cmbGuanxinB.Text = "   无 ";
             //e.Graphics.DrawString("冠心病：" + this.cmbGuanxinB.Text, ptzt, Brushes.Black, new Point(x + 340, y));
             //e.Graphics.DrawLine(Pens.Black, x + 383, y1, x + 480, y1);
-            //if (cmbFeibuJB.Text == "") cmbFeibuJB.Text = "   无 ";
+            //if (cmbFeibuJB.Text.IsNullOrEmpty()) cmbFeibuJB.Text = "   无 ";
             //e.Graphics.DrawString("肺部疾患：" + this.cmbFeibuJB.Text, ptzt, Brushes.Black, new Point(x + 500, y));
             //e.Graphics.DrawLine(Pens.Black, x + 555, y1, x + 650, y1);
 
             //y = y + 30; y1 = y + 15;
-            //if (tbOtherCheck.Text == "") tbOtherCheck.Text = "   无 ";
+            //if (tbOtherCheck.Text.IsNullOrEmpty()) tbOtherCheck.Text = "   无 ";
             //e.Graphics.DrawString("其他辅助检查情况：" + this.tbOtherCheck.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 740, y1);
 
@@ -1600,12 +1600,12 @@ namespace main
             //e.Graphics.DrawString(title2, ptzt3, Brushes.Black, new Point(x + 240, y));
 
             //y = y + 40; y1 = y + 15;
-            //if (tbYssss.Text == "") tbYssss.Text = "   无 ";
+            //if (tbYssss.Text.IsNullOrEmpty()) tbYssss.Text = "   无 ";
             //e.Graphics.DrawString("实施手术名称：" + tbYssss.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 80, y1, x + 740, y1);
 
             //y = y + 30; y1 = y + 15;
-            //if (tbMazuiFS.Text == "") tbMazuiFS.Text = "   无 ";
+            //if (tbMazuiFS.Text.IsNullOrEmpty()) tbMazuiFS.Text = "   无 ";
             //e.Graphics.DrawString("术前实施麻醉方式：" + this.tbMazuiFS.Text.Trim(), ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 740, y1);
 
@@ -1615,10 +1615,10 @@ namespace main
             //y = y + 35; y1 = y + 15;
             //e.Graphics.DrawString("生命体征：  意识：" + cmbYishi.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 210, y1);
-            //if (tbXueya.Text == "") tbXueya.Text = "   ";
+            //if (tbXueya.Text.IsNullOrEmpty()) tbXueya.Text = "   ";
             //e.Graphics.DrawString("血压：" + this.tbXueya.Text, ptzt, Brushes.Black, new Point(x + 230, y));
             //e.Graphics.DrawLine(Pens.Black, x + 260, y1, x + 340, y1);
-            //if (tbHuxi.Text == "") tbHuxi.Text = "    ";
+            //if (tbHuxi.Text.IsNullOrEmpty()) tbHuxi.Text = "    ";
             //e.Graphics.DrawString("mmHg：  呼吸：" + this.tbHuxi.Text, ptzt, Brushes.Black, new Point(x + 340, y));
             //e.Graphics.DrawLine(Pens.Black, x + 420, y1, x + 500, y1);
             //e.Graphics.DrawString("次/分：  心率：" + this.tbXinlv.Text, ptzt, Brushes.Black, new Point(x + 500, y));
@@ -1692,10 +1692,10 @@ namespace main
             //y = y + 35; y1 = y + 15;
             //e.Graphics.DrawString("生命体征：  意识：" + cmbYishiSJ.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 210, y1);
-            //if (tbXueyaSJ.Text == "") tbXueyaSJ.Text = "   ";
+            //if (tbXueyaSJ.Text.IsNullOrEmpty()) tbXueyaSJ.Text = "   ";
             //e.Graphics.DrawString("血压：" + this.tbXueyaSJ.Text, ptzt, Brushes.Black, new Point(x + 230, y));
             //e.Graphics.DrawLine(Pens.Black, x + 260, y1, x + 340, y1);
-            //if (tbHuxiSJ.Text == "") tbHuxiSJ.Text = "    ";
+            //if (tbHuxiSJ.Text.IsNullOrEmpty()) tbHuxiSJ.Text = "    ";
             //e.Graphics.DrawString("mmHg：  呼吸：" + this.tbHuxiSJ.Text, ptzt, Brushes.Black, new Point(x + 340, y));
             //e.Graphics.DrawLine(Pens.Black, x + 420, y1, x + 500, y1);
             //e.Graphics.DrawString("次/分：  心率：" + this.tbXinlvSJ.Text, ptzt, Brushes.Black, new Point(x + 500, y));
@@ -1703,16 +1703,16 @@ namespace main
             //e.Graphics.DrawString("次/分", ptzt, Brushes.Black, new Point(x + 660, y));
 
             //y = y + 30; y1 = y + 15;
-            //if (cmbExin.Text == "") cmbExin.Text = "   无 ";
+            //if (cmbExin.Text.IsNullOrEmpty()) cmbExin.Text = "   无 ";
             //e.Graphics.DrawString("恶心：" + this.cmbExin.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 30, y1, x + 130, y1);
-            //if (cmbChuanciBW.Text == "") cmbChuanciBW.Text = "  正常";
+            //if (cmbChuanciBW.Text.IsNullOrEmpty()) cmbChuanciBW.Text = "  正常";
             //e.Graphics.DrawString("穿刺部位：" + this.cmbChuanciBW.Text, ptzt, Brushes.Black, new Point(x + 150, y));
             //e.Graphics.DrawLine(Pens.Black, x + 205, y1, x + 300, y1);
-            //if (cmbZhitiHD.Text == "") cmbZhitiHD.Text = "  正常";
+            //if (cmbZhitiHD.Text.IsNullOrEmpty()) cmbZhitiHD.Text = "  正常";
             //e.Graphics.DrawString("肢体活动：" + this.cmbZhitiHD.Text, ptzt, Brushes.Black, new Point(x + 320, y));
             //e.Graphics.DrawLine(Pens.Black, x + 380, y1, x + 460, y1);
-            //if (cmbShuhouZT.Text == "") cmbShuhouZT.Text = "  无";
+            //if (cmbShuhouZT.Text.IsNullOrEmpty()) cmbShuhouZT.Text = "  无";
             //e.Graphics.DrawString("术后镇痛方式：" + this.cmbShuhouZT.Text, ptzt, Brushes.Black, new Point(x + 480, y));
             //e.Graphics.DrawLine(Pens.Black, x + 560, y1, x + 720, y1);
 
@@ -1721,12 +1721,12 @@ namespace main
             //e.Graphics.DrawLine(Pens.Black, x + 62, y1, x + 740, y1);
 
             //y = y + 30; y1 = y + 15;
-            //if (cmbZTXG.Text == "") cmbZTXG.Text = "   优 ";
+            //if (cmbZTXG.Text.IsNullOrEmpty()) cmbZTXG.Text = "   优 ";
             //e.Graphics.DrawString("镇痛效果：" + this.cmbZTXG.Text, ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 65, y1, x + 400, y1);
 
             //y = y + 30; y1 = y + 15;
-            //if (tbRemark.Text.Trim() == "") tbRemark.Text = "   优 ";
+            //if (tbRemark.Text.Trim().IsNullOrEmpty()) tbRemark.Text = "   优 ";
             //e.Graphics.DrawString("备注： " + tbRemark.Text.Trim(), ptzt, Brushes.Black, new Point(x, y));
             //e.Graphics.DrawLine(Pens.Black, x + 30, y1, x + 740, y1);
 
@@ -2300,7 +2300,7 @@ namespace main
                 e.Graphics.DrawLine(pblack2, x + 645, y + 12, x + 660, y - 3);
             }
             y = y + 25; y1 = y + 15;
-            if (tbOtherCheck.Text == "") tbOtherCheck.Text = "   无 ";
+            if (tbOtherCheck.Text.IsNullOrEmpty()) tbOtherCheck.Text = "   无 ";
             e.Graphics.DrawString("其他辅助检查情况：" + this.tbOtherCheck.Text, ptzt, Brushes.Black, new Point(x+50, y));
             e.Graphics.DrawLine(Pens.Black, x + 170, y1, x + 740, y1);
             y = y + 25; y1 = y + 15;
@@ -2393,7 +2393,7 @@ namespace main
             {
                 e.Graphics.DrawLine(pblack2, x + 535, y, x + 545, y + 12);
                 e.Graphics.DrawLine(pblack2, x + 545, y + 12, x + 560, y - 3);
-                if (cmbCC.Text == "") cmbCC.Text = " /   ";
+                if (cmbCC.Text.IsNullOrEmpty()) cmbCC.Text = " /   ";
                 e.Graphics.DrawString(this.cmbCC.Text + "）", ptzt, Brushes.Black, x + 650, y);
             }
             else
@@ -2466,7 +2466,7 @@ namespace main
             {
                 e.Graphics.DrawLine(pblack2, x + 535, y, x + 545, y + 12);
                 e.Graphics.DrawLine(pblack2, x + 545, y + 12, x + 560, y - 3);
-                if (cmbCC1.Text == "") cmbCC1.Text = " /   ";
+                if (cmbCC1.Text.IsNullOrEmpty()) cmbCC1.Text = " /   ";
                 e.Graphics.DrawString(this.cmbCC1.Text + "）", ptzt, Brushes.Black, x + 650, y);
             }
             else
@@ -2784,12 +2784,12 @@ namespace main
             //string title2 = "麻 醉 术 后 访 视 记 录 单";
             //e.Graphics.DrawString(title2, ptzt3, Brushes.Black, new Point(x + 240, y));
             y = y + 40; y1 = y + 15; x =50;
-            if (tbYssss.Text == "") tbYssss.Text = "   无 ";
+            if (tbYssss.Text.IsNullOrEmpty()) tbYssss.Text = "   无 ";
             e.Graphics.DrawString("实施手术名称：" + tbYssss.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 80, y1, x + 740, y1);
 
             y = y + 20; y1 = y + 15;
-            if (tbMazuiFS.Text == "") tbMazuiFS.Text = "   无 ";
+            if (tbMazuiFS.Text.IsNullOrEmpty()) tbMazuiFS.Text = "   无 ";
             e.Graphics.DrawString("术前实施麻醉方式：" + this.tbMazuiFS.Text.Trim(), ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 740, y1);
 
@@ -2799,10 +2799,10 @@ namespace main
             y = y + 20; y1 = y + 15;
             e.Graphics.DrawString("生命体征：  意识：" + cmbYishi.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 210, y1);
-            if (tbXueya.Text == "") tbXueya.Text = "   ";
+            if (tbXueya.Text.IsNullOrEmpty()) tbXueya.Text = "   ";
             e.Graphics.DrawString("血压：" + this.tbXueya.Text, ptzt, Brushes.Black, new Point(x + 230, y));
             e.Graphics.DrawLine(Pens.Black, x + 260, y1, x + 340, y1);
-            if (tbHuxi.Text == "") tbHuxi.Text = "    ";
+            if (tbHuxi.Text.IsNullOrEmpty()) tbHuxi.Text = "    ";
             e.Graphics.DrawString("mmHg：  呼吸：" + this.tbHuxi.Text, ptzt, Brushes.Black, new Point(x + 340, y));
             e.Graphics.DrawLine(Pens.Black, x + 420, y1, x + 500, y1);
             e.Graphics.DrawString("次/分：  心率：" + this.tbXinlv.Text, ptzt, Brushes.Black, new Point(x + 500, y));
@@ -2876,10 +2876,10 @@ namespace main
             y = y + 20; y1 = y + 15;
             e.Graphics.DrawString("生命体征：  意识：" + cmbYishiSJ.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 210, y1);
-            if (tbXueyaSJ.Text == "") tbXueyaSJ.Text = "   ";
+            if (tbXueyaSJ.Text.IsNullOrEmpty()) tbXueyaSJ.Text = "   ";
             e.Graphics.DrawString("血压：" + this.tbXueyaSJ.Text, ptzt, Brushes.Black, new Point(x + 230, y));
             e.Graphics.DrawLine(Pens.Black, x + 260, y1, x + 340, y1);
-            if (tbHuxiSJ.Text == "") tbHuxiSJ.Text = "    ";
+            if (tbHuxiSJ.Text.IsNullOrEmpty()) tbHuxiSJ.Text = "    ";
             e.Graphics.DrawString("mmHg：  呼吸：" + this.tbHuxiSJ.Text, ptzt, Brushes.Black, new Point(x + 340, y));
             e.Graphics.DrawLine(Pens.Black, x + 420, y1, x + 500, y1);
             e.Graphics.DrawString("次/分：  心率：" + this.tbXinlvSJ.Text, ptzt, Brushes.Black, new Point(x + 500, y));
@@ -2887,16 +2887,16 @@ namespace main
             e.Graphics.DrawString("次/分", ptzt, Brushes.Black, new Point(x + 660, y));
 
             y = y + 20; y1 = y + 15;
-            if (cmbExin.Text == "") cmbExin.Text = "   无 ";
+            if (cmbExin.Text.IsNullOrEmpty()) cmbExin.Text = "   无 ";
             e.Graphics.DrawString("恶心：" + this.cmbExin.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 30, y1, x + 130, y1);
-            if (cmbChuanciBW.Text == "") cmbChuanciBW.Text = "  正常";
+            if (cmbChuanciBW.Text.IsNullOrEmpty()) cmbChuanciBW.Text = "  正常";
             e.Graphics.DrawString("穿刺部位：" + this.cmbChuanciBW.Text, ptzt, Brushes.Black, new Point(x + 150, y));
             e.Graphics.DrawLine(Pens.Black, x + 205, y1, x + 300, y1);
-            if (cmbZhitiHD.Text == "") cmbZhitiHD.Text = "  正常";
+            if (cmbZhitiHD.Text.IsNullOrEmpty()) cmbZhitiHD.Text = "  正常";
             e.Graphics.DrawString("肢体活动：" + this.cmbZhitiHD.Text, ptzt, Brushes.Black, new Point(x + 320, y));
             e.Graphics.DrawLine(Pens.Black, x + 380, y1, x + 460, y1);
-            if (cmbShuhouZT.Text == "") cmbShuhouZT.Text = "  无";
+            if (cmbShuhouZT.Text.IsNullOrEmpty()) cmbShuhouZT.Text = "  无";
             e.Graphics.DrawString("术后镇痛方式：" + this.cmbShuhouZT.Text, ptzt, Brushes.Black, new Point(x + 480, y));
             e.Graphics.DrawLine(Pens.Black, x + 565, y1, x + 720, y1);
 
@@ -2905,12 +2905,12 @@ namespace main
             e.Graphics.DrawLine(Pens.Black, x + 70, y1, x + 740, y1);
 
             y = y + 20; y1 = y + 15;
-            if (cmbZTXG.Text == "") cmbZTXG.Text = "   优 ";
+            if (cmbZTXG.Text.IsNullOrEmpty()) cmbZTXG.Text = "   优 ";
             e.Graphics.DrawString("镇痛效果：" + this.cmbZTXG.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 65, y1, x + 400, y1);
 
             y = y + 20; y1 = y + 15;
-            if (tbRemark.Text.Trim() == "") tbRemark.Text = "   优 ";
+            if (tbRemark.Text.Trim().IsNullOrEmpty()) tbRemark.Text = "   优 ";
             e.Graphics.DrawString("备注： " + tbRemark.Text.Trim(), ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 30, y1, x + 740, y1);
 
@@ -2929,10 +2929,10 @@ namespace main
             y = y + 20; y1 = y + 15;
             e.Graphics.DrawString("生命体征：  意识：" + cmbYishi1.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 210, y1);
-            if (tbXueya1.Text == "") tbXueya1.Text = "   ";
+            if (tbXueya1.Text.IsNullOrEmpty()) tbXueya1.Text = "   ";
             e.Graphics.DrawString("血压：" + this.tbXueya1.Text, ptzt, Brushes.Black, new Point(x + 230, y));
             e.Graphics.DrawLine(Pens.Black, x + 260, y1, x + 340, y1);
-            if (tbHuxi1.Text == "") tbHuxi1.Text = "    ";
+            if (tbHuxi1.Text.IsNullOrEmpty()) tbHuxi1.Text = "    ";
             e.Graphics.DrawString("mmHg：  呼吸：" + this.tbHuxi1.Text, ptzt, Brushes.Black, new Point(x + 340, y));
             e.Graphics.DrawLine(Pens.Black, x + 420, y1, x + 500, y1);
             e.Graphics.DrawString("次/分：  心率：" + this.tbXinlv1.Text, ptzt, Brushes.Black, new Point(x + 500, y));
@@ -3006,10 +3006,10 @@ namespace main
             y = y + 20; y1 = y + 15;
             e.Graphics.DrawString("生命体征：  意识：" + cmbYishiSJ1.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 110, y1, x + 210, y1);
-            if (tbXueyaSJ1.Text == "") tbXueyaSJ1.Text = "   ";
+            if (tbXueyaSJ1.Text.IsNullOrEmpty()) tbXueyaSJ1.Text = "   ";
             e.Graphics.DrawString("血压：" + this.tbXueyaSJ1.Text, ptzt, Brushes.Black, new Point(x + 230, y));
             e.Graphics.DrawLine(Pens.Black, x + 260, y1, x + 340, y1);
-            if (tbHuxiSJ1.Text == "") tbHuxiSJ1.Text = "    ";
+            if (tbHuxiSJ1.Text.IsNullOrEmpty()) tbHuxiSJ1.Text = "    ";
             e.Graphics.DrawString("mmHg：  呼吸：" + this.tbHuxiSJ1.Text, ptzt, Brushes.Black, new Point(x + 340, y));
             e.Graphics.DrawLine(Pens.Black, x + 420, y1, x + 500, y1);
             e.Graphics.DrawString("次/分：  心率：" + this.tbXinlvSJ1.Text, ptzt, Brushes.Black, new Point(x + 500, y));
@@ -3017,16 +3017,16 @@ namespace main
             e.Graphics.DrawString("次/分", ptzt, Brushes.Black, new Point(x + 660, y));
 
             y = y + 20; y1 = y + 15;
-            if (cmbExin1.Text == "") cmbExin1.Text = "   无 ";
+            if (cmbExin1.Text.IsNullOrEmpty()) cmbExin1.Text = "   无 ";
             e.Graphics.DrawString("恶心：" + this.cmbExin1.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 30, y1, x + 130, y1);
-            if (cmbChuanciBW1.Text == "") cmbChuanciBW1.Text = "  正常";
+            if (cmbChuanciBW1.Text.IsNullOrEmpty()) cmbChuanciBW1.Text = "  正常";
             e.Graphics.DrawString("穿刺部位：" + this.cmbChuanciBW1.Text, ptzt, Brushes.Black, new Point(x + 150, y));
             e.Graphics.DrawLine(Pens.Black, x + 205, y1, x + 300, y1);
-            if (cmbZhitiHD1.Text == "") cmbZhitiHD1.Text = "  正常";
+            if (cmbZhitiHD1.Text.IsNullOrEmpty()) cmbZhitiHD1.Text = "  正常";
             e.Graphics.DrawString("肢体活动：" + this.cmbZhitiHD1.Text, ptzt, Brushes.Black, new Point(x + 320, y));
             e.Graphics.DrawLine(Pens.Black, x + 380, y1, x + 460, y1);
-            if (cmbShuhouZT1.Text == "") cmbShuhouZT1.Text = "  无";
+            if (cmbShuhouZT1.Text.IsNullOrEmpty()) cmbShuhouZT1.Text = "  无";
             e.Graphics.DrawString("术后镇痛方式：" + this.cmbShuhouZT1.Text, ptzt, Brushes.Black, new Point(x + 480, y));
             e.Graphics.DrawLine(Pens.Black, x + 565, y1, x + 720, y1);
 
@@ -3035,12 +3035,12 @@ namespace main
             e.Graphics.DrawLine(Pens.Black, x + 70, y1, x + 740, y1);
 
             y = y + 20; y1 = y + 15;
-            if (cmbZTXG1.Text == "") cmbZTXG1.Text = "   优 ";
+            if (cmbZTXG1.Text.IsNullOrEmpty()) cmbZTXG1.Text = "   优 ";
             e.Graphics.DrawString("镇痛效果：" + this.cmbZTXG1.Text, ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 65, y1, x + 400, y1);
 
             y = y + 20; y1 = y + 15;
-            if (tbRemark1.Text.Trim() == "") tbRemark1.Text = "   优 ";
+            if (tbRemark1.Text.Trim().IsNullOrEmpty()) tbRemark1.Text = "   优 ";
             e.Graphics.DrawString("备注： " + tbRemark1.Text.Trim(), ptzt, Brushes.Black, new Point(x, y));
             e.Graphics.DrawLine(Pens.Black, x + 30, y1, x + 740, y1);
 

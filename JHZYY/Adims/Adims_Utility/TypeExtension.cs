@@ -80,7 +80,7 @@ namespace Adims_Utility
                 {
                     return true;
                 }
-                else if (str.ToString() == "" || str.ToString() == string.Empty)
+                else if (string.IsNullOrEmpty(str.ToString()))
                 {
                     return true;
                 }
@@ -97,35 +97,7 @@ namespace Adims_Utility
 
         }
 
-        /// <summary>
-        ///  判断是否不为空
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns> true 非空，false 空</returns>
-        public static bool IsNotNullOrEmpty(this object str)
-        {
-            try
-            {
-                if (str == null)
-                {
-                    return false;
-                }
-                else if (str.ToString() == "" || str.ToString() == string.Empty)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-        }
+        
         /// <summary>
         /// 强制转string,默认为空字符
         /// </summary>

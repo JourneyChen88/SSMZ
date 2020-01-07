@@ -88,8 +88,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\sjll.dll</HintPath>
     </Reference>
-    <Reference Include="SqlSugar, Version=5.0.0.12, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sqlSugar.5.0.0.12\lib\SqlSugar.dll</HintPath>
+    <Reference Include="SqlSugar, Version=4.9.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlSugar.4.9.8\lib\SqlSugar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -1577,6 +1577,10 @@
     <ProjectReference Include="..\adims_MODEL\adims_MODEL.csproj">
       <Project>{F2BF0CFD-289B-403F-BF4D-006B750317BE}</Project>
       <Name>adims_MODEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adims_Utility\Adims_Utility.csproj">
+      <Project>{442D8AFF-11D7-4DE8-B8CC-5D485D528074}</Project>
+      <Name>Adims_Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

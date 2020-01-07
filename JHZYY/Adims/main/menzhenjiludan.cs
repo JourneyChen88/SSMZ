@@ -312,7 +312,7 @@ namespace main
             #region //分类型采集
             if (btnMonitor.Text.Equals("开始监测"))
             {
-                if (cmbJianhuyi.Text == "")
+                if (cmbJianhuyi.Text.IsNullOrEmpty())
                 {
                     MessageBox.Show("请选择监护仪机型！");
                     return;
@@ -896,7 +896,7 @@ namespace main
             //    try
             //    {
             //        p5.D = Convert.ToDateTime(datadt.Rows[i][0]);//体温记录点
-            //        if (datadt.Rows[i]["TEMP"].ToString() == "")
+            //        if (datadt.Rows[i]["TEMP"].ToString().IsNullOrEmpty())
             //        {
             //            p5.V = 0;
             //        }
@@ -974,7 +974,7 @@ namespace main
             //for (int i = 0; i < datadt.Rows.Count; i++)
             //{
             //    adims_MODEL.jhxm jhxmt = new adims_MODEL.jhxm();
-            //    if (datadt.Rows[i]["BIS"].ToString() == "")
+            //    if (datadt.Rows[i]["BIS"].ToString().IsNullOrEmpty())
             //    {
             //        biszc = 0;
             //    }
@@ -991,7 +991,7 @@ namespace main
             //{
             //    adims_MODEL.jhxm jhxmt = new adims_MODEL.jhxm();
             //    jhxmt.D = Convert.ToDateTime(datadt.Rows[i][0]);
-            //    if (datadt.Rows[i]["CVP"].ToString() == "")
+            //    if (datadt.Rows[i]["CVP"].ToString().IsNullOrEmpty())
             //    {
             //        jhxmt.V = 0;
             //    }
@@ -2755,7 +2755,7 @@ namespace main
                 DateTime dtnow = new DateTime();//打印截止时间判断        
                 DateTime pagetime = new DateTime();
                 DataTable dtMax = bll.GetMaxPointPacu(mzjldID);
-                if (dtMax.Rows[0][0].ToString() == "")
+                if (dtMax.Rows[0][0].ToString().IsNullOrEmpty())
                     dtnow = DateTime.Now;
                 else
                     dtnow = Convert.ToDateTime(dtMax.Rows[0][0]);
@@ -3296,7 +3296,7 @@ namespace main
         private void button2_Click(object sender, EventArgs e)
         {
             DataTable dtMZ_Info = bll.SelectOldPatInfomenzhen(mzjldID);
-            if (dtMZ_Info.Rows[0]["ssjstime"].ToString() == "")
+            if (dtMZ_Info.Rows[0]["ssjstime"].ToString().IsNullOrEmpty())
             {
                 MessageBox.Show("手术结束时间不能为空禁止打印");
                 return;

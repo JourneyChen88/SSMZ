@@ -319,7 +319,7 @@ namespace Adims.SendHL7
 
         private void BindDatasource()
         {
-            var res = dal.GetOperByDate(dtOdate.Value.ToString("yyyy-MM-dd"));
+            var res = dal.GetOperByDate(dtOdate.Value.Date);
             dgvOper.DataSource = res;
             if (res != null)
             {

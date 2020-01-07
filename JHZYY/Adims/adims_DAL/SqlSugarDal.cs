@@ -27,20 +27,20 @@ namespace adims_DAL
         /// </summary>
         /// <param name="mzid"></param>
         /// <returns></returns>
-        public List<QueryMzjldDto> GetOperByDate(string date)
+        public List<QueryMzjldDto> GetOperByDate(DateTime date)
         {
-            var list = db.Queryable<OTypesetting, Adims_Mzjld>((st, sc) => new object[] {
-                    JoinType.Inner,sc.Patid==st.PatZhuYuanID})
-                    .Where((st, sc) => st.Odate.ToString("yyyy-MM-dd") == date)
-                    .Select((a, b) => new QueryMzjldDto
-                    {
-                        Patid = b.Patid,
-                        Mzjldid = b.Id,
-                        Patname = a.Patname,
-                        Odate = a.Odate,
-                        Ostate = a.Ostate,
-                        AP1 = a.AP1
-                    }).OrderBy(a => a.Odate).ToList();
+            var paibanList = db.Queryable<OTypesetting>().Where(a => a.Odate >= date && a.Odate < date.AddDays(1)).ToList();
+            var list = (from a in paibanList
+                        join b in db.Queryable<Adims_Mzjld>().ToList() on a.PatZhuYuanID equals b.Patid
+                        select new QueryMzjldDto
+                        {
+                            Patid = b.Patid,
+                            Mzjldid = b.Id,
+                            Patname = a.Patname,
+                            Odate = a.Odate,
+                            Ostate = a.Ostate,
+                            AP1 = a.AP1
+                        }).OrderBy(a => a.Odate).ToList();
             //            string sql = $@"
             //SELECT a.patid,a.id mzjldid,b.Patname,b.Odate,b.Ostate,b.AP1,c.UserNo FROM Adims_Mzjld a
             //INNER JOIN Adims_OTypesetting b ON a.patid=b.PatID
@@ -121,20 +121,20 @@ namespace adims_DAL
         /// </summary>
         /// <param name="zhuyuanid"></param>
         /// <returns></returns>
-        public OTypesetting GetPaiban(string zhuyuanid)
+        public OTypesetting GetPaiban(int id)
         {
-            return db.Queryable<OTypesetting>().Where(a => a.PatZhuYuanID == zhuyuanid).First();
+            return db.Queryable<OTypesetting>().Where(a => a.ID == id).First();
         }
-        public int UpdatePaibanConfig(string PatZhuYuanId)
+        public int UpdatePaibanConfig(int id)
         {
-            var entity = db.Queryable<OTypesetting>().Where(a => a.PatZhuYuanID == PatZhuYuanId).First();
+            var entity = db.Queryable<OTypesetting>().Where(a => a.ID == id).First();
             entity.Ostate = 1;
             return db.Updateable(entity).UpdateColumns(it => new { it.Ostate }).ExecuteCommand();
         }
-        public List<PaibanDto> GetPaiBanByOdate(string dtime)
+        public List<PaibanDto> GetPaiBanByOdate(DateTime date)
         {
             var list = db.Queryable<OTypesetting>()
-                   .Where(st => st.Odate.ToString("yyyy-MM-dd") == dtime)
+                   .Where(a => a.Odate >= date && a.Odate < date.AddDays(1))
                    .Select(a => new PaibanDto
                    {
                        ID = a.ID,

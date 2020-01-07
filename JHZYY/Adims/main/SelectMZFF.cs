@@ -43,7 +43,7 @@ namespace main
                     listBox2.Items.Add(listBox1.Items[listBox1.SelectedIndex]);
                     foreach (string s in listBox2.Items)
                     {
-                        if (qs == "")
+                        if (qs.IsNullOrEmpty())
                         { qs = s; }
                         else
                         qs = qs + "+"+s;
@@ -81,7 +81,7 @@ namespace main
                 listBox2.Items.RemoveAt(listBox2.SelectedIndex);
             foreach (string s in listBox2.Items)
             {
-                if (qs == "")
+                if (qs.IsNullOrEmpty())
                 { qs = s; }
                 else
                     qs = qs + "+" + s;

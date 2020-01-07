@@ -371,103 +371,103 @@ namespace main.CGG
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //if (cmbShenzhi.Text == "")
+            //if (cmbShenzhi.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("神志不能为空");
             //    cmbShenzhi.Focus();
             //    return;
             //}
-            //if (textBox3.Text == "")
+            //if (textBox3.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("术前签名不能为空");
             //    textBox3.Focus();
             //    return;
             //}
-            //if (tbShuye.Text == "")
+            //if (tbShuye.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输液量不能为空");
             //    tbShuye.Focus();
             //    return;
             //}
-            //if (comboBox7.Text == "")
+            //if (comboBox7.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("自血体不能为空");
             //    comboBox7.Focus();
             //    return;
             //}
-            //if (textBox5.Text == "")
+            //if (textBox5.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("红细胞不能为空");
             //    textBox5.Focus();
             //    return;
             //}
-            //if (textBox6.Text == "")
+            //if (textBox6.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("血浆不能为空");
             //    textBox6.Focus();
             //    return;
             //}
-            //if (textBox7.Text == "")
+            //if (textBox7.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("血小板不能为空");
             //    textBox7.Focus();
             //    return;
             //}
-            //if (comboBox2.Text == "")
+            //if (comboBox2.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("术中血型不能为空");
             //    comboBox2.Focus();
             //    return;
             //}
-            //if (textBox8.Text == "")
+            //if (textBox8.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("术中签名不能为空");
             //    textBox8.Focus();
             //    return;
             //}
-            //if (textBox10.Text == "")
+            //if (textBox10.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("标本送病理签名不能为空");
             //    textBox10.Focus();
             //    return;
             //}
-            //if (textBox11.Text == "")
+            //if (textBox11.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("术后签名不能为空");
             //    textBox11.Focus();
             //    return;
             //}
-            //if (textBox13.Text == "")
+            //if (textBox13.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("手术用药不能为空");
             //    textBox13.Focus();
             //    return;
             //}
-            //if (textBox14.Text == "")
+            //if (textBox14.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("签名不能为空");
             //    textBox14.Focus();
             //    return;
             //}
-            //if (cmbQXHS.Text == "")
+            //if (cmbQXHS.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("器械护士不能为空");
             //    cmbQXHS.Focus();
             //    return;
             //}
-            //if (comboBox4.Text == "")
+            //if (comboBox4.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("手术医师不能为空");
             //    comboBox4.Focus();
             //    return;
             //}
-            //if (comboBox5.Text == "")
+            //if (comboBox5.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("巡回护士不能为空");
             //    comboBox5.Focus();
             //    return;
             //}
-            //if (comboBox6.Text == "")
+            //if (comboBox6.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("接班护士不能为空");
             //    comboBox6.Focus();
@@ -682,23 +682,23 @@ namespace main.CGG
                          dgvZxd.Rows[i].Cells[4].Style.ForeColor = Color.Black;
 
                      }
-                     if (dgvZxd.Rows[i].Cells[1].Value == "")
+                     if (dgvZxd.Rows[i].Cells[1].Value.IsNullOrEmpty())
                          a1 = 0;
                      else a1 = Convert.ToInt32(dgvZxd.Rows[i].Cells[1].Value);
-                     if (dgvZxd.Rows[i].Cells[2].Value == "")
+                     if (dgvZxd.Rows[i].Cells[2].Value.IsNullOrEmpty())
                          a2 = 0;
                      else a2 = Convert.ToInt32(dgvZxd.Rows[i].Cells[2].Value);
-                     if (dgvZxd.Rows[i].Cells[3].Value == "")
+                     if (dgvZxd.Rows[i].Cells[3].Value.IsNullOrEmpty())
                          a3 = 0;
                      else a3 = Convert.ToInt32(dgvZxd.Rows[i].Cells[3].Value);
 
-                     if (dgvZxd.Rows[i].Cells[5].Value == "")
+                     if (dgvZxd.Rows[i].Cells[5].Value.IsNullOrEmpty())
                          a5 = 0;
                      else a5 = Convert.ToInt32(dgvZxd.Rows[i].Cells[5].Value);
-                     if (dgvZxd.Rows[i].Cells[6].Value == "")
+                     if (dgvZxd.Rows[i].Cells[6].Value.IsNullOrEmpty())
                          a6 = 0;
                      else a6 = Convert.ToInt32(dgvZxd.Rows[i].Cells[6].Value);
-                     if (dgvZxd.Rows[i].Cells[7].Value == "")
+                     if (dgvZxd.Rows[i].Cells[7].Value.IsNullOrEmpty())
                          a7 = 0;
                      else a7 = Convert.ToInt32(dgvZxd.Rows[i].Cells[7].Value);
 
@@ -1023,26 +1023,26 @@ namespace main.CGG
                         dgvNurseRecord.Rows[i].Cells[4].Style.ForeColor = Color.Black;
                         dgvNurseRecord.Rows[i].Cells[8].Style.ForeColor = Color.Black;
                     }
-                    if (dgvNurseRecord.Rows[i].Cells[1].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[1].Value.IsNullOrEmpty())
                         a1 = 0;
                     else a1 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[1].Value);
 
-                    if (dgvNurseRecord.Rows[i].Cells[2].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[2].Value.IsNullOrEmpty())
                         a2 = 0;
                     else a2 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[2].Value);
-                    if (dgvNurseRecord.Rows[i].Cells[3].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[3].Value.IsNullOrEmpty())
                         a3 = 0;
                     else a3 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[3].Value);
-                    if (dgvNurseRecord.Rows[i].Cells[5].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[5].Value.IsNullOrEmpty())
                         a5 = 0;
                     else a5 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[5].Value);
-                    if (dgvNurseRecord.Rows[i].Cells[6].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[6].Value.IsNullOrEmpty())
                         a6 = 0;
                     else a6 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[6].Value);
-                    if (dgvNurseRecord.Rows[i].Cells[7].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[7].Value.IsNullOrEmpty())
                         a7 = 0;
                    else a7 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[7].Value);
-                    if (dgvNurseRecord.Rows[i].Cells[9].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[9].Value.IsNullOrEmpty())
                         a9 = 0;
                     else a9 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[9].Value);
                     if (dgvNurseRecord.Rows[i].Cells[9].Value == "0")
@@ -1050,10 +1050,10 @@ namespace main.CGG
                         a9 = int.Parse("╲");
                     }
 
-                    if (dgvNurseRecord.Rows[i].Cells[10].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[10].Value.IsNullOrEmpty())
                         a10 = 0;
                     else a10 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[10].Value);
-                    if (dgvNurseRecord.Rows[i].Cells[11].Value == "")
+                    if (dgvNurseRecord.Rows[i].Cells[11].Value.IsNullOrEmpty())
                         a11 = 0;
                     else a11 = Convert.ToInt32(dgvNurseRecord.Rows[i].Cells[11].Value);
                     if (a1 != a2 || a1 != a3)

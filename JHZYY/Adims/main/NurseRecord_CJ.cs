@@ -307,7 +307,7 @@ namespace main
             y = y + 30; y1 = y + 15;
             e.Graphics.DrawString("日期：" + dtVisitDate.Text.Trim(), zt9, bp1, x + 50, y);
             e.Graphics.DrawLine(Pens.Black, x + 80, y1, x + 180, y1);
-            if (tbKeshi.Text == "")
+            if (tbKeshi.Text.IsNullOrEmpty())
                 e.Graphics.DrawLine(pb1, new Point(90 + x, y + 13), new Point(110 + x, y + 2));
             e.Graphics.DrawString("科室: " + tbKeshi.Text.Trim(), zt9, Brushes.Black, x + 200, y);
             e.Graphics.DrawLine(Pens.Black, x + 230, y1, x + 400, y1);

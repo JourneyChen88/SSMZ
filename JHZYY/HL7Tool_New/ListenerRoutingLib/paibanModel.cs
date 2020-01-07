@@ -1,9 +1,12 @@
-﻿using System;
+﻿using SqlSugar;
+using System;
 
 namespace ListenerRoutingLib
 {
-    public class paibanModel
+    [SugarTable("Adims_OTypesetting")]
+    public class OTypesetting
     {
+        [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public int ID { get; set; }
         public string PatID { get; set; }
         public string PatZhuYuanID { get; set; }
@@ -16,6 +19,9 @@ namespace ListenerRoutingLib
         public string Patdpm { get; set; }
         public string Pattmd { get; set; }
         public string Oname { get; set; }
+
+        public string OperNo { get; set; }
+
         public string Amethod { get; set; }
 
         public DateTime ApplyDate { get; set; }
@@ -28,6 +34,8 @@ namespace ListenerRoutingLib
         public string AP2 { get; set; }
         public string AP3 { get; set; }
         public string OS { get; set; }
+        public string OsNo { get; set; }
+
         public string OS1 { get; set; }
         public string OS2 { get; set; }
         public string OS3 { get; set; }
@@ -78,3 +86,4 @@ namespace ListenerRoutingLib
 
     }
 }
+

@@ -217,117 +217,117 @@ namespace main.CGG
             //    comboBoxABO.Focus();
             //    return;
             //}
-            //if (comboBoxrh.Text == "")
+            //if (comboBoxrh.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("RH血型不能为空");
             //    comboBoxrh.Focus();
             //    return;
             //}
-            //if (comboBoxABO1.Text == "")
+            //if (comboBoxABO1.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("供血者血型不能为空");
             //    comboBoxABO1.Focus();
             //    return;
             //}
-            //if (textBoxsrl.Text == "")
+            //if (textBoxsrl.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血量不能为空");
             //    textBoxsrl.Focus();
             //    return;
             //}
-            //if (textBoxsrl.Text == "")
+            //if (textBoxsrl.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血量不能为空");
             //    textBoxsrl.Focus();
             //    return;
             //}
-            //if (textBoxqtw.Text == "")
+            //if (textBoxqtw.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血前体温不能为空");
             //    textBoxqtw.Focus();
             //    return;
             //}
-            //if (textBoxztw.Text == "")
+            //if (textBoxztw.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血中体温不能为空");
             //    textBoxztw.Focus();
             //    return;
             //}
-            //if (textBoxhtw.Text == "")
+            //if (textBoxhtw.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血后体温不能为空");
             //    textBoxhtw.Focus();
             //    return;
             //}
             ////
-            //if (textBoxqmb.Text == "")
+            //if (textBoxqmb.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血前脉搏不能为空");
             //    textBoxqmb.Focus();
             //    return;
             //}
-            //if (textBoxzmb.Text == "")
+            //if (textBoxzmb.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血中脉搏不能为空");
             //    textBoxzmb.Focus();
             //    return;
             //}
-            //if (textBoxhmb.Text == "")
+            //if (textBoxhmb.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血后脉搏不能为空");
             //    textBoxhmb.Focus();
             //    return;
             //}
-            //if (textBoxqhx.Text == "")
+            //if (textBoxqhx.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("呼吸不能为空");
             //    textBoxqhx.Focus();
             //    return;
             //}
-            //if (textBoxzhx.Text == "")
+            //if (textBoxzhx.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("呼吸不能为空");
             //    textBoxzhx.Focus();
             //    return;
             //}
-            //if (textBoxhhx.Text == "")
+            //if (textBoxhhx.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("呼吸不能为空");
             //    textBoxhhx.Focus();
             //    return;
             //}
-            //if (textBoxqxy.Text == "")
+            //if (textBoxqxy.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("血压不能为空");
             //    textBoxqxy.Focus();
             //    return;
             //}
-            //if (textBoxzxy.Text == "")
+            //if (textBoxzxy.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("血压不能为空");
             //    textBoxzxy.Focus();
             //    return;
             //}
-            //if (textBoxhxy.Text == "")
+            //if (textBoxhxy.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("血压不能为空");
             //    textBoxhxy.Focus();
             //    return;
             //}
 
-            //if (textBoxshuzhuqian.Text == "")
+            //if (textBoxshuzhuqian.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("输血前输入速度不能为空");
             //    textBoxshuzhuqian.Focus();
             //    return;
             //}
-            //if (textBoxshuzhuhou.Text == "")
+            //if (textBoxshuzhuhou.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("注入15分钟后输入速度不能为空");
             //    textBoxshuzhuhou.Focus();
             //    return;
             //}
-            //if (textBoxzunyizhu.Text == "")
+            //if (textBoxzunyizhu.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("遵医输入速度不能为空");
             //    textBoxzunyizhu.Focus();

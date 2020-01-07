@@ -64,7 +64,7 @@ namespace main
                 Boolean flag = Convert.ToBoolean(checkCell.Value);
                 if (flag == true)
                 {
-                    if (Name == "")
+                    if (Name.IsNullOrEmpty())
                         Name =dataGridView1.Rows[i].Cells[0].Value.ToString();
                     else
                         Name =Name+ "、" + dataGridView1.Rows[i].Cells[0].Value.ToString();

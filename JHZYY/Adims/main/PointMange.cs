@@ -47,8 +47,8 @@ namespace main
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (this.tbNIBPS.Text == "" || tbNIBPD.Text == "" || tbPulse.Text == ""
-                || tbRRC.Text == "" || tbSPO2.Text == "" || tbETCO2.Text == "" || tbTemp.Text == "" || tbBIS.Text == "" || tBCVP.Text == "")
+            if (this.tbNIBPS.Text.IsNullOrEmpty() || tbNIBPD.Text.IsNullOrEmpty() || tbPulse.Text.IsNullOrEmpty()
+                || tbRRC.Text.IsNullOrEmpty() || tbSPO2.Text.IsNullOrEmpty() || tbETCO2.Text.IsNullOrEmpty() || tbTemp.Text.IsNullOrEmpty() || tbBIS.Text.IsNullOrEmpty() || tBCVP.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("所有的监测值不能为空！");
             }
@@ -221,8 +221,8 @@ namespace main
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (this.tbNIBPS.Text == "" || tbNIBPD.Text == "" || tbPulse.Text == ""
-                || tbRRC.Text == "" || tbSPO2.Text == "" || tbETCO2.Text == "" || tbTemp.Text == "" || tbBIS.Text == "" || tBCVP.Text == "")
+            if (this.tbNIBPS.Text.IsNullOrEmpty() || tbNIBPD.Text.IsNullOrEmpty() || tbPulse.Text.IsNullOrEmpty()
+                || tbRRC.Text.IsNullOrEmpty() || tbSPO2.Text.IsNullOrEmpty() || tbETCO2.Text.IsNullOrEmpty() || tbTemp.Text.IsNullOrEmpty() || tbBIS.Text.IsNullOrEmpty() || tBCVP.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("所有的监测值不能为空！");
             }

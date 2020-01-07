@@ -47,7 +47,7 @@ namespace main
                 //,[mazuifangshi]
                 //,[dengjishijian]
                 beforeVisit.Add("menzhenhao", txtPatid.Controls[0].Text.Trim());
-                if (dt.Rows[0][0].ToString() == "")
+                if (dt.Rows[0][0].ToString().IsNullOrEmpty())
                 {
                     asc = "001";
                 }
@@ -65,7 +65,7 @@ namespace main
                 beforeVisit.Add("keshi", this.cmbKeshi.Text);
                 beforeVisit.Add("mingzu", txtPatNation.Controls[0].Text.Trim());
                 beforeVisit.Add("dengjishijian", dtOSDate.Value.ToString("yyyy-MM-dd HH:mm"));
-                if (dt.Rows[0][0].ToString() == "")
+                if (dt.Rows[0][0].ToString().IsNullOrEmpty())
                 {
                     beforeVisit.Add("visid", "1");
                 }
@@ -140,7 +140,7 @@ namespace main
                 //,[mazuifangshi]
                 //,[dengjishijian]
                 beforeVisit.Add("menzhenhao", txtPatid.Controls[0].Text.Trim());
-                if (dt.Rows[0][0].ToString() == "")
+                if (dt.Rows[0][0].ToString().IsNullOrEmpty())
                 {
                     adc = "001";
                 }
@@ -158,7 +158,7 @@ namespace main
                 beforeVisit.Add("keshi", this.cmbKeshi.Text);
                 beforeVisit.Add("mingzu", txtPatNation.Controls[0].Text.Trim());
                 beforeVisit.Add("dengjishijian", dtOSDate.Value.ToString("yyyy-MM-dd HH:mm"));
-                if (dt.Rows[0][0].ToString() == "")
+                if (dt.Rows[0][0].ToString().IsNullOrEmpty())
                 {
                     beforeVisit.Add("visid", "1");
                 }

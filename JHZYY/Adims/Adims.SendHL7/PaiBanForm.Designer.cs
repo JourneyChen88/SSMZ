@@ -36,6 +36,7 @@
             this.dtOdate = new System.Windows.Forms.DateTimePicker();
             this.dgvOTypesetting = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Oroom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.second = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patdpm = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,15 +48,8 @@
             this.pattmd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Amethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.on1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.on2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ap1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ap2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ap3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.applyid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PatZhuYuanID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asae = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -131,6 +125,7 @@
             this.dgvOTypesetting.ColumnHeadersHeight = 25;
             this.dgvOTypesetting.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
+            this.Column2,
             this.Oroom,
             this.second,
             this.patdpm,
@@ -142,15 +137,8 @@
             this.pattmd,
             this.OS,
             this.Amethod,
-            this.on1,
-            this.on2,
-            this.sn1,
-            this.sn2,
-            this.Remarks,
-            this.ap1,
-            this.ap2,
-            this.ap3,
             this.applyid,
+            this.Column1,
             this.PatZhuYuanID,
             this.patid,
             this.asae});
@@ -166,16 +154,21 @@
             // ID
             // 
             this.ID.DataPropertyName = "id";
-            this.ID.Frozen = true;
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
             this.ID.Visible = false;
-            this.ID.Width = 42;
+            this.ID.Width = 49;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "PatNation";
+            this.Column2.HeaderText = "民族";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 64;
             // 
             // Oroom
             // 
             this.Oroom.DataPropertyName = "oroom";
-            this.Oroom.Frozen = true;
             this.Oroom.HeaderText = "手术间";
             this.Oroom.MinimumWidth = 80;
             this.Oroom.Name = "Oroom";
@@ -183,8 +176,7 @@
             // 
             // second
             // 
-            this.second.DataPropertyName = "second";
-            this.second.Frozen = true;
+            this.second.DataPropertyName = "Second";
             this.second.HeaderText = "台次";
             this.second.Name = "second";
             this.second.Width = 64;
@@ -192,7 +184,6 @@
             // patdpm
             // 
             this.patdpm.DataPropertyName = "patdpm";
-            this.patdpm.Frozen = true;
             this.patdpm.HeaderText = "科室";
             this.patdpm.Name = "patdpm";
             this.patdpm.ReadOnly = true;
@@ -201,7 +192,6 @@
             // Patbedno
             // 
             this.Patbedno.DataPropertyName = "Patbedno";
-            this.Patbedno.Frozen = true;
             this.Patbedno.HeaderText = "床号";
             this.Patbedno.Name = "Patbedno";
             this.Patbedno.ReadOnly = true;
@@ -210,7 +200,6 @@
             // patname
             // 
             this.patname.DataPropertyName = "patname";
-            this.patname.Frozen = true;
             this.patname.HeaderText = "病人姓名";
             this.patname.Name = "patname";
             this.patname.ReadOnly = true;
@@ -264,71 +253,21 @@
             this.Amethod.ReadOnly = true;
             this.Amethod.Width = 94;
             // 
-            // on1
-            // 
-            this.on1.DataPropertyName = "on1";
-            this.on1.HeaderText = "洗手护士";
-            this.on1.Name = "on1";
-            this.on1.Width = 94;
-            // 
-            // on2
-            // 
-            this.on2.DataPropertyName = "on2";
-            this.on2.HeaderText = "洗手护士2";
-            this.on2.Name = "on2";
-            this.on2.Width = 103;
-            // 
-            // sn1
-            // 
-            this.sn1.DataPropertyName = "sn1";
-            this.sn1.HeaderText = "巡回护士";
-            this.sn1.Name = "sn1";
-            this.sn1.Width = 94;
-            // 
-            // sn2
-            // 
-            this.sn2.DataPropertyName = "sn2";
-            this.sn2.HeaderText = "巡回护士2";
-            this.sn2.Name = "sn2";
-            this.sn2.Width = 103;
-            // 
-            // Remarks
-            // 
-            this.Remarks.DataPropertyName = "Remarks";
-            this.Remarks.HeaderText = "备注";
-            this.Remarks.MinimumWidth = 80;
-            this.Remarks.Name = "Remarks";
-            this.Remarks.Width = 80;
-            // 
-            // ap1
-            // 
-            this.ap1.DataPropertyName = "ap1";
-            this.ap1.HeaderText = "麻醉医师";
-            this.ap1.Name = "ap1";
-            this.ap1.Width = 94;
-            // 
-            // ap2
-            // 
-            this.ap2.DataPropertyName = "ap2";
-            this.ap2.HeaderText = "副醉医师1";
-            this.ap2.Name = "ap2";
-            this.ap2.Width = 103;
-            // 
-            // ap3
-            // 
-            this.ap3.DataPropertyName = "ap3";
-            this.ap3.HeaderText = "副醉医师2";
-            this.ap3.Name = "ap3";
-            this.ap3.Width = 103;
-            // 
             // applyid
             // 
-            this.applyid.DataPropertyName = "applyid";
+            this.applyid.DataPropertyName = "ApplyId";
             this.applyid.HeaderText = "流水号";
             this.applyid.Name = "applyid";
             this.applyid.ReadOnly = true;
             this.applyid.Visible = false;
-            this.applyid.Width = 66;
+            this.applyid.Width = 79;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "CardId";
+            this.Column1.HeaderText = "卡号";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 64;
             // 
             // PatZhuYuanID
             // 
@@ -336,18 +275,16 @@
             this.PatZhuYuanID.HeaderText = "住院号";
             this.PatZhuYuanID.Name = "PatZhuYuanID";
             this.PatZhuYuanID.ReadOnly = true;
-            this.PatZhuYuanID.Visible = false;
-            this.PatZhuYuanID.Width = 66;
+            this.PatZhuYuanID.Width = 79;
             // 
             // patid
             // 
-            this.patid.DataPropertyName = "patid";
+            this.patid.DataPropertyName = "PatId";
             this.patid.HeaderText = "病人编号";
             this.patid.Name = "patid";
             this.patid.ReadOnly = true;
             this.patid.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.patid.Visible = false;
-            this.patid.Width = 78;
+            this.patid.Width = 94;
             // 
             // asae
             // 
@@ -355,7 +292,7 @@
             this.asae.HeaderText = "急诊";
             this.asae.Name = "asae";
             this.asae.Visible = false;
-            this.asae.Width = 54;
+            this.asae.Width = 64;
             // 
             // PaiBanForm
             // 
@@ -373,7 +310,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "PaiBanForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "发送信息";
+            this.Text = "发送排班信息";
             this.Load += new System.EventHandler(this.DataView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOTypesetting)).EndInit();
             this.ResumeLayout(false);
@@ -390,6 +327,7 @@
         private System.Windows.Forms.DateTimePicker dtOdate;
         private System.Windows.Forms.DataGridView dgvOTypesetting;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Oroom;
         private System.Windows.Forms.DataGridViewTextBoxColumn second;
         private System.Windows.Forms.DataGridViewTextBoxColumn patdpm;
@@ -401,15 +339,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pattmd;
         private System.Windows.Forms.DataGridViewTextBoxColumn OS;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amethod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn on1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn on2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ap1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ap2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ap3;
         private System.Windows.Forms.DataGridViewTextBoxColumn applyid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn PatZhuYuanID;
         private System.Windows.Forms.DataGridViewTextBoxColumn patid;
         private System.Windows.Forms.DataGridViewTextBoxColumn asae;

@@ -84,7 +84,7 @@ namespace main.权限管理
             {
                 position_jurisdiction pj = new position_jurisdiction();
                 pj.ID = (int)dataGridView1.Rows[i].Cells[0].Value;
-                if (position_txt.Text == "") { MessageBox.Show("请填写职务名称", "警告"); return; }
+                if (position_txt.Text.IsNullOrEmpty()) { MessageBox.Show("请填写职务名称", "警告"); return; }
                 pj.position = position_txt.Text;
                 bll.Update_position(pj);
                 bll.Update_user_position(dataGridView1.Rows[i].Cells[1].Value.ToString(), position_txt.Text);                

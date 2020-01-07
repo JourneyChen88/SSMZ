@@ -563,7 +563,7 @@ namespace main
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            if (mazuiyisheng.Text == "")
+            if (mazuiyisheng.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("麻醉医生不能为空!");
                 mazuiyisheng.Focus();//获得焦点

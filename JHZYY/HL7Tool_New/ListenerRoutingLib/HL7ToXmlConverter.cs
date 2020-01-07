@@ -75,7 +75,7 @@ namespace ListenerRoutingLib
 
             return pb;
         }
-        public static paibanModel toDataBae(string sHL7)
+        public static OTypesetting toDataBae(string sHL7)
         {
             //把HL7分成段
 
@@ -118,7 +118,7 @@ namespace ListenerRoutingLib
             }
 
             string[] sHL7Lines = Old.Split('\n');
-            paibanModel pb = new paibanModel();
+            OTypesetting pb = new OTypesetting();
 
             #region HIS平台提供信息解析
             for (int i = 0; i < sHL7Lines.Length; i++)

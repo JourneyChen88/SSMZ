@@ -232,7 +232,7 @@ namespace main
                 //    HISinfo.Add(dr["jzbz"].ToString());//31
                   //  HISinfo.Add(Convert.ToDateTime(dr["otime"]).ToString("HH:mm"));
                     //HISinfo.Add("0");//未排班
-                    //if (dr["SSLX"].ToString() == ""||dr["SSLX"].ToString() =="0") HISinfo.Add("0");
+                    //if (dr["SSLX"].ToString().IsNullOrEmpty()||dr["SSLX"].ToString() =="0") HISinfo.Add("0");
                     //else HISinfo.Add(dr["SSLX"].ToString());//是否急诊                    
                     //HISinfo.Add(dr["hebingzhen"].ToString());//32
                     //HISinfo.Add(dr["quxiaoyuanyin"].ToString());//33

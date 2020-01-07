@@ -33,7 +33,7 @@ namespace main
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (tbName.Text.Trim() == "")
+            if (tbName.Text.Trim().IsNullOrEmpty())
                 MessageBox.Show("手术间名不能为空！");
             else
             {

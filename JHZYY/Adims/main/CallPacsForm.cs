@@ -54,7 +54,7 @@ namespace main
         //public static extern int PacsView2(int nPatientType, string lpszID, int nImageType);
         private void buttonCall_Click(object sender, EventArgs e)
         {
-            if (tbPatId.Text == "")
+            if (tbPatId.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("编号不能为空");
                 return;

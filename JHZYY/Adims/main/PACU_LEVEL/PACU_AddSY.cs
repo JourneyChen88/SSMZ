@@ -60,7 +60,7 @@ namespace main.PACU_LEVEL
                 jtytsx.Zrfs = cmbZRFS.Text;
                 jtytsx.Kssj = DateTime.Now;
                 int q = bll.addshuyePACU(mzjldid, jtytsx);
-                if (Value_Info == "")
+                if (Value_Info.IsNullOrEmpty())
                     Value_Info = jtytsx.Name + jtytsx.Jl.ToString() + jtytsx.Dw + jtytsx.Zrfs;
                 else
                     Value_Info = Value_Info+"+"+jtytsx.Name + jtytsx.Jl.ToString() + jtytsx.Dw + jtytsx.Zrfs;

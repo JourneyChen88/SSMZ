@@ -1040,7 +1040,7 @@ namespace main
             //e.Graphics.DrawString("日期 " + dtAddTime.Text, zt9, Brushes.Black, x + 450, y);
             //e.Graphics.DrawLine(Pens.Black, x + 475, y1, x + 600, y1); ;
             ////为空画斜杠
-            //if (dtAddTime.Text == "")
+            //if (dtAddTime.Text.IsNullOrEmpty())
             //    e.Graphics.DrawLine(ptp, new Point(495 + x, y + 13), new Point(515 + x, y + 2));
             //y = y + 33; y1 = y + 15;
             //e.Graphics.DrawString("麻醉经过： ", ht9, Brushes.Black, x + 0, y); 

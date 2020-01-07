@@ -1,5 +1,6 @@
 ﻿using adims_BLL;
 using adims_DAL;
+using adims_MODEL;
 using adims_MODEL.Dtos;
 using Adims_Utility;
 using MediII.Common;
@@ -32,10 +33,10 @@ namespace Adims.SendHL7
         /// </summary>
         /// <param name="patid"></param>
         /// <returns></returns>
-        private string AppendHL7stringConfig(string patid)
+        private string AppendHL7stringConfig(int id)
         {
             ORM_O01 orm = new ORM_O01();
-            var paiban = dal.GetPaiban(patid);
+            var paiban = dal.GetPaiban(id);
             int ostateNum = paiban.Ostate.ToInt32();
             LogHelp.SaveLogHL7("状态" + ostateNum.ToString());
             string SCH_1 = "";
@@ -72,7 +73,7 @@ namespace Adims.SendHL7
 
             #endregion
 
-            int Jieguo = dal.UpdatePaibanConfig(patid);//修改成 已排班
+            int Jieguo = dal.UpdatePaibanConfig(id);//修改成 已排班
 
             #region SCH|
             String SCH = "SCH||||||^" + SCH_1 + "^^^原因" + "|||||";
@@ -83,17 +84,17 @@ namespace Adims.SendHL7
             SCH += paiban.PatID + "\n";
             #endregion
 
-            String PID = paiban.PidInfo.ToString();
+            String PID = paiban.PidInfo;
 
-            String PV1 = paiban.Pv1Info.ToString();
+            String PV1 = paiban.Pv1Info;
             #region RGS|
             String RGS = "RGS|1" + "\n";
             #endregion
 
             #region AIS|
             String AIS = "AIS|1||";
-            AIS += paiban.OperNo.ToString() + "^" + paiban.Oname.ToString() + "|||||||";
-            AIS += paiban.Oroom.ToString() + "^^^" + paiban.Second.ToString() + "|" + "\n";
+            AIS += paiban.OperNo+ "^" + paiban.Oname + "|||||||";
+            AIS += paiban.Oroom + "^^^" + paiban.Second + "|" + "\n";
             #endregion
 
 
@@ -184,16 +185,21 @@ namespace Adims.SendHL7
 
                 if (dgvOTypesetting.SelectedCells.Count == 1)
                 {
-                    string patid = dgvOTypesetting.CurrentRow.Cells["patid"].Value.ToString();
-                    string Oroom = dgvOTypesetting.CurrentRow.Cells["Oroom"].Value.ToString();
-                    string Osecond = dgvOTypesetting.CurrentRow.Cells["second"].Value.ToString();
-                    if (Oroom == "" && Osecond == "")
+                    List<PaibanDto> list = (List<PaibanDto>)dgvOTypesetting.DataSource;
+                    PaibanDto model = list[dgvOTypesetting.CurrentRow.Index];
+                    string patid = model.PatID; 
+                    string Oroom = model.Oroom;
+                    string Osecond = model.Second;
+                    //string patid = dgvOTypesetting.CurrentRow.Cells["patid"].Value.ToString();
+                    //string Oroom = dgvOTypesetting.CurrentRow.Cells["Oroom"].Value.ToString();
+                    //string Osecond = dgvOTypesetting.CurrentRow.Cells["second"].Value.ToString();
+                    if (Oroom.IsNullOrEmpty() && Osecond.IsNullOrEmpty())
                     {
                         MessageBox.Show("手术间和台次不能都为空");
                         return;
                     }
 
-                    string message = AppendHL7stringConfig(patid);
+                    string message = AppendHL7stringConfig(model.ID);
 
                     LogHelp.SaveLogHL7(message);
                     string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];
@@ -310,7 +316,7 @@ namespace Adims.SendHL7
 
         private void BindPaibanInfo()
         {
-            var dt = dal.GetPaiBanByOdate(dtOdate.Value.Date.ToString("yyyy-MM-dd"));
+            var dt = dal.GetPaiBanByOdate(dtOdate.Value.Date);
             dgvOTypesetting.DataSource = dt;
             if (dt != null)
             {
@@ -338,13 +344,13 @@ namespace Adims.SendHL7
                 string patid = item.PatID;
                 string Oroom = item.Oroom;
                 string Osecond = item.Second;
-                if (Oroom == "" && Osecond == "")
+                if (Oroom.IsNullOrEmpty() && Osecond.IsNullOrEmpty())
                 {
                     MessageBox.Show("手术间和台次不能都为空");
                     return;
                 }
 
-                string message = AppendHL7stringConfig(patid);
+                string message = AppendHL7stringConfig(item.ID);
 
                 LogHelp.SaveLogHL7(message);
                 string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];

@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using adims_BLL;
 using adims_DAL;
 using System.Text.RegularExpressions;
+using Adims_Utility;
+
 namespace main
 {
     public partial class JHmzqfsd : Form
@@ -30,122 +32,122 @@ namespace main
 
         private void buttonbaocun_Click(object sender, EventArgs e)
         {
-            if (textBoxkebie.Text == "")
+            if (textBoxkebie.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("科别不能为空!");
                 textBoxkebie.Focus();
                 return;
             }
-            if (textBoxchanghao.Text == "")
+            if (textBoxchanghao.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("床号不能为空！");
                 textBoxchanghao.Focus();
                 return;
             }
-            if (textBoxzhuyuanhao.Text == "")
+            if (textBoxzhuyuanhao.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("住院号不能为空！");
                 textBoxzhuyuanhao.Focus();
                 return;
             }
-            if (textBoxxingming.Text == "")
+            if (textBoxxingming.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("姓名不能为空！");
                 textBoxxingming.Focus();
                 return;
 
             }
-            if (textBoxsex.Text == "")
+            if (textBoxsex.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("性别不能为空！");
                 textBoxsex.Focus();
                 return;
             }
-            if (textBoxage.Text == "")
+            if (textBoxage.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("年龄不能为空！");
                 textBoxage.Focus();
                 return;
             }
-            if (comboBoxyshengqz.Text == "")
+            if (comboBoxyshengqz.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("评估医生不能为空！");
                 comboBoxyshengqz.Focus();
                 return;
             }
-            if (textBoxBP.Text == "")
+            if (textBoxBP.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("BP不能为空！");
                 textBoxBP.Focus();
                 return;
             }
-            if (textBoxR.Text == "")
+            if (textBoxR.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("R不能为空！");
                 textBoxR.Focus();
                 return;
             }
-            if (textBoxP.Text == "")
+            if (textBoxP.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("P不能为空！");
                 textBoxP.Focus();
                 return;
             }
-            if (textBoxT.Text == "")
+            if (textBoxT.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("T不能为空！");
                 textBoxP.Focus();
                 return;
             }
-            if (textBoxT.Text == "")
+            if (textBoxT.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("T不能为空！");
                 textBoxP.Focus();
                 return;
             }
-            if (comboBoxxxg.Text == "")
+            if (comboBoxxxg.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("心血管不能为空！");
                 comboBoxxxg.Focus();
                 return;
             }
-            //if (comboBoxfhx1.Text == "")
+            //if (comboBoxfhx1.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("肺和呼吸不能为空！");
             //    comboBoxfhx1.Focus();
             //    return;
             //}
-            if (textnxssfs.Text == "")
+            if (textnxssfs.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("拟行手术方式不能为空！");
                 textnxssfs.Focus();
                 return;
             }
-            if (textBoxmqtsyw1.Text == "")
+            if (textBoxmqtsyw1.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("特殊药物不能为空！");
                 textBoxmqtsyw1.Focus();
                 return;
             }
-            if (textxy.Text == "")
+            if (textxy.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("血液不能为空！");
                 textxy.Focus();
                 return;
             }
-            if (textBoxxindiantu.Text == "")
+            if (textBoxxindiantu.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("心电图不能为空！");
                 textBoxxindiantu.Focus();
                 return;
             }
-            if (comboBoxasa.Text == "")
+            if (comboBoxasa.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("ASA不能为空！");
                 comboBoxasa.Focus();
                 return;
             }
-            if (comboBoxynbw.Text == "")
+            if (comboBoxynbw.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("是否饱胃不能为空！");
                 comboBoxynbw.Focus();
@@ -453,7 +455,7 @@ namespace main
                     v_content += v_line;
                 }
             }
-            if (v_content == "")
+            if (v_content.IsNullOrEmpty())
             {
                 return v_content;
             }
@@ -918,128 +920,128 @@ namespace main
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBoxkebie.Text == "")
+            if (textBoxkebie.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("科别不能为空禁止打印!");
                 textBoxkebie.Focus();
                 return;
             }
-            if (textBoxchanghao.Text == "")
+            if (textBoxchanghao.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("床号不能为空禁止打印！");
                 textBoxchanghao.Focus();
                 return;
             }
-            if (textBoxzhuyuanhao.Text == "")
+            if (textBoxzhuyuanhao.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("住院号不能为空禁止打印！");
                 textBoxzhuyuanhao.Focus();
                 return;
             }
-            if (textBoxxingming.Text == "")
+            if (textBoxxingming.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("姓名不能为空禁止打印！");
                 textBoxxingming.Focus();
                 return;
 
             }
-            if (textBoxsex.Text == "")
+            if (textBoxsex.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("性别不能为空禁止打印！");
                 textBoxsex.Focus();
                 return;
             }
-            if (textBoxage.Text == "")
+            if (textBoxage.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("年龄不能为空禁止打印！");
                 textBoxage.Focus();
                 return;
             }
-            if (textBoxshuqianzd.Text == "")
+            if (textBoxshuqianzd.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("术前诊断不能为空禁止打印！");
                 textBoxshuqianzd.Focus();
                 return;
             }
-            if (textnxssfs.Text == "")
+            if (textnxssfs.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("手术名称不能为空禁止打印！");
                 textnxssfs.Focus();
                 return;
             }
-            if (comboBoxyshengqz.Text == "")
+            if (comboBoxyshengqz.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("评估医生不能为空！");
                 comboBoxyshengqz.Focus();
                 return;
             }
-            if (textBoxBP.Text == "")
+            if (textBoxBP.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("BP不能为空！");
                 textBoxBP.Focus();
                 return;
             }
-            if (textBoxR.Text == "")
+            if (textBoxR.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("R不能为空！");
                 textBoxR.Focus();
                 return;
             }
-            if (textBoxP.Text == "")
+            if (textBoxP.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("P不能为空！");
                 textBoxP.Focus();
                 return;
             }
-            if (textBoxT.Text == "")
+            if (textBoxT.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("T不能为空！");
                 textBoxP.Focus();
                 return;
             }
-            if (textBoxT.Text == "")
+            if (textBoxT.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("T不能为空！");
                 textBoxP.Focus();
                 return;
             }
-            if (comboBoxxxg.Text == "")
+            if (comboBoxxxg.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("心血管不能为空！");
                 comboBoxxxg.Focus();
                 return;
             }
-            //if (comboBoxfhx1.Text == "")
+            //if (comboBoxfhx1.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("肺和呼吸不能为空！");
             //    comboBoxfhx1.Focus();
             //    return;
             //}
-            if (textxy.Text == "")
+            if (textxy.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("血液不能为空！");
                 textxy.Focus();
                 return;
             }
-            if (textBoxmqtsyw1.Text == "")
+            if (textBoxmqtsyw1.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("特殊药物不能为空！");
                 textBoxmqtsyw1.Focus();
                 return;
             }
-            if (textBoxxindiantu.Text == "")
+            if (textBoxxindiantu.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("心电图不能为空！");
                 textBoxxindiantu.Focus();
                 return;
             }
-            if (comboBoxasa.Text == "")
+            if (comboBoxasa.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("ASA不能为空！");
                 comboBoxasa.Focus();
                 return;
             }
-            if (comboBoxynbw.Text == "")
+            if (comboBoxynbw.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("是否饱胃不能为空！");
                 comboBoxynbw.Focus();
@@ -1155,7 +1157,7 @@ namespace main
                 y = y + 20;
                 e.Graphics.DrawLine(ptp, x + 10, y, x + 660, y);
                 e.Graphics.DrawString("其他:" + textBoxQITA.Text, ptzt, Brushes.Black, new Point(x + 10, y));
-                if (textBoxQITA.Text == "")
+                if (textBoxQITA.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawString("无", ptzt, Brushes.Black, new Point(x + 50, y));
                 }
@@ -2135,68 +2137,68 @@ namespace main
                 y = y + 20; y1 = y + 3;
                 e.Graphics.DrawLine(ptp, x + 10, y, x + 660, y);
                 int k = 50;
-                if (textBoxHB.Text == "")
+                if (textBoxHB.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10, y + 20, x + 40, y);
                 }
                 e.Graphics.DrawString(textBoxHB.Text, ptzt, Brushes.Black, new Point(x + 10, y));
-                if (textBoxwbc.Text == "")
+                if (textBoxwbc.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 1, y + 20, x + 10 + k * 1 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxwbc.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 1, y));
-                if (textBoxplt.Text == "")
+                if (textBoxplt.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 2, y + 20, x + 10 + k * 2 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxplt.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 2, y));
 
-                if (textBoxK.Text == "")
+                if (textBoxK.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 3, y + 20, x + 10 + k * 3 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxK.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 3, y));
-                if (textBoxNa.Text == "")
+                if (textBoxNa.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 4, y + 20, x + 10 + k * 4 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxNa.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 4, y));
-                if (textBoxc1.Text == "")
+                if (textBoxc1.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 5, y + 20, x + 10 + k * 5 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxc1.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 5, y));
-                if (textBoxGLU.Text == "")
+                if (textBoxGLU.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 6, y + 20, x + 10 + k * 6 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxGLU.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 6, y));
-                if (textBoxSGPT.Text == "")
+                if (textBoxSGPT.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 7, y + 20, x + 10 + k * 7 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxSGPT.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 7, y));
-                if (textBoxBUN.Text == "")
+                if (textBoxBUN.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 8, y + 20, x + 10 + k * 8 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxBUN.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 8, y));
-                if (textBoxCR.Text == "")
+                if (textBoxCR.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 9, y + 20, x + 10 + k * 9 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxCR.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 9, y));
-                if (textBoxPT.Text == "")
+                if (textBoxPT.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 10, y + 20, x + 10 + k * 10 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxPT.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 10, y));
-                if (textBoxAPTT.Text == "")
+                if (textBoxAPTT.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 11, y + 20, x + 10 + k * 11 + 40, y);
                 }
                 e.Graphics.DrawString(textBoxAPTT.Text, ptzt, Brushes.Black, new Point(x + 10 + k * 11, y));
-                if (textBoxPAO2.Text == "")
+                if (textBoxPAO2.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawLine(ptp, x + 10 + k * 12, y + 20, x + 10 + k * 12 + 40, y);
                 }
@@ -2227,7 +2229,7 @@ namespace main
                 e.Graphics.DrawString("目前存在的问题及建议:", ptzt, Brushes.Black, new Point(x + 10, y));
                 y = y + 20;
                 e.Graphics.DrawString(textBoxwtjy.Text, ptzt, Brushes.Black, new Point(x + 10, y));
-                if (textBoxwtjy.Text == "")
+                if (textBoxwtjy.Text.IsNullOrEmpty())
                 {
                     e.Graphics.DrawString("无", ptzt, Brushes.Black, new Point(x + 10, y));
                 }

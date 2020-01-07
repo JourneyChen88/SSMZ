@@ -52,18 +52,18 @@ namespace MediII.Adapter.ListenerRouting
                 message = MediII.Common.MLLPHelper.TrimMLLP(message, true, false);
                 LogHelp.WriteLog(message);
 
-                //手术字典
-                if (message.Contains(_AcceptTitleOperDic))
-                {
-                    OperDicModel dic = HL7ToXmlConverter.ToOperDic(message);
-                    dbcon.InsertOperDic(dic);
-                }
+                ////手术字典
+                //if (message.Contains(_AcceptTitleOperDic))
+                //{
+                //    OperDicModel dic = HL7ToXmlConverter.ToOperDic(message);
+                //    dbcon.InsertOperDic(dic);
+                //}
 
 
                 if (message.Contains(_NewOperApply))
                 {
-                    paibanModel paiban = HL7ToXmlConverter.toDataBae(message);
-                    if (dbcon.GetPaiban(paiban).Rows.Count == 0)
+                    OTypesetting paiban = HL7ToXmlConverter.toDataBae(message);
+                    if (dbcon.GetPaiban(paiban.PatZhuYuanID) == null)
                     {
                         dbcon.InsertPaiban(paiban);
                     }
@@ -73,26 +73,26 @@ namespace MediII.Adapter.ListenerRouting
                 //修改
                 if (message.Contains(_UpdateOperApply))
                 {
-                    paibanModel paiban = HL7ToXmlConverter.toDataBae(message);
-                    if (dbcon.GetPaiban(paiban).Rows.Count == 1)
+                    OTypesetting paiban = HL7ToXmlConverter.toDataBae(message);
+                    if (dbcon.GetPaiban(paiban.PatZhuYuanID) != null)
                     {
-                        dbcon.UpdatePaibanAll(paiban);
+                        dbcon.UpdatePaiban(paiban);
                     }
                 }
 
                 if (message.Contains(_CancelOperApply))
                 {
-                    string PatID = "";
+                    string zhuyuanid = "";
                     message = message.Replace("ARQ", "\nARQ");
                     string[] sList = message.Split('\n');
                     foreach (string str in sList)
                     {
                         if (str.Contains("ARQ|"))
                         {
-                            PatID = str.Split('|')[1].Replace("^", "");
+                            zhuyuanid = str.Split('|')[1].Replace("^", "");
                         }
                     }
-                    dbcon.UpdatePaibanOstate(PatID);
+                    dbcon.UpdatePaibanOstate(zhuyuanid, -1);
                 }
 
                 //string mesStruct = parser.GetMessageStructure(message).Substring(0, 3);

@@ -43,132 +43,132 @@ namespace main.CGG
         private void buttonbaocun_Click(object sender, EventArgs e)
         {
            
-            //if (textBoxRuanlb.Text == "")
+            //if (textBoxRuanlb.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("人员类别不能为空!");
             //    textBoxRuanlb.Focus();//获得焦点
             //    return;
             //}
-            //if (textBoxJBzd.Text == "")
+            //if (textBoxJBzd.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("疾病诊断不能为空!");
             //    textBoxJBzd.Focus();//获得焦点
             //    return;
             //}
-            //if (textBoxYwname.Text == "")
+            //if (textBoxYwname.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("药物名称不能为空!");
 
             //    textBoxYwname.Focus();//获得焦点
             //    return;
             //}
-            //if (textBoxinfobyx.Text == "")
+            //if (textBoxinfobyx.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("必要性不能为空!");
             //    textBoxinfobyx.Focus();//获得焦点
             //    return;
             //}
-            //if (textBoxywname2.Text == "")
+            //if (textBoxywname2.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("药物名称不能为空!");
             //    textBoxywname2.Focus();//获得焦点
             //    return;
             //}
-            //if (textBoxinfobyx2.Text == "")
+            //if (textBoxinfobyx2.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("必要性不能为空!");
             //    textBoxinfobyx2.Focus();//获得焦点
             //    return;
             //}
-            //if (textBoxzxkeshi.Text == "")
+            //if (textBoxzxkeshi.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("执行科室不能为空!");
             //    textBoxzxkeshi.Focus();//获得焦点
             //    return;
             //}
-            //if (textBox7.Text == "")
+            //if (textBox7.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("单价金额不能为空!");
             //    textBox7.Focus();
             //    return;
             //}
-            //if (textBox8.Text == "")
+            //if (textBox8.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("患者（亲属）签字为空!");
             //    textBox8.Focus();
             //    return;
-            //} if (textBoxJCXMname.Text == "")
+            //} if (textBoxJCXMname.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("检查项目名称不能为空!");
             //    textBoxJCXMname.Focus();
             //    return;
             //}
-            //if (textBox17.Text == "")
+            //if (textBox17.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("必要性不能为空!");
             //    textBox17.Focus();//获得焦点
             //    return;
             //}
-            //if (textBox16.Text == "")
+            //if (textBox16.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("风险性不能为空!");
             //    textBox16.Focus();//获得焦点
             //    return;
             //}
-            //if (textBox20.Text == "")
+            //if (textBox20.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("单价金额不能为空!");
             //    textBox20.Focus();//获得焦点
             //    return;
             //}
-            //if (textBox21.Text == "")
+            //if (textBox21.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("患者（亲属）签字为空!");
             //    textBox21.Focus();//获得焦点
             //    return;
             //}
-            //if (textBoxYlxiangmu.Text == "")
+            //if (textBoxYlxiangmu.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("医疗项目为空!");
             //    textBoxYlxiangmu.Focus();//获得焦点
             //    return;
             //}
-            //if (textBox19.Text == "")
+            //if (textBox19.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("必要性不能为空!");
             //    textBox19.Focus();//获得焦点
             //    return;
             //}
-            //if (textBox18.Text == "")
+            //if (textBox18.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("说明不能为空!");
             //    textBox18   .Focus();//获得焦点
             //    return;
             //}
-            //if (textBox14.Text == "")
+            //if (textBox14.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("单价金额不能为空!");
             //    textBox14.Focus();//获得焦点
             //    return;
             //}
-            //if (textBox15.Text == "")
+            //if (textBox15.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("患者（亲属）签字为空!");
             //    textBox15.Focus();//获得焦点
             //    return;
             //}
-            //if (textBox23.Text == "")
+            //if (textBox23.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("患者（亲属）签字为空!");
             //    textBox23.Focus();//获得焦点
             //    return;
-            //} if (textBox24.Text == "")
+            //} if (textBox24.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("医师签字为空!");
             //    textBox24.Focus();//获得焦点
             //    return;
             //}
-            //if(textBoxphone.Text == "")
+            //if(textBoxphone.Text.IsNullOrEmpty())
             //{
             //    MessageBox.Show("联系电话不能为空!");
             //    textBoxphone.Focus();

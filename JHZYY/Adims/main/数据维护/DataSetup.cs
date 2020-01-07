@@ -58,7 +58,7 @@ namespace main.科室事物管理
                 TextName = e.Node.Text;
                 lbText.Text = TextName;
                 TableName = e.Node.Name;
-                if (TableName == "")
+                if (TableName.IsNullOrEmpty())
                 { MessageBox.Show("数据库中没有建立相应的表", "警告"); return; }
                 else
                 {

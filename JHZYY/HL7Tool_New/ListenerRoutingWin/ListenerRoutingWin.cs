@@ -78,25 +78,25 @@ namespace ListenerRoutingWin
             string recvApp = AppSettingString.RecvApp; //System.Configuration.ConfigurationManager.AppSettings["recvApp"];
             DBConn dbcon = new DBConn();
             String message = txtOutput.Text;
-          
 
-            //手术字典
-            if (message.Contains(Program._AcceptTitleOperDic))
-            {
-                OperDicModel dic = HL7ToXmlConverter.ToOperDic(message);
-               int res= dbcon.InsertOperDic(dic);
-                if (res>0)
-                {
-                    MessageBox.Show("插入字典成功");
-                }
-            }
+
+            ////手术字典
+            //if (message.Contains(Program._AcceptTitleOperDic))
+            //{
+            //    OperDicModel dic = HL7ToXmlConverter.ToOperDic(message);
+            //    int res = dbcon.InsertOperDic(dic);
+            //    if (res > 0)
+            //    {
+            //        MessageBox.Show("插入字典成功");
+            //    }
+            //}
 
             if (message.Contains(Program._UpdateOperApply))
             {
-                paibanModel paiban = HL7ToXmlConverter.toDataBae(message);
-                if (dbcon.GetPaiban(paiban).Rows.Count == 1)
+                OTypesetting paiban = HL7ToXmlConverter.toDataBae(message);
+                if (dbcon.GetPaiban(paiban.PatZhuYuanID) != null)
                 {
-                    int i = dbcon.UpdatePaibanAll(paiban);
+                    int i = dbcon.UpdatePaiban(paiban);
                     if (i > 0)
                     {
                         MessageBox.Show("修改手术成功");
@@ -105,8 +105,8 @@ namespace ListenerRoutingWin
             }
             if (message.Contains(Program._NewOperApply))
             {
-                paibanModel paiban = HL7ToXmlConverter.toDataBae(message);
-                if (dbcon.GetPaiban(paiban).Rows.Count == 0)
+                OTypesetting paiban = HL7ToXmlConverter.toDataBae(message);
+                if (dbcon.GetPaiban(paiban.PatZhuYuanID) == null)
                 {
                     int i = dbcon.InsertPaiban(paiban);
                     if (i > 0)
@@ -119,23 +119,23 @@ namespace ListenerRoutingWin
             }
             if (message.Contains(Program._CancelOperApply))
             {
-                string PatID = "";
+                string zhuyuanid = "";
                 message = message.Replace("ARQ", "\nARQ");
                 string[] sList = message.Split('\n');
                 foreach (string str in sList)
                 {
                     if (str.Contains("ARQ|"))
                     {
-                        PatID = str.Split('|')[1].Replace("^", "");
+                        zhuyuanid = str.Split('|')[1].Replace("^", "");
                     }
                 }
-                int i = dbcon.UpdatePaibanOstate( PatID);
+                int i = dbcon.UpdatePaibanOstate(zhuyuanid, -1);
                 if (i > 0)
                 {
                     MessageBox.Show("取消手术成功");
-                } 
+                }
             }
-           
+
         }
     }
 }

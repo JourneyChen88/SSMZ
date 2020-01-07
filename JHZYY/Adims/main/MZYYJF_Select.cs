@@ -61,7 +61,7 @@ namespace main
                 //if (dt.Rows.Count > 0)
                 //{
                 //    string admin= dt.Rows[0]["hisCode"].ToString();
-                //    if (admin == "")
+                //    if (admin.IsNullOrEmpty())
                 //    {
                 //        MessageBox.Show("该操作员的his代码为空，禁止操作！");
                 //        return;
@@ -109,7 +109,7 @@ namespace main
                 if (dt.Rows.Count > 0)
                 {
                     string admin = dt.Rows[0]["hisCode"].ToString();
-                    if (admin == "")
+                    if (admin.IsNullOrEmpty())
                     {
                         MessageBox.Show("该操作员的his代码为空，禁止操作！");
                         return;

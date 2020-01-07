@@ -612,7 +612,7 @@ namespace main
                     //RR =Convert.ToInt32(rrc);
 
                 }//机械值
-                else if (rrc == "")//根据氧和赋值
+                else if (rrc.IsNullOrEmpty())//根据氧和赋值
                 {
                     soo14 = soo5 / 4;
                 }

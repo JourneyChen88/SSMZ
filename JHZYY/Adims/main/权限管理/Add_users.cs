@@ -36,7 +36,7 @@ namespace main.权限管理
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (tbName.Text.Trim() == "")
+            if (tbName.Text.Trim().IsNullOrEmpty())
             {
                 MessageBox.Show("请填写真实姓名！");
                 tbName.Focus();
