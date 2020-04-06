@@ -29,18 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("麻醉医生");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("手术间");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("科室");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("麻醉等级");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("麻醉方式");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("麻醉效果");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("护士");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("手术级别");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("风险评估");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("手术医生");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("身份");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("手术类别");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("麻醉医生");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("手术间");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("科室");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("麻醉等级");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("麻醉方式");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("麻醉效果");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("护士");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("手术级别");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("风险评估");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("手术医生");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("身份");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("手术类别");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("手术等级");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSTSTJ));
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -266,43 +267,46 @@
             this.treeView.Font = new System.Drawing.Font("宋体", 11F);
             this.treeView.Location = new System.Drawing.Point(0, 96);
             this.treeView.Name = "treeView";
-            treeNode13.Name = "Adims_User";
-            treeNode13.Text = "麻醉医生";
-            treeNode14.Name = "ssjstate";
-            treeNode14.Text = "手术间";
-            treeNode15.Name = "keshi";
-            treeNode15.Text = "科室";
-            treeNode16.Name = "Olevel";
-            treeNode16.Text = "麻醉等级";
-            treeNode17.Name = "amethod";
-            treeNode17.Text = "麻醉方式";
-            treeNode18.Name = "mzxg";
-            treeNode18.Text = "麻醉效果";
-            treeNode19.Name = "Adims_User";
-            treeNode19.Text = "护士";
-            treeNode20.Name = "SSJB";
-            treeNode20.Text = "手术级别";
-            treeNode21.Name = "FXPG";
-            treeNode21.Text = "风险评估";
-            treeNode22.Name = "SSYS";
-            treeNode22.Text = "手术医生";
-            treeNode23.Name = "SF";
-            treeNode23.Text = "身份";
-            treeNode24.Name = "SSLB";
-            treeNode24.Text = "手术类别";
+            treeNode1.Name = "Adims_User";
+            treeNode1.Text = "麻醉医生";
+            treeNode2.Name = "ssjstate";
+            treeNode2.Text = "手术间";
+            treeNode3.Name = "keshi";
+            treeNode3.Text = "科室";
+            treeNode4.Name = "Olevel";
+            treeNode4.Text = "麻醉等级";
+            treeNode5.Name = "amethod";
+            treeNode5.Text = "麻醉方式";
+            treeNode6.Name = "mzxg";
+            treeNode6.Text = "麻醉效果";
+            treeNode7.Name = "Adims_User";
+            treeNode7.Text = "护士";
+            treeNode8.Name = "SSJB";
+            treeNode8.Text = "手术级别";
+            treeNode9.Name = "FXPG";
+            treeNode9.Text = "风险评估";
+            treeNode10.Name = "SSYS";
+            treeNode10.Text = "手术医生";
+            treeNode11.Name = "SF";
+            treeNode11.Text = "身份";
+            treeNode12.Name = "SSLB";
+            treeNode12.Text = "手术类别";
+            treeNode13.Name = "SSDJ";
+            treeNode13.Text = "手术等级";
             this.treeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14,
-            treeNode15,
-            treeNode16,
-            treeNode17,
-            treeNode18,
-            treeNode19,
-            treeNode20,
-            treeNode21,
-            treeNode22,
-            treeNode23,
-            treeNode24});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13});
             this.treeView.Size = new System.Drawing.Size(165, 396);
             this.treeView.TabIndex = 13;
             this.treeView.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);

@@ -2104,5 +2104,15 @@ namespace adims_DAL
 
 
         #endregion
+
+
+        public DataTable GetHisInfo_LocalTest(string dtime)
+        {//convert(nvarchar(5),otime,24)as starttime,
+            string sql = $@"select op_record_ID as patID ,ZhuYuanNo,patName,CardID,patAge,patSex,
+patNation,PatHeight,PatWeight,PatBloodType,BedNo,Patdpm,Pattmd,Oname,Odate,OS1,OS2,OS3,OS4,OS5,
+Amethod,BX, Tiwei, GR, BX,Ocode,SSLB,SSDJ,Remarks,StartTime,SQSJ,ms
+from V_Operation_Interface where Convert(varchar,Odate,23)='" + dtime + "'";
+            return dBConn.GetDataTable(sql);
+        }
     }
 }

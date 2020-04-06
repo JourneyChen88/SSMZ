@@ -189,7 +189,10 @@ Oroom,PatName,patsex,patage,Patdpm,(select case ot.isjizhen when 0 then '择期'
  FROM Adims_mzjld AS M  left join Adims_OperSchedule  
 AS OT on M.patid = OT.PatId left join Adims_BeforeVisit_HS as H on h.PatId=OT.PatId "
             + " where otime between '" + date1 + "'and'" + date2 + "'"
-            + " and (mazuifs like '%" + name + "%'or M.asa like '%" + name + "%'or mzys like '%" + name + "%'or patdpm like '%" + name + "%'or Oroom like '%" + name + "%' or mzxg like '%" + name + "%' or Xhhs like '%" + name + "%' or qxhs like '%" + name + "%' or h.ssjb like '%" + name + "%' or h.SSLB like '%" + name + "%' or h.Fxpg like '%" + name + "%' or  m.Ssys like '%" + name + "%' or  h.shengfen like '%" + name + "%') "
+            + " and (mazuifs like '%" + name + "%'or M.asa like '%" + name + "%'or mzys like '%" + name + "%'or patdpm like '%" + name + "%'or Oroom like '%" + name + "%' " +
+            "or mzxg like '%" + name + "%' or Xhhs like '%" + name + "%' or qxhs like '%" + name + "%' or h.ssjb like '%" + name + "%' or h.SSLB like '%" + name + "%' " +
+            "or h.Fxpg like '%" + name + "%' or  m.Ssys like '%" + name + "%' or  h.shengfen like '%" + name + "%'" +
+            "or OT.Olevel like '%" + name + "%'  ) "
             + " and  mzkssj>'1990-01-01' and ssjssj>'1990-01-01' and ot.odate>=1 ";
             return dBConn.GetDataTable(string.Format(select1));
 

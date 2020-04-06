@@ -206,8 +206,8 @@ namespace main
                 foreach (DataRow dr in dt1.Rows)
                 {
                     HISinfo.Clear();
-                    HISinfo.Add(dr["patid"].ToString());
-                    HISinfo.Add(dr["ZhuYuanNo"].ToString());
+                    HISinfo.Add(dr["patid"].ToString());//0
+                    HISinfo.Add(dr["ZhuYuanNo"].ToString());//1
                     HISinfo.Add(dr["CardID"].ToString());
                     HISinfo.Add(dr["patName"].ToString());
                     HISinfo.Add(dr["patAge"].ToString());
@@ -225,7 +225,6 @@ namespace main
                     HISinfo.Add(dr["OS2"].ToString());
                     HISinfo.Add(dr["OS3"].ToString());
                     HISinfo.Add(dr["OS4"].ToString());
-
                     HISinfo.Add(dr["OS5"].ToString());
                     HISinfo.Add(dr["Amethod"].ToString());
                     HISinfo.Add(dr["BX"].ToString());
@@ -239,9 +238,7 @@ namespace main
                         HISinfo.Add("0");
                     else HISinfo.Add(dr["SSLB"].ToString());//是否急诊                    
                     HISinfo.Add(dr["Ocode"].ToString());//手术编码
-                    //HISinfo.Add(dr["CFSS"].ToString());//
                     HISinfo.Add(dr["SSDJ"].ToString()); //手术类型
-                    //HISinfo.Add(dr["QKDJ"].ToString()); //切口等级
                     HISinfo.Add(dr["SQSJ"].ToString());//申请时间
                     HISinfo.Add(dr["ms"].ToString());
                     DataTable dt = _PaibanDal.GetPaibanByPatId(dr["patid"].ToString());
@@ -260,7 +257,68 @@ namespace main
             }
 
         }
-    private void BindOroomList(DataTable dt1)
+        private void HisDataBind_LocalTest()
+        {
+            try
+            {
+                DataTable dt1 = dal.GetHisInfo_LocalTest(dtDataTime.Value.ToString("yyyy-MM-dd"));
+                List<string> HISinfo = new List<string>();
+                int result = 0;
+                foreach (DataRow dr in dt1.Rows)
+                {
+                    HISinfo.Clear();
+                    HISinfo.Add(dr["patid"].ToString());//0
+                    HISinfo.Add(dr["ZhuYuanNo"].ToString());//1
+                    HISinfo.Add(dr["CardID"].ToString());
+                    HISinfo.Add(dr["patName"].ToString());
+                    HISinfo.Add(dr["patAge"].ToString());
+                    HISinfo.Add(dr["patSex"].ToString());
+                    HISinfo.Add(dr["patNation"].ToString());
+                    HISinfo.Add(dr["BedNo"].ToString());
+                    HISinfo.Add(dr["Patdpm"].ToString());
+                    HISinfo.Add(dr["Pattmd"].ToString());
+                    HISinfo.Add(dr["PatHeight"].ToString());
+                    HISinfo.Add(dr["PatWeight"].ToString());
+                    HISinfo.Add(dr["PatBloodType"].ToString());
+                    HISinfo.Add(dr["Oname"].ToString());
+                    HISinfo.Add(Convert.ToDateTime(dr["Odate"]).ToString("yyyy-MM-dd HH:mm"));
+                    HISinfo.Add(dr["OS1"].ToString());
+                    HISinfo.Add(dr["OS2"].ToString());
+                    HISinfo.Add(dr["OS3"].ToString());
+                    HISinfo.Add(dr["OS4"].ToString());
+                    HISinfo.Add(dr["OS5"].ToString());
+                    HISinfo.Add(dr["Amethod"].ToString());
+                    HISinfo.Add(dr["BX"].ToString());
+                    HISinfo.Add(dr["Tiwei"].ToString());
+                    HISinfo.Add(dr["GR"].ToString());
+                    HISinfo.Add(dr["Remarks"].ToString());
+
+                    HISinfo.Add(Convert.ToDateTime(dr["Odate"]).ToString("HH:mm"));
+                    HISinfo.Add("0");//未排班
+                    if (dr["SSLB"].ToString() == "" || dr["SSLB"].ToString() == "0")
+                        HISinfo.Add("0");
+                    else HISinfo.Add(dr["SSLB"].ToString());//是否急诊                    
+                    HISinfo.Add(dr["Ocode"].ToString());//手术编码
+                    HISinfo.Add(dr["SSDJ"].ToString()); //手术类型
+                    HISinfo.Add(dr["SQSJ"].ToString());//申请时间
+                    HISinfo.Add(dr["ms"].ToString());
+                    DataTable dt = _PaibanDal.GetPaibanByPatId(dr["patid"].ToString());
+                    if (dt.Rows.Count == 0)
+                        result = _PaibanDal.InsertPaiban(HISinfo);
+                    //else
+                    //    result = _PaibanDal.UpdatePaiban(HISinfo);
+
+                }
+                BindPaibanInfo();
+
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show(E.ToString() + " 出错");
+            }
+
+        }
+        private void BindOroomList(DataTable dt1)
         {
             listboxRoom.Items.Clear();
             listboxRoom.Items.Add("全部手术间");
@@ -706,6 +764,7 @@ namespace main
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //HisDataBind_LocalTest();
             string IPaddress = "192.168.1.8";
             bool flag = TextValueLimit.PingHost(IPaddress, 1000);
             if (flag == true) HisDataBind();

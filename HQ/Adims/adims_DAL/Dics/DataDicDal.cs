@@ -26,7 +26,10 @@ namespace adims_DAL.Dics
             return dBConn.GetDataTable(sql);
         }
 
-      
+        public DataTable GetOperLevel()
+        {
+            return dBConn.GetDataTable(string.Format("select LevelName, LevelCode from OperationLevel "));
+        }
         public DataTable GetKeshi()
         {
             return dBConn.GetDataTable(string.Format("select name from Keshi "));

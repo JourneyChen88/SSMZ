@@ -157,6 +157,14 @@ namespace main
                     treeView.Nodes[11].Nodes.Add(dt11.Rows[i][0].ToString());
                 }
             }
+            DataTable dt12 = _DataDicDal.GetOperLevel();
+            if (dt12.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt12.Rows.Count; i++)
+                {
+                    treeView.Nodes[12].Nodes.Add(dt12.Rows[i][0].ToString());
+                }
+            }
             //if (dt6.Rows.Count > 0)
             //{
             //    for (int i = 0; i < dt6.Rows.Count; i++)
