@@ -322,6 +322,11 @@ namespace adims_DAL
             string sql = "select id 编号,name 名称  from   " + table;
             return dBConn.GetDataTable(sql);
         }
+        public DataTable SelectData1(string table)
+        {
+            string sql = "select name 名称  from   " + table;
+            return dBConn.GetDataTable(sql);
+        }
         public int AddData(string name, string tableName)
         {
             string sql = "insert into  " + tableName + "(name) values ('" + name + "')";
@@ -815,6 +820,11 @@ VALUES ('{0}' ,'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}') ";
             string selectAllYS = " SELECT user_name FROM Adims_user where type='1'";
             return dBConn.GetDataTable(string.Format(selectAllYS));
         }
+  public DataTable GetMZYS()
+        {
+            string selectAllYS = " SELECT user_name,uid FROM Adims_user where type='1'";
+            return dBConn.GetDataTable(string.Format(selectAllYS));
+        }
         public DataTable GetAllMZYSsdsd()
         {
             string selectAllYS = " SELECT user_name FROM Adims_user";
@@ -836,6 +846,12 @@ VALUES ('{0}' ,'{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}') ";
         public DataTable GetAll_hushi()
         {
             string selectAllYS = " SELECT user_name FROM Adims_user where Type='2'";
+            return dBConn.GetDataTable(string.Format(selectAllYS));
+        }
+
+        public DataTable GetHushi()
+        {
+            string selectAllYS = " SELECT user_name,uid FROM Adims_user where Type='2'";
             return dBConn.GetDataTable(string.Format(selectAllYS));
         }
         /// <summary>
@@ -1594,15 +1610,17 @@ not in
         /// <param name="dt"></param>
         /// <returns></returns>
         /// 
-        private static readonly string SQL_OTYPESETTING_SELECT = "SELECT oroom,second,StartTime,patid,patdpm,patname,"
-                + "patsex,patage,patbedno,patNation,pattmd,oname,os,on1,on2,sn1,sn2,ap1,ap2,ap3,tiwei,bx,gr,remarks,sqys,zrys,id,Amethod,expertName"
+      private static readonly string SQL_OTYPESETTING_SELECT = "SELECT PatZhuYuanID,oroom,second,StartTime,patid,patdpm," +
+            "patname,patsex,patage,patNation,pattmd,oname,IsGeli,Patbedno,os,os1,os2,on1,on2,sn1,sn2,ap1,ap2,ap3," +
+            "sslb,tiwei,remarks,sqys,id,Amethod,expertName,TalkInfo"
                 + "  from Adims_OTypesetting WITH (NOLOCK) WHERE {0} ORDER BY oroom";
         public DataTable GetOTypesetting(string oroom, string dt)
         {
             string sqlWhere = "CONVERT(varchar, Odate , 23 ) = '" + dt + "'";
             if (oroom != "全部手术间")
                 sqlWhere += " AND oroom = '" + oroom + "'";
-            return dBConn.GetDataTable(string.Format(SQL_OTYPESETTING_SELECT,sqlWhere));
+            string sql = string.Format(SQL_OTYPESETTING_SELECT, sqlWhere);
+            return dBConn.GetDataTable(sql);
         }
         public DataTable GetIsJZPaiban(string dt)
         {
@@ -1674,7 +1692,7 @@ not in
         /// </summary>
         /// <param name="pb"></param>
         /// <returns></returns>
-        public int SaveOTypesetting(adims_MODEL.paiban pb)
+        public int SaveOTypesetting(adims_MODEL.paibanModel pb)
         {
             return dBConn.ExecuteNonQuery("INSERT INTO Adims_OTypesetting(patid,oname,oroom,second,odepartment,olevel,"
                 + "amethod,gl,jz,ap1,ap2,ap3,aa1,aa2,aa3,os,oa1,oa2,oa3,oa4,tp,on1,on2,sn1,sn2,sn3,remarks,ostate,"
@@ -1693,12 +1711,12 @@ not in
         /// <param name="column"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public int UpdatePaiban(string patID, string DateType, string value, string ostate, DateTime Odate)
-        {
-            string sql = "UPDATE Adims_OTypesetting WITH (ROWLOCK) SET " + DateType + " = '" + value + "',ostate='" + ostate + "' WHERE patid = '" + patID + "' and Odate='" + Odate + "'";
-            return dBConn.ExecuteNonQuery(sql);
-        }
-
+        //public int UpdatePaiban(string patID, string DateType, string value, string ostate, DateTime Odate)
+        //{
+        //    string sql = "UPDATE Adims_OTypesetting WITH (ROWLOCK) SET " + DateType + " = '" + value + "',ostate='" + ostate + "' WHERE PatZhuYuanID = '" + patID + "''";
+        //    return dBConn.ExecuteNonQuery(sql);
+        //}
+      
         #endregion
 
         #region <<术前访视>>
@@ -2862,9 +2880,9 @@ not in
         public int UpdateMzjld1(List<string> mzdList)
         {
             string MZJLD_UPDATE1 = "UPDATE Adims_Mzjld SET [Height] =  '{0}',[Weight] = '{1}',[tiwen] = '{2}',[xueya] = '{3}',[huxi] = '{4}',[maibo] = '{5}',[xuexing] = '{6}',[ASA] = '{7}' "
-      +",[isJizhen] = '{8}',[sqzd] =  '{9}',[nssss] = '{10}',[tw] = '{11}',[SQJinshi] = '{12}',[szzd] = '{13}',[ShoushuFS] ='{14}',[MazuiFS] = '{15}' "
-     +" ,[ssys] = '{16}',[mzys] ='{17}',[qxhs] = '{18}',[PCA] = '{19}',[mzxg] = '{20}',[brqx] = '{21}',[pingfen] = '{22}',[zitixue] = '{23}' "
-     +" ,[chengxue] = '{24}',[jiaotiye] = '{25}',[jintiye] = '{26}',[zongsrl]= '{27}',[ChuXue] = '{28}',[Niaoliang] ='{29}',ifxssj='{30}'WHERE id = '{31}'";
+      + ",[isJizhen] = '{8}',[sqzd] =  '{9}',[nssss] = '{10}',[tw] = '{11}',[SQJinshi] = '{12}',[szzd] = '{13}',[ShoushuFS] ='{14}',[MazuiFS] = '{15}' "
+     + " ,[ssys] = '{16}',[mzys] ='{17}',[qxhs] = '{18}',[PCA] = '{19}',[mzxg] = '{20}',[brqx] = '{21}',[pingfen] = '{22}',[zitixue] = '{23}' "
+     + " ,[chengxue] = '{24}',[jiaotiye] = '{25}',[jintiye] = '{26}',[zongsrl]= '{27}',[ChuXue] = '{28}',[Niaoliang] ='{29}',ifxssj='{30}'WHERE id = '{31}'";
             string SQL = string.Format(MZJLD_UPDATE1, mzdList.ToArray());
             return dBConn.ExecuteNonQuery(SQL);
         }
@@ -3201,10 +3219,9 @@ not in
         }
 
         #endregion
-
+       
         #endregion
 
-       
         #region<<手动排班>>
 
         /// 判断病人访视信息是否存在
@@ -3244,11 +3261,15 @@ not in
             //                    + "OS,OS1,OS2,OS3,OS4,BX,AP1,AP2,AP3,ON1,ON2,SN1,SN2,Olevel,Odate,isjizhen,PatBloodType,osdm,qxbs,expertName,zycs,zrys,ostate) VALUES"
             //                    + "('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}','{27}','{28}','{29}','{30}',"
             //                    + " '{31}','{32}','{33}','{34}','{35}','{36}','{37}')";
-            string SQL_PAIBAN = "INSERT INTO Adims_OTypesetting( PatID,PatZhuYuanID,CardID,Patname,Patsex,Patage,PatNation,Patbedno,Pattmd,Oname,Amethod,OS,OS1,OS2,OS3,OS4,StartTime,Odate,tiwen,SSLB )VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}')";
+            string SQL_PAIBAN = "INSERT INTO Adims_OTypesetting( PatID,PatZhuYuanID,CardID,Patname,Patsex,Patage,PatNation,Patbedno,Patdpm,Pattmd,Oname,Amethod,TiWei,GR,BX,OS,OS1,OS2,OS3,OS4,StartTime,PatHeight,PatWeight,PatBloodType,Odate,SSLB,Ocode,zycs,SSDJ,yiliao,SFZH,chexiao,BRSYH,ZYSJ )VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}','{27}','{28}','{29}','{30}','{31}','{32}','{33}')";
             string INSERT = string.Format(SQL_PAIBAN, list1.ToArray());
             return dBConn.ExecuteNonQuery(INSERT);
         }
-
+        public int JYXX(string zhi,string lieming,string Patid)//检验信息保存，血压，体温，呼吸，脉搏
+        {
+            string SQL_PAIBAN = "UPDATE Adims_OTypesetting SET "+lieming+"='"+zhi+"'where PatZhuYuanID='"+Patid+"'";
+            return dBConn.ExecuteNonQuery(SQL_PAIBAN);
+        }
         public int InsertPAIBAN(Dictionary<string, string> dictionary)
         {
             string SQL_INSERT = "INSERT INTO Adims_OTypesetting(PatID,PatZhuYuanID,Patname ,Patage,Patsex "
@@ -3282,7 +3303,7 @@ not in
         }
         public DataTable GetALLPAIBAN(string patid)
         {
-            string sql = "SELECT * from Adims_OTypesetting  where patid='" + patid + "'";               
+            string sql = "SELECT * from Adims_OTypesetting  where PatZhuYuanID='" + patid + "'";               
             return dBConn.GetDataTable(sql);
         }
 
@@ -3290,6 +3311,11 @@ not in
         public DataTable GetALLPAIBANs(string patid, string Odate)
         {
             string sql = "SELECT * from Adims_OTypesetting  where patzhuyuanid='" + patid + "' and  Convert(varchar,Odate,23)='" + Odate + "'";
+            return dBConn.GetDataTable(sql);
+        }
+        public DataTable GetALLBINGLI(string patid, string Odate)
+        {
+            string sql = "select tiwen,xueya,huxi,maibo from Adims_Mzjld where patid='"+patid+"'";
             return dBConn.GetDataTable(sql);
         }
         public DataTable GetPaiban(string patid,string odate)
@@ -3370,20 +3396,12 @@ not in
         }
         public int UpdatemaTsmztj(Dictionary<string, string> dictionary)
         {
-            string upMZZJ = "UPDATE Tsmztj WITH (ROWLOCK) SET [xingmingname] ='{1}',[shiian] = '{2}',[fswyqysza] = '{3}',[cxybhdjd] = '{4}',[qsmzycxy] = '{5}'"+
-     " ,[ywxwyyfhxdz] = '{6}',[mzywsw] = '{7}',[qtfyqsj] = '{8}',[mzkssswks] = '{9}',[rpacu3xs] ='{10}',[pacudtw] = '{11}'"+
-      ",[fjheccg] = '{12}',[mz24xssw] = '{13}',[mz24xsxzzt] = '{14}',[mzqgmfy] = '{15}',[zgnmzhyzsjbfz] = '{16}'"+
-      ",[szzxjmccyzbfz] = '{17}',[mzxfhm] = '{18}',[fjhzricu] = '{19}',[qmcghsysy] = '{20}'"+
-      ",[shhuzztx] = '{21}',[szytx] = '{22}',[wu] = '{23}',[fangshiren]='{24}',[babengren]='{25}',[babengshijian]='{26}',[tesuqingk]='{27}' where zhuyuanhao='{0}'";
+            string upMZZJ = "UPDATE Tsmztj SET xingmingname = '{1}',shiian = '{2}',fswyqysza = '{3}',cxybhdjd = '{4}',qsmzycxy = '{5}',ywxwyyfhxdz = '{6}',mzywsw = '{7}',qtfyqsj = '{8}',shsw1 = '{9}',shsw2 = '{10}',shsw3 = '{11}',shsw4 = '{12}',shsw5 = '{13}',mzkssswks ='{14}',rpacu3xs = '{15}',pacudtw = '{16}',fjheccg = '{17}',mz24xssw = '{18}',mz24xsxzzt = '{19}',mzqgmfy = '{20}',zgnmzhyzsjbfz = '{21}',szzxjmccyzbfz = '{22}',mzxfhm = '{23}',fjhzricu = '{24}',qmcghsysy = '{25}',wu = '{26}'WHERE zhuyuanhao = '{0}'";
             return dBConn.ExecuteNonQuery(string.Format(upMZZJ, dictionary.Values.ToArray()));
         }
         public int InsertTsmztj(Dictionary<string, string> dictionary)
         {
-            string _INSERT = "INSERT INTO Tsmztj(zhuyuanhao ,xingmingname ,shiian ,fswyqysza  ,cxybhdjd,"
-                + "qsmzycxy ,ywxwyyfhxdz ,mzywsw ,qtfyqsj ,mzkssswks  ,rpacu3xs ,pacudtw ,fjheccg ,"
-               + "mz24xssw ,mz24xsxzzt  ,mzqgmfy  ,zgnmzhyzsjbfz  ,szzxjmccyzbfz  ,mzxfhm,fjhzricu,qmcghsysy,shhuzztx,szytx,wu,fangshiren,babengren,babengshijian,tesuqingk )"
-               + " values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}',"
-              + "'{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}','{27}')";
+            string _INSERT = "INSERT INTO Tsmztj(zhuyuanhao,xingmingname,shiian,fswyqysza,cxybhdjd,qsmzycxy,ywxwyyfhxdz,mzywsw,qtfyqsj,shsw1,shsw2,shsw3,shsw4,shsw5,mzkssswks,rpacu3xs,pacudtw,fjheccg,mz24xssw,mz24xsxzzt,mzqgmfy,zgnmzhyzsjbfz,szzxjmccyzbfz,mzxfhm,fjhzricu,qmcghsysy,wu)VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}','{19}','{20}','{21}','{22}','{23}','{24}','{25}','{26}')";
             string inst = string.Format(_INSERT, dictionary.Values.ToArray());
             return dBConn.ExecuteNonQuery(inst);
 
@@ -3771,6 +3789,12 @@ where MZmzsqfs.nixzlff not in ('无痛宫腔镜','无痛人流术') and riqi BET
             string sql = "SELECT * from Adims_OTypesetting  where  PatZhuYuanID='" + zyh + "'";
             return dBConn.GetDataTable(sql);
         }
+        public DataTable GetteykcwtsID(string zyh)
+        {
+            string sql = "SELECT PatID from Adims_OTypesetting  where  PatZhuYuanID='" + zyh + "'";
+            return dBConn.GetDataTable(sql);
+        }
+        
 
         public DataTable Getkcysname(string name)
         {
@@ -3779,6 +3803,9 @@ where MZmzsqfs.nixzlff not in ('无痛宫腔镜','无痛人流术') and riqi BET
         }
         public DataTable Getkcyshengshuqianfs(string zhuyuanhao)
         {
+            
+
+            
             string sql = "select * from KCyshengfangshi where zhuyuanhao='" + zhuyuanhao + "'";
             return dBConn.GetDataTable(sql);
         }
@@ -3914,6 +3941,17 @@ fangshiqt,zhentengpeifang,zysx,zysxqt,mazuiys,mzfssys,hushi,riqi,IsRead) Values 
             string insert = @"UPDATE JHzqtzs SET mzxz = '{1}',mzxzqt = '{2}',qtsx = '{3}',yqshzt = '{4}',mzysqz = '{5}',rq = '{6}' WHERE zhuyuanhao ='{0}'";
             string sql = string.Format(insert, dictionary.Values.ToArray());
             return dBConn.ExecuteNonQuery(sql);
+        }
+        public DataTable brsyh(string zhuyuanhao)
+        {
+            string sql = "select PatID,BRSYH,convert(char(10),ZYSJ)zhsj from Adims_OTypesetting where PatZhuYuanID='" + zhuyuanhao + "'";
+            return dBConn.GetDataTable(sql);
+        }
+
+        public DataTable zyh(string zhuyuanhao)
+        {
+            string sql = "select PatID from Adims_OTypesetting where PatZhuYuanID='" + zhuyuanhao + "'";
+            return dBConn.GetDataTable(sql);
         }
         #endregion
         #endregion

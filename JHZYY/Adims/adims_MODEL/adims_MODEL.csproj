@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SqlSugar, Version=4.9.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sqlSugar.4.9.8\lib\SqlSugar.dll</HintPath>
+    <Reference Include="SqlSugar">
+      <HintPath>..\Adims_Utility\bin\Debug\SqlSugar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,23 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admins_Mbbtj.cs" />
     <Compile Include="Dtos\MzjldDto.cs" />
     <Compile Include="Dtos\PaibanDto.cs" />
     <Compile Include="Dtos\QueryMzjldDto.cs" />
     <Compile Include="Entitys\Adims_Mzjld.cs" />
     <Compile Include="Entitys\Adims_OTypesetting.cs" />
     <Compile Include="Entitys\Adims_User.cs" />
-    <Compile Include="Admins_Mbbtj.cs" />
     <Compile Include="JHdataModel.cs" />
     <Compile Include="clcxqt.cs" />
     <Compile Include="FillipModel.cs" />
     <Compile Include="medicine_info.cs" />
     <Compile Include="mzjldcxtj.cs" />
+    <Compile Include="MzjldModel.cs" />
     <Compile Include="mzks.cs" />
     <Compile Include="mzpingmian.cs" />
     <Compile Include="oroomstate.cs" />
     <Compile Include="PACU_record.cs" />
-    <Compile Include="paiban.cs" />
+    <Compile Include="paibanModel.cs" />
     <Compile Include="jhxm.cs" />
     <Compile Include="jtytsx.cs" />
     <Compile Include="mzqt.cs" />
@@ -97,8 +98,10 @@
     <Compile Include="ZhenTongYao.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Adims_Utility\Adims_Utility.csproj">
+      <Project>{442d8aff-11d7-4de8-b8cc-5d485d528074}</Project>
+      <Name>Adims_Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

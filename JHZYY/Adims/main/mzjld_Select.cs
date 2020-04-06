@@ -15,7 +15,6 @@ namespace main
         adims_DAL.AdimsProvider dal = new adims_DAL.AdimsProvider();
         adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
         public int mzjldid = 0;
-
         #endregion
 
         #region <<Constructors>>
@@ -25,7 +24,6 @@ namespace main
         /// </summary>
         public mzjld_Select()
         {
-            
             InitializeComponent();
         }
 

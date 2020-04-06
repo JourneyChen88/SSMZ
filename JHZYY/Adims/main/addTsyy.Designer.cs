@@ -128,11 +128,6 @@
             // cmbYYFS1
             // 
             this.cmbYYFS1.FormattingEnabled = true;
-            this.cmbYYFS1.Items.AddRange(new object[] {
-            "肌注",
-            "静脉滴注",
-            "静脉泵注",
-            "口服"});
             this.cmbYYFS1.Location = new System.Drawing.Point(411, 18);
             this.cmbYYFS1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbYYFS1.Name = "cmbYYFS1";

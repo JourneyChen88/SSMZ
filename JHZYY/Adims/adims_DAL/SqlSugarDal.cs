@@ -70,11 +70,12 @@ namespace adims_DAL
 
         public MzjldDto GetPaibanAndMzjld(string patzhuyuanId)
         {
-            var list = db.Queryable<OTypesetting, Adims_Mzjld>((st, sc) => new object[] {
-                    JoinType.Inner,sc.Patid==st.PatZhuYuanID})
-                   .Where((st, sc) => st.PatZhuYuanID == patzhuyuanId)
+            var list = db.Queryable<OTypesetting, Adims_Mzjld>((a, b) => new object[] {
+                    JoinType.Inner,a.PatZhuYuanID==b.Patid})
+                   .Where((a, b) => a.PatZhuYuanID == patzhuyuanId)
                    .Select((a, b) => new MzjldDto
                    {
+                       ApplyId=a.ApplyId,
                        Patid = b.Patid,
                        sskssj = b.Sskssj,
                        ssjssj = b.Ssjssj,
@@ -82,29 +83,41 @@ namespace adims_DAL
                        ssss = b.Ssss,
                        Oroom = a.Oroom,
                        Second = a.Second,
-                       OperNo = a.OperNo,
+                       Ocode = a.Ocode,
                        Oname = a.Oname,
                        PidInfo = a.PidInfo,
                        Pv1Info = a.Pv1Info,
                        SSDJ = a.SSDJ,
                        Amethod = a.Amethod,
+                       AP1 = a.AP1,
                        AP2 = a.AP2,
                        AP3 = a.AP3,
+                       AP1No = a.AP1No,
+                       AP2No = a.AP2No,
+                       AP3No = a.AP3No,
                        OS = a.OS,
                        OS1 = a.OS1,
+                       OsNo=a.OsNo,
+                       Os1No = a.Os1No,
+                       Os2No = a.Os2No,
+                       Os3No = a.Os3No,
                        OS2 = a.OS2,
                        OS3 = a.OS3,
                        ON1 = a.ON1,
                        ON2 = a.ON2,
                        SN1 = a.SN1,
                        SN2 = a.SN2,
+                       ON1No = a.ON1No,
+                       ON2No = a.ON2No,
+                       SN1No = a.SN1No,
+                       SN2No = a.SN2No,
                        asa = b.ASA,
                        asae = b.ASAE,
                        Mzjldid = b.Id,
                        Patname = a.Patname,
                        Odate = a.Odate,
-                       Ostate = a.Ostate,
-                       AP1 = a.AP1
+                       Ostate = a.Ostate
+                      
                    }).OrderBy(a => a.Odate).First();
             //            string sql =$@"SELECT o.PatID,o.Amethod,m.sskssj,m.ssjssj,m.Otime,m.ssss,o.Oroom,
             //o.Second,o.OperNo,o.Oname,o.PidInfo,o.Pv1Info, SSDJ,Amethod,
@@ -124,6 +137,15 @@ namespace adims_DAL
         public OTypesetting GetPaiban(int id)
         {
             return db.Queryable<OTypesetting>().Where(a => a.ID == id).First();
+        }
+        public OTypesetting GetPaibanByPatZhuYuanID(string PatZhuYuanID)
+        {
+            return db.Queryable<OTypesetting>().Where(a => a.PatZhuYuanID == PatZhuYuanID).First();
+        }
+        public int UpdatePaiban(OTypesetting model)
+        {
+            return db.Updateable<OTypesetting>(model).ExecuteCommand();
+            
         }
         public int UpdatePaibanConfig(int id)
         {

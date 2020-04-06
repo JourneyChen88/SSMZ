@@ -117,9 +117,20 @@ namespace main.药品耗材管理
             cmbDW.ValueMember = "id";
             cmbDW.DisplayMember = "name";
         }
+        private void Bindfs()
+        {
+            DataTable dt = dal.GetAdims_fs();
+            cmbZRFS.DataSource = dt;
+            cmbZRFS.ValueMember = "id";
+            cmbZRFS.DisplayMember = "name";
+        }
+        /// <summary>
+        /// 绑定用药方式
+        /// </summary>
         private void YPguanli_Load(object sender, EventArgs e)
         {
             BindDW();
+            Bindfs();
             BindYaopin();
             BindYaoPinBag();
             BindYaoPinType();
@@ -232,6 +243,11 @@ namespace main.药品耗材管理
         private void cmbYaowuName_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = (e.KeyChar == (char)32) || (e.KeyChar == (char)13);
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
         }
        
     }

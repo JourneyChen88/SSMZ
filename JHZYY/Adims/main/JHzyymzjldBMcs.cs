@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using adims_BLL;
 using adims_DAL;
+using Adims_Utility;
+
 namespace main
 {
     public partial class JHzyymzjldBMcs : Form
@@ -17,12 +19,17 @@ namespace main
         public JHzyymzjldBMcs(string ID)
         {
             patid = ID;
-
             InitializeComponent();
         }
+        adims_DAL.AdimsProvider dal = new adims_DAL.AdimsProvider();
         adims_BLL.YXL_BLL cll = new adims_BLL.YXL_BLL();
         private void button1_Click(object sender, EventArgs e)
         {
+            if (mzzjz.Text == "")
+            {
+                MessageBox.Show("请填写麻醉总结者！！！！");
+                return;
+            }
             try
             {
                 int result = 0;
@@ -348,7 +355,7 @@ namespace main
                    string qkzj= da["qkfxzj"].ToString();
                   mzzjsyz.Text = da["mzzjsyz"].ToString();
                   mzzjz.Text = da["mzzjz"].ToString();
-                  if (qkzj.IsNullOrEmpty() || qkzj == null)
+                  if (qkzj.IsNullOrEmpty())
                   {
                       FXZJ();
                   }
@@ -356,10 +363,40 @@ namespace main
                   {
                       fxzj.Text = qkzj;
                   }
-
+                 
                   MZDBY();
                   
               }
+              cmbTiweiBind();
+              cmbMZFSBind();
+              cmbMZSXL();
+        }
+        private void cmbMZFSBind()//绑定麻醉方式下拉表，随访麻醉后常规护理
+        {
+            DataTable dt = dal.SelectData("MazuiFangfa");
+            textcghl.Items.Clear();
+            foreach (DataRow dr in dt.Rows)
+            {
+                textcghl.Items.Add(dr[1].ToString());
+            }
+        }
+        private void cmbTiweiBind()//绑定体位下拉表
+        {
+            DataTable dt = dal.SelectData("tiwei");
+            comboBoxtw.Items.Clear();
+            foreach (DataRow dr in dt.Rows)
+            {
+                comboBoxtw.Items.Add(dr[1].ToString());
+            }
+        }
+        private void cmbMZSXL()//绑定麻醉师下拉表
+        {
+            DataTable dtMZYS = dal.GetAllMZYS();
+            mzzjz.Items.Clear();
+            for (int i = 0; i < dtMZYS.Rows.Count; i++)
+            {
+                this.mzzjz.Items.Add(dtMZYS.Rows[i][0]);
+            }
         }
         private void FXZJ()
         {
@@ -377,7 +414,7 @@ namespace main
             {
                 DataRow da = dt.Rows[0];
                 textcghl.Text = da["huli"].ToString();
-                comboBoxtw.Text = da["tiwei"].ToString();
+                //comboBoxtw.Text = da["tiwei"].ToString();
                 textxymb.Text = da["xueya"].ToString();
                 comboBoxjy.Text = da["bidaoguan"].ToString();
                 comboBoxmz.Text = da["mianzhao"].ToString();
@@ -389,6 +426,7 @@ namespace main
                 if (Convert.ToString(da["fuxuankuang"]).Contains("6")) checkBoxqt.Checked = true;
                 if (Convert.ToString(da["fuxuankuang"]).Contains("7")) ymcp.Checked = true;
                 textBoxqt.Text = da["qita"].ToString();
+                
                
             }
         }

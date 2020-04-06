@@ -72,7 +72,7 @@ namespace main
                           + " " + dt.Rows[i]["yl"].ToString()
                           + "" + dt.Rows[i]["dw"].ToString()
                           + " " + dt.Rows[i]["yyfs"].ToString();
-               if (ws.IsNullOrEmpty())
+               if (ws == "")
                 {
                     ws = ss;
                 }

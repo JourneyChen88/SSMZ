@@ -111,7 +111,7 @@ namespace main
         {
             if (DataValid.PingHost(ftpAddress))
             {
-               //IsUpate();
+             IsUpate();
             }
 
         }
@@ -126,7 +126,9 @@ namespace main
                 //打开服务器上的的xml
                 XmlDocument xmlDoc1 = new XmlDocument();
                 ClassFTP ftp = new ClassFTP(ftpUser, ftpPassword);
-                ftp.DownFtpDir("ftp://172.1.3.51:2121/UpdateFile/", Application.StartupPath + "\\UpdateFile");
+                //ftp.DownFtpDir("ftp://172.1.3.51:2121/UpdateFile/", Application.StartupPath + "\\UpdateFile");
+                //xmlDoc1.Load(Application.StartupPath + "\\UpdateFile\\UpdateFile.xml");
+                ftp.DownLoadFile("ftp://172.1.3.51:2121/" + "\\UpdateFile.xml", Application.StartupPath + "\\UpdateFile\\UpdateFile.xml");
                 xmlDoc1.Load(Application.StartupPath + "\\UpdateFile\\UpdateFile.xml");
                 foreach (XmlNode node in xmlDoc1.ChildNodes)
                 {

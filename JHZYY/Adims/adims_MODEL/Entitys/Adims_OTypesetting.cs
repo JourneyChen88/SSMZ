@@ -11,6 +11,8 @@ namespace adims_MODEL
     {
         [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
         public int ID { get; set; }
+        public string ApplyId { get; set; }
+        
         public string PatID { get; set; }
         public string PatZhuYuanID { get; set; }
         public string CardID { get; set; }
@@ -36,9 +38,17 @@ namespace adims_MODEL
         public string AP1 { get; set; }
         public string AP2 { get; set; }
         public string AP3 { get; set; }
+
+        public string AP1No { get; set; }
+        public string AP2No { get; set; }
+        public string AP3No { get; set; }
         public string OS { get; set; }
         public string OsNo { get; set; }
+        public string Os1No { get; set; }
 
+        public string Os2No { get; set; }
+
+        public string Os3No { get; set; }
         public string OS1 { get; set; }
         public string OS2 { get; set; }
         public string OS3 { get; set; }
@@ -47,6 +57,11 @@ namespace adims_MODEL
         public string ON2 { get; set; }
         public string SN1 { get; set; }
         public string SN2 { get; set; }
+
+        public string ON1No { get; set; }
+        public string ON2No { get; set; }
+        public string SN1No { get; set; }
+        public string SN2No { get; set; }
         public string Remarks { get; set; }
         public int Ostate { get; set; }
         public String StartTime { get; set; }
@@ -84,8 +99,14 @@ namespace adims_MODEL
 
         public string Pv1Info { get; set; }
 
+        public int IsSend { get; set; }
 
+        public string IsGeli { get; set; }
 
+        /// <summary>
+        /// 医生对话信息
+        /// </summary>
+        public string TalkInfo { get; set; }
 
     }
 }

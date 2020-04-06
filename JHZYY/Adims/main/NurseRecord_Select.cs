@@ -44,7 +44,8 @@ namespace main
                // string patNAME = dataGridView1.CurrentRow.Cells[2].Value.ToString();
                // string patSEX = dataGridView1.CurrentRow.Cells[3].Value.ToString();
               //  string patAGE = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-                SHHLJLdan f2 = new SHHLJLdan(patID);
+                //SHHLJLdan f2 = new SHHLJLdan(patID);
+                Jhzyysshljld f2 = new Jhzyysshljld(patID);
                 f2.ShowDialog();
             }
             else MessageBox.Show("请选择病人！");

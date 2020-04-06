@@ -28,7 +28,7 @@ namespace main
                 string patID = dataGridView1.CurrentRow.Cells["住院号"].Value.ToString();
                 this.Close();
                 //MZsqFsd f2 = new MZsqFsd(patID);
-                JHmzqfsd f2 = new JHmzqfsd(patID);
+                BeforeVisit_JH f2 = new BeforeVisit_JH(patID);
                 f2.ShowDialog();              
             }
             else MessageBox.Show("请选择病人！");

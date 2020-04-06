@@ -10,7 +10,7 @@ namespace adims_MODEL
     /// 
     /// </summary>
     [SugarTable("Adims_Mzjld")]
-    public class Adims_Mzjld
+    public class MzjldEntity
     {
 
         /// <summary>

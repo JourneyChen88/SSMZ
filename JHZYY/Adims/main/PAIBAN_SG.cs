@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using adims_BLL;
 using adims_DAL;
+using Adims_Utility;
 using WindowsFormsControlLibrary5;
 
 namespace main

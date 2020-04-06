@@ -271,6 +271,7 @@
             this.tabPage2.Size = new System.Drawing.Size(834, 365);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "用药包管理";
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // cmbBagName
             // 
@@ -316,12 +317,6 @@
             // cmbZRFS
             // 
             this.cmbZRFS.FormattingEnabled = true;
-            this.cmbZRFS.Items.AddRange(new object[] {
-            "肌注",
-            "静注",
-            "静脉滴注",
-            "静脉泵注",
-            "口服"});
             this.cmbZRFS.Location = new System.Drawing.Point(615, 229);
             this.cmbZRFS.Name = "cmbZRFS";
             this.cmbZRFS.Size = new System.Drawing.Size(86, 28);

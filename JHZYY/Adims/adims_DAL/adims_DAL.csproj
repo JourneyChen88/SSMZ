@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SqlSugar, Version=4.9.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sqlSugar.4.9.8\lib\SqlSugar.dll</HintPath>
+      <HintPath>..\Adims_Utility\bin\Debug\SqlSugar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -59,6 +59,7 @@
     <Compile Include="AdimsProvider.cs" />
     <Compile Include="hisdbhelp_oracle.cs" />
     <Compile Include="HisDB_Help.cs" />
+    <Compile Include="MkLisHelper.cs" />
     <Compile Include="LIS_DB_Help.cs" />
     <Compile Include="mz.cs" />
     <Compile Include="pacsdbhelp_oracle.cs" />
@@ -76,6 +77,10 @@
     <ProjectReference Include="..\adims_MODEL\adims_MODEL.csproj">
       <Project>{F2BF0CFD-289B-403F-BF4D-006B750317BE}</Project>
       <Name>adims_MODEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adims_Utility\Adims_Utility.csproj">
+      <Project>{442d8aff-11d7-4de8-b8cc-5d485d528074}</Project>
+      <Name>Adims_Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

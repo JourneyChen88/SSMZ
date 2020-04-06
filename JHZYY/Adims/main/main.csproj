@@ -76,20 +76,36 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\IrisSkin2.dll</HintPath>
     </Reference>
+    <Reference Include="MediII.Adapter.BaseBiz">
+      <HintPath>..\Reference\MediII.Adapter.BaseBiz.dll</HintPath>
+    </Reference>
+    <Reference Include="MediII.Common">
+      <HintPath>..\Reference\MediII.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="MediII.Common.Processer">
+      <HintPath>..\Reference\MediII.Common.Processer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel">
       <HintPath>..\Reference\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\Microsoft.VisualBasic.PowerPacks.Vs.dll</HintPath>
+    </Reference>
+    <Reference Include="NHapi.Base">
+      <HintPath>..\Reference\NHapi.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="NHapi.Model.V24">
+      <HintPath>..\Reference\NHapi.Model.V24.dll</HintPath>
+    </Reference>
+    <Reference Include="SenderRoutingLib">
+      <HintPath>..\Reference\SenderRoutingLib.dll</HintPath>
     </Reference>
     <Reference Include="sjll, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\sjll.dll</HintPath>
-    </Reference>
-    <Reference Include="SqlSugar, Version=4.9.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sqlSugar.4.9.8\lib\SqlSugar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -315,17 +331,23 @@
     <Compile Include="JHMZJLDbeiyedaying.Designer.cs">
       <DependentUpon>JHMZJLDbeiyedaying.cs</DependentUpon>
     </Compile>
-    <Compile Include="JHmzqfsd.cs">
+    <Compile Include="BeforeVisit_JH.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="JHmzqfsd.Designer.cs">
-      <DependentUpon>JHmzqfsd.cs</DependentUpon>
+    <Compile Include="BeforeVisit_JH.Designer.cs">
+      <DependentUpon>BeforeVisit_JH.cs</DependentUpon>
     </Compile>
     <Compile Include="JHzyymzjldBMcs.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="JHzyymzjldBMcs.Designer.cs">
       <DependentUpon>JHzyymzjldBMcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Jhzyysshljld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Jhzyysshljld.Designer.cs">
+      <DependentUpon>Jhzyysshljld.cs</DependentUpon>
     </Compile>
     <Compile Include="JKTimeSetwu.cs">
       <SubType>Form</SubType>
@@ -404,6 +426,12 @@
     </Compile>
     <Compile Include="mzzjtlj.Designer.cs">
       <DependentUpon>mzzjtlj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PAIBAN_Add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PAIBAN_Add.designer.cs">
+      <DependentUpon>PAIBAN_Add.cs</DependentUpon>
     </Compile>
     <Compile Include="pingfenbiaozhun.cs">
       <SubType>Form</SubType>
@@ -727,11 +755,11 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="main.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="main.Designer.cs">
-      <DependentUpon>main.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SelectMZFF.cs">
       <SubType>Form</SubType>
@@ -835,11 +863,11 @@
     <Compile Include="PACU.designer.cs">
       <DependentUpon>PACU.cs</DependentUpon>
     </Compile>
-    <Compile Include="paiban.cs">
+    <Compile Include="PaiBanForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="paiban.Designer.cs">
-      <DependentUpon>paiban.cs</DependentUpon>
+    <Compile Include="PaiBanForm.Designer.cs">
+      <DependentUpon>PaiBanForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1155,11 +1183,14 @@
     <EmbeddedResource Include="JHMZJLDbeiyedaying.resx">
       <DependentUpon>JHMZJLDbeiyedaying.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="JHmzqfsd.resx">
-      <DependentUpon>JHmzqfsd.cs</DependentUpon>
+    <EmbeddedResource Include="BeforeVisit_JH.resx">
+      <DependentUpon>BeforeVisit_JH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JHzyymzjldBMcs.resx">
       <DependentUpon>JHzyymzjldBMcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Jhzyysshljld.resx">
+      <DependentUpon>Jhzyysshljld.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JKTimeSetwu.resx">
       <DependentUpon>JKTimeSetwu.cs</DependentUpon>
@@ -1199,6 +1230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="mzzjtlj.resx">
       <DependentUpon>mzzjtlj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PAIBAN_Add.resx">
+      <DependentUpon>PAIBAN_Add.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pingfenbiaozhun.resx">
       <DependentUpon>pingfenbiaozhun.cs</DependentUpon>
@@ -1359,8 +1393,8 @@
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="main.resx">
-      <DependentUpon>main.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectMZFF.resx">
       <DependentUpon>SelectMZFF.cs</DependentUpon>
@@ -1374,8 +1408,8 @@
     <EmbeddedResource Include="PACU.resx">
       <DependentUpon>PACU.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="paiban.resx">
-      <DependentUpon>paiban.cs</DependentUpon>
+    <EmbeddedResource Include="PaiBanForm.resx">
+      <DependentUpon>PaiBanForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -1540,8 +1574,11 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="app.manifest" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="HeYiAMISDataSet.xsc">
       <DependentUpon>HeYiAMISDataSet.xsd</DependentUpon>
     </None>
@@ -1554,7 +1591,6 @@
       <DependentUpon>HeYiAMISDataSet.xsd</DependentUpon>
     </None>
     <None Include="mazuizongjie.mht" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1579,7 +1615,7 @@
       <Name>adims_MODEL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Adims_Utility\Adims_Utility.csproj">
-      <Project>{442D8AFF-11D7-4DE8-B8CC-5D485D528074}</Project>
+      <Project>{442d8aff-11d7-4de8-b8cc-5d485d528074}</Project>
       <Name>Adims_Utility</Name>
     </ProjectReference>
   </ItemGroup>

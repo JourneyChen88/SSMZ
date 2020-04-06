@@ -209,7 +209,7 @@ namespace adims_BLL
         /// </summary>
         /// <param name="pb"></param>
         /// <returns></returns>
-        public int SaveOTypesetting(adims_MODEL.paiban pb)
+        public int SaveOTypesetting(adims_MODEL.paibanModel pb)
         {
             return adimsProvider.SaveOTypesetting(pb);
         }
@@ -622,8 +622,9 @@ namespace adims_BLL
        
         public DataSet PACU_table1( string dtime)
         {
+           
             string SQL = "select  A.patzhuyuanid 住院号,A.patbedno 床位号,A.patname 姓名,A.patsex 性别,A.patage 年龄,B.brqx 病人去向,B.ID 麻醉编号,B.patid 病人编号"
-                    + " from Adims_Otypesetting as A LEFT join Adims_Mzjld AS B ON A.Patid=B.Patid WHERE "
+                    + " from Adims_Otypesetting as A LEFT join Adims_Mzjld AS B ON A.PatZhuYuanID=B.Patid WHERE "
                     + "  CONVERT(varchar, B.Otime , 23 )='" + dtime + "' order by B.time DESC";
             return dBConn.GetDataSet(SQL);
         }
@@ -1673,7 +1674,7 @@ namespace adims_BLL
             string sql = "SELECT * from Adims_OTypesetting where  patzhuyuanid='" + patid + "'";
             return dBConn.GetDataTable(sql);
         }
-        public void GetPatInfo(string patID, adims_MODEL.paiban pat)
+        public void GetPatInfo(string patID, adims_MODEL.paibanModel pat)
         {
             DataTable dt = new DataTable();
             dt = dBConn.GetDataTable("select patid,PatZhuYuanID,PatHeight,PatBloodType,PatWeight,patname,patage,patsex,patdpm,patbedno,oname,pattmd,os,oa1,oa2,oa3,oa4,"

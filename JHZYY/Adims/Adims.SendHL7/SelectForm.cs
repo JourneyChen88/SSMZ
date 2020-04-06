@@ -18,13 +18,13 @@ namespace Adims.SendHL7
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PaiBanForm f = new PaiBanForm();
+            SendPaiBan f = new SendPaiBan();
             f.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            OperConfig f = new OperConfig();
+            SendOperConfig f = new SendOperConfig();
             f.ShowDialog();
         }
     }

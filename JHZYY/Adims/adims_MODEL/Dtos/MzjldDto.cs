@@ -7,6 +7,7 @@ namespace adims_MODEL
 {
     public class MzjldDto
     {
+        public String ApplyId { get; set; }
         public String Patid { get; set; }
 
         public String Amethod { get; set; }
@@ -23,7 +24,7 @@ namespace adims_MODEL
 
         public String Second { get; set; }
 
-        public String OperNo { get; set; }
+        public String Ocode { get; set; }
 
         public String Oname { get; set; }
 
@@ -45,8 +46,18 @@ namespace adims_MODEL
 
         public String AP3 { get; set; }
 
+        public String AP1No { get; set; }
+
+        public String AP2No { get; set; }
+
+        public String AP3No { get; set; }
+
         public String OS { get; set; }
         public String OsNo { get; set; }
+
+        public String Os1No { get; set; }
+        public String Os2No { get; set; }
+        public String Os3No { get; set; }
 
         public String OS1 { get; set; }
 
@@ -61,6 +72,14 @@ namespace adims_MODEL
         public String SN1 { get; set; }
 
         public String SN2 { get; set; }
+
+        public String ON1No { get; set; }
+
+        public String ON2No { get; set; }
+
+        public String SN1No { get; set; }
+
+        public String SN2No { get; set; }
 
         public String asa { get; set; }
 

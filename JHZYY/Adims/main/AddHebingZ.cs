@@ -1,5 +1,4 @@
-﻿using Adims_Utility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,7 +45,7 @@ namespace main
                     listBox2.Items.Add(listBox1.Items[listBox1.SelectedIndex]);
                     foreach (string s in listBox2.Items)
                     {
-                        if (qs.IsNullOrEmpty())
+                        if (qs == "")
                         { qs = s; }
                         else
                             qs = qs + "+" + s;
@@ -69,7 +68,7 @@ namespace main
                 listBox2.Items.RemoveAt(listBox2.SelectedIndex);
             foreach (string s in listBox2.Items)
             {
-                if (qs.IsNullOrEmpty())
+                if (qs == "")
                 { qs = s; }
                 else
                     qs = qs + "+" + s;

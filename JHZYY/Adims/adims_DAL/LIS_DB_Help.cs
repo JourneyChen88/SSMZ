@@ -110,6 +110,7 @@ namespace adims_DAL
 
         #endregion
 
+        
         public DataTable GetLIS_ReportMicroView(string dtime)
         {
             string sql = "select ReceiveDate,SectionNo,TestTypeNo,SampleNo,ResultNo,ItemNo,ItemName,DescNo,DescName"

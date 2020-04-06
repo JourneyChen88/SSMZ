@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using adims_BLL;
 using adims_MODEL;
+using Adims_Utility;
 
 namespace main.权限管理
 {

@@ -147,8 +147,8 @@ namespace main
                 DataTable dt = dal.GetAdims_YaoPinByType(tbPinyin.Text.Trim());
                 listYaopin.Items.Clear();
                 foreach (DataRow dr in dt.Rows)
-                {
                     listYaopin.Items.Add(dr[1].ToString());
+                {
                 }
                 tbName.Text = "";
             }

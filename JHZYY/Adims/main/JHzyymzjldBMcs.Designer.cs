@@ -156,7 +156,6 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.mzzjsyz = new System.Windows.Forms.TextBox();
-            this.mzzjz = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
@@ -165,6 +164,7 @@
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.mzzjz = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label48 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
@@ -288,7 +288,7 @@
             this.xc.AutoSize = true;
             this.xc.Location = new System.Drawing.Point(327, 131);
             this.xc.Name = "xc";
-            this.xc.Size = new System.Drawing.Size(54, 18);
+            this.xc.Size = new System.Drawing.Size(48, 16);
             this.xc.TabIndex = 70;
             this.xc.Text = "向侧";
             this.xc.UseVisualStyleBackColor = true;
@@ -298,7 +298,7 @@
             this.xd.AutoSize = true;
             this.xd.Location = new System.Drawing.Point(264, 131);
             this.xd.Name = "xd";
-            this.xd.Size = new System.Drawing.Size(54, 18);
+            this.xd.Size = new System.Drawing.Size(48, 16);
             this.xd.TabIndex = 69;
             this.xd.Text = "向骶";
             this.xd.UseVisualStyleBackColor = true;
@@ -308,7 +308,7 @@
             this.xt.AutoSize = true;
             this.xt.Location = new System.Drawing.Point(201, 131);
             this.xt.Name = "xt";
-            this.xt.Size = new System.Drawing.Size(54, 18);
+            this.xt.Size = new System.Drawing.Size(48, 16);
             this.xt.TabIndex = 68;
             this.xt.Text = "向头";
             this.xt.UseVisualStyleBackColor = true;
@@ -318,7 +318,7 @@
             this.crf.AutoSize = true;
             this.crf.Location = new System.Drawing.Point(83, 131);
             this.crf.Name = "crf";
-            this.crf.Size = new System.Drawing.Size(68, 18);
+            this.crf.Size = new System.Drawing.Size(60, 16);
             this.crf.TabIndex = 67;
             this.crf.Text = "侧入法";
             this.crf.UseVisualStyleBackColor = true;
@@ -328,7 +328,7 @@
             this.zrf.AutoSize = true;
             this.zrf.Location = new System.Drawing.Point(9, 131);
             this.zrf.Name = "zrf";
-            this.zrf.Size = new System.Drawing.Size(68, 18);
+            this.zrf.Size = new System.Drawing.Size(60, 16);
             this.zrf.TabIndex = 66;
             this.zrf.Text = "直入法";
             this.zrf.UseVisualStyleBackColor = true;
@@ -345,6 +345,29 @@
             // ssbxd
             // 
             this.ssbxd.FormattingEnabled = true;
+            this.ssbxd.Items.AddRange(new object[] {
+            "T1",
+            "T2",
+            "T3",
+            "T4",
+            "T5",
+            "T6",
+            "T7",
+            "T8",
+            "T9",
+            "T10",
+            "T11",
+            "T12",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5"});
             this.ssbxd.Location = new System.Drawing.Point(960, 198);
             this.ssbxd.Name = "ssbxd";
             this.ssbxd.Size = new System.Drawing.Size(149, 21);
@@ -362,6 +385,29 @@
             // ssbsd
             // 
             this.ssbsd.FormattingEnabled = true;
+            this.ssbsd.Items.AddRange(new object[] {
+            "T1",
+            "T2",
+            "T3",
+            "T4",
+            "T5",
+            "T6",
+            "T7",
+            "T8",
+            "T9",
+            "T10",
+            "T11",
+            "T12",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5"});
             this.ssbsd.Location = new System.Drawing.Point(745, 198);
             this.ssbsd.Name = "ssbsd";
             this.ssbsd.Size = new System.Drawing.Size(149, 21);
@@ -379,6 +425,29 @@
             // sssxd
             // 
             this.sssxd.FormattingEnabled = true;
+            this.sssxd.Items.AddRange(new object[] {
+            "T1",
+            "T2",
+            "T3",
+            "T4",
+            "T5",
+            "T6",
+            "T7",
+            "T8",
+            "T9",
+            "T10",
+            "T11",
+            "T12",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5"});
             this.sssxd.Location = new System.Drawing.Point(960, 168);
             this.sssxd.Name = "sssxd";
             this.sssxd.Size = new System.Drawing.Size(149, 21);
@@ -396,6 +465,29 @@
             // ssssd
             // 
             this.ssssd.FormattingEnabled = true;
+            this.ssssd.Items.AddRange(new object[] {
+            "T1",
+            "T2",
+            "T3",
+            "T4",
+            "T5",
+            "T6",
+            "T7",
+            "T8",
+            "T9",
+            "T10",
+            "T11",
+            "T12",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S5"});
             this.ssssd.Location = new System.Drawing.Point(745, 168);
             this.ssssd.Name = "ssssd";
             this.ssssd.Size = new System.Drawing.Size(149, 21);
@@ -440,7 +532,7 @@
             this.dgcrbsl.AutoSize = true;
             this.dgcrbsl.Location = new System.Drawing.Point(744, 134);
             this.dgcrbsl.Name = "dgcrbsl";
-            this.dgcrbsl.Size = new System.Drawing.Size(68, 18);
+            this.dgcrbsl.Size = new System.Drawing.Size(60, 16);
             this.dgcrbsl.TabIndex = 53;
             this.dgcrbsl.Text = "不顺利";
             this.dgcrbsl.UseVisualStyleBackColor = true;
@@ -450,7 +542,7 @@
             this.cgcrsl.AutoSize = true;
             this.cgcrsl.Location = new System.Drawing.Point(688, 134);
             this.cgcrsl.Name = "cgcrsl";
-            this.cgcrsl.Size = new System.Drawing.Size(54, 18);
+            this.cgcrsl.Size = new System.Drawing.Size(48, 16);
             this.cgcrsl.TabIndex = 52;
             this.cgcrsl.Text = "顺利";
             this.cgcrsl.UseVisualStyleBackColor = true;
@@ -521,7 +613,7 @@
             this.zxqx.AutoSize = true;
             this.zxqx.Location = new System.Drawing.Point(960, 69);
             this.zxqx.Name = "zxqx";
-            this.zxqx.Size = new System.Drawing.Size(54, 18);
+            this.zxqx.Size = new System.Drawing.Size(48, 16);
             this.zxqx.TabIndex = 44;
             this.zxqx.Text = "全血";
             this.zxqx.UseVisualStyleBackColor = true;
@@ -531,7 +623,7 @@
             this.zxd.AutoSize = true;
             this.zxd.Location = new System.Drawing.Point(903, 69);
             this.zxd.Name = "zxd";
-            this.zxd.Size = new System.Drawing.Size(40, 18);
+            this.zxd.Size = new System.Drawing.Size(36, 16);
             this.zxd.TabIndex = 43;
             this.zxd.Text = "淡";
             this.zxd.UseVisualStyleBackColor = true;
@@ -541,7 +633,7 @@
             this.zxzg.AutoSize = true;
             this.zxzg.Location = new System.Drawing.Point(839, 69);
             this.zxzg.Name = "zxzg";
-            this.zxzg.Size = new System.Drawing.Size(54, 18);
+            this.zxzg.Size = new System.Drawing.Size(48, 16);
             this.zxzg.TabIndex = 42;
             this.zxzg.Text = "置管";
             this.zxzg.UseVisualStyleBackColor = true;
@@ -551,7 +643,7 @@
             this.zxcc.AutoSize = true;
             this.zxcc.Location = new System.Drawing.Point(775, 69);
             this.zxcc.Name = "zxcc";
-            this.zxcc.Size = new System.Drawing.Size(54, 18);
+            this.zxcc.Size = new System.Drawing.Size(48, 16);
             this.zxcc.TabIndex = 41;
             this.zxcc.Text = "穿刺";
             this.zxcc.UseVisualStyleBackColor = true;
@@ -561,7 +653,7 @@
             this.zxy.AutoSize = true;
             this.zxy.Location = new System.Drawing.Point(717, 69);
             this.zxy.Name = "zxy";
-            this.zxy.Size = new System.Drawing.Size(40, 18);
+            this.zxy.Size = new System.Drawing.Size(36, 16);
             this.zxy.TabIndex = 40;
             this.zxy.Text = "有";
             this.zxy.UseVisualStyleBackColor = true;
@@ -571,7 +663,7 @@
             this.zxw.AutoSize = true;
             this.zxw.Location = new System.Drawing.Point(650, 69);
             this.zxw.Name = "zxw";
-            this.zxw.Size = new System.Drawing.Size(40, 18);
+            this.zxw.Size = new System.Drawing.Size(36, 16);
             this.zxw.TabIndex = 39;
             this.zxw.Text = "无";
             this.zxw.UseVisualStyleBackColor = true;
@@ -590,7 +682,7 @@
             this.hlw.AutoSize = true;
             this.hlw.Location = new System.Drawing.Point(1035, 34);
             this.hlw.Name = "hlw";
-            this.hlw.Size = new System.Drawing.Size(40, 18);
+            this.hlw.Size = new System.Drawing.Size(36, 16);
             this.hlw.TabIndex = 37;
             this.hlw.Text = "无";
             this.hlw.UseVisualStyleBackColor = true;
@@ -600,7 +692,7 @@
             this.hls.AutoSize = true;
             this.hls.Location = new System.Drawing.Point(986, 34);
             this.hls.Name = "hls";
-            this.hls.Size = new System.Drawing.Size(40, 18);
+            this.hls.Size = new System.Drawing.Size(36, 16);
             this.hls.TabIndex = 36;
             this.hls.Text = "少";
             this.hls.UseVisualStyleBackColor = true;
@@ -610,7 +702,7 @@
             this.hld.AutoSize = true;
             this.hld.Location = new System.Drawing.Point(937, 34);
             this.hld.Name = "hld";
-            this.hld.Size = new System.Drawing.Size(40, 18);
+            this.hld.Size = new System.Drawing.Size(36, 16);
             this.hld.TabIndex = 35;
             this.hld.Text = "多";
             this.hld.UseVisualStyleBackColor = true;
@@ -629,7 +721,7 @@
             this.zsbs.AutoSize = true;
             this.zsbs.Location = new System.Drawing.Point(785, 34);
             this.zsbs.Name = "zsbs";
-            this.zsbs.Size = new System.Drawing.Size(54, 18);
+            this.zsbs.Size = new System.Drawing.Size(48, 16);
             this.zsbs.TabIndex = 33;
             this.zsbs.Text = "不松";
             this.zsbs.UseVisualStyleBackColor = true;
@@ -639,7 +731,7 @@
             this.zsss.AutoSize = true;
             this.zsss.Location = new System.Drawing.Point(717, 34);
             this.zsss.Name = "zsss";
-            this.zsss.Size = new System.Drawing.Size(54, 18);
+            this.zsss.Size = new System.Drawing.Size(48, 16);
             this.zsss.TabIndex = 32;
             this.zsss.Text = "尚松";
             this.zsss.UseVisualStyleBackColor = true;
@@ -649,7 +741,7 @@
             this.zshs.AutoSize = true;
             this.zshs.Location = new System.Drawing.Point(650, 34);
             this.zshs.Name = "zshs";
-            this.zshs.Size = new System.Drawing.Size(54, 18);
+            this.zshs.Size = new System.Drawing.Size(48, 16);
             this.zshs.TabIndex = 31;
             this.zshs.Text = "很松";
             this.zshs.UseVisualStyleBackColor = true;
@@ -668,7 +760,7 @@
             this.bdw.AutoSize = true;
             this.bdw.Location = new System.Drawing.Point(418, 198);
             this.bdw.Name = "bdw";
-            this.bdw.Size = new System.Drawing.Size(40, 18);
+            this.bdw.Size = new System.Drawing.Size(36, 16);
             this.bdw.TabIndex = 29;
             this.bdw.Text = "无";
             this.bdw.UseVisualStyleBackColor = true;
@@ -678,7 +770,7 @@
             this.bdx.AutoSize = true;
             this.bdx.Location = new System.Drawing.Point(369, 198);
             this.bdx.Name = "bdx";
-            this.bdx.Size = new System.Drawing.Size(40, 18);
+            this.bdx.Size = new System.Drawing.Size(36, 16);
             this.bdx.TabIndex = 28;
             this.bdx.Text = "小";
             this.bdx.UseVisualStyleBackColor = true;
@@ -688,7 +780,7 @@
             this.bdd.AutoSize = true;
             this.bdd.Location = new System.Drawing.Point(320, 198);
             this.bdd.Name = "bdd";
-            this.bdd.Size = new System.Drawing.Size(40, 18);
+            this.bdd.Size = new System.Drawing.Size(36, 16);
             this.bdd.TabIndex = 27;
             this.bdd.Text = "大";
             this.bdd.UseVisualStyleBackColor = true;
@@ -698,7 +790,7 @@
             this.fyw.AutoSize = true;
             this.fyw.Location = new System.Drawing.Point(160, 198);
             this.fyw.Name = "fyw";
-            this.fyw.Size = new System.Drawing.Size(40, 18);
+            this.fyw.Size = new System.Drawing.Size(36, 16);
             this.fyw.TabIndex = 26;
             this.fyw.Text = "无";
             this.fyw.UseVisualStyleBackColor = true;
@@ -708,7 +800,7 @@
             this.fyx.AutoSize = true;
             this.fyx.Location = new System.Drawing.Point(111, 198);
             this.fyx.Name = "fyx";
-            this.fyx.Size = new System.Drawing.Size(40, 18);
+            this.fyx.Size = new System.Drawing.Size(36, 16);
             this.fyx.TabIndex = 25;
             this.fyx.Text = "小";
             this.fyx.UseVisualStyleBackColor = true;
@@ -718,7 +810,7 @@
             this.fyd.AutoSize = true;
             this.fyd.Location = new System.Drawing.Point(62, 198);
             this.fyd.Name = "fyd";
-            this.fyd.Size = new System.Drawing.Size(40, 18);
+            this.fyd.Size = new System.Drawing.Size(36, 16);
             this.fyd.TabIndex = 24;
             this.fyd.Text = "大";
             this.fyd.UseVisualStyleBackColor = true;
@@ -746,7 +838,7 @@
             this.hrdbmx.AutoSize = true;
             this.hrdbmx.Location = new System.Drawing.Point(237, 163);
             this.hrdbmx.Name = "hrdbmx";
-            this.hrdbmx.Size = new System.Drawing.Size(68, 18);
+            this.hrdbmx.Size = new System.Drawing.Size(60, 16);
             this.hrdbmx.TabIndex = 21;
             this.hrdbmx.Text = "不明显";
             this.hrdbmx.UseVisualStyleBackColor = true;
@@ -756,7 +848,7 @@
             this.hrdsmx.AutoSize = true;
             this.hrdsmx.Location = new System.Drawing.Point(160, 163);
             this.hrdsmx.Name = "hrdsmx";
-            this.hrdsmx.Size = new System.Drawing.Size(68, 18);
+            this.hrdsmx.Size = new System.Drawing.Size(60, 16);
             this.hrdsmx.TabIndex = 20;
             this.hrdsmx.Text = "尚明显";
             this.hrdsmx.UseVisualStyleBackColor = true;
@@ -766,7 +858,7 @@
             this.hrdmx.AutoSize = true;
             this.hrdmx.Location = new System.Drawing.Point(97, 163);
             this.hrdmx.Name = "hrdmx";
-            this.hrdmx.Size = new System.Drawing.Size(54, 18);
+            this.hrdmx.Size = new System.Drawing.Size(48, 16);
             this.hrdmx.TabIndex = 19;
             this.hrdmx.Text = "明显";
             this.hrdmx.UseVisualStyleBackColor = true;
@@ -785,7 +877,7 @@
             this.ccdrdcp.AutoSize = true;
             this.ccdrdcp.Location = new System.Drawing.Point(432, 101);
             this.ccdrdcp.Name = "ccdrdcp";
-            this.ccdrdcp.Size = new System.Drawing.Size(54, 18);
+            this.ccdrdcp.Size = new System.Drawing.Size(48, 16);
             this.ccdrdcp.TabIndex = 17;
             this.ccdrdcp.Text = "穿破";
             this.ccdrdcp.UseVisualStyleBackColor = true;
@@ -795,7 +887,7 @@
             this.ccdrdsb.AutoSize = true;
             this.ccdrdsb.Location = new System.Drawing.Point(369, 101);
             this.ccdrdsb.Name = "ccdrdsb";
-            this.ccdrdsb.Size = new System.Drawing.Size(54, 18);
+            this.ccdrdsb.Size = new System.Drawing.Size(48, 16);
             this.ccdrdsb.TabIndex = 16;
             this.ccdrdsb.Text = "失败";
             this.ccdrdsb.UseVisualStyleBackColor = true;
@@ -805,7 +897,7 @@
             this.ccdrdcg.AutoSize = true;
             this.ccdrdcg.Location = new System.Drawing.Point(306, 101);
             this.ccdrdcg.Name = "ccdrdcg";
-            this.ccdrdcg.Size = new System.Drawing.Size(54, 18);
+            this.ccdrdcg.Size = new System.Drawing.Size(48, 16);
             this.ccdrdcg.TabIndex = 15;
             this.ccdrdcg.Text = "成功";
             this.ccdrdcg.UseVisualStyleBackColor = true;
@@ -813,6 +905,10 @@
             // ccdrd
             // 
             this.ccdrd.FormattingEnabled = true;
+            this.ccdrd.Items.AddRange(new object[] {
+            "L2.3",
+            "L3.4",
+            "L4.5"});
             this.ccdrd.Location = new System.Drawing.Point(132, 99);
             this.ccdrd.Name = "ccdrd";
             this.ccdrd.Size = new System.Drawing.Size(126, 21);
@@ -841,7 +937,7 @@
             this.ccdycp.AutoSize = true;
             this.ccdycp.Location = new System.Drawing.Point(432, 67);
             this.ccdycp.Name = "ccdycp";
-            this.ccdycp.Size = new System.Drawing.Size(54, 18);
+            this.ccdycp.Size = new System.Drawing.Size(48, 16);
             this.ccdycp.TabIndex = 11;
             this.ccdycp.Text = "穿破";
             this.ccdycp.UseVisualStyleBackColor = true;
@@ -851,7 +947,7 @@
             this.ccdysb.AutoSize = true;
             this.ccdysb.Location = new System.Drawing.Point(369, 67);
             this.ccdysb.Name = "ccdysb";
-            this.ccdysb.Size = new System.Drawing.Size(54, 18);
+            this.ccdysb.Size = new System.Drawing.Size(48, 16);
             this.ccdysb.TabIndex = 10;
             this.ccdysb.Text = "失败";
             this.ccdysb.UseVisualStyleBackColor = true;
@@ -861,7 +957,7 @@
             this.ccdycg.AutoSize = true;
             this.ccdycg.Location = new System.Drawing.Point(306, 67);
             this.ccdycg.Name = "ccdycg";
-            this.ccdycg.Size = new System.Drawing.Size(54, 18);
+            this.ccdycg.Size = new System.Drawing.Size(48, 16);
             this.ccdycg.TabIndex = 9;
             this.ccdycg.Text = "成功";
             this.ccdycg.UseVisualStyleBackColor = true;
@@ -869,6 +965,10 @@
             // ccdyd
             // 
             this.ccdyd.FormattingEnabled = true;
+            this.ccdyd.Items.AddRange(new object[] {
+            "L2.3",
+            "L3.4",
+            "L4.5"});
             this.ccdyd.Location = new System.Drawing.Point(132, 65);
             this.ccdyd.Name = "ccdyd";
             this.ccdyd.Size = new System.Drawing.Size(126, 21);
@@ -906,7 +1006,7 @@
             this.ccfw.AutoSize = true;
             this.ccfw.Location = new System.Drawing.Point(266, 34);
             this.ccfw.Name = "ccfw";
-            this.ccfw.Size = new System.Drawing.Size(54, 18);
+            this.ccfw.Size = new System.Drawing.Size(48, 16);
             this.ccfw.TabIndex = 4;
             this.ccfw.Text = "俯卧";
             this.ccfw.UseVisualStyleBackColor = true;
@@ -916,7 +1016,7 @@
             this.ccyzcw.AutoSize = true;
             this.ccyzcw.Location = new System.Drawing.Point(175, 34);
             this.ccyzcw.Name = "ccyzcw";
-            this.ccyzcw.Size = new System.Drawing.Size(82, 18);
+            this.ccyzcw.Size = new System.Drawing.Size(72, 16);
             this.ccyzcw.TabIndex = 3;
             this.ccyzcw.Text = "右左侧卧";
             this.ccyzcw.UseVisualStyleBackColor = true;
@@ -926,7 +1026,7 @@
             this.ccz.AutoSize = true;
             this.ccz.Location = new System.Drawing.Point(125, 34);
             this.ccz.Name = "ccz";
-            this.ccz.Size = new System.Drawing.Size(40, 18);
+            this.ccz.Size = new System.Drawing.Size(36, 16);
             this.ccz.TabIndex = 2;
             this.ccz.Text = "坐";
             this.ccz.UseVisualStyleBackColor = true;
@@ -998,7 +1098,7 @@
             this.mzydjd.AutoSize = true;
             this.mzydjd.Location = new System.Drawing.Point(982, 22);
             this.mzydjd.Name = "mzydjd";
-            this.mzydjd.Size = new System.Drawing.Size(54, 18);
+            this.mzydjd.Size = new System.Drawing.Size(48, 16);
             this.mzydjd.TabIndex = 40;
             this.mzydjd.Text = "激动";
             this.mzydjd.UseVisualStyleBackColor = true;
@@ -1008,7 +1108,7 @@
             this.mzydhjl.AutoSize = true;
             this.mzydhjl.Location = new System.Drawing.Point(905, 22);
             this.mzydhjl.Name = "mzydhjl";
-            this.mzydhjl.Size = new System.Drawing.Size(68, 18);
+            this.mzydhjl.Size = new System.Drawing.Size(60, 16);
             this.mzydhjl.TabIndex = 39;
             this.mzydhjl.Text = "喉痉挛";
             this.mzydhjl.UseVisualStyleBackColor = true;
@@ -1018,7 +1118,7 @@
             this.mzydot.AutoSize = true;
             this.mzydot.Location = new System.Drawing.Point(842, 22);
             this.mzydot.Name = "mzydot";
-            this.mzydot.Size = new System.Drawing.Size(54, 18);
+            this.mzydot.Size = new System.Drawing.Size(48, 16);
             this.mzydot.TabIndex = 38;
             this.mzydot.Text = "呕吐";
             this.mzydot.UseVisualStyleBackColor = true;
@@ -1028,7 +1128,7 @@
             this.mzydfq.AutoSize = true;
             this.mzydfq.Location = new System.Drawing.Point(779, 22);
             this.mzydfq.Name = "mzydfq";
-            this.mzydfq.Size = new System.Drawing.Size(54, 18);
+            this.mzydfq.Size = new System.Drawing.Size(48, 16);
             this.mzydfq.TabIndex = 37;
             this.mzydfq.Text = "发绀";
             this.mzydfq.UseVisualStyleBackColor = true;
@@ -1038,7 +1138,7 @@
             this.mzydqk.AutoSize = true;
             this.mzydqk.Location = new System.Drawing.Point(716, 22);
             this.mzydqk.Name = "mzydqk";
-            this.mzydqk.Size = new System.Drawing.Size(54, 18);
+            this.mzydqk.Size = new System.Drawing.Size(48, 16);
             this.mzydqk.TabIndex = 36;
             this.mzydqk.Text = "呛咳";
             this.mzydqk.UseVisualStyleBackColor = true;
@@ -1048,7 +1148,7 @@
             this.mzydmy.AutoSize = true;
             this.mzydmy.Location = new System.Drawing.Point(653, 22);
             this.mzydmy.Name = "mzydmy";
-            this.mzydmy.Size = new System.Drawing.Size(54, 18);
+            this.mzydmy.Size = new System.Drawing.Size(48, 16);
             this.mzydmy.TabIndex = 35;
             this.mzydmy.Text = "满意";
             this.mzydmy.UseVisualStyleBackColor = true;
@@ -1058,7 +1158,7 @@
             this.cgkn.AutoSize = true;
             this.cgkn.Location = new System.Drawing.Point(356, 56);
             this.cgkn.Name = "cgkn";
-            this.cgkn.Size = new System.Drawing.Size(82, 18);
+            this.cgkn.Size = new System.Drawing.Size(72, 16);
             this.cgkn.TabIndex = 34;
             this.cgkn.Text = "插管困难";
             this.cgkn.UseVisualStyleBackColor = true;
@@ -1068,7 +1168,7 @@
             this.dgxc.AutoSize = true;
             this.dgxc.Location = new System.Drawing.Point(265, 56);
             this.dgxc.Name = "dgxc";
-            this.dgxc.Size = new System.Drawing.Size(82, 18);
+            this.dgxc.Size = new System.Drawing.Size(72, 16);
             this.dgxc.TabIndex = 33;
             this.dgxc.Text = "带管芯插";
             this.dgxc.UseVisualStyleBackColor = true;
@@ -1078,7 +1178,7 @@
             this.qwj.AutoSize = true;
             this.qwj.Location = new System.Drawing.Point(188, 56);
             this.qwj.Name = "qwj";
-            this.qwj.Size = new System.Drawing.Size(68, 18);
+            this.qwj.Size = new System.Drawing.Size(60, 16);
             this.qwj.TabIndex = 32;
             this.qwj.Text = "纤维镜";
             this.qwj.UseVisualStyleBackColor = true;
@@ -1088,7 +1188,7 @@
             this.bcgy.AutoSize = true;
             this.bcgy.Location = new System.Drawing.Point(97, 56);
             this.bcgy.Name = "bcgy";
-            this.bcgy.Size = new System.Drawing.Size(82, 18);
+            this.bcgy.Size = new System.Drawing.Size(72, 16);
             this.bcgy.TabIndex = 31;
             this.bcgy.Text = "鼻插管右";
             this.bcgy.UseVisualStyleBackColor = true;
@@ -1098,7 +1198,7 @@
             this.bcgz.AutoSize = true;
             this.bcgz.Location = new System.Drawing.Point(7, 56);
             this.bcgz.Name = "bcgz";
-            this.bcgz.Size = new System.Drawing.Size(82, 18);
+            this.bcgz.Size = new System.Drawing.Size(72, 16);
             this.bcgz.TabIndex = 30;
             this.bcgz.Text = "鼻插管左";
             this.bcgz.UseVisualStyleBackColor = true;
@@ -1108,7 +1208,7 @@
             this.dgID.AutoSize = true;
             this.dgID.Location = new System.Drawing.Point(329, 22);
             this.dgID.Name = "dgID";
-            this.dgID.Size = new System.Drawing.Size(68, 18);
+            this.dgID.Size = new System.Drawing.Size(60, 16);
             this.dgID.TabIndex = 29;
             this.dgID.Text = "导管ID";
             this.dgID.UseVisualStyleBackColor = true;
@@ -1118,7 +1218,7 @@
             this.mc.AutoSize = true;
             this.mc.Location = new System.Drawing.Point(266, 22);
             this.mc.Name = "mc";
-            this.mc.Size = new System.Drawing.Size(54, 18);
+            this.mc.Size = new System.Drawing.Size(48, 16);
             this.mc.TabIndex = 28;
             this.mc.Text = "盲插";
             this.mc.UseVisualStyleBackColor = true;
@@ -1128,7 +1228,7 @@
             this.sqgy.AutoSize = true;
             this.sqgy.Location = new System.Drawing.Point(175, 22);
             this.sqgy.Name = "sqgy";
-            this.sqgy.Size = new System.Drawing.Size(82, 18);
+            this.sqgy.Size = new System.Drawing.Size(72, 16);
             this.sqgy.TabIndex = 27;
             this.sqgy.Text = "双腔管右";
             this.sqgy.UseVisualStyleBackColor = true;
@@ -1138,7 +1238,7 @@
             this.sqgz.AutoSize = true;
             this.sqgz.Location = new System.Drawing.Point(84, 22);
             this.sqgz.Name = "sqgz";
-            this.sqgz.Size = new System.Drawing.Size(82, 18);
+            this.sqgz.Size = new System.Drawing.Size(72, 16);
             this.sqgz.TabIndex = 26;
             this.sqgz.Text = "双腔管左";
             this.sqgz.UseVisualStyleBackColor = true;
@@ -1148,7 +1248,7 @@
             this.kcg.AutoSize = true;
             this.kcg.Location = new System.Drawing.Point(7, 22);
             this.kcg.Name = "kcg";
-            this.kcg.Size = new System.Drawing.Size(68, 18);
+            this.kcg.Size = new System.Drawing.Size(60, 16);
             this.kcg.TabIndex = 25;
             this.kcg.Text = "口插管";
             this.kcg.UseVisualStyleBackColor = true;
@@ -1211,7 +1311,7 @@
             this.ymwdgzd.AutoSize = true;
             this.ymwdgzd.Location = new System.Drawing.Point(555, 109);
             this.ymwdgzd.Name = "ymwdgzd";
-            this.ymwdgzd.Size = new System.Drawing.Size(124, 18);
+            this.ymwdgzd.Size = new System.Drawing.Size(108, 16);
             this.ymwdgzd.TabIndex = 54;
             this.ymwdgzd.Text = "硬膜外导管折断";
             this.ymwdgzd.UseVisualStyleBackColor = true;
@@ -1221,7 +1321,7 @@
             this.gNzz.AutoSize = true;
             this.gNzz.Location = new System.Drawing.Point(415, 109);
             this.gNzz.Name = "gNzz";
-            this.gNzz.Size = new System.Drawing.Size(89, 18);
+            this.gNzz.Size = new System.Drawing.Size(78, 16);
             this.gNzz.TabIndex = 53;
             this.gNzz.Text = "膈 N 阻滞";
             this.gNzz.UseVisualStyleBackColor = true;
@@ -1231,7 +1331,7 @@
             this.xs.AutoSize = true;
             this.xs.Location = new System.Drawing.Point(313, 109);
             this.xs.Name = "xs";
-            this.xs.Size = new System.Drawing.Size(54, 18);
+            this.xs.Size = new System.Drawing.Size(48, 16);
             this.xs.TabIndex = 52;
             this.xs.Text = "心衰";
             this.xs.UseVisualStyleBackColor = true;
@@ -1241,7 +1341,7 @@
             this.hxtz.AutoSize = true;
             this.hxtz.Location = new System.Drawing.Point(225, 109);
             this.hxtz.Name = "hxtz";
-            this.hxtz.Size = new System.Drawing.Size(82, 18);
+            this.hxtz.Size = new System.Drawing.Size(72, 16);
             this.hxtz.TabIndex = 51;
             this.hxtz.Text = "呼吸停止";
             this.hxtz.UseVisualStyleBackColor = true;
@@ -1251,7 +1351,7 @@
             this.fss.AutoSize = true;
             this.fss.Location = new System.Drawing.Point(113, 109);
             this.fss.Name = "fss";
-            this.fss.Size = new System.Drawing.Size(68, 18);
+            this.fss.Size = new System.Drawing.Size(60, 16);
             this.fss.TabIndex = 50;
             this.fss.Text = "肺栓塞";
             this.fss.UseVisualStyleBackColor = true;
@@ -1261,7 +1361,7 @@
             this.ot.AutoSize = true;
             this.ot.Location = new System.Drawing.Point(7, 109);
             this.ot.Name = "ot";
-            this.ot.Size = new System.Drawing.Size(54, 18);
+            this.ot.Size = new System.Drawing.Size(48, 16);
             this.ot.TabIndex = 49;
             this.ot.Text = "呕吐";
             this.ot.UseVisualStyleBackColor = true;
@@ -1271,7 +1371,7 @@
             this.jNgfzz.AutoSize = true;
             this.jNgfzz.Location = new System.Drawing.Point(555, 81);
             this.jNgfzz.Name = "jNgfzz";
-            this.jNgfzz.Size = new System.Drawing.Size(117, 18);
+            this.jNgfzz.Size = new System.Drawing.Size(102, 16);
             this.jNgfzz.TabIndex = 47;
             this.jNgfzz.Text = "脊 N 广泛阻滞";
             this.jNgfzz.UseVisualStyleBackColor = true;
@@ -1281,7 +1381,7 @@
             this.jmyzd.AutoSize = true;
             this.jmyzd.Location = new System.Drawing.Point(415, 81);
             this.jmyzd.Name = "jmyzd";
-            this.jmyzd.Size = new System.Drawing.Size(96, 18);
+            this.jmyzd.Size = new System.Drawing.Size(84, 16);
             this.jmyzd.TabIndex = 46;
             this.jmyzd.Text = "局麻药中毒";
             this.jmyzd.UseVisualStyleBackColor = true;
@@ -1291,7 +1391,7 @@
             this.xlsc.AutoSize = true;
             this.xlsc.Location = new System.Drawing.Point(313, 81);
             this.xlsc.Name = "xlsc";
-            this.xlsc.Size = new System.Drawing.Size(82, 18);
+            this.xlsc.Size = new System.Drawing.Size(72, 16);
             this.xlsc.TabIndex = 45;
             this.xlsc.Text = "心律失常";
             this.xlsc.UseVisualStyleBackColor = true;
@@ -1301,7 +1401,7 @@
             this.xj.AutoSize = true;
             this.xj.Location = new System.Drawing.Point(225, 81);
             this.xj.Name = "xj";
-            this.xj.Size = new System.Drawing.Size(75, 18);
+            this.xj.Size = new System.Drawing.Size(66, 16);
             this.xj.TabIndex = 44;
             this.xj.Text = "CO2蓄积";
             this.xj.UseVisualStyleBackColor = true;
@@ -1311,7 +1411,7 @@
             this.jxfsz.AutoSize = true;
             this.jxfsz.Location = new System.Drawing.Point(113, 81);
             this.jxfsz.Name = "jxfsz";
-            this.jxfsz.Size = new System.Drawing.Size(96, 18);
+            this.jxfsz.Size = new System.Drawing.Size(84, 16);
             this.jxfsz.TabIndex = 43;
             this.jxfsz.Text = "急性肺水肿";
             this.jxfsz.UseVisualStyleBackColor = true;
@@ -1321,7 +1421,7 @@
             this.wx.AutoSize = true;
             this.wx.Location = new System.Drawing.Point(7, 81);
             this.wx.Name = "wx";
-            this.wx.Size = new System.Drawing.Size(54, 18);
+            this.wx.Size = new System.Drawing.Size(48, 16);
             this.wx.TabIndex = 42;
             this.wx.Text = "误吸";
             this.wx.UseVisualStyleBackColor = true;
@@ -1331,7 +1431,7 @@
             this.ymcp.AutoSize = true;
             this.ymcp.Location = new System.Drawing.Point(691, 50);
             this.ymcp.Name = "ymcp";
-            this.ymcp.Size = new System.Drawing.Size(82, 18);
+            this.ymcp.Size = new System.Drawing.Size(72, 16);
             this.ymcp.TabIndex = 41;
             this.ymcp.Text = "硬膜穿破";
             this.ymcp.UseVisualStyleBackColor = true;
@@ -1341,7 +1441,7 @@
             this.hnsz.AutoSize = true;
             this.hnsz.Location = new System.Drawing.Point(555, 50);
             this.hnsz.Name = "hnsz";
-            this.hnsz.Size = new System.Drawing.Size(82, 18);
+            this.hnsz.Size = new System.Drawing.Size(72, 16);
             this.hnsz.TabIndex = 40;
             this.hnsz.Text = "霍纳氏症";
             this.hnsz.UseVisualStyleBackColor = true;
@@ -1351,7 +1451,7 @@
             this.jmygm.AutoSize = true;
             this.jmygm.Location = new System.Drawing.Point(415, 50);
             this.jmygm.Name = "jmygm";
-            this.jmygm.Size = new System.Drawing.Size(96, 18);
+            this.jmygm.Size = new System.Drawing.Size(84, 16);
             this.jmygm.TabIndex = 39;
             this.jmygm.Text = "局麻药过敏";
             this.jmygm.UseVisualStyleBackColor = true;
@@ -1361,7 +1461,7 @@
             this.dxy.AutoSize = true;
             this.dxy.Location = new System.Drawing.Point(313, 50);
             this.dxy.Name = "dxy";
-            this.dxy.Size = new System.Drawing.Size(68, 18);
+            this.dxy.Size = new System.Drawing.Size(60, 16);
             this.dxy.TabIndex = 38;
             this.dxy.Text = "低血压";
             this.dxy.UseVisualStyleBackColor = true;
@@ -1371,7 +1471,7 @@
             this.qy.AutoSize = true;
             this.qy.Location = new System.Drawing.Point(225, 50);
             this.qy.Name = "qy";
-            this.qy.Size = new System.Drawing.Size(54, 18);
+            this.qy.Size = new System.Drawing.Size(48, 16);
             this.qy.TabIndex = 37;
             this.qy.Text = "缺氧";
             this.qy.UseVisualStyleBackColor = true;
@@ -1381,7 +1481,7 @@
             this.zqgjl.AutoSize = true;
             this.zqgjl.Location = new System.Drawing.Point(113, 50);
             this.zqgjl.Name = "zqgjl";
-            this.zqgjl.Size = new System.Drawing.Size(96, 18);
+            this.zqgjl.Size = new System.Drawing.Size(84, 16);
             this.zqgjl.TabIndex = 36;
             this.zqgjl.Text = "支气管痉挛";
             this.zqgjl.UseVisualStyleBackColor = true;
@@ -1391,7 +1491,7 @@
             this.lmss.AutoSize = true;
             this.lmss.Location = new System.Drawing.Point(7, 50);
             this.lmss.Name = "lmss";
-            this.lmss.Size = new System.Drawing.Size(82, 18);
+            this.lmss.Size = new System.Drawing.Size(72, 16);
             this.lmss.TabIndex = 35;
             this.lmss.Text = "黏膜损伤";
             this.lmss.UseVisualStyleBackColor = true;
@@ -1401,7 +1501,7 @@
             this.qjm.AutoSize = true;
             this.qjm.Location = new System.Drawing.Point(691, 22);
             this.qjm.Name = "qjm";
-            this.qjm.Size = new System.Drawing.Size(68, 18);
+            this.qjm.Size = new System.Drawing.Size(60, 16);
             this.qjm.TabIndex = 32;
             this.qjm.Text = "全脊麻";
             this.qjm.UseVisualStyleBackColor = true;
@@ -1411,7 +1511,7 @@
             this.hfNzz.AutoSize = true;
             this.hfNzz.Location = new System.Drawing.Point(555, 22);
             this.hfNzz.Name = "hfNzz";
-            this.hfNzz.Size = new System.Drawing.Size(103, 18);
+            this.hfNzz.Size = new System.Drawing.Size(90, 16);
             this.hfNzz.TabIndex = 31;
             this.hfNzz.Text = "喉返 N 阻滞";
             this.hfNzz.UseVisualStyleBackColor = true;
@@ -1421,7 +1521,7 @@
             this.xtzt.AutoSize = true;
             this.xtzt.Location = new System.Drawing.Point(415, 22);
             this.xtzt.Name = "xtzt";
-            this.xtzt.Size = new System.Drawing.Size(82, 18);
+            this.xtzt.Size = new System.Drawing.Size(72, 16);
             this.xtzt.TabIndex = 30;
             this.xtzt.Text = "心跳骤停";
             this.xtzt.UseVisualStyleBackColor = true;
@@ -1431,7 +1531,7 @@
             this.gxy.AutoSize = true;
             this.gxy.Location = new System.Drawing.Point(313, 22);
             this.gxy.Name = "gxy";
-            this.gxy.Size = new System.Drawing.Size(68, 18);
+            this.gxy.Size = new System.Drawing.Size(60, 16);
             this.gxy.TabIndex = 29;
             this.gxy.Text = "高血压";
             this.gxy.UseVisualStyleBackColor = true;
@@ -1441,7 +1541,7 @@
             this.qx.AutoSize = true;
             this.qx.Location = new System.Drawing.Point(225, 22);
             this.qx.Name = "qx";
-            this.qx.Size = new System.Drawing.Size(54, 18);
+            this.qx.Size = new System.Drawing.Size(48, 16);
             this.qx.TabIndex = 28;
             this.qx.Text = "气胸";
             this.qx.UseVisualStyleBackColor = true;
@@ -1451,7 +1551,7 @@
             this.sxc.AutoSize = true;
             this.sxc.Location = new System.Drawing.Point(113, 22);
             this.sxc.Name = "sxc";
-            this.sxc.Size = new System.Drawing.Size(68, 18);
+            this.sxc.Size = new System.Drawing.Size(60, 16);
             this.sxc.TabIndex = 27;
             this.sxc.Text = "舌下垂";
             this.sxc.UseVisualStyleBackColor = true;
@@ -1461,7 +1561,7 @@
             this.ycss.AutoSize = true;
             this.ycss.Location = new System.Drawing.Point(7, 22);
             this.ycss.Name = "ycss";
-            this.ycss.Size = new System.Drawing.Size(82, 18);
+            this.ycss.Size = new System.Drawing.Size(72, 16);
             this.ycss.TabIndex = 26;
             this.ycss.Text = "牙齿损伤";
             this.ycss.UseVisualStyleBackColor = true;
@@ -1528,13 +1628,6 @@
             this.mzzjsyz.Size = new System.Drawing.Size(205, 23);
             this.mzzjsyz.TabIndex = 61;
             // 
-            // mzzjz
-            // 
-            this.mzzjz.Location = new System.Drawing.Point(993, 622);
-            this.mzzjz.Name = "mzzjz";
-            this.mzzjz.Size = new System.Drawing.Size(198, 23);
-            this.mzzjz.TabIndex = 62;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(281, 689);
@@ -1553,6 +1646,7 @@
             this.button2.TabIndex = 64;
             this.button2.Text = "打印";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // printDialog1
@@ -1585,10 +1679,10 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.mzzjz);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.mzzjz);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.mzzjsyz);
             this.tabPage1.Controls.Add(this.label26);
@@ -1602,6 +1696,14 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "麻醉总结";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // mzzjz
+            // 
+            this.mzzjz.FormattingEnabled = true;
+            this.mzzjz.Location = new System.Drawing.Point(991, 623);
+            this.mzzjz.Name = "mzzjz";
+            this.mzzjz.Size = new System.Drawing.Size(158, 21);
+            this.mzzjz.TabIndex = 62;
             // 
             // tabPage2
             // 
@@ -1803,7 +1905,7 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(344, 146);
+            this.label38.Location = new System.Drawing.Point(367, 146);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(229, 16);
             this.label38.TabIndex = 11;
@@ -1811,7 +1913,7 @@
             // 
             // textxymb
             // 
-            this.textxymb.Location = new System.Drawing.Point(219, 141);
+            this.textxymb.Location = new System.Drawing.Point(242, 141);
             this.textxymb.Name = "textxymb";
             this.textxymb.Size = new System.Drawing.Size(116, 26);
             this.textxymb.TabIndex = 10;
@@ -1819,7 +1921,7 @@
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(728, 208);
+            this.label37.Location = new System.Drawing.Point(762, 208);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(53, 16);
             this.label37.TabIndex = 9;
@@ -1828,7 +1930,12 @@
             // comboBoxmz
             // 
             this.comboBoxmz.FormattingEnabled = true;
-            this.comboBoxmz.Location = new System.Drawing.Point(580, 204);
+            this.comboBoxmz.Items.AddRange(new object[] {
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboBoxmz.Location = new System.Drawing.Point(614, 204);
             this.comboBoxmz.Name = "comboBoxmz";
             this.comboBoxmz.Size = new System.Drawing.Size(140, 24);
             this.comboBoxmz.TabIndex = 8;
@@ -1836,7 +1943,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(381, 208);
+            this.label36.Location = new System.Drawing.Point(415, 208);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(141, 16);
             this.label36.TabIndex = 7;
@@ -1845,7 +1952,12 @@
             // comboBoxjy
             // 
             this.comboBoxjy.FormattingEnabled = true;
-            this.comboBoxjy.Location = new System.Drawing.Point(232, 205);
+            this.comboBoxjy.Items.AddRange(new object[] {
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.comboBoxjy.Location = new System.Drawing.Point(266, 205);
             this.comboBoxjy.Name = "comboBoxjy";
             this.comboBoxjy.Size = new System.Drawing.Size(140, 24);
             this.comboBoxjy.TabIndex = 6;
@@ -2052,7 +2164,6 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox mzzjsyz;
-        private System.Windows.Forms.TextBox mzzjz;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label30;
@@ -2099,5 +2210,6 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.ComboBox mzzjz;
     }
 }

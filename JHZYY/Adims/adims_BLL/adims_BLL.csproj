@@ -31,6 +31,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MediII.Common">
+      <HintPath>..\Reference\MediII.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="NHapi.Base">
+      <HintPath>..\Reference\NHapi.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="NHapi.Model.V24">
+      <HintPath>..\Reference\NHapi.Model.V24.dll</HintPath>
+    </Reference>
+    <Reference Include="SenderRoutingLib">
+      <HintPath>..\Reference\SenderRoutingLib.dll</HintPath>
+    </Reference>
     <Reference Include="SqlSugar, Version=4.9.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sqlSugar.4.9.8\lib\SqlSugar.dll</HintPath>
     </Reference>
@@ -45,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdimsController.cs" />
+    <Compile Include="Hl7Bll.cs" />
     <Compile Include="mz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\ValidationRegex.cs" />
@@ -60,6 +73,10 @@
     <ProjectReference Include="..\adims_MODEL\adims_MODEL.csproj">
       <Project>{F2BF0CFD-289B-403F-BF4D-006B750317BE}</Project>
       <Name>adims_MODEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adims_Utility\Adims_Utility.csproj">
+      <Project>{442D8AFF-11D7-4DE8-B8CC-5D485D528074}</Project>
+      <Name>Adims_Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

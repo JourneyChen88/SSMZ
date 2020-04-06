@@ -1,0 +1,42 @@
+create or replace view v_operation_interface as
+select b.zhuyuanhao as patID, --     住院病人的首页序号
+       b.bingrenzyid as ZYID, --  住院号
+       b.bingrenzyid || (select count(bingrenzyid) from sm_shoushuxx where bingrenzyid = b.bingrenzyid) ZhuYuanNo, --住院号加住院次数
+       nvl(b.zhuyuancs,'1') zycs, --住院次数
+       (select count(bingrenzyid) from sm_shoushuxx where bingrenzyid = b.bingrenzyid) SQcs, --手术申请次数
+       b.xingming patName, --病人姓名
+       b.jiuzhenkh CardID, ----卡号
+       b.nianling||b.nianlingdw patAge, -- 年龄
+       b.xingbie patSex, --性别
+       b.minzu patNation, --民族
+       a.shengao PatHeight, --身高
+       a.bingrentz PatWeight, --体重
+       '' PatBloodType, --血型
+       a.bingrencw BedNo, --床号
+       b.dangqianksmc Patdpm, --科室
+       a.zhenduanmc1 Pattmd, --术前诊断
+       a.shoushumc Oname, --拟行手术名称
+       a.shoushumcid Ocode, --手术编码
+       (select c.daimamc from gy_mazuiff c where c.DaiMaID = a.mazuiff) Amethod, -- 麻醉方法
+       a.chuangkougrqk GR, --感染
+       '' BX, --备血
+       (select zhigongxm from gy_zhigongxx where zhigongid = a.shoushuys) OS, --手术医生
+       (select zhigongxm from gy_zhigongxx where zhigongid = a.zhuliys1) OS1, -- 手术医生
+       (select zhigongxm from gy_zhigongxx where zhigongid = a.zhuliys2) OS2, -- 手术医生
+       (select zhigongxm from gy_zhigongxx where zhigongid = a.zhuliys3) OS3, --手术医生
+       '' OS4, -- 手术医生
+       a.yaoqiusj Odate, --手术日期
+       b.ruyuanrq Ryrq,--入院日期
+       a.anpaisj StartTime, --预计开始时间
+       a.shoushulb SSLB, --手术类别
+       a.shoushujb SSDJ, --手术等级
+       a.beizhu remarks, --备注
+       decode(a.feiyonglb,'01','自费','医保') yiliao, --医疗费
+       '' tiwei, --手术体位
+       b.shenfenzh SFZH, --身份证号
+       a.zhuangtaibz chexiao --撤销标示
+  from sm_shoushuxx a, zy_bingrenxx b
+ where a.bingrenzyid = b.bingrenzyid
+
+
+--select * from sm_shoushuxx where shenqingsj > sysdate - 10

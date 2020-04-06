@@ -343,7 +343,7 @@ namespace main
                 mzjldEdit F1 = new mzjldEdit(PatID, Oroom, DateTime.Parse(Odate), mzjldID);
                 F1.ShowDialog();
                 this.Close();
-                new paiban().Close(); 
+                new PaiBanForm().Close(); 
             }
         }
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)

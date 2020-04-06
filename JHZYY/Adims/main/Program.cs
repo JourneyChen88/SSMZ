@@ -26,7 +26,7 @@ namespace main
             loginForm.ShowDialog();
             if (loginForm.DialogResult == DialogResult.OK)
             {
-                Application.Run(new main());
+                Application.Run(new MainForm());
             }
         }
     }

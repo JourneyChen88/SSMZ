@@ -52,9 +52,10 @@
             // txtLoginName
             // 
             this.txtLoginName.BackColor = System.Drawing.Color.Snow;
+            this.txtLoginName.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtLoginName.Location = new System.Drawing.Point(79, 20);
             this.txtLoginName.Name = "txtLoginName";
-            this.txtLoginName.Size = new System.Drawing.Size(129, 21);
+            this.txtLoginName.Size = new System.Drawing.Size(129, 26);
             this.txtLoginName.TabIndex = 1;
             // 
             // label2
@@ -69,10 +70,11 @@
             // txtPassWord
             // 
             this.txtPassWord.BackColor = System.Drawing.Color.Snow;
+            this.txtPassWord.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtPassWord.Location = new System.Drawing.Point(79, 60);
             this.txtPassWord.Name = "txtPassWord";
             this.txtPassWord.PasswordChar = '*';
-            this.txtPassWord.Size = new System.Drawing.Size(129, 21);
+            this.txtPassWord.Size = new System.Drawing.Size(129, 26);
             this.txtPassWord.TabIndex = 3;
             // 
             // btnLogin

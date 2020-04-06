@@ -10,8 +10,29 @@ namespace adims_DAL
     public class hisdbhelp_oracle
     {
         public static string strConn = "Data Source=his3;User Id=hysm;Password=hysm;";
-
+        public static string JCXM = "Data Source=emr3;User Id=xlyg;Password=xlyg;";
         // string strConn = "Provider=IBMDADB2;Database=dbserver;Hostname=192.168.18.19;Protocol=TCPIP;Port=50000; Uid=SYSTEM;Pwd=LIUSUN";
+        public DataTable JCJY(string sql)
+        {
+            using (OracleConnection conn = new OracleConnection(JCXM))
+            {
+                OracleCommand cmd = new OracleCommand(sql, conn);
+                try
+                {
+                    conn.Open();
+                    OracleDataAdapter adp = new OracleDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adp.Fill(ds);
+                    conn.Close();
+                    DataTable dt = ds.Tables[0];
+                    return dt;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+        }
         public DataTable GetDataTable(string sql)
         {
             using (OracleConnection conn = new OracleConnection(strConn))
@@ -53,16 +74,25 @@ namespace adims_DAL
         //    string sql = "select * from v_operation_interface  where to_char(Odate,'yyyy-MM-dd')='" + dtime + "'";
         //    return this.GetDataTable(sql);
         //}
-        //public DataTable GetHISpaiban(string dtime)
-        //{
-        //    string sql = "select * from v_operation_interface where to_char(Odate,'yyyy-MM-dd')='" + dtime + "'";
-        //    return this.GetDataTable(sql);
-        //}
+
         public DataTable GetHISpaiban(string dtime)
-        {
-            string sql = "select ZYID,ZHUYUANNO||sqcs as zhuyuanid,CARDID,PATNAME,PATSEX,PATAGE,PATNATION,BedNo,PATTMD,ONAME,AMETHOD,OS,OS1,OS2,OS3,OS4,SUBSTR(to_char(ODATE,'yyyymmdd hh24:mi:ss'),10,17 ) as StartTime,ODATE,TIWEI,SSLB from v_operation_interface where to_char(Odate,'yyyy-MM-dd')='" + dtime + "'";
+        {//||sqcs
+         // string sql = "select ZYID,ZHUYUANNO as ZHUYUANNO,CARDID,PATNAME,PATSEX,PATAGE,PATNATION,BedNo,PATTMD,ONAME,AMETHOD,OS,OS1,OS2,OS3,OS4,SUBSTR(to_char(ODATE,'yyyymmdd hh24:mi:ss'),10,17 ) as StartTime,ODATE,TIWEI,SSLB from v_operation_interface where to_char(Odate,'yyyy-MM-dd')='" + dtime + "'";
+            string sql = "select * from v_operation_interface where to_char(Odate,'yyyy-MM-dd')='" + dtime + "'";
+
             return this.GetDataTable(sql);
         }
+        public DataTable BINGLI(string Patid,string name)
+        {
+            //string sql = "select tiwen,maibo,huxi,xueya from emr3.v_sm_zhiliaoxx where patid = '" + Patid + "'";
+            string sql = "select " + name + " from emr3.v_sm_zhiliaoxx where patid = '" + Patid + "' and " + name + " is not null and rownum = 1";
+            return this.JCJY(sql);
+        }
+        //public DataTable GetHISpaiban(string dtime)
+        //{
+        //    string sql = "select ZYID,ZHUYUANNO,CARDID,PATNAME,PATSEX,PATAGE,PATNATION,BedNo,PATTMD,ONAME,AMETHOD,OS,OS1,OS2,OS3,OS4,SUBSTR(to_char(ODATE,'yyyymmdd hh24:mi:ss'),10,17 ) as StartTime,ODATE,TIWEI,SSLB from v_operation_interface where to_char(Odate,'yyyy-MM-dd')='" + dtime + "'";
+        //    return this.GetDataTable(sql);
+        //}
         public DataTable GetHISpaibanmenzhen(string dtime)
         {
             string sql = "select * from v_operation_menzhen  where patient_id='" + dtime + "' order by VISIT_DATE desc ";

@@ -10,7 +10,7 @@ using adims_BLL;
 using adims_DAL;
 using adims_MODEL;
 using System.Drawing.Printing;
-
+using Adims_Utility;
 
 namespace main.CGG
 {

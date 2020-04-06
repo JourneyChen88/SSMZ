@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Adims_Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -315,7 +316,7 @@ namespace main
             DataTable dt = new DataTable();
             dt = dal.GetALLPAIBAN(ZYNumber1);
             tbPatname.Text = dt.Rows[0]["Patname"].ToString();
-            tbZhuyuanID.Text = dt.Rows[0]["PatZhuYuanID"].ToString();
+            tbZhuyuanID.Text = dt.Rows[0]["PatID"].ToString();
             tbBedNO.Text = dt.Rows[0]["Patbedno"].ToString();
             //tbShoushuName.Text = dt.Rows[0]["Oname"].ToString();
             //textBoxzd.Text = dt.Rows[0][""].ToString();

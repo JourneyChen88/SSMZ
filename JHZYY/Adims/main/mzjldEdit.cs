@@ -22,11 +22,14 @@ using adims_MODEL;
 using System.Drawing.Printing;
 using main.CGG;
 using Adims_Utility;
+using System.Configuration;
 
 namespace main
 {
     public partial class mzjldEdit : Form, IMessageFilter
     {
+        adims_DAL.hisdbhelp_oracle hisoracl = new adims_DAL.hisdbhelp_oracle();
+        adims_DAL.AdimsProvider DAL = new adims_DAL.AdimsProvider();
         string patidccs;
         #region //飞利浦参数
 
@@ -94,7 +97,7 @@ namespace main
         DateTime ReceivedTime_JKW = DateTime.Now;
         public bool SockectIsException_JKW = false;
 
-        
+
         #endregion
 
         #region 迈瑞参数
@@ -121,7 +124,7 @@ namespace main
         int iYema = 1;
         adims_DAL.AdimsProvider dal = new adims_DAL.AdimsProvider();
         adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
-        adims_MODEL.paiban pat = new adims_MODEL.paiban();
+        adims_MODEL.paibanModel pat = new adims_MODEL.paibanModel();
         Label lbMzks1 = new Label();//麻醉开始lable
         Label lbMzjs1 = new Label();//麻醉结束lable
         Label lbSSKS = new Label();//手术开始lable
@@ -155,7 +158,7 @@ namespace main
         adims_MODEL.tsyy t_tsyy = new adims_MODEL.tsyy();//单个特殊用药模板
         adims_MODEL.szsj t_szsj = new adims_MODEL.szsj();//单个术中事件模板
         adims_MODEL.clcxqt t_chuniao = new adims_MODEL.clcxqt();//单个出尿模板
-       
+
         adims_MODEL.clcxqt t_niaoliang = new adims_MODEL.clcxqt();
         adims_MODEL.clcxqt t_yll = new adims_MODEL.clcxqt();
         adims_MODEL.clcxqt t_shixue = new adims_MODEL.clcxqt();
@@ -165,7 +168,7 @@ namespace main
         int ssmzcgbgFlag = 0;//手术麻醉插管拔管鼠标按下是否选中标志 
 
         adims_MODEL.point t_point = new adims_MODEL.point();//单个point模板       
-      
+
         private List<string> jhxmAll = new List<string>();//所有备选监护项目
         private List<string> jhxmIn = new List<string>();//已添加的监护项目
         public List<adims_MODEL.point> ssyList = new List<adims_MODEL.point>();//收缩点集合
@@ -244,7 +247,7 @@ namespace main
             InitializeComponent();
             GetConfigure();
             tbIpAdress.Text = IPAddressInput1;
-          //  BedNumber1.Text = BedIDInput1;
+            //  BedNumber1.Text = BedIDInput1;
             phillip_server = new IPEndPoint(IPAddress.Parse(tbIpAdress.Text.Trim()), 24105);
             server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             Remote = new IPEndPoint(IPAddress.Any, 8001);
@@ -343,21 +346,72 @@ namespace main
             lbtimew9.Text = lbTime9.Text = otime.AddMinutes(48 * jcsjjg).ToString("HH:mm");
             lbtimew10.Text = lbTime10.Text = otime.AddMinutes(54 * jcsjjg).ToString("HH:mm");
         }
+        private void HisDataBINGLI()
+        {
+            //    try
+            //    {
+            //        //DataTable BRSYH=    //取病人首页号
+            //        DataTable zhi = DAL.brsyh(patID);
+            //        string BRSYH = zhi.Rows[0]["BRSYH"].ToString();
+            //        DataTable dt1 = hisoracl.BINGLI(BRSYH, "tiwen");
+            //        if (dt1.Rows.Count != 0)
+            //        {
+            //            string tiwen=dt1.Rows[0][0].ToString();
+            //            dal.JYXX(tiwen, "tiwen", patID);
+            //        }
+            //        dt1 = hisoracl.BINGLI(BRSYH, "xueya");
+            //        if (dt1.Rows.Count != 0)
+            //        {
+            //            string tiwen = dt1.Rows[0][0].ToString();
+            //            dal.JYXX(tiwen, "xueya", patID);
+            //        }
+            //        dt1 = hisoracl.BINGLI(BRSYH, "huxi");
+            //        if (dt1.Rows.Count != 0)
+            //        {
+            //            string tiwen = dt1.Rows[0][0].ToString();
+            //            dal.JYXX(tiwen, "huxi", patID);
+            //        }
+            //        dt1 = hisoracl.BINGLI(BRSYH, "maibo");
+            //        if (dt1.Rows.Count != 0)
+            //        {
+            //            string tiwen = dt1.Rows[0][0].ToString();
+            //            dal.JYXX(tiwen, "maibo", patID);
+            //        }
+            //    }
+            //    catch (Exception E)
+            //    {
+            //        MessageBox.Show(E.ToString() + " 出错");
+            //    }
 
+        }//从病例获取血压，脉搏，呼吸，体温
         private void BindMzjldBacicInfo()//加载麻醉记录单信息
         {
+
+
+
             DataTable dtMzjld = bll.selectmzjld(mzjldID);
             txtHeight.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["Height"]);
             txtWeight.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["Weight"]);
-            
+
+
+
             txtTW.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["tiwen"]);
             txtXueya.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["xueya"]);
             txtHuxi.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["huxi"]);
             txtMaibo.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["maibo"]);
             cmbXueXing.Text = Convert.ToString(dtMzjld.Rows[0]["xuexing"]);
+            //if (txtTW.Controls[0].Text == "" && txtXueya.Controls[0].Text =="" && txtHuxi.Controls[0].Text =="" && txtMaibo.Controls[0].Text =="")
+            //{
+            //    string zhuyuanhao = patID.ToString();
+            //    DataTable brsyh = DAL.brsyh(zhuyuanhao);//获取病人就诊卡号
+            //    string syh = brsyh.Rows[0]["BRSYH"].ToString();
+            //    HisDataBind(syh);
+            //}
+
+
             cmbASA.Text = Convert.ToString(dtMzjld.Rows[0]["ASA"]);
             txtSqzd.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["sqzd"]);
-            txtTSBQing.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["nssss"]);
+            txtNssss.Controls[0].Text = Convert.ToString(dtMzjld.Rows[0]["nssss"]);
             cmbTiwei.Text = Convert.ToString(dtMzjld.Rows[0]["tw"]);
             cmbSQJinshi.Text = Convert.ToString(dtMzjld.Rows[0]["SQJinshi"]);
             if (Convert.ToString(dtMzjld.Rows[0]["isjizhen"]) == "1")
@@ -650,10 +704,11 @@ namespace main
             txtWeight.Controls[0].Text = Convert.ToString(dt.Rows[0]["PatWeight"]);
             this.cmbXueXing.Text = Convert.ToString(dt.Rows[0]["PatBloodType"]);
             txtZhuYuanHao.Controls[0].Text = Convert.ToString(dt.Rows[0]["patid"]);
-            patidccs= Convert.ToString(dt.Rows[0]["patid"]);
+            patidccs = Convert.ToString(dt.Rows[0]["patid"]);
             txtsshzd.Controls[0].Text = Convert.ToString(dt.Rows[0]["pattmd"]);
             this.txtBingQu.Controls[0].Text = Convert.ToString(dt.Rows[0]["patdpm"]);
             this.txtBednumber.Controls[0].Text = Convert.ToString(dt.Rows[0]["patbedno"]);
+            this.txtYiLiaoFei.Controls[0].Text = Convert.ToString(dt.Rows[0]["yiliao"]);
             txtNssss.Controls[0].Text = Convert.ToString(dt.Rows[0]["oname"]);
             txtShoushuFS.Controls[0].Text = Convert.ToString(dt.Rows[0]["oname"]);
             txtSqzd.Controls[0].Text = Convert.ToString(dt.Rows[0]["pattmd"]);
@@ -668,7 +723,13 @@ namespace main
             txtXHHS.Controls[0].Text = Convert.ToString(dt.Rows[0]["Sn1"])
                                 + " " + Convert.ToString(dt.Rows[0]["sn2"]);
             dtOdate.Value = Convert.ToDateTime(dt.Rows[0]["Odate"]);
-            textBsfzh.Text = Convert.ToString(dt.Rows[0]["zrys"]);
+            // textBsfzh.Text = Convert.ToString(dt.Rows[0]["zrys"]);
+            txtTW.Controls[0].Text = Convert.ToString(dt.Rows[0]["tiwen"]);
+            txtXueya.Controls[0].Text = Convert.ToString(dt.Rows[0]["xueya"]);
+            txtHuxi.Controls[0].Text = Convert.ToString(dt.Rows[0]["huxi"]);
+            txtMaibo.Controls[0].Text = Convert.ToString(dt.Rows[0]["maibo"]);
+            textBsfzh.Text = Convert.ToString(dt.Rows[0]["SFZH"]);
+
         }
         private void cmbTiweiBind()//绑定体位下拉表
         {
@@ -698,7 +759,7 @@ namespace main
                 foreach (string portName in spName)
                 {
                     cmbCOM.Items.Add(portName);
-                   
+
                 }
             }
             cmbCOM.SelectedIndex = 0;
@@ -771,6 +832,7 @@ namespace main
             this.dtOtime.CustomFormat = "yyyy-MM-dd HH:mm";
             try
             {
+                HisDataBINGLI();
                 GetPatBasicInfo();
                 if (mzjldID == 0)
                 {
@@ -829,17 +891,17 @@ namespace main
                 }
                 else if (mzjldID != 0)
                 {
-                   // if (isSjll)
-                   // dal.UpdateShoushujianinfo(5, mzjldID, patID, Oroom);//修改手术间状态信息为准备手术
+                    // if (isSjll)
+                    // dal.UpdateShoushujianinfo(5, mzjldID, patID, Oroom);//修改手术间状态信息为准备手术
 
                     jhxmIn.Clear();
-                    
+
                     DataTable dtJhxm = bll.GetJhxm(mzjldID);
                     for (int i = 0; i < dtJhxm.Rows.Count; i++)
                     {
                         jhxmIn.Add(dtJhxm.Rows[i][0].ToString());
                     }
-                    
+
                     DataTable dt = new DataTable();
                     txtMzjldid.Controls[0].Text = Convert.ToString(mzjldID);
                     DataTable dtMZ_Info = bll.SelectOldPatInfo(mzjldID);
@@ -952,7 +1014,6 @@ namespace main
                 MessageBox.Show(ex.ToString(), "出现异常，请检查！");
             }
         }
-
         #region //绑定用药，时间，麻醉平面等数据
         private void BindQtList()//绑定气体列表
         {
@@ -1185,7 +1246,7 @@ namespace main
         }
         #endregion
 
-        
+
 
         #region //双击事件
 
@@ -1236,7 +1297,7 @@ namespace main
             #region //分类型采集
             if (btnMonitor.Text.Equals("开始监测"))
             {
-                if (cmbJianhuyi.Text.IsNullOrEmpty())
+                if (cmbJianhuyi.Text == "")
                 {
                     MessageBox.Show("请选择监护仪机型！");
                     return;
@@ -1302,16 +1363,16 @@ namespace main
                     timerJKW.Stop();
                     if (serialPort1.IsOpen)
                     {
-                       
+
                         serialPort1.Close();
                     }
-                  
+
                     if (_serialPort.IsOpen)
                     {
                         _serialPort.StopTransfer();
                         _serialPort.Close();
                     }
-                  
+
                     if (ThreadExist)
                     {
                         ThreadExist = false;
@@ -1361,7 +1422,7 @@ namespace main
             {
                 if (_serialPort.OSIsUnix())
                 {
-                    dataEvent += new EventHandler(delegate(object senderGE, EventArgs eGE)
+                    dataEvent += new EventHandler(delegate (object senderGE, EventArgs eGE)
                     {
                         ReadData(senderGE);
                     });
@@ -1400,7 +1461,7 @@ namespace main
             try
             {
                 // _serialPort.ReadBuffer();
-                (sender as DSerialPort).ReadBuffer(mzjldID, 0,rrc);
+                (sender as DSerialPort).ReadBuffer(mzjldID, 0, rrc);
             }
             catch (TimeoutException) { }
         }
@@ -1438,14 +1499,15 @@ namespace main
             }
             return position;
         }
-        private void FillipData()
+        int spo23 = 0, etc023 = 0, pr3 = 0, xy = 0, xy2 = 0;
+        private void FillipData()//飞利浦
         {
             try
             {
                 bool TimerStarted = false;
                 string temp1 = tbIpAdress.Text;
                 //string temp2 = this.txtMzjldid.Controls[0].Text;
-                IPAddressInput1 = tbIpAdress.Text;
+                IPAddressInput1 = tbIpAdress.Text;   //IP必须与监护仪上一样
                 //BedIDInput1 = this.txtMzjldid.Controls[0].Text;
                 if (ThreadExist)
                 {
@@ -1469,9 +1531,9 @@ namespace main
                     //Receiving_xy = null; ////在.NET中，有GC垃圾回收，如果这里不赋为null，有可能老半天也不回收内存，甚至永远这么占着，导致内存泄漏。
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-            MessageBox.Show("1."+ex);
+                MessageBox.Show("1." + ex);
             }
         }
         private delegate void setText();//定义一个线程委托
@@ -1486,9 +1548,9 @@ namespace main
 
                 //   Socket server;
                 // ip = new IPEndPoint(IPAddress.Parse(ip_txt.Text.Trim()), 24105);
-                //定义网络类型，数据连接类型和网络协议UDP
 
-                string temp1 = IPAddressInput1;
+
+                string temp1 = IPAddressInput1;//定义网络类型，数据连接类型和网络协议UDP
                 while (true)
                 {
 
@@ -1573,7 +1635,7 @@ namespace main
 
 
                     server.SendTo(AssocReq, 237, SocketFlags.None, phillip_server);
-                  //  logstr = "Send Association Request : " + MeasureDate.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n" + BitConverter.ToString(AssocReq).Replace("-", ",0x");
+                    //  logstr = "Send Association Request : " + MeasureDate.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n" + BitConverter.ToString(AssocReq).Replace("-", ",0x");
 
                     //Thread.Sleep(Waiting_Period);
 
@@ -1582,8 +1644,8 @@ namespace main
                     recv_Length = 0;
                     recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
 
-                  //  logstr = "Received Association Result: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-                   // SaveLog(logstr);
+                    //  logstr = "Received Association Result: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+                    // SaveLog(logstr);
                     if (recv_Length > 0)
                     {
                         if (recv_Data[0] == 0x0E)  // MessageBox.Show("收到联系响应报文！");
@@ -1598,7 +1660,7 @@ namespace main
                             //   response_txt.Text = response_str;
                             recv_Length = server.ReceiveFrom(recv_Data, ref phillip);// 接收 MDS CREATE EVENT 
                             logstr = "Received MSD Create Event Report : " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-                           // SaveLog(logstr);
+                            // SaveLog(logstr);
 
 
                             if (recv_Length > 0)
@@ -1622,8 +1684,8 @@ namespace main
                         0x47,0x00,0x0d,0x06,0x00,0x00
                     };
                             server.SendTo(event_result, 28, SocketFlags.None, phillip_server);
-                           // logstr = "Send MSD Create Event Result: " + BitConverter.ToString(event_result).Replace("-", ",0x");
-                           // SaveLog(logstr);
+                            // logstr = "Send MSD Create Event Result: " + BitConverter.ToString(event_result).Replace("-", ",0x");
+                            // SaveLog(logstr);
 
                             Thread.Sleep(1000);
 
@@ -1678,12 +1740,12 @@ namespace main
                         LoopCount++;
                         Thread.Sleep(500);
                         server.SendTo(single_poll_exs, 40, SocketFlags.None, phillip_server);
-                       // logstr = "Send single pool ext: " + BitConverter.ToString(single_poll_exs).Replace("-", ",0x");
-                       // SaveLog(logstr);
+                        // logstr = "Send single pool ext: " + BitConverter.ToString(single_poll_exs).Replace("-", ",0x");
+                        // SaveLog(logstr);
                         //Thread.Sleep(1000);
                         recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
-                       // logstr = "Received single pool ext response1: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-                       // SaveLog(logstr);
+                        // logstr = "Received single pool ext response1: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+                        // SaveLog(logstr);
                         //处理第一个消息， 该消息是一个ROLRS_APDU消息
                         if ((recv_Length > 0) && (recv_Data[4] == 0x00) && (recv_Data[5] == 0x02))
                         {
@@ -1691,16 +1753,20 @@ namespace main
                             int Fieldposition = 0;
                             //PR 0x4822
                             Fieldposition = FindField(recv_Data, 0x48, 0x22);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 pr_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
                                 if (pr_effective)
                                     PR = (int)getFloat(recv_Data, Fieldposition + 6);
+                                if (PR != 0)
+                                {
+                                    pr3 = (int)getFloat(recv_Data, Fieldposition + 6);
+                                }
                             }
                             //RR 0x500A
                             Fieldposition = FindField(recv_Data, 0x50, 0x0A);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 rr_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1709,7 +1775,7 @@ namespace main
                             }
                             //awRR 0x5012
                             Fieldposition = FindField(recv_Data, 0x50, 0x12);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 awrr_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1718,26 +1784,36 @@ namespace main
                             }
                             //EtCO2 0x50B0 
                             Fieldposition = FindField(recv_Data, 0x50, 0xB0);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 etco2_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
                                 if (etco2_effective)
                                     ETCO2 = (int)getFloat(recv_Data, Fieldposition + 6);
+                                if (ETCO2 != 0)
+                                {
+                                    etc023 = (int)getFloat(recv_Data, Fieldposition + 6);
+                                    //int spo23, etc023, pr3;
+                                }
                             }
 
                             //SPO2 0x4BB8
                             Fieldposition = FindField(recv_Data, 0x4B, 0xB8);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 spo2_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
                                 if (spo2_effective)
                                     SPO2 = (int)getFloat(recv_Data, Fieldposition + 6);
+                                if (SPO2 != 0)
+                                {
+                                    spo23 = (int)getFloat(recv_Data, Fieldposition + 6);
+
+                                }
                             }
                             //TEMP 0x4B60
                             Fieldposition = FindField(recv_Data, 0x4B, 0x60);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 temp_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1746,7 +1822,7 @@ namespace main
                             }
                             //HR 0x4182
                             Fieldposition = FindField(recv_Data, 0x41, 0x82);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 hr_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1756,25 +1832,33 @@ namespace main
 
                             //NBP SYS 0x4A05
                             Fieldposition = FindField(recv_Data, 0x4A, 0x05);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 sys_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
                                 if (sys_effective)
                                     SYS = (int)getFloat(recv_Data, Fieldposition + 6);
+                                if (270 > SYS && SYS > 5)
+                                {
+                                    xy = (int)getFloat(recv_Data, Fieldposition + 6);
+                                }
                             }
                             //NBP DIA 0x4A06
                             Fieldposition = FindField(recv_Data, 0x4A, 0x06);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 dia_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
                                 if (dia_effective)
                                     DIA = (int)getFloat(recv_Data, Fieldposition + 6);
+                                if (270 > DIA && DIA > 5)
+                                {
+                                    xy2 = (int)getFloat(recv_Data, Fieldposition + 6);
+                                }
                             }
                             //NBP MAP 0x4A07
                             Fieldposition = FindField(recv_Data, 0x4A, 0x07);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 map_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1784,7 +1868,7 @@ namespace main
 
                             //CVP 0x4A44
                             Fieldposition = FindField(recv_Data, 0x4A, 0x44);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 CVP_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1793,7 +1877,7 @@ namespace main
                             }
                             //CVP SYS 0x4A45
                             Fieldposition = FindField(recv_Data, 0x4A, 0x45);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 CVP_sys_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1802,7 +1886,7 @@ namespace main
                             }
                             //CVP DIA 0x4A46
                             Fieldposition = FindField(recv_Data, 0x4A, 0x46);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 CVP_dia_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1811,7 +1895,7 @@ namespace main
                             }
                             //NBP MAP 0x4A47
                             Fieldposition = FindField(recv_Data, 0x4A, 0x47);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 CVP_map_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1822,7 +1906,7 @@ namespace main
 
                             //ABP SYS 0x4A15
                             Fieldposition = FindField(recv_Data, 0x4A, 0x15);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 ABP_sys_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1831,7 +1915,7 @@ namespace main
                             }
                             //ABP DIA 0x4A16
                             Fieldposition = FindField(recv_Data, 0x4A, 0x16);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 ABP_dia_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1840,7 +1924,7 @@ namespace main
                             }
                             //ABP MAP 0x4A17
                             Fieldposition = FindField(recv_Data, 0x4A, 0x17);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 ABP_map_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1850,7 +1934,7 @@ namespace main
 
                             //ART SYS 0x4A11
                             Fieldposition = FindField(recv_Data, 0x4A, 0x11);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 ART_sys_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1859,7 +1943,7 @@ namespace main
                             }
                             //ART DIA 0x4A12
                             Fieldposition = FindField(recv_Data, 0x4A, 0x12);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 ART_dia_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1868,7 +1952,7 @@ namespace main
                             }
                             //ART MAP 0x4A13
                             Fieldposition = FindField(recv_Data, 0x4A, 0x13);
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 10 < recv_Length))
                             {
                                 physio_id = recv_Data[Fieldposition] * 256 + recv_Data[Fieldposition + 1];
                                 ART_map_effective = recv_Data[Fieldposition + 2] == 0 ? true : false;
@@ -1879,7 +1963,7 @@ namespace main
                             // Measure time 0x0990
                             Fieldposition = FindField(recv_Data, 0x09, 0x90);//Attribute ID: Absolute Time Stamp NOM_ATTR_TIME_STAMP_ABS
                             //                      if (recv_Data[contemp3] == 0x09 && recv_Data[contemp3 + 1] == 0x90)//Attribute ID: Absolute Time Stamp NOM_ATTR_TIME_STAMP_ABS
-                            if (Fieldposition > 0)
+                            if ((Fieldposition > 0) && (Fieldposition + 11 < recv_Length))
                             { //时间字段  BCD格式， 需要转化为十进制
                                 contemp4 = Fieldposition + 4;
 
@@ -1908,8 +1992,8 @@ namespace main
                             HasEffectiveData = hr_effective || rr_effective || pr_effective || temp_effective || spo2_effective || sys_effective || dia_effective || map_effective || CVP_map_effective || ABP_map_effective;
                             HasEffectivePressure = map_effective || CVP_map_effective || ABP_map_effective;
 
-                          //  logstr = "HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
-                           // SaveLog(logstr);
+                            //  logstr = "HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
+                            // SaveLog(logstr);
 
                         }
 
@@ -1963,7 +2047,7 @@ namespace main
                         PatientData.ART_DIA = ART_DIA; PatientData.ART_dia_effective = ART_dia_effective; //动脉舒张压
                         PatientData.ART_MAP = ART_MAP; PatientData.ART_map_effective = ART_map_effective; //动脉平均血压
 
-                     //   logstr = "Final Saved Data: Time=" + MeasureDate.ToString("yyyy-MM-dd HH:mm:ss") + ";HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";awRR=" + awRR.ToString() + ";ETCO2=" + ETCO2.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
+                        //   logstr = "Final Saved Data: Time=" + MeasureDate.ToString("yyyy-MM-dd HH:mm:ss") + ";HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";awRR=" + awRR.ToString() + ";ETCO2=" + ETCO2.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
                         //string logstr = "HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";awRR=" + awRR.ToString() + ";ETCO2=" + ETCO2.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
                         //SaveLog(logstr);
                         //SaveData(PatientData);
@@ -1971,7 +2055,7 @@ namespace main
                     }
                     Byte[] Associate_Release_Request = new Byte[]
              {
-                 0x09, 0x18, 
+                 0x09, 0x18,
                  0xC1, 0x16, 0x61, 0x80, 0x30, 0x80, 0x02, 0x01,
                  0x01, 0xA0, 0x80, 0x62, 0x80, 0x80, 0x01, 0x00,
                  0x00, 0x00, 0x00, 0x00,
@@ -1983,12 +2067,12 @@ namespace main
                     //SaveLog(logstr);
                     // Thread.Sleep(Waiting_Period);
                     recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
-                  //  logstr = "Received Associate Release Result: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-                   // SaveLog(logstr);
+                    //  logstr = "Received Associate Release Result: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+                    // SaveLog(logstr);
 
                     Byte[] Associate_Release_Response = new Byte[]
              {
-                 0x0A, 0x18, 
+                 0x0A, 0x18,
 
                  0xC1, 0x16, 0x61, 0x80, 0x30, 0x80, 0x02, 0x01,
                  0x01, 0xA0, 0x80, 0x63, 0x80, 0x80, 0x01, 0x00,
@@ -2015,13 +2099,13 @@ namespace main
                     else if (recv_Data[0] == Associate_Abort[0] && recv_Data[1] == Associate_Abort[1])
                     {
                         // Associate_Abort
-                       // MessageBox.Show("收到连接中断消息！");
+                        // MessageBox.Show("收到连接中断消息！");
                     }
                     else
                     {
                         //收到无法识别的消息
 
-                     //   MessageBox.Show("收到无法识别消息！");
+                        //   MessageBox.Show("收到无法识别消息！");
                     }
                     Thread.Sleep(Get_Period);
                     GetDataTimes++;
@@ -2029,7 +2113,7 @@ namespace main
             }
             catch (Exception ex)
             {
-                MessageBox.Show("2"+ex);
+                MessageBox.Show("2" + ex);
             }
         }
         public struct PatientDataBlock
@@ -2062,8 +2146,19 @@ namespace main
         {
             try
             {
-                int PR1 = PatientInfo.PR;
+                int SPO21;
+                int ETCO21;
+                //int PR1 = PatientInfo.PR;
+                int PR1;
                 int RR1 = 0;
+                if (PatientInfo.PR == 0)
+                {
+                    PR1 = pr3;
+                }
+                else
+                {
+                    PR1 = PatientInfo.PR;
+                }
                 if (PatientInfo.awRR != 0)
                 {
                     RR = PatientInfo.awRR;
@@ -2077,19 +2172,53 @@ namespace main
                 }
                 if (PatientInfo.awRR == 0)
                 {
-                    RR = SPO2/4;
+                    RR = SPO2 / 4;
                 }
-                int SPO21 = (int)PatientInfo.SPO2;
-                int ETCO21 = PatientInfo.ETCO2;
+                if ((int)PatientInfo.SPO2 == 0)
+                {
+                    SPO21 = spo23;
+                }
+                else
+                {
+                    SPO21 = (int)PatientInfo.SPO2;
+                }
+                //int SPO21  = (int)PatientInfo.SPO2;
+                // int ETCO21 = PatientInfo.ETCO2;
+                if (PatientInfo.ETCO2 == 0)
+                {
+                    ETCO21 = etc023;
+                }
+                else
+                {
+                    ETCO21 = PatientInfo.ETCO2;
+                }
                 double TEMP1 = PatientInfo.TEMP;
                 if (TEMP1 == 0)
                 {
                     TEMP1 = 36.7;
-                
+
                 }
                 int HR1 = PatientInfo.HR;
-                int SYS1 = PatientInfo.SYS;
-                int DIA1 = PatientInfo.DIA;
+                //int SYS1 = PatientInfo.SYS;
+                int SYS1 = 0;
+                if (PatientInfo.SYS == 0)
+                {
+                    SYS1 = xy;
+                }
+                else
+                {
+                    SYS1 = PatientInfo.SYS;
+                }
+                //int DIA1 = PatientInfo.DIA;
+                int DIA1 = 0;
+                if (PatientInfo.DIA == 0)
+                {
+                    DIA1 = xy2;
+                }
+                else
+                {
+                    DIA1 = PatientInfo.DIA;
+                }
                 int MAP1 = PatientInfo.MAP;
                 int CVP_DIA1 = PatientInfo.CVP_DIA;
                 int CVP_SYS1 = PatientInfo.CVP_SYS;
@@ -2098,28 +2227,28 @@ namespace main
                 int ABP_DIA1 = PatientInfo.ABP_DIA;
                 int ABP_MAP1 = PatientInfo.ABP_MAP;
                 string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-                if (sqlite.selectJianCeData(now, mzjldID, type).Rows.Count == 0)
+                if (sqlite.selectJianCeData(now, mzjldID, type).Rows.Count == 0)//判断是否有数据
                 {
                     int fa = 0;
                     if (ABP_SYS1 != 0 && ABP_DIA1 != 0 && ABP_MAP1 != 0)
                     {
                         if (type == 0)
-                            fa = sqlite.insertJianCeDataMZJLD(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, TEMP1,CVP_MAP1, now);
+                            fa = sqlite.insertJianCeDataMZJLD(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, CVP_MAP1, now);
                         if (type == 1)
                             fa = sqlite.insertJianCeDataPACU(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
                     }
                     else
                     {
                         if (type == 0)
-                            fa = sqlite.insertJianCeDataMZJLD(mzjldID, SYS1, DIA1, MAP1, RR, HR, PR, SPO2, ETCO2, TEMP1,CVP_MAP1, now);
+                            fa = sqlite.insertJianCeDataMZJLD(mzjldID, SYS1, DIA1, MAP1, RR, HR, PR, SPO2, ETCO2, TEMP1, CVP_MAP1, now);
                         if (type == 1)
                             fa = sqlite.insertJianCeDataPACU(mzjldID, SYS, DIA, MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("3"+ex);
+                MessageBox.Show("3" + ex);
             }
         }
 
@@ -2177,531 +2306,531 @@ namespace main
 
         #region //飞利浦监护函数
 
-            //private void FillipData()
-            //{
-            //    bool TimerStarted = false;
-            //    string temp1 = tbIpAdress.Text;
-            //    //string temp2 = this.txtMzjldid.Controls[0].Text;
-            //    IPAddressInput1 = tbIpAdress.Text;
-            //    //BedIDInput1 = this.txtMzjldid.Controls[0].Text;
-            //    if (ThreadExist)
-            //    {
-            //        ThreadExist = false;
-            //        Receiving_xy.Abort();//强制结束线程运行
-            //        Receiving_xy = null; ////在.NET中，有GC垃圾回收，如果这里不赋为null，不回收内存，甚至永远这么占着，导致内存泄漏。
-            //    }
-            //    if (!TimerStarted)
-            //    {
-            //        CheckTimer.Start();
-            //        TimerStarted = true;
-            //    }
-            //    SaveConfigure();
-            //    GetConfigure();
-            //    if (!ThreadExist)
-            //    {
-            //        Receiving_xy = new Thread(GatherData);
-            //        Receiving_xy.Start();
-            //        ThreadExist = true;
-            //        //Receiving_xy.Abort();//强制结束线程运行
-            //        //Receiving_xy = null; ////在.NET中，有GC垃圾回收，如果这里不赋为null，有可能老半天也不回收内存，甚至永远这么占着，导致内存泄漏。
-            //    }
-            //}
-            //private delegate void setText();//定义一个线程委托
-            //public void GatherData()
-            //{
-            //    int i = 0;
-            //    int j = 0;
-            //    int k = 0;
-            //    int t = 0;
-            //    //   Socket server;
-            //    // ip = new IPEndPoint(IPAddress.Parse(ip_txt.Text.Trim()), 24105);
-            //    //定义网络类型，数据连接类型和网络协议UDP
+        //private void FillipData()
+        //{
+        //    bool TimerStarted = false;
+        //    string temp1 = tbIpAdress.Text;
+        //    //string temp2 = this.txtMzjldid.Controls[0].Text;
+        //    IPAddressInput1 = tbIpAdress.Text;
+        //    //BedIDInput1 = this.txtMzjldid.Controls[0].Text;
+        //    if (ThreadExist)
+        //    {
+        //        ThreadExist = false;
+        //        Receiving_xy.Abort();//强制结束线程运行
+        //        Receiving_xy = null; ////在.NET中，有GC垃圾回收，如果这里不赋为null，不回收内存，甚至永远这么占着，导致内存泄漏。
+        //    }
+        //    if (!TimerStarted)
+        //    {
+        //        CheckTimer.Start();
+        //        TimerStarted = true;
+        //    }
+        //    SaveConfigure();
+        //    GetConfigure();
+        //    if (!ThreadExist)
+        //    {
+        //        Receiving_xy = new Thread(GatherData);
+        //        Receiving_xy.Start();
+        //        ThreadExist = true;
+        //        //Receiving_xy.Abort();//强制结束线程运行
+        //        //Receiving_xy = null; ////在.NET中，有GC垃圾回收，如果这里不赋为null，有可能老半天也不回收内存，甚至永远这么占着，导致内存泄漏。
+        //    }
+        //}
+        //private delegate void setText();//定义一个线程委托
+        //public void GatherData()
+        //{
+        //    int i = 0;
+        //    int j = 0;
+        //    int k = 0;
+        //    int t = 0;
+        //    //   Socket server;
+        //    // ip = new IPEndPoint(IPAddress.Parse(ip_txt.Text.Trim()), 24105);
+        //    //定义网络类型，数据连接类型和网络协议UDP
 
-            //    string temp1 = IPAddressInput1;
-            //    while (true)
-            //    {
-            //        PR = 0; pr_effective = false;    //脉率
-            //        RR = 0; rr_effective = false;    //呼吸频率
-            //        SPO2 = 0; spo2_effective = false;//血氧饱和度
-            //        TEMP1 = 0; temp_effective = false;//温度
-            //        HR = 0; hr_effective = false;    //心率
-            //        SYS = 0; sys_effective = false; //收缩压
-            //        DIA = 0; dia_effective = false; //舒张压
-            //        MAP = 0; map_effective = false; //平均血压
-            //        CVP_SYS = 0; CVP_sys_effective = false; //中心静脉收缩压
-            //        CVP_DIA = 0; CVP_dia_effective = false; //中心静脉舒张压
-            //        CVP_MAP = 0; CVP_map_effective = false; //中心静脉平均血压
-            //        ABP_SYS = 0; ABP_sys_effective = false; //动脉收缩压
-            //        ABP_DIA = 0; ABP_dia_effective = false; //动脉舒张压
-            //        ABP_MAP = 0; ABP_map_effective = false; //动脉平均血压
-            //        MeasureDate = System.DateTime.Now;
-            //        //setText d = new setText(DisplayAllData);
-            //        //this.Invoke(d);
-            //        string logstr;
-            //        int recv_Length = 0;
-            //        /* recv_Length = server.ReceiveFrom(recv_Data,ref phillip);
-            //          if (recv_Length > 0) MessageBox.Show("indication message is received");*/
+        //    string temp1 = IPAddressInput1;
+        //    while (true)
+        //    {
+        //        PR = 0; pr_effective = false;    //脉率
+        //        RR = 0; rr_effective = false;    //呼吸频率
+        //        SPO2 = 0; spo2_effective = false;//血氧饱和度
+        //        TEMP1 = 0; temp_effective = false;//温度
+        //        HR = 0; hr_effective = false;    //心率
+        //        SYS = 0; sys_effective = false; //收缩压
+        //        DIA = 0; dia_effective = false; //舒张压
+        //        MAP = 0; map_effective = false; //平均血压
+        //        CVP_SYS = 0; CVP_sys_effective = false; //中心静脉收缩压
+        //        CVP_DIA = 0; CVP_dia_effective = false; //中心静脉舒张压
+        //        CVP_MAP = 0; CVP_map_effective = false; //中心静脉平均血压
+        //        ABP_SYS = 0; ABP_sys_effective = false; //动脉收缩压
+        //        ABP_DIA = 0; ABP_dia_effective = false; //动脉舒张压
+        //        ABP_MAP = 0; ABP_map_effective = false; //动脉平均血压
+        //        MeasureDate = System.DateTime.Now;
+        //        //setText d = new setText(DisplayAllData);
+        //        //this.Invoke(d);
+        //        string logstr;
+        //        int recv_Length = 0;
+        //        /* recv_Length = server.ReceiveFrom(recv_Data,ref phillip);
+        //          if (recv_Length > 0) MessageBox.Show("indication message is received");*/
 
-            //        string response_str = "";
-            //        Byte[] AssocReq = new Byte[]                   //AssocReq
-            //    {
-            //     0x0D,0xEC,                                   //SessionHeader  
-            //     0x05,0x08,0x13,0x01,0x00,0x16,0x01,0x02,     //SessionData
-            //     0x80,0x00,0x14,0x02,0x00,0x02,
+        //        string response_str = "";
+        //        Byte[] AssocReq = new Byte[]                   //AssocReq
+        //    {
+        //     0x0D,0xEC,                                   //SessionHeader  
+        //     0x05,0x08,0x13,0x01,0x00,0x16,0x01,0x02,     //SessionData
+        //     0x80,0x00,0x14,0x02,0x00,0x02,
 
-            //     0xC1,0xDC,0x31,0x80,0xA0,0x80,0x80,0x01,     //PresentationHeader
-            //     0x01,0x00,0x00,0xA2,0x80,0xA0,0x03,0x00,
-            //     0x00,0x01,0xA4,0x80,0x30,0x80,0x02,0x01,
-            //     0x01,0x06,0x04,0x52,0x01,0x00,0x01,0x30,
-            //     0x80,0x06,0x02,0x51,0x01,0x00,0x00,0x00,
-            //     0x00,0x30,0x80,0x02,0x01,0x02,0x06,0x0C,
-            //     0x2A,0x86,0x48,0xCE,0x14,0x02,0x01,0x00,
-            //     0x00,0x00,0x01,0x01,0x30,0x80,0x06,0x0C,
-            //     0x2A,0x86,0x48,0xCE,0x14,0x02,0x01,0x00,
-            //     0x00,0x00,0x02,0x01,0x00,0x00,0x00,0x00,
-            //     0x00,0x00,0x61,0x80,0x30,0x80,0x02,0x01,
-            //     0x01,0xA0,0x80,0x60,0x80,0xA1,0x80,0x06,
-            //     0x0C,0x2A,0x86,0x48,0xCE,0x14,0x02,0x01,
-            //     0x00,0x00,0x00,0x03,0x01,0x00,0x00,0xBE,
-            //     0x80,0x28,0x80,0x06,0x0C,0x2A,0x86,0x48,
-            //     0xCE,0x14,0x02,0x01,0x00,0x00,0x00,0x01,
-            //     0x01,0x02,0x01,0x02,0x81,
+        //     0xC1,0xDC,0x31,0x80,0xA0,0x80,0x80,0x01,     //PresentationHeader
+        //     0x01,0x00,0x00,0xA2,0x80,0xA0,0x03,0x00,
+        //     0x00,0x01,0xA4,0x80,0x30,0x80,0x02,0x01,
+        //     0x01,0x06,0x04,0x52,0x01,0x00,0x01,0x30,
+        //     0x80,0x06,0x02,0x51,0x01,0x00,0x00,0x00,
+        //     0x00,0x30,0x80,0x02,0x01,0x02,0x06,0x0C,
+        //     0x2A,0x86,0x48,0xCE,0x14,0x02,0x01,0x00,
+        //     0x00,0x00,0x01,0x01,0x30,0x80,0x06,0x0C,
+        //     0x2A,0x86,0x48,0xCE,0x14,0x02,0x01,0x00,
+        //     0x00,0x00,0x02,0x01,0x00,0x00,0x00,0x00,
+        //     0x00,0x00,0x61,0x80,0x30,0x80,0x02,0x01,
+        //     0x01,0xA0,0x80,0x60,0x80,0xA1,0x80,0x06,
+        //     0x0C,0x2A,0x86,0x48,0xCE,0x14,0x02,0x01,
+        //     0x00,0x00,0x00,0x03,0x01,0x00,0x00,0xBE,
+        //     0x80,0x28,0x80,0x06,0x0C,0x2A,0x86,0x48,
+        //     0xCE,0x14,0x02,0x01,0x00,0x00,0x00,0x01,
+        //     0x01,0x02,0x01,0x02,0x81,
 
-            //     0x48,                                        //AssocReqUserData
-            //     0x80,0x00,0x00,0x00,0x40,0x00,0x00,0x00,
-            //     0x00,0x00,0x00,0x00,0x80,0x00,0x00,0x00,
-            //     0x20,0x00,0x00,0x00,
-            //     0x00,0x00,0x00,0x00,
-            //     0x00,0x01,0x00,0x2c,
-            //     0x00,0x01,0x00,0x28,
-            //     0x80,0x00,0x00,0x00,0x00,0x00,0x09,0xc4,
-            //     0x00,0x00,0x09,0xc4,0x00,0x00,0x03,0xe8,
-            //     0xff,0xff,0xff,0xff,0x60,0x00,0x00,0x00,
-            //     0x00,0x01,0x00,0x0c,
-            //     0xf0,0x01,0x00,0x08,
-            //     0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,  //0x20 表示每60秒应答一次 0x80表示每秒应答一次。 
-             
-            //     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,   //PresentationTrailer
-            //     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
-            //     };
+        //     0x48,                                        //AssocReqUserData
+        //     0x80,0x00,0x00,0x00,0x40,0x00,0x00,0x00,
+        //     0x00,0x00,0x00,0x00,0x80,0x00,0x00,0x00,
+        //     0x20,0x00,0x00,0x00,
+        //     0x00,0x00,0x00,0x00,
+        //     0x00,0x01,0x00,0x2c,
+        //     0x00,0x01,0x00,0x28,
+        //     0x80,0x00,0x00,0x00,0x00,0x00,0x09,0xc4,
+        //     0x00,0x00,0x09,0xc4,0x00,0x00,0x03,0xe8,
+        //     0xff,0xff,0xff,0xff,0x60,0x00,0x00,0x00,
+        //     0x00,0x01,0x00,0x0c,
+        //     0xf0,0x01,0x00,0x08,
+        //     0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,  //0x20 表示每60秒应答一次 0x80表示每秒应答一次。 
 
-            //        server.SendTo(AssocReq, 237, SocketFlags.None, phillip_server);
-            //        //logstr = "Send Association Request : " + MeasureDate.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n" + BitConverter.ToString(AssocReq).Replace("-", ",0x");
-            //        //Thread.Sleep(Waiting_Period);
-            //        //SaveLog(logstr);
+        //     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,   //PresentationTrailer
+        //     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+        //     };
 
-            //        recv_Length = 0;
-            //        recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
-            //        //logstr = "Received Association Result: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-            //        //SaveLog(logstr);
-            //        if (recv_Length > 0)
-            //        {
-            //            if (recv_Data[0] == 0x0E)  // MessageBox.Show("收到联系响应报文！");
-            //            {
-            //                for (i = 0; i < recv_Length; i++)
-            //                {
-            //                    response_str += recv_Data[i].ToString();
-            //                    response_str += " ";
-            //                }
-            //                //   response_txt.Text = response_str;
-            //                recv_Length = server.ReceiveFrom(recv_Data, ref phillip);// 接收 MDS CREATE EVENT 
-            //                //logstr = "Received MSD Create Event Report : " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-            //                //SaveLog(logstr);
+        //        server.SendTo(AssocReq, 237, SocketFlags.None, phillip_server);
+        //        //logstr = "Send Association Request : " + MeasureDate.ToString("yyyy-MM-dd HH:mm:ss") + "\r\n" + BitConverter.ToString(AssocReq).Replace("-", ",0x");
+        //        //Thread.Sleep(Waiting_Period);
+        //        //SaveLog(logstr);
 
-            //                if (recv_Length > 0)
-            //                {
-            //                    //   MessageBox.Show("收到事件报文！");
-            //                    response_str = "";
-            //                    for (i = 0; i < recv_Length; i++)
-            //                    {
-            //                        response_str += recv_Data[i].ToString();
-            //                        response_str += " ";
-            //                    }
-            //                    //eveReasult_txt.Text = response_str;
-            //                }
-            //                Byte[] event_result = new Byte[]
-            //            {
-            //                0xE1,0x00,0x00,0x02,
-            //                0x00,0x02,0x00,0x14,
-            //                0x00,0x01,0x00,0x01,0x00,0x0e,
-            //                0x00,0x21,0x00,0x00,0x00,0x00,0x00,0x48,
-            //                0x47,0x00,0x0d,0x06,0x00,0x00
-            //            };
-            //                server.SendTo(event_result, 28, SocketFlags.None, phillip_server);
-            //                //logstr = "Send MSD Create Event Result: " + BitConverter.ToString(event_result).Replace("-", ",0x");
-            //                //SaveLog(logstr);
+        //        recv_Length = 0;
+        //        recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
+        //        //logstr = "Received Association Result: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+        //        //SaveLog(logstr);
+        //        if (recv_Length > 0)
+        //        {
+        //            if (recv_Data[0] == 0x0E)  // MessageBox.Show("收到联系响应报文！");
+        //            {
+        //                for (i = 0; i < recv_Length; i++)
+        //                {
+        //                    response_str += recv_Data[i].ToString();
+        //                    response_str += " ";
+        //                }
+        //                //   response_txt.Text = response_str;
+        //                recv_Length = server.ReceiveFrom(recv_Data, ref phillip);// 接收 MDS CREATE EVENT 
+        //                //logstr = "Received MSD Create Event Report : " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+        //                //SaveLog(logstr);
 
-            //                Thread.Sleep(1000);
-            //            }
-            //            if (recv_Data[0] == 0x0C) MessageBox.Show("收到拒绝联系报文！");
-            //            if (recv_Data[0] == 0x19) MessageBox.Show("收到丢弃联系报文！");
-            //        }
+        //                if (recv_Length > 0)
+        //                {
+        //                    //   MessageBox.Show("收到事件报文！");
+        //                    response_str = "";
+        //                    for (i = 0; i < recv_Length; i++)
+        //                    {
+        //                        response_str += recv_Data[i].ToString();
+        //                        response_str += " ";
+        //                    }
+        //                    //eveReasult_txt.Text = response_str;
+        //                }
+        //                Byte[] event_result = new Byte[]
+        //            {
+        //                0xE1,0x00,0x00,0x02,
+        //                0x00,0x02,0x00,0x14,
+        //                0x00,0x01,0x00,0x01,0x00,0x0e,
+        //                0x00,0x21,0x00,0x00,0x00,0x00,0x00,0x48,
+        //                0x47,0x00,0x0d,0x06,0x00,0x00
+        //            };
+        //                server.SendTo(event_result, 28, SocketFlags.None, phillip_server);
+        //                //logstr = "Send MSD Create Event Result: " + BitConverter.ToString(event_result).Replace("-", ",0x");
+        //                //SaveLog(logstr);
 
-            //        Byte[] single_poll_exs = new Byte[]
-            //     {
-            //         0xE1,0x00,0x00,0x02,
-            //         0x00,0x01,0x00,0x20,
-            //         0x00,0x01,0x00,0x07,0x00,0x1a,
-            //         0x00,0x21,0x00,0x00,0x00,0x00,0x00,0x00,
-            //         0x00,0x00,0xf1,0x3b,0x00,0x0c,
-            //         0x00,0x01,0x00,0x01,0x00,0x06,0x08,0x03,
-            //         0x00,0x00,0x00,0x00
-            //      };
-            //        /*   Byte[] single_pool_data_request =new Byte[]
-            //           {
-            //             0xE1, 0x00, 0x00, 0x02,
-            //             0x00, 0x01, 0x00, 0x1c,
-            //             0x00, 0x01, 0x00, 0x07, 0x00, 0x16,
-            //             0x00, 0x21, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            //             0x00, 0x00, 0x0c, 0x16, 0x00, 0x08,
-            //             0x00, 0x01, 0x00, 0x01, 0x00, 0x06, 0x08,0x03  //0x08, 0x03 是 polled_attr_grp， 选择NOM_ATTR_GRP_METRIC_VAL_OBS 0x0803
-            //           }; */
-            //        int count1 = 0;
-            //        int count2 = 0;
-            //        int count3 = 0;
-            //        int count4 = 0;
+        //                Thread.Sleep(1000);
+        //            }
+        //            if (recv_Data[0] == 0x0C) MessageBox.Show("收到拒绝联系报文！");
+        //            if (recv_Data[0] == 0x19) MessageBox.Show("收到丢弃联系报文！");
+        //        }
 
-            //        int contemp1 = 0;
-            //        int contemp2 = 0;
-            //        int contemp3 = 0;
-            //        ////int contemp4 = 0;
-            //        int contemp5 = 0;
-            //        int physio_id = 0;
+        //        Byte[] single_poll_exs = new Byte[]
+        //     {
+        //         0xE1,0x00,0x00,0x02,
+        //         0x00,0x01,0x00,0x20,
+        //         0x00,0x01,0x00,0x07,0x00,0x1a,
+        //         0x00,0x21,0x00,0x00,0x00,0x00,0x00,0x00,
+        //         0x00,0x00,0xf1,0x3b,0x00,0x0c,
+        //         0x00,0x01,0x00,0x01,0x00,0x06,0x08,0x03,
+        //         0x00,0x00,0x00,0x00
+        //      };
+        //        /*   Byte[] single_pool_data_request =new Byte[]
+        //           {
+        //             0xE1, 0x00, 0x00, 0x02,
+        //             0x00, 0x01, 0x00, 0x1c,
+        //             0x00, 0x01, 0x00, 0x07, 0x00, 0x16,
+        //             0x00, 0x21, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        //             0x00, 0x00, 0x0c, 0x16, 0x00, 0x08,
+        //             0x00, 0x01, 0x00, 0x01, 0x00, 0x06, 0x08,0x03  //0x08, 0x03 是 polled_attr_grp， 选择NOM_ATTR_GRP_METRIC_VAL_OBS 0x0803
+        //           }; */
+        //        int count1 = 0;
+        //        int count2 = 0;
+        //        int count3 = 0;
+        //        int count4 = 0;
 
-            //        //要采集的数据
+        //        int contemp1 = 0;
+        //        int contemp2 = 0;
+        //        int contemp3 = 0;
+        //        ////int contemp4 = 0;
+        //        int contemp5 = 0;
+        //        int physio_id = 0;
 
-            //        LoopCount = 0;
-            //        HasEffectiveData = false;
-            //        // while (true)
-            //        while (LoopCount < MAX_TRY_TIMES && !HasEffectiveData)
-            //        {
-            //            LoopCount++;
-            //            Thread.Sleep(500);
-            //            server.SendTo(single_poll_exs, 40, SocketFlags.None, phillip_server);
-            //            logstr = "Send single pool ext: " + BitConverter.ToString(single_poll_exs).Replace("-", ",0x");
-            //            //SaveLog(logstr);
-            //            //Thread.Sleep(1000);
-            //            recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
-            //            logstr = "Received single pool ext response1: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-            //            //SaveLog(logstr);
-            //            //处理第一个消息， 该消息是一个ROLRS_APDU消息
-            //            if (recv_Length > 0 && recv_Data[4] == 0x00 && recv_Data[5] == 0x05)
-            //            {
-            //                contemp1 = 50 + 2;
-            //                count1 = recv_Data[46 + 2] * 256 + recv_Data[47 + 2];
-            //                for (i = 0; i < count1; i++)
-            //                {
-            //                    contemp2 = contemp1 + 6;
-            //                    count2 = recv_Data[contemp2 - 4] * 256 + recv_Data[contemp2 - 3];
-            //                    for (j = 0; j < count2; j++)
-            //                    {
-            //                        contemp3 = contemp2 + 6;
-            //                        count3 = recv_Data[contemp3 - 4] * 256 + recv_Data[contemp3 - 3];
-            //                        for (k = 0; k < count3; k++)
-            //                        {
-            //                            if (recv_Data[contemp3] == 0x09 && recv_Data[contemp3 + 1] == 0x50) //Attribute ID: Numeric Observed Value NOM_ATTR_NU_VAL_OBS
-            //                            {
-            //                                physio_id = recv_Data[contemp3 + 4] * 256 + recv_Data[contemp3 + 5];
-            //                                switch (physio_id)
-            //                                {
-            //                                    case 0x4822:
-            //                                        pr_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
-            //                                        if (pr_effective)
-            //                                            PR = (int)getFloat(recv_Data, contemp3 + 10);
-            //                                        break;
-            //                                    case 0x500A:
-            //                                        rr_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
-            //                                        if (rr_effective)
-            //                                            RR = (int)getFloat(recv_Data, contemp3 + 10);
-            //                                        break;
-            //                                    case 0x4BB8:
-            //                                        spo2_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
-            //                                        if (spo2_effective)
-            //                                            SPO2 = (int)getFloat(recv_Data, contemp3 + 10);
-            //                                        break;
-            //                                    case 0x4B60:
-            //                                        temp_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
-            //                                        if (temp_effective)
-            //                                            TEMP1 = getFloat(recv_Data, contemp3 + 10);
-            //                                        break;
-            //                                    case 0x4182:
-            //                                        hr_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
-            //                                        if (hr_effective)
-            //                                            HR = (int)getFloat(recv_Data, contemp3 + 10);
-            //                                        break;
-            //                                }
-            //                            }
-            //                            else
+        //        //要采集的数据
 
-            //                                if (recv_Data[contemp3] == 0x09 && recv_Data[contemp3 + 1] == 0x4B)//Attribute ID: Compound Numeric Observed Value NOM_ATTR_NU_CMPD_VAL_OBS
-            //                                {
-            //                                    contemp4 = contemp3 + 4;
-            //                                    count4 = recv_Data[contemp4] * 256 + recv_Data[contemp4 + 1];
-            //                                    //                                    for (q = 0; q < count4; q++)
-            //                                    //        {
-            //                                    //            if (recv_Data[contemp4] == 0x4A && recv_Data[contemp4 + 1] == 0x04)
-            //                                    //          {
-            //                                    contemp5 = contemp4 + 4;
-            //                                    for (t = 0; t < count4; t++)
-            //                                    {
-            //                                        physio_id = recv_Data[contemp5] * 256 + recv_Data[contemp5 + 1];
-            //                                        switch (physio_id)
-            //                                        {
-            //                                            //NBP
-            //                                            case 0x4A05:
-            //                                                sys_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (sys_effective)
-            //                                                    SYS = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
-            //                                            case 0x4A06:
-            //                                                dia_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (dia_effective)
-            //                                                    DIA = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
-            //                                            case 0x4A07:
-            //                                                map_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (map_effective)
-            //                                                    MAP = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
+        //        LoopCount = 0;
+        //        HasEffectiveData = false;
+        //        // while (true)
+        //        while (LoopCount < MAX_TRY_TIMES && !HasEffectiveData)
+        //        {
+        //            LoopCount++;
+        //            Thread.Sleep(500);
+        //            server.SendTo(single_poll_exs, 40, SocketFlags.None, phillip_server);
+        //            logstr = "Send single pool ext: " + BitConverter.ToString(single_poll_exs).Replace("-", ",0x");
+        //            //SaveLog(logstr);
+        //            //Thread.Sleep(1000);
+        //            recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
+        //            logstr = "Received single pool ext response1: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+        //            //SaveLog(logstr);
+        //            //处理第一个消息， 该消息是一个ROLRS_APDU消息
+        //            if (recv_Length > 0 && recv_Data[4] == 0x00 && recv_Data[5] == 0x05)
+        //            {
+        //                contemp1 = 50 + 2;
+        //                count1 = recv_Data[46 + 2] * 256 + recv_Data[47 + 2];
+        //                for (i = 0; i < count1; i++)
+        //                {
+        //                    contemp2 = contemp1 + 6;
+        //                    count2 = recv_Data[contemp2 - 4] * 256 + recv_Data[contemp2 - 3];
+        //                    for (j = 0; j < count2; j++)
+        //                    {
+        //                        contemp3 = contemp2 + 6;
+        //                        count3 = recv_Data[contemp3 - 4] * 256 + recv_Data[contemp3 - 3];
+        //                        for (k = 0; k < count3; k++)
+        //                        {
+        //                            if (recv_Data[contemp3] == 0x09 && recv_Data[contemp3 + 1] == 0x50) //Attribute ID: Numeric Observed Value NOM_ATTR_NU_VAL_OBS
+        //                            {
+        //                                physio_id = recv_Data[contemp3 + 4] * 256 + recv_Data[contemp3 + 5];
+        //                                switch (physio_id)
+        //                                {
+        //                                    case 0x4822:
+        //                                        pr_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
+        //                                        if (pr_effective)
+        //                                            PR = (int)getFloat(recv_Data, contemp3 + 10);
+        //                                        break;
+        //                                    case 0x500A:
+        //                                        rr_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
+        //                                        if (rr_effective)
+        //                                            RR = (int)getFloat(recv_Data, contemp3 + 10);
+        //                                        break;
+        //                                    case 0x4BB8:
+        //                                        spo2_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
+        //                                        if (spo2_effective)
+        //                                            SPO2 = (int)getFloat(recv_Data, contemp3 + 10);
+        //                                        break;
+        //                                    case 0x4B60:
+        //                                        temp_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
+        //                                        if (temp_effective)
+        //                                            TEMP1 = getFloat(recv_Data, contemp3 + 10);
+        //                                        break;
+        //                                    case 0x4182:
+        //                                        hr_effective = recv_Data[contemp3 + 6] == 0 ? true : false;
+        //                                        if (hr_effective)
+        //                                            HR = (int)getFloat(recv_Data, contemp3 + 10);
+        //                                        break;
+        //                                }
+        //                            }
+        //                            else
 
-            //                                            //CVP 
-            //                                            case 0x4A45:
-            //                                                CVP_sys_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (CVP_sys_effective)
-            //                                                    CVP_SYS = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
-            //                                            case 0x4A46:
-            //                                                CVP_dia_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (CVP_dia_effective)
-            //                                                    CVP_DIA = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
-            //                                            case 0x4A47:
-            //                                                CVP_map_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (CVP_map_effective)
-            //                                                    CVP_MAP = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
+        //                                if (recv_Data[contemp3] == 0x09 && recv_Data[contemp3 + 1] == 0x4B)//Attribute ID: Compound Numeric Observed Value NOM_ATTR_NU_CMPD_VAL_OBS
+        //                                {
+        //                                    contemp4 = contemp3 + 4;
+        //                                    count4 = recv_Data[contemp4] * 256 + recv_Data[contemp4 + 1];
+        //                                    //                                    for (q = 0; q < count4; q++)
+        //                                    //        {
+        //                                    //            if (recv_Data[contemp4] == 0x4A && recv_Data[contemp4 + 1] == 0x04)
+        //                                    //          {
+        //                                    contemp5 = contemp4 + 4;
+        //                                    for (t = 0; t < count4; t++)
+        //                                    {
+        //                                        physio_id = recv_Data[contemp5] * 256 + recv_Data[contemp5 + 1];
+        //                                        switch (physio_id)
+        //                                        {
+        //                                            //NBP
+        //                                            case 0x4A05:
+        //                                                sys_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (sys_effective)
+        //                                                    SYS = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
+        //                                            case 0x4A06:
+        //                                                dia_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (dia_effective)
+        //                                                    DIA = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
+        //                                            case 0x4A07:
+        //                                                map_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (map_effective)
+        //                                                    MAP = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
 
-            //                                            //ABP
-            //                                            case 0x4A15:
-            //                                                ABP_sys_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (ABP_sys_effective)
-            //                                                    ABP_SYS = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
-            //                                            case 0x4A16:
-            //                                                ABP_dia_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (ABP_dia_effective)
-            //                                                    ABP_DIA = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
-            //                                            case 0x4A17:
-            //                                                ABP_map_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
-            //                                                if (ABP_map_effective)
-            //                                                    ABP_MAP = (int)getFloat(recv_Data, contemp5 + 6);
-            //                                                break;
-            //                                        }
-            //                                        contemp5 += 10;
-            //                                    } //End for
-            //                                }
-            //                                else
-            //                                    if (recv_Data[contemp3] == 0x09 && recv_Data[contemp3 + 1] == 0x90)//Attribute ID: Absolute Time Stamp NOM_ATTR_TIME_STAMP_ABS
-            //                                    { //时间字段  BCD格式， 需要转化为十进制
-            //                                        contemp4 = contemp3 + 4;
+        //                                            //CVP 
+        //                                            case 0x4A45:
+        //                                                CVP_sys_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (CVP_sys_effective)
+        //                                                    CVP_SYS = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
+        //                                            case 0x4A46:
+        //                                                CVP_dia_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (CVP_dia_effective)
+        //                                                    CVP_DIA = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
+        //                                            case 0x4A47:
+        //                                                CVP_map_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (CVP_map_effective)
+        //                                                    CVP_MAP = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
 
-            //                                        byte century = recv_Data[contemp4];
-            //                                        int century_dec = century / 16 * 10 + century % 16;
-            //                                        byte year = recv_Data[contemp4 + 1];
-            //                                        int year_dec = year / 16 * 10 + year % 16 + century_dec * 100;
-            //                                        byte month = recv_Data[contemp4 + 2];
-            //                                        int month_dec = month / 16 * 10 + month % 16;
-            //                                        byte day = recv_Data[contemp4 + 3];
-            //                                        int day_dec = day / 16 * 10 + day % 16;
-            //                                        byte hour = recv_Data[contemp4 + 4];
-            //                                        int hour_dec = hour / 16 * 10 + hour % 16;
-            //                                        byte minute = recv_Data[contemp4 + 5];
-            //                                        int minute_dec = minute / 16 * 10 + minute % 16;
-            //                                        byte second = recv_Data[contemp4 + 6];
-            //                                        int second_dec = second / 16 * 10 + second % 16;
-            //                                        byte sec_fractions = recv_Data[contemp4 + 7];
-            //                                        int sec_fractions_dec = sec_fractions / 16 * 10 + sec_fractions % 16;
-            //                                        MeasureDate = new DateTime(year_dec, month_dec, day_dec, hour_dec, minute_dec, second_dec);
+        //                                            //ABP
+        //                                            case 0x4A15:
+        //                                                ABP_sys_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (ABP_sys_effective)
+        //                                                    ABP_SYS = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
+        //                                            case 0x4A16:
+        //                                                ABP_dia_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (ABP_dia_effective)
+        //                                                    ABP_DIA = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
+        //                                            case 0x4A17:
+        //                                                ABP_map_effective = recv_Data[contemp5 + 2] == 0 ? true : false;
+        //                                                if (ABP_map_effective)
+        //                                                    ABP_MAP = (int)getFloat(recv_Data, contemp5 + 6);
+        //                                                break;
+        //                                        }
+        //                                        contemp5 += 10;
+        //                                    } //End for
+        //                                }
+        //                                else
+        //                                    if (recv_Data[contemp3] == 0x09 && recv_Data[contemp3 + 1] == 0x90)//Attribute ID: Absolute Time Stamp NOM_ATTR_TIME_STAMP_ABS
+        //                                    { //时间字段  BCD格式， 需要转化为十进制
+        //                                        contemp4 = contemp3 + 4;
 
-            //                                    }
-            //                            contemp3 += 4 + recv_Data[contemp3 + 2] * 256 + recv_Data[contemp3 + 3];
-            //                        }
-            //                        contemp2 += 6 + recv_Data[contemp2 + 4] * 256 + recv_Data[contemp2 + 5];
-            //                    }
-            //                    contemp1 += 6 + recv_Data[contemp1 + 4] * 256 + recv_Data[contemp1 + 5];
-            //                }
-            //                //setText ttd = new setText(DisplayAllData);
-            //                //this.Invoke(d);
+        //                                        byte century = recv_Data[contemp4];
+        //                                        int century_dec = century / 16 * 10 + century % 16;
+        //                                        byte year = recv_Data[contemp4 + 1];
+        //                                        int year_dec = year / 16 * 10 + year % 16 + century_dec * 100;
+        //                                        byte month = recv_Data[contemp4 + 2];
+        //                                        int month_dec = month / 16 * 10 + month % 16;
+        //                                        byte day = recv_Data[contemp4 + 3];
+        //                                        int day_dec = day / 16 * 10 + day % 16;
+        //                                        byte hour = recv_Data[contemp4 + 4];
+        //                                        int hour_dec = hour / 16 * 10 + hour % 16;
+        //                                        byte minute = recv_Data[contemp4 + 5];
+        //                                        int minute_dec = minute / 16 * 10 + minute % 16;
+        //                                        byte second = recv_Data[contemp4 + 6];
+        //                                        int second_dec = second / 16 * 10 + second % 16;
+        //                                        byte sec_fractions = recv_Data[contemp4 + 7];
+        //                                        int sec_fractions_dec = sec_fractions / 16 * 10 + sec_fractions % 16;
+        //                                        MeasureDate = new DateTime(year_dec, month_dec, day_dec, hour_dec, minute_dec, second_dec);
 
-            //                HasEffectiveData = hr_effective || rr_effective || pr_effective || temp_effective || spo2_effective || sys_effective || dia_effective || map_effective || CVP_map_effective || ABP_map_effective;
-            //                HasEffectivePressure = map_effective || CVP_map_effective || ABP_map_effective;
+        //                                    }
+        //                            contemp3 += 4 + recv_Data[contemp3 + 2] * 256 + recv_Data[contemp3 + 3];
+        //                        }
+        //                        contemp2 += 6 + recv_Data[contemp2 + 4] * 256 + recv_Data[contemp2 + 5];
+        //                    }
+        //                    contemp1 += 6 + recv_Data[contemp1 + 4] * 256 + recv_Data[contemp1 + 5];
+        //                }
+        //                //setText ttd = new setText(DisplayAllData);
+        //                //this.Invoke(d);
 
-            //                //logstr = "HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
-            //                //SaveLog(logstr);
+        //                HasEffectiveData = hr_effective || rr_effective || pr_effective || temp_effective || spo2_effective || sys_effective || dia_effective || map_effective || CVP_map_effective || ABP_map_effective;
+        //                HasEffectivePressure = map_effective || CVP_map_effective || ABP_map_effective;
 
-            //            }
+        //                //logstr = "HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
+        //                //SaveLog(logstr);
 
-            //            if (recv_Length > 0 && recv_Data[4] == 0x00 && recv_Data[5] == 0x05)  //第一条消息收到，有后续存在的消息要接收， 第二次接受
-            //            {
-            //                //第二个消息字符串， 里面有几个字节， 但是是空的
-            //                // Thread.Sleep(Waiting_Period);
-            //                recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
-            //                //logstr = "Received single pool ext response2: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-            //                //SaveLog(logstr);
-            //            }
+        //            }
 
-            //            if (recv_Length > 0 && recv_Data[4] == 0x00 && recv_Data[5] == 0x05)  //准备接受最后一个消息内容。
-            //            {
-            //                //接受第三个消息字符串， 里面有几个字节， 但是没有什么内容，不予处理
-            //                //Thread.Sleep(Waiting_Period);
-            //                recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
-            //                //logstr = "Received single pool ext response3: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-            //                //SaveLog(logstr);
-            //            }
-            //            if (recv_Length > 0 && recv_Data[4] == 0x00 && recv_Data[5] == 0x02)  //最后一条消息收到
-            //            {
+        //            if (recv_Length > 0 && recv_Data[4] == 0x00 && recv_Data[5] == 0x05)  //第一条消息收到，有后续存在的消息要接收， 第二次接受
+        //            {
+        //                //第二个消息字符串， 里面有几个字节， 但是是空的
+        //                // Thread.Sleep(Waiting_Period);
+        //                recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
+        //                //logstr = "Received single pool ext response2: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+        //                //SaveLog(logstr);
+        //            }
 
-            //            }
-            //        } //End While
-            //        if (HasEffectiveData)
-            //        {
+        //            if (recv_Length > 0 && recv_Data[4] == 0x00 && recv_Data[5] == 0x05)  //准备接受最后一个消息内容。
+        //            {
+        //                //接受第三个消息字符串， 里面有几个字节， 但是没有什么内容，不予处理
+        //                //Thread.Sleep(Waiting_Period);
+        //                recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
+        //                //logstr = "Received single pool ext response3: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+        //                //SaveLog(logstr);
+        //            }
+        //            if (recv_Length > 0 && recv_Data[4] == 0x00 && recv_Data[5] == 0x02)  //最后一条消息收到
+        //            {
 
-            //            //  System.DateTime currentTime = new System.DateTime();
-            //            //  currentTime = System.DateTime.Now;
-            //            PatientDataBlock PatientData;
-            //            PatientData.MeasureTime = MeasureDate;
-            //            PatientData.PR = PR; PatientData.pr_effective = pr_effective;    //脉率
-            //            PatientData.RR = 0; PatientData.rr_effective = rr_effective;    //呼吸频率
-            //            PatientData.SPO2 = SPO2; PatientData.spo2_effective = spo2_effective;//血氧饱和度
-            //            PatientData.TEMP = TEMP1; PatientData.temp_effective = temp_effective;//温度
-            //            PatientData.HR = HR; PatientData.hr_effective = hr_effective;    //心率
-            //            PatientData.SYS = SYS; PatientData.sys_effective = sys_effective; //收缩压
-            //            PatientData.DIA = DIA; PatientData.dia_effective = dia_effective; //舒张压
-            //            PatientData.MAP = MAP; PatientData.map_effective = map_effective; //平均血压
-            //            PatientData.CVP_SYS = CVP_SYS; PatientData.CVP_sys_effective = CVP_sys_effective; //中心静脉收缩压
-            //            PatientData.CVP_DIA = CVP_DIA; PatientData.CVP_dia_effective = CVP_dia_effective; //中心静脉舒张压
-            //            PatientData.CVP_MAP = CVP_MAP; PatientData.CVP_map_effective = CVP_map_effective; //中心静脉平均血压
-            //            PatientData.ABP_SYS = ABP_SYS; PatientData.ABP_sys_effective = ABP_sys_effective; //动脉收缩压
-            //            PatientData.ABP_DIA = ABP_DIA; PatientData.ABP_dia_effective = ABP_dia_effective; //动脉舒张压
-            //            PatientData.ABP_MAP = ABP_MAP; PatientData.ABP_map_effective = ABP_map_effective; //动脉平均血压
+        //            }
+        //        } //End While
+        //        if (HasEffectiveData)
+        //        {
 
-            //            //logstr = "Final Saved Data: Time=" + MeasureDate.ToString("yyyy-MM-dd HH:mm:ss") + ";HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
-            //            //SaveLog(logstr);
-            //            this.SaveFillipData(PatientData, mzjldID, 0);
+        //            //  System.DateTime currentTime = new System.DateTime();
+        //            //  currentTime = System.DateTime.Now;
+        //            PatientDataBlock PatientData;
+        //            PatientData.MeasureTime = MeasureDate;
+        //            PatientData.PR = PR; PatientData.pr_effective = pr_effective;    //脉率
+        //            PatientData.RR = 0; PatientData.rr_effective = rr_effective;    //呼吸频率
+        //            PatientData.SPO2 = SPO2; PatientData.spo2_effective = spo2_effective;//血氧饱和度
+        //            PatientData.TEMP = TEMP1; PatientData.temp_effective = temp_effective;//温度
+        //            PatientData.HR = HR; PatientData.hr_effective = hr_effective;    //心率
+        //            PatientData.SYS = SYS; PatientData.sys_effective = sys_effective; //收缩压
+        //            PatientData.DIA = DIA; PatientData.dia_effective = dia_effective; //舒张压
+        //            PatientData.MAP = MAP; PatientData.map_effective = map_effective; //平均血压
+        //            PatientData.CVP_SYS = CVP_SYS; PatientData.CVP_sys_effective = CVP_sys_effective; //中心静脉收缩压
+        //            PatientData.CVP_DIA = CVP_DIA; PatientData.CVP_dia_effective = CVP_dia_effective; //中心静脉舒张压
+        //            PatientData.CVP_MAP = CVP_MAP; PatientData.CVP_map_effective = CVP_map_effective; //中心静脉平均血压
+        //            PatientData.ABP_SYS = ABP_SYS; PatientData.ABP_sys_effective = ABP_sys_effective; //动脉收缩压
+        //            PatientData.ABP_DIA = ABP_DIA; PatientData.ABP_dia_effective = ABP_dia_effective; //动脉舒张压
+        //            PatientData.ABP_MAP = ABP_MAP; PatientData.ABP_map_effective = ABP_map_effective; //动脉平均血压
 
-            //        }
-            //        Byte[] Associate_Release_Request = new Byte[]
-            //     {
-            //         0x09, 0x18, 
-            //         0xC1, 0x16, 0x61, 0x80, 0x30, 0x80, 0x02, 0x01,
-            //         0x01, 0xA0, 0x80, 0x62, 0x80, 0x80, 0x01, 0x00,
-            //         0x00, 0x00, 0x00, 0x00,
-            //         0x00, 0x00, 0x00, 0x00
-            //      };
-            //        server.SendTo(Associate_Release_Request, 26, SocketFlags.None, phillip_server);
+        //            //logstr = "Final Saved Data: Time=" + MeasureDate.ToString("yyyy-MM-dd HH:mm:ss") + ";HR=" + HR.ToString() + ";RR=" + RR.ToString() + ";SPO2=" + SPO2.ToString() + ";sys=" + SYS.ToString() + ";DIA=" + DIA.ToString() + ";MAP=" + MAP.ToString() + ";CVP_MAP=" + CVP_MAP.ToString() + ";ABP_MAP=" + ABP_MAP.ToString();
+        //            //SaveLog(logstr);
+        //            this.SaveFillipData(PatientData, mzjldID, 0);
 
-            //        //logstr = "Send Associate Release Request: " + BitConverter.ToString(Associate_Release_Request).Replace("-", ",0x");
-            //        // SaveLog(logstr);
-            //        // Thread.Sleep(Waiting_Period);
-            //        recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
-            //        //logstr = "Received Associate Release Result: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
-            //        //SaveLog(logstr);
+        //        }
+        //        Byte[] Associate_Release_Request = new Byte[]
+        //     {
+        //         0x09, 0x18, 
+        //         0xC1, 0x16, 0x61, 0x80, 0x30, 0x80, 0x02, 0x01,
+        //         0x01, 0xA0, 0x80, 0x62, 0x80, 0x80, 0x01, 0x00,
+        //         0x00, 0x00, 0x00, 0x00,
+        //         0x00, 0x00, 0x00, 0x00
+        //      };
+        //        server.SendTo(Associate_Release_Request, 26, SocketFlags.None, phillip_server);
 
-            //        Byte[] Associate_Release_Response = new Byte[]
-            //     {
-            //         0x0A, 0x18, 
+        //        //logstr = "Send Associate Release Request: " + BitConverter.ToString(Associate_Release_Request).Replace("-", ",0x");
+        //        // SaveLog(logstr);
+        //        // Thread.Sleep(Waiting_Period);
+        //        recv_Length = server.ReceiveFrom(recv_Data, ref phillip);
+        //        //logstr = "Received Associate Release Result: " + BitConverter.ToString(recv_Data, 0, recv_Length).Replace("-", ",0x");
+        //        //SaveLog(logstr);
 
-            //         0xC1, 0x16, 0x61, 0x80, 0x30, 0x80, 0x02, 0x01,
-            //         0x01, 0xA0, 0x80, 0x63, 0x80, 0x80, 0x01, 0x00,
-            //         0x00, 0x00, 0x00, 0x00,
-            //         0x00, 0x00, 0x00, 0x00
-            //      };
+        //        Byte[] Associate_Release_Response = new Byte[]
+        //     {
+        //         0x0A, 0x18, 
 
-            //        Byte[] Associate_Abort = new Byte[]
-            //     {
-            //         0x19, 0x2E,
-            //         0x11, 0x01, 0x03,
-            //         0xC1, 0x29, 0xA0, 0x80, 0xA0, 0x80, 0x30, 0x80,
-            //         0x02, 0x01, 0x01, 0x06, 0x02, 0x51, 0x01, 0x00,
-            //         0x00, 0x00, 0x00, 0x61, 0x80, 0x30, 0x80, 0x02,
-            //         0x01, 0x01, 0xA0, 0x80, 0x64, 0x80, 0x80, 0x01,
-            //         0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            //         0x00, 0x00, 0x00, 0x00
-            //      };
-            //        if (recv_Data[0] == Associate_Release_Response[0] && recv_Data[1] == Associate_Release_Response[1])
-            //        {
-            //            //Received correct release Response
-            //            //MessageBox.Show("连接正确退出！");
-            //        }
-            //        else if (recv_Data[0] == Associate_Abort[0] && recv_Data[1] == Associate_Abort[1])
-            //        {
-            //            MessageBox.Show("收到连接中断消息！");
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("收到无法识别消息！");
-            //        }
-            //        Thread.Sleep(Get_Period);
-            //        GetDataTimes++;
-            //    }
-            //}
-            //public struct PatientDataBlock
-            //{
-            //    public DateTime MeasureTime;
-            //    public int PR; public bool pr_effective;    //脉率
-            //    public int RR; public bool rr_effective;    //呼吸频率
-            //    public float SPO2; public bool spo2_effective;//血氧饱和度
-            //    public float TEMP; public bool temp_effective;//温度
-            //    public int HR; public bool hr_effective;    //心率
-            //    public int SYS; public bool sys_effective; //收缩压
-            //    public int DIA; public bool dia_effective; //舒张压
-            //    public int MAP; public bool map_effective; //平均血压
-            //    public int CVP_SYS; public bool CVP_sys_effective; //中心静脉收缩压
-            //    public int CVP_DIA; public bool CVP_dia_effective; //中心静脉舒张压
-            //    public int CVP_MAP; public bool CVP_map_effective; //中心静脉平均血压
-            //    public int ABP_SYS; public bool ABP_sys_effective; //动脉收缩压
-            //    public int ABP_DIA; public bool ABP_dia_effective; //动脉舒张压
-            //    public int ABP_MAP; public bool ABP_map_effective; //动脉平均血压
+        //         0xC1, 0x16, 0x61, 0x80, 0x30, 0x80, 0x02, 0x01,
+        //         0x01, 0xA0, 0x80, 0x63, 0x80, 0x80, 0x01, 0x00,
+        //         0x00, 0x00, 0x00, 0x00,
+        //         0x00, 0x00, 0x00, 0x00
+        //      };
 
-            //}
-     //   public void SaveFillipData(PatientDataBlock PatientInfo, int mzid, int type)
-       // {
-            //int PR1 = PatientInfo.PR;
-            //int RR1 = PatientInfo.RR;
-            //int SPO21 = (int)PatientInfo.SPO2;
-            //float TEMP1 = PatientInfo.TEMP;
-            //int HR1 = PatientInfo.HR;
-            //int SYS1 = PatientInfo.SYS;
-            //int DIA1 = PatientInfo.DIA;
-            //int MAP1 = PatientInfo.MAP;
-            //int CVP_DIA1 = PatientInfo.CVP_DIA;
-            //int CVP_SYS1 = PatientInfo.CVP_SYS;
-            //int CVP_MAP1 = PatientInfo.CVP_MAP;
-            //int ABP_SYS1 = PatientInfo.ABP_SYS;
-            //int ABP_DIA1 = PatientInfo.ABP_DIA;
-            //int ABP_MAP1 = PatientInfo.ABP_MAP;
-            ////DateTime now = DateTime.Parse(DateTime.Now.ToString("yyyy/MM/dd HH:mm"));
-            //string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
-            //if (sqlite.selectJianCeData(now, mzjldID, type).Rows.Count == 0)
-            //{
-            //    int fa = 0;
-            //    if (ABP_SYS1 != 0 && ABP_DIA1 != 0 && ABP_MAP1 != 0)
-            //    {
-            //        if (type == 0)
-            //        fa = sqlite.insertJianCeDataMZJLD(mzjldID, ABP_SYS1, ABP_DIA1, ABP_MAP1, RR1, HR1, PR1, SPO21, new Random().Next(32, 35), TEMP1, now);
-            //        if (type == 1)
-            //            fa = sqlite.insertJianCeDataPACU(mzjldID, ABP_SYS1, ABP_DIA1, ABP_MAP1, RR1, HR1, PR1, SPO21, new Random().Next(32, 35), TEMP1, now);
-            //    }
-            //    else
-            //    {
-            //        if (type == 0)
-             //         sqlite.insertJianCeDataMZJLD(mzjldID, SYS1, DIA1, MAP1, RR1, HR1, PR1, SPO21, new Random().Next(32, 35), TEMP1, now);
-            //        if (type == 1)
-            //            fa = sqlite.insertJianCeDataPACU(mzjldID, SYS1, DIA1, MAP1, RR1, HR1, PR1, SPO21, new Random().Next(32, 35), TEMP1, now);
-            //    }
-            //}
-      //  }
+        //        Byte[] Associate_Abort = new Byte[]
+        //     {
+        //         0x19, 0x2E,
+        //         0x11, 0x01, 0x03,
+        //         0xC1, 0x29, 0xA0, 0x80, 0xA0, 0x80, 0x30, 0x80,
+        //         0x02, 0x01, 0x01, 0x06, 0x02, 0x51, 0x01, 0x00,
+        //         0x00, 0x00, 0x00, 0x61, 0x80, 0x30, 0x80, 0x02,
+        //         0x01, 0x01, 0xA0, 0x80, 0x64, 0x80, 0x80, 0x01,
+        //         0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        //         0x00, 0x00, 0x00, 0x00
+        //      };
+        //        if (recv_Data[0] == Associate_Release_Response[0] && recv_Data[1] == Associate_Release_Response[1])
+        //        {
+        //            //Received correct release Response
+        //            //MessageBox.Show("连接正确退出！");
+        //        }
+        //        else if (recv_Data[0] == Associate_Abort[0] && recv_Data[1] == Associate_Abort[1])
+        //        {
+        //            MessageBox.Show("收到连接中断消息！");
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("收到无法识别消息！");
+        //        }
+        //        Thread.Sleep(Get_Period);
+        //        GetDataTimes++;
+        //    }
+        //}
+        //public struct PatientDataBlock
+        //{
+        //    public DateTime MeasureTime;
+        //    public int PR; public bool pr_effective;    //脉率
+        //    public int RR; public bool rr_effective;    //呼吸频率
+        //    public float SPO2; public bool spo2_effective;//血氧饱和度
+        //    public float TEMP; public bool temp_effective;//温度
+        //    public int HR; public bool hr_effective;    //心率
+        //    public int SYS; public bool sys_effective; //收缩压
+        //    public int DIA; public bool dia_effective; //舒张压
+        //    public int MAP; public bool map_effective; //平均血压
+        //    public int CVP_SYS; public bool CVP_sys_effective; //中心静脉收缩压
+        //    public int CVP_DIA; public bool CVP_dia_effective; //中心静脉舒张压
+        //    public int CVP_MAP; public bool CVP_map_effective; //中心静脉平均血压
+        //    public int ABP_SYS; public bool ABP_sys_effective; //动脉收缩压
+        //    public int ABP_DIA; public bool ABP_dia_effective; //动脉舒张压
+        //    public int ABP_MAP; public bool ABP_map_effective; //动脉平均血压
+
+        //}
+        //   public void SaveFillipData(PatientDataBlock PatientInfo, int mzid, int type)
+        // {
+        //int PR1 = PatientInfo.PR;
+        //int RR1 = PatientInfo.RR;
+        //int SPO21 = (int)PatientInfo.SPO2;
+        //float TEMP1 = PatientInfo.TEMP;
+        //int HR1 = PatientInfo.HR;
+        //int SYS1 = PatientInfo.SYS;
+        //int DIA1 = PatientInfo.DIA;
+        //int MAP1 = PatientInfo.MAP;
+        //int CVP_DIA1 = PatientInfo.CVP_DIA;
+        //int CVP_SYS1 = PatientInfo.CVP_SYS;
+        //int CVP_MAP1 = PatientInfo.CVP_MAP;
+        //int ABP_SYS1 = PatientInfo.ABP_SYS;
+        //int ABP_DIA1 = PatientInfo.ABP_DIA;
+        //int ABP_MAP1 = PatientInfo.ABP_MAP;
+        ////DateTime now = DateTime.Parse(DateTime.Now.ToString("yyyy/MM/dd HH:mm"));
+        //string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+        //if (sqlite.selectJianCeData(now, mzjldID, type).Rows.Count == 0)
+        //{
+        //    int fa = 0;
+        //    if (ABP_SYS1 != 0 && ABP_DIA1 != 0 && ABP_MAP1 != 0)
+        //    {
+        //        if (type == 0)
+        //        fa = sqlite.insertJianCeDataMZJLD(mzjldID, ABP_SYS1, ABP_DIA1, ABP_MAP1, RR1, HR1, PR1, SPO21, new Random().Next(32, 35), TEMP1, now);
+        //        if (type == 1)
+        //            fa = sqlite.insertJianCeDataPACU(mzjldID, ABP_SYS1, ABP_DIA1, ABP_MAP1, RR1, HR1, PR1, SPO21, new Random().Next(32, 35), TEMP1, now);
+        //    }
+        //    else
+        //    {
+        //        if (type == 0)
+        //         sqlite.insertJianCeDataMZJLD(mzjldID, SYS1, DIA1, MAP1, RR1, HR1, PR1, SPO21, new Random().Next(32, 35), TEMP1, now);
+        //        if (type == 1)
+        //            fa = sqlite.insertJianCeDataPACU(mzjldID, SYS1, DIA1, MAP1, RR1, HR1, PR1, SPO21, new Random().Next(32, 35), TEMP1, now);
+        //    }
+        //}
+        //  }
 
         //private float getFloat(Byte[] flt, int start)
         //{
@@ -2769,8 +2898,8 @@ namespace main
             if (ThreadExist_JKW)
             {
                 ThreadExist_JKW = false;
-                Receiving_JKW.Abort();                
-                Receiving_JKW =null;               
+                Receiving_JKW.Abort();
+                Receiving_JKW = null;
             }
             SaveConfigure();
             GetConfigure();
@@ -2783,7 +2912,7 @@ namespace main
                 ThreadExist_JKW = true;
             }
         }
-        
+
         private void Socket_Setup_JKW()
         {
             int port = 8010;
@@ -2803,19 +2932,19 @@ namespace main
                     ReceivedLength_JKW = TempSocket_JKW.Receive(Raw_Data_JKW);
                     ReceivedTime_JKW = DateTime.Now;
                     //string ReceivedString1 = System.Text.Encoding.Default.GetString(Raw_Data_JKW);
-                    string ReceivedString1 =  BitConverter.ToString(Raw_Data_JKW, 0, ReceivedLength_JKW);
+                    string ReceivedString1 = BitConverter.ToString(Raw_Data_JKW, 0, ReceivedLength_JKW);
                     if (Laststring_JKW != ReceivedString1)
                     {
-                        Laststring_JKW = ReceivedString1; 
-                        ProceedreceivedData_JKW(Laststring_JKW);                        
-                    }                   
+                        Laststring_JKW = ReceivedString1;
+                        ProceedreceivedData_JKW(Laststring_JKW);
+                    }
                 }
 
             }
 
             catch (Exception exception)
             {
-                SockectIsException_JKW = true;               
+                SockectIsException_JKW = true;
             }
 
         }
@@ -2845,12 +2974,12 @@ namespace main
             int JXcount40 = 0;
             int JXcount50 = 0;
             int JXcount60 = 0;
-           // SaveLog(CON.ToString() + "、、、" + tempStr);
+            // SaveLog(CON.ToString() + "、、、" + tempStr);
             int type = 0;
-            string[] strList = Regex.Split(tempStr, "-CC",RegexOptions.IgnoreCase);
+            string[] strList = Regex.Split(tempStr, "-CC", RegexOptions.IgnoreCase);
 
             foreach (string STR in strList)
-           
+
             {
                 //SaveLog(STR);
                 string jiexiStr = "";
@@ -2932,7 +3061,7 @@ namespace main
                     jiexiStr = STR.Replace("AA-60", "");
                     jiexiStr = jiexiStr.Replace("-", "");
                     int lenth = jiexiStr.Length / 2;
-                    for (int i = 0; i < lenth ; i++)
+                    for (int i = 0; i < lenth; i++)
                     {
                         strValue[i] = jiexiStr.Substring(i * 2, 2);
                     }
@@ -2957,7 +3086,7 @@ namespace main
                     JXcount60++;
                 }
             }
-           
+
             #region  存入本地数据库
             //DateTime now = DateTime.Parse(DateTime.Now.ToString("yyyy/MM/dd HH:mm"));
             string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
@@ -2973,7 +3102,7 @@ namespace main
                     //RR =Convert.ToInt32(rrc);
 
                 }//机械值
-                else if (rrc.IsNullOrEmpty())//根据氧和赋值
+                else if (rrc == "")//根据氧和赋值
                 {
                     RR = SPO2 / 4;
                 }
@@ -2989,16 +3118,16 @@ namespace main
                 if (ABP_SYS != 0 && ABP_DIA != 0 && ABP_MAP != 0)
                 {
                     if (type == 0)
-                    //    fa = sqlite.insertJianCeDataMZJLD(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
-                    if (type == 1)
-                        fa = sqlite.insertJianCeDataPACU(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
+                        //    fa = sqlite.insertJianCeDataMZJLD(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
+                        if (type == 1)
+                            fa = sqlite.insertJianCeDataPACU(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
                 }
                 else
                 {
                     if (type == 0)
-                     //   fa = sqlite.insertJianCeDataMZJLD(mzjldID, SYS, DIA, MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
-                    if (type == 1)
-                        fa = sqlite.insertJianCeDataPACU(mzjldID, SYS, DIA, MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
+                        //   fa = sqlite.insertJianCeDataMZJLD(mzjldID, SYS, DIA, MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
+                        if (type == 1)
+                            fa = sqlite.insertJianCeDataPACU(mzjldID, SYS, DIA, MAP, RR, HR, PR, SPO2, ETCO2, TEMP1, now);
                 }
             }
             #endregion
@@ -3017,9 +3146,9 @@ namespace main
             return shi;
         }
 
-      
 
-        
+
+
         #endregion
 
         #region  迈瑞监护函数
@@ -3044,7 +3173,7 @@ namespace main
         }
         private void Socket_Setup_Miary()
         {
-            
+
 
             string temp1 = tbIpAdress.Text.Trim();
             string temp2 = "4601";
@@ -3072,7 +3201,7 @@ namespace main
                 //Thread.Sleep(200);
                 while (true)
                 {
-                   // Thread.Sleep(100);
+                    // Thread.Sleep(100);
                     for (temp_count = 0; temp_count < 2000; temp_count++)
                         Raw_Data_Miray[temp_count] = 0;
 
@@ -3103,7 +3232,7 @@ namespace main
             {
                 SockectIsException_Miray = true;
                 //ClientSocket_Miray.Close();
-               // SaveLog("Socket 连接或接收发出错!!!!!" + exception.Message + "\r\n");
+                // SaveLog("Socket 连接或接收发出错!!!!!" + exception.Message + "\r\n");
 
             }
         }
@@ -3205,7 +3334,7 @@ namespace main
                             while ((BasicCommand[position] != '|') && (BasicCommand[position] != '^'))
                                 position++;
                             TestValueStr = BasicCommand.Substring(startposition, position - startposition);
-                            if (TestValueStr.IsNullOrEmpty())
+                            if (TestValueStr == "")
                             {
                                 TestValue = 0;
                             }
@@ -3326,7 +3455,7 @@ namespace main
                             //RR =Convert.ToInt32(rrc);
 
                         }//机械值
-                        else if (rrc.IsNullOrEmpty())//根据氧和赋值
+                        else if (rrc == "")//根据氧和赋值
                         {
                             RR = SPO2 / 4;
                         }
@@ -3338,7 +3467,7 @@ namespace main
                         {
                             RR = SPO2 / 4;
                         }
-                       
+
                         Random rd = new Random();
                         double temp = 36.7;
                         if (ETCO2 == 0)
@@ -3348,14 +3477,14 @@ namespace main
                         if (ABP_SYS != 0 && ABP_DIA != 0 && ABP_MAP != 0)
                         {
                             if (type == 0)
-                                fa = sqlite.insertJianCeDataMZJLD(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, temp,IBP4m, now);
+                                fa = sqlite.insertJianCeDataMZJLD(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, temp, IBP4m, now);
                             if (type == 1)
                                 fa = sqlite.insertJianCeDataPACU(mzjldID, ABP_SYS, ABP_DIA, ABP_MAP, RR, HR, PR, SPO2, ETCO2, temp, now);
                         }
                         else
                         {
                             if (type == 0)
-                                fa = sqlite.insertJianCeDataMZJLD(mzjldID, SYS, DIA, MAP, RR, HR, PR, SPO2, ETCO2, temp,IBP4m, now);
+                                fa = sqlite.insertJianCeDataMZJLD(mzjldID, SYS, DIA, MAP, RR, HR, PR, SPO2, ETCO2, temp, IBP4m, now);
                             if (type == 1)
                                 fa = sqlite.insertJianCeDataPACU(mzjldID, SYS, DIA, MAP, RR, HR, PR, SPO2, ETCO2, temp, now);
                         }
@@ -3497,7 +3626,7 @@ namespace main
 
             }
             MainTaincount_Miray++;
-            
+
         }
         #endregion
         # region 理邦监护函数
@@ -3523,9 +3652,9 @@ namespace main
                             {
                                 jhData.HR = ShuJu;
                             }
-                           
+
                         }
-                        
+
                         if (str.Contains("PR=") && !str.Contains("_PR="))
                         {
                             int ShuJu = DataValid.ToInt32(str.Replace("PR=", ""));
@@ -3533,7 +3662,7 @@ namespace main
                             {
                                 jhData.PR = ShuJu;
                             }
-                            
+
                         }
                         if (str.Contains("RR="))
                         {
@@ -3614,11 +3743,11 @@ namespace main
                             {
                                 jhData.IBP_ART_DIA = ShuJu;
                             }
-                             
+
                         }
                         if (str.Contains("IBP_ART_MEAN="))
                         {
-                            int ShuJu =  DataValid.ToInt32(str.Replace("IBP_ART_MEAN=", ""));
+                            int ShuJu = DataValid.ToInt32(str.Replace("IBP_ART_MEAN=", ""));
                             if (ShuJu != 0)
                             {
                                 jhData.IBP_ART_MEAN = ShuJu;
@@ -3653,11 +3782,11 @@ namespace main
                         int fa = 0;
                         if (jhData.NIBP_SYS != 0 && jhData.NIBP_DIA != 0 && jhData.NIBP_MEAN != 0)
                         {
-                         //   fa = sqlite.insertJianCeDataMZJLD(mzjldID, jhData.NIBP_SYS, jhData.NIBP_DIA, jhData.NIBP_MEAN, jhData.RR, jhData.HR, jhData.PR, jhData.SPO2, jhData.CO2_EtCO2, temp, now);
+                            //   fa = sqlite.insertJianCeDataMZJLD(mzjldID, jhData.NIBP_SYS, jhData.NIBP_DIA, jhData.NIBP_MEAN, jhData.RR, jhData.HR, jhData.PR, jhData.SPO2, jhData.CO2_EtCO2, temp, now);
                         }
                         else
                         {
-                          //  fa = sqlite.insertJianCeDataMZJLD(mzjldID, jhData.IBP_ART_SYS, jhData.IBP_ART_DIA, jhData.IBP_ART_MEAN, jhData.RR, jhData.HR, jhData.PR, jhData.SPO2, jhData.CO2_EtCO2, temp, now);
+                            //  fa = sqlite.insertJianCeDataMZJLD(mzjldID, jhData.IBP_ART_SYS, jhData.IBP_ART_DIA, jhData.IBP_ART_MEAN, jhData.RR, jhData.HR, jhData.PR, jhData.SPO2, jhData.CO2_EtCO2, temp, now);
                         }
                     }
 
@@ -3685,7 +3814,7 @@ namespace main
         private void timer1_Tick(object sender, EventArgs e)//循环取得监护仪检测数据
         {
             int countN = sqlite.CopyData(mzjldID, ksjcTime);//拷贝本地数据到服务器
-           if (countN == 0)
+            if (countN == 0)
             {
                 ksjcTime = ksjcTime.AddMinutes(1);
                 timer1.Interval = 1000 * 1 * 60;
@@ -3747,7 +3876,7 @@ namespace main
                 try
                 {
                     p5.D = Convert.ToDateTime(datadt.Rows[i][0]);//体温记录点
-                    if (datadt.Rows[i]["TEMP"].ToString().IsNullOrEmpty())
+                    if (datadt.Rows[i]["TEMP"].ToString() == "")
                     {
                         p5.V = 0;
                     }
@@ -3786,7 +3915,7 @@ namespace main
                         etco2List.Add(p6);
                     }
                 }
-               
+
                 if (CGUAN && BGUAN)//如果插管，已拔管
                 {
                     if (p6.D > cgTime && p6.D < bgTime)//记录点事件大于插管时间并且小于拔管时间
@@ -3821,17 +3950,17 @@ namespace main
                 jhxmt.Sy = "ETCO2";
                 jhxmValue.Add(jhxmt);
             }
-            int biszc=0;
+            int biszc = 0;
             for (int i = 0; i < datadt.Rows.Count; i++)
             {
                 adims_MODEL.jhxm jhxmt = new adims_MODEL.jhxm();
-                if (datadt.Rows[i]["BIS"].ToString() =="")
+                if (datadt.Rows[i]["BIS"].ToString() == "")
                 {
-                    biszc=0;
+                    biszc = 0;
                 }
                 else
                 {
-                    biszc =Convert.ToInt32(Convert.ToDouble(datadt.Rows[i]["BIS"].ToString()));
+                    biszc = Convert.ToInt32(Convert.ToDouble(datadt.Rows[i]["BIS"].ToString()));
                 }
                 jhxmt.D = Convert.ToDateTime(datadt.Rows[i][0]);
                 jhxmt.V = Convert.ToInt16(biszc);
@@ -3842,7 +3971,7 @@ namespace main
             {
                 adims_MODEL.jhxm jhxmt = new adims_MODEL.jhxm();
                 jhxmt.D = Convert.ToDateTime(datadt.Rows[i][0]);
-                if (datadt.Rows[i]["CVP"].ToString().IsNullOrEmpty())
+                if (datadt.Rows[i]["CVP"].ToString() == "")
                 {
                     jhxmt.V = 0;
                 }
@@ -3921,8 +4050,8 @@ namespace main
             ////           new System.Drawing.Printing.PaperSize("K16", 740, 1020);  
             //printDocument1.DefaultPageSettings.PaperSize =
             //           new System.Drawing.Printing.PaperSize("A4", 820, 1160);
-           
-           
+
+
 
         }
         int fy = 0;
@@ -3931,7 +4060,7 @@ namespace main
 
 
             int x = 20, y = 0;//整体位置控制
-            string title = "        浙江省金华市中医医院醉记录单";//标题
+            string title = "        浙江省金华市中医医院麻醉记录单";//标题
             //string title2 = "              ";//标题
             string title3 = "              麻 醉 小 结";//标题
             Pen ptp = Pens.Black;//普通画笔
@@ -3958,7 +4087,7 @@ namespace main
             if (fy == 0)
             {
                 DataTable dt = cll.mzjiazai(patID);//判断
-               
+
                 Font ptzt08 = new Font("宋体", 8);//普通字体 
 
                 y = 20; x8 = 10; int y1 = y + 15;
@@ -4064,552 +4193,552 @@ namespace main
                 //for (int a = 0; a < dt.Rows.Count; a++)  //  a行 b列
                 //{
 
-                    for (int c = 1; c < dt.Columns.Count; c++) // 列
+                for (int c = 1; c < dt.Columns.Count; c++) // 列
+                {
+                    string datas = dt.Rows[0][c].ToString();
+                    if (c == 2)
                     {
-                        string datas = dt.Rows[0][c].ToString();
-                        if (c == 2)
+                        e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 151, y + 30);
+                    }
+                    if (c == 3)
+                    {
+                        e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 152, y + 60);
+                    }
+                    if (c == 4)
+                    {
+                        e.Graphics.DrawString(datas + "cm", ptzt12, Brushes.Black, x8 + 550, y + 60);
+                    }
+                    if (c == 5)
+                    {
+                        e.Graphics.DrawString(datas + "cm", ptzt12, Brushes.Black, x8 + 685, y + 60);
+                    }
+                    if (c == 6)
+                    {
+                        e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 666, y + 90);
+                    }
+                    if (c == 7)
+                    {
+                        e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 560, y + 120);
+                    }
+                    if (c == 8)
+                    {
+                        e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 666, y + 120);
+                    }
+                    if (c == 9)
+                    {
+                        e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 560, y + 150);
+                    }
+                    if (c == 10)
+                    {
+                        e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 666, y + 150);
+                    }
+                    if (c == 11)
+                    {
+                        e.Graphics.DrawString(datas, ptzt08, Brushes.Black, x8 + 425, y + 220);
+                    }
+                    if (c == 12)
+                    {
+                        e.Graphics.DrawString(datas, ptzt08, Brushes.Black, x8 + 635, y + 310);
+                    }
+                    if (c == 13)
+                    {
+                        string temp = "";
+                        int len1 = 0;
+                        int k = len1, num2 = len1;
+                        SubString(dt.Rows[0]["cctw"].ToString(), 52, k, out temp, out num2);//数据到什么位置换行
+                        len1 = num2;
+                        e.Graphics.DrawString(temp, ptzt10, Brushes.Black, x8 + 40, y + 370);
+                    }
+                    if (c == 14)
+                    {
+                        e.Graphics.DrawString(datas, ptzt10, Brushes.Black, x8 + 470, y + 1044);
+                    }
+                    if (c == 15)
+                    {
+                        e.Graphics.DrawString(datas, ptzt10, Brushes.Black, x8 + 690, y + 1044);
+                    }
+                    //复选框，逐一取出每一个字符进行判断
+                    if (c == 16)
+                    {
+                        string cd = dt.Rows[0]["cctw"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 151, y + 30);
-                        }
-                        if (c == 3)
-                        {
-                            e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 152, y + 60);
-                        }
-                        if (c == 4)
-                        {
-                            e.Graphics.DrawString(datas + "cm", ptzt12, Brushes.Black, x8 + 550, y + 60);
-                        }
-                        if (c == 5)
-                        {
-                            e.Graphics.DrawString(datas + "cm", ptzt12, Brushes.Black, x8 + 685, y + 60);
-                        }
-                        if (c == 6)
-                        {
-                            e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 666, y + 90);
-                        }
-                        if (c == 7)
-                        {
-                            e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 560, y + 120);
-                        }
-                        if (c == 8)
-                        {
-                            e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 666, y + 120);
-                        }
-                        if (c == 9)
-                        {
-                            e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 560, y + 150);
-                        }
-                        if (c == 10)
-                        {
-                            e.Graphics.DrawString(datas, ptzt12, Brushes.Black, x8 + 666, y + 150);
-                        }
-                        if (c == 11)
-                        {
-                            e.Graphics.DrawString(datas, ptzt08, Brushes.Black, x8 + 425, y + 220);
-                        }
-                        if (c == 12)
-                        {
-                            e.Graphics.DrawString(datas, ptzt08, Brushes.Black, x8 + 635, y + 310);
-                        }
-                        if (c == 13)
-                        {
-                            string temp = "";
-                            int len1 = 0;
-                            int k = len1, num2 = len1;
-                            SubString(dt.Rows[0]["cctw"].ToString(), 52, k, out temp, out num2);//数据到什么位置换行
-                            len1 = num2;
-                            e.Graphics.DrawString(temp, ptzt10, Brushes.Black, x8 + 40, y + 370);
-                        }
-                        if (c == 14)
-                        {
-                            e.Graphics.DrawString(datas, ptzt10, Brushes.Black, x8 + 470, y + 1044);
-                        }
-                        if (c == 15)
-                        {
-                            e.Graphics.DrawString(datas, ptzt10, Brushes.Black, x8 + 690, y + 1044);
-                        }
-                        //复选框，逐一取出每一个字符进行判断
-                        if (c == 16)
-                        {
-                            string cd = dt.Rows[0]["cctw"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 160, y));
-                                }
-                                else if (sj == "2")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 188, y));
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 257, y));
-                                }
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 160, y));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 188, y));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 257, y));
                             }
                         }
-                        if (c == 17)
+                    }
+                    if (c == 17)
+                    {
+                        string cd = dt.Rows[0]["ccd"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["ccd"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-
-                                if (sj == "1")
-                                {
-                                   e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 261, y + 28));
-
-                                }
-                                else if (sj == "2")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 304, y + 28));
-
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 346, y + 28));
-                                }
-                                else if (sj == "4")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 261, y + 58));
-
-                                }
-                                else if (sj == "5")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 304, y + 58));
-
-                                }
-                                else if (sj == "6")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 346, y + 58));
-                                }
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 261, y + 28));
 
                             }
-                        }
-                        if (c == 18)
-                        {
-                            string cd = dt.Rows[0]["zrf"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            else if (sj == "2")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 55, y + 88));
-                                }
-                                else if (sj == "2")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 112, y + 88));
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 216, y + 88));
-                                }
-                                else if (sj == "4")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 258, y + 88));
-                                }
-                                else if (sj == "5")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 299, y + 88));
-                                }
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 304, y + 28));
+
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 346, y + 28));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 261, y + 58));
+
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 304, y + 58));
+
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 346, y + 58));
+                            }
+
+                        }
+                    }
+                    if (c == 18)
+                    {
+                        string cd = dt.Rows[0]["zrf"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
+                        {
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 55, y + 88));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 112, y + 88));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 216, y + 88));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 258, y + 88));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 299, y + 88));
                             }
                         }
-                        if (c == 19)
+                    }
+                    if (c == 19)
+                    {
+                        string cd = dt.Rows[0]["hrdgj"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["hrdgj"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 140, y + 118));
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 140, y + 118));
 
 
-                                }
-                                else if (sj == "2")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 181, y + 118));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 181, y + 118));
 
 
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 237, y + 118));
-                                }
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 237, y + 118));
                             }
                         }
-                        if (c == 20)
+                    }
+                    if (c == 20)
+                    {
+                        string cd = dt.Rows[0]["fybd"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["fybd"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 90, y + 148));
-                                }
-                                else if (sj == "2")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 119, y + 148));
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 146, y + 148));
-                                }
-                                else if (sj == "4")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 222, y + 148));
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 90, y + 148));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 119, y + 148));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 146, y + 148));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 222, y + 148));
 
-                                }
-                                else if (sj == "5")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 251, y + 148));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 251, y + 148));
 
-                                }
-                                else if (sj == "6")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 280, y + 148));
-                                }
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 280, y + 148));
                             }
                         }
-                        if (c == 21)
+                    }
+                    if (c == 21)
+                    {
+                        string cd = dt.Rows[0]["zszl"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["zszl"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 488, y));
-                                }
-                                else if (sj == "2")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 531, y));
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 571, y));
-                                }
-                                else if (sj == "4")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 669, y));
-                                }
-                                else if (sj == "5")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 697, y));
-                                }
-                                else if (sj == "6")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 724, y));
-                                }
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 488, y));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 531, y));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 571, y));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 669, y));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 697, y));
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 724, y));
                             }
                         }
-                        if (c == 22)
+                    }
+                    if (c == 22)
+                    {
+                        string cd = dt.Rows[0]["zx"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["zx"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 468, y + 28));
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 468, y + 28));
 
-                                }
-                                else if (sj == "2")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 494, y + 28));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 494, y + 28));
 
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 524, y + 28));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 524, y + 28));
 
-                                }
-                                else if (sj == "4")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 564, y + 28));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 564, y + 28));
 
-                                }
-                                else if (sj == "5")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 606, y + 28));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 606, y + 28));
 
-                                }
-                                else if (sj == "6")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 634, y + 28));
-                                }
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 634, y + 28));
                             }
                         }
-                        if (c == 23)
+                    }
+                    if (c == 23)
+                    {
+                        string cd = dt.Rows[0]["dgcrqk"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["dgcrqk"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 516, y + 88));
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 516, y + 88));
 
-                                }
-                                else if (sj == "2")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 558, y + 88));
-                                }
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt10, Brushes.Black, new Point(x8 + 558, y + 88));
                             }
                         }
-                        if (c == 24)
+                    }
+                    if (c == 24)
+                    {
+                        string cd = dt.Rows[0]["qmcz"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["qmcz"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 40, y + 187));
-                                }
-                                else if (sj == "2")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 161, y + 187));
-                                }
-                                else if (sj == "3")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 184, y + 187));
-                                }
-                                else if (sj == "4")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 187));
-                                }
-                                else if (sj == "5")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 187));
-                                }
-                                else if (sj == "6")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 74, y + 217));
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 40, y + 187));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 161, y + 187));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 184, y + 187));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 187));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 187));
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 74, y + 217));
 
-                                }
-                                else if (sj == "7")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 97, y + 217));
-                                }
-                                else if (sj == "8")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 217));
-                                }
-                                else if (sj == "9")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 217));
+                            }
+                            else if (sj == "7")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 97, y + 217));
+                            }
+                            else if (sj == "8")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 217));
+                            }
+                            else if (sj == "9")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 217));
 
-                                }
-                                else if (sj == "a")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 217));
-                                }
+                            }
+                            else if (sj == "a")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 217));
                             }
                         }
-                        if (c == 25)
+                    }
+                    if (c == 25)
+                    {
+                        string cd = dt.Rows[0]["mzydq"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["mzydq"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 458, y + 187));
-                                }
-                                else if (sj == "2")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 490, y + 187));
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 458, y + 187));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 490, y + 187));
 
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 524, y + 187));
-                                }
-                                else if (sj == "4")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 558, y + 187));
-                                }
-                                else if (sj == "5")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 592, y + 187));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 524, y + 187));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 558, y + 187));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 592, y + 187));
 
-                                }
-                                else if (sj == "6")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 637, y + 187));
-                                }
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 637, y + 187));
                             }
                         }
-                        if (c == 26)
+                    }
+                    if (c == 26)
+                    {
+                        string cd = dt.Rows[0]["mzqjbfz1"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["mzqjbfz1"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 42, y + 247));
-                                }
-                                else if (sj == "2")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 247));
-                                }
-                                else if (sj == "3")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 247));
-                                }
-                                else if (sj == "4")
-                                {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 42, y + 247));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 247));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 247));
+                            }
+                            else if (sj == "4")
+                            {
 
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 247));
-                                }
-                                else if (sj == "5")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 397, y + 247));
-                                }
-                                else if (sj == "6")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 492, y + 247));
-                                }
-                                else if (sj == "7")
-                                {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 247));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 397, y + 247));
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 492, y + 247));
+                            }
+                            else if (sj == "7")
+                            {
 
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 607, y + 247));
-                                }
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 607, y + 247));
                             }
                         }
-                        if (c == 27)
+                    }
+                    if (c == 27)
+                    {
+                        string cd = dt.Rows[0]["mzqjbfz2"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["mzqjbfz2"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                   e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 42, y + 277));
-                                }
-                                else if (sj == "2")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 277));
-                                }
-                                else if (sj == "3")
-                                {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 42, y + 277));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 277));
+                            }
+                            else if (sj == "3")
+                            {
 
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 277));
-                                }
-                                else if (sj == "4")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 277));
-                                }
-                                else if (sj == "5")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 397, y + 277));
-                                }
-                                else if (sj == "6")
-                                {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 277));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 277));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 397, y + 277));
+                            }
+                            else if (sj == "6")
+                            {
 
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 492, y + 277));
-                                }
-                                else if (sj == "7")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 607, y + 277));
-                                }
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 492, y + 277));
+                            }
+                            else if (sj == "7")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 607, y + 277));
                             }
                         }
-                        if (c == 28)
+                    }
+                    if (c == 28)
+                    {
+                        string cd = dt.Rows[0]["mzqjbfz3"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["mzqjbfz3"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 42, y + 307));
-                                }
-                                else if (sj == "2")
-                                {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 42, y + 307));
+                            }
+                            else if (sj == "2")
+                            {
 
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 307));
-                                }
-                                else if (sj == "3")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 307));
-                                }
-                                else if (sj == "4")
-                                {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 307));
+                            }
+                            else if (sj == "3")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 307));
+                            }
+                            else if (sj == "4")
+                            {
 
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 307));
-                                }
-                                else if (sj == "5")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 397, y + 307));
-                                }
-                                else if (sj == "6")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 492, y + 307));
-                                }
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 307));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 397, y + 307));
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 492, y + 307));
                             }
                         }
-                        if (c == 29)
+                    }
+                    if (c == 29)
+                    {
+                        string cd = dt.Rows[0]["mzqjbfz4"].ToString();
+                        for (int i = 0; i < cd.Length; i++)
                         {
-                            string cd = dt.Rows[0]["mzqjbfz4"].ToString();
-                            for (int i = 0; i < cd.Length; i++)
+                            string b = cd.Substring(i, 1);
+                            string sj = b;
+                            if (sj == "1")
                             {
-                                string b = cd.Substring(i, 1);
-                                string sj = b;
-                                if (sj == "1")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 42, y + 337));
-                                }
-                                else if (sj == "2")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 337));
-                                }
-                                else if (sj == "3")
-                                {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 42, y + 337));
+                            }
+                            else if (sj == "2")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 127, y + 337));
+                            }
+                            else if (sj == "3")
+                            {
 
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 337));
-                                }
-                                else if (sj == "4")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 337));
-                                }
-                                else if (sj == "5")
-                                {
-                                     e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 397, y + 337));
-                                }
-                                else if (sj == "6")
-                                {
-                                    e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 492, y + 337));
-                                }
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 217, y + 337));
+                            }
+                            else if (sj == "4")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 287, y + 337));
+                            }
+                            else if (sj == "5")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 397, y + 337));
+                            }
+                            else if (sj == "6")
+                            {
+                                e.Graphics.DrawString("✔", ptzt8, Brushes.Black, new Point(x8 + 492, y + 337));
                             }
                         }
-                    
+                    }
+
                 }
                 #endregion
-                   // if (y + 800 > 800)
-              //  {
-                    e.HasMorePages = true;
-                    fy = fy + 1;
-                    x = 0; y = 0;
-                    return;
-              //  }
+                // if (y + 800 > 800)
+                //  {
+                e.HasMorePages = true;
+                fy = fy + 1;
+                x = 0; y = 0;
+                return;
+                //  }
 
             }
             #endregion
@@ -4626,10 +4755,10 @@ namespace main
                 e.Graphics.DrawString("床号：" + txtBednumber.Controls[0].Text, ptzt8, Brushes.Black, new Point(160 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(190 + x, Y_unLine), new Point(230 + x, Y_unLine));
                 e.Graphics.DrawString("住院号：" + txtZhuYuanHao.Controls[0].Text, ptzt8, Brushes.Black, new Point(240 + x, YY));
-                e.Graphics.DrawLine(ptp, new Point(280+ x, Y_unLine), new Point(390 + x, Y_unLine));
-                e.Graphics.DrawString("日期：" + dtOdate.Value.ToString("yyyy年MM月dd日"), ptzt8, Brushes.Black, new Point(420 + x, YY));
+                e.Graphics.DrawLine(ptp, new Point(280 + x, Y_unLine), new Point(390 + x, Y_unLine));
+                e.Graphics.DrawString("日期：" + dtOdate.Text, ptzt8, Brushes.Black, new Point(420 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(450 + x, Y_unLine), new Point(530 + x, Y_unLine));
-                e.Graphics.DrawString("医疗费：" , ptzt8, Brushes.Black, new Point(550 + x, YY));
+                e.Graphics.DrawString("医疗费：" + txtYiLiaoFei.Controls[0].Text, ptzt8, Brushes.Black, new Point(550 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(590 + x, Y_unLine), new Point(730 + x, Y_unLine));
                 //↑画标题一块的东西
                 Y_unLine = YY + 15; YY = YY + 20;
@@ -4645,7 +4774,7 @@ namespace main
                 e.Graphics.DrawLine(ptp, new Point(50 + x, Y_unLine), new Point(150 + x, Y_unLine));
                 e.Graphics.DrawString("性别  " + txtSex.Controls[0].Text, ptzt8, Brushes.Black, new Point(160 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(185 + x, Y_unLine), new Point(220 + x, Y_unLine));
-                e.Graphics.DrawString("年龄  " + txtAge.Controls[0].Text+ "岁", ptzt8, Brushes.Black, new Point(230 + x, YY));
+                e.Graphics.DrawString("年龄  " + txtAge.Controls[0].Text, ptzt8, Brushes.Black, new Point(230 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(255 + x, Y_unLine), new Point(290 + x, Y_unLine));
                 e.Graphics.DrawString("身高  " + txtHeight.Controls[0].Text, ptzt8, Brushes.Black, new Point(300 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(325 + x, Y_unLine), new Point(360 + x, Y_unLine));
@@ -4720,7 +4849,7 @@ namespace main
                 DateTime dtnow = new DateTime();//打印截止时间判断        
                 DateTime pagetime = new DateTime();
                 DataTable dtMax = bll.GetMaxPoint(mzjldID);
-                if (dtMax.Rows[0][0].ToString().IsNullOrEmpty())
+                if (dtMax.Rows[0][0].ToString() == "")
                     dtnow = DateTime.Now;
                 else
                     dtnow = Convert.ToDateTime(dtMax.Rows[0][0]);
@@ -4766,296 +4895,296 @@ namespace main
                     e.Graphics.DrawLine(pxuxian, new PointF(192 + x + 12 * i, YY + y), new Point(192 + x + 12 * i, YY + 27 * 12 + y));
 
                 }
-                e.Graphics.DrawString("监\n\n\n测", ptzt8, Brushes.Black, new Point(21 + x, YY+10));
-               // e.Graphics.DrawString("用\n\n\n\n\n\n药", ptzt7, Brushes.Black, new Point(22 + x, YY + 42));
-               // e.Graphics.DrawString("输\n\n液\n\n输\n\n血", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 13 + 2));
-               //// e.Graphics.DrawString("出\n\n量", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 20 + 2));
-               // //e.Graphics.DrawString("失血量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 2));
-               // //e.Graphics.DrawString("尿  量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 15));
-               // //e.Graphics.DrawString("入  量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 27));
-               // e.Graphics.DrawString("\n监\n\n\n\n测\n\n\n\n项\n\n\n\n目", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 22 + 2));
+                e.Graphics.DrawString("监\n\n\n测", ptzt8, Brushes.Black, new Point(21 + x, YY + 10));
+                // e.Graphics.DrawString("用\n\n\n\n\n\n药", ptzt7, Brushes.Black, new Point(22 + x, YY + 42));
+                // e.Graphics.DrawString("输\n\n液\n\n输\n\n血", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 13 + 2));
+                //// e.Graphics.DrawString("出\n\n量", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 20 + 2));
+                // //e.Graphics.DrawString("失血量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 2));
+                // //e.Graphics.DrawString("尿  量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 15));
+                // //e.Graphics.DrawString("入  量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 27));
+                // e.Graphics.DrawString("\n监\n\n\n\n测\n\n\n\n项\n\n\n\n目", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 22 + 2));
 
-               // //e.Graphics.DrawString("SP02(%)", ptzt7, Brushes.Black, new Point(40 + x, YY + 12 * 34 + 2));
-               // e.Graphics.DrawString("02 (吸入)", ptzt7, Brushes.Black, new Point(40 + x, YY + 2));
-               // #endregion
-               // #region 打印气体
-               // ArrayList sssQT = new ArrayList();
-               // int qti = 0;   //起步位置
-               // foreach (adims_MODEL.mzqt mzqt in mzqtList)
-               // {
-               //     if (sssQT.Contains(mzqt.Qtname))
-               //         qti = qti - 1;
-               //     //if (!sssQT.Contains(mzqt.Qtname))
-               //     //    e.Graphics.DrawString(mzqt.Qtname, mzqt.Qtname.Length < 7 ? ptzt6 : ptzt5, Brushes.Black, new PointF(32 + x, YY + qti * 12 + y + 3));
+                // //e.Graphics.DrawString("SP02(%)", ptzt7, Brushes.Black, new Point(40 + x, YY + 12 * 34 + 2));
+                // e.Graphics.DrawString("02 (吸入)", ptzt7, Brushes.Black, new Point(40 + x, YY + 2));
+                // #endregion
+                // #region 打印气体
+                // ArrayList sssQT = new ArrayList();
+                // int qti = 0;   //起步位置
+                // foreach (adims_MODEL.mzqt mzqt in mzqtList)
+                // {
+                //     if (sssQT.Contains(mzqt.Qtname))
+                //         qti = qti - 1;
+                //     //if (!sssQT.Contains(mzqt.Qtname))
+                //     //    e.Graphics.DrawString(mzqt.Qtname, mzqt.Qtname.Length < 7 ? ptzt6 : ptzt5, Brushes.Black, new PointF(32 + x, YY + qti * 12 + y + 3));
 
-               //     if (mzqt.Bz == 2)
-               //     {
-               //         TimeSpan t = new TimeSpan();
-               //         TimeSpan t1 = new TimeSpan();
-               //         t1 = mzqt.Jssj - pagetime;
-               //         t = mzqt.Sysj - pagetime;
-               //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120) + x;
-               //         int y1 = YY + qti * 12 + 4;
-               //         int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120) + x;
-               //         //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
-               //         //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
-               //         if (x1 > 120 + x && x1 < 780 + x)
-               //         {
-               //             e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt6, Brushes.Blue, new Point(x1 + 3, y + y1 - 6));
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + y), new Point(x1 - 3, y1 + 6 + y), new Point(x1 + 3, y1 + 6 + y) });
-               //         }
-               //         if (x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + y), new Point(x2 - 3, y1 + 6 + y), new Point(x2 + 3, y1 + 6 + y) });
-               //         }
-               //         if (x1 > 120 + x && x1 < 780 + x && x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(x2, y1 + y + 3));
-               //         }
-               //         if (x1 > 120 + x && x1 < 780 + x && x2 > 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-               //         }
-               //         if (x1 < 120 + x && x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2, y1 + y + 3));
-               //         }
-               //         if (x1 < 120 + x && x2 > 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-               //         }
-               //     }
-               //     qti++;
-               //     sssQT.Add(mzqt.Qtname);
-               // }
+                //     if (mzqt.Bz == 2)
+                //     {
+                //         TimeSpan t = new TimeSpan();
+                //         TimeSpan t1 = new TimeSpan();
+                //         t1 = mzqt.Jssj - pagetime;
+                //         t = mzqt.Sysj - pagetime;
+                //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120) + x;
+                //         int y1 = YY + qti * 12 + 4;
+                //         int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120) + x;
+                //         //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
+                //         //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
+                //         if (x1 > 120 + x && x1 < 780 + x)
+                //         {
+                //             e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt6, Brushes.Blue, new Point(x1 + 3, y + y1 - 6));
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + y), new Point(x1 - 3, y1 + 6 + y), new Point(x1 + 3, y1 + 6 + y) });
+                //         }
+                //         if (x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + y), new Point(x2 - 3, y1 + 6 + y), new Point(x2 + 3, y1 + 6 + y) });
+                //         }
+                //         if (x1 > 120 + x && x1 < 780 + x && x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(x2, y1 + y + 3));
+                //         }
+                //         if (x1 > 120 + x && x1 < 780 + x && x2 > 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                //         }
+                //         if (x1 < 120 + x && x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2, y1 + y + 3));
+                //         }
+                //         if (x1 < 120 + x && x2 > 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                //         }
+                //     }
+                //     qti++;
+                //     sssQT.Add(mzqt.Qtname);
+                // }
 
-               // #endregion
-               // #region 打印全麻药
-               // ArrayList sssYDY = new ArrayList();
-               // int ydyi = 1;
-               // foreach (adims_MODEL.mzyt mzyt in ydyList) //打印全麻药
-               // {
-               //     if (sssYDY.Contains(mzyt.Ytname))
-               //         ydyi = ydyi - 1;
-               //     if (!sssYDY.Contains(mzyt.Ytname))
-               //         e.Graphics.DrawString(mzyt.Ytname + " " + mzyt.Dw, mzyt.Ytname.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + ydyi * 12 + y + 3));
+                // #endregion
+                // #region 打印全麻药
+                // ArrayList sssYDY = new ArrayList();
+                // int ydyi = 1;
+                // foreach (adims_MODEL.mzyt mzyt in ydyList) //打印全麻药
+                // {
+                //     if (sssYDY.Contains(mzyt.Ytname))
+                //         ydyi = ydyi - 1;
+                //     if (!sssYDY.Contains(mzyt.Ytname))
+                //         e.Graphics.DrawString(mzyt.Ytname + " " + mzyt.Dw, mzyt.Ytname.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + ydyi * 12 + y + 3));
 
-               //     if (mzyt.Cxyy == false)
-               //     {
-               //         TimeSpan t = new TimeSpan();
-               //         t = mzyt.Sysj - pagetime;
-               //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               //         int y1 = YY + ydyi * 12 + 4;
-               //         if (x1 > 100 + x && x1 < 700 + x)
-               //         {
-               //             e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-               //         }
-               //     }
-               //     if (mzyt.Cxyy == true)
-               //     {
-               //         TimeSpan t = new TimeSpan();
-               //         TimeSpan t1 = new TimeSpan();
-               //         t1 = mzyt.Jssj - pagetime;
-               //         t = mzyt.Sysj - pagetime;
-               //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               //         int y1 = YY + ydyi * 12 + 4;
-               //         int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
-               //         if (x1 > 120 + x && x1 < 780 + x)
-               //         {
-               //             e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-               //         }
-               //         if (x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2 + x, y1 + y), new Point(x2 - 3 + x, y1 + 6 + y), new Point(x2 + 3 + x, y1 + 6 + y) });
-               //         }
-               //         if (x1 > 120 + x && x1 < 780 + x && x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
-               //         }
-               //         if (x1 > 120 + x && x1 < 780 + x && x2 > 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-               //         }
-               //         if (x1 < 120 + x && x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
-               //         }
-               //         if (x1 < 120 + x && x2 > 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-               //         }
-               //     }
-               //     ydyi++;
-               //     sssYDY.Add(mzyt.Ytname);
-               // }
-               // #endregion
+                //     if (mzyt.Cxyy == false)
+                //     {
+                //         TimeSpan t = new TimeSpan();
+                //         t = mzyt.Sysj - pagetime;
+                //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                //         int y1 = YY + ydyi * 12 + 4;
+                //         if (x1 > 100 + x && x1 < 700 + x)
+                //         {
+                //             e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                //         }
+                //     }
+                //     if (mzyt.Cxyy == true)
+                //     {
+                //         TimeSpan t = new TimeSpan();
+                //         TimeSpan t1 = new TimeSpan();
+                //         t1 = mzyt.Jssj - pagetime;
+                //         t = mzyt.Sysj - pagetime;
+                //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                //         int y1 = YY + ydyi * 12 + 4;
+                //         int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
+                //         if (x1 > 120 + x && x1 < 780 + x)
+                //         {
+                //             e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                //         }
+                //         if (x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2 + x, y1 + y), new Point(x2 - 3 + x, y1 + 6 + y), new Point(x2 + 3 + x, y1 + 6 + y) });
+                //         }
+                //         if (x1 > 120 + x && x1 < 780 + x && x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
+                //         }
+                //         if (x1 > 120 + x && x1 < 780 + x && x2 > 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                //         }
+                //         if (x1 < 120 + x && x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
+                //         }
+                //         if (x1 < 120 + x && x2 > 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                //         }
+                //     }
+                //     ydyi++;
+                //     sssYDY.Add(mzyt.Ytname);
+                // }
+                // #endregion
 
-               // #region 打印局麻药
-               // //int jti = 20;  //打印局麻药
-               // //ArrayList sssJMY = new ArrayList();
-               // //foreach (adims_MODEL.jtytsx jt in jmyList)
-               // //{
-               // //    if (sssJMY.Contains(jt.Name))
-               // //        jti = jti - 1;
-               // //    if (!sssJMY.Contains(jt.Name))
-               // //        e.Graphics.DrawString(jt.Name + " " + jt.Dw, jt.Name.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + jti * 12 + y + 2));
+                // #region 打印局麻药
+                // //int jti = 20;  //打印局麻药
+                // //ArrayList sssJMY = new ArrayList();
+                // //foreach (adims_MODEL.jtytsx jt in jmyList)
+                // //{
+                // //    if (sssJMY.Contains(jt.Name))
+                // //        jti = jti - 1;
+                // //    if (!sssJMY.Contains(jt.Name))
+                // //        e.Graphics.DrawString(jt.Name + " " + jt.Dw, jt.Name.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + jti * 12 + y + 2));
 
-               // //    TimeSpan t = new TimeSpan();
-               // //    t = jt.Kssj - pagetime;
-               // //    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               // //    int y1 = YY + jti * 12 + 4;
-               // //    if (x1 > 120 + x && x1 < 780 + x)
-               // //    {
-               // //        e.Graphics.DrawString(jt.Jl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-               // //        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-               // //    }
-               // //    jti++;
-               // //    sssJMY.Add(jt.Name);
-               // //}
-               // #endregion
+                // //    TimeSpan t = new TimeSpan();
+                // //    t = jt.Kssj - pagetime;
+                // //    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                // //    int y1 = YY + jti * 12 + 4;
+                // //    if (x1 > 120 + x && x1 < 780 + x)
+                // //    {
+                // //        e.Graphics.DrawString(jt.Jl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                // //        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                // //    }
+                // //    jti++;
+                // //    sssJMY.Add(jt.Name);
+                // //}
+                // #endregion
 
-               // #region 打印输液
-               // int syi = 13;
-               // ArrayList sssSY = new ArrayList();
-               // foreach (adims_MODEL.shuye sx in shuyeList)
-               // {
-               //     if (sssSY.Contains(sx.Name))
-               //         syi = syi - 1;
-               //     if (!sssSY.Contains(sx.Name))
-               //         e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + syi * 12 + y + 3));
+                // #region 打印输液
+                // int syi = 13;
+                // ArrayList sssSY = new ArrayList();
+                // foreach (adims_MODEL.shuye sx in shuyeList)
+                // {
+                //     if (sssSY.Contains(sx.Name))
+                //         syi = syi - 1;
+                //     if (!sssSY.Contains(sx.Name))
+                //         e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + syi * 12 + y + 3));
 
-               //     TimeSpan t = new TimeSpan();
-               //     TimeSpan t1 = new TimeSpan();
-               //     t1 = pagetime.AddMinutes(60 * jcsjjg) - pagetime;
-               //     t = sx.Kssj - pagetime;
-               //     //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + syi * 12 + 2);
-               //     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               //     int y1 = YY + syi * 12 + 5;
-               //     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
+                //     TimeSpan t = new TimeSpan();
+                //     TimeSpan t1 = new TimeSpan();
+                //     t1 = pagetime.AddMinutes(60 * jcsjjg) - pagetime;
+                //     t = sx.Kssj - pagetime;
+                //     //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + syi * 12 + 2);
+                //     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                //     int y1 = YY + syi * 12 + 5;
+                //     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
 
-               //     if (x1 > 120 + x && x1 < 780 + x)
-               //     {
-               //         e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 8);
-               //         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
-               //         new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
-               //     }
-               //     syi++;
-               //     sssSY.Add(sx.Name);
-               // }
+                //     if (x1 > 120 + x && x1 < 780 + x)
+                //     {
+                //         e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 8);
+                //         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
+                //         new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
+                //     }
+                //     syi++;
+                //     sssSY.Add(sx.Name);
+                // }
 
-               // #endregion
+                // #endregion
 
-               // #region 打印输血
-               // //打印输血
-               // int sxi = 18;
-               // ArrayList sssSX = new ArrayList();
-               // foreach (adims_MODEL.shuxue sx in shuxueList)
-               // {
-               //     if (sssSX.Contains(sx.Name))
-               //         sxi = sxi - 1;
-               //     if (!sssSX.Contains(sx.Name))
-               //         e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + sxi * 12 + y + 3));
+                // #region 打印输血
+                // //打印输血
+                // int sxi = 18;
+                // ArrayList sssSX = new ArrayList();
+                // foreach (adims_MODEL.shuxue sx in shuxueList)
+                // {
+                //     if (sssSX.Contains(sx.Name))
+                //         sxi = sxi - 1;
+                //     if (!sssSX.Contains(sx.Name))
+                //         e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + sxi * 12 + y + 3));
 
-               //     TimeSpan t = new TimeSpan();
-               //     TimeSpan t1 = new TimeSpan();
-               //     t1 = pagetime.AddHours(jcsjjg) - pagetime;
-               //     t = sx.Kssj - pagetime;
-               //     //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + sxi * 12 + 2);
-               //     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               //     int y1 = YY + sxi * 12 + 5;
-               //     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
-               //     if (x1 > 120 + x && x1 < 780 + x)
-               //     {
-               //         e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 6);
-               //         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
-               //         new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
-               //     }
-               //     sxi++;
-               //     sssSX.Add(sx.Name);
-               // }
-               // #endregion
-               // #region<<打印失血>>
-               // //e.Graphics.DrawString("失 血(ml)", ptzt7, Brushes.Black, x + 37, YY + 15 * 12 + y + 3);
-               // int cx_count = 0;
-               // foreach (adims_MODEL.clcxqt cx in cxList)
-               // {
-               //     if (cx.V > 0)
-               //     {
-               //         if (cx.D >= pagetime && cx.D <= pagetime.AddMinutes(60 * jcsjjg))
-               //         {
-               //             TimeSpan t = new TimeSpan();
-               //             t = cx.D - pagetime;
+                //     TimeSpan t = new TimeSpan();
+                //     TimeSpan t1 = new TimeSpan();
+                //     t1 = pagetime.AddHours(jcsjjg) - pagetime;
+                //     t = sx.Kssj - pagetime;
+                //     //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + sxi * 12 + 2);
+                //     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                //     int y1 = YY + sxi * 12 + 5;
+                //     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
+                //     if (x1 > 120 + x && x1 < 780 + x)
+                //     {
+                //         e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 6);
+                //         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
+                //         new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
+                //     }
+                //     sxi++;
+                //     sssSX.Add(sx.Name);
+                // }
+                // #endregion
+                // #region<<打印失血>>
+                // //e.Graphics.DrawString("失 血(ml)", ptzt7, Brushes.Black, x + 37, YY + 15 * 12 + y + 3);
+                // int cx_count = 0;
+                // foreach (adims_MODEL.clcxqt cx in cxList)
+                // {
+                //     if (cx.V > 0)
+                //     {
+                //         if (cx.D >= pagetime && cx.D <= pagetime.AddMinutes(60 * jcsjjg))
+                //         {
+                //             TimeSpan t = new TimeSpan();
+                //             t = cx.D - pagetime;
 
-               //             float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 132);
-               //             float jhy = YY + 12 * 20;
-               //             //if (cx_count % 5 == 0)
-               //             {
-               //                 if (cx.V.ToString().Length > 3)
-               //                 {
-               //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 16, 9);
-               //                 }
-               //                 else
-               //                 {
-               //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 9, 9);
-               //                 }
-               //                 e.Graphics.DrawString(cx.V.ToString(), cx.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx + 5, jhy));
+                //             float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 132);
+                //             float jhy = YY + 12 * 20;
+                //             //if (cx_count % 5 == 0)
+                //             {
+                //                 if (cx.V.ToString().Length > 3)
+                //                 {
+                //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 16, 9);
+                //                 }
+                //                 else
+                //                 {
+                //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 9, 9);
+                //                 }
+                //                 e.Graphics.DrawString(cx.V.ToString(), cx.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx + 5, jhy));
 
-               //             }
-               //             cx_count++;
-               //         }
-               //     }
-               //     else
-               //     {
-               //         //int xxx = 112;
-               //         //int jhyyy = 445;
-               //         //e.Graphics.DrawLine(ptp, new Point(xxx, jhyyy), new Point(xxx + 30, jhyyy - 10));
-               //     }
-               // }
-               // #endregion
-               // //e.Graphics.DrawString("引流量(ml)", ptzt7, Brushes.Black, x + 37, YY + 16 * 12 + y + 3);
+                //             }
+                //             cx_count++;
+                //         }
+                //     }
+                //     else
+                //     {
+                //         //int xxx = 112;
+                //         //int jhyyy = 445;
+                //         //e.Graphics.DrawLine(ptp, new Point(xxx, jhyyy), new Point(xxx + 30, jhyyy - 10));
+                //     }
+                // }
+                // #endregion
+                // //e.Graphics.DrawString("引流量(ml)", ptzt7, Brushes.Black, x + 37, YY + 16 * 12 + y + 3);
 
-               // #region<<打印入量>>
+                // #region<<打印入量>>
 
-               // int cn_count = 0;
-               // foreach (adims_MODEL.clcxqt q in yllList)
-               // {
-               //     if (q.V > 0)
-               //     {
-               //         if (q.D >= pagetime && q.D <= pagetime.AddMinutes(60 * jcsjjg))
-               //         {
-               //             TimeSpan t = new TimeSpan();
-               //             t = q.D - pagetime;
-               //             float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 132);
-               //             float jhy = YY + 22 * 12;
-               //             //if (cn_count % 5 == 0)
-               //             {
-               //                 if (q.V.ToString().Length > 3)
-               //                 {
-               //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 16, 9);
-               //                 }
-               //                 else
-               //                 {
-               //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 9, 9);
-               //                 }
-               //                 e.Graphics.DrawString(q.V.ToString(), q.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx + 5, jhy));
+                // int cn_count = 0;
+                // foreach (adims_MODEL.clcxqt q in yllList)
+                // {
+                //     if (q.V > 0)
+                //     {
+                //         if (q.D >= pagetime && q.D <= pagetime.AddMinutes(60 * jcsjjg))
+                //         {
+                //             TimeSpan t = new TimeSpan();
+                //             t = q.D - pagetime;
+                //             float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 132);
+                //             float jhy = YY + 22 * 12;
+                //             //if (cn_count % 5 == 0)
+                //             {
+                //                 if (q.V.ToString().Length > 3)
+                //                 {
+                //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 16, 9);
+                //                 }
+                //                 else
+                //                 {
+                //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 9, 9);
+                //                 }
+                //                 e.Graphics.DrawString(q.V.ToString(), q.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx + 5, jhy));
 
-               //             }
-               //             cn_count++;
-               //         }
-               //     }
-               //     else
-               //     {
-               //         //int xxx = 112;
-               //         //int jhyyy = 469;
-               //         //e.Graphics.DrawLine(ptp, new Point(xxx, jhyyy), new Point(xxx + 30, jhyyy - 10));
-               //     }
-               // }
-               // #endregion
-               e.Graphics.DrawString("尿量(ml)", ptzt7, Brushes.Black, x + 37, YY + 5 * 12 + y + 3);
+                //             }
+                //             cn_count++;
+                //         }
+                //     }
+                //     else
+                //     {
+                //         //int xxx = 112;
+                //         //int jhyyy = 469;
+                //         //e.Graphics.DrawLine(ptp, new Point(xxx, jhyyy), new Point(xxx + 30, jhyyy - 10));
+                //     }
+                // }
+                // #endregion
+                e.Graphics.DrawString("尿量(ml)", ptzt7, Brushes.Black, x + 37, YY + 5 * 12 + y + 3);
 
-               // #region<<打尿量>>
+                // #region<<打尿量>>
 
                 int nl_count = 0;
                 foreach (adims_MODEL.clcxqt cl in cnList)
@@ -5109,7 +5238,7 @@ namespace main
                         if (jc == j.Sy)
                         {
 
-                            if (j.D >= pagetime && j.D <= pagetime.AddMinutes(48* jcsjjg))
+                            if (j.D >= pagetime && j.D <= pagetime.AddMinutes(48 * jcsjjg))
                             {
                                 TimeSpan t = new TimeSpan();
                                 t = j.D - pagetime;
@@ -5176,40 +5305,40 @@ namespace main
                 }
                 ///打印显示体温
                 //jhi++;
-               int tw_count = 0;
-               if (checktw.Checked == false)
-               {
-                   e.Graphics.DrawString("体温", ptzt7, Brushes.Black, new PointF(35 + x, YY + jhi * 12 + y));
-                   foreach (adims_MODEL.tw_point p in twList)
-                   {
-                       if (p.V > 0)
-                       {
-                           if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
-                           {
-                               TimeSpan t = new TimeSpan();
-                               t = p.D - pagetime;
-                               float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                               float jhy = YY + jhi * 12;
-                               if (tw_count % 5 == 0)
-                               {
-                                   if (p.V.ToString().Length > 3)
-                                   {
-                                       e.Graphics.FillRectangle(Brushes.Pink, jhx - 3 + x, jhy, 16, 9);
-                                   }
-                                   else
-                                   {
-                                       e.Graphics.FillRectangle(Brushes.Pink, jhx - 3 + x, jhy, 9, 9);
-                                   }
-                                   e.Graphics.DrawString(p.V.ToString(), p.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx - 4 + x, jhy));
+                int tw_count = 0;
+                if (checktw.Checked == false)
+                {
+                    e.Graphics.DrawString("体温", ptzt7, Brushes.Black, new PointF(35 + x, YY + jhi * 12 + y));
+                    foreach (adims_MODEL.tw_point p in twList)
+                    {
+                        if (p.V > 0)
+                        {
+                            if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
+                            {
+                                TimeSpan t = new TimeSpan();
+                                t = p.D - pagetime;
+                                float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                                float jhy = YY + jhi * 12;
+                                if (tw_count % 5 == 0)
+                                {
+                                    if (p.V.ToString().Length > 3)
+                                    {
+                                        e.Graphics.FillRectangle(Brushes.Pink, jhx - 3 + x, jhy, 16, 9);
+                                    }
+                                    else
+                                    {
+                                        e.Graphics.FillRectangle(Brushes.Pink, jhx - 3 + x, jhy, 9, 9);
+                                    }
+                                    e.Graphics.DrawString(p.V.ToString(), p.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx - 4 + x, jhy));
 
-                               }
-                               tw_count++;
-                           }
-                       }
+                                }
+                                tw_count++;
+                            }
+                        }
 
 
-                   }
-               }
+                    }
+                }
 
                 #endregion
                 //foreach (adims_MODEL.jhxm j in jhxmValue)
@@ -5244,56 +5373,56 @@ namespace main
                 //txtxuet.Text = Convert.ToString(dtMzjld.Rows[0]["XUETANG"]);
                 #region 打印血气
                 //Pen dakred2 = new Pen(Brushes.DarkRed, 2);
-                //if (tXTPH.Text.Trim().IsNullOrEmpty())
+                //if (tXTPH.Text.Trim() == "")
                 //    tXTPH.Text = " / ";
                 //int yyyy = YY + 27 * 12 + 1;
                 //e.Graphics.DrawString("PH： " + tXTPH.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtpco2.Text.Trim().IsNullOrEmpty())
+                //if (txtpco2.Text.Trim() == "")
                 //    txtpco2.Text = " /";
                 //e.Graphics.DrawString("PCO2:" + txtpco2.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtpo2.Text.Trim().IsNullOrEmpty())
+                //if (txtpo2.Text.Trim() == "")
                 //    txtpo2.Text = "/";
                 //e.Graphics.DrawString("PO2：" + txtpo2.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtbe.Text.Trim().IsNullOrEmpty())
+                //if (txtbe.Text.Trim() == "")
                 //    txtbe.Text = "/";
                 //e.Graphics.DrawString("BE： " + txtbe.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthco3.Text.Trim().IsNullOrEmpty())
+                //if (txthco3.Text.Trim() == "")
                 //    txthco3.Text = "/";
                 //e.Graphics.DrawString("HCO3:" + txthco3.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthb.Text.Trim().IsNullOrEmpty())
+                //if (txthb.Text.Trim() == "")
                 //    txthb.Text = "/";
                 //e.Graphics.DrawString("HB： " + txthb.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("g/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtk.Text.Trim().IsNullOrEmpty())
+                //if (txtk.Text.Trim() == "")
                 //    txtk.Text = "/";
                 //e.Graphics.DrawString("K：  " + txtk.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmol/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthct.Text.Trim().IsNullOrEmpty())
+                //if (txthct.Text.Trim() == "")
                 //    txthct.Text = "/";
                 //e.Graphics.DrawString("HCT：" + txthct.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("%", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtxuet.Text.Trim().IsNullOrEmpty())
+                //if (txtxuet.Text.Trim() == "")
                 //    txtxuet.Text = "/";
                 //e.Graphics.DrawString("血糖:" + txtxuet.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
@@ -5305,7 +5434,7 @@ namespace main
                 #region//打印检测区域格子。血压体温等区域↓
                 YY = YY + 12 * 7;
                 e.Graphics.DrawLine(ptp, new Point(35 + x, YY), new Point(35 + x, YY + 240));
-                e.Graphics.DrawString("体\n温", ptzt8, Brushes.Black, new Point(21 + x, YY-10 ));
+                e.Graphics.DrawString("体\n温", ptzt8, Brushes.Black, new Point(21 + x, YY - 10));
 
                 for (int i = 0; i < 12; i++)//画横实线           
                     e.Graphics.DrawLine(ptp, new Point(192 + x, YY + 20 * i), new Point(770 + x, YY + 20 * i + y));
@@ -5355,7 +5484,7 @@ namespace main
                     {
                         if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
                         {
-                            
+
                             TimeSpan t = new TimeSpan();
                             t = p.D - pagetime;
                             float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
@@ -5413,30 +5542,30 @@ namespace main
 
                 #region  //打印脉搏
                 px = 0; py = 0;
-                if (checkmb.Checked==false)
-                foreach (adims_MODEL.point p in mboList)
-                {
-                    if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
+                if (checkmb.Checked == false)
+                    foreach (adims_MODEL.point p in mboList)
                     {
-                        TimeSpan t = new TimeSpan();
-                        t = p.D - pagetime;
-                        float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                        //float pointy = (float)((220 - p.V) * 1 + 460);
-                        float pointy = 0;
-                        if (p.V > 230)
+                        if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
                         {
-                            pointy = (float)((20) * 1 + YY);
-                            e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + x, pointy + y);
+                            TimeSpan t = new TimeSpan();
+                            t = p.D - pagetime;
+                            float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                            //float pointy = (float)((220 - p.V) * 1 + 460);
+                            float pointy = 0;
+                            if (p.V > 230)
+                            {
+                                pointy = (float)((20) * 1 + YY);
+                                e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + x, pointy + y);
+                            }
+                            else
+                                pointy = (float)((240 - p.V) * 1 + YY);
+                            e.Graphics.FillEllipse(Brushes.Blue, pointx - 2 + x, pointy - 2 + y, 5, 5);
+                            if (px != 0)
+                                e.Graphics.DrawLine(Pens.Blue, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
+                            px = pointx;
+                            py = pointy;
                         }
-                        else
-                            pointy = (float)((240 - p.V) * 1 + YY);
-                        e.Graphics.FillEllipse(Brushes.Blue, pointx - 2 + x, pointy - 2 + y, 5, 5);
-                        if (px != 0)
-                            e.Graphics.DrawLine(Pens.Blue, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
-                        px = pointx;
-                        py = pointy;
                     }
-                }
                 #endregion
 
                 #region  //打印体温
@@ -5469,77 +5598,77 @@ namespace main
                 //  }
                 #endregion
 
-                    #region  //打印呼吸
+                #region  //打印呼吸
                 px = 0; py = 0; int phuxi = 0;
                 //if (checkBoxhx.Checked == false)
                 //{
-                    string fxs = "";
-                    string tvxs = "";
-                    DataTable dtMZ_Info = bll.SelectOldPatInfo(mzjldID);
+                string fxs = "";
+                string tvxs = "";
+                DataTable dtMZ_Info = bll.SelectOldPatInfo(mzjldID);
 
-                    if (dtMZ_Info.Rows.Count > 0)
+                if (dtMZ_Info.Rows.Count > 0)
+                {
+                    if (this.toStr(dtMZ_Info.Rows[0]["jkvalue"]) != "")
                     {
-                        if (this.toStr(dtMZ_Info.Rows[0]["jkvalue"]) != "")
-                        {
-                            fxs = dtMZ_Info.Rows[0]["jkvalue"].ToString();
-                        }
-                        if (this.toStr(dtMZ_Info.Rows[0]["fzvalue"]) != "")
-                        {
-                            tvxs = dtMZ_Info.Rows[0]["fzvalue"].ToString();
-                        }
+                        fxs = dtMZ_Info.Rows[0]["jkvalue"].ToString();
                     }
-                    int dowa_sb = 0;
-                    if (checkhx.Checked == false)
+                    if (this.toStr(dtMZ_Info.Rows[0]["fzvalue"]) != "")
                     {
-                        foreach (adims_MODEL.point p in hxlList)
+                        tvxs = dtMZ_Info.Rows[0]["fzvalue"].ToString();
+                    }
+                }
+                int dowa_sb = 0;
+                if (checkhx.Checked == false)
+                {
+                    foreach (adims_MODEL.point p in hxlList)
+                    {
+                        if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
                         {
-                            if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
+                            TimeSpan t = new TimeSpan();
+                            t = p.D - pagetime;
+
+                            float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 212);
+                            //float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                            float pointy = 0;
+                            if (p.V > 230)
                             {
-                                TimeSpan t = new TimeSpan();
-                                t = p.D - pagetime;
-
-                                float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 212);
-                                //float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                                float pointy = 0;
-                                if (p.V > 230)
-                                {
-                                    //pointy = (float)((20) * 1 + YY);
-                                    pointy = (float)((20) * 1 + YY) + y;
-                                    e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, pointx, pointy);
-                                }
-                                else
-                                    pointy = (float)((240 - p.V) * 1 + YY) + y;
-                                if (jkksTime < p.D && p.D < jkjsTime)
-                                {
-                                    //float xPlus = pointx - px; // 描点作图
-                                    //PointF p1 = new PointF(px, py);
-                                    //PointF p2 = new PointF(pointx - 2 * xPlus / 3, pointy + 6);
-                                    //PointF p3 = new PointF(pointx - xPlus / 3, pointy - 6);
-                                    //PointF p4 = new PointF(pointx, pointy);
-                                    //e.Graphics.DrawBezier(Pens.DarkCyan, p1, p2, p3, p4);
-                                    this.PaintSignMBreath2(e.Graphics, new PointF(pointx - 2, pointy - 4));
-                                    if (dowa_sb == 0)
-                                    {
-                                        e.Graphics.DrawString("TV" + tvxs + "/ " + "f" + fxs, this.Font, Brushes.DarkCyan, pointx, pointy - 13);
-
-                                        dowa_sb++;
-                                    }
-                                    //e.Graphics.DrawString("C", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
-                                }
-                                //else if (fzksTime < p.D && p.D < fzjsTime)
-                                //{
-                                //    e.Graphics.DrawString("A", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
-                                //}
-                                else
-                                    e.Graphics.DrawEllipse(Pens.DarkCyan, pointx - 2, pointy - 2, 5, 5);
-                                //if (px != 0 && (jkksTime > p.D || jkjsTime < p.D))
-                                if (px != 0)
-                                    e.Graphics.DrawLine(Pens.DarkCyan, new PointF(px, py), new PointF(pointx, pointy));
-                                px = pointx;
-                                py = pointy;
+                                //pointy = (float)((20) * 1 + YY);
+                                pointy = (float)((20) * 1 + YY) + y;
+                                e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, pointx, pointy);
                             }
+                            else
+                                pointy = (float)((240 - p.V) * 1 + YY) + y;
+                            if (jkksTime < p.D && p.D < jkjsTime)
+                            {
+                                //float xPlus = pointx - px; // 描点作图
+                                //PointF p1 = new PointF(px, py);
+                                //PointF p2 = new PointF(pointx - 2 * xPlus / 3, pointy + 6);
+                                //PointF p3 = new PointF(pointx - xPlus / 3, pointy - 6);
+                                //PointF p4 = new PointF(pointx, pointy);
+                                //e.Graphics.DrawBezier(Pens.DarkCyan, p1, p2, p3, p4);
+                                this.PaintSignMBreath2(e.Graphics, new PointF(pointx - 2, pointy - 4));
+                                if (dowa_sb == 0)
+                                {
+                                    e.Graphics.DrawString("TV" + tvxs + "/ " + "f" + fxs, this.Font, Brushes.DarkCyan, pointx, pointy - 13);
+
+                                    dowa_sb++;
+                                }
+                                //e.Graphics.DrawString("C", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
+                            }
+                            //else if (fzksTime < p.D && p.D < fzjsTime)
+                            //{
+                            //    e.Graphics.DrawString("A", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
+                            //}
+                            else
+                                e.Graphics.DrawEllipse(Pens.DarkCyan, pointx - 2, pointy - 2, 5, 5);
+                            //if (px != 0 && (jkksTime > p.D || jkjsTime < p.D))
+                            if (px != 0)
+                                e.Graphics.DrawLine(Pens.DarkCyan, new PointF(px, py), new PointF(pointx, pointy));
+                            px = pointx;
+                            py = pointy;
                         }
                     }
+                }
                 //}
                 //px = 0; py = 0; int phuxi = 0;
                 //foreach (adims_MODEL.point h in hxlList)
@@ -5604,627 +5733,627 @@ namespace main
                 //        py = pointy;
                 //    }
                 //}
-                    #endregion
+                #endregion
 
-                    #region  //打印ETCO2
-                    px = 0; py = 0;
-                    //foreach (adims_MODEL.point p in etco2List)
-                    //{
-                    //    if (p.D >= pagetime && p.D <= pagetime.AddMinutes(60 * jcsjjg))
-                    //    {
-                    //        TimeSpan t = new TimeSpan();
-                    //        t = p.D - pagetime;
-                    //        float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 112);
-                    //        float pointy = 0;
-                    //        if (p.V > 230)
-                    //        {
-                    //            pointy = (float)((20) * 1 + YY);
-                    //            e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + x, pointy + y);
-                    //        }
-                    //        else
-                    //            pointy = (float)((240 - p.V) * 1 + YY);
+                #region  //打印ETCO2
+                px = 0; py = 0;
+                //foreach (adims_MODEL.point p in etco2List)
+                //{
+                //    if (p.D >= pagetime && p.D <= pagetime.AddMinutes(60 * jcsjjg))
+                //    {
+                //        TimeSpan t = new TimeSpan();
+                //        t = p.D - pagetime;
+                //        float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 112);
+                //        float pointy = 0;
+                //        if (p.V > 230)
+                //        {
+                //            pointy = (float)((20) * 1 + YY);
+                //            e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + x, pointy + y);
+                //        }
+                //        else
+                //            pointy = (float)((240 - p.V) * 1 + YY);
 
-                    //        e.Graphics.DrawPolygon(Pens.DarkOrange, new PointF[3] { new PointF(pointx+ x, pointy+ y), 
-                    //                       new PointF(pointx - 3+ x, pointy - 5+ y), new PointF(pointx + 3+ x, pointy - 5+ y) });
-                    //        // e.Graphics.FillPolygon(Brushes.Green, new PointF[3] { new PointF(pointx+ x, pointy+ y), 
-                    //        //         new PointF(pointx + 3+ x, pointy + 6+ y), new PointF(pointx - 3+ x, pointy + 6+ y) });
+                //        e.Graphics.DrawPolygon(Pens.DarkOrange, new PointF[3] { new PointF(pointx+ x, pointy+ y), 
+                //                       new PointF(pointx - 3+ x, pointy - 5+ y), new PointF(pointx + 3+ x, pointy - 5+ y) });
+                //        // e.Graphics.FillPolygon(Brushes.Green, new PointF[3] { new PointF(pointx+ x, pointy+ y), 
+                //        //         new PointF(pointx + 3+ x, pointy + 6+ y), new PointF(pointx - 3+ x, pointy + 6+ y) });
 
-                    //        if (px != 0)
-                    //            e.Graphics.DrawLine(Pens.DarkOrange, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
+                //        if (px != 0)
+                //            e.Graphics.DrawLine(Pens.DarkOrange, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
 
-                    //        px = pointx;
-                    //        py = pointy;
-                    //    }
+                //        px = pointx;
+                //        py = pointy;
+                //    }
 
-                    //}
-                    #endregion
+                //}
+                #endregion
 
-                    //↓标记区域
-                    YY = YY + 12 * 20;
-                    e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
-                    e.Graphics.DrawString("标记", ptzt7, Brushes.Black, new Point(25 + x, YY + 3));
+                //↓标记区域
+                YY = YY + 12 * 20;
+                e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
+                e.Graphics.DrawString("标记", ptzt7, Brushes.Black, new Point(25 + x, YY + 3));
 
-                    #region 打印麻醉，手术，插管
-                    if (ssksTime >= pagetime && ssksTime <= pagetime.AddHours(jcsjjg))
+                #region 打印麻醉，手术，插管
+                if (ssksTime >= pagetime && ssksTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = ssksTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    e.Graphics.DrawString("⊙", ptzt8, Brushes.Black, xxx, YY + 3);
+                }
+                if (ssjsTime >= pagetime && ssjsTime < pagetime.AddMinutes(48 * jcsjjg))
+                {
+                    TimeSpan T = ssjsTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    Image newImage = Properties.Resources.SSJS;
+                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                }
+                if (mzksTime >= pagetime && mzksTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = mzksTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
+                }
+                if (mzjkssjzzTime >= pagetime && mzjkssjzzTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = mzjkssjzzTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    e.Graphics.DrawString("Χ2", ptzt8, Brushes.Black, xxx, YY + 3);
+                }
+                if (mzkszgnTime >= pagetime && mzkszgnTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = mzkszgnTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    e.Graphics.DrawString("Χ1", ptzt8, Brushes.Black, xxx, YY + 3);
+                }
+                //if (mzjsTime >= pagetime && mzjsTime <= pagetime.AddHours(jcsjjg))
+                //{
+                //    TimeSpan T = mzjsTime - pagetime;
+                //    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 11 / jcsjjg + 115 + x);
+                //    e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
+                //}
+                if (cgTime >= pagetime && cgTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = cgTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    Image newImage = Properties.Resources.CG;
+                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                }
+                if (bgTime >= pagetime && bgTime < pagetime.AddMinutes(48 * jcsjjg))
+                {
+                    TimeSpan T = bgTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    Image newImage = Properties.Resources.BG;
+                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                }
+
+                #endregion
+
+                #region 打印用药
+                YY = YY + 24;
+                for (int i = 0; i < 20; i++)//画横实线
+                {
+                    if (i == 0 || i == 11 || i == 16 || i == 19)//|| i == 20
+                        e.Graphics.DrawLine(ptp, new Point(20 + x, YY + 12 * i + y), new Point(770 + x, YY + 12 * i + y));
+                    //else if (i == 33)
+                    //    e.Graphics.DrawLine(ptp, new Point(35 + x, YY + 12 * i + y), new Point(700 + x, YY + 12 * i + y));
+                    else
+                        e.Graphics.DrawLine(ptp, new Point(35 + x, YY + 12 * i + y), new Point(770 + x, YY + 12 * i + y));
+                }
+                e.Graphics.DrawLine(ptp, new Point(35 + x, YY + y), new Point(35 + x, YY + 19 * 12 + y));
+
+                for (int i = 0; i < 10; i++)//画竖实线
+                {
+                    e.Graphics.DrawLine(ptp, new Point(192 + x + 72 * i, YY - 2 + y), new Point(192 + x + 72 * i, YY + 19 * 12 + y));
+                }
+                for (int i = 1; i < 48; i++)//画竖虚线
+                {
+                    e.Graphics.DrawLine(pxuxian, new PointF(192 + x + 12 * i, YY + y), new Point(192 + x + 12 * i, YY + 19 * 12 + y));
+
+                }
+                for (int i = 0; i < 16; i++)//画竖实线
+                {
+                    e.Graphics.DrawLine(ptp, new Point(192 + x + 36 * i, YY + 19 * 12 + y), new Point(192 + x + 36 * i, YY + 19 * 12 + y));
+                }
+
+                #endregion
+
+
+                #region 打印气体
+                e.Graphics.DrawString("O2", ptzt8, Brushes.Black, new Point(35 + x, YY));
+                ArrayList sssQT = new ArrayList();
+                int qti = 0;   //起步位置
+                foreach (adims_MODEL.mzqt mzqt in mzqtList)
+                {
+                    if (sssQT.Contains(mzqt.Qtname))
+                        qti = qti - 1;
+                    //if (!sssQT.Contains(mzqt.Qtname))
+                    //    e.Graphics.DrawString(mzqt.Qtname, mzqt.Qtname.Length < 7 ? ptzt6 : ptzt5, Brushes.Black, new PointF(32 + x, YY + qti * 12 + y + 3));
+
+                    if (mzqt.Bz == 2)
                     {
-                        TimeSpan T = ssksTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        e.Graphics.DrawString("⊙", ptzt8, Brushes.Black, xxx, YY + 3);
+                        TimeSpan t = new TimeSpan();
+                        TimeSpan t1 = new TimeSpan();
+                        t1 = mzqt.Jssj - pagetime;
+                        t = mzqt.Sysj - pagetime;
+                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
+                        int y1 = YY + qti * 12 + 4;
+
+                        int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192) + x;
+                        //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
+                        //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
+                        if (x1 > 190 + x && x1 < 780 + x)
+                        {
+                            e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt6, Brushes.Blue, new Point(x1 + 3, y + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + y), new Point(x1 - 3, y1 + 6 + y), new Point(x1 + 3, y1 + 6 + y) });
+                        }
+                        if (x2 > 190 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + y), new Point(x2 - 3, y1 + 6 + y), new Point(x2 + 3, y1 + 6 + y) });
+                        }
+                        if (x1 > 190 + x && x1 < 780 + x && x2 > 190 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(x2, y1 + y + 3));
+                        }
+                        if (x1 > 190 + x && x1 < 780 + x && x2 > 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                        }
+                        if (x1 < 190 + x && x2 > 190 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(190 + x, y1 + y + 3), new Point(x2, y1 + y + 3));
+                        }
+                        if (x1 < 190 + x && x2 > 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(190 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                        }
                     }
-                    if (ssjsTime >= pagetime && ssjsTime < pagetime.AddMinutes(48 * jcsjjg))
+                    qti++;
+                    sssQT.Add(mzqt.Qtname);
+                }
+
+
+                #endregion
+                #region 打印全麻药
+                ArrayList sssYDY = new ArrayList();
+                int ydyi = 1;
+                foreach (adims_MODEL.mzyt mzyt in ydyList) //打印全麻药
+                {
+                    if (sssYDY.Contains(mzyt.Ytname))
+                        ydyi = ydyi - 1;
+                    if (!sssYDY.Contains(mzyt.Ytname))
+                        e.Graphics.DrawString(mzyt.Ytname + " " + mzyt.Dw, mzyt.Ytname.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + ydyi * 12 + y + 3));
+
+                    if (mzyt.Cxyy == false)
                     {
-                        TimeSpan T = ssjsTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        Image newImage = Properties.Resources.SSJS;
-                        e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                        TimeSpan t = new TimeSpan();
+                        t = mzyt.Sysj - pagetime;
+                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 160) + x;
+                        int y1 = YY + ydyi * 12 + 4;
+                        if (x1 > 100 + x && x1 < 700 + x)
+                        {
+                            e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                        }
                     }
-                    if (mzksTime >= pagetime && mzksTime <= pagetime.AddHours(jcsjjg))
+                    if (mzyt.Cxyy == true)
                     {
-                        TimeSpan T = mzksTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
+                        TimeSpan t = new TimeSpan();
+                        TimeSpan t1 = new TimeSpan();
+                        t1 = mzyt.Jssj - pagetime;
+                        t = mzyt.Sysj - pagetime;
+                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 170) + x;
+                        int y1 = YY + ydyi * 12 + 4;
+                        int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 170) + x;
+                        if (x1 > 173 + x && x1 < 780 + x)
+                        {
+                            e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                        }
+                        if (x2 > 173 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2 + x, y1 + y), new Point(x2 - 3 + x, y1 + 6 + y), new Point(x2 + 3 + x, y1 + 6 + y) });
+                        }
+                        if (x1 > 190 + x && x1 < 780 + x && x2 > 190 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
+                        }
+                        if (x1 > 190 + x && x1 < 780 + x && x2 > 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                        }
+                        if (x1 < 190 + x && x2 > 120 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(195 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
+                        }
+                        if (x1 < 190 + x && x2 > 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(195 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                        }
                     }
-                    if (mzjkssjzzTime >= pagetime && mzjkssjzzTime <= pagetime.AddHours(jcsjjg))
+                    ydyi++;
+                    sssYDY.Add(mzyt.Ytname);
+                }
+
+                #endregion
+
+
+                #region 打印输液
+                int syi = 11;
+                ArrayList sssSY = new ArrayList();
+                foreach (adims_MODEL.shuye sx in shuyeList)
+                {
+                    if (sssSY.Contains(sx.Name))
+                        syi = syi - 1;
+                    if (!sssSY.Contains(sx.Name))
+                        e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + syi * 12 + y + 3));
+
+                    TimeSpan t = new TimeSpan();
+                    TimeSpan t1 = new TimeSpan();
+                    t1 = pagetime.AddMinutes(60 * jcsjjg) - pagetime;
+                    t = sx.Kssj - pagetime;
+                    //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + syi * 12 + 2);
+                    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                    int y1 = YY + syi * 12 + 5;
+                    int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
+
+                    if (x1 > 190 + x && x1 < 780 + x)
                     {
-                        TimeSpan T = mzjkssjzzTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        e.Graphics.DrawString("Χ2", ptzt8, Brushes.Black, xxx, YY + 3);
+                        e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 8);
+                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y),
+                             new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
                     }
-                    if (mzkszgnTime >= pagetime && mzkszgnTime <= pagetime.AddHours(jcsjjg))
+                    syi++;
+                    sssSY.Add(sx.Name);
+                }
+
+                #endregion
+
+                #region 打印输血
+                //打印输血
+                int sxi = 16;
+                ArrayList sssSX = new ArrayList();
+                foreach (adims_MODEL.shuxue sx in shuxueList)
+                {
+                    if (sssSX.Contains(sx.Name))
+                        sxi = sxi - 1;
+                    if (!sssSX.Contains(sx.Name))
+                        e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + sxi * 12 + y + 3));
+
+                    TimeSpan t = new TimeSpan();
+                    TimeSpan t1 = new TimeSpan();
+                    t1 = pagetime.AddHours(jcsjjg) - pagetime;
+                    t = sx.Kssj - pagetime;
+                    //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + sxi * 12 + 2);
+                    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                    int y1 = YY + sxi * 12 + 5;
+                    int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
+                    if (x1 > 190 + x && x1 < 780 + x)
                     {
-                        TimeSpan T = mzkszgnTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        e.Graphics.DrawString("Χ1", ptzt8, Brushes.Black, xxx, YY + 3);
+                        e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 6);
+                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y),
+                             new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
                     }
-                    //if (mzjsTime >= pagetime && mzjsTime <= pagetime.AddHours(jcsjjg))
-                    //{
-                    //    TimeSpan T = mzjsTime - pagetime;
-                    //    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 11 / jcsjjg + 115 + x);
-                    //    e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
-                    //}
-                    if (cgTime >= pagetime && cgTime <= pagetime.AddHours(jcsjjg))
+                    sxi++;
+                    sssSX.Add(sx.Name);
+                }
+                #endregion
+                #region 打印输液输血
+                e.Graphics.DrawString("麻\n\n醉\n\n药", ptzt8, Brushes.Black, new Point(21 + x, YY + 40));
+                e.Graphics.DrawString("输\n\n液", ptzt8, Brushes.Black, new Point(21 + x, YY + 11 * 12 + 10));
+                e.Graphics.DrawString("输\n血", ptzt8, Brushes.Black, new Point(21 + x, YY + 16 * 12 + 5));
+                //e.Graphics.DrawString("     用药序号", ptzt10, Brushes.Black, new Point(25 + x, YY + 51));
+                #endregion
+
+
+                YY = YY + 19 * 12; Y_unLine = YY + 13;
+                #region 打印特殊用药
+
+
+                int szi = 1;
+                int szi1 = 1;
+                int tsn1 = 0;
+                string szss1 = "";
+                //显示事件标记
+                foreach (adims_MODEL.szsj sz in szsjList)
+                {
+                    if (sz.D >= pagetime && sz.D <= pagetime.AddMinutes(48 * jcsjjg))
                     {
-                        TimeSpan T = cgTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        Image newImage = Properties.Resources.CG;
-                        e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
-                    }
-                    if (bgTime >= pagetime && bgTime < pagetime.AddMinutes(48 * jcsjjg))
-                    {
-                        TimeSpan T = bgTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        Image newImage = Properties.Resources.BG;
-                        e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                        TimeSpan t = new TimeSpan();
+                        t = sz.D - pagetime;
+                        float tx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
+                        e.Graphics.FillRectangle(Brushes.Pink, tx - 3, YY + 3 - 450, 9, 9);
+                        //e.Graphics.FillRectangle(Brushes.Pink, tx - 3, BJYY + 8 + (sz.Y_zb - 315), 9, 9);
+                        e.Graphics.DrawString(szi.ToString(), ptzt7, Brushes.Black, new PointF(tx - 3, YY + 3 - 450));
+                        szi++;
                     }
 
-                    #endregion
-                   
-                    #region 打印用药
-                    YY = YY+24;
-                    for (int i = 0; i < 20; i++)//画横实线
+                }
+                //显示事件的类容
+                foreach (adims_MODEL.szsj sz in szsjList)
+                {
+                    if (szi1 + tsn1 > 11)
                     {
-                        if (i == 0 || i == 11 || i == 16 || i == 19)//|| i == 20
-                            e.Graphics.DrawLine(ptp, new Point(20 + x, YY + 12 * i + y), new Point(770 + x, YY + 12 * i + y));
-                        //else if (i == 33)
-                        //    e.Graphics.DrawLine(ptp, new Point(35 + x, YY + 12 * i + y), new Point(700 + x, YY + 12 * i + y));
+                        break;
+                    }
+                    szss1 = szi1.ToString() + "." + sz.Name + " " + sz.D.ToString("HH:mm:ss") + "\n";
+                    if (szi1 + tsn1 > 12)
+                    {
+                        string strSS1 = "";
+                        int StrLengthSS = szss1.Trim().Length;//1//2
+                        int rowSS = StrLengthSS / 20;
+                        if (StrLengthSS < 21)
+                        {
+                            for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                            {
+
+                                if (i < rowSS)
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
+                                else
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20);
+
+                                e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 - i - 9) * 14));
+                            }
+                        }
                         else
-                            e.Graphics.DrawLine(ptp, new Point(35 + x, YY + 12 * i + y), new Point(770 + x, YY + 12 * i + y));
-                    }
-                    e.Graphics.DrawLine(ptp, new Point(35 + x, YY + y), new Point(35 + x, YY +19 * 12 + y));
-
-                    for (int i = 0; i < 10; i++)//画竖实线
-                    {
-                        e.Graphics.DrawLine(ptp, new Point(192 + x + 72 * i, YY - 2 + y), new Point(192 + x + 72 * i, YY + 19 * 12 + y));
-                    }
-                    for (int i = 1; i < 48; i++)//画竖虚线
-                    {
-                        e.Graphics.DrawLine(pxuxian, new PointF(192 + x + 12 * i, YY + y), new Point(192 + x + 12 * i, YY + 19 * 12 + y));
-
-                    }
-                    for (int i = 0; i < 16; i++)//画竖实线
-                    {
-                        e.Graphics.DrawLine(ptp, new Point(192 + x + 36 * i, YY + 19 * 12 + y), new Point(192 + x + 36 * i, YY + 19 * 12 + y));
-                    }
-                   
-                    #endregion
-
-
-                    #region 打印气体
-                    e.Graphics.DrawString("O2", ptzt8, Brushes.Black, new Point(35 + x, YY));
-                    ArrayList sssQT = new ArrayList();
-                    int qti = 0;   //起步位置
-                    foreach (adims_MODEL.mzqt mzqt in mzqtList)
-                    {
-                        if (sssQT.Contains(mzqt.Qtname))
-                            qti = qti - 1;
-                        //if (!sssQT.Contains(mzqt.Qtname))
-                        //    e.Graphics.DrawString(mzqt.Qtname, mzqt.Qtname.Length < 7 ? ptzt6 : ptzt5, Brushes.Black, new PointF(32 + x, YY + qti * 12 + y + 3));
-
-                        if (mzqt.Bz == 2)
                         {
-                            TimeSpan t = new TimeSpan();
-                            TimeSpan t1 = new TimeSpan();
-                            t1 = mzqt.Jssj - pagetime;
-                            t = mzqt.Sysj - pagetime;
-                            int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
-                            int y1 = YY + qti * 12 + 4;
 
-                            int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192) + x;
-                            //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
-                            //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
-                            if (x1 > 190 + x && x1 < 780 + x)
+                            for (int i = 0; i <= rowSS; i++)//40个字符就换行
                             {
-                                e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt6, Brushes.Blue, new Point(x1 + 3, y + y1 - 6));
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + y), new Point(x1 - 3, y1 + 6 + y), new Point(x1 + 3, y1 + 6 + y) });
-                            }
-                            if (x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + y), new Point(x2 - 3, y1 + 6 + y), new Point(x2 + 3, y1 + 6 + y) });
-                            }
-                            if (x1 > 190 + x && x1 < 780 + x && x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(x2, y1 + y + 3));
-                            }
-                            if (x1 > 190 + x && x1 < 780 + x && x2 > 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-                            }
-                            if (x1 < 190 + x && x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(190 + x, y1 + y + 3), new Point(x2, y1 + y + 3));
-                            }
-                            if (x1 < 190 + x && x2 > 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(190 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-                            }
-                        }
-                        qti++;
-                        sssQT.Add(mzqt.Qtname);
-                    }
 
-
-                    #endregion
-                    #region 打印全麻药
-                    ArrayList sssYDY = new ArrayList();
-                    int ydyi = 1;
-                    foreach (adims_MODEL.mzyt mzyt in ydyList) //打印全麻药
-                    {
-                        if (sssYDY.Contains(mzyt.Ytname))
-                            ydyi = ydyi - 1;
-                        if (!sssYDY.Contains(mzyt.Ytname))
-                            e.Graphics.DrawString(mzyt.Ytname + " " + mzyt.Dw, mzyt.Ytname.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + ydyi * 12 + y + 3));
-
-                        if (mzyt.Cxyy == false)
-                        {
-                            TimeSpan t = new TimeSpan();
-                            t = mzyt.Sysj - pagetime;
-                            int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                            int y1 = YY + ydyi * 12 + 4;
-                            if (x1 > 100 + x && x1 < 700 + x)
-                            {
-                                e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-                            }
-                        }
-                        if (mzyt.Cxyy == true)
-                        {
-                            TimeSpan t = new TimeSpan();
-                            TimeSpan t1 = new TimeSpan();
-                            t1 = mzyt.Jssj - pagetime;
-                            t = mzyt.Sysj - pagetime;
-                            int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                            int y1 = YY + ydyi * 12 + 4;
-                            int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
-                            if (x1 > 190 + x && x1 < 780 + x)
-                            {
-                                e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-                            }
-                            if (x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2 + x, y1 + y), new Point(x2 - 3 + x, y1 + 6 + y), new Point(x2 + 3 + x, y1 + 6 + y) });
-                            }
-                            if (x1 > 190 + x && x1 < 780 + x && x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
-                            }
-                            if (x1 > 190 + x && x1 < 780 + x && x2 > 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-                            }
-                            if (x1 < 190 + x && x2 > 120 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
-                            }
-                            if (x1 < 190 + x && x2 > 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-                            }
-                        }
-                        ydyi++;
-                        sssYDY.Add(mzyt.Ytname);
-                    }
-
-                    #endregion
-
-
-                    #region 打印输液
-                    int syi = 11;
-                    ArrayList sssSY = new ArrayList();
-                    foreach (adims_MODEL.shuye sx in shuyeList)
-                    {
-                        if (sssSY.Contains(sx.Name))
-                            syi = syi - 1;
-                        if (!sssSY.Contains(sx.Name))
-                            e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + syi * 12 + y + 3));
-
-                        TimeSpan t = new TimeSpan();
-                        TimeSpan t1 = new TimeSpan();
-                        t1 = pagetime.AddMinutes(60 * jcsjjg) - pagetime;
-                        t = sx.Kssj - pagetime;
-                        //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + syi * 12 + 2);
-                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                        int y1 = YY + syi * 12 + 5;
-                        int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
-
-                        if (x1 > 190 + x && x1 < 780 + x)
-                        {
-                            e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 8);
-                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
-                             new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
-                        }
-                        syi++;
-                        sssSY.Add(sx.Name);
-                    }
-
-                    #endregion
-
-                    #region 打印输血
-                    //打印输血
-                    int sxi = 16;
-                    ArrayList sssSX = new ArrayList();
-                    foreach (adims_MODEL.shuxue sx in shuxueList)
-                    {
-                        if (sssSX.Contains(sx.Name))
-                            sxi = sxi - 1;
-                        if (!sssSX.Contains(sx.Name))
-                            e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + sxi * 12 + y + 3));
-
-                        TimeSpan t = new TimeSpan();
-                        TimeSpan t1 = new TimeSpan();
-                        t1 = pagetime.AddHours(jcsjjg) - pagetime;
-                        t = sx.Kssj - pagetime;
-                        //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + sxi * 12 + 2);
-                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                        int y1 = YY + sxi * 12 + 5;
-                        int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
-                        if (x1 > 190 + x && x1 < 780 + x)
-                        {
-                            e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 6);
-                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
-                             new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
-                        }
-                        sxi++;
-                        sssSX.Add(sx.Name);
-                    }
-                    #endregion
-                    #region 打印输液输血
-                    e.Graphics.DrawString("麻\n\n醉\n\n药", ptzt8, Brushes.Black, new Point(21 + x, YY + 40));
-                    e.Graphics.DrawString("输\n\n液", ptzt8, Brushes.Black, new Point(21 + x, YY + 11 * 12 + 10));
-                    e.Graphics.DrawString("输\n血", ptzt8, Brushes.Black, new Point(21 + x, YY + 16 * 12 + 5));
-                    //e.Graphics.DrawString("     用药序号", ptzt10, Brushes.Black, new Point(25 + x, YY + 51));
-                    #endregion
-
-
-                    YY = YY + 19 * 12; Y_unLine = YY + 13;
-                   #region 打印特殊用药
-
-
-                    int szi = 1;
-                    int szi1 = 1;
-                    int tsn1 = 0;
-                    string szss1 = "";
-                    //显示事件标记
-                    foreach (adims_MODEL.szsj sz in szsjList)
-                    {
-                        if (sz.D >= pagetime && sz.D <= pagetime.AddMinutes(48 * jcsjjg))
-                        {
-                            TimeSpan t = new TimeSpan();
-                            t = sz.D - pagetime;
-                            float tx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
-                            e.Graphics.FillRectangle(Brushes.Pink, tx - 3, YY + 3 - 450, 9, 9);
-                            //e.Graphics.FillRectangle(Brushes.Pink, tx - 3, BJYY + 8 + (sz.Y_zb - 315), 9, 9);
-                            e.Graphics.DrawString(szi.ToString(), ptzt7, Brushes.Black, new PointF(tx - 3, YY + 3 - 450));
-                            szi++;
-                        }
-
-                    }
-                    //显示事件的类容
-                    foreach (adims_MODEL.szsj sz in szsjList)
-                    {
-                        if (szi1 + tsn1 > 11)
-                        {
-                            break;
-                        }
-                        szss1 = szi1.ToString() + "." + sz.Name + " " + sz.D.ToString("HH:mm:ss") + "\n";
-                        if (szi1 + tsn1 > 12)
-                        {
-                            string strSS1 = "";
-                            int StrLengthSS = szss1.Trim().Length;//1//2
-                            int rowSS = StrLengthSS / 20;
-                            if (StrLengthSS < 21)
-                            {
-                                for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                                if (i < rowSS)
                                 {
-
-                                    if (i < rowSS)
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
-                                    else
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20);
-
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
                                     e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 - i - 9) * 14));
                                 }
-                            }
-                            else
-                            {
-
-                                for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                                else
                                 {
-
-                                    if (i < rowSS)
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20);
+                                    if (szi1 + tsn1 + i > 16)
                                     {
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
-                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 - i - 9) * 14));
+                                        break;
                                     }
                                     else
                                     {
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20);
-                                        if (szi1 + tsn1 + i > 16)
-                                        {
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 + i - 9) * 14));
-                                        }
+                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 + i - 9) * 14));
                                     }
-                                    //if（tsi1+tsn > 8）
-                                    //{
-                                    //e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(440 + x, YY + 2 + (tsi1 - 8) * 14));//这里开始做
-                                    //}
-                                    //else
-                                    // e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(430 + x, YY + 27 + (tsi1 + tsn + i - 1) * 14));
-
                                 }
-                                tsn1++;
-                            }
+                                //if（tsi1+tsn > 8）
+                                //{
+                                //e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(440 + x, YY + 2 + (tsi1 - 8) * 14));//这里开始做
+                                //}
+                                //else
+                                // e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(430 + x, YY + 27 + (tsi1 + tsn + i - 1) * 14));
 
+                            }
+                            tsn1++;
+                        }
+
+                    }
+                    else
+                    {
+
+                        string strSS1 = "";
+                        int StrLengthSS = szss1.Trim().Length;//1//2
+                        int rowSS = StrLengthSS / 20;
+                        if (StrLengthSS < 21)
+                        {
+                            for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                            {
+
+                                if (i < rowSS)
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
+                                else
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20);
+
+                                e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 - 1) * 14));
+                            }
                         }
                         else
                         {
 
-                            string strSS1 = "";
-                            int StrLengthSS = szss1.Trim().Length;//1//2
-                            int rowSS = StrLengthSS / 20;
-                            if (StrLengthSS < 21)
+                            for (int i = 0; i <= rowSS; i++)//40个字符就换行
                             {
-                                for (int i = 0; i <= rowSS; i++)//40个字符就换行
+
+                                if (i < rowSS)
                                 {
-
-                                    if (i < rowSS)
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
-                                    else
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20);
-
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
                                     e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 - 1) * 14));
                                 }
-                            }
-                            else
-                            {
-
-                                for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                                else
                                 {
-
-                                    if (i < rowSS)
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20);
+                                    if (szi1 + tsn1 + i > 8)
                                     {
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
-                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 - 1) * 14));
+                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 - 8) * 14));//这里开始做
+
                                     }
                                     else
                                     {
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20);
-                                        if (szi1 + tsn1 + i > 8)
-                                        {
-                                            e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY +2+ (szi1 + tsn1 - 8) * 14));//这里开始做
-
-                                        }
-                                        else
-                                        {
-                                            e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 + i - 1) * 14));
-                                        }
+                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 + i - 1) * 14));
                                     }
-                                    //if（tsi1+tsn > 8）
-                                    //{
-                                    //e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(440 + x, YY + 2 + (tsi1 - 8) * 14));//这里开始做
-                                    //}
-                                    //else
-                                    // e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(430 + x, YY + 27 + (tsi1 + tsn + i - 1) * 14));
                                 }
-                                tsn1++;
+                                //if（tsi1+tsn > 8）
+                                //{
+                                //e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(440 + x, YY + 2 + (tsi1 - 8) * 14));//这里开始做
+                                //}
+                                //else
+                                // e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(430 + x, YY + 27 + (tsi1 + tsn + i - 1) * 14));
                             }
-                        }
-                        szi1++;
-                    }
-
-                    //显示其他用药
-
-                    //显示其他用药
-                    int tsi = 1;
-                    int tsi1 = 1;
-                    int tsn = 0;
-                    string tss1 = "";
-                    foreach (adims_MODEL.tsyy ts in tsyyList)
-                    {
-                        if (ts.D >= pagetime && ts.D <= pagetime.AddMinutes(48 * jcsjjg))
-                        {
-                            TimeSpan t = new TimeSpan();
-                            t = ts.D - pagetime;
-                            float tx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
-                            //e.Graphics.FillEllipse(Brushes.LightGreen, tx - 3, BJYY + 3 + (ts.Y_zb - 370), 10, 9);
-                            e.Graphics.DrawString(tsi.ToString(), ptzt7, Brushes.Blue, new PointF(tx - 3, YY-250 + 3));
-                            tsi++;
+                            tsn1++;
                         }
                     }
-                    foreach (adims_MODEL.tsyy ts in tsyyList)
-                    {
-                        if (tsi1 >11)
-                        {
-                            break;
-                        }
-                        //string zsfs = "";//注射方式
-                        // if (ts.Yyfs == "口服")
-                        //{
-                        //    zsfs = "po";
-                        //}
-                        //if (ts.Yyfs == "静脉滴注")
-                        //{
-                        //    zsfs = "ivdrip";
-                        //}
-                        //if (ts.Yyfs == "皮下注射")
-                        //{
-                        //    zsfs = "ih";
-                        //}
-                        //if (ts.Yyfs == "肌肉注射")
-                        //{
-                        //    zsfs = "im";
-                        //}
-                        //if (ts.Yyfs == "静脉注射")
-                        //{
-                        //    zsfs = "iv";
-                        //}
-                        //if (ts.Yyfs == "皮下注射")
-                        //{
-                        //    zsfs = "id";
-                        //}
-                        if (ts.Name.Contains("+"))
-                        {
-                            tss1 = tsi1.ToString() + ".[" + ts.Name + "" + ts.Yl + "" + ts.Dw + " ]" + ts.Yyfs + " " + ts.D.ToString("HH:mm") + "\n";
-                        }
-                        else
-                        {
-                            tss1 = tsi1.ToString() + "." + ts.Name + "" + ts.Yl + "" + ts.Dw + " " + ts.Yyfs + " " + ts.D.ToString("HH:mm") + "\n";
-                        }
-                        //string strSS1 = "";
-                        //int StrLengthSS = tss1.Trim().Length;//1//2
-                        //int rowSS = StrLengthSS / 18;
-
-                        e.Graphics.DrawString(tss1, ptzt9, Brushes.Black, new PointF(320 + x, YY +2+ (tsi1 - 1) * 14));
-
-
-
-
-                        tsi1++;
-                    }
-
-                    for (int i = 0; i < listBox3.Items.Count; i++)//打印镇痛药
-                    {
-                        if (i < 11)
-                        {
-                            e.Graphics.DrawString((listBox3.Items[i].ToString()),
-                                ptzt7, Brushes.Black, new Point(x +575, YY +2+ i * 14));
-                        }
-                        if (i >=11)
-                        {
-                            break;
-                        }
-
-
-                    }
-                    #endregion
-
-                  
-
-                    #region 打印尾部区域↓
-                    //YY = YY + 70; Y_unLine = YY + 19;
-                    //e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
-                    //e.Graphics.DrawString("备注：" + txtRemark.Controls[0].Text, ptzt7, Brushes.Black, new Point(25 + x, YY + 3));
-                    //e.Graphics.DrawLine(ptp, new Point(50 + x, Y_unLine), new Point(755 + x, Y_unLine));
-                   
-                    e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
-                    e.Graphics.DrawLine(ptp, new Point(40 + x, YY), new Point(40 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(300 + x, YY), new Point(300 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(320 + x, YY), new Point(320 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(555 + x, YY), new Point(555 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(575 + x, YY), new Point(575 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(20 + x, YY + 160), new Point(770 + x, YY + 160));
-                    e.Graphics.DrawString("术\n\n中\n\n事\n\n件", ptzt11, Brushes.Black, new Point(x + 20, YY));
-                    e.Graphics.DrawString("术\n\n中\n\n用\n\n药", ptzt11, Brushes.Black, new Point(300 + x, YY));
-                    e.Graphics.DrawString("\n\n镇\n\n痛\n\n药", ptzt11, Brushes.Black, new Point(555 + x, YY));
-                    YY = YY + 170; Y_unLine = YY + 14;
-                    e.Graphics.DrawString("手术后诊断 " + txtsshzd.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);//诊断
-                    e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(500 + x, Y_unLine));
-                    e.Graphics.DrawString("PAC   :  " + cmbzhentongy.Text, ptzt8, Brushes.Black, 510 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
-                    e.Graphics.DrawString("自 体 血 : " + txtzitixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine), new Point(720 + x, Y_unLine));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY);
-                    e.Graphics.DrawString("成分输血 : " + txtcfsx.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 15);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 15), new Point(720 + x, Y_unLine + 15));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 15);
-                    e.Graphics.DrawString("胶 体 液 : " + txtjiaotixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 30);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 30), new Point(720 + x, Y_unLine + 30));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 30);
-                    e.Graphics.DrawString("晶 体 液 : " + txtjingtixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 45);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 45), new Point(720 + x, Y_unLine + 45));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 45);
-                    e.Graphics.DrawString("总输入量 : " + txtzongsrl.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 60);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine+60), new Point(720 + x, Y_unLine+60));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY +60);
-                    e.Graphics.DrawString("出 血 量:  " + txtchuxuel.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 75);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine+75), new Point(720 + x, Y_unLine+75));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY +75);
-                    e.Graphics.DrawString("尿    量:  " + txtniaoliang.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 90);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine+90), new Point(720 + x, Y_unLine+90));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY+90);
-                    YY = YY + 30; Y_unLine = YY + 14;
-                    e.Graphics.DrawString("手术方式 " + txtShoushuFS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(500 + x, Y_unLine));
-                    e.Graphics.DrawString("麻醉效果 " + cmbmazuixiaoguo.Text, ptzt8, Brushes.Black, 510 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
-                   
-                    YY = YY + 30; Y_unLine = YY + 14;
-                    e.Graphics.DrawString("麻醉方式 " + txtMazuiFS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(300 + x, Y_unLine));
-                    e.Graphics.DrawString("    麻醉医师    " + txtMZYS.Controls[0].Text, ptzt8, Brushes.Black, 300 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(380 + x, Y_unLine), new Point(500 + x, Y_unLine));
-                    e.Graphics.DrawString("病人送往 " + cmbBRQX.Text, ptzt8, Brushes.Black, 510 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
-                    YY = 30 + YY; Y_unLine = YY + 14;
-                    e.Graphics.DrawString("手术医师 " + txtSSYS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(300 + x, Y_unLine));
-                    e.Graphics.DrawString("器械、巡回护士 " + txtXHHS.Controls[0].Text, ptzt8, Brushes.Black, 300 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(380 + x, Y_unLine), new Point(500 + x, Y_unLine));
-                    e.Graphics.DrawString("评    分： " + txtmazuipingfen.Controls[0].Text, ptzt8, Brushes.Black, 510 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
-                    //e.Graphics.DrawString("麻醉医师 " + txtMZYS.Controls[0].Text, ptzt8, Brushes.Black, 425 + x, YY);
-                    //e.Graphics.DrawLine(pxuxian, new Point(470 + x, Y_unLine), new Point(770 + x, Y_unLine));
-                    //YY = 30 + YY; Y_unLine = YY + 14;
-                    //e.Graphics.DrawString("器械护士 " + txtQXHS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    //e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(400 + x, Y_unLine));
-                    //e.Graphics.DrawString("巡回护士 " + txtXHHS.Controls[0].Text, ptzt8, Brushes.Black, 425 + x, YY);
-                    //e.Graphics.DrawLine(pxuxian, new Point(470 + x, Y_unLine), new Point(770 + x, Y_unLine));
-                    //YY = 25 + YY; Y_unLine = YY + 14;
-                    //e.Graphics.DrawString("切口类型 " + cmbBRQX.Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    //e.Graphics.DrawLine(ptp, new Point(70 + x, Y_unLine), new Point(200 + x, Y_unLine));
-                    //e.Graphics.DrawString("切口数量 " + cmbBRQX.Text, ptzt8, Brushes.Black, 210 + x, YY);
-                    //e.Graphics.DrawLine(ptp, new Point(255 + x, Y_unLine), new Point(350 + x, Y_unLine));
-                    //e.Graphics.DrawString("病人去向 " + cmbBRQX.Text, ptzt8, Brushes.Black, 360 + x, YY);
-                    //e.Graphics.DrawLine(ptp, new Point(405 + x, Y_unLine), new Point(530 + x, Y_unLine));
+                    szi1++;
                 }
-                    #endregion
+
+                //显示其他用药
+
+                //显示其他用药
+                int tsi = 1;
+                int tsi1 = 1;
+                int tsn = 0;
+                string tss1 = "";
+                foreach (adims_MODEL.tsyy ts in tsyyList)
+                {
+                    if (ts.D >= pagetime && ts.D <= pagetime.AddMinutes(48 * jcsjjg))
+                    {
+                        TimeSpan t = new TimeSpan();
+                        t = ts.D - pagetime;
+                        float tx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
+                        //e.Graphics.FillEllipse(Brushes.LightGreen, tx - 3, BJYY + 3 + (ts.Y_zb - 370), 10, 9);
+                        e.Graphics.DrawString(tsi.ToString(), ptzt7, Brushes.Blue, new PointF(tx - 3, YY - 250 + 3));
+                        tsi++;
+                    }
+                }
+                foreach (adims_MODEL.tsyy ts in tsyyList)
+                {
+                    if (tsi1 > 11)
+                    {
+                        break;
+                    }
+                    //string zsfs = "";//注射方式
+                    // if (ts.Yyfs == "口服")
+                    //{
+                    //    zsfs = "po";
+                    //}
+                    //if (ts.Yyfs == "静脉滴注")
+                    //{
+                    //    zsfs = "ivdrip";
+                    //}
+                    //if (ts.Yyfs == "皮下注射")
+                    //{
+                    //    zsfs = "ih";
+                    //}
+                    //if (ts.Yyfs == "肌肉注射")
+                    //{
+                    //    zsfs = "im";
+                    //}
+                    //if (ts.Yyfs == "静脉注射")
+                    //{
+                    //    zsfs = "iv";
+                    //}
+                    //if (ts.Yyfs == "皮下注射")
+                    //{
+                    //    zsfs = "id";
+                    //}
+                    if (ts.Name.Contains("+"))
+                    {
+                        tss1 = tsi1.ToString() + ".[" + ts.Name + "" + ts.Yl + "" + ts.Dw + " ]" + ts.Yyfs + " " + ts.D.ToString("HH:mm") + "\n";
+                    }
+                    else
+                    {
+                        tss1 = tsi1.ToString() + "." + ts.Name + "" + ts.Yl + "" + ts.Dw + " " + ts.Yyfs + " " + ts.D.ToString("HH:mm") + "\n";
+                    }
+                    //string strSS1 = "";
+                    //int StrLengthSS = tss1.Trim().Length;//1//2
+                    //int rowSS = StrLengthSS / 18;
+
+                    e.Graphics.DrawString(tss1, ptzt9, Brushes.Black, new PointF(320 + x, YY + 2 + (tsi1 - 1) * 14));
 
 
-            
+
+
+                    tsi1++;
+                }
+
+                for (int i = 0; i < listBox3.Items.Count; i++)//打印镇痛药
+                {
+                    if (i < 11)
+                    {
+                        e.Graphics.DrawString((listBox3.Items[i].ToString()),
+                            ptzt7, Brushes.Black, new Point(x + 575, YY + 2 + i * 14));
+                    }
+                    if (i >= 11)
+                    {
+                        break;
+                    }
+
+
+                }
+                #endregion
+
+
+
+                #region 打印尾部区域↓
+                //YY = YY + 70; Y_unLine = YY + 19;
+                //e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
+                //e.Graphics.DrawString("备注：" + txtRemark.Controls[0].Text, ptzt7, Brushes.Black, new Point(25 + x, YY + 3));
+                //e.Graphics.DrawLine(ptp, new Point(50 + x, Y_unLine), new Point(755 + x, Y_unLine));
+
+                e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
+                e.Graphics.DrawLine(ptp, new Point(40 + x, YY), new Point(40 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(300 + x, YY), new Point(300 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(320 + x, YY), new Point(320 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(555 + x, YY), new Point(555 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(575 + x, YY), new Point(575 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(20 + x, YY + 160), new Point(770 + x, YY + 160));
+                e.Graphics.DrawString("术\n\n中\n\n事\n\n件", ptzt11, Brushes.Black, new Point(x + 20, YY));
+                e.Graphics.DrawString("术\n\n中\n\n用\n\n药", ptzt11, Brushes.Black, new Point(300 + x, YY));
+                e.Graphics.DrawString("\n\n镇\n\n痛\n\n药", ptzt11, Brushes.Black, new Point(555 + x, YY));
+                YY = YY + 170; Y_unLine = YY + 14;
+                e.Graphics.DrawString("手术后诊断 " + txtsshzd.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);//诊断
+                e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(500 + x, Y_unLine));
+                e.Graphics.DrawString("PAC   :  " + cmbzhentongy.Text, ptzt8, Brushes.Black, 510 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
+                e.Graphics.DrawString("自 体 血 : " + txtzitixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine), new Point(720 + x, Y_unLine));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY);
+                e.Graphics.DrawString("成分输血 : " + txtcfsx.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 15);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 15), new Point(720 + x, Y_unLine + 15));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 15);
+                e.Graphics.DrawString("胶 体 液 : " + txtjiaotixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 30);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 30), new Point(720 + x, Y_unLine + 30));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 30);
+                e.Graphics.DrawString("晶 体 液 : " + txtjingtixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 45);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 45), new Point(720 + x, Y_unLine + 45));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 45);
+                e.Graphics.DrawString("总输入量 : " + txtzongsrl.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 60);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 60), new Point(720 + x, Y_unLine + 60));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 60);
+                e.Graphics.DrawString("出 血 量:  " + txtchuxuel.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 75);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 75), new Point(720 + x, Y_unLine + 75));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 75);
+                e.Graphics.DrawString("尿    量:  " + txtniaoliang.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 90);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 90), new Point(720 + x, Y_unLine + 90));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 90);
+                YY = YY + 30; Y_unLine = YY + 14;
+                e.Graphics.DrawString("手术方式 " + txtShoushuFS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(500 + x, Y_unLine));
+                e.Graphics.DrawString("麻醉效果 " + cmbmazuixiaoguo.Text, ptzt8, Brushes.Black, 510 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
+
+                YY = YY + 30; Y_unLine = YY + 14;
+                e.Graphics.DrawString("麻醉方式 " + txtMazuiFS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(300 + x, Y_unLine));
+                e.Graphics.DrawString("    麻醉医师    " + txtMZYS.Controls[0].Text, ptzt8, Brushes.Black, 300 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(380 + x, Y_unLine), new Point(500 + x, Y_unLine));
+                e.Graphics.DrawString("病人送往 " + cmbBRQX.Text, ptzt8, Brushes.Black, 510 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
+                YY = 30 + YY; Y_unLine = YY + 14;
+                e.Graphics.DrawString("手术医师 " + txtSSYS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(300 + x, Y_unLine));
+                e.Graphics.DrawString("器械、巡回护士 " + txtXHHS.Controls[0].Text, ptzt8, Brushes.Black, 300 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(380 + x, Y_unLine), new Point(500 + x, Y_unLine));
+                e.Graphics.DrawString("评    分： " + txtmazuipingfen.Controls[0].Text, ptzt8, Brushes.Black, 510 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
+                //e.Graphics.DrawString("麻醉医师 " + txtMZYS.Controls[0].Text, ptzt8, Brushes.Black, 425 + x, YY);
+                //e.Graphics.DrawLine(pxuxian, new Point(470 + x, Y_unLine), new Point(770 + x, Y_unLine));
+                //YY = 30 + YY; Y_unLine = YY + 14;
+                //e.Graphics.DrawString("器械护士 " + txtQXHS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
+                //e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(400 + x, Y_unLine));
+                //e.Graphics.DrawString("巡回护士 " + txtXHHS.Controls[0].Text, ptzt8, Brushes.Black, 425 + x, YY);
+                //e.Graphics.DrawLine(pxuxian, new Point(470 + x, Y_unLine), new Point(770 + x, Y_unLine));
+                //YY = 25 + YY; Y_unLine = YY + 14;
+                //e.Graphics.DrawString("切口类型 " + cmbBRQX.Text, ptzt8, Brushes.Black, 25 + x, YY);
+                //e.Graphics.DrawLine(ptp, new Point(70 + x, Y_unLine), new Point(200 + x, Y_unLine));
+                //e.Graphics.DrawString("切口数量 " + cmbBRQX.Text, ptzt8, Brushes.Black, 210 + x, YY);
+                //e.Graphics.DrawLine(ptp, new Point(255 + x, Y_unLine), new Point(350 + x, Y_unLine));
+                //e.Graphics.DrawString("病人去向 " + cmbBRQX.Text, ptzt8, Brushes.Black, 360 + x, YY);
+                //e.Graphics.DrawLine(ptp, new Point(405 + x, Y_unLine), new Point(530 + x, Y_unLine));
+            }
+            #endregion
+
+
+
         }
 
         PrintDocument printDocument = new PrintDocument();
@@ -6249,17 +6378,134 @@ namespace main
                     JsFlag++;
                 }
             }
+
+            if (txtTW.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "体温为空，不能打印");
+                return;
+            }
+            if (txtXueya.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "血压为空，不能打印");
+                return;
+            }
+            if (txtHuxi.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "呼吸为空，不能打印");
+                return;
+            }
+            if (txtMaibo.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "脉搏为空，不能打印");
+                return;
+            }
+            if (cmbTiwei.Text == "")
+            {
+                MessageBox.Show(YwName + "体位为空，不能打印");
+                return;
+            }
+            if (cmbSQJinshi.Text == "")
+            {
+                MessageBox.Show(YwName + "术前禁食为空，不能打印");
+                return;
+            }
+            if (txtsshzd.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "手术后诊断为空，不能打印");
+                return;
+            }
+            if (txtShoushuFS.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "手术名称为空，不能打印");
+                return;
+            }
+            //if (cmbzhentongy.Text == "")
+            //{
+            //    MessageBox.Show(YwName + "PCA为空，不能打印");
+            //    return;
+            //}
+            if (cmbmazuixiaoguo.Text == "")
+            {
+                MessageBox.Show(YwName + "麻醉效果为空，不能打印");
+                return;
+            }
+            if (txtMZYS.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "施麻醉者为空，不能打印");
+                return;
+            }
+            if (txtXHHS.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "器械、巡回护士为空，不能打印");
+                return;
+            }
+            if (cmbBRQX.Text == "")
+            {
+                MessageBox.Show(YwName + "病人去向为空，不能打印");
+                return;
+            }
+            if (txtmazuipingfen.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "评分为空，不能打印");
+                return;
+            }
+            if (txtzitixue.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "自体血为空，不能打印");
+                return;
+            }
+            if (txtcfsx.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "成分输血为空，不能打印");
+                return;
+            }
+            if (txtjiaotixue.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "胶体液为空，不能打印");
+                return;
+            }
+            if (txtjingtixue.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "晶体液为空，不能打印");
+                return;
+            }
+            if (txtzongsrl.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "总输入量为空，不能打印");
+                return;
+            }
+            if (txtchuxuel.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "出血量为空，不能打印");
+                return;
+            }
+            if (txtniaoliang.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "尿量为空，不能打印");
+                return;
+            }
+            adims_BLL.YXL_BLL bll = new YXL_BLL();
+            DataTable xinxi = bll.mzbyjiazai(patID);
+            DataTable dt = cll.mzjiazai(patID);//判断
+            if (xinxi.Rows.Count == 0)
+            {
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("请填写麻醉总结！！！！！！");
+                    return;
+                }
+            }
             if (JsFlag > 0)
             {
-                MessageBox.Show(YwName + "没用结束，不能打印");
+                MessageBox.Show(YwName + "没有结束，不能打印");
                 return;
 
             }
+
             ptime = fristopen;
             PrintDialog pd = new PrintDialog();
-
             pd.Document = printDocument;
-            
+
             if (DialogResult.OK == pd.ShowDialog()) //如果确认，将会覆盖所有的打印参数设置
             {
                 //页面设置对话框（可以不使用，其实PrintDialog对话框已提供页面设置）
@@ -6271,7 +6517,7 @@ namespace main
                 //pictureBox3.Refresh();
                 //pictureBox2.Refresh();
 
-                 if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
+                if (printPreviewDialog1.ShowDialog() == DialogResult.OK)
                 {
                     printDocument1.Print();
                     //printPreviewDialog1.PrintPreviewControl.Zoom = 1.5;
@@ -6357,7 +6603,7 @@ namespace main
                 if (DialogResult.OK == MessageBox.Show("确定退出麻醉记录单？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question))
                 {
                     string result = string.Empty;
-                    if (cmbASA.Text.IsNullOrEmpty())
+                    if (cmbASA.Text == "")
                     {
                         MessageBox.Show("ASA分级不能为空！");
                         e.Cancel = true;
@@ -6427,29 +6673,29 @@ namespace main
             {
                 return;
             }
-           
-                //txtMzsj.Controls[0].Text = Convert.ToString(DateTime.Now);
-                TimeSpan t = new TimeSpan();
-                t = DateTime.Now - otime;
-                lbMzks1.Visible = true;
-                lbMzks1.Text = "X";
-                lbMzks1.AutoSize = true;
-                lbMzks1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-                lbMzks1.BackColor = Color.Transparent;
-                lbMzks1.Location = new Point((int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 160), 370);
-                this.pictureBox3.Controls.Add(lbMzks1);
-                mzks = true;
-                mzjs = false;
-                dal.UpdateMzkssj(DateTime.Now, mzjldID);
-                mzksTime = DateTime.Now;
-                dal.UpdatePaibanInfo(2, patID);
-                dal.UpdateShoushujianinfo(2, Oroom);
-                //txtMZKS.Controls[0].Text = DateTime.Now.ToString("HH:mm");
-                lbMzks1.MouseDown += new MouseEventHandler(lbMzks1_MouseDown);
-                lbMzks1.MouseMove += new MouseEventHandler(lbMzks1_MouseMove);
-                lbMzks1.MouseUp += new MouseEventHandler(lbMzks1_MouseUp);
-                lbMzks1.MouseLeave += new EventHandler(lbMzks1_MouseLeave);
-            
+
+            //txtMzsj.Controls[0].Text = Convert.ToString(DateTime.Now);
+            TimeSpan t = new TimeSpan();
+            t = DateTime.Now - otime;
+            lbMzks1.Visible = true;
+            lbMzks1.Text = "X";
+            lbMzks1.AutoSize = true;
+            lbMzks1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lbMzks1.BackColor = Color.Transparent;
+            lbMzks1.Location = new Point((int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 160), 370);
+            this.pictureBox3.Controls.Add(lbMzks1);
+            mzks = true;
+            mzjs = false;
+            dal.UpdateMzkssj(DateTime.Now, mzjldID);
+            mzksTime = DateTime.Now;
+            dal.UpdatePaibanInfo(2, patID);
+            dal.UpdateShoushujianinfo(2, Oroom);
+            //txtMZKS.Controls[0].Text = DateTime.Now.ToString("HH:mm");
+            lbMzks1.MouseDown += new MouseEventHandler(lbMzks1_MouseDown);
+            lbMzks1.MouseMove += new MouseEventHandler(lbMzks1_MouseMove);
+            lbMzks1.MouseUp += new MouseEventHandler(lbMzks1_MouseUp);
+            lbMzks1.MouseLeave += new EventHandler(lbMzks1_MouseLeave);
+
         }
 
         private void lbMzks1_MouseDown(object sender, EventArgs e)
@@ -6608,7 +6854,7 @@ namespace main
             }
             else
                 lbMzjs1.Location = new Point(xStart, yStart);
-            pictureBox3.Refresh();            
+            pictureBox3.Refresh();
 
         }
 
@@ -6712,7 +6958,7 @@ namespace main
                     cgTime = otime.AddMinutes((xEnd - 160) / 15 * jcsjjg);
                 }
                 else
-                
+
                     lbCguan.Location = new Point(xStart, yStart);
             }
             BindJHDian();
@@ -6886,13 +7132,13 @@ namespace main
                 }
                 else
                     lbSSKS.Location = new Point(xStart, yStart);
-            }           
+            }
             pictureBox3.Refresh();
-           
+
 
         }
 
-        
+
 
         private void ssks1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -7018,34 +7264,51 @@ namespace main
         }
 
         #endregion
-        
+
         private void button8_Click(object sender, EventArgs e)/// 影像病历
         {
-            string IPaddress = "192.168.18.70";
-            bool flag = DataValid.PingHost(IPaddress, 1000);
-            if (flag == true)
-            {
+            DataTable brsyh;
+            string zhuyuanhao = patID.ToString();
+            brsyh = DAL.zyh(zhuyuanhao);//获取病人首页号
+            string zyh = brsyh.Rows[0][0].ToString();
+            //if (zyh == "")
+            //{
+            //    brsyh = DAL.zyh(zhuyuanhao);//获取病人就诊卡号
+            //    zyh = brsyh.Rows[0][0].ToString();
+            //}
 
-                ///这里传入的参数 1 门诊 ， 2 住院 ， 3 处方号 ， 4社保号
-                ///patID需要修改为住院号
-                CallPacsForm cpf = new CallPacsForm(patidccs, 2);
-                cpf.Show();
+            //string zhuyuanhao = ZYNumber1;
 
-                //string inpatientID = patID;
-                //string url = "http://192.168.6.210:8089/PacsDBProxy/PacsDatabase/PacsDatabase.action";
-                //System.Diagnostics.Process.Start(url);
-                ////[DllImport("user32.dll", EntryPoint="MessageBoxA")]
-                ////  static extern int MsgBox(int hWnd, string msg, string caption, int type);
-                ////int WINAPI PacsView(int nPatientType , char* lpszID , int nImageType)  
-                ////Process proc = new Process();
-                
-                ////proc.StartInfo.FileName = "D:\\Display临床客户端\\TestJoint.exe";
-               
-                ////proc.StartInfo.Arguments = "nPatientType=1|lpszID="+patID+",nImageType=1";
-                ////proc.StartInfo.UseShellExecute = false;
-                ////proc.Start();
-            }
-            else MessageBox.Show("影响病历 数据库未连接，请检查网络");
+            string url = "http://172.1.1.122/IMCISClient/Interface/ClinicExamList?UserID=his&UserPwd=123456&InPatientNo=" + zyh + "";
+            System.Diagnostics.Process.Start(url);
+
+
+
+
+            //string IPaddress = "192.168.18.70";
+            //bool flag = DataValid.PingHost(IPaddress, 1000);
+            //if (flag == true)
+            //{
+
+            //    ///这里传入的参数 1 门诊 ， 2 住院 ， 3 处方号 ， 4社保号
+            //    ///patID需要修改为住院号
+            //    CallPacsForm cpf = new CallPacsForm(patidccs, 2);
+            //    cpf.Show();
+            //    //string inpatientID = patID;
+            //    //string url = "http://192.168.6.210:8089/PacsDBProxy/PacsDatabase/PacsDatabase.action";
+            //    //System.Diagnostics.Process.Start(url);
+            //    ////[DllImport("user32.dll", EntryPoint="MessageBoxA")]
+            //    ////  static extern int MsgBox(int hWnd, string msg, string caption, int type);
+            //    ////int WINAPI PacsView(int nPatientType , char* lpszID , int nImageType)  
+            //    ////Process proc = new Process();
+
+            //    ////proc.StartInfo.FileName = "D:\\Display临床客户端\\TestJoint.exe";
+
+            //    ////proc.StartInfo.Arguments = "nPatientType=1|lpszID="+patID+",nImageType=1";
+            //    ////proc.StartInfo.UseShellExecute = false;
+            //    ////proc.Start();
+            //}
+            //else MessageBox.Show("影响病历 数据库未连接，请检查网络");
 
             //yxbl yxblform = new yxbl();
             //yxblform.ShowDialog();
@@ -7053,15 +7316,25 @@ namespace main
 
         private void button9_Click(object sender, EventArgs e)/// 检验病历
         {
-            string IPaddress = "192.168.18.55";
-            bool flag = DataValid.PingHost(IPaddress, 1000);
-            if (flag == true)
-            {
-                string inpatientID = patidccs;
-                string url = "http://192.168.18.55/modules/main/rmsysMain.aspx?rmkj_userno=webreport&HIS_PARAM_MODE=3&HIS_PARAM_PATNO=" + patidccs + "";
-                System.Diagnostics.Process.Start(url);
-            }
-            else MessageBox.Show("影响病历 数据库未连接，请检查网络");
+
+            DataTable zhi = DAL.brsyh(patID);
+            string PatID = zhi.Rows[0]["PatID"].ToString();
+            string BRSYH = zhi.Rows[0]["BRSYH"].ToString();
+            DateTime dt = DateTime.Now;
+            string rysj = zhi.Rows[0]["zhsj"].ToString();
+            rysj = Convert.ToDateTime(rysj).ToString("yyyy-MM-dd");
+            // string sj = dt.ToShortDateString().ToString();//2005-11-5
+            string url = "http://172.0.15.250/?zyh=" + PatID + "&brid=" + BRSYH + "&zysj=" + rysj + "";
+            System.Diagnostics.Process.Start(url);
+            ////string IPaddress = "192.168.18.55";
+            ////bool flag = DataValid.PingHost(IPaddress, 1000);
+            ////if (flag == true)
+            ////{
+            ////    string inpatientID = patidccs;
+            ////    string url = "http://192.168.18.55/modules/main/rmsysMain.aspx?rmkj_userno=webreport&HIS_PARAM_MODE=3&HIS_PARAM_PATNO=" + patidccs + "";
+            ////    System.Diagnostics.Process.Start(url);
+            ////}
+            ////else MessageBox.Show("影响病历 数据库未连接，请检查网络");
             //string IPaddress = "132.147.160.6";
             //bool flag = DataValid.PingHost(IPaddress, 1000);
             //if (flag == true)
@@ -7081,7 +7354,7 @@ namespace main
 
         public int SaveMzjld()// 更新麻醉记录单
         {
-           
+
             if (!IsInNet())
             {
                 return 0;
@@ -7094,7 +7367,7 @@ namespace main
             mzdList1.Add(this.txtXueya.Controls[0].Text.Trim());//血压
             mzdList1.Add(this.txtHuxi.Controls[0].Text.Trim());//呼吸
             mzdList1.Add(this.txtMaibo.Controls[0].Text.Trim());//脉搏
-            
+
             mzdList1.Add(this.cmbXueXing.Text.Trim());//血型
             mzdList1.Add(this.cmbASA.Text.Trim());//asa
             if (this.cbJizhen.Checked)//急诊
@@ -7102,7 +7375,7 @@ namespace main
             else
                 mzdList1.Add("0");
             //mzdList1.Add(this.cmbSQJinshi.Text.Trim());//术前进食
-           //mzdList1.Add(this.txtTSBQing.Controls[0].Text.Trim());//特殊病情
+            //mzdList1.Add(this.txtTSBQing.Controls[0].Text.Trim());//特殊病情
             mzdList1.Add(this.txtSqzd.Controls[0].Text.Trim());//术前诊断
             mzdList1.Add(this.txtNssss.Controls[0].Text.Trim());//拟施手术
             mzdList1.Add(this.cmbTiwei.Text.Trim());//体位
@@ -7113,7 +7386,7 @@ namespace main
             mzdList1.Add(this.txtSSYS.Controls[0].Text.Trim());//手术医生
             mzdList1.Add(this.txtMZYS.Controls[0].Text.Trim());//麻醉医生
             mzdList1.Add(this.txtXHHS.Controls[0].Text.Trim());//器械巡回
-            
+
             mzdList1.Add(this.cmbzhentongy.Text.Trim());//镇痛药
             mzdList1.Add(this.cmbmazuixiaoguo.Text.Trim());//麻醉效果评价
             mzdList1.Add(this.cmbBRQX.Text.Trim());//病人送往
@@ -7125,28 +7398,9 @@ namespace main
             mzdList1.Add(this.txtzongsrl.Controls[0].Text.Trim());//总输入量
             mzdList1.Add(this.txtchuxuel.Controls[0].Text.Trim());//出血量
             mzdList1.Add(this.txtniaoliang.Controls[0].Text.Trim());//尿量
-      
 
 
-            //mzdList1.Add(this.txtXHHS.Controls[0].Text.Trim());
-            //mzdList1.Add(txtWeight.Controls[0].Text.Trim());
-            //mzdList1.Add(txtHeight.Controls[0].Text.Trim());
-           // mzdList1.Add(txtSqyy.Controls[0].Text.Trim());
-            //mzdList1.Add(tbChuNiao.Text.Trim());
-            //mzdList1.Add(tbChuxue.Text.Trim());
-            //mzdList1.Add(cmbQiekouType.Text.Trim());
-            //mzdList1.Add(tbQiekouCount.Text.Trim());
-
-            //mzdList1.Add(tXTPH.Text.Trim());
-            //mzdList1.Add(txtpco2.Text.Trim());
-            //mzdList1.Add(txtpo2.Text.Trim());
-            //mzdList1.Add(txtbe.Text.Trim());
-            //mzdList1.Add(txthco3.Text.Trim());
-            //mzdList1.Add(txthb.Text.Trim());
-            //mzdList1.Add(txtk.Text.Trim());
-            //mzdList1.Add(txthct.Text.Trim());
-            //mzdList1.Add(txtxuet.Text.Trim());
-            string AddItem="";
+            string AddItem = "";
             if (cheboxBIS.Checked == true) AddItem += "1";
             if (checktw.Checked == true) AddItem += "2";
             if (checkmb.Checked == true) AddItem += "3";
@@ -7156,6 +7410,49 @@ namespace main
             mzdList1.Add(AddItem);
             mzdList1.Add(Convert.ToString(mzjldID));
             result = dal.UpdateMzjld1(mzdList1);
+            SqlSugarDal sqlSugar = new SqlSugarDal();
+            var paiban = sqlSugar.GetPaibanByPatZhuYuanID(patID);
+            var mzysArr = txtMZYS.Controls[0].Text.Trim().Split('、');
+            for (int i = 0; i < mzysArr.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        paiban.AP1 = mzysArr[i];
+                        break;
+                    case 1:
+                        paiban.AP2 = mzysArr[i];
+                        break;
+                    case 2:
+                        paiban.AP3 = mzysArr[i];
+                        break;
+                    default:
+                        break;
+                }
+            }
+            var hushiArr = txtXHHS.Controls[0].Text.Trim().Split('、');
+            for (int i = 0; i < hushiArr.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        paiban.SN1 = hushiArr[i];
+                        break;
+                    case 1:
+                        paiban.ON1 = hushiArr[i];
+                        break;
+                    case 2:
+                        paiban.SN2 = hushiArr[i];
+                        break;
+                    case 3:
+                        paiban.ON2 = hushiArr[i];
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            sqlSugar.UpdatePaiban(paiban);
             return result;
 
         }
@@ -7627,7 +7924,7 @@ namespace main
                             TimeSpan t1 = new TimeSpan();
                             t1 = cgTime - otime;
                             int x = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 171);
-                            int y =  i * 15;
+                            int y = i * 15;
                             int x1 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 15 / jcsjjg + 170);
                             string ECG = "";
                             if (jt.V.ToString() == "0")
@@ -7672,23 +7969,7 @@ namespace main
                             TimeSpan t1 = new TimeSpan();
                             t1 = cgTime - otime;
                             int x = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 171);
-                            int y =  i * 15;
-                            int x1 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 15 / jcsjjg + 170);
-                            if (x >0 && jt.V > 0)
-                            {
-                                e.Graphics.FillRectangle(Brushes.Pink, x, y, 14, 12);
-                                e.Graphics.DrawString(jt.V.ToString(), (jt.V / 100 > 0 ? zt7 : this.Font), Brushes.Black,
-                                new Point((jt.V / 100 > 0 ? (x - 2) : x), y));
-                            }
-                         }
-                        else if (jhxmIn[i] == "BIS")
-                        {
-                            TimeSpan t = new TimeSpan();
-                            t = jt.D - otime;
-                            TimeSpan t1 = new TimeSpan();
-                            t1 = cgTime - otime;
-                            int x = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 171);
-                            int y =  i * 15;
+                            int y = i * 15;
                             int x1 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 15 / jcsjjg + 170);
                             if (x > 0 && jt.V > 0)
                             {
@@ -7696,7 +7977,23 @@ namespace main
                                 e.Graphics.DrawString(jt.V.ToString(), (jt.V / 100 > 0 ? zt7 : this.Font), Brushes.Black,
                                 new Point((jt.V / 100 > 0 ? (x - 2) : x), y));
                             }
-                         }
+                        }
+                        else if (jhxmIn[i] == "BIS")
+                        {
+                            TimeSpan t = new TimeSpan();
+                            t = jt.D - otime;
+                            TimeSpan t1 = new TimeSpan();
+                            t1 = cgTime - otime;
+                            int x = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 171);
+                            int y = i * 15;
+                            int x1 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 15 / jcsjjg + 170);
+                            if (x > 0 && jt.V > 0)
+                            {
+                                e.Graphics.FillRectangle(Brushes.Pink, x, y, 14, 12);
+                                e.Graphics.DrawString(jt.V.ToString(), (jt.V / 100 > 0 ? zt7 : this.Font), Brushes.Black,
+                                new Point((jt.V / 100 > 0 ? (x - 2) : x), y));
+                            }
+                        }
                         else if (jhxmIn[i] == "ETCO2")
                         {
                             if (jt.D > cgTime)
@@ -7706,7 +8003,7 @@ namespace main
                                 TimeSpan t1 = new TimeSpan();
                                 t1 = cgTime - otime;
                                 int x = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 171);
-                                int y =  i * 15;
+                                int y = i * 15;
                                 int x1 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 15 / jcsjjg + 170);
                                 if (x > 0 && jt.V > 0)
                                 {
@@ -7739,7 +8036,7 @@ namespace main
                             TimeSpan t1 = new TimeSpan();
                             t1 = cgTime - otime;
                             int x = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 171);
-                            int y =  i * 15;
+                            int y = i * 15;
                             int x1 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 15 / jcsjjg + 170);
                             if (x > 0 && jt.V > 0)
                             {
@@ -7764,10 +8061,10 @@ namespace main
                                 new Point((jt.V / 100 > 0 ? (x - 2) : x), y));
                             }
                         }
-                      
+
                     }
 
-                  
+
                     else if (jhxmIn[i] == "深度值")
                     {
                         JHXsdz = 1;
@@ -7858,7 +8155,7 @@ namespace main
                 //    //qt.ShowDialog();
                 //    //BindQtList();
                 //}
-              
+
 
             }
             //if (e.X > 170 && e.Y > 305 && e.Y <350)
@@ -7869,7 +8166,7 @@ namespace main
             //        formaddcl.ShowDialog();
             //        BindCxList();
             //    }
-            else if (e.X > 170 && e.Y > 90 && e.Y <105)
+            else if (e.X > 170 && e.Y > 90 && e.Y < 105)
             {
                 MZcl formaddcl = new MZcl(otime.AddMinutes((e.X - 165) / 15 * jcsjjg), 2, mzjldID);
                 formaddcl.ShowDialog();
@@ -7880,10 +8177,10 @@ namespace main
             //        MZcl formaddcl = new MZcl(otime.AddMinutes((e.X - 165) / 15 * jcsjjg), 3, mzjldID);
             //        formaddcl.ShowDialog();
             //        BindYllList();
-                   
+
             //    }
             //}
-          
+
             if (e.X > 170 && e.Y > 510 && e.Y < 525)
             {
                 foreach (adims_MODEL.jhxm jt in jhxmValue)
@@ -7991,7 +8288,7 @@ namespace main
             //        { flagP2 = 1; typeP2 = 1; t_mzqt = mz; }//flagP2为1表示标志可移动，typeP2为1指气体开始，t_mzqt赋给遍历到的气体模型
             //        if (p2x > x2 - 5 && p2x < x2 + 5 && p2y > y2 - 1 && p2y < y2 + 8)
             //        { flagP2 = 1; typeP2 = 11; t_mzqt = mz; }//flagP2为1表示标志可移动，typeP2为11指气体结束，t_mzqt赋给遍历到的气体模型
-                    
+
             //        dy++;
             //        sssQT.Add(mz.Qtname);//气体种类集合添加此气体
             //    }
@@ -8126,56 +8423,56 @@ namespace main
             }
             if (flagP2 == 1)//可移动标志为1
             {
-            //    if (typeP2 == 1)//类型1表示气体开始
-            //    {
-            //        t_mzqt.Sysj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //    }
-            //    if (typeP2 == 11)//类型11表示气体结束
-            //    {
-            //        t_mzqt.Jssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //    }
-            //    if (typeP2 == 2)//类型2表示诱导药开始标志移动
-            //    {
-            //        t_ydy.Sysj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //    }
-            //    if (typeP2 == 22)//类型22表示诱导药结束标志移动
-            //    {
-            //        t_ydy.Jssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //    }
-            //    if (typeP2 == 3)//类型2表示局麻药开始标志移动
-            //    {
-            //      //  t_jmy.Kssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //    }
-            //    if (typeP2 == 4)//输液移动标志移动
-            //    {
-            //        t_shuye.Kssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //    }
-            //    if (typeP2 == 5)//输血移动
-            //    {
-            //        t_shuxue.Kssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //    }
-            //    if (typeP2 == 6)
-            //    {
-            //        if ((otime.AddMinutes((p2x - 170) / 15 * jcsjjg)) > dtOtime.Value)
-            //        {
-            //            t_shixue.D = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //        }
+                //    if (typeP2 == 1)//类型1表示气体开始
+                //    {
+                //        t_mzqt.Sysj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //    }
+                //    if (typeP2 == 11)//类型11表示气体结束
+                //    {
+                //        t_mzqt.Jssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //    }
+                //    if (typeP2 == 2)//类型2表示诱导药开始标志移动
+                //    {
+                //        t_ydy.Sysj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //    }
+                //    if (typeP2 == 22)//类型22表示诱导药结束标志移动
+                //    {
+                //        t_ydy.Jssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //    }
+                //    if (typeP2 == 3)//类型2表示局麻药开始标志移动
+                //    {
+                //      //  t_jmy.Kssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //    }
+                //    if (typeP2 == 4)//输液移动标志移动
+                //    {
+                //        t_shuye.Kssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //    }
+                //    if (typeP2 == 5)//输血移动
+                //    {
+                //        t_shuxue.Kssj = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //    }
+                //    if (typeP2 == 6)
+                //    {
+                //        if ((otime.AddMinutes((p2x - 170) / 15 * jcsjjg)) > dtOtime.Value)
+                //        {
+                //            t_shixue.D = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //        }
 
-            //        else
-            //            t_shixue.D = dtOtime.Value;
+                //        else
+                //            t_shixue.D = dtOtime.Value;
 
-            //    }
-            //    if (typeP2 == 7)
-            //    {
-            //        if ((otime.AddMinutes((p2x - 170) / 15 * jcsjjg)) > dtOtime.Value)
-            //        {
-            //            t_yll.D = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
-            //        }
+                //    }
+                //    if (typeP2 == 7)
+                //    {
+                //        if ((otime.AddMinutes((p2x - 170) / 15 * jcsjjg)) > dtOtime.Value)
+                //        {
+                //            t_yll.D = otime.AddMinutes((p2x - 170) / 15 * jcsjjg);
+                //        }
 
-            //        else
-            //            t_yll.D = dtOtime.Value;
+                //        else
+                //            t_yll.D = dtOtime.Value;
 
-            //    }
+                //    }
                 if (typeP2 == 8)
                 {
                     if ((otime.AddMinutes((p2x - 170) / 15 * jcsjjg)) > dtOtime.Value)
@@ -8195,46 +8492,46 @@ namespace main
         {
             if (flagP2 != 0)
             {
-            //    flagP2 = 0;//移动结束，标志改为0
-            //    if (typeP2 == 1)//修改数据库气体开始时间
-            //    {
-            //        bll.xgqtKssj(mzjldID, t_mzqt);
-            //    }
-            //    if (typeP2 == 11)//修改数据库气体结束时间
-            //    {
-            //        bll.xgqtJssj(mzjldID, t_mzqt);
-            //    }
-            //    if (typeP2 == 2)//修改数据库诱导药时间
-            //    {
-            //        if (!t_ydy.Cxyy)//非持续，修改开始和结束时间
-            //            bll.xgytKssjJssj(mzjldID, t_ydy);
-            //        else  //持续，修改开始时间
-            //            bll.xgytKssj(mzjldID, t_ydy);
-            //    }
-            //    if (typeP2 == 22)//修改数据库诱导药结束时间
-            //    {
-            //        bll.xgytJssj(mzjldID, t_ydy);
-            //    }
-            //    if (typeP2 == 3)//修改数据库局麻药时间
-            //    {
-            //       // bll.xgjt(mzjldID, t_jmy);
-            //    }
-            //    if (typeP2 == 4)//修改数据库局输液时间
-            //    {
-            //        int i = bll.xgshuyeKSSJ(mzjldID, t_shuye);
-            //    }
-            //    if (typeP2 == 5)//修改数据库输血时间
-            //    {
-            //        int i = bll.xgshuxueKSSJ(mzjldID, t_shuxue);
-            //    }
-            //    if (typeP2 == 6)
-            //    {
-            //        bll.xgclsj(mzjldID, t_shixue);
-            //    }
-            //    if (typeP2 == 7)
-            //    {
-            //        bll.xgclsj(mzjldID, t_yll);
-            //    }
+                //    flagP2 = 0;//移动结束，标志改为0
+                //    if (typeP2 == 1)//修改数据库气体开始时间
+                //    {
+                //        bll.xgqtKssj(mzjldID, t_mzqt);
+                //    }
+                //    if (typeP2 == 11)//修改数据库气体结束时间
+                //    {
+                //        bll.xgqtJssj(mzjldID, t_mzqt);
+                //    }
+                //    if (typeP2 == 2)//修改数据库诱导药时间
+                //    {
+                //        if (!t_ydy.Cxyy)//非持续，修改开始和结束时间
+                //            bll.xgytKssjJssj(mzjldID, t_ydy);
+                //        else  //持续，修改开始时间
+                //            bll.xgytKssj(mzjldID, t_ydy);
+                //    }
+                //    if (typeP2 == 22)//修改数据库诱导药结束时间
+                //    {
+                //        bll.xgytJssj(mzjldID, t_ydy);
+                //    }
+                //    if (typeP2 == 3)//修改数据库局麻药时间
+                //    {
+                //       // bll.xgjt(mzjldID, t_jmy);
+                //    }
+                //    if (typeP2 == 4)//修改数据库局输液时间
+                //    {
+                //        int i = bll.xgshuyeKSSJ(mzjldID, t_shuye);
+                //    }
+                //    if (typeP2 == 5)//修改数据库输血时间
+                //    {
+                //        int i = bll.xgshuxueKSSJ(mzjldID, t_shuxue);
+                //    }
+                //    if (typeP2 == 6)
+                //    {
+                //        bll.xgclsj(mzjldID, t_shixue);
+                //    }
+                //    if (typeP2 == 7)
+                //    {
+                //        bll.xgclsj(mzjldID, t_yll);
+                //    }
                 if (typeP2 == 8)
                 {
                     bll.xgclsj(mzjldID, t_niaoliang);
@@ -8275,6 +8572,7 @@ namespace main
 
             return o.ToString(); ;
         }
+        //回去重点查看
         private void pictureBox3_Paint(object sender, PaintEventArgs e)
         {
             int dyd = 0, dyd1 = 0, dyd2 = 0, dyd3 = 0, dyd4 = 0, dyd5 = 0;//标志是否是第一个点
@@ -8383,13 +8681,13 @@ namespace main
                         y = (int)(368 - (int)(tp.V * 1.5));
                     if (x > 169)
                     {
-                       e.Graphics.DrawPolygon(Pens.Maroon, new PointF[3] { new PointF(x, y), new PointF(x + 4, y + 6), new PointF(x - 4, y + 6) });
-                       // e.Graphics.DrawPolygon(Pens.Maroon, new Point[3] { new Point(x, y), new Point(x + 4, y + 6), new Point(x - 4, y + 6) });
+                        e.Graphics.DrawPolygon(Pens.Maroon, new PointF[3] { new PointF(x, y), new PointF(x + 4, y + 6), new PointF(x - 4, y + 6) });
+                        // e.Graphics.DrawPolygon(Pens.Maroon, new Point[3] { new Point(x, y), new Point(x + 4, y + 6), new Point(x - 4, y + 6) });
                         if (dyd2 != 0 && lastpoint2.X > 169)
                             e.Graphics.DrawLine(Pens.Maroon, new PointF(x, y), lastpoint2);
                     }
-                    lastpoint2.X =(int) x;
-                    lastpoint2.Y =(int) y;
+                    lastpoint2.X = (int)x;
+                    lastpoint2.Y = (int)y;
                     dyd2++;
                 }
 
@@ -8421,7 +8719,7 @@ namespace main
                 }
             }
             int iJikong = 0;
-            string fxs="", tvxs="";
+            string fxs = "", tvxs = "";
             DataTable dtMZ_Info = bll.SelectOldPatInfo(mzjldID);
 
             if (dtMZ_Info.Rows.Count > 0)
@@ -8545,7 +8843,7 @@ namespace main
             //                e.Graphics.DrawBezier(Pens.DarkCyan, p1, p2, p3, p4);
 
             //            }
-                       
+
             //        }
             //        if (CGUAN && BGUAN)
             //        {
@@ -8564,9 +8862,9 @@ namespace main
             //                e.Graphics.DrawEllipse(Pens.DarkCyan, new Rectangle(x - 3, y - 3, 6, 6));
             //            if ((dyd4 != 0 && lastpoint4.X > 169) && (cgTime > tp.D||bgTime<tp.D))
             //                e.Graphics.DrawLine(Pens.DarkCyan, new Point(x, y), lastpoint4);
-                      
+
             //        }
-                    
+
             //    }
             //    lastpoint4.X = x;
             //    lastpoint4.Y = y;
@@ -8594,7 +8892,7 @@ namespace main
             //            e.Graphics.DrawLine(Pens.DarkOrange, new Point(x, y), lastpoint5);
 
             //    }
-                
+
             //    lastpoint5.X = x;
             //    lastpoint5.Y = y;
             //    dyd5++;
@@ -8724,29 +9022,29 @@ namespace main
             {
                 //if (tssy.D < jkksTime || tssy.D > jkjsTime)
                 //{
-                    TimeSpan t = new TimeSpan();
-                    t = tssy.D - otime;
-                    int x = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 170);
-                    int y = 0;
-                    if (tssy.V > 230)
-                        y = (int)(368 - 345);
-                    else
-                        y = (int)(368 - (int)(tssy.V * 1.5));
-                    if (p3x > x - 5 && p3x < x + 5 && p3y < y + 3 && p3y > y - 3)
-                    {
-                        flagP3 = 1;
-                        typeP3 = 1;
-                        t_point = tssy;
-                        lab1.Visible = true;
-                        lab1.BackColor = Color.Transparent;
-                        lab1.ForeColor = Color.Red;
-                        lab1.AutoSize = true;
-                        pictureBox3.Controls.Add(lab1);
-                        lab1.Location = new Point(x, y);
-                        lab1.Text = t_point.V.ToString();
-                        lx = 4;
-                        xgqvalue = t_point.V;
-                    }
+                TimeSpan t = new TimeSpan();
+                t = tssy.D - otime;
+                int x = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 170);
+                int y = 0;
+                if (tssy.V > 230)
+                    y = (int)(368 - 345);
+                else
+                    y = (int)(368 - (int)(tssy.V * 1.5));
+                if (p3x > x - 5 && p3x < x + 5 && p3y < y + 3 && p3y > y - 3)
+                {
+                    flagP3 = 1;
+                    typeP3 = 1;
+                    t_point = tssy;
+                    lab1.Visible = true;
+                    lab1.BackColor = Color.Transparent;
+                    lab1.ForeColor = Color.Red;
+                    lab1.AutoSize = true;
+                    pictureBox3.Controls.Add(lab1);
+                    lab1.Location = new Point(x, y);
+                    lab1.Text = t_point.V.ToString();
+                    lx = 4;
+                    xgqvalue = t_point.V;
+                }
                 //}
             }
 
@@ -8937,9 +9235,9 @@ namespace main
                 flagP3 = 0;
                 if (typeP3 == 1)
                 {
-                   int i= bll.xgMZJLDpoint(mzjldID, t_point);
-                   if (i>0)
-                       bll.InsertxgLog(mzjldID, t_point,xgqvalue,Program.customer.user_name);
+                    int i = bll.xgMZJLDpoint(mzjldID, t_point);
+                    if (i > 0)
+                        bll.InsertxgLog(mzjldID, t_point, xgqvalue, Program.customer.user_name);
                 }
                 if (typeP3 == 2)
                 {
@@ -8972,7 +9270,7 @@ namespace main
 
 
         #endregion
-        
+
         #region//迈瑞函数
         //private void serialPort1_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         //{
@@ -9145,10 +9443,10 @@ namespace main
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (cmbASA.Text.IsNullOrEmpty())
+            if (cmbASA.Text == "")
             {
                 MessageBox.Show("ASA分级不能为空！");
-                return ;
+                return;
             }
             int i = SaveMzjld();
             if (i > 0) MessageBox.Show("麻醉记录单修改成功！");
@@ -9186,7 +9484,7 @@ namespace main
 
         }
         string rrc;
-        string tv; 
+        string tv;
         private void jkhxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             JKTimeSet f1 = new JKTimeSet(mzjldID);
@@ -9254,9 +9552,60 @@ namespace main
             if (cbZeqi.Checked)
                 cbJizhen.Checked = false;
         }
+        private void SendOperRegister()
+        {
+
+            string HL7IPaddress = ConfigurationManager.AppSettings["HL7IPaddress"];
+
+
+            string message = Hl7Bll.AppendHL7stringOperConfig(patID,
+                Program.yh, Program.zhanghao);
+            LogHelp.SaveLogHL7(message);
+            // if (UserFunction.PingHost(HL7IPaddress))
+            if (true)
+            {
+                if (message.Length > 0)
+                {
+                    string HL7port = ConfigurationManager.AppSettings["HL7port"];
+                    SenderRoutingLib.SocketSender send = new SenderRoutingLib.SocketSender();
+                    object objResult;
+                    int iResult = 0;
+                    int count = 1;
+                    if (count < 10)
+                    {
+                        new System.Threading.Thread(o =>
+                        {
+                            for (int i = 0; i < count; i++)
+                            {
+                                objResult = send.Send(message, HL7IPaddress, HL7port.ToInt32());
+                                string ack = objResult == null ? string.Empty : objResult.ToString();
+                                if (ack.Contains("AA"))
+                                {
+                                    iResult++;
+                                    LogHelp.SaveLogHL7(string.Format("\r\n成功条数：{0} \r\n结束时间:{1}", iResult.ToString(), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                }
+                                else
+                                {
+                                    iResult++;
+                                    LogHelp.SaveLogHL7(string.Format("\r\n消息处理失败原因：{0} \r\n结束时间:{1}", ack, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                                }
+                            }
+                        }).Start();
+                    }
+
+                }
+                else
+                {
+                    LogHelp.SaveLogHL7(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " IP地址或端口错误");
+                }
+
+            }
+        }
 
         private void mzjldEdit_FormClosed(object sender, FormClosedEventArgs e)//关闭时候关闭串口和线程
         {
+            SendOperRegister();
+
             if (_serialPort.IsOpen)
             {
                 _serialPort.StopTransfer();
@@ -9300,41 +9649,82 @@ namespace main
             adims_BLL.DataValid.Text_Value_Limit(sender, e);
         }
 
+
+        //BASE64加密
+        public static string EncodeBase64(Encoding encode, string source)
+        {
+            string codestr = "";
+            byte[] bytes = encode.GetBytes(source);
+            try
+            {
+                codestr = Convert.ToBase64String(bytes);
+            }
+            catch
+            {
+                codestr = source;
+            }
+            return codestr;
+        }
+        public static string EncodeBase64(string source)
+        {
+            return EncodeBase64(Encoding.UTF8, source);
+        }
         private void btnEMR_Click(object sender, EventArgs e)//调用EMR
         {
 
-           // D:\MzEmrCli\MzEmrCli.exe 用户代码=0002|用户名称=张三|科室ID=1502|功能模块=病历书写|住院号=0000005620-00001
-            string IPaddress = "192.168.18.14";
-            bool flag = DataValid.PingHost(IPaddress, 1000);
-            if (flag == true)
-            {
-                
+            DataTable brsyh;
+            //此加密使用的是BASE64加密方式
 
-                Process proc = new Process();
-                proc.StartInfo.FileName = "D:\\Emr\\EmrCli.exe";
-                proc.StartInfo.Arguments = "用户代码=10086|住院号=" + patidccs + "|功能模块=个人病历浏览|只读=1|是否病案号=1";
-                proc.StartInfo.UseShellExecute = false;
-                proc.Start();
-            }
-            else MessageBox.Show("电子病历 数据库未连接，请检查网络");
+            string zhuyuanhao = patID.ToString();
+            brsyh = DAL.brsyh(zhuyuanhao);//获取病人就诊卡号
+            string syh = brsyh.Rows[0]["BRSYH"].ToString();
+            DateTime dt = DateTime.Now;
+            string pjsj = "MINGTIANYW^JieRuPingZheng1^DBA^" + dt.GetDateTimeFormats('g')[0].ToString();//获取系统当前时间与其他加密进行拼接
+            string fzsj = EncodeBase64(pjsj);//加密拼接过的时间
+            string fzzyh = EncodeBase64(syh);//加密病人首页号
+            string url = "http://172.1.1.39:8080/ZyGy/BingRenBljNr.aspx?BingRenId=" + fzzyh + "&JieRuXk=" + fzsj + "";//加入加密过的病人首页号和拼接时间，连接病例
+            System.Diagnostics.Process.Start(url);
+            //// D:\MzEmrCli\MzEmrCli.exe 用户代码=0002|用户名称=张三|科室ID=1502|功能模块=病历书写|住院号=0000005620-00001
+            // string IPaddress = "192.168.18.14";
+            // bool flag = DataValid.PingHost(IPaddress, 1000);
+            // if (flag == true)
+            // {
+
+
+            //     Process proc = new Process();
+            //     proc.StartInfo.FileName = "D:\\Emr\\EmrCli.exe";
+            //     proc.StartInfo.Arguments = "用户代码=10086|住院号=" + patidccs + "|功能模块=个人病历浏览|只读=1|是否病案号=1";
+            //     proc.StartInfo.UseShellExecute = false;
+            //     proc.Start();
+            // }
+            // else MessageBox.Show("电子病历 数据库未连接，请检查网络");
         }
 
         private void btnBeforeVisit_Click(object sender, EventArgs e)
         {
-            MZsqFsd f1 = new MZsqFsd(patID);
-            f1.ShowDialog();
+            //MZsqFsd f1 = new MZsqFsd(patID);
+            if (btnMonitor.Text == "停止监测")
+            {
+                MessageBox.Show("请监测结束后查看！");
+                return;
+            }
+            else
+            {
+                BeforeVisit_JH f1 = new BeforeVisit_JH(patID);
+                f1.ShowDialog();
+            }
         }
         private void btnNurseRecord_Click(object sender, EventArgs e)
         {
             CHAShouShuFXPG f1 = new CHAShouShuFXPG(patID);
             f1.ShowDialog();
         }
-     
+
         private void btnMZZJ_Click(object sender, EventArgs e)
         {
             Zffyzqshu f1 = new Zffyzqshu(patID);
             f1.ShowDialog();
-        }        
+        }
         private void timerJKW_Tick(object sender, EventArgs e)
         {
             //ProceedreceivedData_JKW();
@@ -9427,79 +9817,79 @@ namespace main
             JHzyymzjldBMcs f2 = new JHzyymzjldBMcs(patID);
             //BeforeVisit_HS f2 = new BeforeVisit_HS(patID);
             f2.ShowDialog();
-           // mzzjtlj f1 = new mzzjtlj(patID, Convert.ToDateTime(dtOdate.Value.Date.ToString("yyyy-MM-dd")));
-           //f1.ShowDialog();
+            // mzzjtlj f1 = new mzzjtlj(patID, Convert.ToDateTime(dtOdate.Value.Date.ToString("yyyy-MM-dd")));
+            //f1.ShowDialog();
         }
 
         private void printDocument1_EndPrint(object sender, PrintEventArgs e)
         {
-            iYema =1;
+            iYema = 1;
             fy = 0;
         }
         string BISJC;
-//        private void ccccbis()
-//        {
+        //        private void ccccbis()
+        //        {
 
-//            serialPort1.PortName = "COM3";
-//            serialPort1.BaudRate = 9600;
-//            serialPort1.DataBits = 8;
-//            serialPort1.Parity = Parity.None;
-//            serialPort1.StopBits = StopBits.One;
+        //            serialPort1.PortName = "COM3";
+        //            serialPort1.BaudRate = 9600;
+        //            serialPort1.DataBits = 8;
+        //            serialPort1.Parity = Parity.None;
+        //            serialPort1.StopBits = StopBits.One;
 
-//            if (!serialPort1.IsOpen)
-//            {
-//                serialPort1.Open();
-//                serialPort1.ReadTimeout = 500;
-//            }
-//            byte[] ReceivedByte = new byte[5000];
-//            for (int cl = 0; cl < ReceivedByte.Length; cl++)
-//                ReceivedByte[cl] = 0;
-//            Thread.Sleep(100);
-//            int len = serialPort1.Read(ReceivedByte, 0, serialPort1.BytesToRead);
-//            // if (len == 0)
-//            //     return;
+        //            if (!serialPort1.IsOpen)
+        //            {
+        //                serialPort1.Open();
+        //                serialPort1.ReadTimeout = 500;
+        //            }
+        //            byte[] ReceivedByte = new byte[5000];
+        //            for (int cl = 0; cl < ReceivedByte.Length; cl++)
+        //                ReceivedByte[cl] = 0;
+        //            Thread.Sleep(100);
+        //            int len = serialPort1.Read(ReceivedByte, 0, serialPort1.BytesToRead);
+        //            // if (len == 0)
+        //            //     return;
 
 
-//            string ReceivedStr = @"05/26/2017 17:34:30|      10|      27|On      |None    |Off     |Off     |No      |     0.0|     9.1|    20ac|    97.5|    76.0|    66.8|    28.6|       2|4200800c|     0.0|     0.0|    8000|     0.0|     0.0|     0.0|    71.8|       5|4200000c|     0.0|     9.1|    20ac|    97.5|    76.0|    66.8|    28.6|       0|4200800c|
-//                                   05/26/2017 17:34:35|      10|      27|On      |None    |Off     |Off     |No      |     0.0|     9.1|    20ac|    97.3|    76.0|    53.7|    28.6|       6|02000004|     0.0|     0.0|    8000|     0.0|     0.0|     0.0|    65.4|       3|02000004|     0.0|     9.1|    20ac|    97.3|    76.0|    53.7|    28.6|       0|02000004|
-//                                   05/25/2017 17:34:40|      10|      27|On      |None    |Off     |Off     |No      |     0.0|     9.1|    20ac|    97.4|    76.0|    55.0|    28.6|       6|02000000|     0.0|     0.0|    8000|     0.0|     0.0|     0.0|    59.6|       4|02000000|     0.0|     9.1|    20ac|    97.4|    76.0|    55.0|    28.6|       0|02000000|
-//                                   05/26/2017 17:34:45|      10|      27|On      |None    |Off     |Off     |No      |     0.0|     9.5|    20ac|    97.2|    75.5|    53.3|    22.9|       9|02000000|     0.0|     0.0|    8000|     0.0|     0.0|     0.0|    53.2|       4|02000000|     0.0|     9.5|    20ac|    97.2|    75.5|    53.3|    22.9|       0|02000000|";
-//            byte[] byteArray = System.Text.Encoding.Default.GetBytes(ReceivedStr);
+        //            string ReceivedStr = @"05/26/2017 17:34:30|      10|      27|On      |None    |Off     |Off     |No      |     0.0|     9.1|    20ac|    97.5|    76.0|    66.8|    28.6|       2|4200800c|     0.0|     0.0|    8000|     0.0|     0.0|     0.0|    71.8|       5|4200000c|     0.0|     9.1|    20ac|    97.5|    76.0|    66.8|    28.6|       0|4200800c|
+        //                                   05/26/2017 17:34:35|      10|      27|On      |None    |Off     |Off     |No      |     0.0|     9.1|    20ac|    97.3|    76.0|    53.7|    28.6|       6|02000004|     0.0|     0.0|    8000|     0.0|     0.0|     0.0|    65.4|       3|02000004|     0.0|     9.1|    20ac|    97.3|    76.0|    53.7|    28.6|       0|02000004|
+        //                                   05/25/2017 17:34:40|      10|      27|On      |None    |Off     |Off     |No      |     0.0|     9.1|    20ac|    97.4|    76.0|    55.0|    28.6|       6|02000000|     0.0|     0.0|    8000|     0.0|     0.0|     0.0|    59.6|       4|02000000|     0.0|     9.1|    20ac|    97.4|    76.0|    55.0|    28.6|       0|02000000|
+        //                                   05/26/2017 17:34:45|      10|      27|On      |None    |Off     |Off     |No      |     0.0|     9.5|    20ac|    97.2|    75.5|    53.3|    22.9|       9|02000000|     0.0|     0.0|    8000|     0.0|     0.0|     0.0|    53.2|       4|02000000|     0.0|     9.5|    20ac|    97.2|    75.5|    53.3|    22.9|       0|02000000|";
+        //            byte[] byteArray = System.Text.Encoding.Default.GetBytes(ReceivedStr);
 
-//            if ((len < 1000) && (len > 60))
-//            {
-//                ReceivedStr = System.Text.Encoding.Default.GetString(byteArray);
+        //            if ((len < 1000) && (len > 60))
+        //            {
+        //                ReceivedStr = System.Text.Encoding.Default.GetString(byteArray);
 
-//                string[] StringTemp = ReceivedStr.Split('|');
-//                int i = 0;
-//                foreach (string BasicCommand in StringTemp)
-//                {
+        //                string[] StringTemp = ReceivedStr.Split('|');
+        //                int i = 0;
+        //                foreach (string BasicCommand in StringTemp)
+        //                {
 
-//                    //string datestr = ReceivedTime.ToString("{0:yyyy/MM/dd}");
-//                    string datestr = string.Format("{0:MM/dd/yyyy}", DateTime.Now);
-//                    datestr = datestr.Replace("-", "/");
-//                    bool has = BasicCommand.Contains(datestr);
-//                    if (BasicCommand.Contains(datestr))
-//                    {
-//                        string BISstr = "";
-//                        if (i + 11 < StringTemp.Length)
-//                            BISstr = StringTemp[i + 11];
-//                        if (IsNumberic(BISstr))
-//                        {
-//                            int cccbis = dal.CopyDataBISsss(mzjldID, ksjcTime,BISstr);
+        //                    //string datestr = ReceivedTime.ToString("{0:yyyy/MM/dd}");
+        //                    string datestr = string.Format("{0:MM/dd/yyyy}", DateTime.Now);
+        //                    datestr = datestr.Replace("-", "/");
+        //                    bool has = BasicCommand.Contains(datestr);
+        //                    if (BasicCommand.Contains(datestr))
+        //                    {
+        //                        string BISstr = "";
+        //                        if (i + 11 < StringTemp.Length)
+        //                            BISstr = StringTemp[i + 11];
+        //                        if (IsNumberic(BISstr))
+        //                        {
+        //                            int cccbis = dal.CopyDataBISsss(mzjldID, ksjcTime,BISstr);
 
-//                          // BISTimelabel.Text = BasicCommand.Trim('\r', '\n', ' ');
-//                        }
+        //                          // BISTimelabel.Text = BasicCommand.Trim('\r', '\n', ' ');
+        //                        }
 
-//                    }
-//                    i++;
-//                }
+        //                    }
+        //                    i++;
+        //                }
 
-//            }
+        //            }
 
-//            serialPort1.Close();
+        //            serialPort1.Close();
 
-//        }
+        //        }
 
         private void ccccbis()
         {
@@ -9549,8 +9939,8 @@ namespace main
                             BISstr = StringTemp[i + 11];
                         if (IsNumberic(BISstr))
                         {
-                           double bisstra =Convert.ToDouble(BISstr.Trim().ToString());
-                            BISstr =Convert.ToString(bisstra);
+                            double bisstra = Convert.ToDouble(BISstr.Trim().ToString());
+                            BISstr = Convert.ToString(bisstra);
                             //int cccbis = dal.CopyDataBISsss(mzjldID, ksjcTime.AddMinutes(-2d), BISstr);
                             int cccbis = dal.CopyDataBISsss(mzjldID, ksjcTime, BISstr);
                         }
@@ -9561,7 +9951,7 @@ namespace main
 
             }
 
-           //serialPort1.Close();
+            //serialPort1.Close();
 
 
         }
@@ -9586,9 +9976,14 @@ namespace main
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string url = "http://192.168.18.44/MedExECGWEbSetup/Default.aspx";
-                System.Diagnostics.Process.Start(url);
-            
+            adims_DAL.AdimsProvider DAL = new adims_DAL.AdimsProvider();
+            DataTable brsyh;
+            string zhuyuanhao = patID.ToString();
+            brsyh = DAL.zyh(zhuyuanhao);
+            string syh = brsyh.Rows[0][0].ToString();
+            string url = "http://172.1.1.73/HisReportList.aspx?ClinicCode=" + syh + "";
+            System.Diagnostics.Process.Start(url);
+
         }
 
         private void cheboxBIS_CheckedChanged(object sender, EventArgs e)
@@ -9611,7 +10006,7 @@ namespace main
             pictureBox3.Refresh();
         }
 
-       
+
 
         private void lbMzkszgn1_DoubleClick(object sender, EventArgs e)
         {
@@ -9619,28 +10014,28 @@ namespace main
             {
                 return;
             }
-            
-                //txtMzsj.Controls[0].Text = Convert.ToString(DateTime.Now);
-                TimeSpan t = new TimeSpan();
-                t = DateTime.Now - otime;
-                lbMzkszgn1.Visible = true;
-                lbMzkszgn1.Text = "X1";
-                lbMzkszgn1.AutoSize = true;
-                lbMzkszgn1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-                lbMzkszgn1.BackColor = Color.Transparent;
-                lbMzkszgn1.Location = new Point((int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 160), 370);
-                this.pictureBox3.Controls.Add(lbMzkszgn1);
-                mzks = true;
-                mzjs = false;
-                dal.UpdateMzkssjzgn(DateTime.Now, mzjldID);
-                mzkszgnTime = DateTime.Now;
-                //txtMZKS.Controls[0].Text = DateTime.Now.ToString("HH:mm");
-                lbMzkszgn1.MouseDown += new MouseEventHandler(lbMzkszgn1_MouseDown);
-                lbMzkszgn1.MouseMove += new MouseEventHandler(lbMzkszgn1_MouseMove);
-                lbMzkszgn1.MouseUp += new MouseEventHandler(lbMzkszgn1_MouseUp);
-                lbMzkszgn1.MouseLeave += new EventHandler(lbMzkszgn1_MouseLeave);
-            
-            
+
+            //txtMzsj.Controls[0].Text = Convert.ToString(DateTime.Now);
+            TimeSpan t = new TimeSpan();
+            t = DateTime.Now - otime;
+            lbMzkszgn1.Visible = true;
+            lbMzkszgn1.Text = "X1";
+            lbMzkszgn1.AutoSize = true;
+            lbMzkszgn1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            lbMzkszgn1.BackColor = Color.Transparent;
+            lbMzkszgn1.Location = new Point((int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 160), 370);
+            this.pictureBox3.Controls.Add(lbMzkszgn1);
+            mzks = true;
+            mzjs = false;
+            dal.UpdateMzkssjzgn(DateTime.Now, mzjldID);
+            mzkszgnTime = DateTime.Now;
+            //txtMZKS.Controls[0].Text = DateTime.Now.ToString("HH:mm");
+            lbMzkszgn1.MouseDown += new MouseEventHandler(lbMzkszgn1_MouseDown);
+            lbMzkszgn1.MouseMove += new MouseEventHandler(lbMzkszgn1_MouseMove);
+            lbMzkszgn1.MouseUp += new MouseEventHandler(lbMzkszgn1_MouseUp);
+            lbMzkszgn1.MouseLeave += new EventHandler(lbMzkszgn1_MouseLeave);
+
+
         }
         private void lbMzkszgn1_MouseDown(object sender, EventArgs e)
         {
@@ -9714,27 +10109,27 @@ namespace main
             {
                 return;
             }
-          
-                //txtMzsj.Controls[0].Text = Convert.ToString(DateTime.Now);
-                TimeSpan t = new TimeSpan();
-                t = DateTime.Now - otime;
-                mzkssjzz.Visible = true;
-                mzkssjzz.Text = "X2";
-                mzkssjzz.AutoSize = true;
-                mzkssjzz.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-                mzkssjzz.BackColor = Color.Transparent;
-                mzkssjzz.Location = new Point((int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 160), 370);
-                this.pictureBox3.Controls.Add(mzkssjzz);
-                mzks = true;
-                mzjs = false;
-                dal.UpdateMzkssjsjzz(DateTime.Now, mzjldID);
-                mzjkssjzzTime = DateTime.Now;
-                //txtMZKS.Controls[0].Text = DateTime.Now.ToString("HH:mm");
-                mzkssjzz.MouseDown += new MouseEventHandler(mzkssjzz_MouseDown);
-                mzkssjzz.MouseMove += new MouseEventHandler(mzkssjzz_MouseMove);
-                mzkssjzz.MouseUp += new MouseEventHandler(mzkssjzz_MouseUp);
-                mzkssjzz.MouseLeave += new EventHandler(mzkssjzz_MouseLeave);
-            
+
+            //txtMzsj.Controls[0].Text = Convert.ToString(DateTime.Now);
+            TimeSpan t = new TimeSpan();
+            t = DateTime.Now - otime;
+            mzkssjzz.Visible = true;
+            mzkssjzz.Text = "X2";
+            mzkssjzz.AutoSize = true;
+            mzkssjzz.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            mzkssjzz.BackColor = Color.Transparent;
+            mzkssjzz.Location = new Point((int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 15 / jcsjjg + 160), 370);
+            this.pictureBox3.Controls.Add(mzkssjzz);
+            mzks = true;
+            mzjs = false;
+            dal.UpdateMzkssjsjzz(DateTime.Now, mzjldID);
+            mzjkssjzzTime = DateTime.Now;
+            //txtMZKS.Controls[0].Text = DateTime.Now.ToString("HH:mm");
+            mzkssjzz.MouseDown += new MouseEventHandler(mzkssjzz_MouseDown);
+            mzkssjzz.MouseMove += new MouseEventHandler(mzkssjzz_MouseMove);
+            mzkssjzz.MouseUp += new MouseEventHandler(mzkssjzz_MouseUp);
+            mzkssjzz.MouseLeave += new EventHandler(mzkssjzz_MouseLeave);
+
         }
 
         private void mzkssjzz_MouseDown(object sender, EventArgs e)
@@ -9869,7 +10264,7 @@ namespace main
             //    }
             //}
 
-          
+
             pictureBox5.Refresh();
             btnLeft.Focus();
         }
@@ -9904,7 +10299,7 @@ namespace main
             for (int i = 0; i < 10; i++)
                 e.Graphics.DrawLine(Pens.Black, new PointF((float)(i * 90 + 169), (float)1), new PointF((float)(i * 90 + 169), (float)385));
 
-     
+
 
             #region //画气体
             ArrayList sssQT = new ArrayList();
@@ -10418,14 +10813,14 @@ namespace main
 
 
             int x = 20, y = 0;//整体位置控制
-            string title = "        浙江省金华市中医医院醉记录单";//标题
+            string title = "        浙江省金华市中医医院麻醉记录单";//标题
             //string title2 = "              ";//标题
             string title3 = "              麻 醉 小 结";//标题
             Pen ptp = Pens.Black;//普通画笔
             Pen pblack2 = new Pen(Brushes.Black, 2);
             Pen pxuxian = new Pen(Brushes.Black);
             pxuxian.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
-            Font ptzt14 = new System.Drawing.Font("宋体", 14,FontStyle.Bold);//标题
+            Font ptzt14 = new System.Drawing.Font("宋体", 14, FontStyle.Bold);//标题
             Font ptzt13 = new System.Drawing.Font("宋体", 13);//标题                      
             Font ptzt12 = new Font("宋体", 10);//填入栏目字体
             Font ptzt11 = new Font("微软雅黑", 11);//填入栏目字体
@@ -10448,31 +10843,31 @@ namespace main
                 x = x + 50;
                 DataTable dt = cll.mzbyjiazai(patID);
                 e.Graphics.DrawString("说明：麻醉后医嘱请开在病历医嘱单上，开医嘱时参考下列内容", ptzt14, Brushes.Black, new Point(x + 50, y + 30));
-            e.Graphics.DrawString("(1)                        麻醉后常规护理", ptzt11, Brushes.Black, new Point(x + 10, y + 50));
-            e.Graphics.DrawLine(Pens.Black, x + 35, y + 57, x + 130, y + 57);
-            e.Graphics.DrawString("(2)体    位：", ptzt11, Brushes.Black, new Point(x + 10, y + 70));
-            e.Graphics.DrawString("(3)血压，脉搏，呼吸每        分钟测量一次。平稳后停止或", ptzt11, Brushes.Black, new Point(x + 10, y + 100));
-            e.Graphics.DrawLine(Pens.Black, x + 171, y + 117, x + 210, y + 117);
-            e.Graphics.DrawString("(4)给    氧    鼻导管           L/MIN", ptzt11, Brushes.Black, new Point(x + 10, y + 130));
-            e.Graphics.DrawLine(Pens.Black, x + 145, y + 147, x + 195, y + 147);
-            e.Graphics.DrawString("面罩           L/MIN", ptzt11, Brushes.Black, new Point(x + 250, y + 130));
-            e.Graphics.DrawLine(Pens.Black, x + 285, y + 147, x + 340, y + 147);
-            e.Graphics.DrawString("(5)吸    痰", ptzt11, Brushes.Black, new Point(x + 10, y + 160));
-            
-            e.Graphics.DrawString("(6)动静脉穿刺后护理", ptzt11, Brushes.Black, new Point(x + 10, y + 190));
-            
-            e.Graphics.DrawString("(7)机械通气", ptzt11, Brushes.Black, new Point(x + 10, y + 220));
-           
-            e.Graphics.DrawString("(8)鼓励病人咳嗽，作深呼吸", ptzt11, Brushes.Black, new Point(x + 10, y + 250));
-            
-            e.Graphics.DrawString("(9)注意椎管内麻醉病人肢体感觉和活动恢复情况", ptzt11, Brushes.Black, new Point(x + 10, y + 280));
-            
-            e.Graphics.DrawString("(10)其他", ptzt11, Brushes.Black, new Point(x + 10, y + 310));
+                e.Graphics.DrawString("(1)                        麻醉后常规护理", ptzt11, Brushes.Black, new Point(x + 10, y + 50));
+                e.Graphics.DrawLine(Pens.Black, x + 35, y + 67, x + 130, y + 67);
+                e.Graphics.DrawString("(2)体    位：", ptzt11, Brushes.Black, new Point(x + 10, y + 70));
+                e.Graphics.DrawString("(3)血压，脉搏，呼吸每        分钟测量一次。平稳后停止或", ptzt11, Brushes.Black, new Point(x + 10, y + 100));
+                e.Graphics.DrawLine(Pens.Black, x + 171, y + 117, x + 210, y + 117);
+                e.Graphics.DrawString("(4)给    氧    鼻导管           L/MIN", ptzt11, Brushes.Black, new Point(x + 10, y + 130));
+                e.Graphics.DrawLine(Pens.Black, x + 155, y + 147, x + 185, y + 147);
+                e.Graphics.DrawString("面罩           L/MIN", ptzt11, Brushes.Black, new Point(x + 250, y + 130));
+                e.Graphics.DrawLine(Pens.Black, x + 285, y + 147, x + 335, y + 147);
+                e.Graphics.DrawString("(5)吸    痰", ptzt11, Brushes.Black, new Point(x + 10, y + 160));
 
-            x = 10;
+                e.Graphics.DrawString("(6)动静脉穿刺后护理", ptzt11, Brushes.Black, new Point(x + 10, y + 190));
 
-            e.Graphics.DrawString("麻醉术后观察记录", ptzt18, Brushes.Black, new Point(x + 260, y + 350));
-            
+                e.Graphics.DrawString("(7)机械通气", ptzt11, Brushes.Black, new Point(x + 10, y + 220));
+
+                e.Graphics.DrawString("(8)鼓励病人咳嗽，作深呼吸", ptzt11, Brushes.Black, new Point(x + 10, y + 250));
+
+                e.Graphics.DrawString("(9)注意椎管内麻醉病人肢体感觉和活动恢复情况", ptzt11, Brushes.Black, new Point(x + 10, y + 280));
+
+                e.Graphics.DrawString("(10)其他", ptzt11, Brushes.Black, new Point(x + 10, y + 310));
+
+                x = 10;
+
+                e.Graphics.DrawString("麻醉术后观察记录", ptzt18, Brushes.Black, new Point(x + 260, y + 350));
+
                 e.Graphics.DrawLine(Pens.Black, x + 35, y + 390, x + 780, y + 390);
                 e.Graphics.DrawLine(Pens.Black, x + 35, y + 430, x + 780, y + 430);
                 e.Graphics.DrawLine(Pens.Black, x + 35, y + 460, x + 780, y + 460);
@@ -10584,178 +10979,178 @@ namespace main
                 e.Graphics.DrawLine(Pens.Black, x + 780, y + 390, x + 780, y + 520);
                 e.Graphics.DrawString("其他特殊情况及处理：", ptzt11, Brushes.Black, new Point(x + 35, y + 530));
                 y = 20 - 60;
-            e.Graphics.DrawString("麻醉术后镇痛观察记录", ptzt18, Brushes.Black, new Point(x + 260, y + 670));
-            e.Graphics.DrawString("镇痛方案：PCEA(      )；PCIA（     ）；其他", ptzt11, Brushes.Black, new Point(x + 35, y + 700));
+                e.Graphics.DrawString("麻醉术后镇痛观察记录", ptzt18, Brushes.Black, new Point(x + 260, y + 670));
+                e.Graphics.DrawString("镇痛方案：PCEA(      )；PCIA（     ）；其他", ptzt11, Brushes.Black, new Point(x + 35, y + 700));
 
-            e.Graphics.DrawLine(Pens.Black, x + 35, y + 740, x + 780, y + 740);
-            e.Graphics.DrawLine(Pens.Black, x + 105, y + 770, x + 240, y + 770);
-            e.Graphics.DrawLine(Pens.Black, x + 35, y + 800, x + 780, y + 800);
-            e.Graphics.DrawLine(Pens.Black, x + 35, y + 830, x + 780, y + 830);
-            e.Graphics.DrawLine(Pens.Black, x + 35, y + 860, x + 780, y + 860);
-            e.Graphics.DrawLine(Pens.Black, x + 35, y + 890, x + 780, y + 890);
-            e.Graphics.DrawLine(Pens.Black, x + 35, y + 920, x + 780, y + 920);
-
-
-
-            e.Graphics.DrawLine(Pens.Black, x + 35, y + 740, x + 35, y + 920);
-            e.Graphics.DrawString("观察时间", ptzt11, Brushes.Black, new Point(x + 36, y + 755));
-
-            e.Graphics.DrawLine(Pens.Black, x + 105, y + 740, x + 105, y + 920);
-            e.Graphics.DrawString("痛觉评分(VAS)", ptzt11, Brushes.Black, new Point(x + 126, y + 740));
-            e.Graphics.DrawString("安静时", ptzt11, Brushes.Black, new Point(x + 106, y + 771));
-            e.Graphics.DrawLine(Pens.Black, x + 170, y + 770, x + 170, y + 920);
-            e.Graphics.DrawString("活动时", ptzt11, Brushes.Black, new Point(x + 176, y + 771));
-            e.Graphics.DrawLine(Pens.Black, x + 240, y + 740, x + 240, y + 920);
-            e.Graphics.DrawString("嗜睡", ptzt11, Brushes.Black, new Point(x + 260, y + 755));
-            e.Graphics.DrawLine(Pens.Black, x + 285, y + 800, x + 285, y + 920);
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 241, y + 810));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 301, y + 810));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 241, y + 840));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 301, y + 840));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 241, y + 870));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 301, y + 870));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 241, y + 900));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 301, y + 900));
-
-            e.Graphics.DrawLine(Pens.Black, x + 330, y + 740, x + 330, y + 920);
-            e.Graphics.DrawString("恶心", ptzt11, Brushes.Black, new Point(x + 350, y + 755));
-            e.Graphics.DrawLine(Pens.Black, x + 375, y + 800, x + 375, y + 920);
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 331, y + 810));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 391, y + 810));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 331, y + 840));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 391, y + 840));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 331, y + 870));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 391, y + 870));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 331, y + 900));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 391, y + 900));
-
-            e.Graphics.DrawLine(Pens.Black, x + 420, y + 740, x + 420, y + 920);
-            e.Graphics.DrawString("呕吐", ptzt11, Brushes.Black, new Point(x + 440, y + 755));
-            e.Graphics.DrawLine(Pens.Black, x + 465, y + 800, x + 465, y + 920);
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 421, y + 810));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 481, y + 810));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 421, y + 840));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 481, y + 840));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 421, y + 870));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 481, y + 870));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 421, y + 900));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 481, y + 900));
-
-            e.Graphics.DrawLine(Pens.Black, x + 510, y + 740, x + 510, y + 920);
-            e.Graphics.DrawString("瘙痒", ptzt11, Brushes.Black, new Point(x + 530, y + 755));
-            e.Graphics.DrawLine(Pens.Black, x + 555, y + 800, x + 555, y + 920);
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 511, y + 810));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 571, y + 810));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 511, y + 840));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 571, y + 840));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 511, y + 870));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 571, y + 870));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 511, y + 900));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 571, y + 900));
-            e.Graphics.DrawLine(Pens.Black, x + 600, y + 740, x + 600, y + 920);
-            e.Graphics.DrawString("尿潴留", ptzt11, Brushes.Black, new Point(x + 660, y + 755));
-            e.Graphics.DrawLine(Pens.Black, x + 645, y + 800, x + 645, y + 920);
-            e.Graphics.DrawLine(Pens.Black, x + 705, y + 800, x + 705, y + 920);
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 601, y + 810));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 661, y + 810));
-            e.Graphics.DrawString("导尿", ptzt11, Brushes.Black, new Point(x + 721, y + 810));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 601, y + 840));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 661, y + 840));
-            e.Graphics.DrawString("导尿", ptzt11, Brushes.Black, new Point(x + 721, y + 840));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 601, y + 870));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 661, y + 870));
-            e.Graphics.DrawString("导尿", ptzt11, Brushes.Black, new Point(x + 721, y + 870));
-            e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 601, y + 900));
-            e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 661, y + 900));
-            e.Graphics.DrawString("导尿", ptzt11, Brushes.Black, new Point(x + 721, y + 900));
-            e.Graphics.DrawLine(Pens.Black, x + 780, y + 740, x + 780, y + 920);
-            y = 20-120;
-            e.Graphics.DrawString("其他特殊情况及处理：", ptzt11, Brushes.Black, new Point(x + 35, y + 980));
-            e.Graphics.DrawString("麻醉医生签字：", ptzt11, Brushes.Black, new Point(x + 505, y + 1080));
-            e.Graphics.DrawString("注:麻醉术后观察记录要求在术后24小时完成，若无麻醉相关并发症发生，观察记录一次即可；麻醉术后镇痛观察", ptzt10, Brushes.Black, new Point(x + 35, y + 1110));
-            e.Graphics.DrawString("记录需观察两天，每天一次；若发现有麻醉相关并发症，应及时通知经治医师共同处理，并继续观察至病情好转", ptzt10, Brushes.Black, new Point(x + 35, y + 1140));
-            e.Graphics.DrawString("为止。记录时请在观察项目下打勾即可", ptzt10, Brushes.Black, new Point(x + 35, y + 1170));
-            e.Graphics.DrawString("镇痛评分:向患者充分介绍VAS的相关知识，记录相应时点的VAS值。评分标准：0分 无痛；10分 强烈疼痛；", ptzt10, Brushes.Black, new Point(x + 35, y + 1200));
-            e.Graphics.DrawString("1-3分 轻度疼痛；4-6分 中度疼痛；7-10分 重度疼痛。", ptzt10, Brushes.Black, new Point(x + 35, y + 1230));
-            //数据
-      
-
-            y = 20;
-            x = 70;
-            //for (int a = 0; a < dt.Rows.Count; a++)  //  a行 b列
-            //{
+                e.Graphics.DrawLine(Pens.Black, x + 35, y + 740, x + 780, y + 740);
+                e.Graphics.DrawLine(Pens.Black, x + 105, y + 770, x + 240, y + 770);
+                e.Graphics.DrawLine(Pens.Black, x + 35, y + 800, x + 780, y + 800);
+                e.Graphics.DrawLine(Pens.Black, x + 35, y + 830, x + 780, y + 830);
+                e.Graphics.DrawLine(Pens.Black, x + 35, y + 860, x + 780, y + 860);
+                e.Graphics.DrawLine(Pens.Black, x + 35, y + 890, x + 780, y + 890);
+                e.Graphics.DrawLine(Pens.Black, x + 35, y + 920, x + 780, y + 920);
 
 
 
-            e.Graphics.DrawString(dt.Rows[0]["huli"].ToString(), ptzt11, Brushes.Black, x + 35, y + 40);//麻醉后
+                e.Graphics.DrawLine(Pens.Black, x + 35, y + 740, x + 35, y + 920);
+                e.Graphics.DrawString("观察时间", ptzt11, Brushes.Black, new Point(x + 36, y + 755));
 
-            e.Graphics.DrawString(dt.Rows[0]["tiwei"].ToString(), ptzt11, Brushes.Black, x + 100, y + 70);//体位
+                e.Graphics.DrawLine(Pens.Black, x + 105, y + 740, x + 105, y + 920);
+                e.Graphics.DrawString("痛觉评分(VAS)", ptzt11, Brushes.Black, new Point(x + 126, y + 740));
+                e.Graphics.DrawString("安静时", ptzt11, Brushes.Black, new Point(x + 106, y + 771));
+                e.Graphics.DrawLine(Pens.Black, x + 170, y + 770, x + 170, y + 920);
+                e.Graphics.DrawString("活动时", ptzt11, Brushes.Black, new Point(x + 176, y + 771));
+                e.Graphics.DrawLine(Pens.Black, x + 240, y + 740, x + 240, y + 920);
+                e.Graphics.DrawString("嗜睡", ptzt11, Brushes.Black, new Point(x + 260, y + 755));
+                e.Graphics.DrawLine(Pens.Black, x + 285, y + 800, x + 285, y + 920);
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 241, y + 810));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 301, y + 810));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 241, y + 840));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 301, y + 840));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 241, y + 870));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 301, y + 870));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 241, y + 900));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 301, y + 900));
+
+                e.Graphics.DrawLine(Pens.Black, x + 330, y + 740, x + 330, y + 920);
+                e.Graphics.DrawString("恶心", ptzt11, Brushes.Black, new Point(x + 350, y + 755));
+                e.Graphics.DrawLine(Pens.Black, x + 375, y + 800, x + 375, y + 920);
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 331, y + 810));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 391, y + 810));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 331, y + 840));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 391, y + 840));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 331, y + 870));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 391, y + 870));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 331, y + 900));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 391, y + 900));
+
+                e.Graphics.DrawLine(Pens.Black, x + 420, y + 740, x + 420, y + 920);
+                e.Graphics.DrawString("呕吐", ptzt11, Brushes.Black, new Point(x + 440, y + 755));
+                e.Graphics.DrawLine(Pens.Black, x + 465, y + 800, x + 465, y + 920);
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 421, y + 810));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 481, y + 810));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 421, y + 840));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 481, y + 840));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 421, y + 870));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 481, y + 870));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 421, y + 900));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 481, y + 900));
+
+                e.Graphics.DrawLine(Pens.Black, x + 510, y + 740, x + 510, y + 920);
+                e.Graphics.DrawString("瘙痒", ptzt11, Brushes.Black, new Point(x + 530, y + 755));
+                e.Graphics.DrawLine(Pens.Black, x + 555, y + 800, x + 555, y + 920);
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 511, y + 810));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 571, y + 810));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 511, y + 840));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 571, y + 840));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 511, y + 870));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 571, y + 870));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 511, y + 900));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 571, y + 900));
+                e.Graphics.DrawLine(Pens.Black, x + 600, y + 740, x + 600, y + 920);
+                e.Graphics.DrawString("尿潴留", ptzt11, Brushes.Black, new Point(x + 660, y + 755));
+                e.Graphics.DrawLine(Pens.Black, x + 645, y + 800, x + 645, y + 920);
+                e.Graphics.DrawLine(Pens.Black, x + 705, y + 800, x + 705, y + 920);
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 601, y + 810));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 661, y + 810));
+                e.Graphics.DrawString("导尿", ptzt11, Brushes.Black, new Point(x + 721, y + 810));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 601, y + 840));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 661, y + 840));
+                e.Graphics.DrawString("导尿", ptzt11, Brushes.Black, new Point(x + 721, y + 840));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 601, y + 870));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 661, y + 870));
+                e.Graphics.DrawString("导尿", ptzt11, Brushes.Black, new Point(x + 721, y + 870));
+                e.Graphics.DrawString("有", ptzt11, Brushes.Black, new Point(x + 601, y + 900));
+                e.Graphics.DrawString("无", ptzt11, Brushes.Black, new Point(x + 661, y + 900));
+                e.Graphics.DrawString("导尿", ptzt11, Brushes.Black, new Point(x + 721, y + 900));
+                e.Graphics.DrawLine(Pens.Black, x + 780, y + 740, x + 780, y + 920);
+                y = 20 - 120;
+                e.Graphics.DrawString("其他特殊情况及处理：", ptzt11, Brushes.Black, new Point(x + 35, y + 980));
+                e.Graphics.DrawString("麻醉医生签字：", ptzt11, Brushes.Black, new Point(x + 505, y + 1070));//y=1080
+                e.Graphics.DrawString("注:麻醉术后观察记录要求在术后24小时完成，若无麻醉相关并发症发生，观察记录一次即可；麻醉术后镇痛观察", ptzt10, Brushes.Black, new Point(x + 35, y + 1100));//y=1110
+                e.Graphics.DrawString("记录需观察两天，每天一次；若发现有麻醉相关并发症，应及时通知经治医师共同处理，并继续观察至病情好转", ptzt10, Brushes.Black, new Point(x + 35, y + 1130));//y=1140
+                e.Graphics.DrawString("为止。记录时请在观察项目下打勾即可", ptzt10, Brushes.Black, new Point(x + 35, y + 1160));//y=1170
+                e.Graphics.DrawString("镇痛评分:向患者充分介绍VAS的相关知识，记录相应时点的VAS值。评分标准：0分 无痛；10分 强烈疼痛；", ptzt10, Brushes.Black, new Point(x + 35, y + 1190));//y=1200
+                e.Graphics.DrawString("1-3分 轻度疼痛；4-6分 中度疼痛；7-10分 重度疼痛。", ptzt10, Brushes.Black, new Point(x + 35, y + 1220));//y=1230
+                                                                                                                             //数据
 
 
-            e.Graphics.DrawString(dt.Rows[0]["xueya"].ToString(), ptzt11, Brushes.Black, x + 172, y + 100);//呼吸每分钟
-            e.Graphics.DrawString(dt.Rows[0]["bidaoguan"].ToString(), ptzt11, Brushes.Black, x + 160, y + 130);//导管
+                y = 20;
+                x = 70;
+                //for (int a = 0; a < dt.Rows.Count; a++)  //  a行 b列
+                //{
 
-            e.Graphics.DrawString(dt.Rows[0]["mianzhao"].ToString(), ptzt11, Brushes.Black, x + 301, y + 130);//面罩
-                
-                
-                    string cd = dt.Rows[0]["fuxuankuang"].ToString();
-                    for (int i = 0; i < cd.Length; i++)
+
+
+                e.Graphics.DrawString(dt.Rows[0]["huli"].ToString(), ptzt11, Brushes.Black, x + 35, y + 28);//麻醉后
+
+                e.Graphics.DrawString(dt.Rows[0]["tiwei"].ToString(), ptzt11, Brushes.Black, x + 100, y + 50);//体位
+
+
+                e.Graphics.DrawString(dt.Rows[0]["xueya"].ToString(), ptzt11, Brushes.Black, x + 172, y + 80);//呼吸每分钟
+                e.Graphics.DrawString(dt.Rows[0]["bidaoguan"].ToString(), ptzt11, Brushes.Black, x + 155, y + 110);//导管
+
+                e.Graphics.DrawString(dt.Rows[0]["mianzhao"].ToString(), ptzt11, Brushes.Black, x + 301, y + 110);//面罩
+
+
+                string cd = dt.Rows[0]["fuxuankuang"].ToString();
+                for (int i = 0; i < cd.Length; i++)
+                {
+                    string b = cd.Substring(i, 1);
+                    string sj = b;
+                    if (sj == "1")
                     {
-                        string b = cd.Substring(i, 1);
-                        string sj = b;
-                        if (sj == "1")
-                        {
-                            e.Graphics.DrawRectangle(Pens.Black, x + 100, y + 165, 10, 10);
-                            e.Graphics.DrawLine(pblue2, x + 100, y + 170, x + 105, y + 175);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
-                            e.Graphics.DrawLine(pblue2, x + 105, y + 175, x + 110, y + 165);
-                            
-                        }
-                        else if (sj == "2")
-                        {
-                            e.Graphics.DrawRectangle(Pens.Black, x + 170, y + 195, 10, 10);
-                            e.Graphics.DrawLine(pblue2, x + 170, y + 200, x + 175, y + 205);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
-                            e.Graphics.DrawLine(pblue2, x + 175, y + 205, x + 180, y + 195);
-                        }
-                        else if (sj == "3")
-                        {
-                            e.Graphics.DrawRectangle(Pens.Black, x + 110, y + 225, 10, 10);
-                            e.Graphics.DrawLine(pblue2, x + 110, y + 230, x + 115, y + 235);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
-                            e.Graphics.DrawLine(pblue2, x + 115, y + 235, x + 120, y + 225);
-                        }
-                        else if (sj == "4")
-                        {
-                            e.Graphics.DrawRectangle(Pens.Black, x + 220, y + 255, 10, 10);
-                            e.Graphics.DrawLine(pblue2, x + 220, y + 260, x + 225, y + 265);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
-                            e.Graphics.DrawLine(pblue2, x + 225, y + 265, x + 230, y + 255);
-                        }
-                        else if (sj == "5")
-                        {
-                            e.Graphics.DrawRectangle(Pens.Black, x + 360, y + 285, 10, 10);
-                            e.Graphics.DrawLine(pblue2, x + 360, y + 290, x + 365, y + 295);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
-                            e.Graphics.DrawLine(pblue2, x + 365, y + 295, x + 370, y + 285);
-                        }
-                        else if (sj == "6")
-                        {
-                            e.Graphics.DrawRectangle(Pens.Black, x + 90, y + 315, 10, 10);
-                            e.Graphics.DrawLine(pblue2, x + 90, y + 320, x + 95, y + 325);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
-                            e.Graphics.DrawLine(pblue2, x + 95, y + 325, x + 100, y + 315);
-                        }
-                    }
+                        e.Graphics.DrawRectangle(Pens.Black, x + 100, y + 145, 10, 10);
+                        e.Graphics.DrawLine(pblue2, x + 100, y + 150, x + 105, y + 155);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
+                        e.Graphics.DrawLine(pblue2, x + 105, y + 155, x + 110, y + 145);
 
-                    e.Graphics.DrawString(dt.Rows[0]["qita"].ToString(), ptzt11, Brushes.Black, x + 101, y + 310);//其他
-    
-           
-                    
-              
-        
-               // if (y+310 > 800)
-               // {
-                    e.HasMorePages = true;
-                    fy = fy + 1;
-                    x = 0; y = 0;
-                    return;
-               // }
-      
+                    }
+                    else if (sj == "2")
+                    {
+                        e.Graphics.DrawRectangle(Pens.Black, x + 170, y + 175, 10, 10);
+                        e.Graphics.DrawLine(pblue2, x + 170, y + 180, x + 175, y + 185);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
+                        e.Graphics.DrawLine(pblue2, x + 175, y + 185, x + 180, y + 175);
+                    }
+                    else if (sj == "3")
+                    {
+                        e.Graphics.DrawRectangle(Pens.Black, x + 110, y + 205, 10, 10);
+                        e.Graphics.DrawLine(pblue2, x + 110, y + 210, x + 115, y + 215);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
+                        e.Graphics.DrawLine(pblue2, x + 115, y + 215, x + 120, y + 205);
+                    }
+                    else if (sj == "4")
+                    {
+                        e.Graphics.DrawRectangle(Pens.Black, x + 220, y + 235, 10, 10);
+                        e.Graphics.DrawLine(pblue2, x + 220, y + 240, x + 225, y + 245);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
+                        e.Graphics.DrawLine(pblue2, x + 225, y + 245, x + 230, y + 235);
+                    }
+                    else if (sj == "5")
+                    {
+                        e.Graphics.DrawRectangle(Pens.Black, x + 360, y + 265, 10, 10);
+                        e.Graphics.DrawLine(pblue2, x + 360, y + 270, x + 365, y + 275);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
+                        e.Graphics.DrawLine(pblue2, x + 365, y + 275, x + 370, y + 265);
+                    }
+                    else if (sj == "6")
+                    {
+                        e.Graphics.DrawRectangle(Pens.Black, x + 90, y + 295, 10, 10);
+                        e.Graphics.DrawLine(pblue2, x + 90, y + 300, x + 95, y + 305);//第一个X调整下点，第二个X调整上点，第一个Y调整下点，第二个Y调整上点
+                        e.Graphics.DrawLine(pblue2, x + 95, y + 305, x + 100, y + 295);
+                    }
+                }
+
+                e.Graphics.DrawString(dt.Rows[0]["qita"].ToString(), ptzt11, Brushes.Black, x + 101, y + 290);//其他
+
+
+
+
+
+                // if (y+310 > 800)
+                // {
+                e.HasMorePages = true;
+                fy = fy + 1;
+                x = 0; y = 0;
+                return;
+                // }
+
             }
             #endregion
             //else 
@@ -10771,10 +11166,10 @@ namespace main
                 e.Graphics.DrawString("床号：" + txtBednumber.Controls[0].Text, ptzt8, Brushes.Black, new Point(160 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(190 + x, Y_unLine), new Point(230 + x, Y_unLine));
                 e.Graphics.DrawString("住院号：" + txtZhuYuanHao.Controls[0].Text, ptzt8, Brushes.Black, new Point(240 + x, YY));
-                e.Graphics.DrawLine(ptp, new Point(280+ x, Y_unLine), new Point(390 + x, Y_unLine));
-                e.Graphics.DrawString("日期：" + dtOtime.Value.ToString("yyyy年HH月dd日"), ptzt8, Brushes.Black, new Point(420 + x, YY));
+                e.Graphics.DrawLine(ptp, new Point(280 + x, Y_unLine), new Point(390 + x, Y_unLine));
+                e.Graphics.DrawString("日期：" + dtOdate.Text, ptzt8, Brushes.Black, new Point(420 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(450 + x, Y_unLine), new Point(530 + x, Y_unLine));
-                e.Graphics.DrawString("医疗费：" + dtOtime.Value.ToString("yyyy年HH月dd日"), ptzt8, Brushes.Black, new Point(550 + x, YY));
+                e.Graphics.DrawString("医疗费：" + txtYiLiaoFei.Controls[0].Text, ptzt8, Brushes.Black, new Point(550 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(590 + x, Y_unLine), new Point(730 + x, Y_unLine));
                 //↑画标题一块的东西
                 Y_unLine = YY + 15; YY = YY + 20;
@@ -10790,7 +11185,7 @@ namespace main
                 e.Graphics.DrawLine(ptp, new Point(50 + x, Y_unLine), new Point(150 + x, Y_unLine));
                 e.Graphics.DrawString("性别  " + txtSex.Controls[0].Text, ptzt8, Brushes.Black, new Point(160 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(185 + x, Y_unLine), new Point(220 + x, Y_unLine));
-                e.Graphics.DrawString("年龄  " + txtAge.Controls[0].Text+ "岁", ptzt8, Brushes.Black, new Point(230 + x, YY));
+                e.Graphics.DrawString("年龄  " + txtAge.Controls[0].Text, ptzt8, Brushes.Black, new Point(230 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(255 + x, Y_unLine), new Point(290 + x, Y_unLine));
                 e.Graphics.DrawString("身高  " + txtHeight.Controls[0].Text, ptzt8, Brushes.Black, new Point(300 + x, YY));
                 e.Graphics.DrawLine(ptp, new Point(325 + x, Y_unLine), new Point(360 + x, Y_unLine));
@@ -10865,7 +11260,7 @@ namespace main
                 DateTime dtnow = new DateTime();//打印截止时间判断        
                 DateTime pagetime = new DateTime();
                 DataTable dtMax = bll.GetMaxPoint(mzjldID);
-                if (dtMax.Rows[0][0].ToString().IsNullOrEmpty())
+                if (dtMax.Rows[0][0].ToString() == "")
                     dtnow = DateTime.Now;
                 else
                     dtnow = Convert.ToDateTime(dtMax.Rows[0][0]);
@@ -10911,296 +11306,296 @@ namespace main
                     e.Graphics.DrawLine(pxuxian, new PointF(192 + x + 12 * i, YY + y), new Point(192 + x + 12 * i, YY + 27 * 12 + y));
 
                 }
-                e.Graphics.DrawString("监\n\n\n测", ptzt8, Brushes.Black, new Point(21 + x, YY+10));
-               // e.Graphics.DrawString("用\n\n\n\n\n\n药", ptzt7, Brushes.Black, new Point(22 + x, YY + 42));
-               // e.Graphics.DrawString("输\n\n液\n\n输\n\n血", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 13 + 2));
-               //// e.Graphics.DrawString("出\n\n量", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 20 + 2));
-               // //e.Graphics.DrawString("失血量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 2));
-               // //e.Graphics.DrawString("尿  量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 15));
-               // //e.Graphics.DrawString("入  量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 27));
-               // e.Graphics.DrawString("\n监\n\n\n\n测\n\n\n\n项\n\n\n\n目", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 22 + 2));
+                e.Graphics.DrawString("监\n\n\n测", ptzt8, Brushes.Black, new Point(21 + x, YY + 10));
+                // e.Graphics.DrawString("用\n\n\n\n\n\n药", ptzt7, Brushes.Black, new Point(22 + x, YY + 42));
+                // e.Graphics.DrawString("输\n\n液\n\n输\n\n血", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 13 + 2));
+                //// e.Graphics.DrawString("出\n\n量", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 20 + 2));
+                // //e.Graphics.DrawString("失血量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 2));
+                // //e.Graphics.DrawString("尿  量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 15));
+                // //e.Graphics.DrawString("入  量ml", ptzt7, Brushes.Black, new Point(37 + x, YY + 12 * 20 + 27));
+                // e.Graphics.DrawString("\n监\n\n\n\n测\n\n\n\n项\n\n\n\n目", ptzt7, Brushes.Black, new Point(22 + x, YY + 12 * 22 + 2));
 
-               // //e.Graphics.DrawString("SP02(%)", ptzt7, Brushes.Black, new Point(40 + x, YY + 12 * 34 + 2));
-               // e.Graphics.DrawString("02 (吸入)", ptzt7, Brushes.Black, new Point(40 + x, YY + 2));
-               // #endregion
-               // #region 打印气体
-               // ArrayList sssQT = new ArrayList();
-               // int qti = 0;   //起步位置
-               // foreach (adims_MODEL.mzqt mzqt in mzqtList)
-               // {
-               //     if (sssQT.Contains(mzqt.Qtname))
-               //         qti = qti - 1;
-               //     //if (!sssQT.Contains(mzqt.Qtname))
-               //     //    e.Graphics.DrawString(mzqt.Qtname, mzqt.Qtname.Length < 7 ? ptzt6 : ptzt5, Brushes.Black, new PointF(32 + x, YY + qti * 12 + y + 3));
+                // //e.Graphics.DrawString("SP02(%)", ptzt7, Brushes.Black, new Point(40 + x, YY + 12 * 34 + 2));
+                // e.Graphics.DrawString("02 (吸入)", ptzt7, Brushes.Black, new Point(40 + x, YY + 2));
+                // #endregion
+                // #region 打印气体
+                // ArrayList sssQT = new ArrayList();
+                // int qti = 0;   //起步位置
+                // foreach (adims_MODEL.mzqt mzqt in mzqtList)
+                // {
+                //     if (sssQT.Contains(mzqt.Qtname))
+                //         qti = qti - 1;
+                //     //if (!sssQT.Contains(mzqt.Qtname))
+                //     //    e.Graphics.DrawString(mzqt.Qtname, mzqt.Qtname.Length < 7 ? ptzt6 : ptzt5, Brushes.Black, new PointF(32 + x, YY + qti * 12 + y + 3));
 
-               //     if (mzqt.Bz == 2)
-               //     {
-               //         TimeSpan t = new TimeSpan();
-               //         TimeSpan t1 = new TimeSpan();
-               //         t1 = mzqt.Jssj - pagetime;
-               //         t = mzqt.Sysj - pagetime;
-               //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120) + x;
-               //         int y1 = YY + qti * 12 + 4;
-               //         int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120) + x;
-               //         //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
-               //         //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
-               //         if (x1 > 120 + x && x1 < 780 + x)
-               //         {
-               //             e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt6, Brushes.Blue, new Point(x1 + 3, y + y1 - 6));
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + y), new Point(x1 - 3, y1 + 6 + y), new Point(x1 + 3, y1 + 6 + y) });
-               //         }
-               //         if (x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + y), new Point(x2 - 3, y1 + 6 + y), new Point(x2 + 3, y1 + 6 + y) });
-               //         }
-               //         if (x1 > 120 + x && x1 < 780 + x && x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(x2, y1 + y + 3));
-               //         }
-               //         if (x1 > 120 + x && x1 < 780 + x && x2 > 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-               //         }
-               //         if (x1 < 120 + x && x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2, y1 + y + 3));
-               //         }
-               //         if (x1 < 120 + x && x2 > 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-               //         }
-               //     }
-               //     qti++;
-               //     sssQT.Add(mzqt.Qtname);
-               // }
+                //     if (mzqt.Bz == 2)
+                //     {
+                //         TimeSpan t = new TimeSpan();
+                //         TimeSpan t1 = new TimeSpan();
+                //         t1 = mzqt.Jssj - pagetime;
+                //         t = mzqt.Sysj - pagetime;
+                //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120) + x;
+                //         int y1 = YY + qti * 12 + 4;
+                //         int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120) + x;
+                //         //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
+                //         //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
+                //         if (x1 > 120 + x && x1 < 780 + x)
+                //         {
+                //             e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt6, Brushes.Blue, new Point(x1 + 3, y + y1 - 6));
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + y), new Point(x1 - 3, y1 + 6 + y), new Point(x1 + 3, y1 + 6 + y) });
+                //         }
+                //         if (x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + y), new Point(x2 - 3, y1 + 6 + y), new Point(x2 + 3, y1 + 6 + y) });
+                //         }
+                //         if (x1 > 120 + x && x1 < 780 + x && x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(x2, y1 + y + 3));
+                //         }
+                //         if (x1 > 120 + x && x1 < 780 + x && x2 > 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                //         }
+                //         if (x1 < 120 + x && x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2, y1 + y + 3));
+                //         }
+                //         if (x1 < 120 + x && x2 > 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                //         }
+                //     }
+                //     qti++;
+                //     sssQT.Add(mzqt.Qtname);
+                // }
 
-               // #endregion
-               // #region 打印全麻药
-               // ArrayList sssYDY = new ArrayList();
-               // int ydyi = 1;
-               // foreach (adims_MODEL.mzyt mzyt in ydyList) //打印全麻药
-               // {
-               //     if (sssYDY.Contains(mzyt.Ytname))
-               //         ydyi = ydyi - 1;
-               //     if (!sssYDY.Contains(mzyt.Ytname))
-               //         e.Graphics.DrawString(mzyt.Ytname + " " + mzyt.Dw, mzyt.Ytname.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + ydyi * 12 + y + 3));
+                // #endregion
+                // #region 打印全麻药
+                // ArrayList sssYDY = new ArrayList();
+                // int ydyi = 1;
+                // foreach (adims_MODEL.mzyt mzyt in ydyList) //打印全麻药
+                // {
+                //     if (sssYDY.Contains(mzyt.Ytname))
+                //         ydyi = ydyi - 1;
+                //     if (!sssYDY.Contains(mzyt.Ytname))
+                //         e.Graphics.DrawString(mzyt.Ytname + " " + mzyt.Dw, mzyt.Ytname.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + ydyi * 12 + y + 3));
 
-               //     if (mzyt.Cxyy == false)
-               //     {
-               //         TimeSpan t = new TimeSpan();
-               //         t = mzyt.Sysj - pagetime;
-               //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               //         int y1 = YY + ydyi * 12 + 4;
-               //         if (x1 > 100 + x && x1 < 700 + x)
-               //         {
-               //             e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-               //         }
-               //     }
-               //     if (mzyt.Cxyy == true)
-               //     {
-               //         TimeSpan t = new TimeSpan();
-               //         TimeSpan t1 = new TimeSpan();
-               //         t1 = mzyt.Jssj - pagetime;
-               //         t = mzyt.Sysj - pagetime;
-               //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               //         int y1 = YY + ydyi * 12 + 4;
-               //         int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
-               //         if (x1 > 120 + x && x1 < 780 + x)
-               //         {
-               //             e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-               //         }
-               //         if (x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2 + x, y1 + y), new Point(x2 - 3 + x, y1 + 6 + y), new Point(x2 + 3 + x, y1 + 6 + y) });
-               //         }
-               //         if (x1 > 120 + x && x1 < 780 + x && x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
-               //         }
-               //         if (x1 > 120 + x && x1 < 780 + x && x2 > 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-               //         }
-               //         if (x1 < 120 + x && x2 > 120 + x && x2 < 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
-               //         }
-               //         if (x1 < 120 + x && x2 > 780 + x)
-               //         {
-               //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-               //         }
-               //     }
-               //     ydyi++;
-               //     sssYDY.Add(mzyt.Ytname);
-               // }
-               // #endregion
+                //     if (mzyt.Cxyy == false)
+                //     {
+                //         TimeSpan t = new TimeSpan();
+                //         t = mzyt.Sysj - pagetime;
+                //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                //         int y1 = YY + ydyi * 12 + 4;
+                //         if (x1 > 100 + x && x1 < 700 + x)
+                //         {
+                //             e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                //         }
+                //     }
+                //     if (mzyt.Cxyy == true)
+                //     {
+                //         TimeSpan t = new TimeSpan();
+                //         TimeSpan t1 = new TimeSpan();
+                //         t1 = mzyt.Jssj - pagetime;
+                //         t = mzyt.Sysj - pagetime;
+                //         int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                //         int y1 = YY + ydyi * 12 + 4;
+                //         int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
+                //         if (x1 > 120 + x && x1 < 780 + x)
+                //         {
+                //             e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                //         }
+                //         if (x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2 + x, y1 + y), new Point(x2 - 3 + x, y1 + 6 + y), new Point(x2 + 3 + x, y1 + 6 + y) });
+                //         }
+                //         if (x1 > 120 + x && x1 < 780 + x && x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
+                //         }
+                //         if (x1 > 120 + x && x1 < 780 + x && x2 > 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                //         }
+                //         if (x1 < 120 + x && x2 > 120 + x && x2 < 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
+                //         }
+                //         if (x1 < 120 + x && x2 > 780 + x)
+                //         {
+                //             e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                //         }
+                //     }
+                //     ydyi++;
+                //     sssYDY.Add(mzyt.Ytname);
+                // }
+                // #endregion
 
-               // #region 打印局麻药
-               // //int jti = 20;  //打印局麻药
-               // //ArrayList sssJMY = new ArrayList();
-               // //foreach (adims_MODEL.jtytsx jt in jmyList)
-               // //{
-               // //    if (sssJMY.Contains(jt.Name))
-               // //        jti = jti - 1;
-               // //    if (!sssJMY.Contains(jt.Name))
-               // //        e.Graphics.DrawString(jt.Name + " " + jt.Dw, jt.Name.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + jti * 12 + y + 2));
+                // #region 打印局麻药
+                // //int jti = 20;  //打印局麻药
+                // //ArrayList sssJMY = new ArrayList();
+                // //foreach (adims_MODEL.jtytsx jt in jmyList)
+                // //{
+                // //    if (sssJMY.Contains(jt.Name))
+                // //        jti = jti - 1;
+                // //    if (!sssJMY.Contains(jt.Name))
+                // //        e.Graphics.DrawString(jt.Name + " " + jt.Dw, jt.Name.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + jti * 12 + y + 2));
 
-               // //    TimeSpan t = new TimeSpan();
-               // //    t = jt.Kssj - pagetime;
-               // //    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               // //    int y1 = YY + jti * 12 + 4;
-               // //    if (x1 > 120 + x && x1 < 780 + x)
-               // //    {
-               // //        e.Graphics.DrawString(jt.Jl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-               // //        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-               // //    }
-               // //    jti++;
-               // //    sssJMY.Add(jt.Name);
-               // //}
-               // #endregion
+                // //    TimeSpan t = new TimeSpan();
+                // //    t = jt.Kssj - pagetime;
+                // //    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                // //    int y1 = YY + jti * 12 + 4;
+                // //    if (x1 > 120 + x && x1 < 780 + x)
+                // //    {
+                // //        e.Graphics.DrawString(jt.Jl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                // //        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                // //    }
+                // //    jti++;
+                // //    sssJMY.Add(jt.Name);
+                // //}
+                // #endregion
 
-               // #region 打印输液
-               // int syi = 13;
-               // ArrayList sssSY = new ArrayList();
-               // foreach (adims_MODEL.shuye sx in shuyeList)
-               // {
-               //     if (sssSY.Contains(sx.Name))
-               //         syi = syi - 1;
-               //     if (!sssSY.Contains(sx.Name))
-               //         e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + syi * 12 + y + 3));
+                // #region 打印输液
+                // int syi = 13;
+                // ArrayList sssSY = new ArrayList();
+                // foreach (adims_MODEL.shuye sx in shuyeList)
+                // {
+                //     if (sssSY.Contains(sx.Name))
+                //         syi = syi - 1;
+                //     if (!sssSY.Contains(sx.Name))
+                //         e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + syi * 12 + y + 3));
 
-               //     TimeSpan t = new TimeSpan();
-               //     TimeSpan t1 = new TimeSpan();
-               //     t1 = pagetime.AddMinutes(60 * jcsjjg) - pagetime;
-               //     t = sx.Kssj - pagetime;
-               //     //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + syi * 12 + 2);
-               //     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               //     int y1 = YY + syi * 12 + 5;
-               //     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
+                //     TimeSpan t = new TimeSpan();
+                //     TimeSpan t1 = new TimeSpan();
+                //     t1 = pagetime.AddMinutes(60 * jcsjjg) - pagetime;
+                //     t = sx.Kssj - pagetime;
+                //     //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + syi * 12 + 2);
+                //     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                //     int y1 = YY + syi * 12 + 5;
+                //     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
 
-               //     if (x1 > 120 + x && x1 < 780 + x)
-               //     {
-               //         e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 8);
-               //         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
-               //         new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
-               //     }
-               //     syi++;
-               //     sssSY.Add(sx.Name);
-               // }
+                //     if (x1 > 120 + x && x1 < 780 + x)
+                //     {
+                //         e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 8);
+                //         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
+                //         new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
+                //     }
+                //     syi++;
+                //     sssSY.Add(sx.Name);
+                // }
 
-               // #endregion
+                // #endregion
 
-               // #region 打印输血
-               // //打印输血
-               // int sxi = 18;
-               // ArrayList sssSX = new ArrayList();
-               // foreach (adims_MODEL.shuxue sx in shuxueList)
-               // {
-               //     if (sssSX.Contains(sx.Name))
-               //         sxi = sxi - 1;
-               //     if (!sssSX.Contains(sx.Name))
-               //         e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + sxi * 12 + y + 3));
+                // #region 打印输血
+                // //打印输血
+                // int sxi = 18;
+                // ArrayList sssSX = new ArrayList();
+                // foreach (adims_MODEL.shuxue sx in shuxueList)
+                // {
+                //     if (sssSX.Contains(sx.Name))
+                //         sxi = sxi - 1;
+                //     if (!sssSX.Contains(sx.Name))
+                //         e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + sxi * 12 + y + 3));
 
-               //     TimeSpan t = new TimeSpan();
-               //     TimeSpan t1 = new TimeSpan();
-               //     t1 = pagetime.AddHours(jcsjjg) - pagetime;
-               //     t = sx.Kssj - pagetime;
-               //     //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + sxi * 12 + 2);
-               //     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
-               //     int y1 = YY + sxi * 12 + 5;
-               //     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
-               //     if (x1 > 120 + x && x1 < 780 + x)
-               //     {
-               //         e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 6);
-               //         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
-               //         new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
-               //     }
-               //     sxi++;
-               //     sssSX.Add(sx.Name);
-               // }
-               // #endregion
-               // #region<<打印失血>>
-               // //e.Graphics.DrawString("失 血(ml)", ptzt7, Brushes.Black, x + 37, YY + 15 * 12 + y + 3);
-               // int cx_count = 0;
-               // foreach (adims_MODEL.clcxqt cx in cxList)
-               // {
-               //     if (cx.V > 0)
-               //     {
-               //         if (cx.D >= pagetime && cx.D <= pagetime.AddMinutes(60 * jcsjjg))
-               //         {
-               //             TimeSpan t = new TimeSpan();
-               //             t = cx.D - pagetime;
+                //     TimeSpan t = new TimeSpan();
+                //     TimeSpan t1 = new TimeSpan();
+                //     t1 = pagetime.AddHours(jcsjjg) - pagetime;
+                //     t = sx.Kssj - pagetime;
+                //     //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + sxi * 12 + 2);
+                //     int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 120);
+                //     int y1 = YY + sxi * 12 + 5;
+                //     int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 11 / jcsjjg + 120);
+                //     if (x1 > 120 + x && x1 < 780 + x)
+                //     {
+                //         e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 6);
+                //         e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
+                //         new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
+                //     }
+                //     sxi++;
+                //     sssSX.Add(sx.Name);
+                // }
+                // #endregion
+                // #region<<打印失血>>
+                // //e.Graphics.DrawString("失 血(ml)", ptzt7, Brushes.Black, x + 37, YY + 15 * 12 + y + 3);
+                // int cx_count = 0;
+                // foreach (adims_MODEL.clcxqt cx in cxList)
+                // {
+                //     if (cx.V > 0)
+                //     {
+                //         if (cx.D >= pagetime && cx.D <= pagetime.AddMinutes(60 * jcsjjg))
+                //         {
+                //             TimeSpan t = new TimeSpan();
+                //             t = cx.D - pagetime;
 
-               //             float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 132);
-               //             float jhy = YY + 12 * 20;
-               //             //if (cx_count % 5 == 0)
-               //             {
-               //                 if (cx.V.ToString().Length > 3)
-               //                 {
-               //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 16, 9);
-               //                 }
-               //                 else
-               //                 {
-               //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 9, 9);
-               //                 }
-               //                 e.Graphics.DrawString(cx.V.ToString(), cx.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx + 5, jhy));
+                //             float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 132);
+                //             float jhy = YY + 12 * 20;
+                //             //if (cx_count % 5 == 0)
+                //             {
+                //                 if (cx.V.ToString().Length > 3)
+                //                 {
+                //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 16, 9);
+                //                 }
+                //                 else
+                //                 {
+                //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 9, 9);
+                //                 }
+                //                 e.Graphics.DrawString(cx.V.ToString(), cx.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx + 5, jhy));
 
-               //             }
-               //             cx_count++;
-               //         }
-               //     }
-               //     else
-               //     {
-               //         //int xxx = 112;
-               //         //int jhyyy = 445;
-               //         //e.Graphics.DrawLine(ptp, new Point(xxx, jhyyy), new Point(xxx + 30, jhyyy - 10));
-               //     }
-               // }
-               // #endregion
-               // //e.Graphics.DrawString("引流量(ml)", ptzt7, Brushes.Black, x + 37, YY + 16 * 12 + y + 3);
+                //             }
+                //             cx_count++;
+                //         }
+                //     }
+                //     else
+                //     {
+                //         //int xxx = 112;
+                //         //int jhyyy = 445;
+                //         //e.Graphics.DrawLine(ptp, new Point(xxx, jhyyy), new Point(xxx + 30, jhyyy - 10));
+                //     }
+                // }
+                // #endregion
+                // //e.Graphics.DrawString("引流量(ml)", ptzt7, Brushes.Black, x + 37, YY + 16 * 12 + y + 3);
 
-               // #region<<打印入量>>
+                // #region<<打印入量>>
 
-               // int cn_count = 0;
-               // foreach (adims_MODEL.clcxqt q in yllList)
-               // {
-               //     if (q.V > 0)
-               //     {
-               //         if (q.D >= pagetime && q.D <= pagetime.AddMinutes(60 * jcsjjg))
-               //         {
-               //             TimeSpan t = new TimeSpan();
-               //             t = q.D - pagetime;
-               //             float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 132);
-               //             float jhy = YY + 22 * 12;
-               //             //if (cn_count % 5 == 0)
-               //             {
-               //                 if (q.V.ToString().Length > 3)
-               //                 {
-               //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 16, 9);
-               //                 }
-               //                 else
-               //                 {
-               //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 9, 9);
-               //                 }
-               //                 e.Graphics.DrawString(q.V.ToString(), q.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx + 5, jhy));
+                // int cn_count = 0;
+                // foreach (adims_MODEL.clcxqt q in yllList)
+                // {
+                //     if (q.V > 0)
+                //     {
+                //         if (q.D >= pagetime && q.D <= pagetime.AddMinutes(60 * jcsjjg))
+                //         {
+                //             TimeSpan t = new TimeSpan();
+                //             t = q.D - pagetime;
+                //             float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 10 / jcsjjg + 132);
+                //             float jhy = YY + 22 * 12;
+                //             //if (cn_count % 5 == 0)
+                //             {
+                //                 if (q.V.ToString().Length > 3)
+                //                 {
+                //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 16, 9);
+                //                 }
+                //                 else
+                //                 {
+                //                     e.Graphics.FillRectangle(Brushes.Pink, jhx + 3, jhy, 9, 9);
+                //                 }
+                //                 e.Graphics.DrawString(q.V.ToString(), q.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx + 5, jhy));
 
-               //             }
-               //             cn_count++;
-               //         }
-               //     }
-               //     else
-               //     {
-               //         //int xxx = 112;
-               //         //int jhyyy = 469;
-               //         //e.Graphics.DrawLine(ptp, new Point(xxx, jhyyy), new Point(xxx + 30, jhyyy - 10));
-               //     }
-               // }
-               // #endregion
-               e.Graphics.DrawString("尿量(ml)", ptzt7, Brushes.Black, x + 37, YY + 5 * 12 + y + 3);
+                //             }
+                //             cn_count++;
+                //         }
+                //     }
+                //     else
+                //     {
+                //         //int xxx = 112;
+                //         //int jhyyy = 469;
+                //         //e.Graphics.DrawLine(ptp, new Point(xxx, jhyyy), new Point(xxx + 30, jhyyy - 10));
+                //     }
+                // }
+                // #endregion
+                e.Graphics.DrawString("尿量(ml)", ptzt7, Brushes.Black, x + 37, YY + 5 * 12 + y + 3);
 
-               // #region<<打尿量>>
+                // #region<<打尿量>>
 
                 int nl_count = 0;
                 foreach (adims_MODEL.clcxqt cl in cnList)
@@ -11254,7 +11649,7 @@ namespace main
                         if (jc == j.Sy)
                         {
 
-                            if (j.D >= pagetime && j.D <= pagetime.AddMinutes(48* jcsjjg))
+                            if (j.D >= pagetime && j.D <= pagetime.AddMinutes(48 * jcsjjg))
                             {
                                 TimeSpan t = new TimeSpan();
                                 t = j.D - pagetime;
@@ -11321,40 +11716,40 @@ namespace main
                 }
                 ///打印显示体温
                 //jhi++;
-               int tw_count = 0;
-               if (checktw.Checked == false)
-               {
-                   e.Graphics.DrawString("体温", ptzt7, Brushes.Black, new PointF(35 + x, YY + jhi * 12 + y));
-                   foreach (adims_MODEL.tw_point p in twList)
-                   {
-                       if (p.V > 0)
-                       {
-                           if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
-                           {
-                               TimeSpan t = new TimeSpan();
-                               t = p.D - pagetime;
-                               float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                               float jhy = YY + jhi * 12;
-                               if (tw_count % 5 == 0)
-                               {
-                                   if (p.V.ToString().Length > 3)
-                                   {
-                                       e.Graphics.FillRectangle(Brushes.Pink, jhx - 3 + x, jhy, 16, 9);
-                                   }
-                                   else
-                                   {
-                                       e.Graphics.FillRectangle(Brushes.Pink, jhx - 3 + x, jhy, 9, 9);
-                                   }
-                                   e.Graphics.DrawString(p.V.ToString(), p.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx - 4 + x, jhy));
+                int tw_count = 0;
+                if (checktw.Checked == false)
+                {
+                    e.Graphics.DrawString("体温", ptzt7, Brushes.Black, new PointF(35 + x, YY + jhi * 12 + y));
+                    foreach (adims_MODEL.tw_point p in twList)
+                    {
+                        if (p.V > 0)
+                        {
+                            if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
+                            {
+                                TimeSpan t = new TimeSpan();
+                                t = p.D - pagetime;
+                                float jhx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                                float jhy = YY + jhi * 12;
+                                if (tw_count % 5 == 0)
+                                {
+                                    if (p.V.ToString().Length > 3)
+                                    {
+                                        e.Graphics.FillRectangle(Brushes.Pink, jhx - 3 + x, jhy, 16, 9);
+                                    }
+                                    else
+                                    {
+                                        e.Graphics.FillRectangle(Brushes.Pink, jhx - 3 + x, jhy, 9, 9);
+                                    }
+                                    e.Graphics.DrawString(p.V.ToString(), p.V.ToString().Length > 3 ? ptzt6 : ptzt7, Brushes.Black, new PointF(jhx - 4 + x, jhy));
 
-                               }
-                               tw_count++;
-                           }
-                       }
+                                }
+                                tw_count++;
+                            }
+                        }
 
 
-                   }
-               }
+                    }
+                }
 
                 #endregion
                 //foreach (adims_MODEL.jhxm j in jhxmValue)
@@ -11389,56 +11784,56 @@ namespace main
                 //txtxuet.Text = Convert.ToString(dtMzjld.Rows[0]["XUETANG"]);
                 #region 打印血气
                 //Pen dakred2 = new Pen(Brushes.DarkRed, 2);
-                //if (tXTPH.Text.Trim().IsNullOrEmpty())
+                //if (tXTPH.Text.Trim() == "")
                 //    tXTPH.Text = " / ";
                 //int yyyy = YY + 27 * 12 + 1;
                 //e.Graphics.DrawString("PH： " + tXTPH.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtpco2.Text.Trim().IsNullOrEmpty())
+                //if (txtpco2.Text.Trim() == "")
                 //    txtpco2.Text = " /";
                 //e.Graphics.DrawString("PCO2:" + txtpco2.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtpo2.Text.Trim().IsNullOrEmpty())
+                //if (txtpo2.Text.Trim() == "")
                 //    txtpo2.Text = "/";
                 //e.Graphics.DrawString("PO2：" + txtpo2.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtbe.Text.Trim().IsNullOrEmpty())
+                //if (txtbe.Text.Trim() == "")
                 //    txtbe.Text = "/";
                 //e.Graphics.DrawString("BE： " + txtbe.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthco3.Text.Trim().IsNullOrEmpty())
+                //if (txthco3.Text.Trim() == "")
                 //    txthco3.Text = "/";
                 //e.Graphics.DrawString("HCO3:" + txthco3.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmhg/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthb.Text.Trim().IsNullOrEmpty())
+                //if (txthb.Text.Trim() == "")
                 //    txthb.Text = "/";
                 //e.Graphics.DrawString("HB： " + txthb.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("g/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtk.Text.Trim().IsNullOrEmpty())
+                //if (txtk.Text.Trim() == "")
                 //    txtk.Text = "/";
                 //e.Graphics.DrawString("K：  " + txtk.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("mmol/L", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txthct.Text.Trim().IsNullOrEmpty())
+                //if (txthct.Text.Trim() == "")
                 //    txthct.Text = "/";
                 //e.Graphics.DrawString("HCT：" + txthct.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
                 //e.Graphics.DrawString("%", ht7, Brushes.Black, new Point(745 + x, yyyy));
                 //yyyy = yyyy + 12;
-                //if (txtxuet.Text.Trim().IsNullOrEmpty())
+                //if (txtxuet.Text.Trim() == "")
                 //    txtxuet.Text = "/";
                 //e.Graphics.DrawString("血糖:" + txtxuet.Text, ht7, Brushes.DarkRed, new Point(680 + x, yyyy));
                 //e.Graphics.DrawLine(dakred2, new Point(705 + x, yyyy + 11), new Point(746 + x, yyyy + 11));
@@ -11450,7 +11845,7 @@ namespace main
                 #region//打印检测区域格子。血压体温等区域↓
                 YY = YY + 12 * 7;
                 e.Graphics.DrawLine(ptp, new Point(35 + x, YY), new Point(35 + x, YY + 240));
-                e.Graphics.DrawString("体\n温", ptzt8, Brushes.Black, new Point(21 + x, YY-10 ));
+                e.Graphics.DrawString("体\n温", ptzt8, Brushes.Black, new Point(21 + x, YY - 10));
 
                 for (int i = 0; i < 12; i++)//画横实线           
                     e.Graphics.DrawLine(ptp, new Point(192 + x, YY + 20 * i), new Point(770 + x, YY + 20 * i + y));
@@ -11500,7 +11895,7 @@ namespace main
                     {
                         if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
                         {
-                            
+
                             TimeSpan t = new TimeSpan();
                             t = p.D - pagetime;
                             float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
@@ -11558,30 +11953,30 @@ namespace main
 
                 #region  //打印脉搏
                 px = 0; py = 0;
-                if (checkmb.Checked==false)
-                foreach (adims_MODEL.point p in mboList)
-                {
-                    if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
+                if (checkmb.Checked == false)
+                    foreach (adims_MODEL.point p in mboList)
                     {
-                        TimeSpan t = new TimeSpan();
-                        t = p.D - pagetime;
-                        float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                        //float pointy = (float)((220 - p.V) * 1 + 460);
-                        float pointy = 0;
-                        if (p.V > 230)
+                        if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
                         {
-                            pointy = (float)((20) * 1 + YY);
-                            e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + x, pointy + y);
+                            TimeSpan t = new TimeSpan();
+                            t = p.D - pagetime;
+                            float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                            //float pointy = (float)((220 - p.V) * 1 + 460);
+                            float pointy = 0;
+                            if (p.V > 230)
+                            {
+                                pointy = (float)((20) * 1 + YY);
+                                e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + x, pointy + y);
+                            }
+                            else
+                                pointy = (float)((240 - p.V) * 1 + YY);
+                            e.Graphics.FillEllipse(Brushes.Blue, pointx - 2 + x, pointy - 2 + y, 5, 5);
+                            if (px != 0)
+                                e.Graphics.DrawLine(Pens.Blue, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
+                            px = pointx;
+                            py = pointy;
                         }
-                        else
-                            pointy = (float)((240 - p.V) * 1 + YY);
-                        e.Graphics.FillEllipse(Brushes.Blue, pointx - 2 + x, pointy - 2 + y, 5, 5);
-                        if (px != 0)
-                            e.Graphics.DrawLine(Pens.Blue, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
-                        px = pointx;
-                        py = pointy;
                     }
-                }
                 #endregion
 
                 #region  //打印体温
@@ -11614,77 +12009,77 @@ namespace main
                 //  }
                 #endregion
 
-                    #region  //打印呼吸
+                #region  //打印呼吸
                 px = 0; py = 0; int phuxi = 0;
                 //if (checkBoxhx.Checked == false)
                 //{
-                    string fxs = "";
-                    string tvxs = "";
-                    DataTable dtMZ_Info = bll.SelectOldPatInfo(mzjldID);
+                string fxs = "";
+                string tvxs = "";
+                DataTable dtMZ_Info = bll.SelectOldPatInfo(mzjldID);
 
-                    if (dtMZ_Info.Rows.Count > 0)
+                if (dtMZ_Info.Rows.Count > 0)
+                {
+                    if (this.toStr(dtMZ_Info.Rows[0]["jkvalue"]) != "")
                     {
-                        if (this.toStr(dtMZ_Info.Rows[0]["jkvalue"]) != "")
-                        {
-                            fxs = dtMZ_Info.Rows[0]["jkvalue"].ToString();
-                        }
-                        if (this.toStr(dtMZ_Info.Rows[0]["fzvalue"]) != "")
-                        {
-                            tvxs = dtMZ_Info.Rows[0]["fzvalue"].ToString();
-                        }
+                        fxs = dtMZ_Info.Rows[0]["jkvalue"].ToString();
                     }
-                    int dowa_sb = 0;
-                    if (checkhx.Checked == false)
+                    if (this.toStr(dtMZ_Info.Rows[0]["fzvalue"]) != "")
                     {
-                        foreach (adims_MODEL.point p in hxlList)
+                        tvxs = dtMZ_Info.Rows[0]["fzvalue"].ToString();
+                    }
+                }
+                int dowa_sb = 0;
+                if (checkhx.Checked == false)
+                {
+                    foreach (adims_MODEL.point p in hxlList)
+                    {
+                        if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
                         {
-                            if (p.D >= pagetime && p.D <= pagetime.AddMinutes(48 * jcsjjg))
+                            TimeSpan t = new TimeSpan();
+                            t = p.D - pagetime;
+
+                            float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 212);
+                            //float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                            float pointy = 0;
+                            if (p.V > 230)
                             {
-                                TimeSpan t = new TimeSpan();
-                                t = p.D - pagetime;
-
-                                float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 212);
-                                //float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                                float pointy = 0;
-                                if (p.V > 230)
-                                {
-                                    //pointy = (float)((20) * 1 + YY);
-                                    pointy = (float)((20) * 1 + YY) + y;
-                                    e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, pointx, pointy);
-                                }
-                                else
-                                    pointy = (float)((240 - p.V) * 1 + YY) + y;
-                                if (jkksTime < p.D && p.D < jkjsTime)
-                                {
-                                    //float xPlus = pointx - px; // 描点作图
-                                    //PointF p1 = new PointF(px, py);
-                                    //PointF p2 = new PointF(pointx - 2 * xPlus / 3, pointy + 6);
-                                    //PointF p3 = new PointF(pointx - xPlus / 3, pointy - 6);
-                                    //PointF p4 = new PointF(pointx, pointy);
-                                    //e.Graphics.DrawBezier(Pens.DarkCyan, p1, p2, p3, p4);
-                                    this.PaintSignMBreath2(e.Graphics, new PointF(pointx - 2, pointy - 4));
-                                    if (dowa_sb == 0)
-                                    {
-                                        e.Graphics.DrawString("TV" + tvxs + "/ " + "f" + fxs, this.Font, Brushes.DarkCyan, pointx, pointy - 13);
-
-                                        dowa_sb++;
-                                    }
-                                    //e.Graphics.DrawString("C", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
-                                }
-                                //else if (fzksTime < p.D && p.D < fzjsTime)
-                                //{
-                                //    e.Graphics.DrawString("A", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
-                                //}
-                                else
-                                    e.Graphics.DrawEllipse(Pens.DarkCyan, pointx - 2, pointy - 2, 5, 5);
-                                //if (px != 0 && (jkksTime > p.D || jkjsTime < p.D))
-                                if (px != 0)
-                                    e.Graphics.DrawLine(Pens.DarkCyan, new PointF(px, py), new PointF(pointx, pointy));
-                                px = pointx;
-                                py = pointy;
+                                //pointy = (float)((20) * 1 + YY);
+                                pointy = (float)((20) * 1 + YY) + y;
+                                e.Graphics.DrawString(p.V.ToString(), ptzt6, Brushes.Blue, pointx, pointy);
                             }
+                            else
+                                pointy = (float)((240 - p.V) * 1 + YY) + y;
+                            if (jkksTime < p.D && p.D < jkjsTime)
+                            {
+                                //float xPlus = pointx - px; // 描点作图
+                                //PointF p1 = new PointF(px, py);
+                                //PointF p2 = new PointF(pointx - 2 * xPlus / 3, pointy + 6);
+                                //PointF p3 = new PointF(pointx - xPlus / 3, pointy - 6);
+                                //PointF p4 = new PointF(pointx, pointy);
+                                //e.Graphics.DrawBezier(Pens.DarkCyan, p1, p2, p3, p4);
+                                this.PaintSignMBreath2(e.Graphics, new PointF(pointx - 2, pointy - 4));
+                                if (dowa_sb == 0)
+                                {
+                                    e.Graphics.DrawString("TV" + tvxs + "/ " + "f" + fxs, this.Font, Brushes.DarkCyan, pointx, pointy - 13);
+
+                                    dowa_sb++;
+                                }
+                                //e.Graphics.DrawString("C", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
+                            }
+                            //else if (fzksTime < p.D && p.D < fzjsTime)
+                            //{
+                            //    e.Graphics.DrawString("A", ptzt6, Brushes.DarkCyan, pointx - 2, pointy - 3);
+                            //}
+                            else
+                                e.Graphics.DrawEllipse(Pens.DarkCyan, pointx - 2, pointy - 2, 5, 5);
+                            //if (px != 0 && (jkksTime > p.D || jkjsTime < p.D))
+                            if (px != 0)
+                                e.Graphics.DrawLine(Pens.DarkCyan, new PointF(px, py), new PointF(pointx, pointy));
+                            px = pointx;
+                            py = pointy;
                         }
                     }
+                }
                 //}
                 //px = 0; py = 0; int phuxi = 0;
                 //foreach (adims_MODEL.point h in hxlList)
@@ -11749,627 +12144,626 @@ namespace main
                 //        py = pointy;
                 //    }
                 //}
-                    #endregion
+                #endregion
 
-                    #region  //打印ETCO2
-                    px = 0; py = 0;
-                    //foreach (adims_MODEL.point p in etco2List)
-                    //{
-                    //    if (p.D >= pagetime && p.D <= pagetime.AddMinutes(60 * jcsjjg))
-                    //    {
-                    //        TimeSpan t = new TimeSpan();
-                    //        t = p.D - pagetime;
-                    //        float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 112);
-                    //        float pointy = 0;
-                    //        if (p.V > 230)
-                    //        {
-                    //            pointy = (float)((20) * 1 + YY);
-                    //            e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + x, pointy + y);
-                    //        }
-                    //        else
-                    //            pointy = (float)((240 - p.V) * 1 + YY);
+                #region  //打印ETCO2
+                px = 0; py = 0;
+                //foreach (adims_MODEL.point p in etco2List)
+                //{
+                //    if (p.D >= pagetime && p.D <= pagetime.AddMinutes(60 * jcsjjg))
+                //    {
+                //        TimeSpan t = new TimeSpan();
+                //        t = p.D - pagetime;
+                //        float pointx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 11 / jcsjjg + 112);
+                //        float pointy = 0;
+                //        if (p.V > 230)
+                //        {
+                //            pointy = (float)((20) * 1 + YY);
+                //            e.Graphics.DrawString(p.V.ToString(), ptzt7, Brushes.Blue, pointx + x, pointy + y);
+                //        }
+                //        else
+                //            pointy = (float)((240 - p.V) * 1 + YY);
 
-                    //        e.Graphics.DrawPolygon(Pens.DarkOrange, new PointF[3] { new PointF(pointx+ x, pointy+ y), 
-                    //                       new PointF(pointx - 3+ x, pointy - 5+ y), new PointF(pointx + 3+ x, pointy - 5+ y) });
-                    //        // e.Graphics.FillPolygon(Brushes.Green, new PointF[3] { new PointF(pointx+ x, pointy+ y), 
-                    //        //         new PointF(pointx + 3+ x, pointy + 6+ y), new PointF(pointx - 3+ x, pointy + 6+ y) });
+                //        e.Graphics.DrawPolygon(Pens.DarkOrange, new PointF[3] { new PointF(pointx+ x, pointy+ y), 
+                //                       new PointF(pointx - 3+ x, pointy - 5+ y), new PointF(pointx + 3+ x, pointy - 5+ y) });
+                //        // e.Graphics.FillPolygon(Brushes.Green, new PointF[3] { new PointF(pointx+ x, pointy+ y), 
+                //        //         new PointF(pointx + 3+ x, pointy + 6+ y), new PointF(pointx - 3+ x, pointy + 6+ y) });
 
-                    //        if (px != 0)
-                    //            e.Graphics.DrawLine(Pens.DarkOrange, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
+                //        if (px != 0)
+                //            e.Graphics.DrawLine(Pens.DarkOrange, new PointF(px + x, py + y), new PointF(pointx + x, pointy + y));
 
-                    //        px = pointx;
-                    //        py = pointy;
-                    //    }
+                //        px = pointx;
+                //        py = pointy;
+                //    }
 
-                    //}
-                    #endregion
+                //}
+                #endregion
 
-                    //↓标记区域
-                    YY = YY + 12 * 20;
-                    e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
-                    e.Graphics.DrawString("标记", ptzt7, Brushes.Black, new Point(25 + x, YY + 3));
+                //↓标记区域
+                YY = YY + 12 * 20;
+                e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
+                e.Graphics.DrawString("标记", ptzt7, Brushes.Black, new Point(25 + x, YY + 3));
 
-                    #region 打印麻醉，手术，插管
-                    if (ssksTime >= pagetime && ssksTime <= pagetime.AddHours(jcsjjg))
+                #region 打印麻醉，手术，插管
+                if (ssksTime >= pagetime && ssksTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = ssksTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    e.Graphics.DrawString("⊙", ptzt8, Brushes.Black, xxx, YY + 3);
+                }
+                if (ssjsTime >= pagetime && ssjsTime < pagetime.AddMinutes(48 * jcsjjg))
+                {
+                    TimeSpan T = ssjsTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    Image newImage = Properties.Resources.SSJS;
+                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                }
+                if (mzksTime >= pagetime && mzksTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = mzksTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
+                }
+                if (mzjkssjzzTime >= pagetime && mzjkssjzzTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = mzjkssjzzTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    e.Graphics.DrawString("Χ2", ptzt8, Brushes.Black, xxx, YY + 3);
+                }
+                if (mzkszgnTime >= pagetime && mzkszgnTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = mzkszgnTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    e.Graphics.DrawString("Χ1", ptzt8, Brushes.Black, xxx, YY + 3);
+                }
+                //if (mzjsTime >= pagetime && mzjsTime <= pagetime.AddHours(jcsjjg))
+                //{
+                //    TimeSpan T = mzjsTime - pagetime;
+                //    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 11 / jcsjjg + 115 + x);
+                //    e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
+                //}
+                if (cgTime >= pagetime && cgTime <= pagetime.AddHours(jcsjjg))
+                {
+                    TimeSpan T = cgTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    Image newImage = Properties.Resources.CG;
+                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                }
+                if (bgTime >= pagetime && bgTime < pagetime.AddMinutes(48 * jcsjjg))
+                {
+                    TimeSpan T = bgTime - pagetime;
+                    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
+                    Image newImage = Properties.Resources.BG;
+                    e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                }
+
+                #endregion
+
+                #region 打印用药
+                YY = YY + 24;
+                for (int i = 0; i < 20; i++)//画横实线
+                {
+                    if (i == 0 || i == 11 || i == 16 || i == 19)//|| i == 20
+                        e.Graphics.DrawLine(ptp, new Point(20 + x, YY + 12 * i + y), new Point(770 + x, YY + 12 * i + y));
+                    //else if (i == 33)
+                    //    e.Graphics.DrawLine(ptp, new Point(35 + x, YY + 12 * i + y), new Point(700 + x, YY + 12 * i + y));
+                    else
+                        e.Graphics.DrawLine(ptp, new Point(35 + x, YY + 12 * i + y), new Point(770 + x, YY + 12 * i + y));
+                }
+                e.Graphics.DrawLine(ptp, new Point(35 + x, YY + y), new Point(35 + x, YY + 19 * 12 + y));
+
+                for (int i = 0; i < 10; i++)//画竖实线
+                {
+                    e.Graphics.DrawLine(ptp, new Point(192 + x + 72 * i, YY - 2 + y), new Point(192 + x + 72 * i, YY + 19 * 12 + y));
+                }
+                for (int i = 1; i < 48; i++)//画竖虚线
+                {
+                    e.Graphics.DrawLine(pxuxian, new PointF(192 + x + 12 * i, YY + y), new Point(192 + x + 12 * i, YY + 19 * 12 + y));
+
+                }
+                for (int i = 0; i < 16; i++)//画竖实线
+                {
+                    e.Graphics.DrawLine(ptp, new Point(192 + x + 36 * i, YY + 19 * 12 + y), new Point(192 + x + 36 * i, YY + 19 * 12 + y));
+                }
+
+                #endregion
+
+
+                #region 打印气体
+                e.Graphics.DrawString("O2", ptzt8, Brushes.Black, new Point(35 + x, YY));
+                ArrayList sssQT = new ArrayList();
+                int qti = 0;   //起步位置
+                foreach (adims_MODEL.mzqt mzqt in mzqtList)
+                {
+                    if (sssQT.Contains(mzqt.Qtname))
+                        qti = qti - 1;
+                    //if (!sssQT.Contains(mzqt.Qtname))
+                    //    e.Graphics.DrawString(mzqt.Qtname, mzqt.Qtname.Length < 7 ? ptzt6 : ptzt5, Brushes.Black, new PointF(32 + x, YY + qti * 12 + y + 3));
+
+                    if (mzqt.Bz == 2)
                     {
-                        TimeSpan T = ssksTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        e.Graphics.DrawString("⊙", ptzt8, Brushes.Black, xxx, YY + 3);
+                        TimeSpan t = new TimeSpan();
+                        TimeSpan t1 = new TimeSpan();
+                        t1 = mzqt.Jssj - pagetime;
+                        t = mzqt.Sysj - pagetime;
+                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
+                        int y1 = YY + qti * 12 + 4;
+
+                        int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192) + x;
+                        //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
+                        //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
+                        if (x1 > 190 + x && x1 < 780 + x)
+                        {
+                            e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt6, Brushes.Blue, new Point(x1 + 3, y + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + y), new Point(x1 - 3, y1 + 6 + y), new Point(x1 + 3, y1 + 6 + y) });
+                        }
+                        if (x2 > 190 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + y), new Point(x2 - 3, y1 + 6 + y), new Point(x2 + 3, y1 + 6 + y) });
+                        }
+                        if (x1 > 190 + x && x1 < 780 + x && x2 > 190 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(x2, y1 + y + 3));
+                        }
+                        if (x1 > 190 + x && x1 < 780 + x && x2 > 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                        }
+                        if (x1 < 190 + x && x2 > 190 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(190 + x, y1 + y + 3), new Point(x2, y1 + y + 3));
+                        }
+                        if (x1 < 190 + x && x2 > 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(190 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                        }
                     }
-                    if (ssjsTime >= pagetime && ssjsTime < pagetime.AddMinutes(48 * jcsjjg))
+                    qti++;
+                    sssQT.Add(mzqt.Qtname);
+                }
+
+
+                #endregion
+                #region 打印全麻药
+                ArrayList sssYDY = new ArrayList();
+                int ydyi = 1;
+                foreach (adims_MODEL.mzyt mzyt in ydyList) //打印全麻药
+                {
+                    if (sssYDY.Contains(mzyt.Ytname))
+                        ydyi = ydyi - 1;
+                    if (!sssYDY.Contains(mzyt.Ytname))
+                        e.Graphics.DrawString(mzyt.Ytname + " " + mzyt.Dw, mzyt.Ytname.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + ydyi * 12 + y + 3));
+                    if (mzyt.Cxyy == false)
                     {
-                        TimeSpan T = ssjsTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        Image newImage = Properties.Resources.SSJS;
-                        e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                        TimeSpan t = new TimeSpan();
+                        t = mzyt.Sysj - pagetime;
+                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 170) + x;
+                        int y1 = YY + ydyi * 12 + 4;
+                        if (x1 > 100 + x && x1 < 700 + x)
+                        {
+                            e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                        }
                     }
-                    if (mzksTime >= pagetime && mzksTime <= pagetime.AddHours(jcsjjg))
+                    if (mzyt.Cxyy == true)
                     {
-                        TimeSpan T = mzksTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
+                        TimeSpan t = new TimeSpan();
+                        TimeSpan t1 = new TimeSpan();
+                        t1 = mzyt.Jssj - pagetime;
+                        t = mzyt.Sysj - pagetime;
+                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 170) + x;
+                        int y1 = YY + ydyi * 12 + 4;
+                        int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 170) + x;
+                        if (x1 > 173 + x && x1 < 780 + x)
+                        {
+                            e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
+                        }
+                        if (x2 > 173 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2 + x, y1 + y), new Point(x2 - 3 + x, y1 + 6 + y), new Point(x2 + 3 + x, y1 + 6 + y) });
+                        }
+                        if (x1 > 190 + x && x1 < 780 + x && x2 > 190 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
+                        }
+                        if (x1 > 190 + x && x1 < 780 + x && x2 > 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                        }
+                        if (x1 < 190 + x && x2 > 120 + x && x2 < 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(195 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
+                        }
+                        if (x1 < 190 + x && x2 > 780 + x)
+                        {
+                            e.Graphics.DrawLine(pred2, new Point(195 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
+                        }
                     }
-                    if (mzjkssjzzTime >= pagetime && mzjkssjzzTime <= pagetime.AddHours(jcsjjg))
+                    ydyi++;
+                    sssYDY.Add(mzyt.Ytname);
+                }
+
+                #endregion
+
+
+                #region 打印输液
+                int syi = 11;
+                ArrayList sssSY = new ArrayList();
+                foreach (adims_MODEL.shuye sx in shuyeList)
+                {
+                    if (sssSY.Contains(sx.Name))
+                        syi = syi - 1;
+                    if (!sssSY.Contains(sx.Name))
+                        e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + syi * 12 + y + 3));
+
+                    TimeSpan t = new TimeSpan();
+                    TimeSpan t1 = new TimeSpan();
+                    t1 = pagetime.AddMinutes(60 * jcsjjg) - pagetime;
+                    t = sx.Kssj - pagetime;
+                    //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + syi * 12 + 2);
+                    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                    int y1 = YY + syi * 12 + 5;
+                    int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
+
+                    if (x1 > 190 + x && x1 < 780 + x)
                     {
-                        TimeSpan T = mzjkssjzzTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        e.Graphics.DrawString("Χ2", ptzt8, Brushes.Black, xxx, YY + 3);
+                        e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 8);
+                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y),
+                             new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
                     }
-                    if (mzkszgnTime >= pagetime && mzkszgnTime <= pagetime.AddHours(jcsjjg))
+                    syi++;
+                    sssSY.Add(sx.Name);
+                }
+
+                #endregion
+
+                #region 打印输血
+                //打印输血
+                int sxi = 16;
+                ArrayList sssSX = new ArrayList();
+                foreach (adims_MODEL.shuxue sx in shuxueList)
+                {
+                    if (sssSX.Contains(sx.Name))
+                        sxi = sxi - 1;
+                    if (!sssSX.Contains(sx.Name))
+                        e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + sxi * 12 + y + 3));
+
+                    TimeSpan t = new TimeSpan();
+                    TimeSpan t1 = new TimeSpan();
+                    t1 = pagetime.AddHours(jcsjjg) - pagetime;
+                    t = sx.Kssj - pagetime;
+                    //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + sxi * 12 + 2);
+                    int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
+                    int y1 = YY + sxi * 12 + 5;
+                    int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
+                    if (x1 > 190 + x && x1 < 780 + x)
                     {
-                        TimeSpan T = mzkszgnTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        e.Graphics.DrawString("Χ1", ptzt8, Brushes.Black, xxx, YY + 3);
+                        e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 6);
+                        e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y),
+                             new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
                     }
-                    //if (mzjsTime >= pagetime && mzjsTime <= pagetime.AddHours(jcsjjg))
-                    //{
-                    //    TimeSpan T = mzjsTime - pagetime;
-                    //    int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 11 / jcsjjg + 115 + x);
-                    //    e.Graphics.DrawString("Χ", ptzt8, Brushes.Black, xxx, YY + 3);
-                    //}
-                    if (cgTime >= pagetime && cgTime <= pagetime.AddHours(jcsjjg))
+                    sxi++;
+                    sssSX.Add(sx.Name);
+                }
+                #endregion
+                #region 打印输液输血
+                e.Graphics.DrawString("麻\n\n醉\n\n药", ptzt8, Brushes.Black, new Point(21 + x, YY + 40));
+                e.Graphics.DrawString("输\n\n液", ptzt8, Brushes.Black, new Point(21 + x, YY + 11 * 12 + 10));
+                e.Graphics.DrawString("输\n血", ptzt8, Brushes.Black, new Point(21 + x, YY + 16 * 12 + 5));
+                //e.Graphics.DrawString("     用药序号", ptzt10, Brushes.Black, new Point(25 + x, YY + 51));
+                #endregion
+
+
+                YY = YY + 19 * 12; Y_unLine = YY + 13;
+                #region 打印特殊用药
+
+
+                int szi = 1;
+                int szi1 = 1;
+                int tsn1 = 0;
+                string szss1 = "";
+                //显示事件标记
+                foreach (adims_MODEL.szsj sz in szsjList)
+                {
+                    if (sz.D >= pagetime && sz.D <= pagetime.AddMinutes(48 * jcsjjg))
                     {
-                        TimeSpan T = cgTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        Image newImage = Properties.Resources.CG;
-                        e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
-                    }
-                    if (bgTime >= pagetime && bgTime < pagetime.AddMinutes(48 * jcsjjg))
-                    {
-                        TimeSpan T = bgTime - pagetime;
-                        int xxx = (int)((T.Days * 24 * 60 + T.Hours * 60 + T.Minutes) * 12 / jcsjjg + 192 + x);
-                        Image newImage = Properties.Resources.BG;
-                        e.Graphics.DrawImage(newImage, new Rectangle(xxx, YY + 3, 10, 10));
+                        TimeSpan t = new TimeSpan();
+                        t = sz.D - pagetime;
+                        float tx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
+                        e.Graphics.FillRectangle(Brushes.Pink, tx - 3, YY + 3 - 450, 9, 9);
+                        //e.Graphics.FillRectangle(Brushes.Pink, tx - 3, BJYY + 8 + (sz.Y_zb - 315), 9, 9);
+                        e.Graphics.DrawString(szi.ToString(), ptzt7, Brushes.Black, new PointF(tx - 3, YY + 3 - 450));
+                        szi++;
                     }
 
-                    #endregion
-                   
-                    #region 打印用药
-                    YY = YY+24;
-                    for (int i = 0; i < 20; i++)//画横实线
+                }
+                //显示事件的类容
+                foreach (adims_MODEL.szsj sz in szsjList)
+                {
+                    if (szi1 + tsn1 > 11)
                     {
-                        if (i == 0 || i == 11 || i == 16 || i == 19)//|| i == 20
-                            e.Graphics.DrawLine(ptp, new Point(20 + x, YY + 12 * i + y), new Point(770 + x, YY + 12 * i + y));
-                        //else if (i == 33)
-                        //    e.Graphics.DrawLine(ptp, new Point(35 + x, YY + 12 * i + y), new Point(700 + x, YY + 12 * i + y));
+                        break;
+                    }
+                    szss1 = szi1.ToString() + "." + sz.Name + " " + sz.D.ToString("HH:mm:ss") + "\n";
+                    if (szi1 + tsn1 > 12)
+                    {
+                        string strSS1 = "";
+                        int StrLengthSS = szss1.Trim().Length;//1//2
+                        int rowSS = StrLengthSS / 20;
+                        if (StrLengthSS < 21)
+                        {
+                            for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                            {
+
+                                if (i < rowSS)
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
+                                else
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20);
+
+                                e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 - i - 9) * 14));
+                            }
+                        }
                         else
-                            e.Graphics.DrawLine(ptp, new Point(35 + x, YY + 12 * i + y), new Point(770 + x, YY + 12 * i + y));
-                    }
-                    e.Graphics.DrawLine(ptp, new Point(35 + x, YY + y), new Point(35 + x, YY +19 * 12 + y));
-
-                    for (int i = 0; i < 10; i++)//画竖实线
-                    {
-                        e.Graphics.DrawLine(ptp, new Point(192 + x + 72 * i, YY - 2 + y), new Point(192 + x + 72 * i, YY + 19 * 12 + y));
-                    }
-                    for (int i = 1; i < 48; i++)//画竖虚线
-                    {
-                        e.Graphics.DrawLine(pxuxian, new PointF(192 + x + 12 * i, YY + y), new Point(192 + x + 12 * i, YY + 19 * 12 + y));
-
-                    }
-                    for (int i = 0; i < 16; i++)//画竖实线
-                    {
-                        e.Graphics.DrawLine(ptp, new Point(192 + x + 36 * i, YY + 19 * 12 + y), new Point(192 + x + 36 * i, YY + 19 * 12 + y));
-                    }
-                   
-                    #endregion
-
-
-                    #region 打印气体
-                    e.Graphics.DrawString("O2", ptzt8, Brushes.Black, new Point(35 + x, YY));
-                    ArrayList sssQT = new ArrayList();
-                    int qti = 0;   //起步位置
-                    foreach (adims_MODEL.mzqt mzqt in mzqtList)
-                    {
-                        if (sssQT.Contains(mzqt.Qtname))
-                            qti = qti - 1;
-                        //if (!sssQT.Contains(mzqt.Qtname))
-                        //    e.Graphics.DrawString(mzqt.Qtname, mzqt.Qtname.Length < 7 ? ptzt6 : ptzt5, Brushes.Black, new PointF(32 + x, YY + qti * 12 + y + 3));
-
-                        if (mzqt.Bz == 2)
                         {
-                            TimeSpan t = new TimeSpan();
-                            TimeSpan t1 = new TimeSpan();
-                            t1 = mzqt.Jssj - pagetime;
-                            t = mzqt.Sysj - pagetime;
-                            int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
-                            int y1 = YY + qti * 12 + 4;
 
-                            int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192) + x;
-                            //double qtzongliang = (mzqt.Yl) * Convert.ToDouble((x2 - x1) / 2.5);
-                            //e.Graphics.DrawString(Convert.ToInt32(qtzongliang).ToString() + "L", this.Font, Brushes.Blue, new Point(763, y1 - 2));
-                            if (x1 > 190 + x && x1 < 780 + x)
+                            for (int i = 0; i <= rowSS; i++)//40个字符就换行
                             {
-                                e.Graphics.DrawString(mzqt.Yl.ToString() + " " + mzqt.Dw, ptzt6, Brushes.Blue, new Point(x1 + 3, y + y1 - 6));
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1, y1 + y), new Point(x1 - 3, y1 + 6 + y), new Point(x1 + 3, y1 + 6 + y) });
-                            }
-                            if (x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2, y1 + y), new Point(x2 - 3, y1 + 6 + y), new Point(x2 + 3, y1 + 6 + y) });
-                            }
-                            if (x1 > 190 + x && x1 < 780 + x && x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(x2, y1 + y + 3));
-                            }
-                            if (x1 > 190 + x && x1 < 780 + x && x2 > 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(x1, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-                            }
-                            if (x1 < 190 + x && x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(190 + x, y1 + y + 3), new Point(x2, y1 + y + 3));
-                            }
-                            if (x1 < 190 + x && x2 > 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(190 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-                            }
-                        }
-                        qti++;
-                        sssQT.Add(mzqt.Qtname);
-                    }
 
-
-                    #endregion
-                    #region 打印全麻药
-                    ArrayList sssYDY = new ArrayList();
-                    int ydyi = 1;
-                    foreach (adims_MODEL.mzyt mzyt in ydyList) //打印全麻药
-                    {
-                        if (sssYDY.Contains(mzyt.Ytname))
-                            ydyi = ydyi - 1;
-                        if (!sssYDY.Contains(mzyt.Ytname))
-                            e.Graphics.DrawString(mzyt.Ytname + " " + mzyt.Dw, mzyt.Ytname.Length < 7 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + ydyi * 12 + y + 3));
-
-                        if (mzyt.Cxyy == false)
-                        {
-                            TimeSpan t = new TimeSpan();
-                            t = mzyt.Sysj - pagetime;
-                            int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                            int y1 = YY + ydyi * 12 + 4;
-                            if (x1 > 100 + x && x1 < 700 + x)
-                            {
-                                e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-                            }
-                        }
-                        if (mzyt.Cxyy == true)
-                        {
-                            TimeSpan t = new TimeSpan();
-                            TimeSpan t1 = new TimeSpan();
-                            t1 = mzyt.Jssj - pagetime;
-                            t = mzyt.Sysj - pagetime;
-                            int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                            int y1 = YY + ydyi * 12 + 4;
-                            int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
-                            if (x1 > 190 + x && x1 < 780 + x)
-                            {
-                                e.Graphics.DrawString(mzyt.Yl.ToString(), ptzt7, Brushes.Blue, new Point(x1 + 3 + x, y + y1 - 6));
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), new Point(x1 - 3 + x, y1 + 6 + y), new Point(x1 + 3 + x, y1 + 6 + y) });
-                            }
-                            if (x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x2 + x, y1 + y), new Point(x2 - 3 + x, y1 + 6 + y), new Point(x2 + 3 + x, y1 + 6 + y) });
-                            }
-                            if (x1 > 190 + x && x1 < 780 + x && x2 > 190 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
-                            }
-                            if (x1 > 190 + x && x1 < 780 + x && x2 > 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(x1 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-                            }
-                            if (x1 < 190 + x && x2 > 120 + x && x2 < 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(x2 + x, y1 + y + 3));
-                            }
-                            if (x1 < 190 + x && x2 > 780 + x)
-                            {
-                                e.Graphics.DrawLine(pred2, new Point(120 + x, y1 + y + 3), new Point(780 + x, y1 + y + 3));
-                            }
-                        }
-                        ydyi++;
-                        sssYDY.Add(mzyt.Ytname);
-                    }
-
-                    #endregion
-
-
-                    #region 打印输液
-                    int syi = 11;
-                    ArrayList sssSY = new ArrayList();
-                    foreach (adims_MODEL.shuye sx in shuyeList)
-                    {
-                        if (sssSY.Contains(sx.Name))
-                            syi = syi - 1;
-                        if (!sssSY.Contains(sx.Name))
-                            e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + syi * 12 + y + 3));
-
-                        TimeSpan t = new TimeSpan();
-                        TimeSpan t1 = new TimeSpan();
-                        t1 = pagetime.AddMinutes(60 * jcsjjg) - pagetime;
-                        t = sx.Kssj - pagetime;
-                        //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + syi * 12 + 2);
-                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                        int y1 = YY + syi * 12 + 5;
-                        int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
-
-                        if (x1 > 190 + x && x1 < 780 + x)
-                        {
-                            e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 8);
-                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
-                             new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
-                        }
-                        syi++;
-                        sssSY.Add(sx.Name);
-                    }
-
-                    #endregion
-
-                    #region 打印输血
-                    //打印输血
-                    int sxi = 16;
-                    ArrayList sssSX = new ArrayList();
-                    foreach (adims_MODEL.shuxue sx in shuxueList)
-                    {
-                        if (sssSX.Contains(sx.Name))
-                            sxi = sxi - 1;
-                        if (!sssSX.Contains(sx.Name))
-                            e.Graphics.DrawString(sx.Name + " " + sx.Dw, sx.Name.Length < 9 ? ptzt7 : ptzt5, Brushes.Black, new PointF(37 + x, YY + sxi * 12 + y + 3));
-
-                        TimeSpan t = new TimeSpan();
-                        TimeSpan t1 = new TimeSpan();
-                        t1 = pagetime.AddHours(jcsjjg) - pagetime;
-                        t = sx.Kssj - pagetime;
-                        //e.Graphics.DrawString(sx.Name.ToString(), ptzt7, Brushes.Black, 37 + x, YY + sxi * 12 + 2);
-                        int x1 = (int)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192);
-                        int y1 = YY + sxi * 12 + 5;
-                        int x2 = (int)((t1.Days * 24 * 60 + t1.Hours * 60 + t1.Minutes) * 12 / jcsjjg + 192);
-                        if (x1 > 190 + x && x1 < 780 + x)
-                        {
-                            e.Graphics.DrawString(sx.Jl.ToString(), ptzt7, Brushes.Blue, x1 + x, y + y1 - 6);
-                            e.Graphics.FillPolygon(Brushes.Black, new Point[3] { new Point(x1 + x, y1 + y), 
-                             new Point(x1 - 3 + x, y1 + 5 + y), new Point(x1 + 3 + x, y1 + 5 + y) });
-                        }
-                        sxi++;
-                        sssSX.Add(sx.Name);
-                    }
-                    #endregion
-                    #region 打印输液输血
-                    e.Graphics.DrawString("麻\n\n醉\n\n药", ptzt8, Brushes.Black, new Point(21 + x, YY + 40));
-                    e.Graphics.DrawString("输\n\n液", ptzt8, Brushes.Black, new Point(21 + x, YY + 11 * 12 + 10));
-                    e.Graphics.DrawString("输\n血", ptzt8, Brushes.Black, new Point(21 + x, YY + 16 * 12 + 5));
-                    //e.Graphics.DrawString("     用药序号", ptzt10, Brushes.Black, new Point(25 + x, YY + 51));
-                    #endregion
-
-
-                    YY = YY + 19 * 12; Y_unLine = YY + 13;
-                   #region 打印特殊用药
-
-
-                    int szi = 1;
-                    int szi1 = 1;
-                    int tsn1 = 0;
-                    string szss1 = "";
-                    //显示事件标记
-                    foreach (adims_MODEL.szsj sz in szsjList)
-                    {
-                        if (sz.D >= pagetime && sz.D <= pagetime.AddMinutes(48 * jcsjjg))
-                        {
-                            TimeSpan t = new TimeSpan();
-                            t = sz.D - pagetime;
-                            float tx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
-                            e.Graphics.FillRectangle(Brushes.Pink, tx - 3, YY + 3 - 450, 9, 9);
-                            //e.Graphics.FillRectangle(Brushes.Pink, tx - 3, BJYY + 8 + (sz.Y_zb - 315), 9, 9);
-                            e.Graphics.DrawString(szi.ToString(), ptzt7, Brushes.Black, new PointF(tx - 3, YY + 3 - 450));
-                            szi++;
-                        }
-
-                    }
-                    //显示事件的类容
-                    foreach (adims_MODEL.szsj sz in szsjList)
-                    {
-                        if (szi1 + tsn1 > 11)
-                        {
-                            break;
-                        }
-                        szss1 = szi1.ToString() + "." + sz.Name + " " + sz.D.ToString("HH:mm:ss") + "\n";
-                        if (szi1 + tsn1 > 12)
-                        {
-                            string strSS1 = "";
-                            int StrLengthSS = szss1.Trim().Length;//1//2
-                            int rowSS = StrLengthSS / 20;
-                            if (StrLengthSS < 21)
-                            {
-                                for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                                if (i < rowSS)
                                 {
-
-                                    if (i < rowSS)
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
-                                    else
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20);
-
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
                                     e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 - i - 9) * 14));
                                 }
-                            }
-                            else
-                            {
-
-                                for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                                else
                                 {
-
-                                    if (i < rowSS)
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20);
+                                    if (szi1 + tsn1 + i > 16)
                                     {
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
-                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 - i - 9) * 14));
+                                        break;
                                     }
                                     else
                                     {
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20);
-                                        if (szi1 + tsn1 + i > 16)
-                                        {
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 + i - 9) * 14));
-                                        }
+                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 + i - 9) * 14));
                                     }
-                                    //if（tsi1+tsn > 8）
-                                    //{
-                                    //e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(440 + x, YY + 2 + (tsi1 - 8) * 14));//这里开始做
-                                    //}
-                                    //else
-                                    // e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(430 + x, YY + 27 + (tsi1 + tsn + i - 1) * 14));
-
                                 }
-                                tsn1++;
-                            }
+                                //if（tsi1+tsn > 8）
+                                //{
+                                //e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(440 + x, YY + 2 + (tsi1 - 8) * 14));//这里开始做
+                                //}
+                                //else
+                                // e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(430 + x, YY + 27 + (tsi1 + tsn + i - 1) * 14));
 
+                            }
+                            tsn1++;
+                        }
+
+                    }
+                    else
+                    {
+
+                        string strSS1 = "";
+                        int StrLengthSS = szss1.Trim().Length;//1//2
+                        int rowSS = StrLengthSS / 20;
+                        if (StrLengthSS < 21)
+                        {
+                            for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                            {
+
+                                if (i < rowSS)
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
+                                else
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20);
+
+                                e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 - 1) * 14));
+                            }
                         }
                         else
                         {
 
-                            string strSS1 = "";
-                            int StrLengthSS = szss1.Trim().Length;//1//2
-                            int rowSS = StrLengthSS / 20;
-                            if (StrLengthSS < 21)
+                            for (int i = 0; i <= rowSS; i++)//40个字符就换行
                             {
-                                for (int i = 0; i <= rowSS; i++)//40个字符就换行
+
+                                if (i < rowSS)
                                 {
-
-                                    if (i < rowSS)
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
-                                    else
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20);
-
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
                                     e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 - 1) * 14));
                                 }
-                            }
-                            else
-                            {
-
-                                for (int i = 0; i <= rowSS; i++)//40个字符就换行
+                                else
                                 {
-
-                                    if (i < rowSS)
+                                    strSS1 = szss1.Trim().ToString().Substring(i * 20);
+                                    if (szi1 + tsn1 + i > 8)
                                     {
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20, 20); //从第i*40个开始，截取40个字符串
-                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 - 1) * 14));
+                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY + 2 + (szi1 + tsn1 - 8) * 14));//这里开始做
+
                                     }
                                     else
                                     {
-                                        strSS1 = szss1.Trim().ToString().Substring(i * 20);
-                                        if (szi1 + tsn1 + i > 8)
-                                        {
-                                            e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(220 + x, YY +2+ (szi1 + tsn1 - 8) * 14));//这里开始做
-
-                                        }
-                                        else
-                                        {
-                                            e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 + i - 1) * 14));
-                                        }
+                                        e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(40 + x, YY + 2 + (szi1 + tsn1 + i - 1) * 14));
                                     }
-                                    //if（tsi1+tsn > 8）
-                                    //{
-                                    //e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(440 + x, YY + 2 + (tsi1 - 8) * 14));//这里开始做
-                                    //}
-                                    //else
-                                    // e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(430 + x, YY + 27 + (tsi1 + tsn + i - 1) * 14));
                                 }
-                                tsn1++;
+                                //if（tsi1+tsn > 8）
+                                //{
+                                //e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(440 + x, YY + 2 + (tsi1 - 8) * 14));//这里开始做
+                                //}
+                                //else
+                                // e.Graphics.DrawString(strSS1, ptzt9, Brushes.Black, new PointF(430 + x, YY + 27 + (tsi1 + tsn + i - 1) * 14));
                             }
-                        }
-                        szi1++;
-                    }
-
-                    //显示其他用药
-
-                    //显示其他用药
-                    int tsi = 1;
-                    int tsi1 = 1;
-                    int tsn = 0;
-                    string tss1 = "";
-                    foreach (adims_MODEL.tsyy ts in tsyyList)
-                    {
-                        if (ts.D >= pagetime && ts.D <= pagetime.AddMinutes(48 * jcsjjg))
-                        {
-                            TimeSpan t = new TimeSpan();
-                            t = ts.D - pagetime;
-                            float tx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
-                            //e.Graphics.FillEllipse(Brushes.LightGreen, tx - 3, BJYY + 3 + (ts.Y_zb - 370), 10, 9);
-                            e.Graphics.DrawString(tsi.ToString(), ptzt7, Brushes.Blue, new PointF(tx - 3, YY-250 + 3));
-                            tsi++;
+                            tsn1++;
                         }
                     }
-                    foreach (adims_MODEL.tsyy ts in tsyyList)
-                    {
-                        if (tsi1 >11)
-                        {
-                            break;
-                        }
-                        //string zsfs = "";//注射方式
-                        // if (ts.Yyfs == "口服")
-                        //{
-                        //    zsfs = "po";
-                        //}
-                        //if (ts.Yyfs == "静脉滴注")
-                        //{
-                        //    zsfs = "ivdrip";
-                        //}
-                        //if (ts.Yyfs == "皮下注射")
-                        //{
-                        //    zsfs = "ih";
-                        //}
-                        //if (ts.Yyfs == "肌肉注射")
-                        //{
-                        //    zsfs = "im";
-                        //}
-                        //if (ts.Yyfs == "静脉注射")
-                        //{
-                        //    zsfs = "iv";
-                        //}
-                        //if (ts.Yyfs == "皮下注射")
-                        //{
-                        //    zsfs = "id";
-                        //}
-                        if (ts.Name.Contains("+"))
-                        {
-                            tss1 = tsi1.ToString() + ".[" + ts.Name + "" + ts.Yl + "" + ts.Dw + " ]" + ts.Yyfs + " " + ts.D.ToString("HH:mm") + "\n";
-                        }
-                        else
-                        {
-                            tss1 = tsi1.ToString() + "." + ts.Name + "" + ts.Yl + "" + ts.Dw + " " + ts.Yyfs + " " + ts.D.ToString("HH:mm") + "\n";
-                        }
-                        //string strSS1 = "";
-                        //int StrLengthSS = tss1.Trim().Length;//1//2
-                        //int rowSS = StrLengthSS / 18;
-
-                        e.Graphics.DrawString(tss1, ptzt9, Brushes.Black, new PointF(320 + x, YY +2+ (tsi1 - 1) * 14));
-
-
-
-
-                        tsi1++;
-                    }
-
-                    for (int i = 0; i < listBox3.Items.Count; i++)//打印镇痛药
-                    {
-                        if (i < 11)
-                        {
-                            e.Graphics.DrawString((listBox3.Items[i].ToString()),
-                                ptzt7, Brushes.Black, new Point(x +575, YY +2+ i * 14));
-                        }
-                        if (i >=11)
-                        {
-                            break;
-                        }
-
-
-                    }
-                    #endregion
-
-                  
-
-                    #region 打印尾部区域↓
-                    //YY = YY + 70; Y_unLine = YY + 19;
-                    //e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
-                    //e.Graphics.DrawString("备注：" + txtRemark.Controls[0].Text, ptzt7, Brushes.Black, new Point(25 + x, YY + 3));
-                    //e.Graphics.DrawLine(ptp, new Point(50 + x, Y_unLine), new Point(755 + x, Y_unLine));
-                   
-                    e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
-                    e.Graphics.DrawLine(ptp, new Point(40 + x, YY), new Point(40 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(300 + x, YY), new Point(300 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(320 + x, YY), new Point(320 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(555 + x, YY), new Point(555 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(575 + x, YY), new Point(575 + x, YY + 160));
-                    e.Graphics.DrawLine(ptp, new Point(20 + x, YY + 160), new Point(770 + x, YY + 160));
-                    e.Graphics.DrawString("术\n\n中\n\n事\n\n件", ptzt11, Brushes.Black, new Point(x + 20, YY));
-                    e.Graphics.DrawString("术\n\n中\n\n用\n\n药", ptzt11, Brushes.Black, new Point(300 + x, YY));
-                    e.Graphics.DrawString("\n\n镇\n\n痛\n\n药", ptzt11, Brushes.Black, new Point(555 + x, YY));
-                    YY = YY + 170; Y_unLine = YY + 14;
-                    e.Graphics.DrawString("手术后诊断 " + txtsshzd.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);//诊断
-                    e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(500 + x, Y_unLine));
-                    e.Graphics.DrawString("PAC   :  " + cmbzhentongy.Text, ptzt8, Brushes.Black, 510 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
-                    e.Graphics.DrawString("自 体 血 : " + txtzitixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine), new Point(720 + x, Y_unLine));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY);
-                    e.Graphics.DrawString("成分输血 : " + txtcfsx.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 15);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 15), new Point(720 + x, Y_unLine + 15));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 15);
-                    e.Graphics.DrawString("胶 体 液 : " + txtjiaotixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 30);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 30), new Point(720 + x, Y_unLine + 30));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 30);
-                    e.Graphics.DrawString("晶 体 液 : " + txtjingtixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 45);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 45), new Point(720 + x, Y_unLine + 45));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 45);
-                    e.Graphics.DrawString("总输入量 : " + txtzongsrl.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 60);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine+60), new Point(720 + x, Y_unLine+60));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY +60);
-                    e.Graphics.DrawString("出 血 量:  " + txtchuxuel.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 75);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine+75), new Point(720 + x, Y_unLine+75));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY +75);
-                    e.Graphics.DrawString("尿    量:  " + txtniaoliang.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 90);
-                    e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine+90), new Point(720 + x, Y_unLine+90));
-                    e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY+90);
-                    YY = YY + 30; Y_unLine = YY + 14;
-                    e.Graphics.DrawString("手术方式 " + txtShoushuFS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(500 + x, Y_unLine));
-                    e.Graphics.DrawString("麻醉效果 " + cmbmazuixiaoguo.Text, ptzt8, Brushes.Black, 510 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
-                   
-                    YY = YY + 30; Y_unLine = YY + 14;
-                    e.Graphics.DrawString("麻醉方式 " + txtMazuiFS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(300 + x, Y_unLine));
-                    e.Graphics.DrawString("    麻醉医师    " + txtMZYS.Controls[0].Text, ptzt8, Brushes.Black, 300 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(380 + x, Y_unLine), new Point(500 + x, Y_unLine));
-                    e.Graphics.DrawString("病人送往 " + cmbBRQX.Text, ptzt8, Brushes.Black, 510 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
-                    YY = 30 + YY; Y_unLine = YY + 14;
-                    e.Graphics.DrawString("手术医师 " + txtSSYS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(300 + x, Y_unLine));
-                    e.Graphics.DrawString("器械、巡回护士 " + txtXHHS.Controls[0].Text, ptzt8, Brushes.Black, 300 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(380 + x, Y_unLine), new Point(500 + x, Y_unLine));
-                    e.Graphics.DrawString("评    分： " + txtmazuipingfen.Controls[0].Text, ptzt8, Brushes.Black, 510 + x, YY);
-                    e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
-                    //e.Graphics.DrawString("麻醉医师 " + txtMZYS.Controls[0].Text, ptzt8, Brushes.Black, 425 + x, YY);
-                    //e.Graphics.DrawLine(pxuxian, new Point(470 + x, Y_unLine), new Point(770 + x, Y_unLine));
-                    //YY = 30 + YY; Y_unLine = YY + 14;
-                    //e.Graphics.DrawString("器械护士 " + txtQXHS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    //e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(400 + x, Y_unLine));
-                    //e.Graphics.DrawString("巡回护士 " + txtXHHS.Controls[0].Text, ptzt8, Brushes.Black, 425 + x, YY);
-                    //e.Graphics.DrawLine(pxuxian, new Point(470 + x, Y_unLine), new Point(770 + x, Y_unLine));
-                    //YY = 25 + YY; Y_unLine = YY + 14;
-                    //e.Graphics.DrawString("切口类型 " + cmbBRQX.Text, ptzt8, Brushes.Black, 25 + x, YY);
-                    //e.Graphics.DrawLine(ptp, new Point(70 + x, Y_unLine), new Point(200 + x, Y_unLine));
-                    //e.Graphics.DrawString("切口数量 " + cmbBRQX.Text, ptzt8, Brushes.Black, 210 + x, YY);
-                    //e.Graphics.DrawLine(ptp, new Point(255 + x, Y_unLine), new Point(350 + x, Y_unLine));
-                    //e.Graphics.DrawString("病人去向 " + cmbBRQX.Text, ptzt8, Brushes.Black, 360 + x, YY);
-                    //e.Graphics.DrawLine(ptp, new Point(405 + x, Y_unLine), new Point(530 + x, Y_unLine));
+                    szi1++;
                 }
-                    #endregion
+
+                //显示其他用药
+
+                //显示其他用药
+                int tsi = 1;
+                int tsi1 = 1;
+                int tsn = 0;
+                string tss1 = "";
+                foreach (adims_MODEL.tsyy ts in tsyyList)
+                {
+                    if (ts.D >= pagetime && ts.D <= pagetime.AddMinutes(48 * jcsjjg))
+                    {
+                        TimeSpan t = new TimeSpan();
+                        t = ts.D - pagetime;
+                        float tx = (float)((t.Days * 24 * 60 + t.Hours * 60 + t.Minutes) * 12 / jcsjjg + 192) + x;
+                        //e.Graphics.FillEllipse(Brushes.LightGreen, tx - 3, BJYY + 3 + (ts.Y_zb - 370), 10, 9);
+                        e.Graphics.DrawString(tsi.ToString(), ptzt7, Brushes.Blue, new PointF(tx - 3, YY - 250 + 3));
+                        tsi++;
+                    }
+                }
+                foreach (adims_MODEL.tsyy ts in tsyyList)
+                {
+                    if (tsi1 > 11)
+                    {
+                        break;
+                    }
+                    //string zsfs = "";//注射方式
+                    // if (ts.Yyfs == "口服")
+                    //{
+                    //    zsfs = "po";
+                    //}
+                    //if (ts.Yyfs == "静脉滴注")
+                    //{
+                    //    zsfs = "ivdrip";
+                    //}
+                    //if (ts.Yyfs == "皮下注射")
+                    //{
+                    //    zsfs = "ih";
+                    //}
+                    //if (ts.Yyfs == "肌肉注射")
+                    //{
+                    //    zsfs = "im";
+                    //}
+                    //if (ts.Yyfs == "静脉注射")
+                    //{
+                    //    zsfs = "iv";
+                    //}
+                    //if (ts.Yyfs == "皮下注射")
+                    //{
+                    //    zsfs = "id";
+                    //}
+                    if (ts.Name.Contains("+"))
+                    {
+                        tss1 = tsi1.ToString() + ".[" + ts.Name + "" + ts.Yl + "" + ts.Dw + " ]" + ts.Yyfs + " " + ts.D.ToString("HH:mm") + "\n";
+                    }
+                    else
+                    {
+                        tss1 = tsi1.ToString() + "." + ts.Name + "" + ts.Yl + "" + ts.Dw + " " + ts.Yyfs + " " + ts.D.ToString("HH:mm") + "\n";
+                    }
+                    //string strSS1 = "";
+                    //int StrLengthSS = tss1.Trim().Length;//1//2
+                    //int rowSS = StrLengthSS / 18;
+
+                    e.Graphics.DrawString(tss1, ptzt9, Brushes.Black, new PointF(320 + x, YY + 2 + (tsi1 - 1) * 14));
 
 
-            
+
+
+                    tsi1++;
+                }
+
+                for (int i = 0; i < listBox3.Items.Count; i++)//打印镇痛药
+                {
+                    if (i < 11)
+                    {
+                        e.Graphics.DrawString((listBox3.Items[i].ToString()),
+                            ptzt7, Brushes.Black, new Point(x + 575, YY + 2 + i * 14));
+                    }
+                    if (i >= 11)
+                    {
+                        break;
+                    }
+
+
+                }
+                #endregion
+
+
+
+                #region 打印尾部区域↓
+                //YY = YY + 70; Y_unLine = YY + 19;
+                //e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
+                //e.Graphics.DrawString("备注：" + txtRemark.Controls[0].Text, ptzt7, Brushes.Black, new Point(25 + x, YY + 3));
+                //e.Graphics.DrawLine(ptp, new Point(50 + x, Y_unLine), new Point(755 + x, Y_unLine));
+
+                e.Graphics.DrawLine(ptp, new Point(20 + x, YY), new Point(770 + x, YY));
+                e.Graphics.DrawLine(ptp, new Point(40 + x, YY), new Point(40 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(300 + x, YY), new Point(300 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(320 + x, YY), new Point(320 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(555 + x, YY), new Point(555 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(575 + x, YY), new Point(575 + x, YY + 160));
+                e.Graphics.DrawLine(ptp, new Point(20 + x, YY + 160), new Point(770 + x, YY + 160));
+                e.Graphics.DrawString("术\n\n中\n\n事\n\n件", ptzt11, Brushes.Black, new Point(x + 20, YY));
+                e.Graphics.DrawString("术\n\n中\n\n用\n\n药", ptzt11, Brushes.Black, new Point(300 + x, YY));
+                e.Graphics.DrawString("\n\n镇\n\n痛\n\n药", ptzt11, Brushes.Black, new Point(555 + x, YY));
+                YY = YY + 170; Y_unLine = YY + 14;
+                e.Graphics.DrawString("手术后诊断 " + txtsshzd.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);//诊断
+                e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(500 + x, Y_unLine));
+                e.Graphics.DrawString("PAC   :  " + cmbzhentongy.Text, ptzt8, Brushes.Black, 510 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
+                e.Graphics.DrawString("自 体 血 : " + txtzitixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine), new Point(720 + x, Y_unLine));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY);
+                e.Graphics.DrawString("成分输血 : " + txtcfsx.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 15);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 15), new Point(720 + x, Y_unLine + 15));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 15);
+                e.Graphics.DrawString("胶 体 液 : " + txtjiaotixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 30);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 30), new Point(720 + x, Y_unLine + 30));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 30);
+                e.Graphics.DrawString("晶 体 液 : " + txtjingtixue.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 45);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 45), new Point(720 + x, Y_unLine + 45));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 45);
+                e.Graphics.DrawString("总输入量 : " + txtzongsrl.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 60);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 60), new Point(720 + x, Y_unLine + 60));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 60);
+                e.Graphics.DrawString("出 血 量:  " + txtchuxuel.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 75);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 75), new Point(720 + x, Y_unLine + 75));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 75);
+                e.Graphics.DrawString("尿    量:  " + txtniaoliang.Controls[0].Text, ptzt8, Brushes.Black, 610 + x, YY + 90);
+                e.Graphics.DrawLine(pxuxian, new Point(670 + x, Y_unLine + 90), new Point(720 + x, Y_unLine + 90));
+                e.Graphics.DrawString("毫升", ptzt8, Brushes.Black, 720 + x, YY + 90);
+                YY = YY + 30; Y_unLine = YY + 14;
+                e.Graphics.DrawString("手术方式 " + txtShoushuFS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(500 + x, Y_unLine));
+                e.Graphics.DrawString("麻醉效果 " + cmbmazuixiaoguo.Text, ptzt8, Brushes.Black, 510 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
+
+                YY = YY + 30; Y_unLine = YY + 14;
+                e.Graphics.DrawString("麻醉方式 " + txtMazuiFS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(300 + x, Y_unLine));
+                e.Graphics.DrawString("    麻醉医师    " + txtMZYS.Controls[0].Text, ptzt8, Brushes.Black, 300 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(380 + x, Y_unLine), new Point(500 + x, Y_unLine));
+                e.Graphics.DrawString("病人送往 " + cmbBRQX.Text, ptzt8, Brushes.Black, 510 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
+                YY = 30 + YY; Y_unLine = YY + 14;
+                e.Graphics.DrawString("手术医师 " + txtSSYS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(300 + x, Y_unLine));
+                e.Graphics.DrawString("器械、巡回护士 " + txtXHHS.Controls[0].Text, ptzt8, Brushes.Black, 300 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(380 + x, Y_unLine), new Point(500 + x, Y_unLine));
+                e.Graphics.DrawString("评    分： " + txtmazuipingfen.Controls[0].Text, ptzt8, Brushes.Black, 510 + x, YY);
+                e.Graphics.DrawLine(pxuxian, new Point(560 + x, Y_unLine), new Point(600 + x, Y_unLine));
+                //e.Graphics.DrawString("麻醉医师 " + txtMZYS.Controls[0].Text, ptzt8, Brushes.Black, 425 + x, YY);
+                //e.Graphics.DrawLine(pxuxian, new Point(470 + x, Y_unLine), new Point(770 + x, Y_unLine));
+                //YY = 30 + YY; Y_unLine = YY + 14;
+                //e.Graphics.DrawString("器械护士 " + txtQXHS.Controls[0].Text, ptzt8, Brushes.Black, 25 + x, YY);
+                //e.Graphics.DrawLine(pxuxian, new Point(70 + x, Y_unLine), new Point(400 + x, Y_unLine));
+                //e.Graphics.DrawString("巡回护士 " + txtXHHS.Controls[0].Text, ptzt8, Brushes.Black, 425 + x, YY);
+                //e.Graphics.DrawLine(pxuxian, new Point(470 + x, Y_unLine), new Point(770 + x, Y_unLine));
+                //YY = 25 + YY; Y_unLine = YY + 14;
+                //e.Graphics.DrawString("切口类型 " + cmbBRQX.Text, ptzt8, Brushes.Black, 25 + x, YY);
+                //e.Graphics.DrawLine(ptp, new Point(70 + x, Y_unLine), new Point(200 + x, Y_unLine));
+                //e.Graphics.DrawString("切口数量 " + cmbBRQX.Text, ptzt8, Brushes.Black, 210 + x, YY);
+                //e.Graphics.DrawLine(ptp, new Point(255 + x, Y_unLine), new Point(350 + x, Y_unLine));
+                //e.Graphics.DrawString("病人去向 " + cmbBRQX.Text, ptzt8, Brushes.Black, 360 + x, YY);
+                //e.Graphics.DrawLine(ptp, new Point(405 + x, Y_unLine), new Point(530 + x, Y_unLine));
+            }
+            #endregion
+
+
+
         }
 
 
@@ -12398,6 +12792,122 @@ namespace main
                 {
                     YwName = YwName + ydy.Ytname + "\n";
                     JsFlag++;
+                }
+            }
+            if (txtTW.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "体温为空，不能打印");
+                return;
+            }
+            if (txtXueya.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "血压为空，不能打印");
+                return;
+            }
+            if (txtHuxi.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "呼吸为空，不能打印");
+                return;
+            }
+            if (txtMaibo.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "脉搏为空，不能打印");
+                return;
+            }
+            if (cmbTiwei.Text == "")
+            {
+                MessageBox.Show(YwName + "体位为空，不能打印");
+                return;
+            }
+            if (cmbSQJinshi.Text == "")
+            {
+                MessageBox.Show(YwName + "术前禁食为空，不能打印");
+                return;
+            }
+            if (txtsshzd.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "手术后诊断为空，不能打印");
+                return;
+            }
+            if (txtShoushuFS.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "手术名称为空，不能打印");
+                return;
+            }
+            //if (cmbzhentongy.Text == "")
+            //{
+            //    MessageBox.Show(YwName + "PCA为空，不能打印");
+            //    return;
+            //}
+            if (cmbmazuixiaoguo.Text == "")
+            {
+                MessageBox.Show(YwName + "麻醉效果为空，不能打印");
+                return;
+            }
+            if (txtMZYS.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "施麻醉者为空，不能打印");
+                return;
+            }
+            if (txtXHHS.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "器械、巡回护士为空，不能打印");
+                return;
+            }
+            if (cmbBRQX.Text == "")
+            {
+                MessageBox.Show(YwName + "病人去向为空，不能打印");
+                return;
+            }
+            if (txtmazuipingfen.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "评分为空，不能打印");
+                return;
+            }
+            if (txtzitixue.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "自体血为空，不能打印");
+                return;
+            }
+            if (txtcfsx.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "成分输血为空，不能打印");
+                return;
+            }
+            if (txtjiaotixue.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "胶体液为空，不能打印");
+                return;
+            }
+            if (txtjingtixue.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "晶体液为空，不能打印");
+                return;
+            }
+            if (txtzongsrl.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "总输入量为空，不能打印");
+                return;
+            }
+            if (txtchuxuel.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "出血量为空，不能打印");
+                return;
+            }
+            if (txtniaoliang.Controls[0].Text == "")
+            {
+                MessageBox.Show(YwName + "尿量为空，不能打印");
+                return;
+            }
+            adims_BLL.YXL_BLL bll = new YXL_BLL();
+            DataTable xinxi = bll.mzbyjiazai(patID);
+            DataTable dt = cll.mzjiazai(patID);//判断
+            if (xinxi.Rows.Count == 0)
+            {
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("请填写麻醉总结！！！！！！");
+                    return;
                 }
             }
             if (JsFlag > 0)
@@ -12435,9 +12945,9 @@ namespace main
             }
             iYema = 1;
         }
-      
 
-       
+
+
     }
 }
 

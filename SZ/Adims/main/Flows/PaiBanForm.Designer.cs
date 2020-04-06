@@ -66,6 +66,7 @@
             this.TSQXSSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hbbrsqdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.UpdateDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hcsydjToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAp2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbOroom = new System.Windows.Forms.CheckBox();
@@ -100,7 +101,6 @@
             this.btnHisRefresh = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.hcsydjToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOTypesetting)).BeginInit();
             this.ctmsPaibanbiao.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -146,9 +146,9 @@
             // 
             this.dgvOTypesetting.AllowUserToAddRows = false;
             this.dgvOTypesetting.AllowUserToDeleteRows = false;
-            this.dgvOTypesetting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvOTypesetting.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOTypesetting.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvOTypesetting.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvOTypesetting.ColumnHeadersHeight = 25;
@@ -397,7 +397,7 @@
             this.UpdateDateToolStripMenuItem,
             this.hcsydjToolStripMenuItem});
             this.ctmsPaibanbiao.Name = "contextMenuStrip1";
-            this.ctmsPaibanbiao.Size = new System.Drawing.Size(161, 180);
+            this.ctmsPaibanbiao.Size = new System.Drawing.Size(161, 158);
             // 
             // EnterMZD_ToolStripMenuItem
             // 
@@ -442,6 +442,13 @@
             this.UpdateDateToolStripMenuItem.Text = "修改手术日期";
             this.UpdateDateToolStripMenuItem.Click += new System.EventHandler(this.UpdateDateToolStripMenuItem_Click);
             // 
+            // hcsydjToolStripMenuItem
+            // 
+            this.hcsydjToolStripMenuItem.Name = "hcsydjToolStripMenuItem";
+            this.hcsydjToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.hcsydjToolStripMenuItem.Text = "耗材使用登记";
+            this.hcsydjToolStripMenuItem.Click += new System.EventHandler(this.hcsydjToolStripMenuItem_Click);
+            // 
             // btnAp2
             // 
             this.btnAp2.Location = new System.Drawing.Point(506, 617);
@@ -481,7 +488,7 @@
             this.cbOroom.AutoSize = true;
             this.cbOroom.Location = new System.Drawing.Point(771, 47);
             this.cbOroom.Name = "cbOroom";
-            this.cbOroom.Size = new System.Drawing.Size(52, 19);
+            this.cbOroom.Size = new System.Drawing.Size(70, 24);
             this.cbOroom.TabIndex = 650;
             this.cbOroom.Text = "手术间";
             this.cbOroom.UseVisualStyleBackColor = true;
@@ -503,7 +510,7 @@
             this.cbKeshi.AutoSize = true;
             this.cbKeshi.Location = new System.Drawing.Point(772, 19);
             this.cbKeshi.Name = "cbKeshi";
-            this.cbKeshi.Size = new System.Drawing.Size(42, 19);
+            this.cbKeshi.Size = new System.Drawing.Size(56, 24);
             this.cbKeshi.TabIndex = 654;
             this.cbKeshi.Text = "科室";
             this.cbKeshi.UseVisualStyleBackColor = true;
@@ -530,7 +537,7 @@
             this.cbOld.AutoSize = true;
             this.cbOld.Location = new System.Drawing.Point(847, 20);
             this.cbOld.Name = "cbOld";
-            this.cbOld.Size = new System.Drawing.Size(42, 19);
+            this.cbOld.Size = new System.Drawing.Size(56, 24);
             this.cbOld.TabIndex = 654;
             this.cbOld.Text = "老院";
             this.cbOld.UseVisualStyleBackColor = true;
@@ -541,7 +548,7 @@
             this.cbNew.AutoSize = true;
             this.cbNew.Location = new System.Drawing.Point(847, 50);
             this.cbNew.Name = "cbNew";
-            this.cbNew.Size = new System.Drawing.Size(42, 19);
+            this.cbNew.Size = new System.Drawing.Size(56, 24);
             this.cbNew.TabIndex = 653;
             this.cbNew.Text = "新院";
             this.cbNew.UseVisualStyleBackColor = true;
@@ -822,9 +829,9 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Controls.Add(this.dgvOTypesetting);
             this.panel2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -836,13 +843,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // hcsydjToolStripMenuItem
-            // 
-            this.hcsydjToolStripMenuItem.Name = "hcsydjToolStripMenuItem";
-            this.hcsydjToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.hcsydjToolStripMenuItem.Text = "耗材使用登记";
-            this.hcsydjToolStripMenuItem.Click += new System.EventHandler(this.hcsydjToolStripMenuItem_Click);
             // 
             // PaiBanForm
             // 

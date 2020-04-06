@@ -231,9 +231,9 @@
             // 
             this.cmbZRFS.FormattingEnabled = true;
             this.cmbZRFS.Items.AddRange(new object[] {
+            "静脉滴注",
             "肌注",
             "静注",
-            "静脉滴注",
             "静脉泵注"});
             this.cmbZRFS.Location = new System.Drawing.Point(280, 17);
             this.cmbZRFS.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

@@ -21,6 +21,7 @@ using System.Runtime.InteropServices;
 using adims_MODEL;
 using System.Drawing.Printing;
 using main.CGG;
+using Adims_Utility;
 
 namespace main
 {
@@ -81,7 +82,7 @@ namespace main
         int iYema = 1;
         adims_DAL.AdimsProvider dal = new adims_DAL.AdimsProvider();
         adims_BLL.AdimsController bll = new adims_BLL.AdimsController();
-        adims_MODEL.paiban pat = new adims_MODEL.paiban();
+        adims_MODEL.paibanModel pat = new adims_MODEL.paibanModel();
         Label lbMzks1 = new Label();//麻醉开始lable
         Label lbMzjs1 = new Label();//麻醉结束lable
         Label lbSSKS = new Label();//手术开始lable

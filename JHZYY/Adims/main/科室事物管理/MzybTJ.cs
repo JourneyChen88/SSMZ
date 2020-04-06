@@ -53,7 +53,7 @@ namespace main.科室事物管理
             tbSJMCC.Text = dal.GetAboutAfterVisittlj("tljmzxj.qitacaozuo like '%6%'", dt1, dt2);//深静脉穿刺
             tbSJZZ.Text = dal.GetAboutAfterVisittlj("tljmzxj.sjzz like '%1%'", dt1, dt2);//神经阻滞
             tbCGQM.Text = dal.GetAboutAfterVisittlj("qsmz like '%1%' and qsmz like '%6%'", dt1, dt2);//插管全麻
-   //         tbXFFS.Text = dal.GetAboutMZZB("shuzitixue= '1'", dt1, dt2);//心肺复苏
+                                                                                                     //         tbXFFS.Text = dal.GetAboutMZZB("shuzitixue= '1'", dt1, dt2);//心肺复苏
             tbysza.Text = dal.GetAboutMZZB("fswyqysza = '1'", dt1, dt2);//意识障碍
             tbybhd.Text = dal.GetAboutMZZB("cxybhdjd = '1'", dt1, dt2);//氧饱和度
             tbqmjscx.Text = dal.GetAboutMZZB("qsmzycxy = '1'", dt1, dt2);//催醒
@@ -91,7 +91,7 @@ namespace main.科室事物管理
         }
         public string dt1, dt2;
         private void listYueFen_DoubleClick(object sender, EventArgs e)
-        {           
+        {
             int index = listYueFen.SelectedIndex;
             string theYear = cmbYear.Text.Trim();
             // DateTime.DaysInMonth(dt.Year, dt.Month)
@@ -242,7 +242,7 @@ namespace main.科室事物管理
             //  tbPACU.Text = dal.GetAboutPacu("1=1", dt1, dt2);//麻醉复苏
             MessageBox.Show("统计完成");
         }
-        
+
         ///// <summary>
         ///// 判断是否是数字
         ///// </summary>
@@ -313,14 +313,14 @@ namespace main.科室事物管理
                 {
                     //if ( BoolInt() )
                     //{                       
-                   
+
                     int result = 0;
-                   
+
                     Dictionary<string, string> ybbList = new Dictionary<string, string>();
-           //         ([tj_date],[tj_YF],[ygzl],[sjzz],[xfff],[wutwjing]
-           //,[asa1],[asa2],[asa3],[asa4],[asa5],[yitixue],[chagqm],[wudrenliu],[smazuiff]
-           //,[shuszt],[mzksssqx],[zpacuys],[pacutiwend],[fjhzricu],[fjheccg],[zitixue],[mazuixfhm]
-         
+                    //         ([tj_date],[tj_YF],[ygzl],[sjzz],[xfff],[wutwjing]
+                    //,[asa1],[asa2],[asa3],[asa4],[asa5],[yitixue],[chagqm],[wudrenliu],[smazuiff]
+                    //,[shuszt],[mzksssqx],[zpacuys],[pacutiwend],[fjhzricu],[fjheccg],[zitixue],[mazuixfhm]
+
                     ybbList.Add("tj_date", cmbYear.Text.Trim());
                     ybbList.Add("tj_YF", YF);
                     ybbList.Add("ygzl", tbALL.Text.Trim());
@@ -344,9 +344,9 @@ namespace main.科室事物管理
                     ybbList.Add("fjheccg", tbhxdza.Text.Trim());
                     ybbList.Add("zitixue", tbmzywsw.Text.Trim());
                     ybbList.Add("mazuixfhm", tbfyqxgsj.Text.Trim());
-           //           ,[cgdzsysy],[zfyqxgsj] ,[mzcxspo2d],[qifyqsj],[mazui24xzzt],[mzqjgmfy]
-           //,[sjmcc],[stw4],[mzuiysza],[mzsycxyw] ,[mzywsw]
-                //    ,[mz24xssw],[zgnmzyzbfz],[zhongxinjmbfz])
+                    //           ,[cgdzsysy],[zfyqxgsj] ,[mzcxspo2d],[qifyqsj],[mazui24xzzt],[mzqjgmfy]
+                    //,[sjmcc],[stw4],[mzuiysza],[mzsycxyw] ,[mzywsw]
+                    //    ,[mz24xssw],[zgnmzyzbfz],[zhongxinjmbfz])
                     ybbList.Add("cgdzsysy", tbASA1.Text.Trim());
                     ybbList.Add("zfyqxgsj", mazuikaishissqx.Text.Trim());
                     ybbList.Add("mzcxspo2d", tbASA2.Text.Trim());
@@ -359,7 +359,7 @@ namespace main.科室事物管理
                     ybbList.Add("mzsycxyw", feijihuaeccg.Text.Trim());
                     ybbList.Add("mzywsw", YFpaixu.ToString());
 
-                     ybbList.Add("mz24xssw", tbASA5.Text.Trim());
+                    ybbList.Add("mz24xssw", tbASA5.Text.Trim());
                     ybbList.Add("zgnmzyzbfz", feijihuaeccg.Text.Trim());
                     ybbList.Add("zhongxinjmbfz", YFpaixu.ToString());
                     DataTable dt = dal.SelectYBBTJ(YF, cmbYear.Text.Trim());
@@ -424,7 +424,7 @@ namespace main.科室事物管理
                new PaperSize("A4", 1160, 820);
 
         }
-        int count=0;
+        int count = 0;
         int num = 0;
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
@@ -433,13 +433,13 @@ namespace main.科室事物管理
             Font zt9 = new Font(new FontFamily("宋体"), 9);
             Pen ptp = new Pen(Brushes.Black);
             string data = cmbYear.Text.Trim();//获取年份
-            if (num>0)
+            if (num > 0)
             {
                 e.HasMorePages = false;
                 num = 0;
                 count = 0;
                 x = 40; y = 30;
-                y = y + 40; 
+                y = y + 40;
                 e.Graphics.DrawLine(ptp, x, y, 1120, y);//画横线
 
                 ////画统计标题栏
@@ -519,13 +519,13 @@ namespace main.科室事物管理
 
                     e.Graphics.DrawLine(Pens.Black, new Point(x, y + 40), new Point(1120, y + 40));//画底部截止线
                     y = y + 40;
-               
+
+                }
+                return;
             }
-                 return;
-            }
-                x = 40; y = 30;
-            e.Graphics.DrawString("麻醉质量管理登记本（"+data+"年）", zt12, Brushes.Black,450, y);
-            x = 40; y = y+40;
+            x = 40; y = 30;
+            e.Graphics.DrawString("麻醉质量管理登记本（" + data + "年）", zt12, Brushes.Black, 450, y);
+            x = 40; y = y + 40;
             e.Graphics.DrawLine(ptp, x, y, 1120, y);//画横线
 
             ////画统计标题栏
@@ -567,53 +567,53 @@ namespace main.科室事物管理
             e.Graphics.DrawLine(Pens.Black, new Point(x, y + 60), new Point(1120, y + 60));//画底部截止线
             y = y + 60;
             for (; count < dataGridView1.Rows.Count; count++)
-            {               
-                    e.Graphics.DrawLine(Pens.Black, new Point(x, y), new Point(x, y + 40));
-                    e.Graphics.DrawString(dataGridView1[2, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 5, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x+50, y), new Point(x+50, y + 40));
-                    e.Graphics.DrawString(dataGridView1[3, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 71, y+ 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 110, y), new Point(x + 110, y + 40));
-                    e.Graphics.DrawString(dataGridView1[4, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 131, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 170, y), new Point(x + 170, y + 40));
-                    e.Graphics.DrawString(dataGridView1[5, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 191, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 240, y), new Point(x + 240, y + 40));
-                    e.Graphics.DrawString(dataGridView1[6, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 261, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 300, y), new Point(x + 300, y + 40));
-                    e.Graphics.DrawString(dataGridView1[7, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 321, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 360, y), new Point(x + 360, y + 40));
-                    e.Graphics.DrawString(dataGridView1[8, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 381, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 420, y), new Point(x + 420, y + 40));
-                    e.Graphics.DrawString(dataGridView1[9, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 441, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 480, y), new Point(x + 480, y + 40));
-                    e.Graphics.DrawString(dataGridView1[10, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 561, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 540, y), new Point(x + 540, y + 40));
-                    e.Graphics.DrawString(dataGridView1[11, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 561, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 600, y), new Point(x + 600, y + 40));
-                    e.Graphics.DrawString(dataGridView1[12, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 621, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 660, y), new Point(x + 660, y + 40));
-                    e.Graphics.DrawString(dataGridView1[13, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 681, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 720, y), new Point(x + 720, y + 40));
-                    e.Graphics.DrawString(dataGridView1[14, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 741, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 780, y), new Point(x + 780, y + 40));
-                    e.Graphics.DrawString(dataGridView1[15, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 801, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 850, y), new Point(x + 850, y + 40));
-                    e.Graphics.DrawString(dataGridView1[16, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 871, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 920, y), new Point(x + 920, y + 40));
-                    e.Graphics.DrawString(dataGridView1[17, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 941, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 1000, y), new Point(x + 1000, y + 40));
-                    e.Graphics.DrawString(dataGridView1[18, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 1021, y + 15));
-                    e.Graphics.DrawLine(Pens.Black, new Point(x + 1080, y), new Point(x + 1080, y + 40));
+            {
+                e.Graphics.DrawLine(Pens.Black, new Point(x, y), new Point(x, y + 40));
+                e.Graphics.DrawString(dataGridView1[2, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 5, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 50, y), new Point(x + 50, y + 40));
+                e.Graphics.DrawString(dataGridView1[3, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 71, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 110, y), new Point(x + 110, y + 40));
+                e.Graphics.DrawString(dataGridView1[4, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 131, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 170, y), new Point(x + 170, y + 40));
+                e.Graphics.DrawString(dataGridView1[5, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 191, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 240, y), new Point(x + 240, y + 40));
+                e.Graphics.DrawString(dataGridView1[6, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 261, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 300, y), new Point(x + 300, y + 40));
+                e.Graphics.DrawString(dataGridView1[7, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 321, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 360, y), new Point(x + 360, y + 40));
+                e.Graphics.DrawString(dataGridView1[8, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 381, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 420, y), new Point(x + 420, y + 40));
+                e.Graphics.DrawString(dataGridView1[9, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 441, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 480, y), new Point(x + 480, y + 40));
+                e.Graphics.DrawString(dataGridView1[10, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 561, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 540, y), new Point(x + 540, y + 40));
+                e.Graphics.DrawString(dataGridView1[11, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 561, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 600, y), new Point(x + 600, y + 40));
+                e.Graphics.DrawString(dataGridView1[12, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 621, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 660, y), new Point(x + 660, y + 40));
+                e.Graphics.DrawString(dataGridView1[13, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 681, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 720, y), new Point(x + 720, y + 40));
+                e.Graphics.DrawString(dataGridView1[14, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 741, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 780, y), new Point(x + 780, y + 40));
+                e.Graphics.DrawString(dataGridView1[15, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 801, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 850, y), new Point(x + 850, y + 40));
+                e.Graphics.DrawString(dataGridView1[16, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 871, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 920, y), new Point(x + 920, y + 40));
+                e.Graphics.DrawString(dataGridView1[17, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 941, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 1000, y), new Point(x + 1000, y + 40));
+                e.Graphics.DrawString(dataGridView1[18, count].Value.ToString(), zt9, Brushes.Black, new Point(x + 1021, y + 15));
+                e.Graphics.DrawLine(Pens.Black, new Point(x + 1080, y), new Point(x + 1080, y + 40));
 
                 e.Graphics.DrawLine(Pens.Black, new Point(x, y + 40), new Point(1120, y + 40));//画底部截止线
                 y = y + 40;
             }
             if (true)
             {
-                e.HasMorePages = true;                     
+                e.HasMorePages = true;
 
             }
             num++;
-            
+
         }
         /// <summary>
         /// 清空
@@ -640,7 +640,10 @@ namespace main.科室事物管理
         }
         public void DataGridviewShowToExcel(DataGridView dgv)
         {
-            if (dgv.Rows.Count == 0) return;
+            if (dgv.Rows.Count == 0)
+            {
+                return;
+            }
             try
             {
                 //建立Excel对象   
@@ -677,11 +680,11 @@ namespace main.科室事物管理
                             excel.Cells[i + 2, j + 1] = "'" + dgv[j, i].Value.ToString();
                         else
                             if (dgv[j, i].Value == null)
-                            {
-                                excel.Cells[i + 2, j + 1] = 0;
-                            }
-                            else
-                                excel.Cells[i + 2, j + 1] = dgv[j, i].Value.ToString();
+                        {
+                            excel.Cells[i + 2, j + 1] = 0;
+                        }
+                        else
+                            excel.Cells[i + 2, j + 1] = dgv[j, i].Value.ToString();
                     }
                 }
                 excel.Visible = true;

@@ -105,7 +105,7 @@ namespace main
                 BindDaoRu();
             }
             DataTable ds = new DataTable();
-            if (cmbKS.Text.IsNullOrEmpty())
+            if (cmbKS.Text == "")
             {
                 ds = dal.SelectHSDJ(dateTimePicker1.Value.Date.ToString("yyyy-MM-dd"));
             }

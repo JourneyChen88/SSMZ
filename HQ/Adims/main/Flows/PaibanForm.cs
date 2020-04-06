@@ -232,6 +232,7 @@ namespace main
                     HISinfo.Add(dr["Tiwei"].ToString());
                     HISinfo.Add(dr["GR"].ToString());
                     HISinfo.Add(dr["Remarks"].ToString());
+                   
                     HISinfo.Add(Convert.ToDateTime(dr["Odate"]).ToString("HH:mm"));
                     HISinfo.Add("0");//未排班
                     if (dr["SSLB"].ToString() == "" || dr["SSLB"].ToString() == "0")
@@ -242,6 +243,7 @@ namespace main
                     HISinfo.Add(dr["SSDJ"].ToString()); //手术类型
                     //HISinfo.Add(dr["QKDJ"].ToString()); //切口等级
                     HISinfo.Add(dr["SQSJ"].ToString());//申请时间
+                    HISinfo.Add(dr["ms"].ToString());
                     DataTable dt = _PaibanDal.GetPaibanByPatId(dr["patid"].ToString());
                     if (dt.Rows.Count == 0)
                         result = _PaibanDal.InsertPaiban(HISinfo);
@@ -1008,37 +1010,37 @@ namespace main
                     y = y + 25;
                     e.Graphics.DrawLine(black, x, y, x + 650, y);
                     y = y + 5;
-                    //e.Graphics.DrawString("诊断名称：" + dr["Pattmd"].ToString(), Song, Brushes.Black, new Point(x + 10, y));                
-                    List<string> str = new List<string>();
-                    string str1 = "";
-                    int StrLength = dr["Pattmd"].ToString().Trim().Length;
-                    int row = StrLength / 40;
-                    e.Graphics.DrawString("诊断名称：", Song, Brushes.Black, x + 10, y);
-                    for (int ii = 0; ii <=row; )//13个字符就换行
+                    e.Graphics.DrawString("诊断名称：", SongTi, Brushes.Black, x + 10, y);
+                    var arrayPattmd = ArrayHelper.SplitLength(dr["Pattmd"].ToString().Trim(), 45);
+                    foreach (string item in arrayPattmd)
                     {
-                        if (ii < row)
-                            str1 = dr["Pattmd"].ToString().Substring(ii * 40, 40); //从第i*13个开始，截取13个字符串
-                        else
-                            str1 = dr["Pattmd"].ToString().Substring(ii * 40);
-                        e.Graphics.DrawString(str1, Song, Brushes.Black, x + 70, y);
-                        ii++;
-                        if (ii>row)
-                        {
-
-                        }
-                        else
-                        {
-                            y = y + 15;
-                        }                         
-                                         
+                        e.Graphics.DrawString(item, SongTi, Brushes.Black, x + 75, y);
+                        y += 15;
                     }
+                    y = y + 10;
+                    e.Graphics.DrawLine(black, x, y, x + 650, y);
+
+                    y = y + 5;
+                
+                    y = y + 5;
+                    e.Graphics.DrawString("手术名称：" + dr["oname"].ToString(), Song, Brushes.Black, new Point(x + 10, y));
                     y = y + 25;
                     e.Graphics.DrawLine(black, x, y, x + 650, y);
                     y = y + 5;
-                    e.Graphics.DrawString("手术名称：" + dr["oname"].ToString(), Song, Brushes.Black, new Point(x + 10, y));
-                  
-                    y = y + 25;
+                    e.Graphics.DrawString("描述：", SongTi, Brushes.Black, x + 10, y);
+                    var arrayMs = ArrayHelper.SplitLength(dr["ms"].ToString().Trim(), 45);
+                    foreach (string item in arrayMs)
+                    {
+                        e.Graphics.DrawString(item, SongTi, Brushes.Black, x + 45, y);
+                        y += 15;
+                    }
+                    if (arrayMs.Count==0)
+                    {
+                        y = y + 15;
+                    }
+                    y = y + 10;
                     e.Graphics.DrawLine(black, x, y, x + 650, y);
+                  
                     y = y + 5;
                     e.Graphics.DrawString("拟行麻醉方式：" + dr["Amethod"].ToString(), Song, Brushes.Black, new Point(x + 10, y));
                     e.Graphics.DrawString("手术室：  第" + dr["Oroom"].ToString() + "手术房间", Song, Brushes.Black, new Point(x + 350, y));

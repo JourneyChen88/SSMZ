@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using adims_DAL;
+using Adims_Utility;
 
 namespace main.CGG
 {

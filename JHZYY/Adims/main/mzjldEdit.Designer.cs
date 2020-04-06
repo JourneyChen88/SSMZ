@@ -284,6 +284,8 @@
             this.printDocument2 = new System.Drawing.Printing.PrintDocument();
             this.button3 = new System.Windows.Forms.Button();
             this.printPreviewDialog2 = new System.Windows.Forms.PrintPreviewDialog();
+            this.txtYiLiaoFei = new WindowsFormsControlLibrary5.UserControl1();
+            this.label31 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -338,7 +340,7 @@
             // 
             // txtSex
             // 
-            this.txtSex.Location = new System.Drawing.Point(296, 65);
+            this.txtSex.Location = new System.Drawing.Point(294, 66);
             this.txtSex.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSex.Name = "txtSex";
             this.txtSex.Size = new System.Drawing.Size(47, 23);
@@ -387,11 +389,12 @@
             // 
             // txtSqyy
             // 
-            this.txtSqyy.Location = new System.Drawing.Point(1278, 123);
+            this.txtSqyy.Location = new System.Drawing.Point(1265, 91);
             this.txtSqyy.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSqyy.Name = "txtSqyy";
-            this.txtSqyy.Size = new System.Drawing.Size(40, 23);
+            this.txtSqyy.Size = new System.Drawing.Size(64, 23);
             this.txtSqyy.TabIndex = 29;
+            this.txtSqyy.Visible = false;
             this.txtSqyy.DoubleClick += new System.EventHandler(this.txtSqyy_DoubleClick);
             // 
             // lbTime1
@@ -683,17 +686,15 @@
             // 
             // btnPrintView
             // 
-            this.btnPrintView.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPrintView.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnPrintView.ForeColor = System.Drawing.Color.Black;
-            this.btnPrintView.Image = global::main.Properties.Resources.Print;
             this.btnPrintView.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPrintView.Location = new System.Drawing.Point(1160, 1012);
             this.btnPrintView.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnPrintView.Name = "btnPrintView";
-            this.btnPrintView.Size = new System.Drawing.Size(72, 43);
+            this.btnPrintView.Size = new System.Drawing.Size(72, 52);
             this.btnPrintView.TabIndex = 90;
-            this.btnPrintView.Text = "打印病房带走";
-            this.btnPrintView.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPrintView.Text = "打印科室存档";
             this.btnPrintView.UseVisualStyleBackColor = true;
             this.btnPrintView.Click += new System.EventHandler(this.btnPrintView_Click);
             // 
@@ -849,7 +850,7 @@
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label40.ForeColor = System.Drawing.Color.Red;
-            this.label40.Location = new System.Drawing.Point(1267, 1009);
+            this.label40.Location = new System.Drawing.Point(1255, 1070);
             this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(48, 19);
@@ -931,12 +932,13 @@
             this.label63.AutoSize = true;
             this.label63.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label63.ForeColor = System.Drawing.Color.Maroon;
-            this.label63.Location = new System.Drawing.Point(1272, 158);
+            this.label63.Location = new System.Drawing.Point(1259, 131);
             this.label63.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(70, 12);
             this.label63.TabIndex = 146;
             this.label63.Text = "麻醉前用药";
+            this.label63.Visible = false;
             // 
             // label65
             // 
@@ -996,10 +998,10 @@
             "优",
             "良",
             "差"});
-            this.cmbMZXG.Location = new System.Drawing.Point(1276, 21);
+            this.cmbMZXG.Location = new System.Drawing.Point(1265, 182);
             this.cmbMZXG.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbMZXG.Name = "cmbMZXG";
-            this.cmbMZXG.Size = new System.Drawing.Size(48, 20);
+            this.cmbMZXG.Size = new System.Drawing.Size(64, 20);
             this.cmbMZXG.TabIndex = 165;
             this.cmbMZXG.Visible = false;
             this.cmbMZXG.TextChanged += new System.EventHandler(this.cbmzxg_TextChanged);
@@ -1014,7 +1016,7 @@
             this.button8.Size = new System.Drawing.Size(68, 32);
             this.button8.TabIndex = 168;
             this.button8.Text = "影像病历";
-            this.button8.UseVisualStyleBackColor = true;
+            this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button9
@@ -1027,7 +1029,7 @@
             this.button9.Size = new System.Drawing.Size(68, 32);
             this.button9.TabIndex = 169;
             this.button9.Text = "检验病历";
-            this.button9.UseVisualStyleBackColor = true;
+            this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
@@ -1186,7 +1188,7 @@
             this.btnSave.ForeColor = System.Drawing.Color.Black;
             this.btnSave.Image = global::main.Properties.Resources.Save;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(1152, 1107);
+            this.btnSave.Location = new System.Drawing.Point(1160, 1125);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(72, 41);
@@ -1232,7 +1234,7 @@
             this.txtpatID.Location = new System.Drawing.Point(1259, 1129);
             this.txtpatID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtpatID.Name = "txtpatID";
-            this.txtpatID.Size = new System.Drawing.Size(89, 23);
+            this.txtpatID.Size = new System.Drawing.Size(56, 23);
             this.txtpatID.TabIndex = 246;
             this.txtpatID.Visible = false;
             // 
@@ -1388,10 +1390,10 @@
             // 
             // txtNssss
             // 
-            this.txtNssss.Location = new System.Drawing.Point(1276, 75);
+            this.txtNssss.Location = new System.Drawing.Point(168, 120);
             this.txtNssss.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtNssss.Name = "txtNssss";
-            this.txtNssss.Size = new System.Drawing.Size(42, 23);
+            this.txtNssss.Size = new System.Drawing.Size(449, 23);
             this.txtNssss.TabIndex = 286;
             this.txtNssss.DoubleClick += new System.EventHandler(this.txtNssss_DoubleClick);
             // 
@@ -1428,6 +1430,7 @@
             this.txtQXHS.Name = "txtQXHS";
             this.txtQXHS.Size = new System.Drawing.Size(64, 23);
             this.txtQXHS.TabIndex = 291;
+            this.txtQXHS.Visible = false;
             this.txtQXHS.DoubleClick += new System.EventHandler(this.txtQXHS_DoubleClick);
             // 
             // label96
@@ -1475,7 +1478,7 @@
             this.label68.AutoSize = true;
             this.label68.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label68.ForeColor = System.Drawing.Color.Maroon;
-            this.label68.Location = new System.Drawing.Point(672, 25);
+            this.label68.Location = new System.Drawing.Point(799, 23);
             this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label68.Name = "label68";
             this.label68.Size = new System.Drawing.Size(57, 12);
@@ -1629,20 +1632,22 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label9.ForeColor = System.Drawing.Color.Maroon;
-            this.label9.Location = new System.Drawing.Point(1254, 105);
+            this.label9.Location = new System.Drawing.Point(1254, 65);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(64, 12);
             this.label9.TabIndex = 330;
             this.label9.Text = " 特殊病情";
+            this.label9.Visible = false;
             // 
             // txtTSBQing
             // 
-            this.txtTSBQing.Location = new System.Drawing.Point(164, 125);
+            this.txtTSBQing.Location = new System.Drawing.Point(1265, 153);
             this.txtTSBQing.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTSBQing.Name = "txtTSBQing";
-            this.txtTSBQing.Size = new System.Drawing.Size(416, 23);
+            this.txtTSBQing.Size = new System.Drawing.Size(64, 23);
             this.txtTSBQing.TabIndex = 329;
+            this.txtTSBQing.Visible = false;
             // 
             // labVisibleTimer
             // 
@@ -2030,7 +2035,7 @@
             // dtOdate
             // 
             this.dtOdate.CalendarMonthBackground = System.Drawing.SystemColors.InactiveCaption;
-            this.dtOdate.Location = new System.Drawing.Point(734, 18);
+            this.dtOdate.Location = new System.Drawing.Point(861, 16);
             this.dtOdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dtOdate.Name = "dtOdate";
             this.dtOdate.Size = new System.Drawing.Size(111, 21);
@@ -2039,7 +2044,7 @@
             // tbChuNiao
             // 
             this.tbChuNiao.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbChuNiao.Location = new System.Drawing.Point(1271, 983);
+            this.tbChuNiao.Location = new System.Drawing.Point(1259, 1041);
             this.tbChuNiao.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tbChuNiao.Name = "tbChuNiao";
             this.tbChuNiao.Size = new System.Drawing.Size(71, 23);
@@ -2051,7 +2056,7 @@
             // tbChuxue
             // 
             this.tbChuxue.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbChuxue.Location = new System.Drawing.Point(1232, 957);
+            this.tbChuxue.Location = new System.Drawing.Point(1259, 998);
             this.tbChuxue.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tbChuxue.Name = "tbChuxue";
             this.tbChuxue.Size = new System.Drawing.Size(71, 23);
@@ -2065,7 +2070,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label13.ForeColor = System.Drawing.Color.Red;
-            this.label13.Location = new System.Drawing.Point(1255, 987);
+            this.label13.Location = new System.Drawing.Point(1255, 1106);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(48, 19);
@@ -2076,10 +2081,10 @@
             // dtOtime
             // 
             this.dtOtime.CalendarMonthBackground = System.Drawing.SystemColors.InactiveCaption;
-            this.dtOtime.Location = new System.Drawing.Point(923, 18);
+            this.dtOtime.Location = new System.Drawing.Point(1050, 16);
             this.dtOtime.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.dtOtime.Name = "dtOtime";
-            this.dtOtime.Size = new System.Drawing.Size(159, 21);
+            this.dtOtime.Size = new System.Drawing.Size(163, 21);
             this.dtOtime.TabIndex = 587;
             // 
             // label2
@@ -2087,7 +2092,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.Maroon;
-            this.label2.Location = new System.Drawing.Point(863, 23);
+            this.label2.Location = new System.Drawing.Point(990, 21);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 12);
@@ -2098,7 +2103,7 @@
             // 
             this.btnSaveOtime.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.btnSaveOtime.ForeColor = System.Drawing.Color.Blue;
-            this.btnSaveOtime.Location = new System.Drawing.Point(1088, 14);
+            this.btnSaveOtime.Location = new System.Drawing.Point(1217, 12);
             this.btnSaveOtime.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSaveOtime.Name = "btnSaveOtime";
             this.btnSaveOtime.Size = new System.Drawing.Size(55, 31);
@@ -2117,7 +2122,7 @@
             this.btnEMR.Size = new System.Drawing.Size(68, 32);
             this.btnEMR.TabIndex = 590;
             this.btnEMR.Text = "电子病历";
-            this.btnEMR.UseVisualStyleBackColor = true;
+            this.btnEMR.UseVisualStyleBackColor = false;
             this.btnEMR.Click += new System.EventHandler(this.btnEMR_Click);
             // 
             // label6
@@ -2189,7 +2194,7 @@
             this.btnNurseRecord.Size = new System.Drawing.Size(68, 32);
             this.btnNurseRecord.TabIndex = 596;
             this.btnNurseRecord.Text = "风险评估";
-            this.btnNurseRecord.UseVisualStyleBackColor = true;
+            this.btnNurseRecord.UseVisualStyleBackColor = false;
             this.btnNurseRecord.Click += new System.EventHandler(this.btnNurseRecord_Click);
             // 
             // btnMZZJ
@@ -2202,7 +2207,7 @@
             this.btnMZZJ.Size = new System.Drawing.Size(68, 32);
             this.btnMZZJ.TabIndex = 597;
             this.btnMZZJ.Text = "自费同意书";
-            this.btnMZZJ.UseVisualStyleBackColor = true;
+            this.btnMZZJ.UseVisualStyleBackColor = false;
             this.btnMZZJ.Click += new System.EventHandler(this.btnMZZJ_Click);
             // 
             // label22
@@ -2245,7 +2250,7 @@
             this.btnMZZB.Size = new System.Drawing.Size(68, 32);
             this.btnMZZB.TabIndex = 600;
             this.btnMZZB.Text = "麻醉指标";
-            this.btnMZZB.UseVisualStyleBackColor = true;
+            this.btnMZZB.UseVisualStyleBackColor = false;
             this.btnMZZB.Click += new System.EventHandler(this.btnMZZB_Click);
             // 
             // timer_Miray
@@ -2268,7 +2273,7 @@
             this.BtnHLJL.Size = new System.Drawing.Size(68, 32);
             this.BtnHLJL.TabIndex = 601;
             this.BtnHLJL.Text = "麻醉知情";
-            this.BtnHLJL.UseVisualStyleBackColor = true;
+            this.BtnHLJL.UseVisualStyleBackColor = false;
             this.BtnHLJL.Click += new System.EventHandler(this.BtnHLJL_Click);
             // 
             // btnLIYZ
@@ -2281,7 +2286,7 @@
             this.btnLIYZ.Size = new System.Drawing.Size(68, 32);
             this.btnLIYZ.TabIndex = 602;
             this.btnLIYZ.Text = "临时医嘱";
-            this.btnLIYZ.UseVisualStyleBackColor = true;
+            this.btnLIYZ.UseVisualStyleBackColor = false;
             this.btnLIYZ.Click += new System.EventHandler(this.btnLIYZ_Click);
             // 
             // btnMZJF
@@ -2376,6 +2381,7 @@
             this.cheboxBIS.TabIndex = 610;
             this.cheboxBIS.Text = "是否连接BIS";
             this.cheboxBIS.UseVisualStyleBackColor = true;
+            this.cheboxBIS.Visible = false;
             this.cheboxBIS.CheckedChanged += new System.EventHandler(this.cheboxBIS_CheckedChanged);
             // 
             // checkszy
@@ -2551,6 +2557,7 @@
             this.label56.Size = new System.Drawing.Size(11, 12);
             this.label56.TabIndex = 629;
             this.label56.Text = "K";
+            this.label56.Visible = false;
             // 
             // txthb
             // 
@@ -2621,7 +2628,7 @@
             this.button2.Size = new System.Drawing.Size(68, 31);
             this.button2.TabIndex = 636;
             this.button2.Text = "心电图";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // timerbis
@@ -2668,7 +2675,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(1152, 1154);
+            this.checkBox1.Location = new System.Drawing.Point(1160, 1176);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(72, 16);
@@ -2997,14 +3004,13 @@
             // 
             // button3
             // 
-            this.button3.Image = global::main.Properties.Resources.Print;
+            this.button3.Font = new System.Drawing.Font("微软雅黑", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(1160, 1061);
+            this.button3.Location = new System.Drawing.Point(1160, 1070);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(72, 39);
+            this.button3.Size = new System.Drawing.Size(72, 49);
             this.button3.TabIndex = 794;
-            this.button3.Text = "打印科室存档";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button3.Text = "打印病房带走";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -3019,12 +3025,32 @@
             this.printPreviewDialog2.Name = "printPreviewDialog2";
             this.printPreviewDialog2.Visible = false;
             // 
+            // txtYiLiaoFei
+            // 
+            this.txtYiLiaoFei.Location = new System.Drawing.Point(701, 22);
+            this.txtYiLiaoFei.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txtYiLiaoFei.Name = "txtYiLiaoFei";
+            this.txtYiLiaoFei.Size = new System.Drawing.Size(67, 23);
+            this.txtYiLiaoFei.TabIndex = 796;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(644, 25);
+            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(41, 12);
+            this.label31.TabIndex = 795;
+            this.label31.Text = "医疗费";
+            // 
             // mzjldEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1428, 882);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.Controls.Add(this.txtYiLiaoFei);
+            this.Controls.Add(this.label31);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.button11);
@@ -3083,8 +3109,8 @@
             this.Controls.Add(this.checktw);
             this.Controls.Add(this.checkmb);
             this.Controls.Add(this.checkssy);
-            this.Controls.Add(this.checkszy);
             this.Controls.Add(this.cheboxBIS);
+            this.Controls.Add(this.checkszy);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnQXSM);
             this.Controls.Add(this.label28);
@@ -3100,17 +3126,17 @@
             this.Controls.Add(this.label23);
             this.Controls.Add(this.btnBeforeVisit);
             this.Controls.Add(this.label22);
-            this.Controls.Add(this.btnSaveOtime);
             this.Controls.Add(this.tbQiekouCount);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.btnSaveOtime);
             this.Controls.Add(this.cmbQiekouType);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnEMR);
-            this.Controls.Add(this.dtOtime);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.dtOtime);
             this.Controls.Add(this.tbChuxue);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.dtOdate);
             this.Controls.Add(this.tbChuNiao);
+            this.Controls.Add(this.dtOdate);
             this.Controls.Add(this.label40);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label46);
@@ -3144,8 +3170,8 @@
             this.Controls.Add(this.cmbCOM);
             this.Controls.Add(this.btnTsyy);
             this.Controls.Add(this.lbTime10);
-            this.Controls.Add(this.label68);
             this.Controls.Add(this.LB_SHUXUE);
+            this.Controls.Add(this.label68);
             this.Controls.Add(this.cmbTiwei);
             this.Controls.Add(this.lbtimew8);
             this.Controls.Add(this.label30);
@@ -3243,9 +3269,9 @@
             this.Controls.Add(this.txtSqyy);
             this.Controls.Add(this.txtMzjldid);
             this.Controls.Add(this.txtAge);
-            this.Controls.Add(this.txtSex);
             this.Controls.Add(this.txtWeight);
             this.Controls.Add(this.txtSqzd);
+            this.Controls.Add(this.txtSex);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtBingQu);
@@ -3532,5 +3558,7 @@
         private System.Drawing.Printing.PrintDocument printDocument2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog2;
+        private WindowsFormsControlLibrary5.UserControl1 txtYiLiaoFei;
+        private System.Windows.Forms.Label label31;
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using Adims_Utility;
 
 namespace main.科室事物管理
 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Adims_Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -371,103 +372,103 @@ namespace main.CGG
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //if (cmbShenzhi.Text.IsNullOrEmpty())
+            //if (cmbShenzhi.Text == "")
             //{
             //    MessageBox.Show("神志不能为空");
             //    cmbShenzhi.Focus();
             //    return;
             //}
-            //if (textBox3.Text.IsNullOrEmpty())
+            //if (textBox3.Text == "")
             //{
             //    MessageBox.Show("术前签名不能为空");
             //    textBox3.Focus();
             //    return;
             //}
-            //if (tbShuye.Text.IsNullOrEmpty())
+            //if (tbShuye.Text == "")
             //{
             //    MessageBox.Show("输液量不能为空");
             //    tbShuye.Focus();
             //    return;
             //}
-            //if (comboBox7.Text.IsNullOrEmpty())
+            //if (comboBox7.Text == "")
             //{
             //    MessageBox.Show("自血体不能为空");
             //    comboBox7.Focus();
             //    return;
             //}
-            //if (textBox5.Text.IsNullOrEmpty())
+            //if (textBox5.Text == "")
             //{
             //    MessageBox.Show("红细胞不能为空");
             //    textBox5.Focus();
             //    return;
             //}
-            //if (textBox6.Text.IsNullOrEmpty())
+            //if (textBox6.Text == "")
             //{
             //    MessageBox.Show("血浆不能为空");
             //    textBox6.Focus();
             //    return;
             //}
-            //if (textBox7.Text.IsNullOrEmpty())
+            //if (textBox7.Text == "")
             //{
             //    MessageBox.Show("血小板不能为空");
             //    textBox7.Focus();
             //    return;
             //}
-            //if (comboBox2.Text.IsNullOrEmpty())
+            //if (comboBox2.Text == "")
             //{
             //    MessageBox.Show("术中血型不能为空");
             //    comboBox2.Focus();
             //    return;
             //}
-            //if (textBox8.Text.IsNullOrEmpty())
+            //if (textBox8.Text == "")
             //{
             //    MessageBox.Show("术中签名不能为空");
             //    textBox8.Focus();
             //    return;
             //}
-            //if (textBox10.Text.IsNullOrEmpty())
+            //if (textBox10.Text == "")
             //{
             //    MessageBox.Show("标本送病理签名不能为空");
             //    textBox10.Focus();
             //    return;
             //}
-            //if (textBox11.Text.IsNullOrEmpty())
+            //if (textBox11.Text == "")
             //{
             //    MessageBox.Show("术后签名不能为空");
             //    textBox11.Focus();
             //    return;
             //}
-            //if (textBox13.Text.IsNullOrEmpty())
+            //if (textBox13.Text == "")
             //{
             //    MessageBox.Show("手术用药不能为空");
             //    textBox13.Focus();
             //    return;
             //}
-            //if (textBox14.Text.IsNullOrEmpty())
+            //if (textBox14.Text == "")
             //{
             //    MessageBox.Show("签名不能为空");
             //    textBox14.Focus();
             //    return;
             //}
-            //if (cmbQXHS.Text.IsNullOrEmpty())
+            //if (cmbQXHS.Text == "")
             //{
             //    MessageBox.Show("器械护士不能为空");
             //    cmbQXHS.Focus();
             //    return;
             //}
-            //if (comboBox4.Text.IsNullOrEmpty())
+            //if (comboBox4.Text == "")
             //{
             //    MessageBox.Show("手术医师不能为空");
             //    comboBox4.Focus();
             //    return;
             //}
-            //if (comboBox5.Text.IsNullOrEmpty())
+            //if (comboBox5.Text == "")
             //{
             //    MessageBox.Show("巡回护士不能为空");
             //    comboBox5.Focus();
             //    return;
             //}
-            //if (comboBox6.Text.IsNullOrEmpty())
+            //if (comboBox6.Text == "")
             //{
             //    MessageBox.Show("接班护士不能为空");
             //    comboBox6.Focus();

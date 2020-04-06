@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using adims_BLL;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Adims_Utility;
 
 namespace main
 {

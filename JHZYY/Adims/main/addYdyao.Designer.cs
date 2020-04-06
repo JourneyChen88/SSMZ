@@ -108,10 +108,15 @@
             this.listYaopin.FormattingEnabled = true;
             this.listYaopin.ItemHeight = 17;
             this.listYaopin.Items.AddRange(new object[] {
+            "咪达唑仑",
+            "依托咪酯",
+            "瑞芬太尼",
+            "丙泊酚",
             "生理盐水",
             "头孢酊",
             "利多卡因",
-            "丁卡因"});
+            "丁卡因",
+            "罗哌卡因"});
             this.listYaopin.Location = new System.Drawing.Point(3, 67);
             this.listYaopin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listYaopin.Name = "listYaopin";
@@ -294,18 +299,17 @@
             // 
             this.cmbYYFS.FormattingEnabled = true;
             this.cmbYYFS.Items.AddRange(new object[] {
-            "肌注",
+            "静脉泵注",
             "静注",
             "吸入",
             "静脉滴注",
-            "静脉泵注",
             "口服"});
             this.cmbYYFS.Location = new System.Drawing.Point(145, 63);
             this.cmbYYFS.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbYYFS.Name = "cmbYYFS";
             this.cmbYYFS.Size = new System.Drawing.Size(115, 25);
             this.cmbYYFS.TabIndex = 8;
-            this.cmbYYFS.Text = "静脉滴注";
+            this.cmbYYFS.Text = "静脉泵注";
             // 
             // cbCXYY
             // 
