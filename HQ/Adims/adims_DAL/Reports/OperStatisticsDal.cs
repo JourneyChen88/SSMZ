@@ -179,7 +179,7 @@ AS OT on M.patid = OT.PatZhuYuanID left join Adims_BeforeVisit_HS as H on h.pati
         public DataTable GetByYSName(string name, DateTime date1, DateTime date2)
         {
             string select1 = @"SELECT row_number() over(order by m.otime) as row_id, M.id AS mzid,OT.PatZhuYuanID,Convert(nvarchar,otime,23) as otime,
-Oroom,PatName,patsex,patage,Patdpm,(select case ot.isjizhen when 0 then '择期' else '急诊' end )as jizhen
+Oroom,PatName,patsex,patage,Patdpm,OT.Olevel,(select case ot.isjizhen when 0 then '择期' else '急诊' end )as jizhen
 ,(left(Convert(varchar,otime,108),(len(Convert(varchar,otime,108))-3)))as rssj,(left(Convert(varchar,sskssj,108),
 (len(Convert(varchar,sskssj,108))-3)))as kssj,(left(Convert(varchar,(select max(RecordTime)
  from Adims_MonitorRecord where mzjldid=m.id),108),
@@ -205,7 +205,7 @@ AS OT on M.patid = OT.PatId left join Adims_BeforeVisit_HS as H on h.PatId=OT.Pa
         public DataTable GetFromStartToEndTime(DateTime date1, DateTime date2)
         {
             string select1 = $@"SELECT row_number() over(order by m.otime) as row_id, M.id AS mzid,OT.PatZhuYuanID,Convert(nvarchar,otime,23) as otime,
-Oroom,PatName,patsex,patage,Patdpm,(select case ot.isjizhen when 0 then '择期' else '急诊' end )as jizhen
+Oroom,PatName,patsex,patage,Patdpm,OT.Olevel,(select case ot.isjizhen when 0 then '择期' else '急诊' end )as jizhen
 ,(left(Convert(varchar,otime,108),(len(Convert(varchar,otime,108))-3)))as rssj,(left(Convert(varchar,sskssj,108),
 (len(Convert(varchar,sskssj,108))-3)))as kssj,(left(Convert(varchar,(select max(RecordTime)
  from Adims_MonitorRecord where mzjldid=m.id),108),

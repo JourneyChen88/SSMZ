@@ -864,7 +864,7 @@ namespace adims_BLL
         }
         public DataTable selectUserName(int type)
         {
-            string select = "select user_name as 姓名 from adims_user where type='" + type + "' ";
+            string select = "select user_name as 姓名,uid as 账号 from adims_user where type='" + type + "' ";
             return dBConn.GetDataTable(select);
         }
         public DataTable GetMZYS(int type)

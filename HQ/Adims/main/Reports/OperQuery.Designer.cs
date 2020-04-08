@@ -58,6 +58,16 @@
             this.button4 = new System.Windows.Forms.Button();
             this.treeView = new System.Windows.Forms.TreeView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiMZJLD = new System.Windows.Forms.ToolStripMenuItem();
+            this.进入护士术前访视记录单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.进入医师术前访视记录单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.进入医师术后访视ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.进入麻醉总结ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.row_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mzid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +77,7 @@
             this.PatName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patsex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Olevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.jizhen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rssj = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kssj = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,16 +95,6 @@
             this.Fxpg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shengfen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiMZJLD = new System.Windows.Forms.ToolStripMenuItem();
-            this.进入护士术前访视记录单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.进入医师术前访视记录单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.进入医师术后访视ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.进入麻醉总结ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -331,6 +332,7 @@
             this.PatName,
             this.patsex,
             this.patage,
+            this.Olevel,
             this.jizhen,
             this.rssj,
             this.kssj,
@@ -358,6 +360,80 @@
             this.dataGridView1.Size = new System.Drawing.Size(919, 396);
             this.dataGridView1.TabIndex = 6;
             this.dataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView1_RowStateChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMZJLD,
+            this.进入护士术前访视记录单ToolStripMenuItem,
+            this.进入医师术前访视记录单ToolStripMenuItem,
+            this.进入医师术后访视ToolStripMenuItem,
+            this.进入麻醉总结ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 114);
+            // 
+            // tsmiMZJLD
+            // 
+            this.tsmiMZJLD.Name = "tsmiMZJLD";
+            this.tsmiMZJLD.Size = new System.Drawing.Size(172, 22);
+            this.tsmiMZJLD.Text = "进入麻醉记录单";
+            this.tsmiMZJLD.Click += new System.EventHandler(this.tsmiMZJLD_Click);
+            // 
+            // 进入护士术前访视记录单ToolStripMenuItem
+            // 
+            this.进入护士术前访视记录单ToolStripMenuItem.Name = "进入护士术前访视记录单ToolStripMenuItem";
+            this.进入护士术前访视记录单ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.进入护士术前访视记录单ToolStripMenuItem.Text = "进入护士术前访视";
+            this.进入护士术前访视记录单ToolStripMenuItem.Click += new System.EventHandler(this.进入护士术前访视记录单ToolStripMenuItem_Click);
+            // 
+            // 进入医师术前访视记录单ToolStripMenuItem
+            // 
+            this.进入医师术前访视记录单ToolStripMenuItem.Name = "进入医师术前访视记录单ToolStripMenuItem";
+            this.进入医师术前访视记录单ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.进入医师术前访视记录单ToolStripMenuItem.Text = "进入医师术前访视";
+            this.进入医师术前访视记录单ToolStripMenuItem.Click += new System.EventHandler(this.进入医师术前访视记录单ToolStripMenuItem_Click);
+            // 
+            // 进入医师术后访视ToolStripMenuItem
+            // 
+            this.进入医师术后访视ToolStripMenuItem.Name = "进入医师术后访视ToolStripMenuItem";
+            this.进入医师术后访视ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.进入医师术后访视ToolStripMenuItem.Text = "进入医师术后访视";
+            this.进入医师术后访视ToolStripMenuItem.Click += new System.EventHandler(this.进入医师术后访视ToolStripMenuItem_Click);
+            // 
+            // 进入麻醉总结ToolStripMenuItem
+            // 
+            this.进入麻醉总结ToolStripMenuItem.Name = "进入麻醉总结ToolStripMenuItem";
+            this.进入麻醉总结ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.进入麻醉总结ToolStripMenuItem.Text = "进入麻醉总结";
+            this.进入麻醉总结ToolStripMenuItem.Click += new System.EventHandler(this.进入麻醉总结ToolStripMenuItem_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 495);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1109, 22);
+            this.statusStrip1.TabIndex = 17;
+            this.statusStrip1.Text = "当前手术总量：";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(240, 17);
+            this.toolStripStatusLabel1.Text = "                                     当前手术总量：";
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
             // row_id
             // 
@@ -431,6 +507,14 @@
             this.patage.Name = "patage";
             this.patage.ReadOnly = true;
             this.patage.Width = 54;
+            // 
+            // Olevel
+            // 
+            this.Olevel.DataPropertyName = "Olevel";
+            this.Olevel.HeaderText = "手术等级";
+            this.Olevel.Name = "Olevel";
+            this.Olevel.ReadOnly = true;
+            this.Olevel.Width = 78;
             // 
             // jizhen
             // 
@@ -568,80 +652,6 @@
             this.Remarks.ReadOnly = true;
             this.Remarks.Width = 54;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMZJLD,
-            this.进入护士术前访视记录单ToolStripMenuItem,
-            this.进入医师术前访视记录单ToolStripMenuItem,
-            this.进入医师术后访视ToolStripMenuItem,
-            this.进入麻醉总结ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(173, 114);
-            // 
-            // tsmiMZJLD
-            // 
-            this.tsmiMZJLD.Name = "tsmiMZJLD";
-            this.tsmiMZJLD.Size = new System.Drawing.Size(172, 22);
-            this.tsmiMZJLD.Text = "进入麻醉记录单";
-            this.tsmiMZJLD.Click += new System.EventHandler(this.tsmiMZJLD_Click);
-            // 
-            // 进入护士术前访视记录单ToolStripMenuItem
-            // 
-            this.进入护士术前访视记录单ToolStripMenuItem.Name = "进入护士术前访视记录单ToolStripMenuItem";
-            this.进入护士术前访视记录单ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.进入护士术前访视记录单ToolStripMenuItem.Text = "进入护士术前访视";
-            this.进入护士术前访视记录单ToolStripMenuItem.Click += new System.EventHandler(this.进入护士术前访视记录单ToolStripMenuItem_Click);
-            // 
-            // 进入医师术前访视记录单ToolStripMenuItem
-            // 
-            this.进入医师术前访视记录单ToolStripMenuItem.Name = "进入医师术前访视记录单ToolStripMenuItem";
-            this.进入医师术前访视记录单ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.进入医师术前访视记录单ToolStripMenuItem.Text = "进入医师术前访视";
-            this.进入医师术前访视记录单ToolStripMenuItem.Click += new System.EventHandler(this.进入医师术前访视记录单ToolStripMenuItem_Click);
-            // 
-            // 进入医师术后访视ToolStripMenuItem
-            // 
-            this.进入医师术后访视ToolStripMenuItem.Name = "进入医师术后访视ToolStripMenuItem";
-            this.进入医师术后访视ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.进入医师术后访视ToolStripMenuItem.Text = "进入医师术后访视";
-            this.进入医师术后访视ToolStripMenuItem.Click += new System.EventHandler(this.进入医师术后访视ToolStripMenuItem_Click);
-            // 
-            // 进入麻醉总结ToolStripMenuItem
-            // 
-            this.进入麻醉总结ToolStripMenuItem.Name = "进入麻醉总结ToolStripMenuItem";
-            this.进入麻醉总结ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.进入麻醉总结ToolStripMenuItem.Text = "进入麻醉总结";
-            this.进入麻醉总结ToolStripMenuItem.Click += new System.EventHandler(this.进入麻醉总结ToolStripMenuItem_Click);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 495);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1109, 22);
-            this.statusStrip1.TabIndex = 17;
-            this.statusStrip1.Text = "当前手术总量：";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(240, 17);
-            this.toolStripStatusLabel1.Text = "                                     当前手术总量：";
-            // 
-            // printPreviewDialog1
-            // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Visible = false;
-            // 
             // SSTSTJ
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -690,6 +700,10 @@
         private System.Windows.Forms.Button btnEXCEL;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem tsmiMZJLD;
+        private System.Windows.Forms.ToolStripMenuItem 进入护士术前访视记录单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 进入医师术前访视记录单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 进入医师术后访视ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 进入麻醉总结ToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn row_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn mzid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -699,6 +713,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PatName;
         private System.Windows.Forms.DataGridViewTextBoxColumn patsex;
         private System.Windows.Forms.DataGridViewTextBoxColumn patage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Olevel;
         private System.Windows.Forms.DataGridViewTextBoxColumn jizhen;
         private System.Windows.Forms.DataGridViewTextBoxColumn rssj;
         private System.Windows.Forms.DataGridViewTextBoxColumn kssj;
@@ -716,9 +731,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fxpg;
         private System.Windows.Forms.DataGridViewTextBoxColumn shengfen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Remarks;
-        private System.Windows.Forms.ToolStripMenuItem 进入护士术前访视记录单ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 进入医师术前访视记录单ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 进入医师术后访视ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 进入麻醉总结ToolStripMenuItem;
     }
 }

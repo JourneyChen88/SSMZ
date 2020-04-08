@@ -22,12 +22,13 @@ namespace main
         {
             get { return strdata; }
             set { strdata = value; }
-        } 
+        }
 
         WindowsFormsControlLibrary5.UserControl1 UC;
-
-        public SelectMZYSandHushi(int type, WindowsFormsControlLibrary5.UserControl1 o)
+        Dictionary<string, string> dic;
+        public SelectMZYSandHushi(int type, WindowsFormsControlLibrary5.UserControl1 o, Dictionary<string, string> _dic = null)
         {
+            dic = _dic;
             Type = type;
             UC = o;
             InitializeComponent();
@@ -58,18 +59,27 @@ namespace main
         private void button1_Click(object sender, EventArgs e)
         {
             string Name = "";
+            if (dic != null)
+            {
+                dic.Clear();
+            }
+            else
+            {
+                dic = new Dictionary<string, string>();
+            }
+
             int count = dataGridView1.Rows.Count;
             for (int i = 0; i < count; i++)
             {
-                DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[1];
-                Boolean flag = Convert.ToBoolean(checkCell.Value);
-                if (flag == true)
+                DataGridViewCheckBoxCell checkCell = (DataGridViewCheckBoxCell)dataGridView1.Rows[i].Cells[2];
+                if (Convert.ToBoolean(checkCell.Value))
                 {
+                    dic.Add(dataGridView1.Rows[i].Cells[1].Value.ToString(), dataGridView1.Rows[i].Cells[0].Value.ToString());
                     if (Name.IsNullOrEmpty())
-                        Name =dataGridView1.Rows[i].Cells[0].Value.ToString();
+                        Name = dataGridView1.Rows[i].Cells[0].Value.ToString();
                     else
-                        Name =Name+ "、" + dataGridView1.Rows[i].Cells[0].Value.ToString();
-                }                
+                        Name = Name + "、" + dataGridView1.Rows[i].Cells[0].Value.ToString();
+                }
             }
             UC.Controls[0].Text = Name;
             strdata = Name;

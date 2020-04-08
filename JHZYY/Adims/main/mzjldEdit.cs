@@ -7412,45 +7412,93 @@ namespace main
             result = dal.UpdateMzjld1(mzdList1);
             SqlSugarDal sqlSugar = new SqlSugarDal();
             var paiban = sqlSugar.GetPaibanByPatZhuYuanID(patID);
-            var mzysArr = txtMZYS.Controls[0].Text.Trim().Split('、');
-            for (int i = 0; i < mzysArr.Length; i++)
+            int indexMzys = 0;
+            foreach (var item in dicMzys)
             {
-                switch (i)
+                switch (indexMzys)
                 {
                     case 0:
-                        paiban.AP1 = mzysArr[i];
+                        paiban.AP1 = item.Value;
+                        paiban.AP1No = item.Key;
                         break;
                     case 1:
-                        paiban.AP2 = mzysArr[i];
+                        paiban.AP2 = item.Value;
+                        paiban.AP2No = item.Key;
                         break;
                     case 2:
-                        paiban.AP3 = mzysArr[i];
+                        paiban.AP3 = item.Value;
+                        paiban.AP3No = item.Key;
                         break;
                     default:
                         break;
                 }
+                indexMzys++;
             }
-            var hushiArr = txtXHHS.Controls[0].Text.Trim().Split('、');
-            for (int i = 0; i < hushiArr.Length; i++)
+            int indexHushi = 0;
+            foreach (var item in dicHushi)
             {
-                switch (i)
+                switch (indexHushi)
                 {
                     case 0:
-                        paiban.SN1 = hushiArr[i];
+                        paiban.SN1 = item.Value;
+                        paiban.SN1No = item.Key;
                         break;
                     case 1:
-                        paiban.ON1 = hushiArr[i];
+                        paiban.ON1 = item.Value;
+                        paiban.ON1No = item.Key;
                         break;
                     case 2:
-                        paiban.SN2 = hushiArr[i];
+                        paiban.SN2 = item.Value;
+                        paiban.SN2No = item.Key;
                         break;
                     case 3:
-                        paiban.ON2 = hushiArr[i];
+                        paiban.ON2 = item.Value;
+                        paiban.ON2No = item.Key;
                         break;
                     default:
                         break;
                 }
+                indexHushi++;
             }
+            //var mzysArr = txtMZYS.Controls[0].Text.Trim().Split('、');
+            //for (int i = 0; i < mzysArr.Length; i++)
+            //{
+            //    switch (i)
+            //    {
+            //        case 0:
+            //            paiban.AP1 = mzysArr[i];
+            //            break;
+            //        case 1:
+            //            paiban.AP2 = mzysArr[i];
+            //            break;
+            //        case 2:
+            //            paiban.AP3 = mzysArr[i];
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
+            //var hushiArr = txtXHHS.Controls[0].Text.Trim().Split('、');
+            //for (int i = 0; i < hushiArr.Length; i++)
+            //{
+            //    switch (i)
+            //    {
+            //        case 0:
+            //            paiban.SN1 = hushiArr[i];
+            //            break;
+            //        case 1:
+            //            paiban.ON1 = hushiArr[i];
+            //            break;
+            //        case 2:
+            //            paiban.SN2 = hushiArr[i];
+            //            break;
+            //        case 3:
+            //            paiban.ON2 = hushiArr[i];
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
 
             sqlSugar.UpdatePaiban(paiban);
             return result;
@@ -9525,19 +9573,20 @@ namespace main
 
         private void txtQXHS_DoubleClick(object sender, EventArgs e)
         {
-            SelectMZYSandHushi F1 = new SelectMZYSandHushi(2, txtQXHS);
+            SelectMZYSandHushi F1 = new SelectMZYSandHushi(2, txtQXHS, dicHushi);
             F1.ShowDialog();
         }
-
+        private Dictionary<string, string> dicMzys = new Dictionary<string, string>();
+        private Dictionary<string, string> dicHushi = new Dictionary<string, string>();
         private void txtXHHS_DoubleClick(object sender, EventArgs e)
         {
-            SelectMZYSandHushi F1 = new SelectMZYSandHushi(2, txtXHHS);
+            SelectMZYSandHushi F1 = new SelectMZYSandHushi(2, txtXHHS, dicHushi);
             F1.ShowDialog();
         }
 
         private void txtMZYS_DoubleClick(object sender, EventArgs e)
         {
-            SelectMZYSandHushi F1 = new SelectMZYSandHushi(1, txtMZYS);
+            SelectMZYSandHushi F1 = new SelectMZYSandHushi(1, txtMZYS, dicMzys);
             F1.ShowDialog();
         }
 

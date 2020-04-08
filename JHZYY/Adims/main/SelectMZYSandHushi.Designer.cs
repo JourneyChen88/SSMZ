@@ -43,7 +43,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(269, 392);
+            this.groupBox1.Size = new System.Drawing.Size(415, 392);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "人员列表";
@@ -57,7 +57,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(4, 24);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(261, 363);
+            this.dataGridView1.Size = new System.Drawing.Size(407, 363);
             this.dataGridView1.TabIndex = 0;
             // 
             // button2
@@ -65,7 +65,7 @@
             this.button2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.Image = global::main.Properties.Resources.Exit;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(315, 238);
+            this.button2.Location = new System.Drawing.Point(445, 233);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(78, 42);
             this.button2.TabIndex = 91;
@@ -79,7 +79,7 @@
             this.button1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.Image = global::main.Properties.Resources.Save;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(315, 167);
+            this.button1.Location = new System.Drawing.Point(445, 147);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(78, 44);
             this.button1.TabIndex = 90;
@@ -88,11 +88,11 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // SelectYSorHS
+            // SelectMZYSandHushi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 427);
+            this.ClientSize = new System.Drawing.Size(550, 427);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
@@ -100,7 +100,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.Name = "SelectYSorHS";
+            this.Name = "SelectMZYSandHushi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "医生和护士选择";
             this.Load += new System.EventHandler(this.SelectYSorHS_Load);

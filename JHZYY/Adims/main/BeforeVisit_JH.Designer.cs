@@ -351,7 +351,7 @@
             // 
             this.btnDZBL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDZBL.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnDZBL.Location = new System.Drawing.Point(1067, 94);
+            this.btnDZBL.Location = new System.Drawing.Point(1050, 94);
             this.btnDZBL.Name = "btnDZBL";
             this.btnDZBL.Size = new System.Drawing.Size(75, 34);
             this.btnDZBL.TabIndex = 157;
@@ -363,7 +363,7 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.button3.Location = new System.Drawing.Point(1067, 545);
+            this.button3.Location = new System.Drawing.Point(1050, 545);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 36);
             this.button3.TabIndex = 154;
@@ -374,7 +374,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.button1.Location = new System.Drawing.Point(1067, 238);
+            this.button1.Location = new System.Drawing.Point(1050, 238);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 34);
             this.button1.TabIndex = 153;
@@ -386,7 +386,7 @@
             // 
             this.buttonjybl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonjybl.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.buttonjybl.Location = new System.Drawing.Point(1067, 188);
+            this.buttonjybl.Location = new System.Drawing.Point(1050, 188);
             this.buttonjybl.Name = "buttonjybl";
             this.buttonjybl.Size = new System.Drawing.Size(75, 35);
             this.buttonjybl.TabIndex = 152;
@@ -398,7 +398,7 @@
             // 
             this.buttonyxbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonyxbl.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.buttonyxbl.Location = new System.Drawing.Point(1067, 136);
+            this.buttonyxbl.Location = new System.Drawing.Point(1050, 136);
             this.buttonyxbl.Name = "buttonyxbl";
             this.buttonyxbl.Size = new System.Drawing.Size(75, 35);
             this.buttonyxbl.TabIndex = 151;
@@ -438,7 +438,7 @@
             this.groupBox4.Controls.Add(this.label32);
             this.groupBox4.Location = new System.Drawing.Point(61, 640);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1081, 35);
+            this.groupBox4.Size = new System.Drawing.Size(1064, 35);
             this.groupBox4.TabIndex = 147;
             this.groupBox4.TabStop = false;
             // 
@@ -715,7 +715,7 @@
             // textBoxQITA
             // 
             this.textBoxQITA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxQITA.Location = new System.Drawing.Point(632, 59);
+            this.textBoxQITA.Location = new System.Drawing.Point(615, 59);
             this.textBoxQITA.Name = "textBoxQITA";
             this.textBoxQITA.Size = new System.Drawing.Size(283, 21);
             this.textBoxQITA.TabIndex = 146;
@@ -725,7 +725,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(569, 63);
+            this.label9.Location = new System.Drawing.Point(552, 63);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 12);
             this.label9.TabIndex = 145;
@@ -734,7 +734,7 @@
             // textBoxT
             // 
             this.textBoxT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxT.Location = new System.Drawing.Point(506, 58);
+            this.textBoxT.Location = new System.Drawing.Point(489, 58);
             this.textBoxT.Name = "textBoxT";
             this.textBoxT.Size = new System.Drawing.Size(53, 21);
             this.textBoxT.TabIndex = 144;
@@ -744,7 +744,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(488, 63);
+            this.label8.Location = new System.Drawing.Point(471, 63);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(17, 12);
             this.label8.TabIndex = 143;
@@ -753,7 +753,7 @@
             // textBoxP
             // 
             this.textBoxP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxP.Location = new System.Drawing.Point(406, 58);
+            this.textBoxP.Location = new System.Drawing.Point(389, 58);
             this.textBoxP.Name = "textBoxP";
             this.textBoxP.Size = new System.Drawing.Size(58, 21);
             this.textBoxP.TabIndex = 142;
@@ -763,7 +763,7 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(388, 62);
+            this.label7.Location = new System.Drawing.Point(371, 62);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(17, 12);
             this.label7.TabIndex = 141;
@@ -772,7 +772,7 @@
             // textBoxR
             // 
             this.textBoxR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxR.Location = new System.Drawing.Point(269, 60);
+            this.textBoxR.Location = new System.Drawing.Point(252, 60);
             this.textBoxR.Name = "textBoxR";
             this.textBoxR.Size = new System.Drawing.Size(81, 21);
             this.textBoxR.TabIndex = 140;
@@ -782,7 +782,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(236, 62);
+            this.label6.Location = new System.Drawing.Point(219, 62);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 12);
             this.label6.TabIndex = 139;
@@ -794,7 +794,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxBP.Location = new System.Drawing.Point(101, 59);
             this.textBoxBP.Name = "textBoxBP";
-            this.textBoxBP.Size = new System.Drawing.Size(120, 21);
+            this.textBoxBP.Size = new System.Drawing.Size(103, 21);
             this.textBoxBP.TabIndex = 138;
             // 
             // label5
@@ -847,7 +847,7 @@
             this.groupBox3.Controls.Add(this.shapeContainer3);
             this.groupBox3.Location = new System.Drawing.Point(733, 80);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(328, 559);
+            this.groupBox3.Size = new System.Drawing.Size(311, 559);
             this.groupBox3.TabIndex = 134;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "过去或者其他情况";
@@ -875,7 +875,7 @@
             this.textBoxmqtsyw2.Font = new System.Drawing.Font("宋体", 9F);
             this.textBoxmqtsyw2.Location = new System.Drawing.Point(2, 354);
             this.textBoxmqtsyw2.Name = "textBoxmqtsyw2";
-            this.textBoxmqtsyw2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxmqtsyw2.Size = new System.Drawing.Size(302, 21);
             this.textBoxmqtsyw2.TabIndex = 88;
             // 
             // textBoxmzccbw2
@@ -884,7 +884,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxmzccbw2.Location = new System.Drawing.Point(-4, 489);
             this.textBoxmzccbw2.Name = "textBoxmzccbw2";
-            this.textBoxmzccbw2.Size = new System.Drawing.Size(336, 21);
+            this.textBoxmzccbw2.Size = new System.Drawing.Size(319, 21);
             this.textBoxmzccbw2.TabIndex = 87;
             // 
             // textBoxyanke2
@@ -893,7 +893,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxyanke2.Location = new System.Drawing.Point(-2, 468);
             this.textBoxyanke2.Name = "textBoxyanke2";
-            this.textBoxyanke2.Size = new System.Drawing.Size(340, 21);
+            this.textBoxyanke2.Size = new System.Drawing.Size(323, 21);
             this.textBoxyanke2.TabIndex = 86;
             // 
             // textBoxyzk2
@@ -902,7 +902,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxyzk2.Location = new System.Drawing.Point(-1, 399);
             this.textBoxyzk2.Name = "textBoxyzk2";
-            this.textBoxyzk2.Size = new System.Drawing.Size(340, 21);
+            this.textBoxyzk2.Size = new System.Drawing.Size(323, 21);
             this.textBoxyzk2.TabIndex = 84;
             // 
             // textBoxqsqk2
@@ -911,7 +911,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxqsqk2.Location = new System.Drawing.Point(2, 375);
             this.textBoxqsqk2.Name = "textBoxqsqk2";
-            this.textBoxqsqk2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxqsqk2.Size = new System.Drawing.Size(302, 21);
             this.textBoxqsqk2.TabIndex = 83;
             // 
             // textBoxyichuanb2
@@ -920,7 +920,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxyichuanb2.Location = new System.Drawing.Point(2, 331);
             this.textBoxyichuanb2.Name = "textBoxyichuanb2";
-            this.textBoxyichuanb2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxyichuanb2.Size = new System.Drawing.Size(302, 21);
             this.textBoxyichuanb2.TabIndex = 82;
             // 
             // textBoxmazs2
@@ -929,7 +929,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxmazs2.Location = new System.Drawing.Point(3, 304);
             this.textBoxmazs2.Name = "textBoxmazs2";
-            this.textBoxmazs2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxmazs2.Size = new System.Drawing.Size(302, 21);
             this.textBoxmazs2.TabIndex = 81;
             // 
             // textBoxxysj2
@@ -938,7 +938,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxxysj2.Location = new System.Drawing.Point(3, 252);
             this.textBoxxysj2.Name = "textBoxxysj2";
-            this.textBoxxysj2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxxysj2.Size = new System.Drawing.Size(302, 21);
             this.textBoxxysj2.TabIndex = 79;
             // 
             // textBoxsjjr2
@@ -947,7 +947,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxsjjr2.Location = new System.Drawing.Point(2, 117);
             this.textBoxsjjr2.Name = "textBoxsjjr2";
-            this.textBoxsjjr2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxsjjr2.Size = new System.Drawing.Size(302, 21);
             this.textBoxsjjr2.TabIndex = 78;
             // 
             // textBoxxy2
@@ -956,7 +956,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxxy2.Location = new System.Drawing.Point(3, 144);
             this.textBoxxy2.Name = "textBoxxy2";
-            this.textBoxxy2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxxy2.Size = new System.Drawing.Size(302, 21);
             this.textBoxxy2.TabIndex = 77;
             // 
             // textBoxjs2
@@ -965,7 +965,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxjs2.Location = new System.Drawing.Point(3, 198);
             this.textBoxjs2.Name = "textBoxjs2";
-            this.textBoxjs2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxjs2.Size = new System.Drawing.Size(302, 21);
             this.textBoxjs2.TabIndex = 76;
             // 
             // textBoxck2
@@ -974,7 +974,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxck2.Location = new System.Drawing.Point(3, 223);
             this.textBoxck2.Name = "textBoxck2";
-            this.textBoxck2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxck2.Size = new System.Drawing.Size(302, 21);
             this.textBoxck2.TabIndex = 75;
             // 
             // textBoxnfb2
@@ -983,7 +983,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxnfb2.Location = new System.Drawing.Point(3, 171);
             this.textBoxnfb2.Name = "textBoxnfb2";
-            this.textBoxnfb2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxnfb2.Size = new System.Drawing.Size(302, 21);
             this.textBoxnfb2.TabIndex = 74;
             // 
             // textBoxxiaohua2
@@ -992,7 +992,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxxiaohua2.Location = new System.Drawing.Point(3, 93);
             this.textBoxxiaohua2.Name = "textBoxxiaohua2";
-            this.textBoxxiaohua2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxxiaohua2.Size = new System.Drawing.Size(302, 21);
             this.textBoxxiaohua2.TabIndex = 73;
             // 
             // textBoxbnsz2
@@ -1001,7 +1001,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxbnsz2.Location = new System.Drawing.Point(3, 66);
             this.textBoxbnsz2.Name = "textBoxbnsz2";
-            this.textBoxbnsz2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxbnsz2.Size = new System.Drawing.Size(302, 21);
             this.textBoxbnsz2.TabIndex = 72;
             // 
             // textBoxfhx2
@@ -1010,7 +1010,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxfhx2.Location = new System.Drawing.Point(5, 39);
             this.textBoxfhx2.Name = "textBoxfhx2";
-            this.textBoxfhx2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxfhx2.Size = new System.Drawing.Size(302, 21);
             this.textBoxfhx2.TabIndex = 71;
             // 
             // textBoxxxg2
@@ -1019,7 +1019,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxxxg2.Location = new System.Drawing.Point(3, 13);
             this.textBoxxxg2.Name = "textBoxxxg2";
-            this.textBoxxxg2.Size = new System.Drawing.Size(319, 21);
+            this.textBoxxxg2.Size = new System.Drawing.Size(302, 21);
             this.textBoxxxg2.TabIndex = 70;
             // 
             // checkBoxknzl
@@ -1087,7 +1087,7 @@
             this.lineShape9,
             this.lineShape6,
             this.lineShape3});
-            this.shapeContainer3.Size = new System.Drawing.Size(339, 539);
+            this.shapeContainer3.Size = new System.Drawing.Size(305, 539);
             this.shapeContainer3.TabIndex = 69;
             this.shapeContainer3.TabStop = false;
             // 
@@ -1098,7 +1098,7 @@
             this.lineShape60.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape60.Name = "lineShape60";
             this.lineShape60.X1 = -1;
-            this.lineShape60.X2 = 165;
+            this.lineShape60.X2 = 131;
             this.lineShape60.Y1 = 498;
             this.lineShape60.Y2 = 498;
             // 
@@ -1109,7 +1109,7 @@
             this.lineShape59.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape59.Name = "lineShape59";
             this.lineShape59.X1 = 0;
-            this.lineShape59.X2 = 174;
+            this.lineShape59.X2 = 140;
             this.lineShape59.Y1 = 474;
             this.lineShape59.Y2 = 474;
             // 
@@ -1120,7 +1120,7 @@
             this.lineShape58.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape58.Name = "lineShape58";
             this.lineShape58.X1 = -3;
-            this.lineShape58.X2 = 171;
+            this.lineShape58.X2 = 137;
             this.lineShape58.Y1 = 450;
             this.lineShape58.Y2 = 450;
             // 
@@ -1131,7 +1131,7 @@
             this.lineShape57.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape57.Name = "lineShape57";
             this.lineShape57.X1 = 4;
-            this.lineShape57.X2 = 262;
+            this.lineShape57.X2 = 228;
             this.lineShape57.Y1 = 439;
             this.lineShape57.Y2 = 437;
             // 
@@ -1142,7 +1142,7 @@
             this.lineShape56.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape56.Name = "lineShape56";
             this.lineShape56.X1 = 0;
-            this.lineShape56.X2 = 171;
+            this.lineShape56.X2 = 137;
             this.lineShape56.Y1 = 404;
             this.lineShape56.Y2 = 404;
             // 
@@ -1152,7 +1152,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape55.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape55.Name = "lineShape55";
-            this.lineShape55.X1 = 161;
+            this.lineShape55.X1 = 127;
             this.lineShape55.X2 = 0;
             this.lineShape55.Y1 = 382;
             this.lineShape55.Y2 = 382;
@@ -1172,7 +1172,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape53.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape53.Name = "lineShape53";
-            this.lineShape53.X1 = 161;
+            this.lineShape53.X1 = 127;
             this.lineShape53.X2 = 0;
             this.lineShape53.Y1 = 310;
             this.lineShape53.Y2 = 310;
@@ -1183,7 +1183,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape52.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape52.Name = "lineShape52";
-            this.lineShape52.X1 = 161;
+            this.lineShape52.X1 = 127;
             this.lineShape52.X2 = 0;
             this.lineShape52.Y1 = 283;
             this.lineShape52.Y2 = 283;
@@ -1203,7 +1203,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape50.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape50.Name = "lineShape50";
-            this.lineShape50.X1 = 161;
+            this.lineShape50.X1 = 127;
             this.lineShape50.X2 = 0;
             this.lineShape50.Y1 = 231;
             this.lineShape50.Y2 = 231;
@@ -1214,7 +1214,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape49.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape49.Name = "lineShape49";
-            this.lineShape49.X1 = 333;
+            this.lineShape49.X1 = 299;
             this.lineShape49.X2 = 0;
             this.lineShape49.Y1 = 201;
             this.lineShape49.Y2 = 202;
@@ -1225,7 +1225,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape48.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape48.Name = "lineShape48";
-            this.lineShape48.X1 = 334;
+            this.lineShape48.X1 = 300;
             this.lineShape48.X2 = 0;
             this.lineShape48.Y1 = 176;
             this.lineShape48.Y2 = 176;
@@ -1245,7 +1245,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape46.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape46.Name = "lineShape46";
-            this.lineShape46.X1 = 332;
+            this.lineShape46.X1 = 298;
             this.lineShape46.X2 = -2;
             this.lineShape46.Y1 = 123;
             this.lineShape46.Y2 = 123;
@@ -1256,7 +1256,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape12.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape12.Name = "lineShape12";
-            this.lineShape12.X1 = 337;
+            this.lineShape12.X1 = 303;
             this.lineShape12.X2 = -4;
             this.lineShape12.Y1 = 97;
             this.lineShape12.Y2 = 99;
@@ -1267,7 +1267,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape9.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape9.Name = "lineShape9";
-            this.lineShape9.X1 = 340;
+            this.lineShape9.X1 = 306;
             this.lineShape9.X2 = 0;
             this.lineShape9.Y1 = 73;
             this.lineShape9.Y2 = 72;
@@ -1278,7 +1278,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape6.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape6.Name = "lineShape6";
-            this.lineShape6.X1 = 341;
+            this.lineShape6.X1 = 307;
             this.lineShape6.X2 = 0;
             this.lineShape6.Y1 = 46;
             this.lineShape6.Y2 = 46;
@@ -1289,7 +1289,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lineShape3.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape3.Name = "lineShape3";
-            this.lineShape3.X1 = 336;
+            this.lineShape3.X1 = 302;
             this.lineShape3.X2 = -3;
             this.lineShape3.Y1 = 20;
             this.lineShape3.Y2 = 19;
@@ -1374,7 +1374,7 @@
             this.groupBox2.Controls.Add(this.shapeContainer1);
             this.groupBox2.Location = new System.Drawing.Point(327, 83);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(421, 559);
+            this.groupBox2.Size = new System.Drawing.Size(404, 559);
             this.groupBox2.TabIndex = 133;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "现在情况";
@@ -1397,7 +1397,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textxy.Location = new System.Drawing.Point(9, 144);
             this.textxy.Name = "textxy";
-            this.textxy.Size = new System.Drawing.Size(319, 21);
+            this.textxy.Size = new System.Drawing.Size(302, 21);
             this.textxy.TabIndex = 90;
             // 
             // checkBoxhy
@@ -2210,7 +2210,7 @@
             this.lineShape8,
             this.lineShape5,
             this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(432, 539);
+            this.shapeContainer1.Size = new System.Drawing.Size(398, 539);
             this.shapeContainer1.TabIndex = 79;
             this.shapeContainer1.TabStop = false;
             // 
@@ -2302,7 +2302,7 @@
             this.lineShape37.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape37.Name = "lineShape37";
             this.lineShape37.X1 = -1;
-            this.lineShape37.X2 = 397;
+            this.lineShape37.X2 = 363;
             this.lineShape37.Y1 = 309;
             this.lineShape37.Y2 = 309;
             // 
@@ -2313,7 +2313,7 @@
             this.lineShape36.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape36.Name = "lineShape36";
             this.lineShape36.X1 = 0;
-            this.lineShape36.X2 = 388;
+            this.lineShape36.X2 = 354;
             this.lineShape36.Y1 = 283;
             this.lineShape36.Y2 = 283;
             // 
@@ -2342,7 +2342,7 @@
             this.lineShape33.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape33.Name = "lineShape33";
             this.lineShape33.X1 = 0;
-            this.lineShape33.X2 = 271;
+            this.lineShape33.X2 = 237;
             this.lineShape33.Y1 = 202;
             this.lineShape33.Y2 = 202;
             // 
@@ -2353,7 +2353,7 @@
             this.lineShape32.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape32.Name = "lineShape32";
             this.lineShape32.X1 = 0;
-            this.lineShape32.X2 = 271;
+            this.lineShape32.X2 = 237;
             this.lineShape32.Y1 = 176;
             this.lineShape32.Y2 = 176;
             // 
@@ -2373,7 +2373,7 @@
             this.lineShape30.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape30.Name = "lineShape30";
             this.lineShape30.X1 = 0;
-            this.lineShape30.X2 = 270;
+            this.lineShape30.X2 = 236;
             this.lineShape30.Y1 = 123;
             this.lineShape30.Y2 = 123;
             // 
@@ -2393,7 +2393,7 @@
             this.lineShape8.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape8.Name = "lineShape8";
             this.lineShape8.X1 = -2;
-            this.lineShape8.X2 = 270;
+            this.lineShape8.X2 = 236;
             this.lineShape8.Y1 = 71;
             this.lineShape8.Y2 = 71;
             // 
@@ -2404,7 +2404,7 @@
             this.lineShape5.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape5.Name = "lineShape5";
             this.lineShape5.X1 = 0;
-            this.lineShape5.X2 = 271;
+            this.lineShape5.X2 = 237;
             this.lineShape5.Y1 = 46;
             this.lineShape5.Y2 = 46;
             // 
@@ -2415,7 +2415,7 @@
             this.lineShape1.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape1.Name = "lineShape1";
             this.lineShape1.X1 = -3;
-            this.lineShape1.X2 = 270;
+            this.lineShape1.X2 = 236;
             this.lineShape1.Y1 = 19;
             this.lineShape1.Y2 = 19;
             // 
@@ -2472,7 +2472,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox1.Location = new System.Drawing.Point(59, 86);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(250, 847);
+            this.groupBox1.Size = new System.Drawing.Size(233, 977);
             this.groupBox1.TabIndex = 132;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "系统情况";
@@ -2987,7 +2987,7 @@
             this.lineShape7,
             this.lineShape4,
             this.lineShape2});
-            this.shapeContainer2.Size = new System.Drawing.Size(261, 697);
+            this.shapeContainer2.Size = new System.Drawing.Size(227, 957);
             this.shapeContainer2.TabIndex = 43;
             this.shapeContainer2.TabStop = false;
             // 
@@ -3115,7 +3115,7 @@
             this.lineShape16.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape16.Name = "lineShape16";
             this.lineShape16.X1 = 0;
-            this.lineShape16.X2 = 369;
+            this.lineShape16.X2 = 335;
             this.lineShape16.Y1 = 197;
             this.lineShape16.Y2 = 197;
             // 
@@ -3135,7 +3135,7 @@
             this.lineShape14.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape14.Name = "lineShape14";
             this.lineShape14.X1 = 0;
-            this.lineShape14.X2 = 368;
+            this.lineShape14.X2 = 334;
             this.lineShape14.Y1 = 145;
             this.lineShape14.Y2 = 145;
             // 
@@ -3146,7 +3146,7 @@
             this.lineShape13.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape13.Name = "lineShape13";
             this.lineShape13.X1 = 0;
-            this.lineShape13.X2 = 367;
+            this.lineShape13.X2 = 333;
             this.lineShape13.Y1 = 118;
             this.lineShape13.Y2 = 118;
             // 
@@ -3166,7 +3166,7 @@
             this.lineShape7.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape7.Name = "lineShape7";
             this.lineShape7.X1 = 0;
-            this.lineShape7.X2 = 366;
+            this.lineShape7.X2 = 332;
             this.lineShape7.Y1 = 68;
             this.lineShape7.Y2 = 68;
             // 
@@ -3177,7 +3177,7 @@
             this.lineShape4.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape4.Name = "lineShape4";
             this.lineShape4.X1 = -2;
-            this.lineShape4.X2 = 369;
+            this.lineShape4.X2 = 335;
             this.lineShape4.Y1 = 41;
             this.lineShape4.Y2 = 41;
             // 
@@ -3188,7 +3188,7 @@
             this.lineShape2.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.lineShape2.Name = "lineShape2";
             this.lineShape2.X1 = -3;
-            this.lineShape2.X2 = 369;
+            this.lineShape2.X2 = 335;
             this.lineShape2.Y1 = 15;
             this.lineShape2.Y2 = 15;
             // 
@@ -3196,7 +3196,7 @@
             // 
             this.textBoxtzhong.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxtzhong.Location = new System.Drawing.Point(559, 27);
+            this.textBoxtzhong.Location = new System.Drawing.Point(542, 27);
             this.textBoxtzhong.Name = "textBoxtzhong";
             this.textBoxtzhong.Size = new System.Drawing.Size(100, 21);
             this.textBoxtzhong.TabIndex = 131;
@@ -3206,7 +3206,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(514, 36);
+            this.label3.Location = new System.Drawing.Point(497, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 130;
@@ -3216,7 +3216,7 @@
             // 
             this.textBoxshengao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxshengao.Location = new System.Drawing.Point(427, 28);
+            this.textBoxshengao.Location = new System.Drawing.Point(410, 28);
             this.textBoxshengao.Name = "textBoxshengao";
             this.textBoxshengao.Size = new System.Drawing.Size(81, 21);
             this.textBoxshengao.TabIndex = 129;
@@ -3226,7 +3226,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(386, 33);
+            this.label2.Location = new System.Drawing.Point(369, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 12);
             this.label2.TabIndex = 128;
@@ -3237,7 +3237,7 @@
             this.labelssmc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelssmc.AutoSize = true;
-            this.labelssmc.Location = new System.Drawing.Point(666, 33);
+            this.labelssmc.Location = new System.Drawing.Point(649, 33);
             this.labelssmc.Name = "labelssmc";
             this.labelssmc.Size = new System.Drawing.Size(89, 12);
             this.labelssmc.TabIndex = 126;
@@ -3246,7 +3246,7 @@
             // textBoxshuqianzd
             // 
             this.textBoxshuqianzd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxshuqianzd.Location = new System.Drawing.Point(748, 3);
+            this.textBoxshuqianzd.Location = new System.Drawing.Point(731, 3);
             this.textBoxshuqianzd.Multiline = true;
             this.textBoxshuqianzd.Name = "textBoxshuqianzd";
             this.textBoxshuqianzd.Size = new System.Drawing.Size(237, 21);
@@ -3255,7 +3255,7 @@
             // textBoxage
             // 
             this.textBoxage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxage.Location = new System.Drawing.Point(268, 30);
+            this.textBoxage.Location = new System.Drawing.Point(251, 30);
             this.textBoxage.Name = "textBoxage";
             this.textBoxage.ReadOnly = true;
             this.textBoxage.Size = new System.Drawing.Size(112, 21);
@@ -3266,7 +3266,7 @@
             this.labelage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelage.AutoSize = true;
-            this.labelage.Location = new System.Drawing.Point(229, 36);
+            this.labelage.Location = new System.Drawing.Point(212, 36);
             this.labelage.Name = "labelage";
             this.labelage.Size = new System.Drawing.Size(41, 12);
             this.labelage.TabIndex = 123;
@@ -3279,7 +3279,7 @@
             this.textBoxsex.Location = new System.Drawing.Point(104, 34);
             this.textBoxsex.Name = "textBoxsex";
             this.textBoxsex.ReadOnly = true;
-            this.textBoxsex.Size = new System.Drawing.Size(120, 21);
+            this.textBoxsex.Size = new System.Drawing.Size(103, 21);
             this.textBoxsex.TabIndex = 122;
             // 
             // textBoxxingming
@@ -3290,7 +3290,7 @@
             this.textBoxxingming.Multiline = true;
             this.textBoxxingming.Name = "textBoxxingming";
             this.textBoxxingming.ReadOnly = true;
-            this.textBoxxingming.Size = new System.Drawing.Size(130, 21);
+            this.textBoxxingming.Size = new System.Drawing.Size(113, 21);
             this.textBoxxingming.TabIndex = 121;
             // 
             // labelxingbie
@@ -3308,7 +3308,7 @@
             // textBoxzhuyuanhao
             // 
             this.textBoxzhuyuanhao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxzhuyuanhao.Location = new System.Drawing.Point(568, 5);
+            this.textBoxzhuyuanhao.Location = new System.Drawing.Point(551, 5);
             this.textBoxzhuyuanhao.Multiline = true;
             this.textBoxzhuyuanhao.Name = "textBoxzhuyuanhao";
             this.textBoxzhuyuanhao.ReadOnly = true;
@@ -3320,7 +3320,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(521, 12);
+            this.label1.Location = new System.Drawing.Point(504, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 118;
@@ -3329,7 +3329,7 @@
             // textBoxchanghao
             // 
             this.textBoxchanghao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxchanghao.Location = new System.Drawing.Point(413, 3);
+            this.textBoxchanghao.Location = new System.Drawing.Point(396, 3);
             this.textBoxchanghao.Multiline = true;
             this.textBoxchanghao.Name = "textBoxchanghao";
             this.textBoxchanghao.ReadOnly = true;
@@ -3339,7 +3339,7 @@
             // textBoxkebie
             // 
             this.textBoxkebie.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxkebie.Location = new System.Drawing.Point(268, 3);
+            this.textBoxkebie.Location = new System.Drawing.Point(251, 3);
             this.textBoxkebie.Multiline = true;
             this.textBoxkebie.Name = "textBoxkebie";
             this.textBoxkebie.ReadOnly = true;
@@ -3351,7 +3351,7 @@
             this.kebie.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.kebie.AutoSize = true;
-            this.kebie.Location = new System.Drawing.Point(231, 6);
+            this.kebie.Location = new System.Drawing.Point(214, 6);
             this.kebie.Name = "kebie";
             this.kebie.Size = new System.Drawing.Size(41, 12);
             this.kebie.TabIndex = 115;
@@ -3362,7 +3362,7 @@
             this.labelchuanghao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelchuanghao.AutoSize = true;
-            this.labelchuanghao.Location = new System.Drawing.Point(370, 8);
+            this.labelchuanghao.Location = new System.Drawing.Point(353, 8);
             this.labelchuanghao.Name = "labelchuanghao";
             this.labelchuanghao.Size = new System.Drawing.Size(41, 12);
             this.labelchuanghao.TabIndex = 158;
@@ -3385,7 +3385,7 @@
             this.labelsqzd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelsqzd.AutoSize = true;
-            this.labelsqzd.Location = new System.Drawing.Point(682, 6);
+            this.labelsqzd.Location = new System.Drawing.Point(665, 6);
             this.labelsqzd.Name = "labelsqzd";
             this.labelsqzd.Size = new System.Drawing.Size(65, 12);
             this.labelsqzd.TabIndex = 160;
@@ -3587,7 +3587,7 @@
             this.textztpg.Location = new System.Drawing.Point(125, 682);
             this.textztpg.Name = "textztpg";
             this.textztpg.ReadOnly = true;
-            this.textztpg.Size = new System.Drawing.Size(14, 21);
+            this.textztpg.Size = new System.Drawing.Size(0, 21);
             this.textztpg.TabIndex = 180;
             // 
             // label50
@@ -3604,7 +3604,7 @@
             // textnxssfs
             // 
             this.textnxssfs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textnxssfs.Location = new System.Drawing.Point(748, 30);
+            this.textnxssfs.Location = new System.Drawing.Point(731, 30);
             this.textnxssfs.Multiline = true;
             this.textnxssfs.Name = "textnxssfs";
             this.textnxssfs.Size = new System.Drawing.Size(237, 21);
@@ -3631,7 +3631,7 @@
             this.button6.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button6.Image = global::main.Properties.Resources.Key;
             this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(1067, 436);
+            this.button6.Location = new System.Drawing.Point(1050, 436);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 35);
             this.button6.TabIndex = 156;
@@ -3646,7 +3646,7 @@
             this.buttoncundang.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.buttoncundang.Image = global::main.Properties.Resources.Lock;
             this.buttoncundang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttoncundang.Location = new System.Drawing.Point(1067, 384);
+            this.buttoncundang.Location = new System.Drawing.Point(1050, 384);
             this.buttoncundang.Name = "buttoncundang";
             this.buttoncundang.Size = new System.Drawing.Size(75, 37);
             this.buttoncundang.TabIndex = 155;
@@ -3661,7 +3661,7 @@
             this.button5.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button5.Image = global::main.Properties.Resources.Exit;
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(1067, 484);
+            this.button5.Location = new System.Drawing.Point(1050, 484);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 35);
             this.button5.TabIndex = 150;
@@ -3675,7 +3675,7 @@
             this.button2.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.button2.Image = global::main.Properties.Resources.Print;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(1067, 332);
+            this.button2.Location = new System.Drawing.Point(1050, 332);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 35);
             this.button2.TabIndex = 149;
@@ -3690,7 +3690,7 @@
             this.buttonbaocun.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.buttonbaocun.Image = global::main.Properties.Resources.Save;
             this.buttonbaocun.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonbaocun.Location = new System.Drawing.Point(1067, 288);
+            this.buttonbaocun.Location = new System.Drawing.Point(1050, 288);
             this.buttonbaocun.Name = "buttonbaocun";
             this.buttonbaocun.Size = new System.Drawing.Size(75, 35);
             this.buttonbaocun.TabIndex = 148;
